@@ -427,7 +427,7 @@
             <div class="swiper-wrapper">
 
                 <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider animation-style-01" style="background-image: url(assets/images/slider/slider-02.jpg);">
+                <div class="swiper-slide single-slider animation-style-01" style="background-image: url(assets/images/slider/slider-01.jpg);">
                     <div class="container">
 
                         <!-- Slider Content Start -->
