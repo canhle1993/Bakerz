@@ -17,6 +17,7 @@ Route::post('/change-password', [RegisterController::class, 'changepass'])->name
 use App\Http\Controllers\DriverController;
 Route::get('/', [DriverController::class, 'home'])->name('driver.home');
 
+// Route cho dashboard
 use App\Http\Controllers\DashboardController;
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
