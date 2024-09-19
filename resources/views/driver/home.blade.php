@@ -1,5 +1,5 @@
 <h1 style="color: blue;">trang home</h1>
-<a href="{{route('auth.changepass')}}">Đổi Mật Khẩu</a><br>
+<a href="{{route('auth.changepass')}}">change pass</a><br>
 <a href="{{ route('admin.dashboard') }}">dashboard</a><br>
 @auth
       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
