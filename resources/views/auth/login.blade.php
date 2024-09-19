@@ -58,8 +58,8 @@
         font-weight: 300;
       }
       .wrapper {
-        background: #50a3a2;
-        background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+        background: #A0522D;
+        background: linear-gradient(to bottom right, #A0522D 0%, #F4A460 100%);
         position: absolute;
         top: 0%;
         left: 0;
@@ -113,7 +113,7 @@
       form input:focus {
         background-color: white;
         width: 300px;
-        color: #53e3a6;
+        color: #2F1E12;
       }
       form button {
         -webkit-appearance: none;
@@ -123,7 +123,7 @@
         background-color: white;
         border: 0;
         padding: 10px 15px;
-        color: #53e3a6;
+        color: #2F1E12;
         border-radius: 3px;
         width: 250px;
         cursor: pointer;
@@ -269,7 +269,7 @@
                 <input type="password" placeholder="Password" name="password" required />
                 <button type="submit" id="login-button">Login</button>
                 <br />
-                <a href="{{ route('auth.getpass') }}" class="small" style="color: rgb(216, 28, 28)">Forgot password?</a>
+                <a href="{{ route('auth.getpass') }}" class="small" style="color: rgb(8 255 24)">Forgot password?</a>
                 <p class="text-white mb-5 pb-lg-2">
                     Don't have an account? <a href="{{ route('register') }}" style="color: #0014f2">Register here</a>
                 </p>
