@@ -48,6 +48,7 @@ class RegisterController extends Controller
             Mail::to($user->email)->send(new RegisterEmail($data));
 
         } catch (Exception $e) {
+            
             return back()->withErrors([
                 'email' => 'duplicate emails.',
             ])->withInput($request->only('email'));
