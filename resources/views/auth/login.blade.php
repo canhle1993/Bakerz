@@ -277,15 +277,15 @@
         </div>
         <ul class="bg-bubbles">
             <li><img src="img/aaa.png" width="100%" alt=""></li>
-            <li><img src="img/aaa.png" width="100%" alt=""></li>
-            <li><img src="img/aaa.png" width="100%" alt=""></li>
-            <li><img src="img/aaa.png" width="100%" alt=""></li>
-            <li><img src="img/aaa.png" width="100%" alt=""></li>
-            <li><img src="img/aaa.png" width="100%" alt=""></li>
-            <li><img src="img/aaa.png" width="100%" alt=""></li>
-            <li><img src="img/aaa.png" width="100%" alt=""></li>
-            <li><img src="img/aaa.png" width="100%" alt=""></li>
-            <li><img src="img/aaa.png" width="100%" alt=""></li>
+            <li><img src="img/bbb.png" width="100%" alt=""></li>
+            <li><img src="img/ccc.png" width="100%" alt=""></li>
+            <li><img src="img/ddd.png" width="100%" alt=""></li>
+            <li><img src="img/eee.png" width="100%" alt=""></li>
+            <li><img src="img/fff.png" width="100%" alt=""></li>
+            <li><img src="img/hhh.png" width="100%" alt=""></li>
+            <li><img src="img/ggg.png" width="100%" alt=""></li>
+            <li><img src="img/jjj.png" width="100%" alt=""></li>
+            <li><img src="img/kkk.png" width="100%" alt=""></li>
         </ul>
     </div>
 
