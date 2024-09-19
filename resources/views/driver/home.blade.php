@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Bakerfresh - Cake Shop HTML Template</title>
+    <title>BKz</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -161,7 +161,7 @@
                                 </form>
                                 <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     Logout
-                                </a>                    
+                                </a>
                             </li>
                             @endauth
                             @guest
@@ -170,7 +170,7 @@
                             <form id="login-form" action="{{ route('login') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                                <a class="nav-link" href="{{ route('login') }}">Login</a>                     
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
                             </li>
 
                             @endguest
