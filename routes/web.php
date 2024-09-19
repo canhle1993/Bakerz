@@ -18,7 +18,7 @@ use App\Http\Controllers\DriverController;
 Route::get('/', [DriverController::class, 'home'])->name('driver.home');
 
 use App\Http\Controllers\DashboardController;
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 // Route cho logout
 use Illuminate\Support\Facades\Auth;

@@ -10,7 +10,7 @@ class DashboardController extends Controller
         if (Auth::user()->role_id !=2){
             return redirect()->route('driver.home')->with('error','aaaaaaa');
         }
-        return view('dashboard');
+        return view('admin.dashboard');
         
     }
 }

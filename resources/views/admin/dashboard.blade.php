@@ -1,5 +1,5 @@
-<h1 style="color: blue;">trang home</h1>
-<a href="{{ route('admin.dashboard') }}">dashboard</a><br>
+<h1 style="color: red;">Trang dashboard</h1>
+<a href="{{ route('driver.home') }}">home</a><br>
 @auth
       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
           @csrf

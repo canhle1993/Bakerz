@@ -59,7 +59,7 @@ class RegisterController extends Controller
         // Redirect to dashboard
         $user = Auth::user();
         if ($user->role_id == 2 && $user->role_id != null  ) {
-            return redirect()->intended('dashboard');
+            return redirect()->intended('admin.dashboard');
         } else {
             return redirect()->intended('/');
         }
