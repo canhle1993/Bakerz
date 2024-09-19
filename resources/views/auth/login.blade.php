@@ -147,7 +147,7 @@
         display: block;
         width: 40px;
         height: 40px;
-        background-color: rgba(255, 255, 255, 0.15);
+        /* background-color: rgba(255, 255, 255, 0.15); */
         bottom: -160px;
         -webkit-animation: square 25s infinite;
         animation: square 25s infinite;
@@ -176,7 +176,7 @@
         height: 60px;
         -webkit-animation-duration: 22s;
         animation-duration: 22s;
-        background-color: rgba(255, 255, 255, 0.25);
+        /* background-color: rgba(255, 255, 255, 0.25); */
       }
       .bg-bubbles li:nth-child(5) {
         left: 70%;
@@ -187,7 +187,7 @@
         height: 120px;
         -webkit-animation-delay: 3s;
         animation-delay: 3s;
-        background-color: rgba(255, 255, 255, 0.2);
+        /* background-color: rgba(255, 255, 255, 0.2); */
       }
       .bg-bubbles li:nth-child(7) {
         left: 32%;
@@ -213,7 +213,7 @@
         animation-delay: 2s;
         -webkit-animation-duration: 40s;
         animation-duration: 40s;
-        background-color: rgba(255, 255, 255, 0.3);
+        /* background-color: rgba(255, 255, 255, 0.3); */
       }
       .bg-bubbles li:nth-child(10) {
         left: 90%;
@@ -276,16 +276,16 @@
             </form>
         </div>
         <ul class="bg-bubbles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><img src="img/aaa.png" width="100%" alt=""></li>
+            <li><img src="img/aaa.png" width="100%" alt=""></li>
+            <li><img src="img/aaa.png" width="100%" alt=""></li>
+            <li><img src="img/aaa.png" width="100%" alt=""></li>
+            <li><img src="img/aaa.png" width="100%" alt=""></li>
+            <li><img src="img/aaa.png" width="100%" alt=""></li>
+            <li><img src="img/aaa.png" width="100%" alt=""></li>
+            <li><img src="img/aaa.png" width="100%" alt=""></li>
+            <li><img src="img/aaa.png" width="100%" alt=""></li>
+            <li><img src="img/aaa.png" width="100%" alt=""></li>
         </ul>
     </div>
 
