@@ -38,4 +38,29 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Avatar updated successfully.');
     }
 
+    public function update(Request $request)
+    {
+        $user = User::where('user_id', Auth::user()->user_id)->first();
+    
+        // Validate dữ liệu nhập vào
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'gender' => 'required|string|in:male,female,other', // Validate cho Gender
+        ]);
+    
+        // Cập nhật thông tin người dùng
+        $user->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'gender' => $request->gender, // Cập nhật gender
+        ]);
+    
+        return redirect()->back()->with('success', 'Profile updated successfully');
+    }
+    
+
+
 }

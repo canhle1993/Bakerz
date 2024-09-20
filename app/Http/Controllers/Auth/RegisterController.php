@@ -18,7 +18,7 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         if (Auth::check()) {
-            return redirect()->route('driver.home');
+            return redirect()->route('client.home');
         }
         return view('auth.register');
     }
@@ -128,7 +128,7 @@ class RegisterController extends Controller
         $user->password = Hash::make($request->newpassword);
         $user->save();
 
-        return redirect()->route('driver.profile', ['userid' => $user->user_id])
+        return redirect()->route('client.profile', ['userid' => $user->user_id])
         ->with('success', 'Password has been changed successfully.');
 }
 }

@@ -390,43 +390,90 @@
           <div class="card">
             <div class="card-body">
               <div>
-                <h4 class="card-title mb-4">Profile</h4>
-                <div class="table-responsive">
-                  <table class="table table-bordered mb-0">
-                    <tbody>
-                      <tr>
-                        <th scope="row">Full Name</th>
-                        <td>{{Auth::user()->name}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Address</th>
-                        <td>{{Auth::user()->address}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Phone</th>
-                        <td>
-                          {{ preg_replace('/(\d{3})(\d{3})(\d{4})/', '$1-$2-$3',
-                          Auth::user()->phone) }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Gender</th>
-                        <td>
-                        <input type="radio" id="male" name="gender" value="male" >
-                        <label for="male">Male</label>
-                        <input type="radio" id="female" name="gender" value="female">
-                        <label for="female">Female</label>
-                        <input type="radio" id="other" name="gender" value="other">
-                        <label for="other">Other</label><br>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Email</th>
-                        <td><p>{{Auth::user()->email}}</p></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <h4 class="card-title mb-4">Profile
+                <a style="float: right;" href="#" onclick="toggleEditForm(); return false;">
+                  <span><h6 id="EditText">Edit</h6></span>
+                </a>
+              </h4>
+                
+      
+
+              <div class="table-responsive" id="profile-table">
+                <table class="table table-bordered mb-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Full Name</th>
+                      <td>{{ Auth::user()->name }}</td>
+                    </tr>
+                    <!-- Thêm hàng hiển thị Gender -->
+                    <tr>
+                      <th scope="row">Gender</th>
+                      <td>
+                        @if(Auth::user()->gender == 'male')
+                          Male
+                        @elseif(Auth::user()->gender == 'female')
+                          Female
+                        @else
+                          Other
+                        @endif
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Address</th>
+                      <td>{{ Auth::user()->address }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Phone</th>
+                      <td>{{ Auth::user()->phone }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Email</th>
+                      <td>{{ Auth::user()->email }}</td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+
+
+              <!-- Hiển thị form khi người dùng nhấn Edit -->
+              <div id="profile-form" style="display:none;">
+                <form method="POST" action="{{ route('profile.update') }}">
+                  @csrf
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}" required>
+                  </div>
+                  <!-- Thêm trường Gender -->
+                  <div class="mb-3">
+                    <label for="gender" class="form-label">Gender</label>
+                    <div>
+                      <input type="radio" id="male" name="gender" value="male" {{ Auth::user()->gender == 'male' ? 'checked' : '' }}>
+                      <label for="male">Male</label>
+                      
+                      <input type="radio" id="female" name="gender" value="female" {{ Auth::user()->gender == 'female' ? 'checked' : '' }}>
+                      <label for="female">Female</label>
+
+                      <input type="radio" id="other" name="gender" value="other" {{ Auth::user()->gender == 'other' ? 'checked' : '' }}>
+                      <label for="other">Other</label>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" value="{{ Auth::user()->address }}" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{ Auth::user()->phone }}" required>
+                  </div>
+                  
+                  
+
+                  <button type="submit" class="btn btn-primary">Update Profile</button>
+                </form>
+              </div>
+
+
               </div>
             </div>
           </div>
@@ -471,6 +518,21 @@
         .addEventListener("click", function () {
           document.getElementById("imgClick").click();
         });
+        
+        var count =0;
+        function toggleEditForm() {          
+          count++;
+          if (count%2==0){
+            document.getElementById("profile-table").style.display = "block";
+            document.getElementById("profile-form").style.display = "none";
+            document.getElementById("EditText").innerHTML = "Edit";
+          } else {
+            document.getElementById("profile-table").style.display = "none";
+            document.getElementById("profile-form").style.display = "block";
+            document.getElementById("EditText").innerHTML = "Hide";
+          }
+        }
+
     </script>
   </body>
 </html>

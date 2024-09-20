@@ -58,7 +58,7 @@
                     <div class="header-menu">
                         <ul class="header-primary-menu d-flex justify-content-center">
                             <li>
-                                <a href="{{ route('driver.home') }}" class="menu-item-link active"><span>Home</span></a>
+                                <a href="{{ route('client.home') }}" class="menu-item-link active"><span>Home</span></a>
                                 <ul class="sub-menu">
                                     <li><a class="sub-item-link" href="index.html"><span>Cake Shop 01</span></a></li>
                                     <li><a class="sub-item-link" href="index-2.html"><span>Cake Shop 02</span></a></li>
@@ -158,7 +158,7 @@
                             </li>
                             @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('driver.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
+                                <a class="nav-link" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
                             </li>
                             <li class="nav-item">
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

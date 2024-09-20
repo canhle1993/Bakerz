@@ -4,20 +4,20 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class DriverController extends Controller
+class ClientController extends Controller
 {
     public function home()
     
     {
-        $vehicles = User::all();
-        return view('driver.home', compact('vehicles'));
+        $client = User::all();
+        return view('client.home', compact('client'));
     }
 
     public function profile($userid)
     {
         $user= Auth::user();
       
-        return view('driver.profile');
+        return view('client.profile');
     }
     
 
