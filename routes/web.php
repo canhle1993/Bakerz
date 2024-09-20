@@ -16,6 +16,8 @@ Route::post('/change-password', [RegisterController::class, 'changepass'])->name
 // Route cho driver
 use App\Http\Controllers\DriverController;
 Route::get('/', [DriverController::class, 'home'])->name('driver.home');
+Route::get('/driver/profile/user/{userid}', [DriverController::class, 'profile'])->name('driver.profile');
+
 
 // Route cho dashboard
 use App\Http\Controllers\DashboardController;
@@ -31,3 +33,4 @@ Route::post('/logout', function () {
 // Route cho reset pass
 use App\Http\Controllers\Auth\ResetPasswordController;
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('getpass');
+Route::post('/update-avatar', [App\Http\Controllers\UserController::class, 'updateAvatar'])->name('update-avatar');

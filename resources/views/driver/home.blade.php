@@ -156,6 +156,9 @@
                             </li>
                             @auth
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('driver.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
+                            </li>
+                            <li class="nav-item">
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
@@ -2385,7 +2388,7 @@
             <div class="container">
                 <!-- Footer Copyright Text Strat -->
                 <div class="footer-copyright-text text-center">
-                    <p>&copy; 2022 <strong> Bakerfresh </strong> Made with <i class="lastudioicon-heart-1"></i> by <a href="https://themeforest.net/user/bootxperts/portfolio">BootXperts</a></p>
+                    <p>&copy; 2024 <strong> Bakerz Bite </strong> Made with <i class="lastudioicon-heart-1"></i> by <a href="https://aptechvietnam.com.vn/">Aptech</a></p>
                 </div>
                 <!-- Footer Copyright Text End -->
             </div>
