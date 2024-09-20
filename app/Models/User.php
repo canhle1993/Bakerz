@@ -14,8 +14,8 @@ class User extends Authenticatable
     protected $primaryKey = 'user_id';
 
     public $timestamps = true;
-    const CREATED_AT = 'creation_date';
-    const UPDATED_AT = 'update_date';
+    const CREATED_AT = 'CreatedDate';
+    const UPDATED_AT = 'ModifiedDate';
     /**
      * The attributes that are mass assignable.
      *
