@@ -20,14 +20,14 @@ class UserController extends Controller
         $user = User::where('user_id', Auth::user()->user_id)->first();
                 
         // Xóa ảnh cũ nếu có
-        if ($user->avatar) {
-            Storage::delete('public/avatars/' . $user->avatar);
+        if (Storage::disk('public')->exists('avatars/' . $user->avatar)) {
+            Storage::disk('public')->delete('avatars/' . $user->avatar);
         }
 
         // Lưu ảnh mới
         $avatarName = time().'.'.$request->avatar->getClientOriginalExtension();
         
-        $request->avatar->storeAs('avatars', $avatarName, 'public');
+        $request->avatar->storeAs('avatars', $avatarName, 'public');        
         // // Cập nhật ảnh trong cơ sở dữ liệu
         $user->avatar = $avatarName;
                 
