@@ -13,10 +13,10 @@ Route::get('/getpassword', [RegisterController::class, 'showGetPasswordForm'])->
 Route::get('/changepassword', [RegisterController::class, 'showChangePasswordForm'])->name('auth.changepass');
 Route::post('/change-password', [RegisterController::class, 'changepass'])->name('auth.Changed');
 
-// Route cho driver
-use App\Http\Controllers\DriverController;
-Route::get('/', [DriverController::class, 'home'])->name('driver.home');
-Route::get('/driver/profile/user/{userid}', [DriverController::class, 'profile'])->name('driver.profile');
+// Route cho client
+use App\Http\Controllers\ClientController;
+Route::get('/', [ClientController::class, 'home'])->name('client.home');
+Route::get('/client/profile/user/{userid}', [ClientController::class, 'profile'])->name('client.profile');
 
 
 // Route cho dashboard
@@ -32,5 +32,8 @@ Route::post('/logout', function () {
 
 // Route cho reset pass
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\UserController;
+
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('getpass');
 Route::post('/update-avatar', [App\Http\Controllers\UserController::class, 'updateAvatar'])->name('update-avatar');
+Route::post('/profile/update', [UserController::class, 'update'])->name('profile.update');
