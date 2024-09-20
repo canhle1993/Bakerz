@@ -20,8 +20,10 @@ class UserController extends Controller
         $user = User::where('user_id', Auth::user()->user_id)->first();
                 
         // Xóa ảnh cũ nếu có
-        if (Storage::disk('public')->exists('avatars/' . $user->avatar)) {
-            Storage::disk('public')->delete('avatars/' . $user->avatar);
+        if ($user && $user->avatar) {
+            if (Storage::disk('public')->exists('avatars/' . $user->avatar)) {
+                Storage::disk('public')->delete('avatars/' . $user->avatar);
+            }
         }
 
         // Lưu ảnh mới
