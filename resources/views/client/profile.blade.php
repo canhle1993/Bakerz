@@ -214,10 +214,6 @@
     </style>
   </head>
   <body style="background-color: #343a40">
-
-    @include('layouts.header')
-
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
     <!-- header -->
     <br /><br />
     <link
@@ -484,7 +480,6 @@
         </div>
       </div>
     </div>
-    @include('layouts.footer')
 
     <!-- footer -->
 
