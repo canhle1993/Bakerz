@@ -23,9 +23,6 @@ use App\Http\Controllers\ProductController;
 Route::get('/client/heathyfilter', [ProductController::class, 'filter'])->name('client.heathyfilter');
 
 
-// Route cho dashboard
-use App\Http\Controllers\DashboardController;
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 // Route cho logout
 use Illuminate\Support\Facades\Auth;
@@ -41,3 +38,11 @@ use App\Http\Controllers\UserController;
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('getpass');
 Route::post('/update-avatar', [App\Http\Controllers\UserController::class, 'updateAvatar'])->name('update-avatar');
 Route::post('/profile/update', [UserController::class, 'update'])->name('profile.update');
+
+
+
+
+// Route cho admin
+use App\Http\Controllers\Admin\DashboardController;
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');

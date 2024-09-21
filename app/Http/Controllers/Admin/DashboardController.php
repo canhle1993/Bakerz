@@ -1,5 +1,7 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -11,6 +13,6 @@ class DashboardController extends Controller
             return redirect()->route('client.home')->with('error','aaaaaaa');
         }
         return view('admin.dashboard');
-        
+
     }
 }

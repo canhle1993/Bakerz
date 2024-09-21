@@ -21,4 +21,5 @@ class Product extends Model
     {
         return $this->belongsToMany(HeathyCatalog::class, 'link_product_heathy', 'product_id', 'heath_id');
     }
+
 }
