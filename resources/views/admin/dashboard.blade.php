@@ -69,19 +69,15 @@
                             <a href="element.html" class="dropdown-item">Other Elements</a>
                         </div>
                     </div>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Management</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">Sign In</a>
-                            <a href="signup.html" class="dropdown-item">Sign Up</a>
-                            <a href="404.html" class="dropdown-item">404 Error</a>
-                            <a href="blank.html" class="dropdown-item">Blank Page</a>
+                            <a href="{{route('manage-client')}}" class="dropdown-item">Client</a>
+                            <a href="{{route('manage-admin')}}" class="dropdown-item">Admin</a>
                         </div>
                     </div>
+                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
+
                 </div>
             </nav>
         </div>
@@ -186,8 +182,17 @@
                 </div>
             </nav>
             <!-- Navbar End -->
+
+            <!-- Body -->
             @yield('product_content')
             @yield('product_detail')
+            @yield('manage_client')
+            @yield('manage_admin')
+
+            <!-- Body -->
+
+
+
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">
                     <div class="bg-secondary rounded-top p-4">
