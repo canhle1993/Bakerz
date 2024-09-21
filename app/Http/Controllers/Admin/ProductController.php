@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,16 +9,15 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
-
-
-
 class ProductController extends Controller
 {
     // Hiển thị danh sách các sản phẩm
     public function index()
     {
-        $products = Product::where('isdelete', 0)->get(); // Chỉ lấy các sản phẩm chưa bị xóa
-        return view('admin.dashboard', compact('products'));
+        $products = Product::where('isdelete', '<>', 1)
+                   ->orWhereNull('isdelete')
+                   ->paginate(1);
+        return view('admin.product_management', compact('products'));
     }
 
     // Hiển thị form thêm sản phẩm mới
@@ -123,5 +121,11 @@ class ProductController extends Controller
         ]);
 
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully');
+    }
+    public function showDetail($id)
+    {
+        $product = Product::find($id);
+        // Logic xử lý
+        return view('admin.productdetail', compact('product'));
     }
 }
