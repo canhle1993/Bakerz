@@ -16,9 +16,17 @@ class Product extends Model
     const CREATED_AT = 'CreatedDate';
     const UPDATED_AT = 'ModifiedDate';
     
+    protected $fillable = ['product_name', 'inventory','describe','price','status','isdelete','image','CreatedBy','ModifiedBy'];
+    
     // Liên kết nhiều với HeathyCatalog thông qua bảng trung gian link_product_heathy
     public function heathyCatalogs()
     {
         return $this->belongsToMany(HeathyCatalog::class, 'link_product_heathy', 'product_id', 'heath_id');
     }
+
+    public function catalogs()
+    {
+        return $this->belongsToMany(Catalog::class, 'linkcatalogproduct', 'product_id', 'category_id');
+    }
+
 }
