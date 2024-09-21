@@ -36,7 +36,7 @@
 </head>
 <body>
       <!-- Newsletter Section Strat -->
-      <div class="newsletter-section" style="background-image: url(assets/images/newsletter-bg.jpg);">
+      <div class="newsletter-section" style="background-image: url({{asset('assets/images/newsletter-bg.jpg')}});">
         <div class="container">
 
             <!-- Newsletter Section Strat -->
@@ -73,8 +73,8 @@
                 <!-- Footer Widget Section Strat -->
                 <div class="footer-widget">
                     <div class="footer-widget__logo">
-                        <a class="logo-dark" href="index.html"><img src="assets/images/logo.svg" alt="Logo"></a>
-                        <a class="logo-white d-none" href="index.html"><img src="assets/images/logo-white.svg" alt="Logo"></a>
+                        <a class="logo-dark" href="index.html"><img src="{{asset('assets/images/logo.svg')}}" alt="Logo"></a>
+                        <a class="logo-white d-none" href="index.html"><img src="{{asset('assets/images/logo-white.svg')}}" alt="Logo"></a>
                     </div>
                     <div class="footer-widget__social">
                         <a href="#/"><i class="lastudioicon-b-facebook"></i></a>
