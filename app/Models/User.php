@@ -33,9 +33,6 @@ class User extends Authenticatable
         'note',
         'avatar',
     ];
-
-    
-
     /**
      * The attributes that should be hidden for serialization.
      *
