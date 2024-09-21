@@ -57,19 +57,8 @@
                     <!-- Header Menu Start -->
                     <div class="header-menu">
                         <ul class="header-primary-menu d-flex justify-content-center">
-                            <li>
-                                <a href="{{ route('client.home') }}" class="menu-item-link active"><span>Home</span></a>
-                                <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="index.html"><span>Cake Shop 01</span></a></li>
-                                    <li><a class="sub-item-link" href="index-2.html"><span>Cake Shop 02</span></a></li>
-                                    <li><a class="sub-item-link" href="index-3.html"><span>Cake Shop 03</span></a></li>
-                                    <li><a class="sub-item-link" href="index-4.html"><span>Cake Shop 04</span></a></li>
-                                    <li><a class="sub-item-link" href="index-5.html"><span>Cake Shop 05</span></a></li>
-                                    <li><a class="sub-item-link" href="index-6.html"><span>Cake Shop 06</span></a></li>
-                                    <li><a class="sub-item-link" href="index-7.html"><span>Bread Shop</span></a></li>
-                                    <li><a class="sub-item-link" href="index-8.html"><span>Bread Shop 02</span></a></li>
-                                    <li><a class="sub-item-link" href="index-9.html"><span>Cake Shop Fullscreen</span></a></li>
-                                </ul>
+                            <li >
+                                <a  href="{{ route('client.home') }}"  class="menu-item-link"><span >Home</span></a>
                             </li>
                             <li class="position-static">
                                 <a class="menu-item-link" href="#"><span>Shop</span></a>
@@ -157,25 +146,25 @@
                                 </button>
                             </li>
                             @auth
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
+                            <li >
+                                <a  class="menu-item-link" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
                             </li>
-                            <li class="nav-item">
+                            <li >
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                                <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <a  class="menu-item-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
                             </li>
                             @endauth
                             @guest
 
-                            <li class="nav-item">
+                            <li >
                             <form id="login-form" action="{{ route('login') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                                <a  class="menu-item-link" href="{{ route('login') }}">Login</a>
                             </li>
 
                             @endguest
