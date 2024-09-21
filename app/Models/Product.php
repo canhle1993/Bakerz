@@ -22,4 +22,8 @@ class Product extends Model
         return $this->belongsToMany(HeathyCatalog::class, 'link_product_heathy', 'product_id', 'heath_id');
     }
 
+
+
+    protected $fillable = ['product_id', 'product_name', 'inventory','describe','price','status','isdelete','image','CreatedDate','CreatedBy','ModifiedDate','ModifiedBy'];
+
 }

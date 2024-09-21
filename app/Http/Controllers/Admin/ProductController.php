@@ -56,7 +56,7 @@ class ProductController extends Controller
             'status' => $request->input('status'),
             'image' => $imagePath,
             'CreatedDate' => now(),
-            'CreatedBy' => Auth::user()->id ?? null,,  // Nếu có người dùng đăng nhập
+            'CreatedBy' => Auth::user()->id ?? null,  // Nếu có người dùng đăng nhập
             'isdelete' => 0  // Đặt giá trị mặc định là không bị xóa
         ]);
 
