@@ -2,7 +2,7 @@
     <h3>Filter by Health Catalog</h3>
     @foreach($heathyCatalogs as $catalog)
         <div>
-            <input type="checkbox" name="heath_id[]" value="{{ $catalog->heath_catalog }}"
+            <input type="checkbox" name="heath_id[]" value="{{ $catalog->heath_id }}"
                    id="heath_{{ $catalog->heath_id }}"
                    {{ (is_array(request('heath_id')) && in_array($catalog->heath_id, request('heath_id'))) ? 'checked' : '' }}>
 
@@ -41,28 +41,28 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $('#filterForm').on('submit', function(event) {
-        event.preventDefault(); // Ngăn form tải lại trang
-
+    // Bắt sự kiện thay đổi trạng thái của các checkbox
+    $('input[name="heath_id[]"]').on('change', function() {
         $.ajax({
-            url: $(this).attr('action'), // Lấy URL từ action của form
+            url: $('#filterForm').attr('action'),
             type: 'GET',
-            data: $(this).serialize(), // Lấy tất cả dữ liệu trong form
+            data: $('#filterForm').serialize(),
             success: function(response) {
-                // Thay thế toàn bộ nội dung trang với response
-                $('body').html(response);
+                $('#productList').html($(response).find('#productList').html());
             },
-            error: function(xhr) {
+            error: function(xhr, status, error) {
+                console.log('Lỗi:', error);
                 alert('Có lỗi xảy ra trong quá trình lọc sản phẩm.');
             }
         });
     });
 
+
  // Hàm để kiểm tra và cập nhật trạng thái của checkbox
  function updateHeathStatus(bmi) {
     // Lấy checkbox "Thừa Cân" và "Thiếu Cân"
-    var thuaCanCheckbox = $('input[name="heath_id[]"][value="Thừa Cân"]');
-    var thieuCanCheckbox = $('input[name="heath_id[]"][value="Thiếu Cân"]');
+    var thuaCanCheckbox = $('input[name="heath_id[]"][value="4"]');// 4 là thừa cân
+    var thieuCanCheckbox = $('input[name="heath_id[]"][value="5"]');// 5 là thiếu cân
 
     // Xử lý tự động check/uncheck dựa vào BMI
     if (bmi >= 25) {
