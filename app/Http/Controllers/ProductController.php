@@ -17,18 +17,29 @@ class ProductController extends Controller
             if ($request->has('heath_id')) {
                 // Lọc các sản phẩm có liên kết với tất cả các danh mục sức khỏe đã chọn
                 $heathIds = $request->heath_id;
-                
+
                 // Điều kiện AND: mỗi sản phẩm phải có đầy đủ các heath_id
                 $query->whereIn('link_product_heathy.heath_id', $heathIds)
                       ->groupBy('product_id')
                       ->havingRaw('COUNT(DISTINCT link_product_heathy.heath_id) = ?', [count($heathIds)]);
             }
         })->get();
-        
-        
+
+
         // Trả về toàn bộ trang 'client.heathyfilter'
         return view('client.heathyfilter', compact('products', 'heathyCatalogs'));
     }
 
+    public function search(Request $request)
+    {
+        // Lấy từ khóa tìm kiếm từ form
+        $query = $request->input('query');
+
+        // Tìm kiếm trong bảng "product" theo tên sản phẩm
+        $results = Product::where('product_name', 'LIKE', "%{$query}%")->get();
+
+        // Trả về view với kết quả tìm kiếm
+        return view('client.search-results', ['results' => $results, 'query' => $query]);
+    }
 
 }
