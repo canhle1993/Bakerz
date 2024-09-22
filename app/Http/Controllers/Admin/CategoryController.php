@@ -45,7 +45,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+
         $catalog = Catalog::findOrFail($id);
 
         $request->validate([

@@ -68,9 +68,9 @@
                                 <td id="name-cell-{{ $catalog->category_id }}">{{ $catalog->category_name }}</td>
                                 <td>
                                     <!-- <a href="javascript:void(0);" class="bi bi-pencil m-2" onclick="editRow({{ $catalog->category_id }}, '{{ route('catalog.update', $catalog->category_id) }}')"></a> -->
-                                    <a href="javascript:void(0);" class="bi bi-pencil m-2" 
-                                        data-category-id="{{ $catalog->category_id }}" 
-                                        data-update-url="{{ route('catalog.update', ['catalog' => $catalog->category_id]) }}" 
+                                    <a href="javascript:void(0);" class="bi bi-pencil m-2"
+                                        data-category-id="{{ $catalog->category_id }}"
+                                        data-update-url="{{ route('catalog.update', ['catalog' => $catalog->category_id]) }}"
                                         onclick="editRow(this)"></a>
                                     <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('catalog.destroy', $catalog->category_id) }}" onclick="showDeleteModal(this)">Delete</a>
                                 </td>
@@ -115,10 +115,10 @@
     function showDeleteModal(element) {
         // Lấy giá trị URL từ thuộc tính data-url
         var actionUrl = element.getAttribute('data-url');
-        
+
         // Gán action URL cho form xóa trong modal
         document.getElementById('deleteForm').action = actionUrl;
-        
+
         // Hiển thị modal
         var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         deleteModal.show();
@@ -131,7 +131,7 @@
         // Lấy các phần tử trong dòng cần chỉnh sửa
         var nameCell = document.getElementById('name-cell-' + categoryId);
         var row = document.getElementById('row-' + categoryId);
-    
+
         // Kiểm tra xem các phần tử có tồn tại không
         if (!nameCell || !row) {
             console.error('Element not found for categoryId: ' + categoryId);
@@ -146,7 +146,7 @@
         var imageCell = row.children[1];
         var currentImage = imageCell.querySelector('img').src;
         imageCell.innerHTML = '<input onchange="changeFile('+categoryId+')" type="file" id="image-input-' + categoryId + '">';
-        
+
         // Thêm nút save và cancel
         var actionCell = row.children[3];
         actionCell.innerHTML = `
@@ -162,7 +162,7 @@
     }
 
     function saveRow(categoryId) {
-        
+
         document.getElementById('category_name-' + categoryId).value = document.getElementById('name-input-' + categoryId).value
         // Submit form
         document.getElementById('edit-form-' + categoryId).submit();
@@ -178,7 +178,7 @@
             <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('catalog.destroy', $catalog->category_id) }}" onclick="showDeleteModal(this)">Delete</a>
         `;
     }
-    
+
     function changeFile(categoryId) {
         var fileInput = document.getElementById('image-input-' + categoryId);
         var files = fileInput.files; // Lấy các file đã chọn
