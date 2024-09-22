@@ -26,5 +26,15 @@ class Product extends Model
     }
 
 
+    public function catalogs()
+    {
+        return $this->belongsToMany(Catalog::class, 'linkcatalogproduct', 'product_id', 'category_id');
+    }
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id');
+    }
+
+
 }
 

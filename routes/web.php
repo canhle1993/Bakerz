@@ -21,6 +21,8 @@ Route::get('/client/profile/user/{userid}', [ClientController::class, 'profile']
 use App\Http\Controllers\ProductController;
 
 Route::get('/client/heathyfilter', [ProductController::class, 'filter'])->name('client.heathyfilter');
+//Route cho client tìm kiếm thông tin sản phẩm
+Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 
 
@@ -74,9 +76,72 @@ Route::delete('/admin/manage/admin/{id}', [ManageAdminController::class, 'destro
 
 
 
+// Route cho client shop product types
+Route::get('/product-simple', function () {
+    return view('client.shop.product-types.product-simple');
+})->name('product-simple');
+Route::get('/product-grouped', function () {
+    return view('client.shop.product-types.product-grouped');
+})->name('product-grouped');
+Route::get('/product-affiliate', function () {
+    return view('client.shop.product-types.product-affiliate');
+})->name('product-affiliate');
+
+//Route cho client shop others
+Route::get('/cart', function () {
+    return view('client.shop.others.cart');
+})->name('cart');
+Route::get('/checkout', function () {
+    return view('client.shop.others.checkout');
+})->name('checkout');
+Route::get('/wishlist', function () {
+    return view('client.shop.others.wishlist');
+})->name('wishlist');
+Route::get('/order-tracking', function () {
+    return view('client.shop.others.order-tracking');
+})->name('order-tracking');
+
+//Route cho client pages
+Route::get('/about', function () {
+    return view('client.pages.about');
+})->name('about');
+Route::get('/coming-soon', function () {
+    return view('client.pages.coming-soon');
+})->name('coming-soon');
+Route::get('/faq', function () {
+    return view('client.pages.faq');
+})->name('faq');
+Route::get('/our-chef', function () {
+    return view('client.pages.our-chef');
+})->name('our-chef');
+Route::get('/pricing-plan', function () {
+    return view('client.pages.pricing-plan');
+})->name('pricing-plan');
+
+//Route cho client blog
+Route::get('/blog-detail', function () {
+    return view('client.blog.blog-detail');
+})->name('blog-detail');
 
 
+//Route cho client contact
+Route::get('/contact', function () {
+    return view('client.contact');
+})->name('contact');
 
+
+//Route cho client category
+Route::get('/category', function () {
+    return view('client.category.category');
+})->name('category');
+
+//Route cho client services
+Route::get('/delivery', function () {
+    return view('client.services.delivery');
+})->name('delivery');
+Route::get('/exchange-return-policy', function () {
+    return view('client.services.exchange-return-policy');
+})->name('exchange-return-policy');
 
 //route cho product_management trang admin
 use App\Http\Controllers\Admin\ProductController as AdminProductController;

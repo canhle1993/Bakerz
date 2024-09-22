@@ -49,7 +49,7 @@
                                 <tr>
                                     <td><input class="form-check-input" type="checkbox"></td>
                                     <td>
-                                        <img src="{{ asset('storage/product/' . $product->image) }}" alt="Hình ảnh" width="100" class="mt-2">
+                                        <img src="{{ asset('storage/products/' . $product->image) }}" alt="Hình ảnh" width="100" class="mt-2">
                                     </td>
                                     <td>{{ $product->product_name }}</td>
                                     <td>
