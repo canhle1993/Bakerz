@@ -35,6 +35,19 @@
 
 </head>
 <body>
+      <!-- Newsletter Section Strat -->
+      <div class="newsletter-section" style="background-image: url({{asset('assets/images/newsletter-bg.jpg')}});">
+        <div class="container">
+
+            <!-- Newsletter Section Strat -->
+            <div class="newsletter text-center">
+                <h2 class="newsletter__title text-white">Stay in touch & get 10% off</h2>
+
+                <div class="newsletter__form">
+                    <form action="#">
+                        <input class="newsletter__field" type="text" placeholder="Your email address">
+                        <button class="newsletter__btn">Subscribe</button>
+                    </form>
       <!-- Footer Strat -->
     <div class="footer-section">
 
@@ -120,6 +133,33 @@
         <!-- Footer Copyright End -->
 
     </div>
+    <!-- Newsletter Section End -->
+
+    <!-- Scroll Top Start -->
+    <a href="#" class="scroll-top" id="scroll-top">
+        <i class="lastudioicon-up-arrow"></i>
+    </a>
+    <!-- Scroll Top End -->
+
+       <!-- Footer Strat -->
+       <div class="footer-section">
+
+<!-- Footer Widget Section Strat -->
+<div class="footer-widget-section">
+    <div class="container custom-container">
+        <div class="row gy-6">
+            <div class="col-md-4">
+                <!-- Footer Widget Section Strat -->
+                <div class="footer-widget">
+                    <div class="footer-widget__logo">
+                        <a class="logo-dark" href="index.html"><img src="{{asset('assets/images/logo.svg')}}" alt="Logo"></a>
+                        <a class="logo-white d-none" href="index.html"><img src="{{asset('assets/images/logo-white.svg')}}" alt="Logo"></a>
+                    </div>
+                    <div class="footer-widget__social">
+                        <a href="#/"><i class="lastudioicon-b-facebook"></i></a>
+                        <a href="#/"><i class="lastudioicon-b-twitter"></i></a>
+                        <a href="#/"><i class="lastudioicon-b-pinterest"></i></a>
+                        <a href="#/"><i class="lastudioicon-b-instagram"></i></a>
     <!-- Footer End -->
 
     <div class="quickview-product-modal modal fade" id="exampleProductModal">

@@ -130,15 +130,17 @@
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>
                                 </button>
                             </li>
+                            <!-- header-primary-menu d-flex justify-content-center -->
+                            <div class="header-meta__action d-flex justify-content-end">
                             @auth
                             <li >
-                                <a  class="menu-item-link" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
+                                <a  class=" action" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
                             </li>
                             <li >
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                                <a  class="menu-item-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <a  class="action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
                             </li>
@@ -149,10 +151,11 @@
                             <form id="login-form" action="{{ route('login') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                                <a  class="menu-item-link" href="{{ route('login') }}">Login</a>
+                                <a  class="action" href="{{ route('login') }}">Login</a>
                             </li>
 
                             @endguest
+                            </div>
                             <li class="d-lg-none">
                                 <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"><i class="lastudioicon-menu-8-1"></i></button>
                             </li>
