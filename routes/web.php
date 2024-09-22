@@ -140,3 +140,5 @@ Route::delete('/product/{product}/delete', [AdminProductController::class, 'dest
 //route cho catalog trang admin
 use App\Http\Controllers\Admin\CategoryController;
 Route::resource('catalog', CategoryController::class);
+Route::put('/catalog/{catalog}/update', [CategoryController::class, 'update'])->name('catalog.update');
+Route::delete('/catalog/{catalog}/delete', [CategoryController::class, 'destroy'])->name('catalog.destroy');
