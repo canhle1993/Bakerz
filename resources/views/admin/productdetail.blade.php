@@ -36,52 +36,190 @@
 </head>
 
 <body>
-<div class="container-fluid pt-4 px-4">
+<div id="showDetail" class="container-fluid pt-4 px-4">
+    <div class="row pt-3">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="row">
+                <div class="col-md-11">
+                <a href="{{ route('product.index') }}" class="btn btn-light m-2">↩ Back</a>
+
+                <h6 class="mb-4">{{$product->product_name}}</h6>
+                <div class="row">
+                    <div class="col-md-4">
+                    @foreach($product->images as $image)
+                        <img src="{{ asset('storage/products/' . $image->image) }}" alt="Product Image" width="200px" ><br>
+                    @endforeach
+                    </div>
+                    <div class="col-md-8" style="border: solid thin grey;">
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4">Description</dt>
+                            <dd class="col-sm-8 bg-transparent text-muted" >{{$product->describe}}</dd>
+                        </dl>
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4">Category</dt>
+                            <dd class="col-sm-8">
+                                @foreach($product->catalogs as $catalog)
+                                    <p class="text-warning">{{ $catalog->category_name }} </p>
+                                @endforeach
+                            </dd>
+                        </dl>
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4">Inventory</dt>
+                            <dd class="col-sm-8">{{ $product->inventory}}</dd>
+                        </dl>
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4">Unit Price</dt>
+                            <dd class="col-sm-8">{{ formatPriceVND($product->price) }}</dd>
+                        </dl>
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4">Heathy</dt>
+                            <dd class="col-sm-8">
+                                @foreach($product->heathyCatalogs as $heathyCatalog)
+                                <p class="text-info">{{ $heathyCatalog->heath_catalog }}</p> 
+                                @endforeach
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-1">
+                    <button id="btnEdit" type="button" class="btn btn-outline-success m-2">Edit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        
+    
+        </div>
+        <div class="col-md-1">
+        
+        </div>
+    </div>
+</div>
+
+<div id="updateDetail" class="container-fluid pt-4 px-4" style="display: none;">
     <div class="row pt-3">
         <div class="col-md-1"></div>
         <div class="col-md-10">
             <div class="bg-secondary rounded h-100 p-4">
-                <h6 class="mb-4">{{$product->product_name}}</h6>
-                <div class="row">
-                    <div class="col-md-4">
-                    <img src="https://product.hstatic.net/1000141988/product/banh_kem_trai_cay_001_247b645214894f23be7a1964af33b092_1024x1024.png" alt="Hình ảnh" style="width:70%"  class="mt-2"><br>
-                    <img src="https://product.hstatic.net/1000141988/product/banh_kem_trai_cay_001_247b645214894f23be7a1964af33b092_1024x1024.png" alt="Hình ảnh" style="width:70%"  class="mt-2"><br>
-                    <img src="https://product.hstatic.net/1000141988/product/banh_kem_trai_cay_001_247b645214894f23be7a1964af33b092_1024x1024.png" alt="Hình ảnh" style="width:70%"  class="mt-2"><br>
-                    </div>
-                    <div class="col-md-8">aaaaaaaaaaaaa</div>
+                <h6 class="mb-4">Product Update</h6>
+                <form action="{{ route('product.update', $product->product_id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT') 
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Product Main Image</label>
+                    <input class="form-control bg-dark" type="file" id="formFile0" name="main_image">
+                    <img id="previewImage0" src="{{ asset('storage/products/' . $product->image) }}" alt="Product Image" width="100px" ><br>
+
                 </div>
-                <!-- <dl class="row mb-0">
-                    <dt class="col-sm-4">
-                    <img src="https://product.hstatic.net/1000141988/product/banh_kem_trai_cay_001_247b645214894f23be7a1964af33b092_1024x1024.png" alt="Hình ảnh" style="width:70%"  class="mt-2">    
-                    </dt>
-                    <dd class="col-sm-8">A description list is perfect for defining terms.
-                        <br>A description list is perfect for defining terms.
-                        <br>A description list is perfect for defining terms.
-                    </dd>
-                    
-                </dl>
-                <dl class="row mb-0">
-                    <dt class="col-sm-4">
-                    <img src="https://product.hstatic.net/1000141988/product/banh_kem_trai_cay_001_247b645214894f23be7a1964af33b092_1024x1024.png" alt="Hình ảnh" style="width:70%"  class="mt-2">    
-                    </dt>
-                    <dd class="col-sm-8">A description list is perfect for defining terms.</dd>
-                    <dd class="col-sm-8">A description list is perfect for defining terms.</dd>
-                    <dd class="col-sm-8">A description list is perfect for defining terms.</dd>
-                </dl>
-                <dl class="row mb-0">
-                    <dt class="col-sm-4">
-                    <img src="https://product.hstatic.net/1000141988/product/banh_kem_trai_cay_001_247b645214894f23be7a1964af33b092_1024x1024.png" alt="Hình ảnh" style="width:70%"  class="mt-2">    
-                    </dt>
-                    <dd></dd>
-                </dl> -->
-                
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Product Image 1</label>
+                    <input class="form-control bg-dark" type="file" id="formFile1" name="image_1">
+                    @if($product->images()->count() > 0)
+                        <img id="previewImage1" src="{{ asset('storage/products/' . $product->images()->first()->image) }}" alt="Product Image" width="100px"><br>
+                    @else
+                        <img id="previewImage1" src="#" alt="Product Image" width="100px"><br>
+                    @endif
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Product Image 2</label>
+                    <input class="form-control bg-dark" type="file" id="formFile2" name="image_2">
+                    @if($product->images()->count() > 1)
+                        <img id="previewImage2" src="{{ asset('storage/products/' . $product->images()->skip(1)->first()->image) }}" alt="Product Image" width="100px"><br>
+                    @else
+                        <img id="previewImage2" src="#" alt="Product Image" width="100px"><br>
+                    @endif
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Product Image 3</label>
+                    <input class="form-control bg-dark" type="file" id="formFile3" name="image_3">
+                    @if($product->images()->count() > 2)
+                        <img id="previewImage3" src="{{ asset('storage/products/' . $product->images()->skip(2)->first()->image) }}" alt="Product Image" width="100px"><br>
+                    @else
+                        <img id="previewImage3" src="#" alt="Product Image" width="100px"><br>
+                    @endif
+                </div>
+                <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Product Name</label>
+                    <input class="form-control bg-dark" type="text" name="product_name" required value="{{$product->product_name}}">
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Catagory</label><br>
+                    @foreach($catalogs as $catalog)
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input class="form-check-input" type="checkbox" name="catalog[]" value="{{ $catalog->category_id }}" 
+                            {{ in_array($catalog->category_id, $product->catalogs->pluck('category_id')->toArray()) ? 'checked' : '' }}> 
+                            {{ $catalog->category_name }}<br>
+                    @endforeach
+                </div>
+                <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Inventory</label>
+                    <input class="form-control bg-dark" type="number" name="inventory" value="{{$product->inventory}}">
+                </div>
+                <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Unit price</label>
+                    <input class="form-control bg-dark" type="number" name="price" required value="{{$product->price}}">
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Heathy</label><br>
+                    @foreach($heathys as $heathy)
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input class="form-check-input" type="checkbox" name="heathy[]" value="{{ $heathy->heath_id }}" 
+                            {{ in_array($heathy->heath_id, $product->heathyCatalogs->pluck('heath_id')->toArray()) ? 'checked' : '' }}> 
+                            {{ $heathy->heath_catalog }}<br>
+                    @endforeach
+                </div>
+                <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Description</label>
+                    <textarea class="form-control" placeholder="Product description here" id="describe" name="describe" style="height: 150px;">{{$product->describe}}</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-outline-info m-2">Update</button>
+                <button id="btnCancel" type="button" class="btn btn-outline-light m-2">Cancel</button>
+                </form>
             </div>
         </div>
         <div class="col-md-1"></div>
     </div>
 </div>
-
 </body>
+<script>
+    document
+    .getElementById("btnEdit")
+    .addEventListener("click", function () {
+        document.getElementById("showDetail").style.display = 'none';
+        document.getElementById("updateDetail").style.display = 'block';
+    });
+    document
+    .getElementById("btnCancel")
+    .addEventListener("click", function () {
+        document.getElementById("showDetail").style.display = 'block';
+        document.getElementById("updateDetail").style.display = 'none';
+    });
+    // Lắng nghe sự kiện thay đổi file và cập nhật hình ảnh ngay lập tức
+    document.getElementById('formFile0').addEventListener('change', function(event) {
+        const previewImage = document.getElementById('previewImage0');
+        previewImage.src = URL.createObjectURL(event.target.files[0]); // Cập nhật ảnh
+        previewImage.style.display = 'block'; // Hiển thị ảnh
+    });
 
+    document.getElementById('formFile1').addEventListener('change', function(event) {
+        const previewImage = document.getElementById('previewImage1');
+        previewImage.src = URL.createObjectURL(event.target.files[0]); // Cập nhật ảnh
+        previewImage.style.display = 'block'; // Hiển thị ảnh
+    });
+    document.getElementById('formFile2').addEventListener('change', function(event) {
+        const previewImage = document.getElementById('previewImage2');
+        previewImage.src = URL.createObjectURL(event.target.files[0]); // Cập nhật ảnh
+        previewImage.style.display = 'block'; // Hiển thị ảnh
+    });
+    document.getElementById('formFile3').addEventListener('change', function(event) {
+        const previewImage = document.getElementById('previewImage3');
+        previewImage.src = URL.createObjectURL(event.target.files[0]); // Cập nhật ảnh
+        previewImage.style.display = 'block'; // Hiển thị ảnh
+    });
+</script>
 </html>
 @endsection

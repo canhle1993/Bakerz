@@ -23,20 +23,20 @@
         03 - 02 Product CSS
         03 - 03 Call to Action CSS
         03 - 04 Brand CSS
-        03 - 05 Banner CSS 
-        03 - 06 Instagram CSS 
+        03 - 05 Banner CSS
+        03 - 06 Instagram CSS
         03 - 07 Newsletter CSS
-        03 - 08 Features Card CSS 
-        03 - 09 Hot Product CSS 
+        03 - 08 Features Card CSS
+        03 - 09 Hot Product CSS
         03 - 10 Counter CSS
         03 - 11 Testimonial CSS
         03 - 12 Blog CSS
         03 - 13 Pricing CSS
-        03 - 14 About CSS 
-        03 - 15 Category CSS 
-        03 - 16 Video CSS 
-        03 - 17 Contact CSS 
-        03 - 18 Best Service CSS 
+        03 - 14 About CSS
+        03 - 15 Category CSS
+        03 - 16 Video CSS
+        03 - 17 Contact CSS
+        03 - 18 Best Service CSS
         03 - 19 Event CSS
         03 - 20 Shipping CSS
         03 - 21 Why Choose Us CSS
@@ -15551,4 +15551,67 @@ textarea.form-control {
     margin-left: 0px;
     min-width: 100%;
   }
+}
+
+.newsletter__form form {
+    display: flex;
+    flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+    align-items: center; /* Căn giữa các phần tử */
+    width: 100%; /* Chiếm toàn bộ chiều ngang */
+    max-width: 500px; /* Giới hạn chiều rộng tối đa */
+    margin: 0 auto; /* Căn giữa form */
+}
+
+.newsletter__field {
+    width: 100%; /* Chiếm toàn bộ chiều ngang của form */
+    padding: 10px;
+    margin-bottom: 15px; /* Tạo khoảng cách giữa các trường nhập */
+    box-sizing: border-box; /* Đảm bảo padding không làm vỡ layout */
+}
+
+.newsletter__btn {
+    width: 100%; /* Đặt nút chiếm toàn bộ chiều ngang */
+    max-width: 200px; /* Giới hạn chiều rộng của nút */
+    padding: 10px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center; /* Căn giữa text bên trong nút */
+}
+
+.newsletter__btn:hover {
+    background-color: #e55b5b;
+}
+
+.product-item {
+    height: 350px; /* Chiều cao cố định cho mỗi sản phẩm */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Đảm bảo phân bố đều nội dung */
+    align-items: center;
+}
+
+.product-item__image {
+    width: 100%;
+    height: 350px; /* Đảm bảo hình ảnh có kích thước cố định */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ẩn phần thừa của ảnh nếu có */
+}
+
+.product-item__image img {
+    object-fit: cover; /* Đảm bảo ảnh vừa khít */
+    width: 100%;
+    height: 100%;
+}
+
+.product-item__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

@@ -25,6 +25,15 @@ class Product extends Model
         return $this->belongsToMany(HeathyCatalog::class, 'link_product_heathy', 'product_id', 'heath_id');
     }
 
+    public function catalogs()
+    {
+        return $this->belongsToMany(Catalog::class, 'linkcatalogproduct', 'product_id', 'category_id');
+    }
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id');
+    }
+
 
 }
 

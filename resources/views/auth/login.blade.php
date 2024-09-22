@@ -160,15 +160,13 @@
         left: 20%;
         width: 80px;
         height: 80px;
-        -webkit-animation-delay: 2s;
-        animation-delay: 2s;
+
         -webkit-animation-duration: 17s;
         animation-duration: 17s;
       }
       .bg-bubbles li:nth-child(3) {
         left: 25%;
-        -webkit-animation-delay: 4s;
-        animation-delay: 4s;
+
       }
       .bg-bubbles li:nth-child(4) {
         left: 40%;
@@ -185,23 +183,20 @@
         left: 80%;
         width: 120px;
         height: 120px;
-        -webkit-animation-delay: 3s;
-        animation-delay: 3s;
+
         /* background-color: rgba(255, 255, 255, 0.2); */
       }
       .bg-bubbles li:nth-child(7) {
         left: 32%;
         width: 160px;
         height: 160px;
-        -webkit-animation-delay: 7s;
-        animation-delay: 7s;
+
       }
       .bg-bubbles li:nth-child(8) {
         left: 55%;
         width: 20px;
         height: 20px;
-        -webkit-animation-delay: 15s;
-        animation-delay: 15s;
+
         -webkit-animation-duration: 40s;
         animation-duration: 40s;
       }
@@ -209,8 +204,7 @@
         left: 25%;
         width: 10px;
         height: 10px;
-        -webkit-animation-delay: 2s;
-        animation-delay: 2s;
+
         -webkit-animation-duration: 40s;
         animation-duration: 40s;
         /* background-color: rgba(255, 255, 255, 0.3); */
@@ -219,8 +213,7 @@
         left: 90%;
         width: 160px;
         height: 160px;
-        -webkit-animation-delay: 11s;
-        animation-delay: 11s;
+
       }
       @-webkit-keyframes square {
         0% {
