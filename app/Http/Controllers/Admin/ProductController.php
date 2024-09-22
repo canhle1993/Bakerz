@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         $products = Product::where('isdelete', '<>', 1)
                    ->orWhereNull('isdelete')
-                   ->paginate(5);
+                   ->paginate(2);
         return view('admin.product_management', compact('products'));
     }
 
