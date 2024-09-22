@@ -47,7 +47,7 @@
                 <div class="col-lg-3 col-xl-3 col-7">
                     <!-- Header Logo Start -->
                     <div class="header-logo">
-                        <a href="index.html">
+                        <a href="{{ route('client.home')}}">
                             <img class="white-logo" src="assets/images/logo-white.svg" width="229" height="62" alt="Logo">
                         </a>
                     </div>
@@ -61,42 +61,38 @@
                                 <a  href="{{ route('client.home') }}"  class="menu-item-link"><span >Home</span></a>
                             </li>
                             <li class="position-static">
-                                <a class="menu-item-link" href="#"><span>Shop</span></a>
+                                <a class="menu-item-link" href="{{ route('client.home')}}"><span>Shop</span></a>
                                 <ul class="sub-menu sub-menu-mega">
                                     <li class="mega-menu-item">
                                         <ul>
-                                            <li class="mega-menu-item-title">Shop Layouts</li>
-                                            <li><a class="sub-item-link" href="shop-right-sidebar.html"><span>Shop Right Sidebar</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-left-sidebar.html"><span>Shop Left Sidebar</span></a></li>
-                                            <li><a class="sub-item-link" href="shop.html"><span>Shop 4 Columns</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-five-columns.html"><span>Shop 5 Columns</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-item">
-                                        <ul>
                                             <li class="mega-menu-item-title">Product Types</li>
-                                            <li><a class="sub-item-link" href="single-product.html"><span>Product Simple</span></a></li>
-                                            <li><a class="sub-item-link" href="single-product-grouped.html"><span>Product Grouped</span></a></li>
-                                            <li><a class="sub-item-link" href="single-product-variable.html"><span>Product Variable</span></a></li>
-                                            <li><a class="sub-item-link" href="single-product-affiliate.html"><span>Product Affiliate</span></a></li>
-                                            <li><a class="sub-item-link" href="single-product-Custom.html"><span>Custom Layout</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('product-simple') }}"><span>Product Simple</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('product-grouped') }}"><span>Product Grouped</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('product-affiliate') }}"><span>Product Affiliate</span></a></li>
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item">
                                         <ul>
                                             <li class="mega-menu-item-title">Others</li>
-                                            <li><a class="sub-item-link" href="shop-account.html"><span>My Account</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-cart.html"><span>Cart</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-wishlist.html"><span>Wishlist</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-checkout.html"><span>Checkout</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-compare.html"><span>Compare</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-order-tracking.html"><span>Order Tracking</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('cart') }}"><span>Cart</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('checkout') }}"><span>Checkout</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('order-tracking') }}"><span>Order Tracking</span></a></li>
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item banner-menu-content-wrap">
                                         <ul>
                                             <li>
-                                                <a href="shop.html">
+                                                <a href="{{ route('client.home')}}">
+                                                    <img src="assets/images/product/featured-product-01.png" alt="Shop">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="mega-menu-item banner-menu-content-wrap">
+                                        <ul>
+                                            <li>
+                                                <a href="{{ route('client.home')}}">
                                                     <img src="assets/images/product/featured-product-01.png" alt="Shop">
                                                 </a>
                                             </li>
@@ -104,32 +100,21 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a class="menu-item-link" href="#"><span>Pages</span></a>
+                            <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Pages</span></a>
                                 <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="about.html"><span>About</span></a></li>
-                                    <li><a class="sub-item-link" href="contact.html"><span>Contact</span></a></li>
-                                    <li><a class="sub-item-link" href="contact-2.html"><span>Contact 2</span></a></li>
-                                    <li><a class="sub-item-link" href="our-chef.html"><span>Our Chef</span></a></li>
-                                    <li><a class="sub-item-link" href="faq.html"><span>FAQs</span></a></li>
-                                    <li><a class="sub-item-link" href="pricing.html"><span>Pricing Plans</span></a></li>
-                                    <li><a class="sub-item-link" href="404.html"><span>404 Not Found</span></a></li>
-                                    <li><a class="sub-item-link" href="coming-soon.html"><span>Coming Soon</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('about') }}"><span>About</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('our-chef') }}"><span>Our Chef</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Pricing Plans</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
                                 </ul>
                             </li>
-                            <li><a class="menu-item-link" href="#"><span>Blog</span></a>
+                            <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Blog</span></a>
                                 <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="blog-right-sidebar.html"><span>Blog Right Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-left-sidebar.html"><span>Blog Left Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-no-sidebar.html"><span>Blog No Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-grid-right-sidebar.html"><span>Blog Grid Right Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-grid-left-sidebar.html"><span>Blog Grid Left Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-grid-no-sidebar.html"><span>Blog Grid No Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-details-right-sidebar.html"><span>Blog Post Right Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-details-left-sidebar.html"><span>Blog Post Left Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-details.html"><span>Blog Details</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('blog-detail') }}"><span>Blog Details</span></a></li>
                                 </ul>
                             </li>
-                            <li><a class="menu-item-link" href="contact.html"><span>Contact</span></a></li>
+                            <li><a class="menu-item-link" href="{{ route('contact') }}"><span>Contact</span></a></li>
                         </ul>
                     </div>
                     <!-- Header Menu End -->
@@ -184,7 +169,7 @@
     <!-- Search Start  -->
     <div class="search-popup position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-6 bg-black bg-opacity-75">
         <div class="search-popup__form position-relative">
-            <form action="#">
+            <form action="{{ route('search') }}" method="GET">
                 <input class="search-popup__field border-0 border-bottom bg-transparent text-white w-100 tra py-3" type="text" placeholder="Search…">
                 <button class="search-popup__icon text-white border-0 bg-transparent position-absolute top-50 end-0 translate-middle-y"><i class="lastudioicon-zoom-1"></i></button>
             </form>
@@ -192,228 +177,6 @@
         <button class="search-popup__close position-absolute top-0 end-0 m-8 p-3 lh-1 border-0 text-white fs-4"><i class="lastudioicon-e-remove"></i></button>
     </div>
     <!-- Search End -->
-
-    <!-- offcanvas Menu Start -->
-    <div class="offcanvas offcanvas-end offcanvas-menu bg-secondary" id="offcanvasMenu">
-        <div class="offcanvas-header justify-content-end">
-            <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas"><i class="lastudioicon-e-remove"></i></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="mobile-primary-menu">
-                <li>
-                    <a href="#" class="menu-item-link active"><span>Home</span></a>
-                    <ul class="sub-menu">
-                        <li><a class="sub-item-link" href="index.html"><span>Cake Shop 01</span></a></li>
-                        <li><a class="sub-item-link" href="index-2.html"><span>Cake Shop 02</span></a></li>
-                        <li><a class="sub-item-link" href="index-3.html"><span>Cake Shop 03</span></a></li>
-                        <li><a class="sub-item-link" href="index-4.html"><span>Cake Shop 04</span></a></li>
-                        <li><a class="sub-item-link" href="index-5.html"><span>Cake Shop 05</span></a></li>
-                        <li><a class="sub-item-link" href="index-6.html"><span>Cake Shop 06</span></a></li>
-                        <li><a class="sub-item-link" href="index-7.html"><span>Bread Shop</span></a></li>
-                        <li><a class="sub-item-link" href="index-8.html"><span>Bread Shop 02</span></a></li>
-                        <li><a class="sub-item-link" href="index-9.html"><span>Cake Shop Fullscreen</span></a></li>
-                    </ul>
-                </li>
-                <li class="position-static">
-                    <a class="menu-item-link" href="#"><span>Shop</span></a>
-                    <ul class="sub-menu sub-menu-mega">
-                        <li class="mega-menu-item">
-                            <ul>
-                                <li class="mega-menu-item-title">Shop Layouts</li>
-                                <li><a class="sub-item-link" href="shop-right-sidebar.html"><span>Shop Right Sidebar</span></a></li>
-                                <li><a class="sub-item-link" href="shop-left-sidebar.html"><span>Shop Left Sidebar</span></a></li>
-                                <li><a class="sub-item-link" href="shop.html"><span>Shop 4 Columns</span></a></li>
-                                <li><a class="sub-item-link" href="shop-five-columns.html"><span>Shop 5 Columns</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="mega-menu-item">
-                            <ul>
-                                <li class="mega-menu-item-title">Product Types</li>
-                                <li><a class="sub-item-link" href="single-product.html"><span>Product Simple</span></a></li>
-                                <li><a class="sub-item-link" href="single-product-grouped.html"><span>Product Grouped</span></a></li>
-                                <li><a class="sub-item-link" href="single-product-variable.html"><span>Product Variable</span></a></li>
-                                <li><a class="sub-item-link" href="single-product-affiliate.html"><span>Product Affiliate</span></a></li>
-                                <li><a class="sub-item-link" href="single-product-Custom.html"><span>Custom Layout</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="mega-menu-item">
-                            <ul>
-                                <li class="mega-menu-item-title">Others</li>
-                                <li><a class="sub-item-link" href="shop-account.html"><span>My Account</span></a></li>
-                                <li><a class="sub-item-link" href="shop-cart.html"><span>Cart</span></a></li>
-                                <li><a class="sub-item-link" href="shop-wishlist.html"><span>Wishlist</span></a></li>
-                                <li><a class="sub-item-link" href="shop-checkout.html"><span>Checkout</span></a></li>
-                                <li><a class="sub-item-link" href="shop-compare.html"><span>Compare</span></a></li>
-                                <li><a class="sub-item-link" href="shop-order-tracking.html"><span>Order Tracking</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="mega-menu-item banner-menu-content-wrap">
-                            <ul>
-                                <li>
-                                    <a href="shop.html">
-                                        <img src="assets/images/product/featured-product-01.png" alt="Shop">
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a class="menu-item-link" href="#"><span>Pages</span></a>
-                    <ul class="sub-menu">
-                        <li><a class="sub-item-link" href="about.html"><span>About</span></a></li>
-                        <li><a class="sub-item-link" href="contact.html"><span>Contact</span></a></li>
-                        <li><a class="sub-item-link" href="contact-2.html"><span>Contact 2</span></a></li>
-                        <li><a class="sub-item-link" href="our-chef.html"><span>Our Chef</span></a></li>
-                        <li><a class="sub-item-link" href="faq.html"><span>FAQs</span></a></li>
-                        <li><a class="sub-item-link" href="pricing.html"><span>Pricing Plans</span></a></li>
-                        <li><a class="sub-item-link" href="404.html"><span>404 Not Found</span></a></li>
-                        <li><a class="sub-item-link" href="coming-soon.html"><span>Coming Soon</span></a></li>
-                    </ul>
-                </li>
-                <li><a class="menu-item-link" href="#"><span>Blog</span></a>
-                    <ul class="sub-menu">
-                        <li><a class="sub-item-link" href="blog-right-sidebar.html"><span>Blog Right Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-left-sidebar.html"><span>Blog Left Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-no-sidebar.html"><span>Blog No Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-grid-right-sidebar.html"><span>Blog Grid Right Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-grid-left-sidebar.html"><span>Blog Grid Left Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-grid-no-sidebar.html"><span>Blog Grid No Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-details-right-sidebar.html"><span>Blog Post Right Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-details-left-sidebar.html"><span>Blog Post Left Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-details.html"><span>Blog Details</span></a></li>
-                    </ul>
-                </li>
-                <li><a class="menu-item-link" href="contact.html"><span>Contact</span></a></li>
-            </ul>
-            <ul class="hotline-wrapper offcanvas-hotline">
-                <li>
-                    <div class="hotline">
-                        <i class="lastudioicon lastudioicon-support248"></i>
-                        <div class="hotline-content">
-                            <span class="hotline-text">Hotline</span>
-                            <a class="hotline-link" href="tel:0123456789">(012) 345-6789</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="hotline">
-                        <i class="lastudioicon lastudioicon-pin-check"></i>
-                        <div class="hotline-content">
-                            <span class="hotline-text">Store Location</span>
-                            <a class="hotline-link" href="#/">6391 Elgin St. Celina, Delaware 10299</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- offcanvas Menu End -->
-
-    <!-- Offcanvas Cart Start  -->
-    <div class="offcanvas offcanvas-end offcanvas-cart" id="offcanvasCart">
-
-        <div class="offcanvas-header">
-            <h4 class="offcanvas-title">My Cart</h4>
-            <button type="button" class="btn-close text-secondary" data-bs-dismiss="offcanvas"><i class="lastudioicon lastudioicon-e-remove"></i></button>
-        </div>
-
-        <div class="offcanvas-body">
-            <!-- Offcanvas Cart Items Start  -->
-            <ul class="offcanvas-cart-items">
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-1.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">Macaron Cake</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-2.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">Cream Muffin</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-3.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">Brownie</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-4.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">Chocolate Muffin</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-5.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">No-bake chocolate</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-            </ul>
-            <!-- Offcanvas Cart Items End  -->
-        </div>
-
-        <div class="offcanvas-footer d-flex flex-column gap-4">
-
-            <!-- Mini Cart Total End  -->
-            <div class="mini-cart-totla">
-                <span class="label">Subtotal:</span>
-                <span class="value">$24.95</span>
-            </div>
-            <!-- Mini Cart Total End  -->
-
-            <!-- Mini Cart Button End  -->
-            <div class="mini-cart-btn d-flex flex-column gap-2">
-                <a class="d-block btn btn-secondary btn-hover-primary" href="#">View cart</a>
-                <a class="d-block btn btn-secondary btn-hover-primary" href="#">Checkout</a>
-            </div>
-            <!-- Mini Cart Button End  -->
-
-        </div>
-
-    </div>
-    <!-- Offcanvas Cart End -->
 
     <!-- Slider Section Strat -->
     <div class="slider-section slider-active overflow-hidden">
@@ -538,88 +301,6 @@
         </div>
     </div>
     <!-- Product Section End -->
-
-    <!-- Call to Action Section Strat -->
-    <div class="call-to-action" style="background-image: url(assets/images/call-to-action-bg.jpg);">
-        <div class="container">
-
-            <div class="row align-items-center gy-8 gx-0">
-                <div class="col-lg-6">
-                    <!-- Call to Action box Strat -->
-                    <div class="call-to-action-box">
-                        <h3 class="call-to-action-box__title text-white"><span>Come with us</span></h3>
-                        <ul class="call-to-action-box__list text-white">
-                            <li>Aliquam pulvinar vestibulum blandit. Donec sed nisl libero. Fusce dignissim <u>luctus sem eu dapibus.</u></li>
-                            <li>Pellentesque vulputate quam a quam volutpat, sed ullamcorper erat commodo. Vestibulum sit amet ipsum vitae mauris mattis vulputate lacinia nec neque.</li>
-                        </ul>
-                    </div>
-                    <!-- Call to Action box End -->
-                </div>
-                <div class="col-lg-6">
-                    <!-- Call to Action box Start -->
-                    <div class="call-to-action-more text-center position-relative">
-                        <a class="call-to-action-more__arrow text-white lh-1" href="contact.html"><i class="lastudioicon-arrow-right"></i></a>
-
-                        <div class="position-absolute top-50 start-50 translate-middle">
-                            <img class="call-to-action-more__svg" src="assets/images/svg-text.svg" alt="Svg Text">
-                        </div>
-                    </div>
-                    <!-- Call to Action box End -->
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-    <!-- Call to Action Section End -->
-
-    <!-- Brand Section Strat -->
-    <div class="brand-section">
-        <div class="container">
-
-            <!-- Brand Action Strat -->
-            <div class="brand-active">
-                <div class="swiper">
-                    <div class="swiper-wrapper align-items-center">
-
-                        <!-- Brand Item Strat -->
-                        <div class="swiper-slide brand-item">
-                            <img src="assets/images/brand/partner-1.png" alt="Brand">
-                        </div>
-                        <!-- Brand Item End -->
-
-                        <!-- Brand Item Strat -->
-                        <div class="swiper-slide brand-item">
-                            <img src="assets/images/brand/partner-2.png" alt="Brand">
-                        </div>
-                        <!-- Brand Item End -->
-
-                        <!-- Brand Item Strat -->
-                        <div class="swiper-slide brand-item">
-                            <img src="assets/images/brand/partner-3.png" alt="Brand">
-                        </div>
-                        <!-- Brand Item End -->
-
-                        <!-- Brand Item Strat -->
-                        <div class="swiper-slide brand-item">
-                            <img src="assets/images/brand/partner-4.png" alt="Brand">
-                        </div>
-                        <!-- Brand Item End -->
-
-                        <!-- Brand Item Strat -->
-                        <div class="swiper-slide brand-item">
-                            <img src="assets/images/brand/partner-5.png" alt="Brand">
-                        </div>
-                        <!-- Brand Item End -->
-
-                    </div>
-                </div>
-            </div>
-            <!-- Brand Action End -->
-
-        </div>
-    </div>
-    <!-- Brand Section End -->
 
     <!-- Banner Section Strat -->
     <div class="banner-section">
@@ -2073,208 +1754,8 @@
     </div>
     <!-- Product Section End -->
 
-    <!-- Call to Action Section Strat -->
-    <div class="call-to-action-02" style="background-image: url(assets/images/call-to-action-bg-02.jpg);">
-
-        <!-- Call to Action Section Strat -->
-        <div class="call-to-action-02-wrapper section-padding-01">
-            <div class="container">
-                <!-- Call to Action Section Strat -->
-                <div class="call-to-action-02-content text-center">
-                    <h4 class="call-to-action-02-content__sub-title text-primary">Bakerfresh</h4>
-                    <h2 class="call-to-action-02-content__title text-white mt-1">The most amazing cakes</h2>
-                    <p class="mt-6 text-white">Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim</p>
-                    <a class="btn btn-outline-white btn-hover-primary" href="shop.html">Shop Now</a>
-                </div>
-                <!-- Call to Action Section End -->
-            </div>
-        </div>
-        <!-- Call to Action Section End -->
-
-        <!-- Call to Action Meta Strat -->
-        <div class="call-to-action-02-meta">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <!-- Call to Action Meta Strat -->
-                        <div class="call-to-action-02-meta-item text-center">
-                            <a href="shop.html">
-                                <div class="call-to-action-02-meta-item__icon text-primary">
-                                    <i class="dlicon tech_mobile"></i>
-                                </div>
-                                <div class="call-to-action-02-meta-item__text text-white">Contact us</div>
-                            </a>
-                        </div>
-                        <!-- Call to Action Meta End -->
-                    </div>
-                    <div class="col-md-4">
-                        <!-- Call to Action Meta Strat -->
-                        <div class="call-to-action-02-meta-item text-center">
-                            <a href="shop.html">
-                                <div class="call-to-action-02-meta-item__icon text-primary">
-                                    <i class="dlicon shopping_bag-09"></i>
-                                </div>
-                                <div class="call-to-action-02-meta-item__text text-white">Shopping Online</div>
-                            </a>
-                        </div>
-                        <!-- Call to Action Meta End -->
-                    </div>
-                    <div class="col-md-4">
-                        <!-- Call to Action Meta Strat -->
-                        <div class="call-to-action-02-meta-item text-center">
-                            <a href="shop.html">
-                                <div class="call-to-action-02-meta-item__icon text-primary">
-                                    <i class="lastudioicon lastudioicon-pin-3-2"></i>
-                                </div>
-                                <div class="call-to-action-02-meta-item__text text-white">Store Location</div>
-                            </a>
-                        </div>
-                        <!-- Call to Action Meta End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Call to Action Meta End -->
-
-    </div>
-    <!-- Call to Action Section End -->
-
-    <!-- Instagram Section Strat -->
-    <div class="instagram-section section-padding-01">
-        <div class="container">
-            <div class="row gy-6 align-items-center">
-                <div class="col-md-4">
-                    <!-- Instagram Title Strat -->
-                    <div class="instagram-title">
-                        <h2 class="instagram-title__title">INSTAGRAM</h2>
-                        <p class="instagram-title__sub-title text-global-color-01">@BakerFreshCakeshop </p>
-                    </div>
-                    <!-- Instagram Title End -->
-                </div>
-                <div class="col-md-8">
-
-                    <!-- Instagram Images Strat -->
-                    <div class="instagram-active">
-                        <div class="swiper">
-                            <div class="swiper-wrapper">
-
-                                <!-- Instagram Item Strat -->
-                                <div class="swiper-slide instagram-item">
-                                    <a href="https://www.instagram.com/">
-                                        <div class="instagram-item__image">
-                                            <img src="assets/images/instagram/instagram-1.jpg" alt="Instagram">
-                                        </div>
-                                        <div class="instagram-item__icon">
-                                            <i class="lastudioicon lastudioicon-b-instagram"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Instagram Item End -->
-
-                                <!-- Instagram Item Strat -->
-                                <div class="swiper-slide instagram-item">
-                                    <a href="https://www.instagram.com/">
-                                        <div class="instagram-item__image">
-                                            <img src="assets/images/instagram/instagram-2.jpg" alt="Instagram">
-                                        </div>
-                                        <div class="instagram-item__icon">
-                                            <i class="lastudioicon lastudioicon-b-instagram"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Instagram Item End -->
-
-                                <!-- Instagram Item Strat -->
-                                <div class="swiper-slide instagram-item">
-                                    <a href="https://www.instagram.com/">
-                                        <div class="instagram-item__image">
-                                            <img src="assets/images/instagram/instagram-3.jpg" alt="Instagram">
-                                        </div>
-                                        <div class="instagram-item__icon">
-                                            <i class="lastudioicon lastudioicon-b-instagram"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Instagram Item End -->
-
-                                <!-- Instagram Item Strat -->
-                                <div class="swiper-slide instagram-item">
-                                    <a href="https://www.instagram.com/">
-                                        <div class="instagram-item__image">
-                                            <img src="assets/images/instagram/instagram-4.jpg" alt="Instagram">
-                                        </div>
-                                        <div class="instagram-item__icon">
-                                            <i class="lastudioicon lastudioicon-b-instagram"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Instagram Item End -->
-
-                                <!-- Instagram Item Strat -->
-                                <div class="swiper-slide instagram-item">
-                                    <a href="https://www.instagram.com/">
-                                        <div class="instagram-item__image">
-                                            <img src="assets/images/instagram/instagram-5.jpg" alt="Instagram">
-                                        </div>
-                                        <div class="instagram-item__icon">
-                                            <i class="lastudioicon lastudioicon-b-instagram"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Instagram Item End -->
-
-                                <!-- Instagram Item Strat -->
-                                <div class="swiper-slide instagram-item">
-                                    <a href="https://www.instagram.com/">
-                                        <div class="instagram-item__image">
-                                            <img src="assets/images/instagram/instagram-6.jpg" alt="Instagram">
-                                        </div>
-                                        <div class="instagram-item__icon">
-                                            <i class="lastudioicon lastudioicon-b-instagram"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Instagram Item End -->
-
-                                <!-- Instagram Item Strat -->
-                                <div class="swiper-slide instagram-item">
-                                    <a href="https://www.instagram.com/">
-                                        <div class="instagram-item__image">
-                                            <img src="assets/images/instagram/instagram-7.jpg" alt="Instagram">
-                                        </div>
-                                        <div class="instagram-item__icon">
-                                            <i class="lastudioicon lastudioicon-b-instagram"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Instagram Item End -->
-
-                                <!-- Instagram Item Strat -->
-                                <div class="swiper-slide instagram-item">
-                                    <a href="https://www.instagram.com/">
-                                        <div class="instagram-item__image">
-                                            <img src="assets/images/instagram/instagram-8.jpg" alt="Instagram">
-                                        </div>
-                                        <div class="instagram-item__icon">
-                                            <i class="lastudioicon lastudioicon-b-instagram"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Instagram Item End -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Instagram Images End -->
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Instagram Section End -->
-
-    <!-- Newsletter Section Strat -->
-    <div class="newsletter-section" style="background-image: url(assets/images/newsletter-bg.jpg);">
+     <!-- Newsletter Section Strat -->
+     <div class="newsletter-section" style="background-image: url(assets/images/newsletter-bg.jpg);">
         <div class="container">
 
             <!-- Newsletter Section Strat -->
@@ -2311,14 +1792,14 @@
                         <!-- Footer Widget Section Strat -->
                         <div class="footer-widget">
                             <div class="footer-widget__logo">
-                                <a class="logo-dark" href="index.html"><img src="assets/images/logo.svg" alt="Logo"></a>
+                                <a class="logo-dark" href="{{ route('client.home')}}"><img src="assets/images/logo.svg" alt="Logo"></a>
                                 <a class="logo-white d-none" href="index.html"><img src="assets/images/logo-white.svg" alt="Logo"></a>
                             </div>
                             <div class="footer-widget__social">
-                                <a href="#/"><i class="lastudioicon-b-facebook"></i></a>
-                                <a href="#/"><i class="lastudioicon-b-twitter"></i></a>
-                                <a href="#/"><i class="lastudioicon-b-pinterest"></i></a>
-                                <a href="#/"><i class="lastudioicon-b-instagram"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-facebook"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-twitter"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-instagram"></i></a>
                             </div>
                         </div>
                         <!-- Footer Widget Section End -->
@@ -2332,10 +1813,10 @@
                                 <h4 class="footer-widget__title">Categories</h4>
 
                                 <ul class="footer-widget__link">
-                                    <li><a href="shop.html">Cupcake</a></li>
-                                    <li><a href="shop.html">Pastry</a></li>
-                                    <li><a href="shop.html">Muffin</a></li>
-                                    <li><a href="shop.html">Waffle</a></li>
+                                    <li><a href="{{ route('category')}}">Sweet Breads</a></li>
+                                    <li><a href="{{ route('category')}}">Baked Goods</a></li>
+                                    <li><a href="{{ route('category')}}">Cakes</a></li>
+                                    <li><a href="{{ route('category')}}">Cheesecakes</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -2345,10 +1826,9 @@
                                 <h4 class="footer-widget__title">Services</h4>
 
                                 <ul class="footer-widget__link">
-                                    <li><a href="contact.html">Delivery</a></li>
-                                    <li><a href="contact.html">Payment</a></li>
-                                    <li><a href="contact.html">Returns</a></li>
-                                    <li><a href="contact.html">Privacy</a></li>
+                                    <li><a href="{{ route('delivery')}}">Delivery</a></li>
+                                    <li><a href="{{ route('checkout')}}">Payment</a></li>
+                                    <li><a href="{{ route('exchange-return-policy')}}">Exchange & Return Policy</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -2358,10 +1838,9 @@
                                 <h4 class="footer-widget__title">Information</h4>
 
                                 <ul class="footer-widget__link">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="conact.html">Contact Us</a></li>
-                                    <li><a href="blog-details.html">Latest Post</a></li>
-                                    <li><a href="about.html">Selling Tips</a></li>
+                                    <li><a href="{{ route('about')}}">About Us</a></li>
+                                    <li><a href="{{ route('contact')}}">Contact Us</a></li>
+                                    <li><a href="{{ route('blog-detail')}}">Latest Post</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
