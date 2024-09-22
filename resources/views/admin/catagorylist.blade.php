@@ -23,8 +23,6 @@
 
     <!-- Template Stylesheet -->
     <link href="darkpan-1.0.0/css/style.css" rel="stylesheet">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <!-- Bootstrap CSS -->
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
@@ -46,21 +44,17 @@
                             </thead>
                             <tbody>
                             @foreach($catalogs as $catalog)
-                            <tr id="row-{{ $catalog->category_id }}">
-                                <td>{{ $loop->iteration }}</td>
-                                <td>
-                                    <img src="{{ asset('storage/catalogs/' . $catalog->image) }}" alt="Hình ảnh" width="100" class="mt-2">
-                                </td>
-                                <td id="name-cell-{{ $catalog->category_id }}">{{ $catalog->category_name }}</td>
-                                <td>
-                                    <!-- <a href="javascript:void(0);" class="bi bi-pencil m-2" onclick="editRow({{ $catalog->category_id }}, '{{ route('catalog.update', $catalog->category_id) }}')"></a> -->
-                                    <a href="javascript:void(0);" class="bi bi-pencil m-2" 
-                                        data-category-id="{{ $catalog->category_id }}" 
-                                        data-update-url="{{ route('catalog.update', ['catalog' => $catalog->category_id]) }}" 
-                                        onclick="editRow(this)"></a>
-                                    <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('catalog.destroy', $catalog->category_id) }}" onclick="showDeleteModal(this)">Delete</a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                     <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <img src="{{ asset('storage/catalogs/' . $catalog->image) }}" alt="Hình ảnh" width="100" class="mt-2">
+                                    </td>
+                                    <td>{{ $catalog->category_name }}</td>
+                                    <td><a class="bi bi-pencil m-2" href="{{ route('product.showDetail', $catalog->category_id) }}"></a>
+                                    <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('product.destroy', $catalog->category_id) }}" onclick="showDeleteModal(this)">Delete</a>
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>
@@ -101,82 +95,13 @@
     function showDeleteModal(element) {
         // Lấy giá trị URL từ thuộc tính data-url
         var actionUrl = element.getAttribute('data-url');
-        
+
         // Gán action URL cho form xóa trong modal
         document.getElementById('deleteForm').action = actionUrl;
-        
+
         // Hiển thị modal
         var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         deleteModal.show();
-    }
-
-
-    function editRow(element) {
-        var categoryId = element.getAttribute('data-category-id');
-        var updateUrl = element.getAttribute('data-update-url');
-        // Lấy các phần tử trong dòng cần chỉnh sửa
-        var nameCell = document.getElementById('name-cell-' + categoryId);
-        var row = document.getElementById('row-' + categoryId);
-    
-        // Kiểm tra xem các phần tử có tồn tại không
-        if (!nameCell || !row) {
-            console.error('Element not found for categoryId: ' + categoryId);
-            return; // Ngăn việc tiếp tục nếu phần tử không tồn tại
-        }
-
-        // Tạo input cho tên
-        var currentName = nameCell.innerHTML;
-        nameCell.innerHTML = '<input type="text" id="name-input-' + categoryId + '" value="' + currentName.trim() + '">';
-
-        // Tạo input file cho hình ảnh
-        var imageCell = row.children[1];
-        var currentImage = imageCell.querySelector('img').src;
-        imageCell.innerHTML = '<input onchange="changeFile('+categoryId+')" type="file" id="image-input-' + categoryId + '">';
-        
-        // Thêm nút save và cancel
-        var actionCell = row.children[3];
-        actionCell.innerHTML = `
-            <form id="edit-form-${categoryId}" action="${updateUrl}" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="_method" value="PUT">
-                <input  type="hidden" name ="category_name" id="category_name-` + categoryId + `">
-                <input style="display:none;" type="file" name="category_image" id="category_image-` + categoryId + `">
-                <button type="button" class="btn btn-success m-2" onclick="saveRow(${categoryId})">Save</button>
-                <button type="button" class="btn btn-secondary m-2" onclick="cancelEdit(${categoryId}, '${currentName}', '${currentImage}')">Cancel</button>
-            </form>
-        `;
-    }
-
-    function saveRow(categoryId) {
-        
-        document.getElementById('category_name-' + categoryId).value = document.getElementById('name-input-' + categoryId).value
-        // Submit form
-        document.getElementById('edit-form-' + categoryId).submit();
-    }
-
-    function cancelEdit(categoryId, originalName, originalImage) {
-        // Khôi phục lại nội dung ban đầu
-        document.getElementById('name-cell-' + categoryId).innerHTML = originalName;
-        document.getElementById('row-' + categoryId).children[1].innerHTML = `<img src="${originalImage}" alt="Hình ảnh" width="100" class="mt-2">`;
-        var actionCell = document.getElementById('row-' + categoryId).children[3];
-        actionCell.innerHTML = `
-            <a class="bi bi-pencil m-2" href="javascript:void(0);" onclick="editRow(${categoryId})"></a>
-            <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('product.destroy', $catalog->category_id) }}" onclick="showDeleteModal(this)">Delete</a>
-        `;
-    }
-    
-    function changeFile(categoryId) {
-        var fileInput = document.getElementById('image-input-' + categoryId);
-        var files = fileInput.files; // Lấy các file đã chọn
-
-        // Kiểm tra nếu có file được chọn
-        if (files.length > 0) {
-            // Tạo URL để hiển thị file (nếu là hình ảnh)
-            var fileURL = URL.createObjectURL(files[0]);
-            // Nếu muốn hiển thị file được chọn (nếu là hình ảnh)
-            var imagePreview = document.getElementById('category_image-' + categoryId);
-            imagePreview.files = fileInput.files;  // Hiển thị ảnh đã chọn
-        }
     }
 
 </script>

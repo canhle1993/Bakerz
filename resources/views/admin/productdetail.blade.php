@@ -43,7 +43,7 @@
         <div class="bg-secondary rounded h-100 p-4">
             <div class="row">
                 <div class="col-md-11">
-                <a href="{{ route('product.index') }}" class="btn btn-light m-2">← BACK</a>
+                <a href="{{ route('product.index') }}" class="btn btn-light m-2">↩ Back</a>
 
                 <h6 class="mb-4">{{$product->product_name}}</h6>
                 <div class="row">
@@ -52,16 +52,16 @@
                         <img src="{{ asset('storage/products/' . $image->image) }}" alt="Product Image" width="200px" ><br>
                     @endforeach
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8" style="border: solid thin grey;">
                         <dl class="row mb-0">
                             <dt class="col-sm-4">Description</dt>
-                            <dd class="col-sm-8">{{$product->describe}}</dd>
+                            <dd class="col-sm-8 bg-transparent text-muted" >{{$product->describe}}</dd>
                         </dl>
                         <dl class="row mb-0">
                             <dt class="col-sm-4">Category</dt>
                             <dd class="col-sm-8">
                                 @foreach($product->catalogs as $catalog)
-                                    {{ $catalog->category_name }} <br>
+                                    <p class="text-warning">{{ $catalog->category_name }} </p>
                                 @endforeach
                             </dd>
                         </dl>
@@ -77,7 +77,7 @@
                             <dt class="col-sm-4">Heathy</dt>
                             <dd class="col-sm-8">
                                 @foreach($product->heathyCatalogs as $heathyCatalog)
-                                    {{ $heathyCatalog->heath_catalog }} <br>
+                                <p class="text-info">{{ $heathyCatalog->heath_catalog }}</p> 
                                 @endforeach
                             </dd>
                         </dl>
@@ -110,19 +110,36 @@
                     @method('PUT') 
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Main Image</label>
-                    <input class="form-control bg-dark" type="file" id="formFile1" name="main_image">
+                    <input class="form-control bg-dark" type="file" id="formFile0" name="main_image">
+                    <img id="previewImage0" src="{{ asset('storage/products/' . $product->image) }}" alt="Product Image" width="100px" ><br>
+
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Image 1</label>
                     <input class="form-control bg-dark" type="file" id="formFile1" name="image_1">
+                    @if($product->images()->count() > 0)
+                        <img id="previewImage1" src="{{ asset('storage/products/' . $product->images()->first()->image) }}" alt="Product Image" width="100px"><br>
+                    @else
+                        <img id="previewImage1" src="#" alt="Product Image" width="100px"><br>
+                    @endif
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Image 2</label>
-                    <input class="form-control bg-dark" type="file" id="formFile3" name="image_2">
+                    <input class="form-control bg-dark" type="file" id="formFile2" name="image_2">
+                    @if($product->images()->count() > 1)
+                        <img id="previewImage2" src="{{ asset('storage/products/' . $product->images()->skip(1)->first()->image) }}" alt="Product Image" width="100px"><br>
+                    @else
+                        <img id="previewImage2" src="#" alt="Product Image" width="100px"><br>
+                    @endif
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Image 3</label>
                     <input class="form-control bg-dark" type="file" id="formFile3" name="image_3">
+                    @if($product->images()->count() > 2)
+                        <img id="previewImage3" src="{{ asset('storage/products/' . $product->images()->skip(2)->first()->image) }}" alt="Product Image" width="100px"><br>
+                    @else
+                        <img id="previewImage3" src="#" alt="Product Image" width="100px"><br>
+                    @endif
                 </div>
                 <div class="mb-3">
                     <label for="formFileMultiple" class="form-label">Product Name</label>
@@ -180,6 +197,28 @@
     .addEventListener("click", function () {
         document.getElementById("showDetail").style.display = 'block';
         document.getElementById("updateDetail").style.display = 'none';
+    });
+    // Lắng nghe sự kiện thay đổi file và cập nhật hình ảnh ngay lập tức
+    document.getElementById('formFile0').addEventListener('change', function(event) {
+        const previewImage = document.getElementById('previewImage0');
+        previewImage.src = URL.createObjectURL(event.target.files[0]); // Cập nhật ảnh
+        previewImage.style.display = 'block'; // Hiển thị ảnh
+    });
+
+    document.getElementById('formFile1').addEventListener('change', function(event) {
+        const previewImage = document.getElementById('previewImage1');
+        previewImage.src = URL.createObjectURL(event.target.files[0]); // Cập nhật ảnh
+        previewImage.style.display = 'block'; // Hiển thị ảnh
+    });
+    document.getElementById('formFile2').addEventListener('change', function(event) {
+        const previewImage = document.getElementById('previewImage2');
+        previewImage.src = URL.createObjectURL(event.target.files[0]); // Cập nhật ảnh
+        previewImage.style.display = 'block'; // Hiển thị ảnh
+    });
+    document.getElementById('formFile3').addEventListener('change', function(event) {
+        const previewImage = document.getElementById('previewImage3');
+        previewImage.src = URL.createObjectURL(event.target.files[0]); // Cập nhật ảnh
+        previewImage.style.display = 'block'; // Hiển thị ảnh
     });
 </script>
 </html>

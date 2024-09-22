@@ -23,19 +23,21 @@
 
     <!-- Template Stylesheet -->
     <link href="darkpan-1.0.0/css/style.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
 
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Salse</h6>
-                        <a href="">Show All</a>
+                        <h4 class="mb-0">List Product</h4>
+                        <a href="{{route('product.create')}}">Create Product</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                             <thead>
                                 <tr class="text-white">
-                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
+                                    <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                                    <th scope="col">No.</th>
                                     <th scope="col">Image</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Category</th>
@@ -47,7 +49,8 @@
                             <tbody>
                             @foreach($products as $product)
                                 <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                     <td>{{ $loop->iteration }}</td>
                                     <td>
                                         <img src="{{ asset('storage/products/' . $product->image) }}" alt="Hình ảnh" width="100" class="mt-2">
                                     </td>
@@ -59,7 +62,9 @@
                                     </td>
                                     <td>{{ $product->inventory }}</td>
                                     <td>{{ formatPriceVND($product->price) }}</td>
-                                    <td><a class="btn btn-sm btn-primary" href="{{ route('product.showDetail', $product->product_id) }}">Detail</a></td>
+                                    <td><a class="btn btn-outline-info m-2" href="{{ route('product.showDetail', $product->product_id) }}">Detail</a>
+                                    <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('product.destroy', $product->product_id) }}" onclick="showDeleteModal(this)">Delete</a>                                        
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -73,5 +78,41 @@
                 </div>
             </div>
             <!-- Recent Sales End -->
+            <!-- Modal Popup -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 style="color: grey;" class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this product?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form id="deleteForm" method="POST" action="">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
 
+<script>
+
+    function showDeleteModal(element) {
+        // Lấy giá trị URL từ thuộc tính data-url
+        var actionUrl = element.getAttribute('data-url');
+        
+        // Gán action URL cho form xóa trong modal
+        document.getElementById('deleteForm').action = actionUrl;
+        
+        // Hiển thị modal
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.show();
+    }
+</script>
     @endsection
