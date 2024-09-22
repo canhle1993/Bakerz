@@ -201,6 +201,7 @@
             <!-- Body -->
             @yield('product_content')
             @yield('product_detail')
+            @yield('product_new')
             @yield('manage_client')
             @yield('manage_admin')
 

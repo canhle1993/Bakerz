@@ -19,14 +19,16 @@ class ProductController extends Controller
     {
         $products = Product::where('isdelete', '<>', 1)
                    ->orWhereNull('isdelete')
-                   ->paginate(2);
+                   ->paginate(5);
         return view('admin.product_management', compact('products'));
     }
 
     // Hiển thị form thêm sản phẩm mới
     public function create()
     {
-        return view('admin.create');
+        $catalogs = Catalog::all();  // Lấy tất cả catalog
+        $heathys = HeathyCatalog::all();  // Lấy tất cả heathycase
+        return view('admin.newproduct',compact('catalogs','heathys'));
     }
 
     // Lưu sản phẩm mới
@@ -37,31 +39,84 @@ class ProductController extends Controller
             'product_name' => 'required|string|max:255',
             'inventory' => 'required|integer|min:0',
             'describe' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'status' => 'required|boolean',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'price' => 'required|numeric|min:1',
+            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image_3' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
 
-        // Xử lý tải lên hình ảnh
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');  // Lưu ảnh vào thư mục public/storage/products
+        $product = new Product();
+        // Cập nhật thông tin cơ bản
+        $product->product_name = $request->input('product_name');
+        $product->inventory = $request->input('inventory');
+        $product->price = $request->input('price');
+        $product->describe = $request->input('describe');
+        $product->CreatedBy = Auth::user()->user_id;
+
+        // Xử lý hình ảnh (nếu có)
+        if ($request->hasFile('main_image')) {
+            $file = $request->file('main_image');
+            $filename = time() . '_0.' . $file->getClientOriginalExtension();
+            $request->main_image->storeAs('products', $filename, 'public');
+            // Lưu tên ảnh vào bảng product_image
+            $product->image = $filename;
+            // Kiểm tra nếu file đã lưu thành công
+        }
+        $product->save();
+
+        $productImages = $product->images()->orderBy('image', 'asc')->get();
+        if ($request->hasFile('image_1')) {
+            $file = $request->file('image_1');
+            $filename = time() . '_1.' . $file->getClientOriginalExtension();
+            $request->image_1->storeAs('products', $filename, 'public');   
+            // Lưu tên ảnh vào bảng product_image
+            ProductImage::create([
+                'product_id' => $product->product_id,
+                'image' => $filename,
+                'CreatedBy' => Auth::user()->user_id,
+            ]);
+            // Kiểm tra nếu file đã lưu thành công
+
+        }
+        if ($request->hasFile('image_2')) {
+            if ($productImages->isNotEmpty() && isset($productImages[1]) && Storage::disk('public')->exists('products/' . $productImages[1]->image)) {
+                Storage::disk('public')->delete('products/' . $productImages[1]->image);
+                $productImages[1]->delete(); // Xóa ảnh cũ từ DB
+            }
+            $file = $request->file('image_2');
+            $filename = time() . '_2.' . $file->getClientOriginalExtension();
+            $request->image_2->storeAs('products', $filename, 'public');   
+            
+            // Lưu tên ảnh vào bảng product_image
+            ProductImage::create([
+                'product_id' => $product->product_id,
+                'image' => $filename,
+                'CreatedBy' => Auth::user()->user_id,
+            ]);
         }
 
-        // Lưu thông tin sản phẩm
-        Product::create([
-            'product_name' => $request->input('product_name'),
-            'inventory' => $request->input('inventory'),
-            'describe' => $request->input('describe'),
-            'price' => $request->input('price'),
-            'status' => $request->input('status'),
-            'image' => $imagePath,
-            'CreatedDate' => now(),
-            'CreatedBy' => Auth::user()->id ?? null,  // Nếu có người dùng đăng nhập
-            'isdelete' => 0  // Đặt giá trị mặc định là không bị xóa
-        ]);
+        if ($request->hasFile('image_3')) {
+            if ($productImages->isNotEmpty() && isset($productImages[2]) && Storage::disk('public')->exists('products/' . $productImages[2]->image)) {
+                Storage::disk('public')->delete('products/' . $productImages[2]->image);
+                $productImages[2]->delete(); // Xóa ảnh cũ từ DB
+            }
+            $file = $request->file('image_3');
+            $filename = time() . '_3.' . $file->getClientOriginalExtension();
+            $request->image_3->storeAs('products', $filename, 'public');   
+            // Lưu tên ảnh vào bảng product_image
+            ProductImage::create([
+                'product_id' => $product->product_id,
+                'image' => $filename,
+                'CreatedBy' => Auth::user()->user_id,
+            ]);
+        }
 
-        return redirect()->route('admin.product_management')->with('success', 'Product added successfully');
+        // Cập nhật liên kết catalog và heathy
+        $product->catalogs()->sync($request->input('catalog', []));
+        $product->heathyCatalogs()->sync($request->input('heathy', []));
+        // Lưu các thay đổi
+        return redirect()->route('product.index')->with('success', 'Product added successfully');
     }
 
     // Hiển thị form sửa sản phẩm
@@ -81,16 +136,7 @@ class ProductController extends Controller
         $product->inventory = $request->input('inventory');
         $product->price = $request->input('price');
         $product->describe = $request->input('describe');
-
-        // Xóa ảnh cũ trong database và file
-        // foreach ($product->images as $image) {
-        //     // Xóa file ảnh cũ
-        //     if (Storage::disk('public')->exists('products/' . $image->image)) {
-        //         Storage::disk('public')->delete('products/' . $image->image);
-        //     }
-        //     // Xóa bản ghi ảnh trong bảng product_image
-        //     $image->delete();
-        // }
+        $product->ModifiedBy = Auth::user()->user_id;
 
         // Xử lý hình ảnh (nếu có)
         if ($request->hasFile('main_image')) {
@@ -104,7 +150,7 @@ class ProductController extends Controller
             $product->image = $filename;
             // Kiểm tra nếu file đã lưu thành công
         }
-        $productImages = $product->images;
+        $productImages = $product->images()->orderBy('image', 'asc')->get();
         if ($request->hasFile('image_1')) {
             if ($productImages->isNotEmpty() && isset($productImages[0]) && Storage::disk('public')->exists('products/' . $productImages[0]->image)) {
                 Storage::disk('public')->delete('products/' . $productImages[0]->image);
@@ -117,6 +163,7 @@ class ProductController extends Controller
             ProductImage::create([
                 'product_id' => $id,
                 'image' => $filename,
+                'CreatedBy' => Auth::user()->user_id,
             ]);
             // Kiểm tra nếu file đã lưu thành công
 
@@ -134,6 +181,7 @@ class ProductController extends Controller
             ProductImage::create([
                 'product_id' => $id,
                 'image' => $filename,
+                'CreatedBy' => Auth::user()->user_id,
             ]);
         }
 
@@ -149,6 +197,7 @@ class ProductController extends Controller
             ProductImage::create([
                 'product_id' => $id,
                 'image' => $filename,
+                'CreatedBy' => Auth::user()->user_id,
             ]);
         }
 
@@ -176,7 +225,7 @@ class ProductController extends Controller
             'ModifiedBy' => Auth::user()->id ?? null,
         ]);
 
-        return redirect()->route('admin.product_management')->with('success', 'Product deleted successfully');
+        return redirect()->route('product.index')->with('success', 'Product deleted successfully');
     }
     public function showDetail($id)
     {

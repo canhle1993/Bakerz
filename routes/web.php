@@ -146,4 +146,6 @@ Route::get('/exchange-return-policy', function () {
 //route cho product_management trang admin
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 Route::resource('product', AdminProductController::class);
-Route::get('product/{product}', [AdminProductController::class, 'showDetail'])->name('product.showDetail');
+Route::get('/product/create', [AdminProductController::class, 'create'])->name('product.create');
+Route::get('product/{product}/detail', [AdminProductController::class, 'showDetail'])->name('product.showDetail');
+Route::delete('/product/{product}/delete', [AdminProductController::class, 'destroy'])->name('product.destroy');
