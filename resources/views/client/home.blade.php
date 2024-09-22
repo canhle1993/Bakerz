@@ -61,7 +61,7 @@
                                 <a  href="{{ route('client.home') }}"  class="menu-item-link"><span >Home</span></a>
                             </li>
                             <li class="position-static">
-                                <a class="menu-item-link" href="{{ route('client.home')}}"><span>Shop</span></a>
+                                <a class="menu-item-link" href="{{ route('shop_all')}}"><span>Shop</span></a>
                                 <ul class="sub-menu sub-menu-mega">
                                     <li class="mega-menu-item">
                                         <ul>
@@ -169,7 +169,7 @@
     <!-- Search Start  -->
     <div class="search-popup position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-6 bg-black bg-opacity-75">
         <div class="search-popup__form position-relative">
-            <form action="{{ route('search') }}" method="GET">
+            <form action="" method="GET">
                 <input class="search-popup__field border-0 border-bottom bg-transparent text-white w-100 tra py-3" type="text" placeholder="Search…">
                 <button class="search-popup__icon text-white border-0 bg-transparent position-absolute top-50 end-0 translate-middle-y"><i class="lastudioicon-zoom-1"></i></button>
             </form>
@@ -177,6 +177,114 @@
         <button class="search-popup__close position-absolute top-0 end-0 m-8 p-3 lh-1 border-0 text-white fs-4"><i class="lastudioicon-e-remove"></i></button>
     </div>
     <!-- Search End -->
+
+    <!-- Offcanvas Cart Start  -->
+    <div class="offcanvas offcanvas-end offcanvas-cart" id="offcanvasCart">
+
+        <div class="offcanvas-header">
+            <h4 class="offcanvas-title">My Cart</h4>
+            <button type="button" class="btn-close text-secondary" data-bs-dismiss="offcanvas"><i class="lastudioicon lastudioicon-e-remove"></i></button>
+        </div>
+
+        <div class="offcanvas-body">
+            <!-- Offcanvas Cart Items Start  -->
+            <ul class="offcanvas-cart-items">
+                <li>
+                    <!-- Mini Cart Item Start  -->
+                    <div class="mini-cart-item">
+                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                        <div class="mini-cart-item__thumbnail">
+                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-1.png" alt="Cart"></a>
+                        </div>
+                        <div class="mini-cart-item__content">
+                            <h6 class="mini-cart-item__title"><a href="single-product.html">Macaron Cake</a></h6>
+                            <span class="mini-cart-item__quantity">1 × $4.99</span>
+                        </div>
+                    </div>
+                    <!-- Mini Cart Item End  -->
+                </li>
+                <li>
+                    <!-- Mini Cart Item Start  -->
+                    <div class="mini-cart-item">
+                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                        <div class="mini-cart-item__thumbnail">
+                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-2.png" alt="Cart"></a>
+                        </div>
+                        <div class="mini-cart-item__content">
+                            <h6 class="mini-cart-item__title"><a href="single-product.html">Cream Muffin</a></h6>
+                            <span class="mini-cart-item__quantity">1 × $4.99</span>
+                        </div>
+                    </div>
+                    <!-- Mini Cart Item End  -->
+                </li>
+                <li>
+                    <!-- Mini Cart Item Start  -->
+                    <div class="mini-cart-item">
+                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                        <div class="mini-cart-item__thumbnail">
+                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-3.png" alt="Cart"></a>
+                        </div>
+                        <div class="mini-cart-item__content">
+                            <h6 class="mini-cart-item__title"><a href="single-product.html">Brownie</a></h6>
+                            <span class="mini-cart-item__quantity">1 × $4.99</span>
+                        </div>
+                    </div>
+                    <!-- Mini Cart Item End  -->
+                </li>
+                <li>
+                    <!-- Mini Cart Item Start  -->
+                    <div class="mini-cart-item">
+                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                        <div class="mini-cart-item__thumbnail">
+                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-4.png" alt="Cart"></a>
+                        </div>
+                        <div class="mini-cart-item__content">
+                            <h6 class="mini-cart-item__title"><a href="single-product.html">Chocolate Muffin</a></h6>
+                            <span class="mini-cart-item__quantity">1 × $4.99</span>
+                        </div>
+                    </div>
+                    <!-- Mini Cart Item End  -->
+                </li>
+                <li>
+                    <!-- Mini Cart Item Start  -->
+                    <div class="mini-cart-item">
+                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                        <div class="mini-cart-item__thumbnail">
+                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-5.png" alt="Cart"></a>
+                        </div>
+                        <div class="mini-cart-item__content">
+                            <h6 class="mini-cart-item__title"><a href="single-product.html">No-bake chocolate</a></h6>
+                            <span class="mini-cart-item__quantity">1 × $4.99</span>
+                        </div>
+                    </div>
+                    <!-- Mini Cart Item End  -->
+                </li>
+            </ul>
+            <!-- Offcanvas Cart Items End  -->
+        </div>
+
+        <div class="offcanvas-footer d-flex flex-column gap-4">
+
+            <!-- Mini Cart Total End  -->
+            <div class="mini-cart-totla">
+                <span class="label">Subtotal:</span>
+                <span class="value">$24.95</span>
+            </div>
+            <!-- Mini Cart Total End  -->
+
+            <!-- Mini Cart Button End  -->
+            <div class="mini-cart-btn d-flex flex-column gap-2">
+                <a class="d-block btn btn-secondary btn-hover-primary" href="#">View cart</a>
+                <a class="d-block btn btn-secondary btn-hover-primary" href="#">Checkout</a>
+            </div>
+            <!-- Mini Cart Button End  -->
+
+        </div>
+
+    </div>
+    <!-- Offcanvas Cart End -->
+
+
 
     <!-- Slider Section Strat -->
     <div class="slider-section slider-active overflow-hidden">
@@ -309,10 +417,9 @@
                 <!-- Banner Item Strat -->
                 <a href="shop.html" class="banner-item" style="background-image: url(assets/images/banner-01.jpg);">
                     <div class="banner-item__content">
-                        <h3 class="banner-item__title text-white">Cupcake</h3>
+                        <h3 class="banner-item__title text-white">Sweet Breads</h3>
                         <span class="banner-item__btn text-white">Shop Now</span>
                     </div>
-                    <div class="banner-item__badge text-white">01.</div>
                 </a>
                 <!-- Banner Item End -->
             </div>
@@ -320,10 +427,9 @@
                 <!-- Banner Item Strat -->
                 <a href="shop.html" class="banner-item" style="background-image: url(assets/images/banner-02.jpg);">
                     <div class="banner-item__content">
-                        <h3 class="banner-item__title text-white">Pastry</h3>
+                        <h3 class="banner-item__title text-white">Baked Goods</h3>
                         <span class="banner-item__btn text-white">Shop Now</span>
                     </div>
-                    <div class="banner-item__badge text-white">01.</div>
                 </a>
                 <!-- Banner Item End -->
             </div>
@@ -331,10 +437,9 @@
                 <!-- Banner Item Strat -->
                 <a href="shop.html" class="banner-item" style="background-image: url(assets/images/banner-03.jpg);">
                     <div class="banner-item__content">
-                        <h3 class="banner-item__title text-white">Muffin</h3>
+                        <h3 class="banner-item__title text-white">Cakes</h3>
                         <span class="banner-item__btn text-white">Shop Now</span>
                     </div>
-                    <div class="banner-item__badge text-white">01.</div>
                 </a>
                 <!-- Banner Item End -->
             </div>
@@ -342,10 +447,9 @@
                 <!-- Banner Item Strat -->
                 <a href="shop.html" class="banner-item" style="background-image: url(assets/images/banner-04.jpg);">
                     <div class="banner-item__content">
-                        <h3 class="banner-item__title text-white">Waffle</h3>
+                        <h3 class="banner-item__title text-white">Cheesecakes</h3>
                         <span class="banner-item__btn text-white">Shop Now</span>
                     </div>
-                    <div class="banner-item__badge text-white">01.</div>
                 </a>
                 <!-- Banner Item End -->
             </div>
