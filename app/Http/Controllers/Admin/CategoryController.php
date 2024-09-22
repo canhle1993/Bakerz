@@ -14,9 +14,34 @@ class CategoryController extends Controller
     {
         $catalogs = Catalog::where('isdelete', '<>', 1)
                    ->orWhereNull('isdelete')
+                   ->orderBy('ModifiedDate', 'desc')  // Sắp xếp theo ngày cập nhật giảm dần
                    ->paginate(5);
         return view('admin.catagorylist', compact('catalogs'));
     }
+
+    public function store(Request $request)
+    {
+        
+        $catalog = new Catalog();
+
+        $request->validate([
+            'new_category_name'=> 'required|string|max:255',
+            'new_category_image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+        ]);
+        $catalog->category_name = $request->input('new_category_name');
+        $catalog->CreatedBy = Auth::user()->id ?? null;
+
+        if ($request->hasFile('new_category_image')) {
+            $file = $request->file('new_category_image');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('catalogs', $filename, 'public');
+            $catalog->image = $filename;
+        }
+        $catalog->save();
+
+        return redirect()->route('catalog.index')->with('success', 'Product added successfully');
+    }
+
 
     public function update(Request $request, $id)
     {
