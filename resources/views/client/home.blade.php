@@ -181,6 +181,112 @@
     </div>
     <!-- Search End -->
 
+        <!-- Offcanvas Cart Start  -->
+        <div class="offcanvas offcanvas-end offcanvas-cart" id="offcanvasCart">
+
+<div class="offcanvas-header">
+    <h4 class="offcanvas-title">My Cart</h4>
+    <button type="button" class="btn-close text-secondary" data-bs-dismiss="offcanvas"><i class="lastudioicon lastudioicon-e-remove"></i></button>
+</div>
+
+<div class="offcanvas-body">
+    <!-- Offcanvas Cart Items Start  -->
+    <ul class="offcanvas-cart-items">
+        <li>
+            <!-- Mini Cart Item Start  -->
+            <div class="mini-cart-item">
+                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                <div class="mini-cart-item__thumbnail">
+                    <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-1.png" alt="Cart"></a>
+                </div>
+                <div class="mini-cart-item__content">
+                    <h6 class="mini-cart-item__title"><a href="single-product.html">Macaron Cake</a></h6>
+                    <span class="mini-cart-item__quantity">1 × $4.99</span>
+                </div>
+            </div>
+            <!-- Mini Cart Item End  -->
+        </li>
+        <li>
+            <!-- Mini Cart Item Start  -->
+            <div class="mini-cart-item">
+                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                <div class="mini-cart-item__thumbnail">
+                    <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-2.png" alt="Cart"></a>
+                </div>
+                <div class="mini-cart-item__content">
+                    <h6 class="mini-cart-item__title"><a href="single-product.html">Cream Muffin</a></h6>
+                    <span class="mini-cart-item__quantity">1 × $4.99</span>
+                </div>
+            </div>
+            <!-- Mini Cart Item End  -->
+        </li>
+        <li>
+            <!-- Mini Cart Item Start  -->
+            <div class="mini-cart-item">
+                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                <div class="mini-cart-item__thumbnail">
+                    <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-3.png" alt="Cart"></a>
+                </div>
+                <div class="mini-cart-item__content">
+                    <h6 class="mini-cart-item__title"><a href="single-product.html">Brownie</a></h6>
+                    <span class="mini-cart-item__quantity">1 × $4.99</span>
+                </div>
+            </div>
+            <!-- Mini Cart Item End  -->
+        </li>
+        <li>
+            <!-- Mini Cart Item Start  -->
+            <div class="mini-cart-item">
+                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                <div class="mini-cart-item__thumbnail">
+                    <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-4.png" alt="Cart"></a>
+                </div>
+                <div class="mini-cart-item__content">
+                    <h6 class="mini-cart-item__title"><a href="single-product.html">Chocolate Muffin</a></h6>
+                    <span class="mini-cart-item__quantity">1 × $4.99</span>
+                </div>
+            </div>
+            <!-- Mini Cart Item End  -->
+        </li>
+        <li>
+            <!-- Mini Cart Item Start  -->
+            <div class="mini-cart-item">
+                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                <div class="mini-cart-item__thumbnail">
+                    <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-5.png" alt="Cart"></a>
+                </div>
+                <div class="mini-cart-item__content">
+                    <h6 class="mini-cart-item__title"><a href="single-product.html">No-bake chocolate</a></h6>
+                    <span class="mini-cart-item__quantity">1 × $4.99</span>
+                </div>
+            </div>
+            <!-- Mini Cart Item End  -->
+        </li>
+    </ul>
+    <!-- Offcanvas Cart Items End  -->
+</div>
+
+<div class="offcanvas-footer d-flex flex-column gap-4">
+
+    <!-- Mini Cart Total End  -->
+    <div class="mini-cart-totla">
+        <span class="label">Subtotal:</span>
+        <span class="value">$24.95</span>
+    </div>
+    <!-- Mini Cart Total End  -->
+
+    <!-- Mini Cart Button End  -->
+    <div class="mini-cart-btn d-flex flex-column gap-2">
+        <a class="d-block btn btn-secondary btn-hover-primary" href="#">View cart</a>
+        <a class="d-block btn btn-secondary btn-hover-primary" href="#">Checkout</a>
+    </div>
+    <!-- Mini Cart Button End  -->
+
+</div>
+
+</div>
+<!-- Offcanvas Cart End -->
+ 
     <!-- Slider Section Strat -->
     <div class="slider-section slider-active overflow-hidden">
         <div class="swiper">
@@ -224,14 +330,147 @@
     </div>
     <!-- Slider Section End -->
 
-    <!-- Product Section Strat -->
     <div class="section-padding-01">
+        
+
+<div class="container">
+    <!-- Section Title Strat -->
+    <div class="section-title text-center max-width-720 mx-auto">
+        <h2 class="section-title__title">Products suitable for health</h2>
+        <p>We always bring the healthiest dishes</p>
+    </div>
+    <!-- Section Title End -->
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="tab1">
+            <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 mb-n50">
+                <div class="col mb-50">
+                    <!-- Product Item Start -->
+                    <div class="product-item text-center">
+                        <div class="product-item__badge">Hot</div>
+                        <div class="product-item__image border w-100">
+                            <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-8-500x625.jpg" alt="Product"></a>
+                            <ul class="product-item__meta">
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
+                                </li>
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
+                                </li>
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
+                                </li>
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product-item__content pt-5">
+                            <h5 class="product-item__title"><a href="single-product.html">Brownie</a></h5>
+                            <span class="product-item__price">$4.99</span>
+                        </div>
+                    </div>
+                    <!-- Product Item End -->
+                </div>
+                <div class="col mb-50">
+                    <!-- Product Item Start -->
+                    <div class="product-item text-center">
+                        <div class="product-item__badge d-none">@@badge</div>
+                        <div class="product-item__image border w-100">
+                            <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-7-500x625.jpg" alt="Product"></a>
+                            <ul class="product-item__meta">
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
+                                </li>
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
+                                </li>
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
+                                </li>
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product-item__content pt-5">
+                            <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
+                            <span class="product-item__price">$5.00</span>
+                        </div>
+                    </div>
+                    <!-- Product Item End -->
+                </div>
+                <div class="col mb-50">
+                    <!-- Product Item Start -->
+                    <div class="product-item text-center">
+                        <div class="product-item__badge d-none">@@badge</div>
+                        <div class="product-item__image border w-100">
+                            <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-6-500x625.jpg" alt="Product"></a>
+                            <ul class="product-item__meta">
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
+                                </li>
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
+                                </li>
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
+                                </li>
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product-item__content pt-5">
+                            <h5 class="product-item__title"><a href="single-product.html">Cream Muffin</a></h5>
+                            <span class="product-item__price">$7.55</span>
+                        </div>
+                    </div>
+                    <!-- Product Item End -->
+                </div>
+                <div class="col mb-50">
+                    <!-- Product Item Start -->
+                    <div class="product-item text-center">
+                        <div class="product-item__badge d-none">@@badge</div>
+                        <div class="product-item__image border w-100">
+                            <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-5-500x625.jpg" alt="Product"></a>
+                            <ul class="product-item__meta">
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
+                                </li>
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
+                                </li>
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
+                                </li>
+                                <li class="product-item__meta-action">
+                                    <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product-item__content pt-5">
+                            <h5 class="product-item__title"><a href="single-product.html">Macaron Cake</a></h5>
+                            <span class="product-item__price">$9.44</span>
+                        </div>
+                    </div>
+                    <!-- Product Item End -->
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- Product Section Strat -->
+    <div class="section-padding-01" style="padding-bottom: 0px !important;">
         <div class="container">
 
             <!-- Section Title Strat -->
             <div class="section-title text-center max-width-720 mx-auto">
-                <h2 class="section-title__title">FOR A SWEET DAY</h2>
-                <p>Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt</p>
+                <h2 class="section-title__title">Most recently purchased product</h2>
             </div>
             <!-- Section Title End -->
 
@@ -304,9 +543,376 @@
         </div>
     </div>
     <!-- Product Section End -->
+</div>
+    <!-- Product Section Start -->
+    <div class="section-padding-03 custom-container-four" >
+        <div class="product-row">
+            <div class="product-wrapper pe-md-5 pe-lg-6 pe-xl-8 pe-xxl-11 order-md-1 order-2">
+                <!-- Section Title Strat -->
+                <div class="section-title-05">
+                    <h5 class="section-title-05__title"><span>Promotional Products</span></h5>
+                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
+                </div>
+                <!-- Section Title End -->
+
+                <div class="product-active-two">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+
+                            <!-- swiper-slide start -->
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item product-item-05 border text-center">
+                                    <div class="product-item__image">
+                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-9-500x625.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-item__content">
+                                        <h5 class="product-item__title"><a href="single-product.html">Raisin Bread</a></h5>
+                                        <span class="product-item__price">$4.99</span>
+                                    </div>
+                                    <ul class="product-item__meta">
+                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
+                                    </ul>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item product-item-05 border text-center">
+                                    <div class="product-item__image">
+                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-15-500x625.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-item__content">
+                                        <h5 class="product-item__title"><a href="single-product.html">Poppy Roll</a></h5>
+                                        <span class="product-item__price">$5.00</span>
+                                    </div>
+                                    <ul class="product-item__meta">
+                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
+                                    </ul>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item product-item-05 border text-center">
+                                    <div class="product-item__image">
+                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-16-500x625.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-item__content">
+                                        <h5 class="product-item__title"><a href="single-product.html">Wheat Loaf</a></h5>
+                                        <span class="product-item__price">$7.55</span>
+                                    </div>
+                                    <ul class="product-item__meta">
+                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
+                                    </ul>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item product-item-05 border text-center">
+                                    <div class="product-item__image">
+                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-17-500x625.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-item__content">
+                                        <h5 class="product-item__title"><a href="single-product.html">Corn Ciabatta</a></h5>
+                                        <span class="product-item__price">$9.44</span>
+                                    </div>
+                                    <ul class="product-item__meta">
+                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
+                                    </ul>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                            <!-- swiper-slide end-->
+
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
+                    <div class="swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
+                </div>
+
+            </div>
+            <div class="boxbanner-wrapper order-md-2 order-1">
+                <!-- Ad Banner Start -->
+                <a href="single-product.html" class="boxbanner-bg boxbanner" data-bg-image="assets/images/banner/add-banner.jpg">
+                    <span class="boxbanner-subtitle">only buy in stores</span>
+                    <span class="boxbanner-title">Discount</span>
+                    <span class="boxbanner-discount">50%</span>
+                    <div class="boxbanner-btn-area">
+                        <span class="boxbanner-btn">Store Location <i class="lastudioicon lastudioicon-right-arrow"></i></span>
+                    </div>
+                </a>
+                <!-- Ad Banner End -->
+            </div>
+        </div>
+    </div>
+    <!-- Product Section End -->
+
+    <!-- Product Section Start -->
+    <div class="section-padding-03 custom-container-four pt-0">
+        <div class="product-row">
+            <div class="product-wrapper ps-md-5 ps-lg-6 ps-xl-8 ps-xxl-11 order-2 ">
+                <!-- Section Title Strat -->
+                <div class="section-title-05">
+                    <h5 class="section-title-05__title"><span>What’s Hot</span></h5>
+                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
+                </div>
+                <!-- Section Title End -->
+
+                <div class="product-active-three">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+
+                            <!-- swiper-slide start -->
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item product-item-05 border text-center">
+                                    <div class="product-item__image">
+                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-12-500x625.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-item__content">
+                                        <h5 class="product-item__title"><a href="single-product.html">Raisin Bread</a></h5>
+                                        <span class="product-item__price">$4.99</span>
+                                    </div>
+                                    <ul class="product-item__meta">
+                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
+                                    </ul>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item product-item-05 border text-center">
+                                    <div class="product-item__image">
+                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-13-500x625.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-item__content">
+                                        <h5 class="product-item__title"><a href="single-product.html">Poppy Bun</a></h5>
+                                        <span class="product-item__price">$5.00</span>
+                                    </div>
+                                    <ul class="product-item__meta">
+                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
+                                    </ul>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item product-item-05 border text-center">
+                                    <div class="product-item__image">
+                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-11-500x625.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-item__content">
+                                        <h5 class="product-item__title"><a href="single-product.html">Olivetta Bread</a></h5>
+                                        <span class="product-item__price">$7.55</span>
+                                    </div>
+                                    <ul class="product-item__meta">
+                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
+                                    </ul>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item product-item-05 border text-center">
+                                    <div class="product-item__image">
+                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-17-500x625.jpg" alt="Product"></a>
+                                    </div>
+                                    <div class="product-item__content">
+                                        <h5 class="product-item__title"><a href="single-product.html">Corn Ciabatta</a></h5>
+                                        <span class="product-item__price">$9.44</span>
+                                    </div>
+                                    <ul class="product-item__meta">
+                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
+                                    </ul>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                            <!-- swiper-slide end-->
+
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
+                    <div class="swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
+                </div>
+
+            </div>
+            <div class="boxbanner-wrapper order-1">
+                <!-- Ad Banner Start -->
+                <a href="single-product.html" class="boxbanner-bg boxbanner" data-bg-image="assets/images/banner/add-banner-two.jpg">
+                    <div class="boxbanner-two">
+                        <span class="boxbanner-title">a new cookie</span>
+                        <span class="boxbanner-discount-two">from only 4$</span>
+                    </div>
+                    <div class="boxbanner-btn-area">
+                        <span class="boxbanner-btn">Store Location <i class="lastudioicon lastudioicon-right-arrow"></i></span>
+                    </div>
+                </a>
+                <!-- Ad Banner End -->
+            </div>
+        </div>
+    </div>
+    <!-- Product Section End -->
+
+    <!-- Product Deal Section Start -->
+    <div class="custom-container-four container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section Title Strat -->
+                <div class="section-title-05">
+                    <h5 class="section-title-05__title"><span>Seasonal Products</span></h5>
+                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
+                </div>
+                <!-- Section Title End -->
+            </div>
+            <div class="col-12">
+                <div class="product-active-four mt-4">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+
+                            <!-- swiper-slide start -->
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item product-item-06 border text-center">
+                                    <div class="product-item__image">
+                                        <a href="single-product.html"><img width="350" height="350" src="assets/images/product/m5-prod1.jpg" alt="Product"></a>
+                                        <ul class="product-item__meta meta-middle">
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
+                                            </li>
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
+                                            </li>
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-item__content">
+                                        <h5 class="product-item__title"><a href="single-product.html">White Chocolate Rasberry</a></h5>
+                                        <span class="product-item__price">$4.99</span>
+                                        <p class="product-item__text">Aliqua id fugiat nostrud irure ex duis ea quis id…</p>
+                                        <a href="#/" class="product-item__btn" data-bs-toggle="modal" data-bs-target="#modalCart">Add to cart</a>
+                                    </div>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item product-item-06 border text-center">
+                                    <div class="product-item__image">
+                                        <a href="single-product.html"><img width="350" height="350" src="assets/images/product/m5-prod2.jpg" alt="Product"></a>
+                                        <ul class="product-item__meta meta-middle">
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
+                                            </li>
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
+                                            </li>
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-item__content">
+                                        <h5 class="product-item__title"><a href="single-product.html">Caramel Apple</a></h5>
+                                        <span class="product-item__price">$5.00</span>
+                                        <p class="product-item__text">Aliqua id fugiat nostrud irure ex duis ea quis id…</p>
+                                        <a href="#/" class="product-item__btn" data-bs-toggle="modal" data-bs-target="#modalCart">Add to cart</a>
+                                    </div>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item product-item-06 border text-center">
+                                    <div class="product-item__image">
+                                        <a href="single-product.html"><img width="350" height="350" src="assets/images/product/m5-prod3.jpg" alt="Product"></a>
+                                        <ul class="product-item__meta meta-middle">
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
+                                            </li>
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
+                                            </li>
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-item__content">
+                                        <h5 class="product-item__title"><a href="single-product.html">German Chocolate Cake</a></h5>
+                                        <span class="product-item__price">$7.55</span>
+                                        <p class="product-item__text">Aliqua id fugiat nostrud irure ex duis ea quis id…</p>
+                                        <a href="#/" class="product-item__btn" data-bs-toggle="modal" data-bs-target="#modalCart">Add to cart</a>
+                                    </div>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item product-item-06 border text-center">
+                                    <div class="product-item__image">
+                                        <a href="single-product.html"><img width="350" height="350" src="assets/images/product/m5-prod2.jpg" alt="Product"></a>
+                                        <ul class="product-item__meta meta-middle">
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
+                                            </li>
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
+                                            </li>
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-item__content">
+                                        <h5 class="product-item__title"><a href="single-product.html">Caramel Apple</a></h5>
+                                        <span class="product-item__price">$9.44</span>
+                                        <p class="product-item__text">Aliqua id fugiat nostrud irure ex duis ea quis id…</p>
+                                        <a href="#/" class="product-item__btn" data-bs-toggle="modal" data-bs-target="#modalCart">Add to cart</a>
+                                    </div>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                            <!-- swiper-slide end-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product Deal Section End -->
+
 
     <!-- Banner Section Strat -->
-    <div class="banner-section">
+    <div class="banner-section pt-5" >
         <div class="row row-cols-1 row-cols-md-2 g-0">
             <div class="col">
                 <!-- Banner Item Strat -->
@@ -353,1409 +959,225 @@
                 <!-- Banner Item End -->
             </div>
         </div>
-    </div>
+    </div><br>
     <!-- Banner Section End -->
-
-    <!-- Product Section End -->
-    <div class="section-padding-01">
-
-        <div class="container">
-            <!-- Section Title Strat -->
-            <div class="section-title text-center max-width-720 mx-auto">
-                <h2 class="section-title__title">OUR PRODUCTS</h2>
-                <p>Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt</p>
-            </div>
-            <!-- Section Title End -->
-
-            <!-- Product Tab Menu Strat -->
-            <div class="product-tab-menu pb-8">
-                <ul class="nav justify-content-center">
-                    <li><button class="active" data-bs-toggle="tab" data-bs-target="#tab1">All</button></li>
-                    <li><button data-bs-toggle="tab" data-bs-target="#tab2">Cupcake</button></li>
-                    <li><button data-bs-toggle="tab" data-bs-target="#tab3">Pastry</button></li>
-                    <li><button data-bs-toggle="tab" data-bs-target="#tab4">Muffin</button></li>
-                    <li><button data-bs-toggle="tab" data-bs-target="#tab5">Waffle</button></li>
-                    <li><button data-bs-toggle="tab" data-bs-target="#tab6">Tart</button></li>
-                </ul>
-            </div>
-            <!-- Product Tab Menu End -->
-
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="tab1">
-                    <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 mb-n50">
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-8-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Brownie</a></h5>
-                                    <span class="product-item__price">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-7-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-6-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Cream Muffin</a></h5>
-                                    <span class="product-item__price">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-5-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Macaron Cake</a></h5>
-                                    <span class="product-item__price">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-4-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">No-bake chocolate</a></h5>
-                                    <span class="product-item__price">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-3-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Chocolate Bake</a></h5>
-                                    <span class="product-item__price">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-2-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-1-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Italian Loaf</a></h5>
-                                    <span class="product-item__price">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="tab2">
-                    <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 mb-n50">
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-7-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-1-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Italian Loaf</a></h5>
-                                    <span class="product-item__price">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-8-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Brownie</a></h5>
-                                    <span class="product-item__price">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-6-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Cream Muffin</a></h5>
-                                    <span class="product-item__price">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-5-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Macaron Cake</a></h5>
-                                    <span class="product-item__price">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-4-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">No-bake chocolate</a></h5>
-                                    <span class="product-item__price">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-3-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Chocolate Bake</a></h5>
-                                    <span class="product-item__price">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-2-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="tab3">
-                    <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 mb-n50">
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-6-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-3-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Italian Loaf</a></h5>
-                                    <span class="product-item__price">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-8-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Brownie</a></h5>
-                                    <span class="product-item__price">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-7-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Cream Muffin</a></h5>
-                                    <span class="product-item__price">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-5-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Macaron Cake</a></h5>
-                                    <span class="product-item__price">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-4-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">No-bake chocolate</a></h5>
-                                    <span class="product-item__price">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-1-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Chocolate Bake</a></h5>
-                                    <span class="product-item__price">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-2-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="tab4">
-                    <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 mb-n50">
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-2-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-6-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-3-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Italian Loaf</a></h5>
-                                    <span class="product-item__price">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-7-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Cream Muffin</a></h5>
-                                    <span class="product-item__price">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-5-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Macaron Cake</a></h5>
-                                    <span class="product-item__price">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-4-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">No-bake chocolate</a></h5>
-                                    <span class="product-item__price">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-8-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Brownie</a></h5>
-                                    <span class="product-item__price">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-1-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Chocolate Bake</a></h5>
-                                    <span class="product-item__price">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="tab5">
-                    <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 mb-n50">
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-5-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Macaron Cake</a></h5>
-                                    <span class="product-item__price">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-2-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-6-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-7-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Cream Muffin</a></h5>
-                                    <span class="product-item__price">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-4-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">No-bake chocolate</a></h5>
-                                    <span class="product-item__price">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-8-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Brownie</a></h5>
-                                    <span class="product-item__price">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-1-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Chocolate Bake</a></h5>
-                                    <span class="product-item__price">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-3-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Italian Loaf</a></h5>
-                                    <span class="product-item__price">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="tab6">
-                    <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 mb-n50">
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-4-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">No-bake chocolate</a></h5>
-                                    <span class="product-item__price">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-5-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Macaron Cake</a></h5>
-                                    <span class="product-item__price">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-2-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-7-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Cream Muffin</a></h5>
-                                    <span class="product-item__price">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-8-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Brownie</a></h5>
-                                    <span class="product-item__price">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-1-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Chocolate Bake</a></h5>
-                                    <span class="product-item__price">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-3-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Italian Loaf</a></h5>
-                                    <span class="product-item__price">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="col mb-50">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-6-500x625.jpg" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+    <!-- Testimonial Section Strat -->
+    <div class="customer-review" data-bg-image="assets/images/bg/tesmonial-bg-2.jpg">
+        <h5 class="customer-review-title">Customer reviews</h5>
+        <div class="customer-review-mark">
+            <svg xmlns="http://www.w3.org/2000/svg" width="62" height="20" fill="none" viewBox="0 0 62 20">
+                <path fill="#C2943A" d="M6 4l1.347 4.146h4.36L8.18 10.708l1.347 4.146L6 12.292l-3.527 2.562 1.347-4.146L.294 8.146h4.359L6 4zM31 0l2.245 6.91h7.266l-5.878 4.27 2.245 6.91L31 13.82l-5.878 4.27 2.245-6.91-5.878-4.27h7.266L31 0zM56 4l1.347 4.146h4.36l-3.527 2.562 1.347 4.146L56 12.292l-3.527 2.562 1.347-4.146-3.526-2.562h4.359L56 4z" />
+            </svg>
         </div>
+    </div>
+    <div class="testimonial-section">
+
+        <!-- Testimonial Active Strat -->
+        <div class="testimonial-active-two">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+
+                    <!-- swiper-slide start -->
+                    <!-- Testimonial Item Strat -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-two text-center">
+                            <div class="testimonial-two_quote">
+                                <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
+                                </svg>
+                            </div>
+                            <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
+                            <div class="testimonial-two_image">
+                                <img width="56" height="56" src="assets/images/avatar/testimoial-1.png" alt="Author">
+                            </div>
+                            <span class="testimonial-two_name">Esther Howard</span>
+                            <span class="testimonial-two_position">New Yourk</span>
+                        </div>
+                    </div>
+                    <!-- Testimonial Item End -->
+                    <!-- Testimonial Item Strat -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-two text-center">
+                            <div class="testimonial-two_quote">
+                                <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
+                                </svg>
+                            </div>
+                            <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
+                            <div class="testimonial-two_image">
+                                <img width="56" height="56" src="assets/images/avatar/testimoial-2.png" alt="Author">
+                            </div>
+                            <span class="testimonial-two_name">Elanor Pera</span>
+                            <span class="testimonial-two_position">Canada</span>
+                        </div>
+                    </div>
+                    <!-- Testimonial Item End -->
+                    <!-- Testimonial Item Strat -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-two text-center">
+                            <div class="testimonial-two_quote">
+                                <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
+                                </svg>
+                            </div>
+                            <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
+                            <div class="testimonial-two_image">
+                                <img width="56" height="56" src="assets/images/avatar/testimoial-3.png" alt="Author">
+                            </div>
+                            <span class="testimonial-two_name">Krishna Barbe</span>
+                            <span class="testimonial-two_position">Singapore</span>
+                        </div>
+                    </div>
+                    <!-- Testimonial Item End -->
+                    <!-- Testimonial Item Strat -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-two text-center">
+                            <div class="testimonial-two_quote">
+                                <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
+                                </svg>
+                            </div>
+                            <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
+                            <div class="testimonial-two_image">
+                                <img width="56" height="56" src="assets/images/avatar/testimoial-2.png" alt="Author">
+                            </div>
+                            <span class="testimonial-two_name">Esther Howard</span>
+                            <span class="testimonial-two_position">Dubai</span>
+                        </div>
+                    </div>
+                    <!-- Testimonial Item End -->
+                    <!-- swiper-slide end-->
+
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial Active End -->
 
     </div>
-    <!-- Product Section End -->
+    <!-- Testimonial Section End -->
+
+    <!-- Blog Post Section Start -->
+    <div class="section-padding-03 custom-container-four container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section Title Strat -->
+                <div class="section-title-05">
+                    <h5 class="section-title-05__title"><span>The Most Popular Blogs</span></h5>
+                    <a href="blog-no-sidebar.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
+                </div>
+                <!-- Section Title End -->
+            </div>
+            <div class="col-12">
+                <div class="blog-active mt-4">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+
+                            <!-- swiper-slide start -->
+                            <div class="swiper-slide">
+                                <!-- Blog Item Strat -->
+                                <div class="blog-itemtwo">
+                                    <a href="blog-details.html" class="blog-itemtwo__thumbnail">
+                                        <img src="assets/images/blog/blog-5-1.jpg" alt="Blog">
+                                    </a>
+                                    <div class="blog-itemtwo__content">
+                                        <div class="blog-itemtwo__meta">
+                                            <div class="blog-itemtwo__meta-action">August 14, 2022</div>
+                                            <div class="blog-itemtwo__meta-action"><a href="#"> - Bakery</a></div>
+                                        </div>
+                                        <h3 class="blog-itemtwo__title"><a href="blog-details.html">Things you should know about cakes</a></h3>
+                                        <p class="blog-itemtwo__text">Things you should know about cakes Donec sed erat ut magna suscipit…</p>
+                                        <div class="blog-btn-wrap">
+                                            <a href="blog-details.html" class="blog-itemtwo__btn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 44 16">
+                                                    <path fill="currentColor" d="M43.707 8.707a1 1 0 0 0 0-1.414L37.343.929a1 1 0 1 0-1.414 1.414L41.586 8l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM0 9h43V7H0v2z"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Blog Item End -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Blog Item Strat -->
+                                <div class="blog-itemtwo">
+                                    <a href="blog-details.html" class="blog-itemtwo__thumbnail">
+                                        <img src="assets/images/blog/blog-5-2.jpg" alt="Blog">
+                                    </a>
+                                    <div class="blog-itemtwo__content">
+                                        <div class="blog-itemtwo__meta">
+                                            <div class="blog-itemtwo__meta-action">August 14, 2022</div>
+                                            <div class="blog-itemtwo__meta-action"><a href="#"> - Bakery</a></div>
+                                        </div>
+                                        <h3 class="blog-itemtwo__title"><a href="blog-details.html">Things you should know about cakes</a></h3>
+                                        <p class="blog-itemtwo__text">Things you should know about cakes Donec sed erat ut magna suscipit…</p>
+                                        <div class="blog-btn-wrap">
+                                            <a href="blog-details.html" class="blog-itemtwo__btn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 44 16">
+                                                    <path fill="currentColor" d="M43.707 8.707a1 1 0 0 0 0-1.414L37.343.929a1 1 0 1 0-1.414 1.414L41.586 8l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM0 9h43V7H0v2z"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Blog Item End -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Blog Item Strat -->
+                                <div class="blog-itemtwo">
+                                    <a href="blog-details.html" class="blog-itemtwo__thumbnail">
+                                        <img src="assets/images/blog/blog-5-3.jpg" alt="Blog">
+                                    </a>
+                                    <div class="blog-itemtwo__content">
+                                        <div class="blog-itemtwo__meta">
+                                            <div class="blog-itemtwo__meta-action">August 14, 2022</div>
+                                            <div class="blog-itemtwo__meta-action"><a href="#"> - Bakery</a></div>
+                                        </div>
+                                        <h3 class="blog-itemtwo__title"><a href="blog-details.html">Things you should know about cakes</a></h3>
+                                        <p class="blog-itemtwo__text">Things you should know about cakes Donec sed erat ut magna suscipit…</p>
+                                        <div class="blog-btn-wrap">
+                                            <a href="blog-details.html" class="blog-itemtwo__btn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 44 16">
+                                                    <path fill="currentColor" d="M43.707 8.707a1 1 0 0 0 0-1.414L37.343.929a1 1 0 1 0-1.414 1.414L41.586 8l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM0 9h43V7H0v2z"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Blog Item End -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- Blog Item Strat -->
+                                <div class="blog-itemtwo">
+                                    <a href="blog-details.html" class="blog-itemtwo__thumbnail">
+                                        <img src="assets/images/blog/blog-5-2.jpg" alt="Blog">
+                                    </a>
+                                    <div class="blog-itemtwo__content">
+                                        <div class="blog-itemtwo__meta">
+                                            <div class="blog-itemtwo__meta-action">August 14, 2022</div>
+                                            <div class="blog-itemtwo__meta-action"><a href="#"> - Bakery</a></div>
+                                        </div>
+                                        <h3 class="blog-itemtwo__title"><a href="blog-details.html">Things you should know about cakes</a></h3>
+                                        <p class="blog-itemtwo__text">Things you should know about cakes Donec sed erat ut magna suscipit…</p>
+                                        <div class="blog-btn-wrap">
+                                            <a href="blog-details.html" class="blog-itemtwo__btn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 44 16">
+                                                    <path fill="currentColor" d="M43.707 8.707a1 1 0 0 0 0-1.414L37.343.929a1 1 0 1 0-1.414 1.414L41.586 8l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM0 9h43V7H0v2z"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Blog Item End -->
+                            </div>
+                            <!-- swiper-slide end-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Blog Post Section End -->
 
      <!-- Newsletter Section Strat -->
      <div class="newsletter-section" style="background-image: url(assets/images/newsletter-bg.jpg);">
