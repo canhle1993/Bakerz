@@ -115,3 +115,7 @@ Route::get('/delivery', function () {
 Route::get('/exchange-return-policy', function () {
     return view('client.services.exchange-return-policy');
 })->name('exchange-return-policy');
+//route cho product_management trang admin
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+Route::resource('product', AdminProductController::class);
+Route::get('product/{product}', [AdminProductController::class, 'showDetail'])->name('product.showDetail');
