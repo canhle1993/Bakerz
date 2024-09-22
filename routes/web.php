@@ -17,12 +17,14 @@ Route::post('/change-password', [RegisterController::class, 'changepass'])->name
 use App\Http\Controllers\ClientController;
 Route::get('/', [ClientController::class, 'home'])->name('client.home');
 Route::get('/client/profile/user/{userid}', [ClientController::class, 'profile'])->name('client.profile');
-
 use App\Http\Controllers\ProductController;
-
 Route::get('/client/heathyfilter', [ProductController::class, 'filter'])->name('client.heathyfilter');
+
 //Route cho client tìm kiếm thông tin sản phẩm
-Route::get('/search', [ProductController::class, 'search'])->name('search');
+Route::get('/search', [ProductController::class, 'search'])->name('product_search');
+
+//Rout cho client bấm vào danh mục sẽ hiện ra sản phẩm của danh mục đó
+Route::get('/shop/category/{category_id}', [ProductController::class, 'filterByCategory'])->name('shop.category');
 
 
 
@@ -41,15 +43,31 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name(
 Route::post('/update-avatar', [App\Http\Controllers\UserController::class, 'updateAvatar'])->name('update-avatar');
 Route::post('/profile/update', [UserController::class, 'update'])->name('profile.update');
 
-
-
-
 // Route cho admin
+// dashboard
 use App\Http\Controllers\Admin\DashboardController;
-
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+// Route quản lý Client
+use App\Http\Controllers\Admin\ManageClientController;
+Route::get('/admin/manage/client', [ManageClientController::class, 'index'])->name('manage-client');
+Route::get('/admin/manage/client/create', [ManageClientController::class, 'create'])->name('client.create');
+Route::post('/admin/manage/client/store', [ManageClientController::class, 'store'])->name('client.store');
+Route::get('/admin/manage/client/{id}/edit', [ManageClientController::class, 'edit'])->name('client.edit');
+Route::post('/admin/manage/client/{id}', [ManageClientController::class, 'update'])->name('client.update');
+Route::delete('/admin/manage/client/{id}', [ManageClientController::class, 'destroy'])->name('client.destroy');
+
+// Route quản lý Admin
+use App\Http\Controllers\Admin\ManageAdminController;
+Route::get('/admin/manage/admin', [ManageAdminController::class, 'index'])->name('manage-admin');
+Route::get('/admin/manage/admin/create', [ManageAdminController::class, 'create'])->name('admin.create');
+Route::post('/admin/manage/admin/store', [ManageAdminController::class, 'store'])->name('admin.store');
+Route::get('/admin/manage/admin/{id}/edit', [ManageAdminController::class, 'edit'])->name('admin.edit');
+Route::post('/admin/manage/admin/{id}', [ManageAdminController::class, 'update'])->name('admin.update');
+Route::delete('/admin/manage/admin/{id}', [ManageAdminController::class, 'destroy'])->name('admin.destroy');
+
 // Route cho client shop product types
+Route::get('/shop_all', [ProductController::class, 'all_product'])->name('shop_all');
 Route::get('/product-simple', function () {
     return view('client.shop.product-types.product-simple');
 })->name('product-simple');
@@ -96,12 +114,10 @@ Route::get('/blog-detail', function () {
     return view('client.blog.blog-detail');
 })->name('blog-detail');
 
-
 //Route cho client contact
 Route::get('/contact', function () {
     return view('client.contact');
 })->name('contact');
-
 
 //Route cho client category
 Route::get('/category', function () {
@@ -115,7 +131,15 @@ Route::get('/delivery', function () {
 Route::get('/exchange-return-policy', function () {
     return view('client.services.exchange-return-policy');
 })->name('exchange-return-policy');
+
 //route cho product_management trang admin
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+
 Route::resource('product', AdminProductController::class);
-Route::get('product/{product}', [AdminProductController::class, 'showDetail'])->name('product.showDetail');
+Route::get('/product/create', [AdminProductController::class, 'create'])->name('product.create');
+Route::get('product/{product}/detail', [AdminProductController::class, 'showDetail'])->name('product.showDetail');
+Route::delete('/product/{product}/delete', [AdminProductController::class, 'destroy'])->name('product.destroy');
+
+//route cho catalog trang admin
+use App\Http\Controllers\Admin\CategoryController;
+Route::resource('catalog', CategoryController::class);

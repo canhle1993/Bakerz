@@ -15585,3 +15585,33 @@ textarea.form-control {
     background-color: #e55b5b;
 }
 
+.product-item {
+    height: 350px; /* Chiều cao cố định cho mỗi sản phẩm */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Đảm bảo phân bố đều nội dung */
+    align-items: center;
+}
+
+.product-item__image {
+    width: 100%;
+    height: 350px; /* Đảm bảo hình ảnh có kích thước cố định */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ẩn phần thừa của ảnh nếu có */
+}
+
+.product-item__image img {
+    object-fit: cover; /* Đảm bảo ảnh vừa khít */
+    width: 100%;
+    height: 100%;
+}
+
+.product-item__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
