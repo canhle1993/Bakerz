@@ -62,11 +62,11 @@
                 <div class="navbar-nav w-100">
                     <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle {{ Request::routeIs('product.index') ? 'active' : '' }}" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ route('product.index') }}" class="dropdown-item {{ Request::routeIs('product.index') ? 'active' : '' }}">Product Management</a>
-                            <a href="typography.html" class="dropdown-item">Typography</a>
-                            <a href="element.html" class="dropdown-item">Other Elements</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ Request::is('product*') ? 'active' : '' }}" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
+                        <div class="dropdown-menu bg-transparent border-0 {{ Request::is('product*') ? 'show' : '' }}">
+                            <a href="{{ route('product.index') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('product.index') ? 'active' : '' }}">&nbsp;&nbsp;Product Management</a>
+                            <a href="{{ route('catalog.index') }}" class="bi-tag m-2 dropdown-item">&nbsp;&nbsp;Catagory</a>
+                            <a href="element.html" class="m-2 dropdown-item">💞&nbsp;&nbsp;Heathy Type</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
@@ -202,6 +202,7 @@
             @yield('product_content')
             @yield('product_detail')
             @yield('product_new')
+            @yield('catogory_content')
             @yield('manage_client')
             @yield('manage_admin')
 

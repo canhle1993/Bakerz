@@ -101,7 +101,7 @@
                     <textarea class="form-control" placeholder="Product description here" id="describe" name="describe" style="height: 150px;"></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-outline-info m-2">Update</button>
+                <button type="submit" class="btn btn-outline-info m-2">Create</button>
                 <button id="btnCancel" type="button" class="btn btn-outline-light m-2">
                 <a href="{{ route('product.index') }}">Cancel</a>
                 </button>
