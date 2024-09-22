@@ -1,6 +1,6 @@
 @extends('admin.dashboard')
 
-@section('manage_client_create')
+@section('manage_admin_create')
 <style>
     .form-container {
         background: url('https://i.pinimg.com/564x/d6/e0/95/d6e0957a44d11d542d03abafd16e8234.jpg') no-repeat center center;
@@ -13,7 +13,6 @@
         color: white;
     }
 
-    /* Tiêu đề nổi bật */
     .form-container h1 {
         text-align: center;
         font-size: 2.5rem;
@@ -38,7 +37,6 @@
         color: black;
     }
 
-    /* Button hoành tráng */
     .form-container button {
         width: 100%;
         padding: 15px;
@@ -71,7 +69,7 @@
 </style>
 
 <div class="form-container mt-5">
-    <h1>Add Client</h1>
+    <h1>Add Admin</h1>
 
     <!-- Hiển thị lỗi validate -->
     @if ($errors->any())
@@ -84,12 +82,12 @@
         </div>
     @endif
 
-    <form action="{{ route('client.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
-            <!-- Hiển thị lỗi cho trường name -->
+            <!-- Hiển thị lỗi cho field name -->
             @error('name')
                 <div class="error">{{ $message }}</div>
             @enderror
@@ -98,7 +96,7 @@
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
-            <!-- Hiển thị lỗi cho trường email -->
+            <!-- Hiển thị lỗi cho field email -->
             @error('email')
                 <div class="error">{{ $message }}</div>
             @enderror
@@ -107,7 +105,7 @@
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" required>
-            <!-- Hiển thị lỗi cho trường password -->
+            <!-- Hiển thị lỗi cho field password -->
             @error('password')
                 <div class="error">{{ $message }}</div>
             @enderror
@@ -116,7 +114,7 @@
         <div class="mb-3">
             <label for="phone" class="form-label">Phone</label>
             <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}">
-            <!-- Hiển thị lỗi cho trường phone -->
+            <!-- Hiển thị lỗi cho field phone -->
             @error('phone')
                 <div class="error">{{ $message }}</div>
             @enderror
@@ -129,7 +127,7 @@
                 <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
                 <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
             </select>
-            <!-- Hiển thị lỗi cho trường gender -->
+            <!-- Hiển thị lỗi cho field gender -->
             @error('gender')
                 <div class="error">{{ $message }}</div>
             @enderror
@@ -138,7 +136,7 @@
         <div class="mb-3">
             <label for="address" class="form-label">Address</label>
             <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}">
-            <!-- Hiển thị lỗi cho trường address -->
+            <!-- Hiển thị lỗi cho field address -->
             @error('address')
                 <div class="error">{{ $message }}</div>
             @enderror
@@ -147,7 +145,7 @@
         <div class="mb-3">
             <label for="avatar" class="form-label">Upload Avatar (from local)</label>
             <input type="file" class="form-control" id="avatar" name="avatar">
-            <!-- Hiển thị lỗi cho trường avatar -->
+            <!-- Hiển thị lỗi cho field avatar -->
             @error('avatar')
                 <div class="error">{{ $message }}</div>
             @enderror
@@ -155,14 +153,14 @@
 
         <div class="mb-3">
             <label for="avatar_url" class="form-label">Avatar URL (optional)</label>
-            <input type="url" class="form-control" id="avatar_url" name="avatar_url" placeholder="Enter image URL" value="{{ old('avatar_url') }}">
-            <!-- Hiển thị lỗi cho trường avatar_url -->
+            <input type="url" class="form-control" id="avatar_url" name="avatar_url" value="{{ old('avatar_url') }}">
+            <!-- Hiển thị lỗi cho field avatar_url -->
             @error('avatar_url')
                 <div class="error">{{ $message }}</div>
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Add Client</button>
+        <button type="submit" class="btn btn-primary">Add Admin</button>
     </form>
 </div>
 @endsection

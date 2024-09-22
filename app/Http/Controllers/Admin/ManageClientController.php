@@ -9,11 +9,14 @@ use Illuminate\Support\Facades\Storage;
 
 class ManageClientController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
-        $clients = User::where('isdelete', 0)->where('role_id', 1)->get(); // Lọc client không bị xóa
+        $clients = User::where('role_id', '=', 1)->whereNull('isdelete')->paginate(5);
+
         return view('admin.manage-client', compact('clients'));
     }
+
 
     public function create()
     {
@@ -27,28 +30,37 @@ class ManageClientController extends Controller
             'email' => 'required|email|unique:user,email',
             'password' => 'required|string|min:6',
             'phone' => 'nullable|string',
-            'gender' => 'nullable|boolean',
+            'gender' => 'nullable|string',
             'address' => 'nullable|string',
-            'note' => 'nullable|string',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'avatar_url' => 'nullable|url'
         ]);
-        // Xử lý upload avatar
-        $avatarPath = null;
-        if ($request->hasFile('avatar')) {
-            $avatarPath = $request->file('avatar')->store('avatars', 'public');
-        }
 
+        $avatarName = null;
+
+    // Kiểm tra nếu người dùng upload file từ máy cục bộ
+    if ($request->hasFile('avatar')) {
+        // Lấy tên file gốc và lưu trực tiếp vào thư mục public/storage/avatars
+        $avatarName = $request->file('avatar')->getClientOriginalName();
+        $request->file('avatar')->move(public_path('storage/avatars'), $avatarName); // Di chuyển file vào public/storage/avatars
+    }
+
+    // Nếu không upload file, kiểm tra URL ảnh từ bên ngoài
+    if (!$avatarName && $request->input('avatar_url')) {
+        $avatarName = $request->input('avatar_url'); // Lưu URL vào cơ sở dữ liệu
+    }
+
+        // Tạo mới client
         User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'role_id' => 1, // Gán role_id = 1 cho client
+            'role_id' => 1,
             'phone' => $request->input('phone'),
             'gender' => $request->input('gender'),
             'address' => $request->input('address'),
-            'note' => $request->input('note'),
-            'avatar' => $avatarPath,
-            'isdelete' => 0 // Đặt trạng thái chưa bị xóa
+            'avatar' => $avatarName,
+            'isdelete' => null
         ]);
 
         return redirect()->route('manage-client')->with('success', 'Client added successfully');
@@ -61,46 +73,81 @@ class ManageClientController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $client = User::findOrFail($id);
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:user,email,' . $client->user_id,
-            'password' => 'nullable|string|min:6',
-            'phone' => 'nullable|string',
-            'gender' => 'nullable|boolean',
-            'address' => 'nullable|string',
-            'note' => 'nullable|string',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ]);
+{
+    // Tìm client theo user_id
+    $client = User::findOrFail($id);
 
-        if ($request->hasFile('avatar')) {
-            if ($client->avatar && Storage::disk('public')->exists($client->avatar)) {
-                Storage::disk('public')->delete($client->avatar);
-            }
-            $avatarPath = $request->file('avatar')->store('avatars', 'public');
-            $client->avatar = $avatarPath;
+    // Validation dữ liệu đầu vào
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:user,email,' . $client->user_id.',user_id',
+        'password' => 'nullable|string|min:6',
+        'phone' => 'nullable|string',
+        'gender' => 'nullable|string',
+        'address' => 'nullable|string',
+        'note' => 'nullable|string',
+        'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'avatar_url' => 'nullable|url'
+    ]);
+
+    // Giữ avatar cũ nếu không thay đổi
+    $avatarName = $client->avatar;
+
+    // Xử lý trường hợp upload avatar mới từ máy cục bộ
+    if ($request->hasFile('avatar')) {
+        // Xóa avatar cũ nếu có
+        if ($client->avatar && file_exists(public_path('storage/avatars/'.$client->avatar))) {
+            unlink(public_path('storage/avatars/'.$client->avatar)); // Xóa avatar cũ
         }
 
-        $client->update([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => $request->input('password') ? bcrypt($request->input('password')) : $client->password,
-            'phone' => $request->input('phone'),
-            'gender' => $request->input('gender'),
-            'address' => $request->input('address'),
-            'note' => $request->input('note'),
-            'avatar' => $client->avatar,
-        ]);
-
-        return redirect()->route('admin.manage-client')->with('success', 'Client updated successfully');
+        // Lưu avatar mới vào public/storage/avatars
+        $avatarName = $request->file('avatar')->hashName(); // Tạo tên file duy nhất
+        $request->file('avatar')->storeAs('avatars', $avatarName, 'public'); // Lưu vào storage/app/public/avatars
     }
+
+    // Nếu người dùng không upload file và nhập URL, cập nhật URL
+    if (!$request->hasFile('avatar') && $request->input('avatar_url')) {
+        $avatarName = $request->input('avatar_url'); // Lưu URL ảnh từ bên ngoài
+    }
+
+    // Cập nhật thông tin client
+    $client->update([
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'password' => $request->input('password') ? bcrypt($request->input('password')) : $client->password,
+        'phone' => $request->input('phone'),
+        'gender' => $request->input('gender'),
+        'address' => $request->input('address'),
+        'note' => $request->input('note'),
+        'avatar' => $avatarName,
+        'role_id' => 1, // Giữ nguyên role_id là 1 cho client
+        'isdelete' => null
+    ]);
+
+    // Redirect về trang quản lý client với thông báo thành công
+    return redirect()->route('manage-client')->with('success', 'Client updated successfully');
+}
+
+
     public function destroy($id)
     {
         $client = User::findOrFail($id);
         $client->update(['isdelete' => 1]);
 
         return redirect()->route('manage-client')->with('success', 'Client deleted successfully');
-
     }
+
+    public function blacklist(){
+
+        $blacklistedUsers = User::where('isdelete', '1')->paginate(5);
+    return view('admin.manage-blacklist', compact('blacklistedUsers'));
+    }
+
+    public function restore($id)
+{
+    $user = User::findOrFail($id);
+    $user->update(['isdelete' => null]);
+
+    return redirect()->route('manage-blacklist')->with('success', 'User restored successfully');
+}
 }

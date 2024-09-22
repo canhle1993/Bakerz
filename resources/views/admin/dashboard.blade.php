@@ -74,6 +74,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{route('manage-client')}}" class="dropdown-item">Client</a>
                             <a href="{{route('manage-admin')}}" class="dropdown-item">Admin</a>
+                            <a href="{{route('manage-blacklist')}}" class="dropdown-item">Blacklist</a>
                         </div>
                     </div>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
@@ -188,6 +189,10 @@
             @yield('product_detail')
             @yield('manage_client')
             @yield('manage_admin')
+            @yield('manage_client_create')
+            @yield('manage_client_edit')
+            @yield('manage_admin_create')
+            @yield('manage_blacklist')
 
             <!-- Body -->
 
