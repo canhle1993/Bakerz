@@ -16,6 +16,8 @@ class Catalog extends Model
     const CREATED_AT = 'CreatedDate';
     const UPDATED_AT = 'ModifiedDate';
 
+    protected $fillable = ['category_name','isdelete','image','CreatedBy','ModifiedBy'];
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'linkcatalogproduct', 'category_id', 'product_id');
