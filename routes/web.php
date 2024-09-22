@@ -17,14 +17,11 @@ Route::post('/change-password', [RegisterController::class, 'changepass'])->name
 use App\Http\Controllers\ClientController;
 Route::get('/', [ClientController::class, 'home'])->name('client.home');
 Route::get('/client/profile/user/{userid}', [ClientController::class, 'profile'])->name('client.profile');
-
 use App\Http\Controllers\ProductController;
-
 Route::get('/client/heathyfilter', [ProductController::class, 'filter'])->name('client.heathyfilter');
+
 //Route cho client tìm kiếm thông tin sản phẩm
 Route::get('/search', [ProductController::class, 'search'])->name('search');
-
-
 
 // Route cho logout
 use Illuminate\Support\Facades\Auth;
@@ -41,23 +38,13 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name(
 Route::post('/update-avatar', [App\Http\Controllers\UserController::class, 'updateAvatar'])->name('update-avatar');
 Route::post('/profile/update', [UserController::class, 'update'])->name('profile.update');
 
-
-
-
 // Route cho admin
-
-
 // dashboard
 use App\Http\Controllers\Admin\DashboardController;
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-
-
-
 // Route quản lý Client
-
 use App\Http\Controllers\Admin\ManageClientController;
-
 Route::get('/admin/manage/client', [ManageClientController::class, 'index'])->name('manage-client');
 Route::get('/admin/manage/client/create', [ManageClientController::class, 'create'])->name('client.create');
 Route::post('/admin/manage/client/store', [ManageClientController::class, 'store'])->name('client.store');
@@ -74,9 +61,10 @@ Route::get('/admin/manage/admin/{id}/edit', [ManageAdminController::class, 'edit
 Route::post('/admin/manage/admin/{id}', [ManageAdminController::class, 'update'])->name('admin.update');
 Route::delete('/admin/manage/admin/{id}', [ManageAdminController::class, 'destroy'])->name('admin.destroy');
 
-
-
 // Route cho client shop product types
+Route::get('/shop_all', function () {
+    return view('client.shop.shop_all');
+})->name('shop_all');
 Route::get('/product-simple', function () {
     return view('client.shop.product-types.product-simple');
 })->name('product-simple');
@@ -123,12 +111,10 @@ Route::get('/blog-detail', function () {
     return view('client.blog.blog-detail');
 })->name('blog-detail');
 
-
 //Route cho client contact
 Route::get('/contact', function () {
     return view('client.contact');
 })->name('contact');
-
 
 //Route cho client category
 Route::get('/category', function () {

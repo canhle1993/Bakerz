@@ -61,7 +61,7 @@
                                 <a  href="{{ route('client.home') }}"  class="menu-item-link"><span >Home</span></a>
                             </li>
                             <li class="position-static">
-                                <a class="menu-item-link" href="{{ route('client.home')}}"><span>Shop</span></a>
+                                <a class="menu-item-link" href="{{ route('shop_all')}}"><span>Shop</span></a>
                                 <ul class="sub-menu sub-menu-mega">
                                     <li class="mega-menu-item">
                                         <ul>
