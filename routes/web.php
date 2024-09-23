@@ -56,8 +56,10 @@ Route::get('/admin/manage/client', [ManageClientController::class, 'index'])->na
 Route::get('/admin/manage/client/create', [ManageClientController::class, 'create'])->name('client.create');
 Route::post('/admin/manage/client/store', [ManageClientController::class, 'store'])->name('client.store');
 Route::get('/admin/manage/client/{id}/edit', [ManageClientController::class, 'edit'])->name('client.edit');
-Route::post('/admin/manage/client/{id}', [ManageClientController::class, 'update'])->name('client.update');
+Route::put('/admin/manage/client/{id}', [ManageClientController::class, 'update'])->name('client.update');
 Route::delete('/admin/manage/client/{id}', [ManageClientController::class, 'destroy'])->name('client.destroy');
+Route::get('/admin/manage/blacklist', [ManageClientController::class, 'blacklist'])->name('manage-blacklist');
+Route::post('/admin/manage/blacklist/{id}/restore', [ManageClientController::class, 'restore'])->name('blacklist.restore');
 
 // Route quản lý Admin
 use App\Http\Controllers\Admin\ManageAdminController;
@@ -67,6 +69,7 @@ Route::post('/admin/manage/admin/store', [ManageAdminController::class, 'store']
 Route::get('/admin/manage/admin/{id}/edit', [ManageAdminController::class, 'edit'])->name('admin.edit');
 Route::post('/admin/manage/admin/{id}', [ManageAdminController::class, 'update'])->name('admin.update');
 Route::delete('/admin/manage/admin/{id}', [ManageAdminController::class, 'destroy'])->name('admin.destroy');
+Route::post('/admin/manage/lower-to-client/{id}', [ManageAdminController::class, 'lowerToClient'])->name('admin.lower_to_client');
 
 // // Route quản lý Client
 // use App\Http\Controllers\Admin\ManageClientController;

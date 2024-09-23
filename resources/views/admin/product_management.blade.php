@@ -63,7 +63,7 @@
                                     <td>{{ $product->inventory }}</td>
                                     <td>{{ formatPriceVND($product->price) }}</td>
                                     <td><a class="btn btn-outline-info m-2" href="{{ route('product.showDetail', $product->product_id) }}">Detail</a>
-                                    <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('product.destroy', $product->product_id) }}" onclick="showDeleteModal(this)">Delete</a>                                        
+                                    <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('product.destroy', $product->product_id) }}" onclick="showDeleteModal(this)">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -101,18 +101,22 @@
             </div>
             </div>
 
+<<<<<<< HEAD
+    @endsection
+=======
 <script>
 
     function showDeleteModal(element) {
         // Lấy giá trị URL từ thuộc tính data-url
         var actionUrl = element.getAttribute('data-url');
-        
+
         // Gán action URL cho form xóa trong modal
         document.getElementById('deleteForm').action = actionUrl;
-        
+
         // Hiển thị modal
         var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         deleteModal.show();
     }
 </script>
-    @endsection
+
+>>>>>>> origin/master
