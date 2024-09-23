@@ -33,6 +33,18 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
+    <style>
+      .hidden-form {
+        display: none;
+      }
+      .form-container {
+        border: 2px solid #BC8157;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+      }
+    </style>
+
 </head>
 
 <body>
@@ -349,14 +361,65 @@
     </div>
     <!-- Slider Section End -->
 
-    <div class="section-padding-01" >
+    <div class="container mt-5">
+      <button id="healthSuggestionBtn" class="btn btn-primary">
+        Gợi ý món ăn theo sức khỏe
+      </button>
+
+      <div id="healthForm" class="hidden-form mt-4 form-container">
+        <form>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="heightInput" class="form-label">Chiều cao (m):</label>
+              <input
+                type="number"
+                class="form-control"
+                id="heightInput"
+                placeholder="Nhập chiều cao"
+              />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="weightInput" class="form-label">Cân nặng (kg):</label>
+              <input
+                type="number"
+                class="form-control"
+                id="weightInput"
+                placeholder="Nhập cân nặng"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <label for="weightInput" class="form-label">Chỉ số BMI:</label>
+                <h4> <span id="bmiResult">Chưa có dữ liệu</span></h4>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                <label for="conditionSelect" class="form-label"
+                >Chọn tình trạng sức khỏe:</label
+                >
+                <select class="form-select" id="conditionSelect">
+                <option value="" selected disabled>Chọn bệnh</option>
+                <option value="diabet">Bình thường</option>
+                <option value="diabetes">Bệnh tiểu đường</option>
+                <option value="hypertension">Bệnh cao huyết áp</option>
+                <option value="liverDisease">Bệnh men gan cao</option>
+                <option value="stroke">Bệnh đột quỵ</option>
+                </select>
+            </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
 
 
+<div class="section-padding-01" >
 <div class="container" style="padding-bottom: 50px !important;">
     <!-- Section Title Strat -->
     <div class="section-title text-center max-width-720 mx-auto">
-        <h2 class="section-title__title">Products suitable for health</h2>
-        <p>We always bring the healthiest dishes</p>
+        <h2 class="section-title__title">Products suitable for your health</h2>
+        <p>Wish you the best experience</p>
     </div>
     <!-- Section Title End -->
 
@@ -1667,7 +1730,15 @@
     <script src="{{asset('assets/js/main.js')}}"></script>
     <!-- Vendors JS -->
 
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document
+        .getElementById("healthSuggestionBtn")
+        .addEventListener("click", function () {
+          var form = document.getElementById("healthForm");
+          form.classList.toggle("hidden-form");
+        });
+    </script>
 </body>
 
 </html>
