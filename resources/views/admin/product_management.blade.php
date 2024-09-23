@@ -101,22 +101,20 @@
             </div>
             </div>
 
-<<<<<<< HEAD
-    @endsection
-=======
-<script>
-
+            <script>
+                
     function showDeleteModal(element) {
         // Lấy giá trị URL từ thuộc tính data-url
         var actionUrl = element.getAttribute('data-url');
-
+        
         // Gán action URL cho form xóa trong modal
         document.getElementById('deleteForm').action = actionUrl;
-
+        
         // Hiển thị modal
         var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         deleteModal.show();
     }
 </script>
 
->>>>>>> origin/master
+
+@endsection

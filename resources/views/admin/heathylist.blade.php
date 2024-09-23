@@ -60,11 +60,11 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td id="name-cell-{{ $heathy->heath_id }}">{{ $heathy->heath_catalog }}</td>
                                 <td>
-                                    <a href="javascript:void(0);" class="bi bi-pencil m-2"
-                                        data-category-id="{{ $heathy->heath_id }}"
-                                        data-update-url="{{ route('heathy.update', ['heathy' => $heathy->heath_id]) }}"
-                                        onclick="editRow(this)"></a>
-                                    <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('heathy.destroy', $heathy->heath_id) }}" onclick="showDeleteModal(this)">Delete</a>
+                                <a href="javascript:void(0);" class="bi bi-pencil m-2"
+                                data-category-id="{{ $heathy->heath_id }}"
+                                data-update-url="{{ route('heathy.update', ['heathy' => $heathy->heath_id]) }}"
+                                onclick="editRow(this)"></a>
+                                <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('heathy.destroy', $heathy->heath_id) }}" onclick="showDeleteModal(this)">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -116,6 +116,7 @@
         deleteModal.show();
     }
 
+    let currentEditRow = null;
 
     function editRow(element) {
         var heathyId = element.getAttribute('data-category-id');
@@ -123,7 +124,10 @@
         // Lấy các phần tử trong dòng cần chỉnh sửa
         var nameCell = document.getElementById('name-cell-' + heathyId);
         var row = document.getElementById('row-' + heathyId);
-
+        // Nếu đã có dòng đang được chỉnh sửa, hủy chỉnh sửa dòng đó trước
+        if (currentEditRow !== null) {
+            cancelEdit(currentEditRow);
+        }
         // Kiểm tra xem các phần tử có tồn tại không
         if (!nameCell || !row) {
             console.error('Element not found for heathyId: ' + heathyId);
@@ -147,6 +151,8 @@
                 <button type="button" class="btn btn-secondary m-2" onclick="cancelEdit(${heathyId}, '${currentName}')">Cancel</button>
             </form>
         `;
+        // Gán giá trị cho biến currentEditRow
+        currentEditRow = heathyId;
     }
 
     function saveRow(heathyId) {
@@ -157,13 +163,22 @@
     }
 
     function cancelEdit(heathyId, originalName) {
+        var row = document.getElementById('row-' + heathyId);
+        var nameCell = document.getElementById('name-cell-' + heathyId);
+        var updateUrl = row.getAttribute('data-update-url');
+        var deleteUrl = row.getAttribute('data-delete-url');
         // Khôi phục lại nội dung ban đầu
         document.getElementById('name-cell-' + heathyId).innerHTML = originalName;
-        var actionCell = document.getElementById('row-' + heathyId).children[3];
+        var actionCell = document.getElementById('row-' + heathyId).children[2];
         actionCell.innerHTML = `
-            <a class="bi bi-pencil m-2" href="javascript:void(0);" onclick="editRow(${heathyId})"></a>
-            <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('heathy.destroy', $heathy->heath_id) }}" onclick="showDeleteModal(this)">Delete</a>
+            <a href="javascript:void(0);" class="bi bi-pencil m-2"
+           data-category-id="${heathyId}"
+           data-update-url="${updateUrl}"
+           onclick="editRow(this)"></a>
+        <a class="btn btn-outline-danger m-2" href="#" data-url="${deleteUrl}" onclick="showDeleteModal(this)">Delete</a>
         `;
+        // Đặt lại currentEditRow về null
+        currentEditRow = null;
     }
 
     document.getElementById('btnCreate').addEventListener('click', function(event) {

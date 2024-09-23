@@ -67,12 +67,11 @@
                                 </td>
                                 <td id="name-cell-{{ $catalog->category_id }}">{{ $catalog->category_name }}</td>
                                 <td>
-                                    <!-- <a href="javascript:void(0);" class="bi bi-pencil m-2" onclick="editRow({{ $catalog->category_id }}, '{{ route('catalog.update', $catalog->category_id) }}')"></a> -->
-                                    <a href="javascript:void(0);" class="bi bi-pencil m-2"
-                                        data-category-id="{{ $catalog->category_id }}"
-                                        data-update-url="{{ route('catalog.update', ['catalog' => $catalog->category_id]) }}"
-                                        onclick="editRow(this)"></a>
-                                    <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('catalog.destroy', $catalog->category_id) }}" onclick="showDeleteModal(this)">Delete</a>
+                                <a href="javascript:void(0);" class="bi bi-pencil m-2"
+                                data-category-id="{{ $catalog->category_id }}"
+                                data-update-url="{{ route('catalog.update', ['catalog' => $catalog->category_id]) }}"
+                                onclick="editRow(this)"></a>
+                                <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('catalog.destroy', $catalog->category_id) }}" onclick="showDeleteModal(this)">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -124,6 +123,7 @@
         deleteModal.show();
     }
 
+    let currentEditRow = null;
 
     function editRow(element) {
         var categoryId = element.getAttribute('data-category-id');
@@ -131,7 +131,9 @@
         // Lấy các phần tử trong dòng cần chỉnh sửa
         var nameCell = document.getElementById('name-cell-' + categoryId);
         var row = document.getElementById('row-' + categoryId);
-
+        if (currentEditRow !== null) {
+            cancelEdit(currentEditRow);
+        }
         // Kiểm tra xem các phần tử có tồn tại không
         if (!nameCell || !row) {
             console.error('Element not found for categoryId: ' + categoryId);
@@ -159,6 +161,7 @@
                 <button type="button" class="btn btn-secondary m-2" onclick="cancelEdit(${categoryId}, '${currentName}', '${currentImage}')">Cancel</button>
             </form>
         `;
+        currentEditRow = categoryId;
     }
 
     function saveRow(categoryId) {
@@ -169,14 +172,22 @@
     }
 
     function cancelEdit(categoryId, originalName, originalImage) {
+        var row = document.getElementById('row-' + categoryId);
+        var nameCell = document.getElementById('name-cell-' + categoryId);
+        var updateUrl = row.getAttribute('data-update-url');
+        var deleteUrl = row.getAttribute('data-delete-url');
         // Khôi phục lại nội dung ban đầu
         document.getElementById('name-cell-' + categoryId).innerHTML = originalName;
         document.getElementById('row-' + categoryId).children[1].innerHTML = `<img src="${originalImage}" alt="Hình ảnh" width="100" class="mt-2">`;
         var actionCell = document.getElementById('row-' + categoryId).children[3];
         actionCell.innerHTML = `
-            <a class="bi bi-pencil m-2" href="javascript:void(0);" onclick="editRow(${categoryId})"></a>
-            <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('catalog.destroy', $catalog->category_id) }}" onclick="showDeleteModal(this)">Delete</a>
+            <a href="javascript:void(0);" class="bi bi-pencil m-2"
+           data-category-id="${categoryId}"
+           data-update-url="${updateUrl}"
+           onclick="editRow(this)"></a>
+            <a class="btn btn-outline-danger m-2" href="#" data-url="${deleteUrl}" onclick="showDeleteModal(this)">Delete</a>
         `;
+        currentEditRow = null;
     }
 
     function changeFile(categoryId) {
