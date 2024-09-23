@@ -30,8 +30,8 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h4 class="mb-0">List Catagory</h4>
-                        <a id="btnCreate" href="#">Create Catagory </a>
+                        <h4 class="mb-0">List Heathy Catagory </h4>
+                        <a id="btnCreate" href="#">Create HeathyType </a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -39,40 +39,32 @@
                                 <tr class="text-white">
                                     <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
                                     <th scope="col">No.</th>
-                                    <th scope="col">Image</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <form action="{{ route('catalog.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('heathy.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <tr id="row-create" style="display:none">
                                 <td></td>
-                                <td>
-                                    <input type="file" name="new_category_image" id="new_category_image">
-                                </td>
-                                <td id="name-create"><input  type="text" name ="new_category_name" id="new_category_name"></td>
+                                <td id="name-create"><input  type="text" name ="new_heath_catalog" id="new_heath_catalog"></td>
                                 <td>
                                 <button type="submit" class="btn btn-success m-2" >Save</button>
                                 <button id="btnCancelAdd" type="button" class="btn btn-secondary m-2">Cancel</button>
                                 </td>
                             </tr>   
                             </form>
-                            @foreach($catalogs as $catalog)
-                            <tr id="row-{{ $catalog->category_id }}">
+                            @foreach($heathies as $heathy)
+                            <tr id="row-{{ $heathy->heath_id }}">
                                 <td>{{ $loop->iteration }}</td>
+                                <td id="name-cell-{{ $heathy->heath_id }}">{{ $heathy->heath_catalog }}</td>
                                 <td>
-                                    <img src="{{ asset('storage/catalogs/' . $catalog->image) }}" alt="Hình ảnh" width="100" class="mt-2">
-                                </td>
-                                <td id="name-cell-{{ $catalog->category_id }}">{{ $catalog->category_name }}</td>
-                                <td>
-                                    <!-- <a href="javascript:void(0);" class="bi bi-pencil m-2" onclick="editRow({{ $catalog->category_id }}, '{{ route('catalog.update', $catalog->category_id) }}')"></a> -->
                                     <a href="javascript:void(0);" class="bi bi-pencil m-2"
-                                        data-category-id="{{ $catalog->category_id }}"
-                                        data-update-url="{{ route('catalog.update', ['catalog' => $catalog->category_id]) }}"
+                                        data-category-id="{{ $heathy->heath_id }}"
+                                        data-update-url="{{ route('heathy.update', ['heathy' => $heathy->heath_id]) }}"
                                         onclick="editRow(this)"></a>
-                                    <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('catalog.destroy', $catalog->category_id) }}" onclick="showDeleteModal(this)">Delete</a>
+                                    <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('heathy.destroy', $heathy->heath_id) }}" onclick="showDeleteModal(this)">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -81,7 +73,7 @@
                     </div>
                     <div style="height: 20px;"></div>
                     <div class="d-flex justify-content-center">
-                        {{ $catalogs->links('pagination::bootstrap-4') }}
+                        {{ $heathies->links('pagination::bootstrap-4') }}
 
                     </div>
                 </div>
@@ -126,71 +118,52 @@
 
 
     function editRow(element) {
-        var categoryId = element.getAttribute('data-category-id');
+        var heathyId = element.getAttribute('data-category-id');
         var updateUrl = element.getAttribute('data-update-url');
         // Lấy các phần tử trong dòng cần chỉnh sửa
-        var nameCell = document.getElementById('name-cell-' + categoryId);
-        var row = document.getElementById('row-' + categoryId);
+        var nameCell = document.getElementById('name-cell-' + heathyId);
+        var row = document.getElementById('row-' + heathyId);
 
         // Kiểm tra xem các phần tử có tồn tại không
         if (!nameCell || !row) {
-            console.error('Element not found for categoryId: ' + categoryId);
+            console.error('Element not found for heathyId: ' + heathyId);
             return; // Ngăn việc tiếp tục nếu phần tử không tồn tại
         }
 
         // Tạo input cho tên
         var currentName = nameCell.innerHTML;
-        nameCell.innerHTML = '<input type="text" id="name-input-' + categoryId + '" value="' + currentName.trim() + '">';
+        nameCell.innerHTML = '<input type="text" id="name-input-' + heathyId + '" value="' + currentName.trim() + '">';
 
         // Tạo input file cho hình ảnh
         var imageCell = row.children[1];
-        var currentImage = imageCell.querySelector('img').src;
-        imageCell.innerHTML = '<input onchange="changeFile('+categoryId+')" type="file" id="image-input-' + categoryId + '">';
-
         // Thêm nút save và cancel
-        var actionCell = row.children[3];
+        var actionCell = row.children[2];
         actionCell.innerHTML = `
-            <form id="edit-form-${categoryId}" action="${updateUrl}" method="POST" enctype="multipart/form-data">
+            <form id="edit-form-${heathyId}" action="${updateUrl}" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="_method" value="PUT">
-                <input  type="hidden" name ="category_name" id="category_name-` + categoryId + `">
-                <input style="display:none;" type="file" name="category_image" id="category_image-` + categoryId + `">
-                <button type="button" class="btn btn-success m-2" onclick="saveRow(${categoryId})">Save</button>
-                <button type="button" class="btn btn-secondary m-2" onclick="cancelEdit(${categoryId}, '${currentName}', '${currentImage}')">Cancel</button>
+                <input  type="hidden" name ="heath_catalog" id="heath_catalog-` + heathyId + `">
+                <button type="button" class="btn btn-success m-2" onclick="saveRow(${heathyId})">Save</button>
+                <button type="button" class="btn btn-secondary m-2" onclick="cancelEdit(${heathyId}, '${currentName}')">Cancel</button>
             </form>
         `;
     }
 
-    function saveRow(categoryId) {
+    function saveRow(heathyId) {
 
-        document.getElementById('category_name-' + categoryId).value = document.getElementById('name-input-' + categoryId).value
+        document.getElementById('heath_catalog-' + heathyId).value = document.getElementById('name-input-' + heathyId).value
         // Submit form
-        document.getElementById('edit-form-' + categoryId).submit();
+        document.getElementById('edit-form-' + heathyId).submit();
     }
 
-    function cancelEdit(categoryId, originalName, originalImage) {
+    function cancelEdit(heathyId, originalName) {
         // Khôi phục lại nội dung ban đầu
-        document.getElementById('name-cell-' + categoryId).innerHTML = originalName;
-        document.getElementById('row-' + categoryId).children[1].innerHTML = `<img src="${originalImage}" alt="Hình ảnh" width="100" class="mt-2">`;
-        var actionCell = document.getElementById('row-' + categoryId).children[3];
+        document.getElementById('name-cell-' + heathyId).innerHTML = originalName;
+        var actionCell = document.getElementById('row-' + heathyId).children[3];
         actionCell.innerHTML = `
-            <a class="bi bi-pencil m-2" href="javascript:void(0);" onclick="editRow(${categoryId})"></a>
-            <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('catalog.destroy', $catalog->category_id) }}" onclick="showDeleteModal(this)">Delete</a>
+            <a class="bi bi-pencil m-2" href="javascript:void(0);" onclick="editRow(${heathyId})"></a>
+            <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('heathy.destroy', $heathy->heath_id) }}" onclick="showDeleteModal(this)">Delete</a>
         `;
-    }
-
-    function changeFile(categoryId) {
-        var fileInput = document.getElementById('image-input-' + categoryId);
-        var files = fileInput.files; // Lấy các file đã chọn
-
-        // Kiểm tra nếu có file được chọn
-        if (files.length > 0) {
-            // Tạo URL để hiển thị file (nếu là hình ảnh)
-            var fileURL = URL.createObjectURL(files[0]);
-            // Nếu muốn hiển thị file được chọn (nếu là hình ảnh)
-            var imagePreview = document.getElementById('category_image-' + categoryId);
-            imagePreview.files = fileInput.files;  // Hiển thị ảnh đã chọn
-        }
     }
 
     document.getElementById('btnCreate').addEventListener('click', function(event) {
