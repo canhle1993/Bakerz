@@ -341,7 +341,7 @@
                                     <!-- Product Item Start -->
                                     <div class="product-item text-center">
                                         <div class="product-item__image border w-100">
-                                            <a href="single-product.html"><img width="350" height="350" src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}"></a>
+                                            <a href="{{ route('single-product', ['id' => $product->product_id]) }}"><img width="350" height="350" src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}"></a>
                                         </div>
                                         <div class="product-item__content pt-5">
                                             <h5 class="product-item__title"><a href="#">{{ $product->product_name }}</a></h5>

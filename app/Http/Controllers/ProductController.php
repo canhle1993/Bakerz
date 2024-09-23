@@ -33,28 +33,7 @@ class ProductController extends Controller
     }
 
 
-    //Hiển thị toàn bộ sản phẩm, phân trang, lọc giá
-    // public function all_product(Request $request)
-    // {
-    //     // Lấy giá trị sắp xếp từ request, mặc định là 'price-ascending'
-    //     $sort = $request->get('sort', 'price-ascending');
-
-    //     // Lấy 10 sản phẩm mỗi trang, sắp xếp theo yêu cầu
-    //     $products = Product::query();
-
-    //     if ($sort == 'price-ascending') {
-    //         $products->orderBy('price', 'asc');
-    //     } elseif ($sort == 'price-descending') {
-    //         $products->orderBy('price', 'desc');
-    //     }
-
-    //     // Phân trang 10 sản phẩm
-    //     $products = $products->paginate(10);
-
-    //     // Trả về view và truyền dữ liệu sản phẩm
-    //     return view('client.shop.shop_all', ['products' => $products]);
-    // }
-    public function all_product(Request $request)
+        public function all_product(Request $request)
     {
         // Lấy giá trị sắp xếp từ request, mặc định là 'price-ascending'
         $sort = $request->get('sort', 'price-ascending');
@@ -122,4 +101,10 @@ class ProductController extends Controller
         return view('client.shop.shop_all', compact('products', 'categories'));
     }
 
+    public function showdetail($id){
+        $product = Product::findOrFail($id);
+
+
+        return view('client/shop/product-types/single-product', compact('product'));
+    }
 }

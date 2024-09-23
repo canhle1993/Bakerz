@@ -74,7 +74,12 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Management</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{route('manage-client')}}" class="dropdown-item">Client</a>
-                            <a href="{{route('manage-admin')}}" class="dropdown-item">Admin</a>
+
+                            @if(Auth::user()->role_id == 3)
+                            <!-- Chỉ hiển thị phần quản lý Admin nếu user là Manager -->
+                            <a href="{{ route('manage-admin') }}" class="dropdown-item">Admin</a>
+                        @endif
+
                             <a href="{{route('manage-blacklist')}}" class="dropdown-item">Blacklist</a>
                         </div>
                     </div>
@@ -92,7 +97,7 @@
                     <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
                     <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                    
+
 
                 </div>
             </nav>

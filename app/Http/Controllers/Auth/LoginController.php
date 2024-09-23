@@ -38,13 +38,13 @@ class LoginController extends Controller
                     'isdelete' => 'Your account has been deleted',
                 ])->withInput($request->only('isdelete'));
             }
-            
-            if ($user->role_id == 2 && $user->role_id != null  ) {
+
+            if ($user->role_id == 2 || $user->role_id == 3  ) {
                 return redirect()->intended('/dashboard');
             } else {
                 return redirect()->intended('/');
             }
-            
+
         }
 
         // If unsuccessful, then redirect back to the login with the form data
