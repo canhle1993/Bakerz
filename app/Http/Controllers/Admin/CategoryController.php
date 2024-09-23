@@ -26,7 +26,7 @@ class CategoryController extends Controller
 
         $request->validate([
             'new_category_name'=> 'required|string|max:255',
-            'new_category_image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'new_category_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp',
         ]);
         $catalog->category_name = $request->input('new_category_name');
         $catalog->CreatedBy = Auth::user()->id ?? null;
@@ -50,7 +50,7 @@ class CategoryController extends Controller
 
         $request->validate([
             'category_name'=> 'required|string|max:255',
-            'category_image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'category_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp',
         ]);
         $catalog->category_name = $request->input('category_name');
         $catalog->ModifiedBy = Auth::user()->id ?? null;

@@ -40,10 +40,10 @@ class ProductController extends Controller
             'inventory' => 'required|integer|min:0',
             'describe' => 'nullable|string',
             'price' => 'required|numeric|min:1',
-            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'image_3' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp',
+            'image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp',
+            'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp',
+            'image_3' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp',
         ]);
 
         $product = new Product();

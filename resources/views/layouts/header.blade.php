@@ -470,7 +470,7 @@
                         <i class="lastudioicon lastudioicon-support248"></i>
                         <div class="hotline-content">
                             <span class="hotline-text">Hotline</span>
-                            <a class="hotline-link" href="tel:0123456789">(012) 345-6789</a>
+                            <a class="hotline-link" href="tel:0123456789">1800 1779</a>
                         </div>
                     </div>
                 </li>
@@ -479,7 +479,7 @@
                         <i class="lastudioicon lastudioicon-pin-check"></i>
                         <div class="hotline-content">
                             <span class="hotline-text">Store Location</span>
-                            <a class="hotline-link" href="#/">6391 Elgin St. Celina, Delaware 10299</a>
+                            <a class="hotline-link" href="#/">35/6 đường D5, Q. Bình Thạnh, TP.HCM</a>
                         </div>
                     </div>
                 </li>
@@ -633,6 +633,7 @@
                 );
             }
         });
+
     </script>
 </body>
 
