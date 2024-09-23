@@ -239,14 +239,14 @@
       referrerpolicy="no-referrer"
     />
     <!-- Header Start -->
-    <div class="header-section header-transparent header-sticky" style="background-color: black;">
+    <div class="header-section header-transparent header-sticky">
         <div class="container position-relative">
 
             <div class="row align-items-center">
                 <div class="col-lg-3 col-xl-3 col-7">
                     <!-- Header Logo Start -->
                     <div class="header-logo">
-                        <a href="index.html">
+                        <a href="{{ route('client.home')}}">
                             <img class="white-logo" src="{{asset('assets/images/logo-white.svg')}}" width="229" height="62" alt="Logo">
                         </a>
                     </div>
@@ -256,57 +256,42 @@
                     <!-- Header Menu Start -->
                     <div class="header-menu">
                         <ul class="header-primary-menu d-flex justify-content-center">
-                            <li>
-                                <a href="{{ route('client.home') }}" class="menu-item-link active"><span>Home</span></a>
-                                <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="index.html"><span>Cake Shop 01</span></a></li>
-                                    <li><a class="sub-item-link" href="index-2.html"><span>Cake Shop 02</span></a></li>
-                                    <li><a class="sub-item-link" href="index-3.html"><span>Cake Shop 03</span></a></li>
-                                    <li><a class="sub-item-link" href="index-4.html"><span>Cake Shop 04</span></a></li>
-                                    <li><a class="sub-item-link" href="index-5.html"><span>Cake Shop 05</span></a></li>
-                                    <li><a class="sub-item-link" href="index-6.html"><span>Cake Shop 06</span></a></li>
-                                    <li><a class="sub-item-link" href="index-7.html"><span>Bread Shop</span></a></li>
-                                    <li><a class="sub-item-link" href="index-8.html"><span>Bread Shop 02</span></a></li>
-                                    <li><a class="sub-item-link" href="index-9.html"><span>Cake Shop Fullscreen</span></a></li>
-                                </ul>
+                            <li >
+                                <a  href="{{ route('client.home') }}"  class="menu-item-link"><span >Home</span></a>
                             </li>
                             <li class="position-static">
-                                <a class="menu-item-link" href="#"><span>Shop</span></a>
+                                <a class="menu-item-link" href="{{ route('shop_all')}}"><span>Shop</span></a>
                                 <ul class="sub-menu sub-menu-mega">
                                     <li class="mega-menu-item">
                                         <ul>
-                                            <li class="mega-menu-item-title">Shop Layouts</li>
-                                            <li><a class="sub-item-link" href="shop-right-sidebar.html"><span>Shop Right Sidebar</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-left-sidebar.html"><span>Shop Left Sidebar</span></a></li>
-                                            <li><a class="sub-item-link" href="shop.html"><span>Shop 4 Columns</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-five-columns.html"><span>Shop 5 Columns</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-item">
-                                        <ul>
                                             <li class="mega-menu-item-title">Product Types</li>
-                                            <li><a class="sub-item-link" href="single-product.html"><span>Product Simple</span></a></li>
-                                            <li><a class="sub-item-link" href="single-product-grouped.html"><span>Product Grouped</span></a></li>
-                                            <li><a class="sub-item-link" href="single-product-variable.html"><span>Product Variable</span></a></li>
-                                            <li><a class="sub-item-link" href="single-product-affiliate.html"><span>Product Affiliate</span></a></li>
-                                            <li><a class="sub-item-link" href="single-product-Custom.html"><span>Custom Layout</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('product-simple') }}"><span>Product Simple</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('product-grouped') }}"><span>Product Grouped</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('product-affiliate') }}"><span>Product Affiliate</span></a></li>
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item">
                                         <ul>
                                             <li class="mega-menu-item-title">Others</li>
-                                            <li><a class="sub-item-link" href="shop-account.html"><span>My Account</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-cart.html"><span>Cart</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-wishlist.html"><span>Wishlist</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-checkout.html"><span>Checkout</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-compare.html"><span>Compare</span></a></li>
-                                            <li><a class="sub-item-link" href="shop-order-tracking.html"><span>Order Tracking</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('cart') }}"><span>Cart</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('checkout') }}"><span>Checkout</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('order-tracking') }}"><span>Order Tracking</span></a></li>
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item banner-menu-content-wrap">
                                         <ul>
                                             <li>
-                                                <a href="shop.html">
+                                                <a href="{{ route('client.home')}}">
+                                                    <img src="{{asset('assets/images/product/featured-product-01.png')}}" alt="Shop">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="mega-menu-item banner-menu-content-wrap">
+                                        <ul>
+                                            <li>
+                                                <a href="{{ route('client.home')}}">
                                                     <img src="{{asset('assets/images/product/featured-product-01.png')}}" alt="Shop">
                                                 </a>
                                             </li>
@@ -314,32 +299,21 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a class="menu-item-link" href="#"><span>Pages</span></a>
+                            <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Pages</span></a>
                                 <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="about.html"><span>About</span></a></li>
-                                    <li><a class="sub-item-link" href="contact.html"><span>Contact</span></a></li>
-                                    <li><a class="sub-item-link" href="contact-2.html"><span>Contact 2</span></a></li>
-                                    <li><a class="sub-item-link" href="our-chef.html"><span>Our Chef</span></a></li>
-                                    <li><a class="sub-item-link" href="faq.html"><span>FAQs</span></a></li>
-                                    <li><a class="sub-item-link" href="pricing.html"><span>Pricing Plans</span></a></li>
-                                    <li><a class="sub-item-link" href="404.html"><span>404 Not Found</span></a></li>
-                                    <li><a class="sub-item-link" href="coming-soon.html"><span>Coming Soon</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('about') }}"><span>About</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('our-chef') }}"><span>Our Chef</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Pricing Plans</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
                                 </ul>
                             </li>
-                            <li><a class="menu-item-link" href="#"><span>Blog</span></a>
+                            <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Blog</span></a>
                                 <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="blog-right-sidebar.html"><span>Blog Right Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-left-sidebar.html"><span>Blog Left Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-no-sidebar.html"><span>Blog No Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-grid-right-sidebar.html"><span>Blog Grid Right Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-grid-left-sidebar.html"><span>Blog Grid Left Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-grid-no-sidebar.html"><span>Blog Grid No Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-details-right-sidebar.html"><span>Blog Post Right Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-details-left-sidebar.html"><span>Blog Post Left Sidebar</span></a></li>
-                                    <li><a class="sub-item-link" href="blog-details.html"><span>Blog Details</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('blog-detail') }}"><span>Blog Details</span></a></li>
                                 </ul>
                             </li>
-                            <li><a class="menu-item-link" href="contact.html"><span>Contact</span></a></li>
+                            <li><a class="menu-item-link" href="{{ route('contact') }}"><span>Contact</span></a></li>
                         </ul>
                     </div>
                     <!-- Header Menu End -->
@@ -355,6 +329,8 @@
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>
                                 </button>
                             </li>
+                            <!-- header-primary-menu d-flex justify-content-center -->
+                            <div class="header-meta__action d-flex justify-content-end">
                             @auth
                             <li >
                                 <a  class=" action" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
@@ -378,6 +354,7 @@
                             </li>
 
                             @endguest
+                            </div>
                             <li class="d-lg-none">
                                 <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"><i class="lastudioicon-menu-8-1"></i></button>
                             </li>
@@ -389,9 +366,138 @@
 
         </div>
     </div>
-    
+    <!-- Header End -->
+
+    <!-- Search Start  -->
+    <div class="search-popup position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-6 bg-black bg-opacity-75">
+        <div class="search-popup__form position-relative">
+            <form action="" method="GET">
+                <input class="search-popup__field border-0 border-bottom bg-transparent text-white w-100 tra py-3" type="text" placeholder="Search…">
+                <button class="search-popup__icon text-white border-0 bg-transparent position-absolute top-50 end-0 translate-middle-y"><i class="lastudioicon-zoom-1"></i></button>
+            </form>
+        </div>
+        <button class="search-popup__close position-absolute top-0 end-0 m-8 p-3 lh-1 border-0 text-white fs-4"><i class="lastudioicon-e-remove"></i></button>
+    </div>
+    <!-- Search End -->
+
+        <!-- Offcanvas Cart Start  -->
+        <div class="offcanvas offcanvas-end offcanvas-cart" id="offcanvasCart">
+
+<div class="offcanvas-header">
+    <h4 class="offcanvas-title">My Cart</h4>
+    <button type="button" class="btn-close text-secondary" data-bs-dismiss="offcanvas"><i class="lastudioicon lastudioicon-e-remove"></i></button>
+</div>
+
+<div class="offcanvas-body">
+    <!-- Offcanvas Cart Items Start  -->
+    <ul class="offcanvas-cart-items">
+        <li>
+            <!-- Mini Cart Item Start  -->
+            <div class="mini-cart-item">
+                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                <div class="mini-cart-item__thumbnail">
+                    <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-1.png')}}" alt="Cart"></a>
+                </div>
+                <div class="mini-cart-item__content">
+                    <h6 class="mini-cart-item__title"><a href="single-product.html">Macaron Cake</a></h6>
+                    <span class="mini-cart-item__quantity">1 × $4.99</span>
+                </div>
+            </div>
+            <!-- Mini Cart Item End  -->
+        </li>
+        <li>
+            <!-- Mini Cart Item Start  -->
+            <div class="mini-cart-item">
+                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                <div class="mini-cart-item__thumbnail">
+                    <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-2.png')}}" alt="Cart"></a>
+                </div>
+                <div class="mini-cart-item__content">
+                    <h6 class="mini-cart-item__title"><a href="single-product.html">Cream Muffin</a></h6>
+                    <span class="mini-cart-item__quantity">1 × $4.99</span>
+                </div>
+            </div>
+            <!-- Mini Cart Item End  -->
+        </li>
+        <li>
+            <!-- Mini Cart Item Start  -->
+            <div class="mini-cart-item">
+                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                <div class="mini-cart-item__thumbnail">
+                    <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-3.png')}}" alt="Cart"></a>
+                </div>
+                <div class="mini-cart-item__content">
+                    <h6 class="mini-cart-item__title"><a href="single-product.html">Brownie</a></h6>
+                    <span class="mini-cart-item__quantity">1 × $4.99</span>
+                </div>
+            </div>
+            <!-- Mini Cart Item End  -->
+        </li>
+        <li>
+            <!-- Mini Cart Item Start  -->
+            <div class="mini-cart-item">
+                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                <div class="mini-cart-item__thumbnail">
+                    <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-4.png')}}" alt="Cart"></a>
+                </div>
+                <div class="mini-cart-item__content">
+                    <h6 class="mini-cart-item__title"><a href="single-product.html">Chocolate Muffin</a></h6>
+                    <span class="mini-cart-item__quantity">1 × $4.99</span>
+                </div>
+            </div>
+            <!-- Mini Cart Item End  -->
+        </li>
+        <li>
+            <!-- Mini Cart Item Start  -->
+            <div class="mini-cart-item">
+                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                <div class="mini-cart-item__thumbnail">
+                    <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-5.png')}}" alt="Cart"></a>
+                </div>
+                <div class="mini-cart-item__content">
+                    <h6 class="mini-cart-item__title"><a href="single-product.html">No-bake chocolate</a></h6>
+                    <span class="mini-cart-item__quantity">1 × $4.99</span>
+                </div>
+            </div>
+            <!-- Mini Cart Item End  -->
+        </li>
+    </ul>
+    <!-- Offcanvas Cart Items End  -->
+</div>
+
+<div class="offcanvas-footer d-flex flex-column gap-4">
+
+    <!-- Mini Cart Total End  -->
+    <div class="mini-cart-totla">
+        <span class="label">Subtotal:</span>
+        <span class="value">$24.95</span>
+    </div>
+    <!-- Mini Cart Total End  -->
+
+    <!-- Mini Cart Button End  -->
+    <div class="mini-cart-btn d-flex flex-column gap-2">
+        <a class="d-block btn btn-secondary btn-hover-primary" href="#">View cart</a>
+        <a class="d-block btn btn-secondary btn-hover-primary" href="#">Checkout</a>
+    </div>
+    <!-- Mini Cart Button End  -->
+
+</div>
+
+</div>
+<!-- Offcanvas Cart End -->
+<div class="breadcrumb" data-bg-image="{{asset('assets/images/bg/breadcrumb-bg.jpg')}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <h1 class="breadcrumb_title">Profile</h1>
+   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- JS Vendor, Plugins & Activation Script Files -->
-<br><br><br><br>
 
     <div class="container pt-5">
       <div class="row">
@@ -561,7 +667,8 @@
               <div>
               <h4 class="card-title mb-4">Profile
                 <a style="float: right;" href="#" onclick="toggleEditForm(); return false;">
-                  <span><h6 id="EditText">Edit</h6></span>
+                <a style="float: right;"  href="#" onclick="toggleEditForm(); return false;">
+                <span><h6 id="EditText" class="text-primary">Edit</h6></span>
                 </a>
               </h4>
                 
@@ -648,28 +755,79 @@
           </div>
         </div>
       </div>
-    </div>
+    </div><br><br><br><br>
 
-          <!-- Newsletter Section Strat -->
-          <div class="newsletter-section" style="background-image: url({{asset('assets/images/newsletter-bg.jpg')}});">
-        <div class="container">
-
-            <!-- Newsletter Section Strat -->
-            <div class="newsletter text-center">
-                <h2 class="newsletter__title text-white">Stay in touch & get 10% off</h2>
-
-                <div class="newsletter__form">
-                    <form action="#">
-                        <input class="newsletter__field" type="text" placeholder="Your email address">
-                        <button class="newsletter__btn">Subscribe</button>
-                    </form>
+    <!-- Contact form section Start -->
+    <div class="section-padding-03 contact-section contact-section_bg" data-bg-image="{{asset('assets/images/bg/contact-bg.jpg')}}">
+        <div class="container custom-container-five">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="contact-section_content">
+                        <h2 class="contact-section__title">Our Contact</h2>
+                        <ul class="contact-section_list">
+                            <li>
+                                <span class="contact-section_list__icon"><i class="lastudioicon lastudioicon-phone-2"></i></span>
+                                <span class="contact-section_list__text">Phone Number : <span>1800 1779</span></span>
+                            </li>
+                            <li>
+                                <span class="contact-section_list__icon"><i class="lastudioicon lastudioicon-pin-3-2"></i></span>
+                                <span class="contact-section_list__text">Address : <span>35/6 đường D5, Q. Bình Thạnh, TP.HCM</span></span>
+                            </li>
+                            <li>
+                                <span class="contact-section_list__icon"><i class="lastudioicon lastudioicon-mail"></i></span>
+                                <span class="contact-section_list__text">Email Adress : <span>aptech2@aprotrain.com</span></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="contact-section_formbg" data-bg-image="{{asset('assets/images/bg/contact-form-bg.jpg')}}">
+                        <h2 class="contact-section_form__title">Get in touch.</h2>
+                        <form class="contact-section_form" id="contact-form" action="http://whizthemes.com/mail-php/raju/arden/mail.php" method="post">
+                            <div class="row">
+                                <div class="col-md-6 form-p">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="con_name" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-p">
+                                    <div class="form-group">
+                                        <input class="form-control" type="email" name="con_email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-p">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="con_phone" placeholder="Phone">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-p">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="con_address" placeholder="Address">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-p">
+                                    <div class="form-group">
+                                        <textarea class="form-control text-area" name="con_message" placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-p">
+                                    <div class="form-group mb-0">
+                                        <button class="btn btn-theme" type="submit">Send Message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Message Notification -->
+                        <div class="form-message"></div>
+                    </div>
                 </div>
             </div>
-            <!-- Newsletter Section End -->
-
+        </div>
+        <div class="contact-section_shape">
+            <img src="{{asset('assets/images/shape/shape-10.png')}}" alt="Shape-Image">
         </div>
     </div>
-    <!-- Newsletter Section End -->
+    <!-- Contact form section End -->
 
     <!-- Scroll Top Start -->
     <a href="#" class="scroll-top" id="scroll-top">
@@ -677,97 +835,135 @@
     </a>
     <!-- Scroll Top End -->
 
-       <!-- Footer Strat -->
-       <div class="footer-section">
+    <!-- Footer Strat -->
+    <div class="footer-section">
 
-<!-- Footer Widget Section Strat -->
-<div class="footer-widget-section">
-    <div class="container custom-container">
-        <div class="row gy-6">
-            <div class="col-md-4">
-                <!-- Footer Widget Section Strat -->
-                <div class="footer-widget">
-                    <div class="footer-widget__logo">
-                        <a class="logo-dark" href="index.html"><img src="{{asset('assets/images/logo.svg')}}" alt="Logo"></a>
-                        <a class="logo-white d-none" href="index.html"><img src="{{asset('assets/images/logo-white.svg')}}" alt="Logo"></a>
+        <!-- Footer Widget Section Strat -->
+        <div class="footer-widget-section">
+            <div class="container custom-container">
+                <div class="row gy-6">
+                    <div class="col-md-4">
+                        <!-- Footer Widget Section Strat -->
+                        <div class="footer-widget">
+                            <div class="footer-widget__logo">
+                                <a class="logo-dark" href="{{ route('client.home')}}"><img src="{{asset('assets/images/logo.svg')}}" alt="Logo"></a>
+                                <a class="logo-white d-none" href="index.html"><img src="{{asset('assets/images/logo-white.svg')}}" alt="Logo"></a>
+                            </div>
+                            <div class="footer-widget__social">
+                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-facebook"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-twitter"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-instagram"></i></a>
+                            </div>
+                        </div>
+                        <!-- Footer Widget Section End -->
                     </div>
-                    <div class="footer-widget__social">
-                        <a href="#/"><i class="lastudioicon-b-facebook"></i></a>
-                        <a href="#/"><i class="lastudioicon-b-twitter"></i></a>
-                        <a href="#/"><i class="lastudioicon-b-pinterest"></i></a>
-                        <a href="#/"><i class="lastudioicon-b-instagram"></i></a>
+                    <div class="col-md-8">
+                        <!-- Footer Widget Wrapper Strat -->
+                        <div class="footer-widget-wrapper d-flex flex-wrap gap-4">
+
+                            <!-- Footer Widget Strat -->
+                            <div class="footer-widget flex-grow-1">
+                                <h4 class="footer-widget__title">Categories</h4>
+
+                                <ul class="footer-widget__link">
+                                    <li><a href="{{ route('category')}}">Sweet Breads</a></li>
+                                    <li><a href="{{ route('category')}}">Baked Goods</a></li>
+                                    <li><a href="{{ route('category')}}">Cakes</a></li>
+                                    <li><a href="{{ route('category')}}">Cheesecakes</a></li>
+                                </ul>
+                            </div>
+                            <!-- Footer Widget End -->
+
+                            <!-- Footer Widget Strat -->
+                            <div class="footer-widget flex-grow-1">
+                                <h4 class="footer-widget__title">Services</h4>
+
+                                <ul class="footer-widget__link">
+                                    <li><a href="{{ route('delivery')}}">Delivery</a></li>
+                                    <li><a href="{{ route('checkout')}}">Payment</a></li>
+                                    <li><a href="{{ route('exchange-return-policy')}}">Exchange & Return Policy</a></li>
+                                </ul>
+                            </div>
+                            <!-- Footer Widget End -->
+
+                            <!-- Footer Widget Strat -->
+                            <div class="footer-widget flex-grow-1">
+                                <h4 class="footer-widget__title">Information</h4>
+
+                                <ul class="footer-widget__link">
+                                    <li><a href="{{ route('about')}}">About Us</a></li>
+                                    <li><a href="{{ route('contact')}}">Contact Us</a></li>
+                                    <li><a href="{{ route('blog-detail')}}">Latest Post</a></li>
+                                </ul>
+                            </div>
+                            <!-- Footer Widget End -->
+
+                        </div>
+                        <!-- Footer Widget Wrapper End -->
                     </div>
                 </div>
-                <!-- Footer Widget Section End -->
             </div>
-            <div class="col-md-8">
-                <!-- Footer Widget Wrapper Strat -->
-                <div class="footer-widget-wrapper d-flex flex-wrap gap-4">
+        </div>
+        <!-- Footer Widget Section End -->
 
-                    <!-- Footer Widget Strat -->
-                    <div class="footer-widget flex-grow-1">
-                        <h4 class="footer-widget__title">Categories</h4>
-
-                        <ul class="footer-widget__link">
-                            <li><a href="shop.html">Cupcake</a></li>
-                            <li><a href="shop.html">Pastry</a></li>
-                            <li><a href="shop.html">Muffin</a></li>
-                            <li><a href="shop.html">Waffle</a></li>
-                        </ul>
-                    </div>
-                    <!-- Footer Widget End -->
-
-                    <!-- Footer Widget Strat -->
-                    <div class="footer-widget flex-grow-1">
-                        <h4 class="footer-widget__title">Services</h4>
-
-                        <ul class="footer-widget__link">
-                            <li><a href="contact.html">Delivery</a></li>
-                            <li><a href="contact.html">Payment</a></li>
-                            <li><a href="contact.html">Returns</a></li>
-                            <li><a href="contact.html">Privacy</a></li>
-                        </ul>
-                    </div>
-                    <!-- Footer Widget End -->
-
-                    <!-- Footer Widget Strat -->
-                    <div class="footer-widget flex-grow-1">
-                        <h4 class="footer-widget__title">Information</h4>
-
-                        <ul class="footer-widget__link">
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="conact.html">Contact Us</a></li>
-                            <li><a href="blog-details.html">Latest Post</a></li>
-                            <li><a href="about.html">Selling Tips</a></li>
-                        </ul>
-                    </div>
-                    <!-- Footer Widget End -->
-
+        <!-- Footer Copyright Strat -->
+        <div class="footer-copyright footer-copyright-two">
+            <div class="container">
+                <!-- Footer Copyright Text Strat -->
+                <div class="footer-copyright-text text-center">
+                    <p>&copy; 2024 <strong> Bakerz Bite </strong> Made with <i class="lastudioicon-heart-1"></i> by <a href="https://aptechvietnam.com.vn/">Bakerz</a></p>
                 </div>
-                <!-- Footer Widget Wrapper End -->
+                <!-- Footer Copyright Text End -->
             </div>
         </div>
-    </div>
-</div>
-<!-- Footer Widget Section End -->
+        <!-- Footer Copyright End -->
 
-<!-- Footer Copyright Strat -->
-<div class="footer-copyright footer-copyright-two">
-    <div class="container">
-        <!-- Footer Copyright Text Strat -->
-        <div class="footer-copyright-text text-center">
-            <p>&copy; 2024 <strong> Bakerz Bite </strong> Made with <i class="lastudioicon-heart-1"></i> by <a href="https://aptechvietnam.com.vn/">Aptech</a></p>
-        </div>
-        <!-- Footer Copyright Text End -->
     </div>
-</div>
-<!-- Footer Copyright End -->
+    <!-- Footer End -->
+     <!-- JS Vendor, Plugins & Activation Script Files -->
 
-</div>
-<!-- Footer End -->
- 
+    <!-- Vendors JS -->
+    <script src="{{asset('assets/js/vendor/modernizr-3.11.7.min.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/jquery-migrate-3.3.2.min.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Plugins JS -->
+    <script src="{{asset('assets/js/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('assets/js/countdown.min.js')}}"></script>
+    <script src="{{asset('assets/js/ion.rangeSlider.min.js')}}"></script>
+    <script src="{{asset('assets/js/lightgallery.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('assets/js/ajax.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
+
+    <!-- Activation JS -->
+    <script src="{{asset('assets/js/main.js')}}"></script>
     <!-- Vendors JS -->
     <script>
+    $(window).on("scroll", function (event) {
+        var scroll = $(window).scrollTop();
+        if (scroll <= 0) {
+            $(
+                ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
+            ).removeClass("sticky");
+            $(".header-sticky .header-logo img").attr(
+                "src",
+                "{{asset('assets/images/logo-white.svg')}}"
+            );
+        } else {
+            $(
+                ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
+            ).addClass("sticky");
+            $(".header-sticky .header-logo img").attr(
+                "src",
+                "{{asset('assets/images/logo.svg')}}"
+            );
+        }
+    });
+
+
       document
         .getElementById("avatarImg")
         .addEventListener("click", function () {
