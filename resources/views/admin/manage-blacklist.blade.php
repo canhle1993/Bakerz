@@ -1,6 +1,6 @@
 @extends('admin.dashboard')
 
-@section('manage_admin')
+@section('manage_blacklist')
 <style>
 .pagination {
     display: flex;
@@ -54,9 +54,6 @@
 .pagination .page-link:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
-.pagination .page-link {
-    transition: all 0.3s ease;
-}
 
 .pagination .page-link:hover {
     transform: scale(1.1);
@@ -65,32 +62,17 @@
     box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
 }
 
-/* Lower to Client button */
-.btn-lower {
-    background-color: #ffc107;
-    color: #000;
-    border: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.btn-lower:hover {
-    background-color: #e0a800;
-    color: #fff;
-    box-shadow: 0px 4px 10px rgba(224, 168, 0, 0.5);
-    transform: scale(1.05);
-}
-
-/* Delete button */
-.btn-danger {
-    background-color: #dc3545;
+/* Restore button */
+.btn-restore {
+    background-color: #28a745;
     color: #fff;
     border: none;
     transition: all 0.3s ease-in-out;
 }
 
-.btn-danger:hover {
-    background-color: #c82333;
-    box-shadow: 0px 4px 10px rgba(200, 35, 51, 0.5);
+.btn-restore:hover {
+    background-color: #218838;
+    box-shadow: 0px 4px 10px rgba(33, 136, 56, 0.5);
     transform: scale(1.05);
 }
 
@@ -132,7 +114,6 @@
     color: #ddd;
 }
 
-
 </style>
 
 @if(session('success'))
@@ -163,8 +144,7 @@
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="text-primary">Admin Management</h1>
-        <a href="{{ route('admin.create') }}" class="btn btn-primary">Add Admin</a>
+        <h1 class="text-primary">Blacklisted Users</h1>
     </div>
 
     <table class="table table-hover table-bordered table-striped shadow-sm">
@@ -180,40 +160,32 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($admins as $admin)
+            @foreach ($blacklistedUsers as $user)
             <tr>
                 <td class="text-center">
-                    @if($admin->avatar)
-                        @if (filter_var($admin->avatar, FILTER_VALIDATE_URL))
-                            <img src="{{ $admin->avatar }}" alt="avatar" class="rounded-circle" width="50" height="50">
+                    @if($user->avatar)
+                        @if (filter_var($user->avatar, FILTER_VALIDATE_URL))
+                            <img src="{{ $user->avatar }}" alt="avatar" class="rounded-circle" width="50" height="50">
                         @else
-                            <img src="{{ asset('storage/avatars/'.$admin->avatar) }}" alt="avatar" class="rounded-circle" width="50" height="50">
+                            <img src="{{ asset('storage/avatars/'.$user->avatar) }}" alt="avatar" class="rounded-circle" width="50" height="50">
                         @endif
                     @else
                         <img src="{{ asset('storage/avatars/default-avatar.png') }}" alt="default avatar" class="rounded-circle" width="50" height="50">
                     @endif
                 </td>
 
-                <td>{{ $admin->name }}</td>
-                <td>{{ $admin->email }}</td>
-                <td>{{ $admin->phone }}</td>
-                <td>{{ $admin->address }}</td>
-                <td>{{ $admin->note }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->phone }}</td>
+                <td>{{ $user->address }}</td>
+                <td>{{ $user->note }}</td>
 
                 <td class="text-center">
-                    <!-- Button to lower admin role to client -->
-                    <form action="{{ route('admin.lower_to_client', $admin->user_id) }}" method="POST" style="display:inline-block;">
+                    <!-- Button to restore user -->
+                    <form action="{{ route('blacklist.restore', $user->user_id) }}" method="POST" style="display:inline-block;">
                         @csrf
-                        <button type="submit" class="btn btn-sm btn-lower">
-                            <i class="bi bi-arrow-down-circle"></i> Lower to Client
-                        </button>
-                    </form>
-
-                    <form action="{{ route('admin.destroy', $admin->user_id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger">
-                            <i class="bi bi-trash"></i> Delete
+                        <button type="submit" class="btn btn-sm btn-restore">
+                            <i class="bi bi-arrow-up-circle"></i> Restore
                         </button>
                     </form>
                 </td>
@@ -225,7 +197,7 @@
 
     <!-- Pagination -->
     <div class="d-flex justify-content-center mt-4">
-        {{ $admins->links('pagination::bootstrap-5') }}
+        {{ $blacklistedUsers->links('pagination::bootstrap-5') }}
     </div>
 
 @endsection

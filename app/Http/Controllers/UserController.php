@@ -14,7 +14,7 @@ class UserController extends Controller
     {
         // dd('BEGIN');
         $request->validate([
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp',
         ]);
         
         $user = User::where('user_id', Auth::user()->user_id)->first();

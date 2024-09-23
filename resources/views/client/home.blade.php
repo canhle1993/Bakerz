@@ -4,14 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-
     <title>Bakerz Bite</title>
-
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.png')}}">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -21,271 +19,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Allura&family=Handlee&family=Inter:wght@300;400;500;600;700&family=Comfortaa:wght@300;400;500;600;700&family=Montaga&family=Pacifico&family=Fredericka+the+Great&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Yellowtail&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS (Bootstrap & Icon Font) -->
-    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/vendor/lastudioicons.css">
-    <link rel="stylesheet" href="assets/css/vendor/dliconoutline.css">
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/lastudioicons.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/dliconoutline.css')}}">
 
     <!-- Plugins CSS (All Plugins Files) -->
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/ion.rangeSlider.min.css">
-    <link rel="stylesheet" href="assets/css/lightgallery-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="{{asset('assets/css/animate.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/swiper-bundle.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/ion.rangeSlider.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/lightgallery-bundle.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
 
     <!-- Style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+
+    <style>
+      .hidden-form {
+        display: none;
+      }
+      .form-container {
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #dcdad1;
+      }
+    </style>
 
 </head>
 
 <body>
-
-    <!-- Header Start -->
-    <div class="header-section header-transparent header-sticky">
-        <div class="container position-relative">
-
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-xl-3 col-7">
-                    <!-- Header Logo Start -->
-                    <div class="header-logo">
-                        <a href="{{ route('client.home')}}">
-                            <img class="white-logo" src="assets/images/logo-white.svg" width="229" height="62" alt="Logo">
-                        </a>
-                    </div>
-                    <!-- Header Logo End -->
-                </div>
-                <div class="col-lg-7 col-xl-6 d-none d-lg-block">
-                    <!-- Header Menu Start -->
-                    <div class="header-menu">
-                        <ul class="header-primary-menu d-flex justify-content-center">
-                            <li >
-                                <a  href="{{ route('client.home') }}"  class="menu-item-link"><span >Home</span></a>
-                            </li>
-                            <li class="position-static">
-                                <a class="menu-item-link" href="{{ route('shop_all')}}"><span>Shop</span></a>
-                                <ul class="sub-menu sub-menu-mega">
-                                    <li class="mega-menu-item">
-                                        <ul>
-                                            <li class="mega-menu-item-title">Product Types</li>
-                                            <li><a class="sub-item-link" href="{{ route('product-simple') }}"><span>Product Simple</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('product-grouped') }}"><span>Product Grouped</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('product-affiliate') }}"><span>Product Affiliate</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-item">
-                                        <ul>
-                                            <li class="mega-menu-item-title">Others</li>
-                                            <li><a class="sub-item-link" href="{{ route('cart') }}"><span>Cart</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('checkout') }}"><span>Checkout</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('order-tracking') }}"><span>Order Tracking</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-item banner-menu-content-wrap">
-                                        <ul>
-                                            <li>
-                                                <a href="{{ route('client.home')}}">
-                                                    <img src="assets/images/product/featured-product-01.png" alt="Shop">
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-item banner-menu-content-wrap">
-                                        <ul>
-                                            <li>
-                                                <a href="{{ route('client.home')}}">
-                                                    <img src="assets/images/product/featured-product-01.png" alt="Shop">
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Pages</span></a>
-                                <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="{{ route('about') }}"><span>About</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('our-chef') }}"><span>Our Chef</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Pricing Plans</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Blog</span></a>
-                                <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="{{ route('blog-detail') }}"><span>Blog Details</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a class="menu-item-link" href="{{ route('contact') }}"><span>Contact</span></a></li>
-                        </ul>
-                    </div>
-                    <!-- Header Menu End -->
-                </div>
-                <div class="col-lg-2 col-xl-3 col-5">
-                    <!-- Header Meta Start -->
-                    <div class="header-meta">
-                        <ul class="header-meta__action d-flex justify-content-end">
-                            <li><button class="action search-open"><i class="lastudioicon-zoom-1"></i></button></li>
-                            <li>
-                                <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
-                                    <i class="lastudioicon-shopping-cart-2"></i>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>
-                                </button>
-                            </li>
-                            <!-- header-primary-menu d-flex justify-content-center -->
-                            <div class="header-meta__action d-flex justify-content-end">
-                            @auth
-                            <li >
-                                <a  class=" action" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
-                            </li>
-                            <li >
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                                <a  class="action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-                            </li>
-                            @endauth
-                            @guest
-
-                            <li >
-                            <form id="login-form" action="{{ route('login') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                                <a  class="action" href="{{ route('login') }}">Login</a>
-                            </li>
-
-                            @endguest
-                            </div>
-                            <li class="d-lg-none">
-                                <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"><i class="lastudioicon-menu-8-1"></i></button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Header Meta End -->
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!-- Header End -->
-
-    <!-- Search Start  -->
-    <div class="search-popup position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-6 bg-black bg-opacity-75">
-        <div class="search-popup__form position-relative">
-            <form action="" method="GET">
-                <input class="search-popup__field border-0 border-bottom bg-transparent text-white w-100 tra py-3" type="text" placeholder="Search…">
-                <button class="search-popup__icon text-white border-0 bg-transparent position-absolute top-50 end-0 translate-middle-y"><i class="lastudioicon-zoom-1"></i></button>
-            </form>
-        </div>
-        <button class="search-popup__close position-absolute top-0 end-0 m-8 p-3 lh-1 border-0 text-white fs-4"><i class="lastudioicon-e-remove"></i></button>
-    </div>
-    <!-- Search End -->
-
-        <!-- Offcanvas Cart Start  -->
-        <div class="offcanvas offcanvas-end offcanvas-cart" id="offcanvasCart">
-
-<div class="offcanvas-header">
-    <h4 class="offcanvas-title">My Cart</h4>
-    <button type="button" class="btn-close text-secondary" data-bs-dismiss="offcanvas"><i class="lastudioicon lastudioicon-e-remove"></i></button>
-</div>
-
-<div class="offcanvas-body">
-    <!-- Offcanvas Cart Items Start  -->
-    <ul class="offcanvas-cart-items">
-        <li>
-            <!-- Mini Cart Item Start  -->
-            <div class="mini-cart-item">
-                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                <div class="mini-cart-item__thumbnail">
-                    <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-1.png" alt="Cart"></a>
-                </div>
-                <div class="mini-cart-item__content">
-                    <h6 class="mini-cart-item__title"><a href="single-product.html">Macaron Cake</a></h6>
-                    <span class="mini-cart-item__quantity">1 × $4.99</span>
-                </div>
-            </div>
-            <!-- Mini Cart Item End  -->
-        </li>
-        <li>
-            <!-- Mini Cart Item Start  -->
-            <div class="mini-cart-item">
-                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                <div class="mini-cart-item__thumbnail">
-                    <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-2.png" alt="Cart"></a>
-                </div>
-                <div class="mini-cart-item__content">
-                    <h6 class="mini-cart-item__title"><a href="single-product.html">Cream Muffin</a></h6>
-                    <span class="mini-cart-item__quantity">1 × $4.99</span>
-                </div>
-            </div>
-            <!-- Mini Cart Item End  -->
-        </li>
-        <li>
-            <!-- Mini Cart Item Start  -->
-            <div class="mini-cart-item">
-                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                <div class="mini-cart-item__thumbnail">
-                    <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-3.png" alt="Cart"></a>
-                </div>
-                <div class="mini-cart-item__content">
-                    <h6 class="mini-cart-item__title"><a href="single-product.html">Brownie</a></h6>
-                    <span class="mini-cart-item__quantity">1 × $4.99</span>
-                </div>
-            </div>
-            <!-- Mini Cart Item End  -->
-        </li>
-        <li>
-            <!-- Mini Cart Item Start  -->
-            <div class="mini-cart-item">
-                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                <div class="mini-cart-item__thumbnail">
-                    <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-4.png" alt="Cart"></a>
-                </div>
-                <div class="mini-cart-item__content">
-                    <h6 class="mini-cart-item__title"><a href="single-product.html">Chocolate Muffin</a></h6>
-                    <span class="mini-cart-item__quantity">1 × $4.99</span>
-                </div>
-            </div>
-            <!-- Mini Cart Item End  -->
-        </li>
-        <li>
-            <!-- Mini Cart Item Start  -->
-            <div class="mini-cart-item">
-                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                <div class="mini-cart-item__thumbnail">
-                    <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-5.png" alt="Cart"></a>
-                </div>
-                <div class="mini-cart-item__content">
-                    <h6 class="mini-cart-item__title"><a href="single-product.html">No-bake chocolate</a></h6>
-                    <span class="mini-cart-item__quantity">1 × $4.99</span>
-                </div>
-            </div>
-            <!-- Mini Cart Item End  -->
-        </li>
-    </ul>
-    <!-- Offcanvas Cart Items End  -->
-</div>
-
-<div class="offcanvas-footer d-flex flex-column gap-4">
-
-    <!-- Mini Cart Total End  -->
-    <div class="mini-cart-totla">
-        <span class="label">Subtotal:</span>
-        <span class="value">$24.95</span>
-    </div>
-    <!-- Mini Cart Total End  -->
-
-    <!-- Mini Cart Button End  -->
-    <div class="mini-cart-btn d-flex flex-column gap-2">
-        <a class="d-block btn btn-secondary btn-hover-primary" href="#">View cart</a>
-        <a class="d-block btn btn-secondary btn-hover-primary" href="#">Checkout</a>
-    </div>
-    <!-- Mini Cart Button End  -->
-
-</div>
-
-</div>
-<!-- Offcanvas Cart End -->
+@include('layouts.header')
 
     <!-- Slider Section Strat -->
     <div class="slider-section-seven slider-active overflow-hidden">
@@ -351,14 +113,149 @@
     </div>
     <!-- Slider Section End -->
 
-    <div class="section-padding-01" >
+        <!-- Category Section Start -->
+        <div class="category-four category-four_bg section-padding-03" data-bg-image="assets/images/bg/category-four-bg.jpg">
+        <div class="container custom-container-five">
+            <div class="row row-cols-2 row-cols-lg-4 category-four_wrapper mb-n60">
+                <div class="col mb-60">
+                    <!-- Single Category Four Start -->
+                    <div class="category-four_box">
+                        <span class="category-four_border"></span>
+                        <a href="shop.html" class="category-four_thumb">
+                            <img src="assets/images/category/category-08.jpg" alt="Category-Image">
+                        </a>
+                        <div class="category-four_content">
+                            <a href="shop.html" class="category-four_name">Sweet Breads</a>
+                        </div>
+                    </div>
+                    <!-- Single Category Four End -->
+                </div>
+                <div class="col mb-60">
+                    <!-- Single Category Four Start -->
+                    <div class="category-four_box">
+                        <span class="category-four_border"></span>
+                        <a href="shop.html" class="category-four_thumb">
+                            <img src="assets/images/category/category-09.jpg" alt="Category-Image">
+                        </a>
+                        <div class="category-four_content">
+                            <a href="shop.html" class="category-four_name">Baked Goods</a>
+                        </div>
+                    </div>
+                    <!-- Single Category Four End -->
+                </div>
+                <div class="col mb-60">
+                    <!-- Single Category Four Start -->
+                    <div class="category-four_box">
+                        <span class="category-four_border"></span>
+                        <a href="shop.html" class="category-four_thumb">
+                            <img src="assets/images/category/category-10.jpg" alt="Category-Image">
+                        </a>
+                        <div class="category-four_content">
+                            <a href="shop.html" class="category-four_name">Cakes</a>
+                        </div>
+                    </div>
+                    <!-- Single Category Four End -->
+                </div>
+                <div class="col mb-60">
+                    <!-- Single Category Four Start -->
+                    <div class="category-four_box">
+                        <span class="category-four_border"></span>
+                        <a href="shop.html" class="category-four_thumb">
+                            <img src="assets/images/category/category-11.jpg" alt="Category-Image">
+                        </a>
+                        <div class="category-four_content">
+                            <a href="shop.html" class="category-four_name">Cheese Cakes </a>
+                        </div>
+                    </div>
+                    <!-- Single Category Four End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Category Section End -->
+
+    <!-- Testimonial Five Section Start -->
+    <div class="testimonial-five_bg section-padding-03">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="testimonial-five_inner">
+                        <blockquote class="testimonial-five_blockquote">"Savor the natural flavors, nurture your health every day!". We always bring our customers the best food for their health.</blockquote>
+                        <span class="testimonial-five_border"></span>
+                        <span class="testimonial-five_author">
+                            <button id="healthSuggestionBtn" style="margin-top: 0px !important;" class="slider-content__btn btn btn-primary btn-hover-black">
+                                Gợi ý món ăn theo sức khỏe
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5">
+      <div id="healthForm" class="hidden-form mt-4 form-container" >
+        <form>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="heightInput" class="form-label">Chiều cao (m):</label>
+              <input
+                type="number"
+                class="form-control"
+                id="heightInput"
+                placeholder="Nhập chiều cao"
+              />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="weightInput" class="form-label">Cân nặng (kg):</label>
+              <input
+                type="number"
+                class="form-control"
+                id="weightInput"
+                placeholder="Nhập cân nặng"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <label for="weightInput" class="form-label">Chỉ số BMI:</label>
+                <h4> <span id="bmiResult">Chưa có dữ liệu</span></h4>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                <label for="conditionSelect" class="form-label"
+                >Chọn tình trạng sức khỏe:</label
+                >
+                <select class="form-select" id="conditionSelect">
+                <option value="" selected disabled>Chọn bệnh</option>
+                <option value="diabet">Bình thường</option>
+                <option value="diabetes">Bệnh tiểu đường</option>
+                <option value="hypertension">Bệnh cao huyết áp</option>
+                <option value="liverDisease">Bệnh men gan cao</option>
+                <option value="stroke">Bệnh đột quỵ</option>
+                </select>
+            </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+        <div class="testimonial-five_shape01">
+            <img class="" src="assets/images/testimonial/testimonial-shape01.png" alt="Shape-Image">
+        </div>
+        <div class="testimonial-five_shape02">
+            <img class="" src="assets/images/testimonial/testimonial-shape02.png" alt="Shape-Image">
+        </div>
+    </div>
+    <!-- Testimonial Five Section End -->
 
 
+
+
+<div class="section-padding-01" >
 <div class="container" style="padding-bottom: 50px !important;">
     <!-- Section Title Strat -->
     <div class="section-title text-center max-width-720 mx-auto">
-        <h2 class="section-title__title">Products suitable for health</h2>
-        <p>We always bring the healthiest dishes</p>
+        <h2 class="section-title__title">Products suitable for your health</h2>
+        <p>Wish you the best experience</p>
     </div>
     <!-- Section Title End -->
 
@@ -566,105 +463,38 @@
         </div>
     </div>
     <!-- Product Section End -->
-    <div class="category-section pt-4">
-        <div class="container">
 
-            <!-- Category Box Strat -->
-            <div class="category-box">
-                <div class="row row-cols-4">
-                    <div class="col">
-
-                        <!-- Category Box Item Strat -->
-                        <div class="category-box-item">
-                            <div class="category-box-item__wrapper text-center">
-                                <div class="category-box-item__icon">
-                                    <a href="shop.html">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="none" viewBox="0 0 70 70">
-                                            <path fill="currentColor" d="M57.504 26.92l-1.328 2.656a6.562 6.562 0 0 0-4.77 2.894 6.562 6.562 0 0 0-10.937 0 6.6 6.6 0 0 0-1.779-1.791l3.482-1.024a29.288 29.288 0 0 0 16.527-12.566 14.692 14.692 0 0 1-1.195 9.832zM47.14 66.72h-6.634l1.056-30.588h-.007c0-.013.008-.024.008-.037a4.375 4.375 0 1 1 8.75-.03L47.14 66.718zM19.688 36.063a4.375 4.375 0 0 1 8.75.03c0 .014.006.025.007.038h-.008l1.056 30.588h-6.634l-3.172-30.656zm10.937.03a4.375 4.375 0 1 1 8.75 0L38.318 66.72h-6.636l-1.057-30.625zm-9.844-30.04a2.775 2.775 0 0 1 4.734-1.96l1.055 1.055a1.094 1.094 0 0 0 1.547 0l1.055-1.055a2.774 2.774 0 0 1 4.734 1.96 4.766 4.766 0 0 1-1.663 3.621l-4.9 4.198-4.898-4.199a4.76 4.76 0 0 1-1.664-3.62zm2.735 7.419l3.116 2.67a1.094 1.094 0 0 0 1.422 0l5.61-4.812c.109-.093.207-.197.31-.296l2.325-.317a8.65 8.65 0 0 0 7.123-6.171 14.608 14.608 0 0 1 3.576 8.841 11.084 11.084 0 0 1-6.578 3.14l-18.721 2.078c-.607.071-1.209.188-1.798.35a8.946 8.946 0 0 1 3.615-5.483zm-1.58 7.31l18.72-2.079A13.302 13.302 0 0 0 52.313 7.714l1.71 1.496a14.748 14.748 0 0 1 3.755 5.095 27.082 27.082 0 0 1-16.223 13.258L34.8 29.55a6.556 6.556 0 0 0-5.27 2.92 6.562 6.562 0 0 0-10.937 0 6.563 6.563 0 0 0-5.403-2.939 9.89 9.89 0 0 1 8.745-8.75zM14.76 60.86L8.75 35.97a4.375 4.375 0 1 1 8.75.123c0 .04.019.072.022.11h-.016l3.137 30.335a7.62 7.62 0 0 1-5.884-5.68zm40.482 0a7.617 7.617 0 0 1-5.884 5.687L52.5 36.203h-.016c0-.038.021-.071.021-.11a4.375 4.375 0 1 1 8.75-.122L55.241 60.86zM13.125 15.313l2.539-1.27a3.324 3.324 0 0 0 1.836-2.97 2.322 2.322 0 0 0-3.208-2.146 2.32 2.32 0 0 0-.752.503l-.415.414-.415-.414a2.32 2.32 0 0 0-3.96 1.642 3.323 3.323 0 0 0 1.838 2.973l2.537 1.268z"></path>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="category-box-item__content">
-                                    <h3 class="category-box-item__title"><a href="shop.html">Sweet Breads</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Category Box Item End -->
-
+        <!-- Product Deal Section Start -->
+        <div class="section-padding-03 deal-two_bg" data-bg-image="assets/images/bg/product-deal-bg.jpg">
+        <div class="container custom-container-two">
+            <div class="row row-cols-lg-2 row-cols-md-2 row-cols-1 align-items-center mb-n30">
+                <div class="col mb-30">
+                    <div class="deal-two_images">
+                        <img class="deal-two_thumb" src="assets/images/product/product-deal.png" alt="Deal-Image">
+                        <img class="deal-two_sale" src="assets/images/shape/hot-sale.png" alt="Sale-Image">
                     </div>
-                    <div class="col">
-
-                        <!-- Category Box Item Strat -->
-                        <div class="category-box-item">
-                            <div class="category-box-item__wrapper text-center">
-                                <div class="category-box-item__icon">
-                                    <a href="shop.html">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="none" viewBox="0 0 70 70">
-                                            <g fill="currentColor">
-                                                <path d="M1.201 45.597a4.1 4.1 0 0 0 4.513.872 31.188 31.188 0 0 0 4.34 7.676l-1.119 1.119a4.106 4.106 0 0 0 0 5.8 4.099 4.099 0 0 0 5.8 0l1.12-1.12a31.188 31.188 0 0 0 7.677 4.342 4.1 4.1 0 0 0 6.671 4.512L35 64.001l4.796 4.796a4.1 4.1 0 0 0 6.672-4.512 31.186 31.186 0 0 0 7.677-4.341l1.12 1.118a4.099 4.099 0 0 0 5.8 0 4.106 4.106 0 0 0 0-5.799l-1.12-1.12a31.19 31.19 0 0 0 4.34-7.675 4.1 4.1 0 0 0 4.513-.872 4.1 4.1 0 0 0 0-5.801L64.001 35l4.796-4.796a4.1 4.1 0 0 0 0-5.801 4.1 4.1 0 0 0-4.512-.873 31.19 31.19 0 0 0-4.34-7.675l1.118-1.12a4.106 4.106 0 0 0 0-5.799 4.099 4.099 0 0 0-5.8 0l-1.119 1.119a31.185 31.185 0 0 0-7.677-4.342 4.1 4.1 0 0 0-6.671-4.512l-4.797 4.797-4.796-4.796a4.1 4.1 0 0 0-6.671 4.511 31.184 31.184 0 0 0-7.678 4.342l-1.119-1.119a4.099 4.099 0 0 0-5.8 0 4.106 4.106 0 0 0 0 5.8l1.119 1.119a31.187 31.187 0 0 0-4.34 7.675 4.1 4.1 0 0 0-4.513.873 4.1 4.1 0 0 0 0 5.8L5.997 35l-4.796 4.795a4.1 4.1 0 0 0 0 5.802zm6.75-.95l3.846-3.847 5.8 5.8-5.592 5.594a28.451 28.451 0 0 1-4.054-7.547zm17.4 17.401a28.457 28.457 0 0 1-7.546-4.054l5.594-5.593 5.8 5.8-3.847 3.847zM40.8 58.202l5.8-5.8 5.594 5.592a28.453 28.453 0 0 1-7.546 4.054L40.8 58.202zM52.401 46.6l5.8-5.8 3.847 3.847a28.455 28.455 0 0 1-4.054 7.547L52.4 46.6zm9.647-21.248L58.2 29.2l-5.8-5.8 5.593-5.594a28.451 28.451 0 0 1 4.054 7.546zm-17.402-17.4c2.71.964 5.24 2.323 7.547 4.053L46.6 17.598l-5.801-5.8 3.847-3.847zm-19.294 0l3.847 3.846-5.8 5.8-5.594-5.593a28.453 28.453 0 0 1 7.547-4.054zm-7.754 15.447l-5.8 5.8-3.847-3.847a28.454 28.454 0 0 1 4.054-7.547l5.593 5.594zM3.135 41.73l5.762-5.763c.534-.534.534-1.4 0-1.933L3.135 28.27a1.367 1.367 0 0 1 1.933-1.934L10.83 32.1c.535.535 1.4.533 1.934 0l7.734-7.734c.534-.534.534-1.4 0-1.933l-9.63-9.63a1.366 1.366 0 1 1 1.933-1.933l9.631 9.628c.534.534 1.4.534 1.934 0l7.734-7.734c.533-.533.533-1.4 0-1.933l-5.764-5.763a1.367 1.367 0 0 1 1.934-1.933l5.762 5.763c.534.534 1.4.534 1.934 0l5.762-5.763a1.367 1.367 0 0 1 1.935 1.933l-5.764 5.763a1.368 1.368 0 0 0 0 1.933l7.734 7.734a1.366 1.366 0 0 0 1.933 0l9.63-9.629a1.366 1.366 0 1 1 1.933 1.934l-9.629 9.63a1.368 1.368 0 0 0 0 1.933l7.734 7.734c.534.534 1.4.534 1.934 0l5.762-5.764a1.367 1.367 0 0 1 1.933 1.934l-5.762 5.763a1.367 1.367 0 0 0 0 1.934l5.762 5.762a1.367 1.367 0 0 1-1.933 1.934L59.168 37.9a1.366 1.366 0 0 0-1.934 0L49.5 45.633a1.368 1.368 0 0 0 0 1.934l9.63 9.63a1.366 1.366 0 1 1-1.933 1.933l-9.63-9.629a1.367 1.367 0 0 0-1.934 0l-7.734 7.734a1.368 1.368 0 0 0 0 1.934l5.764 5.762a1.367 1.367 0 0 1-1.934 1.933l-5.763-5.763a1.367 1.367 0 0 0-1.934 0l-5.762 5.763a1.368 1.368 0 0 1-1.934-1.933l5.763-5.762c.534-.534.534-1.4 0-1.934l-7.733-7.734a1.367 1.367 0 0 0-1.934 0l-9.63 9.629a1.366 1.366 0 1 1-1.933-1.933l9.629-9.63c.534-.534.534-1.4 0-1.934L12.764 37.9a1.368 1.368 0 0 0-1.934 0l-5.762 5.764a1.367 1.367 0 0 1-1.933-1.934z"></path>
-                                                <path d="M37.9 35.967l7.734 7.734c.534.533 1.4.534 1.933 0l7.734-7.734c.534-.534.534-1.4 0-1.934L47.567 26.3a1.368 1.368 0 0 0-1.933 0L37.9 34.033a1.367 1.367 0 0 0 0 1.934zm8.7-6.767l5.801 5.8-5.8 5.8-5.8-5.8 5.8-5.8zm-12.567 2.9c.534.534 1.4.534 1.934 0l7.734-7.734c.533-.533.534-1.4 0-1.933l-7.734-7.734a1.368 1.368 0 0 0-1.934 0L26.3 22.433a1.368 1.368 0 0 0 0 1.933l7.734 7.734zM35 17.6l5.8 5.8-5.8 5.8-5.8-5.8 5.8-5.801zM22.433 43.7c.534.534 1.4.535 1.934 0l7.734-7.733c.534-.534.534-1.4 0-1.934L24.367 26.3a1.368 1.368 0 0 0-1.934 0L14.7 34.033a1.368 1.368 0 0 0 0 1.934l7.734 7.734zm.967-14.5l5.8 5.8-5.8 5.8-5.8-5.8 5.8-5.8zM35 40.468a1.367 1.367 0 1 0 0-2.734 1.367 1.367 0 0 0 0 2.734zm5.431 1.896a1.367 1.367 0 0 0-1.933 1.933L40.8 46.6 35 52.401l-5.801-5.8 2.303-2.304a1.367 1.367 0 0 0-1.934-1.933l-3.27 3.27a1.368 1.368 0 0 0 0 1.933l7.734 7.734c.534.534 1.4.534 1.934 0l7.734-7.734c.533-.534.534-1.4 0-1.934l-3.27-3.27z"></path>
-                                            </g>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="category-box-item__content">
-                                    <h3 class="category-box-item__title"><a href="shop.html">Cakes</a></h3>
-                                </div>
-                            </div>
+                </div>
+                <div class="col mb-30">
+                    <div class="deal-two_content">
+                        <span class="deal-two_subtitle">Deal of the day</span>
+                        <h4 class="deal-two_title">Sesame Rye Bread</h4>
+                        <div class="countdown-area">
+                            <div class="countdown-wrapper" data-countdown="2028/12/28"></div>
                         </div>
-                        <!-- Category Box Item End -->
+                        <span class="deal-two_price"><span>$</span>4.99</span>
 
-                    </div>
-                    <div class="col">
-
-                        <!-- Category Box Item Strat -->
-                        <div class="category-box-item">
-                            <div class="category-box-item__wrapper text-center">
-                                <div class="category-box-item__icon">
-                                    <a href="shop.html">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="none" viewBox="0 0 70 70">
-                                            <path fill="currentColor" d="M15.876 14.643l.033.013c2.306.924 4.978-.182 5.956-2.466l.053-.124c1.396-3.259 4.465-5.284 8.01-5.284 3.546 0 6.616 2.025 8.011 5.284l.053.124c.979 2.284 3.65 3.39 5.957 2.466l.11-.044c3.291-1.319 6.894-.58 9.402 1.927 2.508 2.508 3.246 6.11 1.927 9.403l-.044.11c-.924 2.306.182 4.978 2.466 5.956l.124.052c3.26 1.396 5.284 4.466 5.284 8.011 0 3.546-2.025 6.616-5.284 8.011a4.62 4.62 0 0 0-2.43 6.043 12.21 12.21 0 0 0 4.463 5.4C66.438 52.94 70 44.245 70 35c0-9.349-3.64-18.138-10.251-24.749C53.139 3.641 44.349 0 34.999 0c-9.318 0-18.08 3.618-24.684 10.189a12.197 12.197 0 0 0 5.561 4.454z"></path>
-                                            <path fill="currentColor" d="M51.729 55.728c-1.873-4.41.187-9.53 4.59-11.416 1.752-.75 2.798-2.335 2.798-4.24 0-1.906-1.046-3.49-2.797-4.24l-.123-.054a8.668 8.668 0 0 1-4.622-4.676 8.666 8.666 0 0 1-.038-6.575l.044-.11c.709-1.77.328-3.63-1.02-4.978-1.347-1.347-3.208-1.728-4.977-1.02l-.11.044a8.668 8.668 0 0 1-6.574-.037 8.667 8.667 0 0 1-4.678-4.622l-.053-.123c-.75-1.752-2.335-2.797-4.24-2.797-1.905 0-3.49 1.045-4.24 2.796l-.053.125a8.667 8.667 0 0 1-4.677 4.62 8.668 8.668 0 0 1-6.575.038l-.033-.013a16.26 16.26 0 0 1-6.828-5.134C2.647 19.469 0 27.031 0 35c0 9.349 3.64 18.138 10.251 24.749C16.861 66.359 25.651 70 35 70c8.044 0 15.672-2.697 21.855-7.66a16.28 16.28 0 0 1-5.126-6.612zM10.133 32.762l2.9-2.9 2.772 2.771-2.9 2.9-2.772-2.77zm4.157 16.352l-2.771-2.771 2.9-2.9 2.772 2.77-2.9 2.901zm9.367 9.367l-2.771-2.771 2.9-2.9 2.771 2.77-2.9 2.901zm13.58 1.386l-2.77-2.772 2.9-2.9 2.771 2.772-2.9 2.9zM35 47.03c-6.645 0-12.031-5.386-12.031-12.031 0-6.645 5.386-12.031 12.031-12.031 6.645 0 12.031 5.386 12.031 12.031 0 6.645-5.386 12.031-12.031 12.031z"></path>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="category-box-item__content">
-                                    <h3 class="category-box-item__title"><a href="shop.html">Baked Goods</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Category Box Item End -->
-
-                    </div>
-                    <div class="col">
-
-                        <!-- Category Box Item Strat -->
-                        <div class="category-box-item">
-                            <div class="category-box-item__wrapper text-center">
-                                <div class="category-box-item__icon">
-                                    <a href="shop.html">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="none" viewBox="0 0 70 70">
-                                            <g fill="currentColor">
-                                                <path d="M17.037 40.097c0-.52.031-1.034.078-1.54C9.883 36.45 4.533 31.683 4.533 26.14c0-1.073.031-2.931.086-3.102 1.648 4.082 7.822 7.332 15.03 8.491l3.632-5.8a14.289 14.289 0 0 1 2.9-3.337 16.144 16.144 0 0 1 3.733-2.348c1.657-.755 3.46-1.276 5.405-1.563a1.695 1.695 0 0 1-.327-.995c0-.934.778-1.711 1.71-1.711.934 0 1.712.777 1.712 1.71 0 .265-.063.521-.172.747.242-.008.475-.008.716-.008 3.795 0 7.776.801 11.656 2.318-.054-9.48-11.368-17.186-25.303-17.186-13.966 0-25.303 7.76-25.303 17.271L0 28.192c0 7.667 7.38 14.152 17.558 16.376a19.41 19.41 0 0 1-.52-4.47zM33.631 8.394c.933 0 1.71.778 1.71 1.711s-.777 1.71-1.71 1.71c-.933 0-1.71-.777-1.71-1.71 0-.933.77-1.71 1.71-1.71zm-6.687 5.832c.933 0 1.71.778 1.71 1.711s-.777 1.71-1.71 1.71c-.933 0-1.71-.777-1.71-1.71 0-.933.777-1.71 1.71-1.71zm-6.345-3.942c.933 0 1.71.777 1.71 1.71 0 .934-.777 1.711-1.71 1.711a1.726 1.726 0 0 1-1.711-1.71c0-.933.777-1.711 1.71-1.711zm-3.943 7.885c.933 0 1.71.777 1.71 1.71 0 .934-.777 1.711-1.71 1.711-.933 0-1.71-.777-1.71-1.71 0-.934.777-1.711 1.71-1.711zm-4.798-4.635c.933 0 1.711.778 1.711 1.711s-.778 1.71-1.71 1.71a1.725 1.725 0 0 1-1.711-1.71c0-.925.777-1.71 1.71-1.71z"></path>
-                                                <path d="M55.87 25.774a36.63 36.63 0 0 0-5.24-2.73c-3.974-1.672-7.978-2.496-11.657-2.496-5.948 0-11.034 2.162-13.708 6.415l-3.056 4.876-.965 1.54c-1.088 1.742-1.687 3.686-1.835 5.746-.14 1.898.109 3.888.7 5.894 1.742 5.926 6.5 12.022 13.421 16.369 5.607 3.515 11.626 5.256 16.944 5.256 5.91 0 10.949-2.146 13.608-6.384.04-.062 3.896-6.213 4.036-6.43 5.054-8.064-.42-20.638-12.247-28.056zm-.131 18.273c0 .934-.778 1.711-1.711 1.711s-1.71-.778-1.71-1.71c0-.934.777-1.711 1.71-1.711.933 0 1.71.777 1.71 1.71zm-2.232-12.511c.933 0 1.71.777 1.71 1.71 0 .934-.777 1.711-1.71 1.711-.933 0-1.71-.777-1.71-1.71 0-.934.777-1.711 1.71-1.711zm-7.364 8.227c0 .933-.778 1.71-1.71 1.71a1.74 1.74 0 0 1-1.517-.917 1.74 1.74 0 0 1-.202-.793c0-.933.777-1.711 1.71-1.711.444 0 .848.171 1.151.459.35.31.568.754.568 1.252zm2.395-7.03c0 .933-.778 1.711-1.71 1.711a1.727 1.727 0 0 1-1.712-1.71c0-.934.778-1.712 1.711-1.712s1.71.778 1.71 1.711zm-8.227-6.166c.708 0 1.33.45 1.586 1.073.086.202.132.412.132.645 0 .933-.777 1.711-1.71 1.711a1.714 1.714 0 0 1-1.408-.754 1.653 1.653 0 0 1-.303-.964 1.714 1.714 0 0 1 1.703-1.711zm21.05 29.556c-3.982 6.353-15.498 6.307-24.814.46-4.704-2.956-8.328-7.054-10.24-11.206-.88-1.913-1.4-3.834-1.501-5.669-.11-2.06.31-4.004 1.353-5.669.396-.63 1.01-1.578 1.392-2.138.163-.24.287-.412.334-.443a7.04 7.04 0 0 0-.062.428c-.25 2.208.544 4.82 2.1 7.465.995 1.703 2.309 3.413 3.856 5.054a35.796 35.796 0 0 0 6.882 5.622c7.986 5.008 17.923 6.734 22.395 3.5 0-.009-1.12 1.687-1.695 2.596zm1.407-14.992c0 .934-.778 1.711-1.71 1.711a1.725 1.725 0 0 1-1.711-1.71c0-.934.777-1.711 1.71-1.711.933 0 1.711.777 1.711 1.71z"></path>
-                                            </g>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="category-box-item__content">
-                                    <h3 class="category-box-item__title"><a href="shop.html">Cheesecakes</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Category Box Item End -->
-
+                        <ul class="product-item__meta deal-two_meta">
+                            <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
+                            <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
+                            <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <!-- Category Box End -->
-
         </div>
     </div>
+    <!-- Product Deal Section End -->
+
 </div>
     <!-- Product Section Start -->
     <div class="section-padding-03 custom-container-four" style="padding-top: 0px !important;" >
@@ -1163,7 +993,7 @@
     <!-- Call To Action Three Section Start -->
     <div class="bg-dark-two section-padding-03" data-bg-image="assets/images/bg/category-three-bg.png">
         <div class="container">
-            <div class="row row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-1 mb-n30">
+            <div class="row row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-1 mb-n30" style="margin-bottom: 10px !important;">
                 <div class="col mb-30">
                     <!-- Single Call To Actio 03 Start -->
                     <a href="contact.html" class="callto-action-03">
@@ -1247,170 +1077,7 @@
     </div>
     <!-- Call To Action Three Section End -->
 
-    <!-- Contact form section Start -->
-    <div class="section-padding-03 contact-section contact-section_bg" data-bg-image="assets/images/bg/contact-bg.jpg">
-        <div class="container custom-container-five">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="contact-section_content">
-                        <h2 class="contact-section__title">Our Contact</h2>
-                        <ul class="contact-section_list">
-                            <li>
-                                <span class="contact-section_list__icon"><i class="lastudioicon lastudioicon-phone-2"></i></span>
-                                <span class="contact-section_list__text">Phone Number : <span>1800 1779</span></span>
-                            </li>
-                            <li>
-                                <span class="contact-section_list__icon"><i class="lastudioicon lastudioicon-pin-3-2"></i></span>
-                                <span class="contact-section_list__text">Address : <span>35/6 đường D5, Q. Bình Thạnh, TP.HCM</span></span>
-                            </li>
-                            <li>
-                                <span class="contact-section_list__icon"><i class="lastudioicon lastudioicon-mail"></i></span>
-                                <span class="contact-section_list__text">Email Adress : <span>aptech2@aprotrain.com</span></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="contact-section_formbg" data-bg-image="assets/images/bg/contact-form-bg.jpg">
-                        <h2 class="contact-section_form__title">Get in touch.</h2>
-                        <form class="contact-section_form" id="contact-form" action="http://whizthemes.com/mail-php/raju/arden/mail.php" method="post">
-                            <div class="row">
-                                <div class="col-md-6 form-p">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" name="con_name" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 form-p">
-                                    <div class="form-group">
-                                        <input class="form-control" type="email" name="con_email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 form-p">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" name="con_phone" placeholder="Phone">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 form-p">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" name="con_address" placeholder="Address">
-                                    </div>
-                                </div>
-                                <div class="col-md-12 form-p">
-                                    <div class="form-group">
-                                        <textarea class="form-control text-area" name="con_message" placeholder="Message"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 form-p">
-                                    <div class="form-group mb-0">
-                                        <button class="btn btn-theme" type="submit">Send Message</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <!-- Message Notification -->
-                        <div class="form-message"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="contact-section_shape">
-            <img src="assets/images/shape/shape-10.png" alt="Shape-Image">
-        </div>
-    </div>
-    <!-- Contact form section End -->
-
-    <!-- Scroll Top Start -->
-    <a href="#" class="scroll-top" id="scroll-top">
-        <i class="lastudioicon-up-arrow"></i>
-    </a>
-    <!-- Scroll Top End -->
-
-    <!-- Footer Strat -->
-    <div class="footer-section">
-
-        <!-- Footer Widget Section Strat -->
-        <div class="footer-widget-section">
-            <div class="container custom-container">
-                <div class="row gy-6">
-                    <div class="col-md-4">
-                        <!-- Footer Widget Section Strat -->
-                        <div class="footer-widget">
-                            <div class="footer-widget__logo">
-                                <a class="logo-dark" href="{{ route('client.home')}}"><img src="assets/images/logo.svg" alt="Logo"></a>
-                                <a class="logo-white d-none" href="index.html"><img src="assets/images/logo-white.svg" alt="Logo"></a>
-                            </div>
-                            <div class="footer-widget__social">
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-facebook"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-twitter"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-instagram"></i></a>
-                            </div>
-                        </div>
-                        <!-- Footer Widget Section End -->
-                    </div>
-                    <div class="col-md-8">
-                        <!-- Footer Widget Wrapper Strat -->
-                        <div class="footer-widget-wrapper d-flex flex-wrap gap-4">
-
-                            <!-- Footer Widget Strat -->
-                            <div class="footer-widget flex-grow-1">
-                                <h4 class="footer-widget__title">Categories</h4>
-
-                                <ul class="footer-widget__link">
-                                    <li><a href="{{ route('category')}}">Sweet Breads</a></li>
-                                    <li><a href="{{ route('category')}}">Baked Goods</a></li>
-                                    <li><a href="{{ route('category')}}">Cakes</a></li>
-                                    <li><a href="{{ route('category')}}">Cheesecakes</a></li>
-                                </ul>
-                            </div>
-                            <!-- Footer Widget End -->
-
-                            <!-- Footer Widget Strat -->
-                            <div class="footer-widget flex-grow-1">
-                                <h4 class="footer-widget__title">Services</h4>
-
-                                <ul class="footer-widget__link">
-                                    <li><a href="{{ route('delivery')}}">Delivery</a></li>
-                                    <li><a href="{{ route('checkout')}}">Payment</a></li>
-                                    <li><a href="{{ route('exchange-return-policy')}}">Exchange & Return Policy</a></li>
-                                </ul>
-                            </div>
-                            <!-- Footer Widget End -->
-
-                            <!-- Footer Widget Strat -->
-                            <div class="footer-widget flex-grow-1">
-                                <h4 class="footer-widget__title">Information</h4>
-
-                                <ul class="footer-widget__link">
-                                    <li><a href="{{ route('about')}}">About Us</a></li>
-                                    <li><a href="{{ route('contact')}}">Contact Us</a></li>
-                                    <li><a href="{{ route('blog-detail')}}">Latest Post</a></li>
-                                </ul>
-                            </div>
-                            <!-- Footer Widget End -->
-
-                        </div>
-                        <!-- Footer Widget Wrapper End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer Widget Section End -->
-
-        <!-- Footer Copyright Strat -->
-        <div class="footer-copyright footer-copyright-two">
-            <div class="container">
-                <!-- Footer Copyright Text Strat -->
-                <div class="footer-copyright-text text-center">
-                    <p>&copy; 2024 <strong> Bakerz Bite </strong> Made with <i class="lastudioicon-heart-1"></i> by <a href="https://aptechvietnam.com.vn/">Bakerz</a></p>
-                </div>
-                <!-- Footer Copyright Text End -->
-            </div>
-        </div>
-        <!-- Footer Copyright End -->
-
-    </div>
-    <!-- Footer End -->
+@include('layouts.footer')
 
     <div class="quickview-product-modal modal fade" id="exampleProductModal">
         <div class="modal-dialog modal-dialog-centered mw-100">
@@ -1650,27 +1317,34 @@
         </div>
     </div>
 
-    <!-- JS Vendor, Plugins & Activation Script Files -->
-
     <!-- Vendors JS -->
-    <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
-    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
-    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('assets/js/vendor/modernizr-3.11.7.min.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/jquery-migrate-3.3.2.min.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Plugins JS -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
-    <script src="assets/js/countdown.min.js"></script>
-    <script src="assets/js/ion.rangeSlider.min.js"></script>
-    <script src="assets/js/lightgallery.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/ajax.js"></script>
-    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="{{asset('assets/js/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('assets/js/countdown.min.js')}}"></script>
+    <script src="{{asset('assets/js/ion.rangeSlider.min.js')}}"></script>
+    <script src="{{asset('assets/js/lightgallery.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('assets/js/ajax.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 
     <!-- Activation JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
+    <!-- Vendors JS -->
 
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document
+        .getElementById("healthSuggestionBtn")
+        .addEventListener("click", function () {
+          var form = document.getElementById("healthForm");
+          form.classList.toggle("hidden-form");
+        });
+    </script>
 </body>
 
 </html>

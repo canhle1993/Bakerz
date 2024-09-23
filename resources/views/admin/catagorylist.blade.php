@@ -31,7 +31,7 @@
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h4 class="mb-0">List Product</h4>
-                        <a href="{{route('product.create')}}">Create Product</a>
+                        <a id="btnCreate" href="#">Create Catagory </a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -45,6 +45,20 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <form action="{{ route('catalog.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <tr id="row-create" style="display:none">
+                                <td></td>
+                                <td>
+                                    <input type="file" name="new_category_image" id="new_category_image">
+                                </td>
+                                <td id="name-create"><input  type="text" name ="new_category_name" id="new_category_name"></td>
+                                <td>
+                                <button type="submit" class="btn btn-success m-2" >Save</button>
+                                <button id="btnCancelAdd" type="button" class="btn btn-secondary m-2">Cancel</button>
+                                </td>
+                            </tr>   
+                            </form>
                             @foreach($catalogs as $catalog)
                             <tr id="row-{{ $catalog->category_id }}">
                                 <td>{{ $loop->iteration }}</td>
@@ -161,7 +175,7 @@
         var actionCell = document.getElementById('row-' + categoryId).children[3];
         actionCell.innerHTML = `
             <a class="bi bi-pencil m-2" href="javascript:void(0);" onclick="editRow(${categoryId})"></a>
-            <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('product.destroy', $catalog->category_id) }}" onclick="showDeleteModal(this)">Delete</a>
+            <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('catalog.destroy', $catalog->category_id) }}" onclick="showDeleteModal(this)">Delete</a>
         `;
     }
 
@@ -178,6 +192,15 @@
             imagePreview.files = fileInput.files;  // Hiển thị ảnh đã chọn
         }
     }
+
+    document.getElementById('btnCreate').addEventListener('click', function(event) {
+        
+        document.getElementById("row-create").style.display ='contents'
+        
+    });
+    document.getElementById('btnCancelAdd').addEventListener('click', function(event) {
+        document.getElementById("row-create").style.display ='none'
+    });
 
 </script>
     @endsection
