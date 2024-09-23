@@ -16,6 +16,7 @@ Route::post('/change-password', [RegisterController::class, 'changepass'])->name
 // Route cho client
 use App\Http\Controllers\ClientController;
 Route::get('/', [ClientController::class, 'home'])->name('client.home');
+Route::get('/filter', [ClientController::class, 'filter'])->name('client.filter');
 Route::get('/client/profile/user/{userid}', [ClientController::class, 'profile'])->name('client.profile');
 use App\Http\Controllers\ProductController;
 Route::get('/client/heathyfilter', [ProductController::class, 'filter'])->name('client.heathyfilter');
