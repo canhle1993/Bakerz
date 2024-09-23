@@ -33,71 +33,127 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('darkpan-1.0.0/css/style.css')}}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+      #a1 {
+        border: solid 2px #808080;
+      }
+      .product-table {
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #191c24;
+        position: relative;
+      }
+      .product-image {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+      .product-column {
+        font-weight: bold;
+        color: #ffc106; /* Màu chữ của cột 2 */
+      }
+      .product-info {
+        color: #ffffff; /* Màu chữ của cột 3 */
+        padding: 5px;
+        border-radius: 5px;
+      }
+      .row-item {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      .table-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .btn-edit,
+      .btn-back {
+        margin-bottom: 20px;
+      }
+    </style>
 </head>
 
 <body>
 <div id="showDetail" class="container-fluid pt-4 px-4">
-    <div class="row pt-3">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-        <div class="bg-secondary rounded h-100 p-4">
-            <div class="row">
-                <div class="col-md-11">
-                <a href="{{ route('product.index') }}" class="btn btn-light m-2">↩ Back</a>
-
-                <h6 class="mb-4">{{$product->product_name}}</h6>
-                <div class="row">
-                    <div class="col-md-4">
-                    @foreach($product->images as $image)
-                        <img src="{{ asset('storage/products/' . $image->image) }}" alt="Product Image" width="200px" ><br>
-                    @endforeach
-                    </div>
-                    <div class="col-md-8" style="border: solid thin grey;">
-                        <dl class="row mb-0">
-                            <dt class="col-sm-4">Description</dt>
-                            <dd class="col-sm-8 bg-transparent text-muted" >{{$product->describe}}</dd>
-                        </dl>
-                        <dl class="row mb-0">
-                            <dt class="col-sm-4">Category</dt>
-                            <dd class="col-sm-8">
-                                @foreach($product->catalogs as $catalog)
-                                    <p class="text-warning">{{ $catalog->category_name }} </p>
-                                @endforeach
-                            </dd>
-                        </dl>
-                        <dl class="row mb-0">
-                            <dt class="col-sm-4">Inventory</dt>
-                            <dd class="col-sm-8">{{ $product->inventory}}</dd>
-                        </dl>
-                        <dl class="row mb-0">
-                            <dt class="col-sm-4">Unit Price</dt>
-                            <dd class="col-sm-8">{{ formatPriceVND($product->price) }}</dd>
-                        </dl>
-                        <dl class="row mb-0">
-                            <dt class="col-sm-4">Heathy</dt>
-                            <dd class="col-sm-8">
-                                @foreach($product->heathyCatalogs as $heathyCatalog)
-                                <p class="text-info">{{ $heathyCatalog->heath_catalog }}</p> 
-                                @endforeach
-                            </dd>
-                        </dl>
-                    </div>
-                </div>
-                </div>
-                <div class="col-md-1">
-                    <button id="btnEdit" type="button" class="btn btn-outline-success m-2">Edit</button>
-                </div>
+      <div class="product-table">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Nút Back và Nút Edit nằm ngoài viền -->
+            <div class="d-flex justify-content-between mb-3">
+              <a href="{{ route('product.index') }}" class="btn btn-light m-2"
+                >↩ Back</a
+              >
+              <div class="col-md-1">
+                <button
+                  id="btnEdit"
+                  type="button"
+                  class="btn btn-outline-success m-2"
+                >
+                  Edit
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-        <div class="col-md-1"></div>
-        
-    
+        <div class="row">
+          <!-- Cột 1: Hiện 3 tấm hình -->
+          <div class="col-md-2">
+            @foreach($product->images as $image)
+            <img
+              src="{{ asset('storage/products/' . $image->image) }}"
+              alt="Product Image"
+              class="product-image"
+            /><br />
+            @endforeach
+          </div>
+
+          <!-- Cột 2 và Cột 3: Hiển thị nhãn và thông tin chi tiết cùng hàng -->
+          <div id="a1" class="col-md-10">
+            <div class="row-item">
+              <div class="col-md-3 product-column">Name</div>
+              <div class="col-md-9 product-info">
+                {{$product->product_name}}
+              </div>
+            </div>
+            <div class="row-item">
+              <div class="col-md-3 product-column">Category</div>
+              <div class="col-md-9 product-info">
+                @foreach($product->catalogs as $catalog)
+                <p>{{ $catalog->category_name }}</p>
+                @endforeach
+              </div>
+            </div>
+            <div class="row-item">
+              <div class="col-md-3 product-column">Inventory</div>
+              <div class="col-md-9 product-info">{{ $product->inventory}}</div>
+            </div>
+            <div class="row-item">
+              <div class="col-md-3 product-column">Unit Price</div>
+              <div class="col-md-9 product-info">
+                {{ formatPriceVND($product->price) }}
+              </div>
+            </div>
+            <div class="row-item">
+              <div class="col-md-3 product-column">Heathy</div>
+              <div class="col-md-9 product-info">
+                @foreach($product->heathyCatalogs as $heathyCatalog)
+                <p>{{ $heathyCatalog->heath_catalog }}</p>
+                @endforeach
+              </div>
+            </div>
+            <div class="row-item">
+              <div class="col-md-3 product-column">Description</div>
+              <div class="col-md-9 product-info">{{$product->describe}}</div>
+            </div>
+          </div>
         </div>
-        <div class="col-md-1">
-        
-        </div>
+
+      </div>
     </div>
-</div>
 
 <div id="updateDetail" class="container-fluid pt-4 px-4" style="display: none;">
     <div class="row pt-3">
