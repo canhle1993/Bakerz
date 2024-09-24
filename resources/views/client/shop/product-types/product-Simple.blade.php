@@ -47,7 +47,7 @@
                         <!-- Header Logo Start -->
                         <div class="header-logo">
                             <a href="{{ route('client.home')}}">
-                                <img class="white-logo" src="{{ asset('assets/images/banner-03.jpg') }}" width="1920" height="370" alt="Logo">
+                                <img class="white-logo" alt="Logo">
                             </a>
                         </div>
                         <!-- Header Logo End -->
@@ -168,7 +168,7 @@
         <!-- Search Start  -->
         <div class="search-popup position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-6 bg-black bg-opacity-75">
             <div class="search-popup__form position-relative">
-                <form action="{{ route('search') }}" method="GET">
+                <form action="" method="GET">
                     <input class="search-popup__field border-0 border-bottom bg-transparent text-white w-100 tra py-3" type="text" placeholder="Search…">
                     <button class="search-popup__icon text-white border-0 bg-transparent position-absolute top-50 end-0 translate-middle-y"><i class="lastudioicon-zoom-1"></i></button>
                 </form>
