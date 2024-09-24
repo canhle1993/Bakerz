@@ -50,7 +50,7 @@
                             @foreach($products as $product)
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-                                     <td>{{ $loop->iteration }}</td>
+                                     <td>{{ ($products->currentPage() - 1) * $products->perPage() + $loop->iteration }}</td>
                                     <td>
                                         <img src="{{ asset('storage/products/' . $product->image) }}" alt="Hình ảnh" width="100" class="mt-2">
                                     </td>

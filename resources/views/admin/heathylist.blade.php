@@ -57,7 +57,7 @@
                             </form>
                             @foreach($heathies as $heathy)
                             <tr id="row-{{ $heathy->heath_id }}">
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ ($heathies->currentPage() - 1) * $heathies->perPage() + $loop->iteration }}</td>
                                 <td id="name-cell-{{ $heathy->heath_id }}">{{ $heathy->heath_catalog }}</td>
                                 <td>
                                 <a href="javascript:void(0);" class="bi bi-pencil m-2"

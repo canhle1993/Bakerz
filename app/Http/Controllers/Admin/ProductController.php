@@ -19,6 +19,7 @@ class ProductController extends Controller
     {
         $products = Product::where('isdelete', '<>', 1)
                    ->orWhereNull('isdelete')
+                   ->orderBy('ModifiedDate', 'desc')  // Sắp xếp theo ngày cập nhật giảm dần
                    ->paginate(5);
         return view('admin.product_management', compact('products'));
     }
@@ -26,7 +27,11 @@ class ProductController extends Controller
     // Hiển thị form thêm sản phẩm mới
     public function create()
     {
-        $catalogs = Catalog::all();  // Lấy tất cả catalog
+        $catalogs = Catalog::query()
+        ->where(function ($query) {
+            $query->where('isdelete', '<>', 1)
+                ->orWhere('isdelete', null);
+        })->get();
         $heathys = HeathyCatalog::all();  // Lấy tất cả heathycase
         return view('admin.newproduct',compact('catalogs','heathys'));
     }
@@ -204,7 +209,11 @@ class ProductController extends Controller
         // Cập nhật liên kết catalog và heathy
         $product->catalogs()->sync($request->input('catalog', []));
         $product->heathyCatalogs()->sync($request->input('heathy', []));
-        $catalogs = Catalog::all();  // Lấy tất cả catalog
+        $catalogs = Catalog::query()
+        ->where(function ($query) {
+            $query->where('isdelete', '<>', 1)
+                ->orWhere('isdelete', null);
+        })->get();
         $heathys = HeathyCatalog::all();  // Lấy tất cả heathycase
         // Lưu các thay đổi
         $product->save();
@@ -230,7 +239,11 @@ class ProductController extends Controller
     public function showDetail($id)
     {
         $product = Product::with('catalogs')->find($id); // Lấy sản phẩm cùng với các catalog đã liên kết
-        $catalogs = Catalog::all();  // Lấy tất cả catalog
+        $catalogs = Catalog::query()
+        ->where(function ($query) {
+            $query->where('isdelete', '<>', 1)
+                ->orWhere('isdelete', null);
+        })->get();
         $heathys = HeathyCatalog::all();  // Lấy tất cả heathycase
         // Logic xử lý
         return view('admin.productdetail', compact('product','catalogs','heathys'));

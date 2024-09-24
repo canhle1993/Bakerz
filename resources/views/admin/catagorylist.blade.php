@@ -61,7 +61,7 @@
                             </form>
                             @foreach($catalogs as $catalog)
                             <tr id="row-{{ $catalog->category_id }}">
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ ($catalogs->currentPage() - 1) * $catalogs->perPage() + $loop->iteration }}</td>
                                 <td>
                                     <img src="{{ asset('storage/catalogs/' . $catalog->image) }}" alt="Hình ảnh" width="100" class="mt-2">
                                 </td>
