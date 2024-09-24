@@ -39,7 +39,7 @@ class LoginController extends Controller
                 ])->withInput($request->only('isdelete'));
             }
 
-            if ($user->role_id == 2 || $user->role_id == 3  ) {
+            if ($user->role_id == 2 || $user->role_id == 3 && $user->role_id != null) {
                 return redirect()->intended('/dashboard');
             } else {
                 return redirect()->intended('/');
