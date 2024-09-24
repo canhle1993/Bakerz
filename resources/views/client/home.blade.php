@@ -175,44 +175,37 @@
     <!-- Category Section End -->
 
     <!-- Testimonial Five Section Start -->
-    <div class="testimonial-five_bg section-padding-03">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="testimonial-five_inner">
-                        <blockquote class="testimonial-five_blockquote">"Savor the natural flavors, nurture your health every day!". We always bring our customers the best food for their health.</blockquote>
-                        <span class="testimonial-five_border"></span>
-                        <span class="testimonial-five_author">
-                            <button id="healthSuggestionBtn" style="margin-top: 0px !important;" class="slider-content__btn btn btn-primary btn-hover-black">
-                                Gợi ý món ăn theo sức khỏe
-                            </button>
-                        </span>
-                    </div>
+<div class="testimonial-five_bg section-padding-03">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="testimonial-five_inner">
+                    <blockquote class="testimonial-five_blockquote">"Savor the natural flavors, nurture your health every day!". We always bring our customers the best food for their health.</blockquote>
+                    <span class="testimonial-five_border"></span>
+                    <span class="testimonial-five_author">
+                        <button id="healthSuggestionBtn" style="margin-top: 0px !important;" class="slider-content__btn btn btn-primary btn-hover-black">
+                            Gợi ý món ăn theo sức khỏe
+                        </button>
+                    </span>
                 </div>
             </div>
         </div>
-        <div class="container mt-5">
-      <div id="healthForm" class="hidden-form mt-4 form-container" >
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                    <label for="heightInput" class="form-label">Input Height (cm):</label>
-                    <input width="100%" type="number" id="heightInput" min="0" maxlength="3" step="0.1" placeholder="Input Height (cm)" />
-            </div>
-            <div class="col-md-6 mb-3">
-                    <label for="weightInput" class="form-label">Input Weight (kg):</label>
-                    <input width="100%" type="number" id="weightInput" min="0" maxlength="3" step="0.1"placeholder="Input Weight (kg)" />
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <label for="weightInput" class="form-label">Chỉ số BMI:</label>
-                <h4><span id="bmiResult">No data available yet.</span></h4>
-            </div>
-                <div class="col-md-6">
-                    <form >
+    </div>
+    <div class="container mt-5">
+        <div id="healthForm" class="hidden-form mt-4 form-container" >
+            <form >
+                <div class="row">
+                    <div class="col-md-6 mb-3" style="float: right;">
+                        <label for="heightInput" class="form-label">Height (cm):</label>
+                        <input width="100%" type="number" id="heightInput" min="0" maxlength="3" step="0.1" placeholder="Input Height (cm)" />
+                        <label for="weightInput" class="form-label pt-5">Weight (kg):</label>
+                        <input width="100%" type="number" id="weightInput" min="0" maxlength="3" step="0.1"placeholder="Input Weight (kg)" />
+                        <label for="weightInput" class="form-label pt-5">BMI index:</label>
+                        <h4><span id="bmiResult">No data available yet.</span></h4>
+                    </div>
+                    <div class="col-md-6 mb-3">
                         <div class="mb-3">
-                            <label class="form-label">Chọn tình trạng sức khỏe:</label>
+                            <label class="form-label">Select health status:</label>
                             @foreach($heathyCatalogs as $catalog)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="heath_id[]" value="{{ $catalog->heath_id }}"
@@ -224,10 +217,16 @@
                             </div>
                             @endforeach
                         </div>
-                            <button type="submit" class="slider-content__btn btn btn-primary btn-hover-black">Filter</button>
-                    </form>
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center" style="margin-top: -5%;">
+                            <button type="submit" class="slider-content__btn btn btn-primary btn-hover-black">Filter</button>
+                        </div>   
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
         <div class="testimonial-five_shape01">
@@ -236,68 +235,64 @@
         <div class="testimonial-five_shape02">
             <img class="" src="assets/images/testimonial/testimonial-shape02.png" alt="Shape-Image">
         </div>
-    </div>
+</div>
     <!-- Testimonial Five Section End -->
 
 
 
 
 <div class="section-padding-01" >
-<div class="container" style="padding-bottom: 50px !important;">
+    <div class="container" style="padding-bottom: 50px !important;" >
     <!-- Section Title Strat -->
-    <div class="section-title text-center max-width-720 mx-auto">
-        <h2 class="section-title__title">Products suitable for your health</h2>
-        <p>Wish you the best experience</p>
-    </div>
+        <div class="section-title text-center max-width-720 mx-auto" >
+            <h2 class="section-title__title">Products suitable for your health</h2>
+            <p>Wish you the best experience</p>
+        </div>
     <!-- Section Title End -->
 
-    <div class="tab-content">
-        <div class="tab-pane fade show active" id="tab1">
-            <div id="productList" class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 mb-n50">
-            @if($products->isEmpty())
-                <p>No products found.</p>
-            @else
-                @foreach($products as $product)
-                <div class="col mb-50">
-                    <!-- Product Item Start -->
-                    <div class="product-item text-center">
-                        @if($product->price>10) <!-- TODO:CHEAT -->
-                        <div class="product-item__badge">Best Seller</div>
-                        @endif
-                        <div class="product-item__image border w-100">
-                            <a href="single-product.html"><img width="350" height="350" src="{{ asset('storage/products/' . $product->image) }}" alt="Product"></a>
-                            <ul class="product-item__meta">
-                                <li class="product-item__meta-action">
-                                    <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                </li>
-                                <li class="product-item__meta-action">
-                                    <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                </li>
-                                <li class="product-item__meta-action">
-                                    <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                </li>
-                                <li class="product-item__meta-action">
-                                    <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                </li>
-                            </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="tab1">
+                <div id="productList" class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 mb-n50" >
+                @if($products->isEmpty())
+                    <p>No products found.</p>
+                @else
+                    @foreach($products as $product)
+                    <div class="col mb-50">
+                        <!-- Product Item Start -->
+                        <div class="product-item text-center">
+                            @if($product->price>10) <!-- TODO:CHEAT -->
+                            <div class="product-item__badge">Best Seller</div>
+                            @endif
+                            <div class="product-item__image border w-100">
+                                <a href="single-product.html"><img width="350" height="350" src="{{ asset('storage/products/' . $product->image) }}" alt="Product"></a>
+                                <ul class="product-item__meta">
+                                    <li class="product-item__meta-action">
+                                        <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
+                                    </li>
+                                    <li class="product-item__meta-action">
+                                        <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
+                                    </li>
+                                    <li class="product-item__meta-action">
+                                        <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
+                                    </li>
+                                    <li class="product-item__meta-action">
+                                        <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product-item__content pt-5">
+                                <h5 class="product-item__title"><a href="single-product.html">{{ $product->product_name }}</a></h5>
+                                <span class="product-item__price">{{ formatPriceVND($product->price) }}</span>
+                            </div>
                         </div>
-                        <div class="product-item__content pt-5">
-                            <h5 class="product-item__title"><a href="single-product.html">{{ $product->product_name }}</a></h5>
-                            <span class="product-item__price">{{ formatPriceVND($product->price) }}</span>
-                        </div>
+                        <!-- Product Item End -->
                     </div>
-                    <!-- Product Item End -->
+                    @endforeach
+                @endif
                 </div>
-                @endforeach
-            @endif
-
             </div>
         </div>
-
-    </div>
-
 </div>
-
 
 
     <!-- Product Section Strat -->
