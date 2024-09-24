@@ -164,15 +164,8 @@ use App\Http\Controllers\Admin\CategoryController;
 
 Route::resource('catalog', CategoryController::class);
 
-
-//Show thông tin sản phẩm khi người dùng bấm quick view
-Route::get('/quickview', [ProductController::class, 'quickView'])->name('quickview');
-
-use App\Http\Controllers\Admin\CartController;
-//Thêm sản phẩm vào cart - xóa sản phẩm
-Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
-Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+//route cho heathy trang admin
+use App\Http\Controllers\Admin\HeathyController;
 
 Route::resource('heathy', HeathyController::class);
 
