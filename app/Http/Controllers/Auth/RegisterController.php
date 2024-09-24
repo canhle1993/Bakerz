@@ -32,7 +32,7 @@ class RegisterController extends Controller
         try {
             // Create the user
             $user = $this->create($request->all());
-            
+
             $data = [
                 'title' => 'Đây là tiêu đề của email',
                 'message' => 'Nội dung của email được gửi từ Laravel',
@@ -48,7 +48,7 @@ class RegisterController extends Controller
             Mail::to($user->email)->send(new RegisterEmail($data));
 
         } catch (Exception $e) {
-            
+
             return back()->withErrors([
                 'email' => 'duplicate emails.',
             ])->withInput($request->only('email'));
@@ -64,7 +64,7 @@ class RegisterController extends Controller
         } else {
             return redirect()->intended('/');
         }
-    
+
     }
 
     // Validate the incoming request data
@@ -97,9 +97,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-
             'phone' => $data['phone'],
             'address' => $data['address'],
+            'role_id' => 1, // Gán mặc định role_id là 1 cho client đăng ký nha ( nếu không bị xung đột code)
         ]);
     }
     public function showGetPasswordForm()
