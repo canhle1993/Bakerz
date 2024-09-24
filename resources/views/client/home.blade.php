@@ -34,6 +34,9 @@
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
     <style>
+        body{
+            background-color: #FFFFFF !important;
+        }
       .hidden-form {
         display: none;
       }
