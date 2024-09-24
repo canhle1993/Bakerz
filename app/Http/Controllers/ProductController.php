@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Catalog;
 use App\Models\Product;
 use App\Models\HeathyCatalog;
 use Illuminate\Http\Request;
@@ -15,17 +16,21 @@ class ProductController extends Controller
         $heathyCatalogs = HeathyCatalog::all();
 
         // Lọc danh sách sản phẩm theo danh mục sức khỏe đã chọn
-        $products = Product::whereHas('heathyCatalogs', function ($query) use ($request) {
-            if ($request->has('heath_id')) {
-                // Lọc các sản phẩm có liên kết với tất cả các danh mục sức khỏe đã chọn
-                $heathIds = $request->heath_id;
-
-                // Điều kiện AND: mỗi sản phẩm phải có đầy đủ các heath_id
-                $query->whereIn('link_product_heathy.heath_id', $heathIds)
-                      ->groupBy('product_id')
-                      ->havingRaw('COUNT(DISTINCT link_product_heathy.heath_id) = ?', [count($heathIds)]);
-            }
-        })->get();
+        $products = Product::where(function ($q) {
+            // Điều kiện lọc các sản phẩm chưa bị xóa (isdelete <> 1 hoặc isdelete là null)
+            $q->where('isdelete', '<>', 1)
+              ->orWhereNull('isdelete');
+            })->whereHas('heathyCatalogs', function ($query) use ($request) {
+                // Nếu có yêu cầu lọc theo heath_id
+                if ($request->has('heath_id')) {
+                    $heathIds = $request->heath_id;
+            
+                    // Điều kiện AND: mỗi sản phẩm phải có đầy đủ các heath_id
+                    $query->whereIn('link_product_heathy.heath_id', $heathIds)
+                          ->groupBy('product_id')
+                          ->havingRaw('COUNT(DISTINCT link_product_heathy.heath_id) = ?', [count($heathIds)]);
+                }
+            })->get();
 
 
         // Trả về toàn bộ trang 'client.heathyfilter'
@@ -33,28 +38,7 @@ class ProductController extends Controller
     }
 
 
-    //Hiển thị toàn bộ sản phẩm, phân trang, lọc giá
-    // public function all_product(Request $request)
-    // {
-    //     // Lấy giá trị sắp xếp từ request, mặc định là 'price-ascending'
-    //     $sort = $request->get('sort', 'price-ascending');
-
-    //     // Lấy 10 sản phẩm mỗi trang, sắp xếp theo yêu cầu
-    //     $products = Product::query();
-
-    //     if ($sort == 'price-ascending') {
-    //         $products->orderBy('price', 'asc');
-    //     } elseif ($sort == 'price-descending') {
-    //         $products->orderBy('price', 'desc');
-    //     }
-
-    //     // Phân trang 10 sản phẩm
-    //     $products = $products->paginate(10);
-
-    //     // Trả về view và truyền dữ liệu sản phẩm
-    //     return view('client.shop.shop_all', ['products' => $products]);
-    // }
-    public function all_product(Request $request)
+        public function all_product(Request $request)
     {
         // Lấy giá trị sắp xếp từ request, mặc định là 'price-ascending'
         $sort = $request->get('sort', 'price-ascending');
@@ -68,6 +52,11 @@ class ProductController extends Controller
         // Khởi tạo query cho sản phẩm
         $products = Product::query();
 
+        $products->where(function ($query) {
+            $query->where('isdelete', '<>', 1)
+                  ->orWhereNull('isdelete');
+        });
+        
         // Kiểm tra nếu có từ khóa tìm kiếm
         if ($query) {
             // Tìm kiếm sản phẩm theo tên chứa từ khóa
@@ -76,8 +65,10 @@ class ProductController extends Controller
 
         // Kiểm tra nếu có lọc theo danh mục
         if ($categoryId) {
-            $products->join('linkcatalogproduct', 'product.product_id', '=', 'linkcatalogproduct.product_id')
-                    ->where('linkcatalogproduct.category_id', $categoryId);
+            $products->whereHas('catalogs', function ($query) use ($categoryId) {
+                // Sử dụng đúng tên bảng liên kết là linkcatalogproduct
+                $query->where('linkcatalogproduct.category_id', $categoryId);
+            });
         }
 
         // Sắp xếp theo giá
@@ -91,7 +82,13 @@ class ProductController extends Controller
         $products = $products->paginate(10)->appends(['query' => $query, 'sort' => $sort, 'category_id' => $categoryId]);
 
         // Lấy danh sách tất cả các danh mục
-        $categories = Category::all();
+        $categories = Catalog::query()
+        ->where(function ($query) {
+            $query->where('isdelete', '<>', 1)
+                ->orWhere('isdelete', null);
+        })
+        ->get();
+
 
         // Trả về view với danh sách sản phẩm, danh mục và từ khóa tìm kiếm (nếu có)
         return view('client.shop.shop_all', ['products' => $products, 'categories' => $categories, 'query' => $query]);
@@ -122,4 +119,10 @@ class ProductController extends Controller
         return view('client.shop.shop_all', compact('products', 'categories'));
     }
 
+    public function showdetail($id){
+        $product = Product::findOrFail($id);
+
+
+        return view('client/shop/product-types/single-product', compact('product'));
+    }
 }

@@ -62,11 +62,11 @@
                 <div class="navbar-nav w-100">
                     <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle {{ (Request::is('product*') || Request::is('catalog*')) ? 'active' : '' }} " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
-                        <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('product*') || Request::is('catalog*')) ? 'show' : '' }}">
+                        <a href="#" class="nav-link dropdown-toggle {{ (Request::is('product*') || Request::is('catalog*') || Request::is('heathy*')) ? 'active' : '' }} " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
+                        <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('product*') || Request::is('catalog*') || Request::is('heathy*')) ? 'show' : '' }}">
                             <a href="{{ route('product.index') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('product.index') ? 'active' : '' }}">&nbsp;&nbsp;Product Management</a>
                             <a href="{{ route('catalog.index') }}" class="bi-tag m-2 dropdown-item {{ Request::routeIs('catalog.index') ? 'active' : '' }}">&nbsp;&nbsp;Catagory</a>
-                            <a href="element.html" class="m-2 dropdown-item">💞&nbsp;&nbsp;Heathy Type</a>
+                            <a href="{{ route('heathy.index') }}" class="m-2 dropdown-item {{ Request::routeIs('heathy.index') ? 'active' : '' }}">💞&nbsp;&nbsp;Heathy Type</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
@@ -74,7 +74,12 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Management</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{route('manage-client')}}" class="dropdown-item">Client</a>
-                            <a href="{{route('manage-admin')}}" class="dropdown-item">Admin</a>
+
+                            @if(Auth::user()->role_id == 3)
+                            <!-- Chỉ hiển thị phần quản lý Admin nếu user là Manager -->
+                            <a href="{{ route('manage-admin') }}" class="dropdown-item">Admin</a>
+                        @endif
+
                             <a href="{{route('manage-blacklist')}}" class="dropdown-item">Blacklist</a>
                         </div>
                     </div>
@@ -92,7 +97,7 @@
                     <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
                     <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                    
+
 
                 </div>
             </nav>

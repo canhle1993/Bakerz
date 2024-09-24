@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 // Routes cho chức năng đăng ký
 use App\Http\Controllers\Auth\RegisterController;
+
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/getpassword', [RegisterController::class, 'showGetPasswordForm'])->name('auth.getpass');
@@ -15,9 +17,13 @@ Route::post('/change-password', [RegisterController::class, 'changepass'])->name
 
 // Route cho client
 use App\Http\Controllers\ClientController;
+
 Route::get('/', [ClientController::class, 'home'])->name('client.home');
+Route::get('/filter', [ClientController::class, 'filter'])->name('client.filter');
 Route::get('/client/profile/user/{userid}', [ClientController::class, 'profile'])->name('client.profile');
+
 use App\Http\Controllers\ProductController;
+
 Route::get('/client/heathyfilter', [ProductController::class, 'filter'])->name('client.heathyfilter');
 
 
@@ -31,6 +37,7 @@ Route::get('/shop/category/{category_id}', [ProductController::class, 'filterByC
 
 // Route cho logout
 use Illuminate\Support\Facades\Auth;
+
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
@@ -48,10 +55,12 @@ Route::post('/profile/update', [UserController::class, 'update'])->name('profile
 // dashboard
 // dashboard
 use App\Http\Controllers\Admin\DashboardController;
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 // Route quản lý Client
 use App\Http\Controllers\Admin\ManageClientController;
+
 Route::get('/admin/manage/client', [ManageClientController::class, 'index'])->name('manage-client');
 Route::get('/admin/manage/client/create', [ManageClientController::class, 'create'])->name('client.create');
 Route::post('/admin/manage/client/store', [ManageClientController::class, 'store'])->name('client.store');
@@ -63,6 +72,7 @@ Route::post('/admin/manage/blacklist/{id}/restore', [ManageClientController::cla
 
 // Route quản lý Admin
 use App\Http\Controllers\Admin\ManageAdminController;
+
 Route::get('/admin/manage/admin', [ManageAdminController::class, 'index'])->name('manage-admin');
 Route::get('/admin/manage/admin/create', [ManageAdminController::class, 'create'])->name('admin.create');
 Route::post('/admin/manage/admin/store', [ManageAdminController::class, 'store'])->name('admin.store');
@@ -70,24 +80,8 @@ Route::get('/admin/manage/admin/{id}/edit', [ManageAdminController::class, 'edit
 Route::post('/admin/manage/admin/{id}', [ManageAdminController::class, 'update'])->name('admin.update');
 Route::delete('/admin/manage/admin/{id}', [ManageAdminController::class, 'destroy'])->name('admin.destroy');
 Route::post('/admin/manage/lower-to-client/{id}', [ManageAdminController::class, 'lowerToClient'])->name('admin.lower_to_client');
+Route::post('/admin/manage/update-to-admin/{id}', [ManageAdminController::class, 'Upgradetoadmin'])->name('admin.update_to_admin');
 
-// // Route quản lý Client
-// use App\Http\Controllers\Admin\ManageClientController;
-// Route::get('/admin/manage/client', [ManageClientController::class, 'index'])->name('manage-client');
-// Route::get('/admin/manage/client/create', [ManageClientController::class, 'create'])->name('client.create');
-// Route::post('/admin/manage/client/store', [ManageClientController::class, 'store'])->name('client.store');
-// Route::get('/admin/manage/client/{id}/edit', [ManageClientController::class, 'edit'])->name('client.edit');
-// Route::post('/admin/manage/client/{id}', [ManageClientController::class, 'update'])->name('client.update');
-// Route::delete('/admin/manage/client/{id}', [ManageClientController::class, 'destroy'])->name('client.destroy');
-
-// // Route quản lý Admin
-// use App\Http\Controllers\Admin\ManageAdminController;
-// Route::get('/admin/manage/admin', [ManageAdminController::class, 'index'])->name('manage-admin');
-// Route::get('/admin/manage/admin/create', [ManageAdminController::class, 'create'])->name('admin.create');
-// Route::post('/admin/manage/admin/store', [ManageAdminController::class, 'store'])->name('admin.store');
-// Route::get('/admin/manage/admin/{id}/edit', [ManageAdminController::class, 'edit'])->name('admin.edit');
-// Route::post('/admin/manage/admin/{id}', [ManageAdminController::class, 'update'])->name('admin.update');
-// Route::delete('/admin/manage/admin/{id}', [ManageAdminController::class, 'destroy'])->name('admin.destroy');
 
 // Route cho client shop product types
 Route::get('/shop_all', [ProductController::class, 'all_product'])->name('shop_all');
@@ -167,6 +161,7 @@ Route::delete('/product/{product}/delete', [AdminProductController::class, 'dest
 
 //route cho catalog trang admin
 use App\Http\Controllers\Admin\CategoryController;
+
 Route::resource('catalog', CategoryController::class);
 
 
@@ -179,3 +174,4 @@ Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 
+Route::resource('heathy', HeathyController::class);

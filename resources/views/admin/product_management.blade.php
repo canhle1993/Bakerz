@@ -50,7 +50,7 @@
                             @foreach($products as $product)
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-                                     <td>{{ $loop->iteration }}</td>
+                                     <td>{{ ($products->currentPage() - 1) * $products->perPage() + $loop->iteration }}</td>
                                     <td>
                                         <img src="{{ asset('storage/products/' . $product->image) }}" alt="Hình ảnh" width="100" class="mt-2">
                                     </td>
@@ -101,22 +101,20 @@
             </div>
             </div>
 
-<<<<<<< HEAD
-    @endsection
-=======
-<script>
-
+            <script>
+                
     function showDeleteModal(element) {
         // Lấy giá trị URL từ thuộc tính data-url
         var actionUrl = element.getAttribute('data-url');
-
+        
         // Gán action URL cho form xóa trong modal
         document.getElementById('deleteForm').action = actionUrl;
-
+        
         // Hiển thị modal
         var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         deleteModal.show();
     }
 </script>
 
->>>>>>> origin/master
+
+@endsection

@@ -15,6 +15,9 @@ class HeathyCatalog extends Model
     public $timestamps = true;
     const CREATED_AT = 'CreatedDate';
     const UPDATED_AT = 'ModifiedDate';
+
+    protected $fillable = ['heath_catalog','isdelete','image','CreatedBy','ModifiedBy'];
+
     // Liên kết nhiều với Product thông qua bảng trung gian link_product_heathy
     public function products()
     {
