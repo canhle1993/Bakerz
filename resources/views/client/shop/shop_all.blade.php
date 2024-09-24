@@ -133,6 +133,7 @@
                             <div class="sidebars_widget">
                                 <h3 class="sidebars_widget__title">Category</h3>
                                 <ul class="sidebars_widget__category">
+                                <li><a href="{{ route('shop_all')}}">All Product</a></li>
                                     @foreach($categories as $category)
                                         <li><a href="{{ route('shop_all', ['category_id' => $category->category_id]) }}">{{ $category->category_name }}</a></li>
                                     @endforeach

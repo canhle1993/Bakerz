@@ -222,7 +222,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="d-flex justify-content-center" style="margin-top: -5%;">
-                            <button type="submit" class="slider-content__btn btn btn-primary btn-hover-black">Filter</button>
+                            <button id="btnFilter" type="submit" class="slider-content__btn btn btn-primary btn-hover-black">Filter</button>
                         </div>   
                     </div>
                 </div>
@@ -241,7 +241,7 @@
 
 
 
-<div class="section-padding-01" >
+<div class="section-padding-01" id="a1" >
     <div class="container" style="padding-bottom: 50px !important;" >
     <!-- Section Title Strat -->
         <div class="section-title text-center max-width-720 mx-auto" >
@@ -1353,6 +1353,20 @@
 
     $('#weightInput').on('keydown', function(event) {
         handleKeyDown.call(this, event, 500); // Giới hạn cân nặng tối đa là 500 kg
+    });
+
+    document.getElementById('btnFilter').addEventListener('click', function() {
+        sessionStorage.setItem('scrollToA1', 'true');
+    });
+    
+    window.addEventListener('load', function() {
+        if (sessionStorage.getItem('scrollToA1') === 'true') {
+            document.getElementById('a1').scrollIntoView({
+                behavior: 'smooth'
+            });
+            // Xóa cờ sau khi đã cuộn xong để không lặp lại trong lần tải sau
+            sessionStorage.removeItem('scrollToA1');
+        }
     });
     </script>
 </body>

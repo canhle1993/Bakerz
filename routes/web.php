@@ -168,3 +168,11 @@ Route::resource('catalog', CategoryController::class);
 use App\Http\Controllers\Admin\HeathyController;
 
 Route::resource('heathy', HeathyController::class);
+
+//route cho discount trang admin
+use App\Http\Controllers\Admin\DiscountController;
+
+Route::resource('discount', DiscountController::class);
+Route::get('/discount/{discount}/setup', [DiscountController::class, 'setup'])->name('discount.setup');
+Route::get('/discount/updatesaleoff/{product_id}/{id}', [DiscountController::class, 'update_discount'])->name('discount.update_discount');
+Route::delete('/discount/deletealeoff/{product_id}/{id}', [DiscountController::class, 'destroy_discount'])->name('discount.destroy_discount');
