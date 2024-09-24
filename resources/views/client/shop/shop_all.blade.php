@@ -92,11 +92,12 @@
                                                        title="Quick View"
                                                        data-bs-toggle="modal"
                                                        data-bs-target="#exampleProductModal"
-                                                       onclick="loadQuickView({{ $product->product_id }})">
+                                                       data-id="{{ $product->product_id }}"
+                                                       onclick="loadQuickView(this)">
                                                     </a>
                                                 </li>
                                                 <li class="product-item__meta-action">
-                                                    <a class="labtn-icon-cart" href="javascript:void(0);" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to cart" onclick="addToCart({{ $product->product_id }})"></a>
+                                                    <a class="labtn-icon-cart" href="javascript:void(0);" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to cart" onclick="addToCart(this)" data-id="{{ $product->product_id }}"></a>
                                                 </li>
                                                 <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
                                                 <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
@@ -438,7 +439,8 @@
 
     {{-- Script để xử lý quick view --}}
     <script>
-        function loadQuickView(productId) {
+        function loadQuickView(element) {
+            var productId = element.getAttribute('data-id');
             $.ajax({
                 url: "{{ route('quickview') }}", // Route sẽ xử lý yêu cầu
                 method: 'GET',
@@ -464,7 +466,8 @@
 
     {{-- Script thêm sản phẩm vào giỏ hàng --}}
     <script>
-        function addToCart(productId) {
+        function addToCart(element) {
+            var productId = element.getAttribute("data-id");
             $.ajax({
                 url: "{{ route('cart.add') }}",
                 method: "POST",
@@ -510,7 +513,8 @@
 
     {{-- Script thêm sản phẩm vào giỏ hàng --}}
     <script>
-        function addToCart(productId) {
+        function addToCart(element) {
+            var productId = element.getAttribute("data-id");
             $.ajax({
                 url: "{{ route('cart.add') }}",
                 method: "POST",
