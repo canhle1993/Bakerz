@@ -69,7 +69,7 @@ class ProductController extends Controller
         if ($request->hasFile('image_1')) {
             $file = $request->file('image_1');
             $filename = time() . '_1.' . $file->getClientOriginalExtension();
-            $request->image_1->storeAs('products', $filename, 'public');   
+            $request->image_1->storeAs('products', $filename, 'public');
             // Lưu tên ảnh vào bảng product_image
             ProductImage::create([
                 'product_id' => $product->product_id,
@@ -86,8 +86,8 @@ class ProductController extends Controller
             }
             $file = $request->file('image_2');
             $filename = time() . '_2.' . $file->getClientOriginalExtension();
-            $request->image_2->storeAs('products', $filename, 'public');   
-            
+            $request->image_2->storeAs('products', $filename, 'public');
+
             // Lưu tên ảnh vào bảng product_image
             ProductImage::create([
                 'product_id' => $product->product_id,
@@ -103,7 +103,7 @@ class ProductController extends Controller
             }
             $file = $request->file('image_3');
             $filename = time() . '_3.' . $file->getClientOriginalExtension();
-            $request->image_3->storeAs('products', $filename, 'public');   
+            $request->image_3->storeAs('products', $filename, 'public');
             // Lưu tên ảnh vào bảng product_image
             ProductImage::create([
                 'product_id' => $product->product_id,
@@ -158,7 +158,7 @@ class ProductController extends Controller
             }
             $file = $request->file('image_1');
             $filename = time() . '_1.' . $file->getClientOriginalExtension();
-            $request->image_1->storeAs('products', $filename, 'public');   
+            $request->image_1->storeAs('products', $filename, 'public');
             // Lưu tên ảnh vào bảng product_image
             ProductImage::create([
                 'product_id' => $id,
@@ -175,8 +175,8 @@ class ProductController extends Controller
             }
             $file = $request->file('image_2');
             $filename = time() . '_2.' . $file->getClientOriginalExtension();
-            $request->image_2->storeAs('products', $filename, 'public');   
-            
+            $request->image_2->storeAs('products', $filename, 'public');
+
             // Lưu tên ảnh vào bảng product_image
             ProductImage::create([
                 'product_id' => $id,
@@ -192,7 +192,7 @@ class ProductController extends Controller
             }
             $file = $request->file('image_3');
             $filename = time() . '_3.' . $file->getClientOriginalExtension();
-            $request->image_3->storeAs('products', $filename, 'public');   
+            $request->image_3->storeAs('products', $filename, 'public');
             // Lưu tên ảnh vào bảng product_image
             ProductImage::create([
                 'product_id' => $id,
@@ -235,4 +235,26 @@ class ProductController extends Controller
         // Logic xử lý
         return view('admin.productdetail', compact('product','catalogs','heathys'));
     }
+
+
+    //Khi người dùng bấm quick view thì show thông tin sản phẩm mà không cần reload
+    public function quickView(Request $request)
+    {
+        $productId = $request->get('product_id');
+
+        // Lấy thông tin sản phẩm
+        $product = Product::with('images', 'catalogs')->findOrFail($productId);
+
+        // Chuẩn bị dữ liệu gửi về cho AJAX
+        $data = [
+            'product_name' => $product->product_name,
+            'price' => $product->price,
+            'describe' => $product->describe,
+            'category_name' => $product->catalogs->pluck('category_name')->first(), // Lấy category đầu tiên
+            'images' => $product->images->pluck('image'), // Lấy tất cả các hình ảnh liên quan đến sản phẩm
+        ];
+
+        return response()->json($data);
+    }
+
 }
