@@ -140,4 +140,13 @@ class ManageAdminController extends Controller
 
         return redirect()->route('manage-admin')->with('success', 'Admin role lowered to client successfully');
     }
+
+    public function Upgradetoadmin($id)
+    {
+        $client = User::findOrFail($id);
+        $client->update([
+            'role_id' => 2 // Nâng quyền lên Admin
+        ]);
+        return redirect()->route('manage-admin')->with('success', 'Client role updated to Admin successfully');
+    }
 }
