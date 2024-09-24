@@ -41,17 +41,7 @@
     <!-- Breadcrumb Section Start -->
     <div class="breadcrumb" data-bg-image="assets/images/bg/breadcrumb-bg.jpg">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb_content">
-                        <h1 class="breadcrumb_title">Shop</h1>
-                        <ul class="breadcrumb_list">
-                            <li><a href="index.html">Home</a></li>
-                            <li>Shop Left Sidebar</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
     <!-- Breadcrumb Section End -->
@@ -95,8 +85,22 @@
                                     <!-- Product Item Start -->
                                     <div class="product-item text-center">
                                         <div class="product-item__image border w-100">
-                                            
-                                            <a href="#"><img width="350" height="350" src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}"></a>
+                                            <a href="single-product.html"><img width="350" height="350" src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}"></a>
+                                            <ul class="product-item__meta meta-middle">
+                                                <li class="product-item__meta-action">
+                                                    <a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top"
+                                                       title="Quick View"
+                                                       data-bs-toggle="modal"
+                                                       data-bs-target="#exampleProductModal"
+                                                       onclick="loadQuickView({{ $product->product_id }})">
+                                                    </a>
+                                                </li>
+                                                <li class="product-item__meta-action">
+                                                    <a class="labtn-icon-cart" href="javascript:void(0);" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to cart" onclick="addToCart({{ $product->product_id }})"></a>
+                                                </li>
+                                                <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                                                <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
+                                            </ul>
                                         </div>
                                         <div class="product-item__content pt-5">
                                             <h5 class="product-item__title"><a href="#">{{ $product->product_name }}</a></h5>
@@ -431,6 +435,57 @@
         </div>
     </div>
 
+    {{-- Script để xử lý quick view --}}
+    <script>
+        function loadQuickView(productId) {
+            $.ajax({
+                url: "{{ route('quickview') }}", // Route sẽ xử lý yêu cầu
+                method: 'GET',
+                data: { product_id: productId },
+                success: function(data) {
+                    // Populate modal with product data
+                    $('#exampleProductModal .product-head-price').text(data.price + " $");
+                    $('#exampleProductModal .desc-content').text(data.describe);
+                    $('#exampleProductModal .product-summery .product-meta .product-meta-detail').text(data.category_name);
+
+                    // Cập nhật ảnh trong modal
+                    let imageContainer = $('#exampleProductModal .single-product-vertical-tab .swiper-wrapper');
+                    imageContainer.empty();
+                    data.images.forEach(function(image) {
+                        imageContainer.append('<a class="swiper-slide h-auto" href="#"><img class="w-100" src="/storage/products/' + image + '" alt="Product"></a>');
+                    });
+
+                    $('#exampleProductModal').modal('show'); // Show the modal
+                }
+            });
+        }
+    </script>
+
+    {{-- Script thêm sản phẩm vào giỏ hàng --}}
+    <script>
+        function addToCart(productId) {
+            $.ajax({
+                url: "{{ route('cart.add') }}",
+                method: "POST",
+                // Đặt đoạn mã này ở đây
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    product_id: productId
+                },
+                success: function(response) {
+                    alert(response.message);
+                    // Cập nhật biểu tượng giỏ hàng nếu cần
+                },
+                error: function(response) {
+                    alert('Failed to add product to cart');
+                }
+            });
+        }
+    </script>
+
+
+
+
     <!-- JS Vendor, Plugins & Activation Script Files -->
 
     <!-- Vendors JS -->
@@ -450,6 +505,31 @@
 
     <!-- Activation JS -->
     <script src="./assets/js/main.js"></script>
+
+
+    {{-- Script thêm sản phẩm vào giỏ hàng --}}
+    <script>
+        function addToCart(productId) {
+            $.ajax({
+                url: "{{ route('cart.add') }}",
+                method: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    product_id: productId
+                },
+                success: function(response) {
+                    alert(response.message);
+                    // Cập nhật biểu tượng giỏ hàng nếu cần
+                },
+                error: function(xhr) {
+                    // Xử lý lỗi bằng console.log
+                    console.log('Error Status:', xhr.status);
+                    console.log('Error Response:', xhr.responseText);
+                    alert('Failed to add product to cart');
+                }
+            });
+        }
+    </script>
 
 </body>
 
