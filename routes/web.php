@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -184,4 +185,11 @@ use App\Http\Controllers\Admin\CartController;
 //Thêm sản phẩm vào cart - xóa sản phẩm
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+<<<<<<< HEAD
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+=======
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+
+Route::resource('heathy', HeathyController::class);
+
+>>>>>>> quanguyen/QuaNguyen
