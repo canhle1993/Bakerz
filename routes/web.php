@@ -26,7 +26,6 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/client/heathyfilter', [ProductController::class, 'filter'])->name('client.heathyfilter');
 
-
 //Route cho client tìm kiếm thông tin sản phẩm
 Route::get('/search', [ProductController::class, 'search'])->name('product_search');
 
@@ -82,9 +81,22 @@ Route::delete('/admin/manage/admin/{id}', [ManageAdminController::class, 'destro
 Route::post('/admin/manage/lower-to-client/{id}', [ManageAdminController::class, 'lowerToClient'])->name('admin.lower_to_client');
 Route::post('/admin/manage/update-to-admin/{id}', [ManageAdminController::class, 'Upgradetoadmin'])->name('admin.update_to_admin');
 
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-// Route cho client shop product types
+
+// Route cho Product và Other
 Route::get('/shop_all', [ProductController::class, 'all_product'])->name('shop_all');
+Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'])->name('product.single');
+Route::get('shop/category/{category_id}', [ProductController::class, 'filterByCategory'])->name('shop.filterByCategory');
+Route::get('product/details/{id}', [ProductController::class, 'getProductDetails'])->name('product.details');
+
+
+
+
+
+
+
+
 Route::get('/product-simple', function () {
     return view('client.shop.product-types.product-simple');
 })->name('product-simple');
