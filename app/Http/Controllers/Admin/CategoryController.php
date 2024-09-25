@@ -10,14 +10,21 @@ use Illuminate\Support\Facades\Auth;
 class CategoryController extends Controller
 {
     // Hiển thị danh sách các category
-    public function index()
+    public function index(Request $request)
     {
-        $catalogs = Catalog::where('isdelete', '<>', 1)
-                   ->orWhereNull('isdelete')
-                   ->orderBy('ModifiedDate', 'desc')  // Sắp xếp theo ngày cập nhật giảm dần
-                   ->paginate(5);
+        $query = Catalog::where('isdelete', '<>', 1)
+                        ->orWhereNull('isdelete');
+
+        // Nếu có tham số tìm kiếm
+        if ($request->has('search')) {
+            $query->where('category_name', 'like', '%' . $request->search . '%');
+        }
+
+        $catalogs = $query->orderBy('ModifiedDate', 'desc')->paginate(5);
+
         return view('admin.catagorylist', compact('catalogs'));
     }
+
 
     public function store(Request $request)
     {

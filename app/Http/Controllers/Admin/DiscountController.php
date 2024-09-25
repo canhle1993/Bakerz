@@ -10,14 +10,21 @@ use Illuminate\Support\Facades\Auth;
 
 class DiscountController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $discounts = Discount::where('isdelete', '<>', 1)
-                   ->orWhereNull('isdelete')
-                   ->orderBy('ModifiedDate', 'desc')  // Sắp xếp theo ngày cập nhật giảm dần
-                   ->paginate(5);
+        $query = Discount::where('isdelete', '<>', 1)
+                        ->orWhereNull('isdelete');
+
+        // Nếu có tham số tìm kiếm
+        if ($request->has('search')) {
+            $query->where('promotion_name', 'like', '%' . $request->search . '%');
+        }
+
+        $discounts = $query->orderBy('ModifiedDate', 'desc')->paginate(5);
+
         return view('admin.discountlist', compact('discounts'));
     }
+
 
     
     public function store(Request $request)
@@ -78,32 +85,41 @@ class DiscountController extends Controller
         return redirect()->route('discount.index')->with('success', 'Product added successfully');
     }
 
-    public function setup($id)
+    public function setup($id, Request $request)
     {
-        $products = Product::query()
-        ->where(function ($query) {
-            $query->where('isdelete', '<>', 1)
-                ->orWhereNull('isdelete');
-        })
-        ->whereDoesntHave('discounts', function ($query) use ($id) {
-            $query->where('discountproduct.discount_id', $id); // Sử dụng discountproduct để tránh lỗi mơ hồ
-        })
-        ->orderBy('ModifiedDate', 'desc')  // Sắp xếp theo ngày cập nhật giảm dần
-        ->paginate(5);  // Phân trang, 5 sản phẩm mỗi trang
+        // Thêm tìm kiếm theo tên sản phẩm
+        $query = Product::query()
+            ->where(function ($query) {
+                $query->where('isdelete', '<>', 1)
+                    ->orWhereNull('isdelete');
+            })
+            ->whereDoesntHave('discounts', function ($query) use ($id) {
+                $query->where('discountproduct.discount_id', $id);
+            });
 
+        // Nếu có tham số tìm kiếm
+        if ($request->has('search')) {
+            $query->where('product_name', 'like', '%' . $request->search . '%');
+        }
+
+        $products = $query->orderBy('ModifiedDate', 'desc')->paginate(5);
+
+        // Lấy danh sách sản phẩm đã có discount
         $prodiscounts = Product::query()
-        ->where(function ($query) {
-            $query->where('isdelete', '<>', 1)
-                  ->orWhereNull('isdelete');
-        })
-        ->whereHas('discounts', function ($query) use ($id) {
-            $query->where('discountproduct.discount_id', $id); // Cần chỉ rõ bảng discountproduct
-        })
-        ->get();
+            ->where(function ($query) {
+                $query->where('isdelete', '<>', 1)
+                    ->orWhereNull('isdelete');
+            })
+            ->whereHas('discounts', function ($query) use ($id) {
+                $query->where('discountproduct.discount_id', $id);
+            })
+            ->get();
+
         $discount = Discount::findOrFail($id);
 
-        return view('admin.discountsetup', compact('prodiscounts', 'products','id','discount'));
+        return view('admin.discountsetup', compact('prodiscounts', 'products', 'id', 'discount'));
     }
+
 
 
     public function update_discount($productid, $discountid)

@@ -32,7 +32,18 @@
                 <div class="col-9">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h4 class="mb-0">Promotion: <b>{{ $discount->promotion_name }} (discount {{ $discount->discount * 100}}%) </b></h4>
+                        <h4 class="mb-0"><b>{{ $discount->promotion_name }} (discount {{ $discount->discount * 100}}%) </b></h4>
+                        <!-- Thêm form tìm kiếm -->
+                        <form class="d-none d-md-flex ms-4" method="GET" action="{{ route('discount.setup', $id) }}">
+                            <input class="form-control bg-dark border-0" type="search" placeholder="Product name" name="search" value="{{ request()->query('search') }}">
+                            <button type="submit" class="btn btn-primary">Search</button>
+
+                            @if(request()->query('search'))
+                                <!-- Nút "x" để reset tìm kiếm -->
+                                <button type="button" class="btn btn-light ms-2" id="reset-search">✖</button>
+                            @endif
+                        </form>
+
                         
                     </div>
                     <div class="table-responsive">
@@ -74,9 +85,9 @@
                     </div>
                     <div style="height: 20px;"></div>
                     <div class="d-flex justify-content-center">
-                        {{ $products->links('pagination::bootstrap-4') }}
-
+                        {{ $products->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
                     </div>
+
                 </div>
                 </div>
                 <div class="col-3">
@@ -128,6 +139,7 @@
             </div>
             </div>
             <script>
+
                 function showDeleteModal(element) {
                 // Lấy giá trị URL từ thuộc tính data-url
                 var actionUrl = element.getAttribute('data-url');
@@ -139,5 +151,11 @@
                 var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
                 deleteModal.show();
             }
+
+            document.getElementById('reset-search').addEventListener('click', function() {
+                    // Đưa người dùng trở về trang mà không có tham số search
+                    window.location.href="{{ route('discount.setup', $id) }}";
+
+                });
             </script>
     @endsection
