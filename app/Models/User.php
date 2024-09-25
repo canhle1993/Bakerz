@@ -65,7 +65,15 @@ class User extends Authenticatable
         ];
     }
 <<<<<<< HEAD
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'role_id');
+    }
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> quanguyen/QuaNguyen
     
 >>>>>>> 1fb4cbb0b5b95f7829e960a184d68e887ca76077
 }

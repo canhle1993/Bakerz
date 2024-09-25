@@ -79,7 +79,7 @@ class ProductController extends Controller
         }
 
         // Phân trang 10 sản phẩm, đồng thời duy trì từ khóa tìm kiếm và danh mục
-        $products = $products->paginate(10)->appends(['query' => $query, 'sort' => $sort, 'category_id' => $categoryId]);
+        $products = $products->paginate(12)->appends(['query' => $query, 'sort' => $sort, 'category_id' => $categoryId]);
 
         // Lấy danh sách tất cả các danh mục
         $categories = Catalog::query()
@@ -111,7 +111,7 @@ class ProductController extends Controller
         // Lọc sản phẩm theo danh mục
         $products = Product::whereHas('catalogs', function ($query) use ($category_id) {
             $query->where('category_id', $category_id);
-        })->paginate(10);
+        })->paginate(12);
 
         // Lấy tất cả danh mục để hiển thị
         $categories = Category::all();

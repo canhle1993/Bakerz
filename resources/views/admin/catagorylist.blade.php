@@ -31,6 +31,16 @@
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h4 class="mb-0">List Catagory</h4>
+
+                        <!-- Form tìm kiếm -->
+                        <form class="d-none d-md-flex ms-4" method="GET" action="{{ route('catalog.index') }}">
+                            <input class="form-control bg-dark border-0" type="search" placeholder="Category name" name="search" value="{{ request()->query('search') }}">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                            @if(request()->query('search'))
+                                <button type="button" class="btn btn-light ms-2" id="reset-search">✖</button>
+                            @endif
+                        </form>
+
                         <a id="btnCreate" href="#">Create Catagory </a>
                     </div>
                     <div class="table-responsive">
@@ -80,9 +90,10 @@
                     </div>
                     <div style="height: 20px;"></div>
                     <div class="d-flex justify-content-center">
-                        {{ $catalogs->links('pagination::bootstrap-4') }}
-
+                        {{ $catalogs->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
                     </div>
+
+
                 </div>
             </div>
             <!-- Recent Sales End -->
@@ -110,6 +121,7 @@
             </div>
 
 <script>
+
 
     function showDeleteModal(element) {
         // Lấy giá trị URL từ thuộc tính data-url
@@ -212,6 +224,10 @@
     document.getElementById('btnCancelAdd').addEventListener('click', function(event) {
         document.getElementById("row-create").style.display ='none'
     });
+
+    document.getElementById('reset-search').addEventListener('click', function() {
+            window.location.href = "{{ route('catalog.index') }}";
+        });
 
 </script>
     @endsection
