@@ -102,7 +102,7 @@ class DiscountController extends Controller
             $query->where('product_name', 'like', '%' . $request->search . '%');
         }
 
-        $products = $query->orderBy('ModifiedDate', 'desc')->paginate(5);
+        $products = $query->orderBy('ModifiedDate', 'desc')->paginate(10);
 
         // Lấy danh sách sản phẩm đã có discount
         $prodiscounts = Product::query()
