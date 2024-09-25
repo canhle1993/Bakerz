@@ -84,7 +84,7 @@
                                         </div>
                                     </th>
                                     <th scope="col">
-                                        Unit Price
+                                        Price
                                         <div style="float: right;">
                                             <a href="{{ route('product.index', array_merge(request()->all(), ['sort' => 'price_asc'])) }}">
                                                 <i class="fas fa-arrow-up"></i>

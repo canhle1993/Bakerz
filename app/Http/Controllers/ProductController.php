@@ -13,7 +13,9 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         // Lấy tất cả danh mục sức khỏe
-        $heathyCatalogs = HeathyCatalog::all();
+        $heathyCatalogs = HeathyCatalog::where('isdelete', '<>', 1)
+                        ->orWhereNull('isdelete')
+                        ->get();
 
         // Lọc danh sách sản phẩm theo danh mục sức khỏe đã chọn
         $products = Product::where(function ($q) {
@@ -114,7 +116,8 @@ class ProductController extends Controller
         })->paginate(12);
 
         // Lấy tất cả danh mục để hiển thị
-        $categories = Category::all();
+        $categories = Category::where('isdelete', '<>', 1)
+                    ->orWhere('isdelete', null);
 
         return view('client.shop.shop_all', compact('products', 'categories'));
     }

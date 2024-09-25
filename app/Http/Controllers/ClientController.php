@@ -27,7 +27,9 @@ class ClientController extends Controller
     public function filter(Request $request)
     {
         // Lấy tất cả danh mục sức khỏe
-        $heathyCatalogs = HeathyCatalog::all();
+        $heathyCatalogs = HeathyCatalog::where('isdelete', '<>', 1)
+                        ->orWhereNull('isdelete')
+                        ->get();
 
         // Lọc danh sách sản phẩm theo danh mục sức khỏe đã chọn
         $products = Product::where(function ($q) {
