@@ -559,3 +559,46 @@
 #48 C:\\xampp\\htdocs\\baker-bite\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\xampp\\\\htdocs...')
 #49 {main}
 "} 
+[2024-09-25 14:12:33] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [stacko] is not defined. at C:\\xampp\\htdocs\\baker-bite\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php:231)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\baker-bite\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(138): Illuminate\\Log\\LogManager->resolve('stacko', NULL)
+#1 C:\\xampp\\htdocs\\baker-bite\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(125): Illuminate\\Log\\LogManager->get('stacko')
+#2 C:\\xampp\\htdocs\\baker-bite\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(700): Illuminate\\Log\\LogManager->driver()
+#3 C:\\xampp\\htdocs\\baker-bite\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(378): Illuminate\\Log\\LogManager->error('Command \"migrat...', Array)
+#4 C:\\xampp\\htdocs\\baker-bite\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(341): Illuminate\\Foundation\\Exceptions\\Handler->reportThrowable(Object(Symfony\\Component\\Console\\Exception\\CommandNotFoundException))
+#5 C:\\xampp\\htdocs\\baker-bite\\vendor\\nunomaduro\\collision\\src\\Adapters\\Laravel\\ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report(Object(Symfony\\Component\\Console\\Exception\\CommandNotFoundException))
+#6 C:\\xampp\\htdocs\\baker-bite\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(620): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report(Object(Symfony\\Component\\Console\\Exception\\CommandNotFoundException))
+#7 C:\\xampp\\htdocs\\baker-bite\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->reportException(Object(Symfony\\Component\\Console\\Exception\\CommandNotFoundException))
+#8 C:\\xampp\\htdocs\\baker-bite\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1203): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\xampp\\htdocs\\baker-bite\\artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#10 {main}
+"} 
+[2024-09-25 14:12:33] laravel.ERROR: Command "migration" is not defined.
+
+Did you mean one of these?
+    make:migration
+    migrate
+    migrate:fresh
+    migrate:install
+    migrate:refresh
+    migrate:reset
+    migrate:rollback
+    migrate:status {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"migration\" is not defined.
+
+Did you mean one of these?
+    make:migration
+    migrate
+    migrate:fresh
+    migrate:install
+    migrate:refresh
+    migrate:reset
+    migrate:rollback
+    migrate:status at C:\\xampp\\htdocs\\baker-bite\\vendor\\symfony\\console\\Application.php:702)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\baker-bite\\vendor\\symfony\\console\\Application.php(258): Symfony\\Component\\Console\\Application->find('migration')
+#1 C:\\xampp\\htdocs\\baker-bite\\vendor\\symfony\\console\\Application.php(167): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\xampp\\htdocs\\baker-bite\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\xampp\\htdocs\\baker-bite\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1203): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\xampp\\htdocs\\baker-bite\\artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#5 {main}
+"} 
