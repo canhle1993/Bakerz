@@ -377,7 +377,7 @@
                             <div class="product-item text-center">
                                 <div class="product-item__badge">Hot</div>
                                 <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-8-500x625.jpg" alt="Product"></a>
+                                    <a href="single-product.html"><img width="350" height="350" src="img/Baked Goods/Apple Pie/Apple Pie.png" alt="Product"></a>
                                     <ul class="product-item__meta">
                                         <li class="product-item__meta-action">
                                             <a class="shadow-1 labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>

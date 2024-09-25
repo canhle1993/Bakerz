@@ -1,17 +1,17 @@
 @font-face {
     font-display: swap;
-    font-family: 'LaStudioIcons';
-    src: url('../../fonts/lastudioicons/LaStudioIcons.eot');
-    src: url('../../fonts/lastudioicons/LaStudioIcons.eot') format('embedded-opentype'),
-         url('../../fonts/lastudioicons/LaStudioIcons.woff2') format('woff2'),
-         url('../../fonts/lastudioicons/LaStudioIcons.woff') format('woff'),
-         url('../../fonts/lastudioicons/LaStudioIcons.ttf') format('truetype'),
-         url('../../fonts/lastudioicons/LaStudioIcons.svg#LaStudioIcons') format('svg');
+    font-family: "LaStudioIcons";
+    src: url("../../fonts/lastudioicons/LaStudioIcons.eot");
+    src: url("../../fonts/lastudioicons/LaStudioIcons.eot")
+            format("embedded-opentype"),
+        url("../../fonts/lastudioicons/LaStudioIcons.woff2") format("woff2"),
+        url("../../fonts/lastudioicons/LaStudioIcons.woff") format("woff"),
+        url("../../fonts/lastudioicons/LaStudioIcons.ttf") format("truetype"),
+        url("../../fonts/lastudioicons/LaStudioIcons.svg#LaStudioIcons")
+            format("svg");
     font-weight: 400;
-    font-style: normal
+    font-style: normal;
 }
-
-
 
 [class*="lastudioicon-"] {
     display: inline-block;
@@ -19,790 +19,790 @@
     speak: none;
     text-transform: none;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .lastudioicon-mail-2:before {
-    content: '\e800'
+    content: "\e800";
 }
 
 .lastudioicon-b-dribbble:before {
-    content: '\e801'
+    content: "\e801";
 }
 
 .lastudioicon-b-vkontakte:before {
-    content: '\e802'
+    content: "\e802";
 }
 
 .lastudioicon-b-line:before {
-    content: '\e803'
+    content: "\e803";
 }
 
 .lastudioicon-b-twitter-squared:before {
-    content: '\e804'
+    content: "\e804";
 }
 
 .lastudioicon-b-yahoo-1:before {
-    content: '\e805'
+    content: "\e805";
 }
 
 .lastudioicon-b-skype-outline:before {
-    content: '\e806'
+    content: "\e806";
 }
 
 .lastudioicon-globe:before {
-    content: '\e807'
+    content: "\e807";
 }
 
 .lastudioicon-shield:before {
-    content: '\e808'
+    content: "\e808";
 }
 
 .lastudioicon-phone-call:before {
-    content: '\e809'
+    content: "\e809";
 }
 
 .lastudioicon-menu-6:before {
-    content: '\e80a'
+    content: "\e80a";
 }
 
 .lastudioicon-support248:before {
-    content: '\e80b'
+    content: "\e80b";
 }
 
 .lastudioicon-f-comment-1:before {
-    content: '\e80c'
+    content: "\e80c";
 }
 
 .lastudioicon-dot-3:before {
-    content: '\e80d'
+    content: "\e80d";
 }
 
 .lastudioicon-mail-1:before {
-    content: '\e80e'
+    content: "\e80e";
 }
 
 .lastudioicon-envato:before {
-    content: '\e8bc'
+    content: "\e8bc";
 }
 
 .lastudioicon-letter-1:before {
-    content: '\e8be'
+    content: "\e8be";
 }
 
 .lastudioicon-circle-1:before {
-    content: '\e8bf'
+    content: "\e8bf";
 }
 
 .lastudioicon-bag-2:before {
-    content: '\e8c4'
+    content: "\e8c4";
 }
 
 .lastudioicon-bag-3:before {
-    content: '\e8c6';
-    font-weight: 600
+    content: "\e8c6";
+    font-weight: 600;
 }
 
 .lastudioicon-ic_mail_outline_24px:before {
-    content: '\ea02'
+    content: "\ea02";
 }
 
 .lastudioicon-ic_compare_arrows_24px:before {
-    content: '\ea03'
+    content: "\ea03";
 }
 
 .lastudioicon-ic_compare_24px:before {
-    content: '\ea04'
+    content: "\ea04";
 }
 
 .lastudioicon-ic_share_24px:before {
-    content: '\ea05'
+    content: "\ea05";
 }
 
 .lastudioicon-bath-tub-1:before {
-    content: '\ea06'
+    content: "\ea06";
 }
 
 .lastudioicon-shopping-cart-1:before {
-    content: '\ea07'
+    content: "\ea07";
 }
 
 .lastudioicon-contrast:before {
-    content: '\ea08'
+    content: "\ea08";
 }
 
 .lastudioicon-heart-1:before {
-    content: '\ea09'
+    content: "\ea09";
 }
 
 .lastudioicon-sort-tool:before {
-    content: '\ea0a'
+    content: "\ea0a";
 }
 
 .lastudioicon-list-bullet-1:before {
-    content: '\ea0b'
+    content: "\ea0b";
 }
 
 .lastudioicon-menu-8-1:before {
-    content: '\ea0c'
+    content: "\ea0c";
 }
 
 .lastudioicon-menu-4-1:before {
-    content: '\ea0d'
+    content: "\ea0d";
 }
 
 .lastudioicon-menu-3-1:before {
-    content: '\ea0e'
+    content: "\ea0e";
 }
 
 .lastudioicon-menu-1:before {
-    content: '\ea0f'
+    content: "\ea0f";
 }
 
 .lastudioicon-down-arrow:before {
-    content: '\ea10'
+    content: "\ea10";
 }
 
 .lastudioicon-left-arrow:before {
-    content: '\ea11'
+    content: "\ea11";
 }
 
 .lastudioicon-right-arrow:before {
-    content: '\ea12'
+    content: "\ea12";
 }
 
 .lastudioicon-up-arrow:before {
-    content: '\ea13'
+    content: "\ea13";
 }
 
 .lastudioicon-phone-1:before {
-    content: '\ea14'
+    content: "\ea14";
 }
 
 .lastudioicon-pin-3-1:before {
-    content: '\ea15'
+    content: "\ea15";
 }
 
 .lastudioicon-search-content:before {
-    content: '\ea16'
+    content: "\ea16";
 }
 
 .lastudioicon-single-01-1:before {
-    content: '\ea17'
+    content: "\ea17";
 }
 
 .lastudioicon-i-delete:before {
-    content: '\ea18'
+    content: "\ea18";
 }
 
 .lastudioicon-zoom-1:before {
-    content: '\ea19'
+    content: "\ea19";
 }
 
 .lastudioicon-b-meeting:before {
-    content: '\ea1a'
+    content: "\ea1a";
 }
 
 .lastudioicon-bag-20:before {
-    content: '\ea1b'
+    content: "\ea1b";
 }
 
 .lastudioicon-bath-tub-2:before {
-    content: '\ea1c'
+    content: "\ea1c";
 }
 
 .lastudioicon-web-link:before {
-    content: '\ea1d'
+    content: "\ea1d";
 }
 
 .lastudioicon-shopping-cart-2:before {
-    content: '\ea1e'
+    content: "\ea1e";
 }
 
 .lastudioicon-cart-return:before {
-    content: '\ea1f'
+    content: "\ea1f";
 }
 
 .lastudioicon-check:before {
-    content: '\ea20'
+    content: "\ea20";
 }
 
 .lastudioicon-g-check:before {
-    content: '\ea21'
+    content: "\ea21";
 }
 
 .lastudioicon-d-check:before {
-    content: '\ea22'
+    content: "\ea22";
 }
 
 .lastudioicon-circle-10:before {
-    content: '\ea23'
+    content: "\ea23";
 }
 
 .lastudioicon-circle-simple-left:before {
-    content: '\ea24'
+    content: "\ea24";
 }
 
 .lastudioicon-circle-simple-right:before {
-    content: '\ea25'
+    content: "\ea25";
 }
 
 .lastudioicon-compare:before {
-    content: '\ea26'
+    content: "\ea26";
 }
 
 .lastudioicon-letter:before {
-    content: '\ea27'
+    content: "\ea27";
 }
 
 .lastudioicon-mail:before {
-    content: '\ea28'
+    content: "\ea28";
 }
 
 .lastudioicon-email:before {
-    content: '\ea29'
+    content: "\ea29";
 }
 
 .lastudioicon-eye:before {
-    content: '\ea2a'
+    content: "\ea2a";
 }
 
 .lastudioicon-heart-2:before {
-    content: '\ea2b'
+    content: "\ea2b";
 }
 
 .lastudioicon-shopping-cart-3:before {
-    content: '\ea2c'
+    content: "\ea2c";
 }
 
 .lastudioicon-list-bullet-2:before {
-    content: '\ea2d'
+    content: "\ea2d";
 }
 
 .lastudioicon-marker-3:before {
-    content: '\ea2e'
+    content: "\ea2e";
 }
 
 .lastudioicon-measure-17:before {
-    content: '\ea2f'
+    content: "\ea2f";
 }
 
 .lastudioicon-menu-8-2:before {
-    content: '\ea30'
+    content: "\ea30";
 }
 
 .lastudioicon-menu-7:before {
-    content: '\ea31'
+    content: "\ea31";
 }
 
 .lastudioicon-menu-4-2:before {
-    content: '\ea32'
+    content: "\ea32";
 }
 
 .lastudioicon-menu-3-2:before {
-    content: '\ea33'
+    content: "\ea33";
 }
 
 .lastudioicon-menu-2:before {
-    content: '\ea34'
+    content: "\ea34";
 }
 
 .lastudioicon-microsoft:before {
-    content: '\ea35'
+    content: "\ea35";
 }
 
 .lastudioicon-phone-2:before {
-    content: '\ea36'
+    content: "\ea36";
 }
 
 .lastudioicon-phone-call-1:before {
-    content: '\ea37'
+    content: "\ea37";
 }
 
 .lastudioicon-pin-3-2:before {
-    content: '\ea38'
+    content: "\ea38";
 }
 
 .lastudioicon-pin-check:before {
-    content: '\ea39'
+    content: "\ea39";
 }
 
 .lastudioicon-e-remove:before {
-    content: '\ea3a'
+    content: "\ea3a";
 }
 
 .lastudioicon-single-01-2:before {
-    content: '\ea3b'
+    content: "\ea3b";
 }
 
 .lastudioicon-i-add:before {
-    content: '\ea3c'
+    content: "\ea3c";
 }
 
 .lastudioicon-small-triangle-down:before {
-    content: '\ea3d'
+    content: "\ea3d";
 }
 
 .lastudioicon-small-triangle-left:before {
-    content: '\ea3e'
+    content: "\ea3e";
 }
 
 .lastudioicon-small-triangle-right:before {
-    content: '\ea3f'
+    content: "\ea3f";
 }
 
 .lastudioicon-tag-check:before {
-    content: '\ea40'
+    content: "\ea40";
 }
 
 .lastudioicon-tag:before {
-    content: '\ea41'
+    content: "\ea41";
 }
 
 .lastudioicon-clock:before {
-    content: '\ea42'
+    content: "\ea42";
 }
 
 .lastudioicon-time-clock:before {
-    content: '\ea43'
+    content: "\ea43";
 }
 
 .lastudioicon-triangle-left:before {
-    content: '\ea44'
+    content: "\ea44";
 }
 
 .lastudioicon-triangle-right:before {
-    content: '\ea45'
+    content: "\ea45";
 }
 
 .lastudioicon-business-agent:before {
-    content: '\ea46'
+    content: "\ea46";
 }
 
 .lastudioicon-zoom-2:before {
-    content: '\ea47'
+    content: "\ea47";
 }
 
 .lastudioicon-zoom-88:before {
-    content: '\ea48'
+    content: "\ea48";
 }
 
 .lastudioicon-search-zoom-in:before {
-    content: '\ea49'
+    content: "\ea49";
 }
 
 .lastudioicon-search-zoom-out:before {
-    content: '\ea4a'
+    content: "\ea4a";
 }
 
 .lastudioicon-small-triangle-up:before {
-    content: '\ea4b'
+    content: "\ea4b";
 }
 
 .lastudioicon-phone-call-2:before {
-    content: '\ea4c'
+    content: "\ea4c";
 }
 
 .lastudioicon-full-screen:before {
-    content: '\ea4d'
+    content: "\ea4d";
 }
 
 .lastudioicon-car-parking:before {
-    content: '\ea4e'
+    content: "\ea4e";
 }
 
 .lastudioicon-transparent:before {
-    content: '\ea4f'
+    content: "\ea4f";
 }
 
 .lastudioicon-bedroom-1:before {
-    content: '\ea50'
+    content: "\ea50";
 }
 
 .lastudioicon-bedroom-2:before {
-    content: '\ea51'
+    content: "\ea51";
 }
 
 .lastudioicon-search-property:before {
-    content: '\ea52'
+    content: "\ea52";
 }
 
 .lastudioicon-menu-5:before {
-    content: '\ea53'
+    content: "\ea53";
 }
 
 .lastudioicon-circle-simple-right-2:before {
-    content: '\ea54'
+    content: "\ea54";
 }
 
 .lastudioicon-detached-property:before {
-    content: '\ea55'
+    content: "\ea55";
 }
 
 .lastudioicon-armchair:before {
-    content: '\ea56'
+    content: "\ea56";
 }
 
 .lastudioicon-measure-big:before {
-    content: '\ea57'
+    content: "\ea57";
 }
 
 .lastudioicon-b-meeting-2:before {
-    content: '\ea58'
+    content: "\ea58";
 }
 
 .lastudioicon-bulb-63:before {
-    content: '\ea59'
+    content: "\ea59";
 }
 
 .lastudioicon-new-construction:before {
-    content: '\ea5a'
+    content: "\ea5a";
 }
 
 .lastudioicon-quite-happy:before {
-    content: '\ea5b'
+    content: "\ea5b";
 }
 
 .lastudioicon-shape-star-1:before {
-    content: '\ea5c'
+    content: "\ea5c";
 }
 
 .lastudioicon-shape-star-2:before {
-    content: '\ea5d'
+    content: "\ea5d";
 }
 
 .lastudioicon-star-rate-1:before {
-    content: '\ea5e'
+    content: "\ea5e";
 }
 
 .lastudioicon-star-rate-2:before {
-    content: '\ea5f'
+    content: "\ea5f";
 }
 
 .lastudioicon-home-2:before {
-    content: '\ea60'
+    content: "\ea60";
 }
 
 .lastudioicon-home-3:before {
-    content: '\ea61'
+    content: "\ea61";
 }
 
 .lastudioicon-home:before {
-    content: '\ea62'
+    content: "\ea62";
 }
 
 .lastudioicon-home-2-2:before {
-    content: '\ea63'
+    content: "\ea63";
 }
 
 .lastudioicon-home-3-2:before {
-    content: '\ea64'
+    content: "\ea64";
 }
 
 .lastudioicon-home-4:before {
-    content: '\ea65'
+    content: "\ea65";
 }
 
 .lastudioicon-home-search:before {
-    content: '\ea66'
+    content: "\ea66";
 }
 
 .lastudioicon-e-add:before {
-    content: '\ea67'
+    content: "\ea67";
 }
 
 .lastudioicon-e-delete:before {
-    content: '\ea68'
+    content: "\ea68";
 }
 
 .lastudioicon-i-delete-2:before {
-    content: '\ea69'
+    content: "\ea69";
 }
 
 .lastudioicon-i-add-2:before {
-    content: '\ea6a'
+    content: "\ea6a";
 }
 
 .lastudioicon-arrow-right:before {
-    content: '\ea6b'
+    content: "\ea6b";
 }
 
 .lastudioicon-arrow-left:before {
-    content: '\ea6c'
+    content: "\ea6c";
 }
 
 .lastudioicon-arrow-up:before {
-    content: '\ea6d'
+    content: "\ea6d";
 }
 
 .lastudioicon-arrow-down:before {
-    content: '\ea6e'
+    content: "\ea6e";
 }
 
 .lastudioicon-a-check:before {
-    content: '\ea6f'
+    content: "\ea6f";
 }
 
 .lastudioicon-a-add:before {
-    content: '\ea70'
+    content: "\ea70";
 }
 
 .lastudioicon-chart-bar-32:before {
-    content: '\ea71'
+    content: "\ea71";
 }
 
 .lastudioicon-chart-bar-32-2:before {
-    content: '\ea72'
+    content: "\ea72";
 }
 
 .lastudioicon-cart-simple-add:before {
-    content: '\ea73'
+    content: "\ea73";
 }
 
 .lastudioicon-cart-add:before {
-    content: '\ea74'
+    content: "\ea74";
 }
 
 .lastudioicon-cart-add-2:before {
-    content: '\ea75'
+    content: "\ea75";
 }
 
 .lastudioicon-cart-speed-1:before {
-    content: '\ea76'
+    content: "\ea76";
 }
 
 .lastudioicon-cart-speed-2:before {
-    content: '\ea77'
+    content: "\ea77";
 }
 
 .lastudioicon-cart-refresh:before {
-    content: '\ea78'
+    content: "\ea78";
 }
 
 .lastudioicon-ic_format_quote_24px:before {
-    content: '\ea79'
+    content: "\ea79";
 }
 
 .lastudioicon-quote-1:before {
-    content: '\ea7a'
+    content: "\ea7a";
 }
 
 .lastudioicon-quote-2:before {
-    content: '\ea7b'
+    content: "\ea7b";
 }
 
 .lastudioicon-a-chat:before {
-    content: '\ea7f'
+    content: "\ea7f";
 }
 
 .lastudioicon-b-comment:before {
-    content: '\ea80'
+    content: "\ea80";
 }
 
 .lastudioicon-chat:before {
-    content: '\ea81'
+    content: "\ea81";
 }
 
 .lastudioicon-b-chat:before {
-    content: '\ea82'
+    content: "\ea82";
 }
 
 .lastudioicon-f-comment:before {
-    content: '\ea83'
+    content: "\ea83";
 }
 
 .lastudioicon-f-chat:before {
-    content: '\ea84'
+    content: "\ea84";
 }
 
 .lastudioicon-subtitles:before {
-    content: '\ea85'
+    content: "\ea85";
 }
 
 .lastudioicon-voice-recognition:before {
-    content: '\ea86'
+    content: "\ea86";
 }
 
 .lastudioicon-n-edit:before {
-    content: '\ea87'
+    content: "\ea87";
 }
 
 .lastudioicon-d-edit:before {
-    content: '\ea88'
+    content: "\ea88";
 }
 
 .lastudioicon-globe-1:before {
-    content: '\f018'
+    content: "\f018";
 }
 
 .lastudioicon-b-twitter:before {
-    content: '\f099'
+    content: "\f099";
 }
 
 .lastudioicon-b-facebook:before {
-    content: '\f09a'
+    content: "\f09a";
 }
 
 .lastudioicon-b-github-circled:before {
-    content: '\f09b'
+    content: "\f09b";
 }
 
 .lastudioicon-b-pinterest-circled:before {
-    content: '\f0d2'
+    content: "\f0d2";
 }
 
 .lastudioicon-b-pinterest-squared:before {
-    content: '\f0d3'
+    content: "\f0d3";
 }
 
 .lastudioicon-b-linkedin:before {
-    content: '\f0e1'
+    content: "\f0e1";
 }
 
 .lastudioicon-b-github:before {
-    content: '\f113'
+    content: "\f113";
 }
 
 .lastudioicon-b-youtube-squared:before {
-    content: '\f166'
+    content: "\f166";
 }
 
 .lastudioicon-b-youtube:before {
-    content: '\f167'
+    content: "\f167";
 }
 
 .lastudioicon-b-youtube-play:before {
-    content: '\f16a'
+    content: "\f16a";
 }
 
 .lastudioicon-b-dropbox:before {
-    content: '\f16b'
+    content: "\f16b";
 }
 
 .lastudioicon-b-instagram:before {
-    content: '\f16d'
+    content: "\f16d";
 }
 
 .lastudioicon-b-tumblr:before {
-    content: '\f173'
+    content: "\f173";
 }
 
 .lastudioicon-b-tumblr-squared:before {
-    content: '\f174'
+    content: "\f174";
 }
 
 .lastudioicon-b-skype:before {
-    content: '\f17e'
+    content: "\f17e";
 }
 
 .lastudioicon-b-foursquare:before {
-    content: '\f180'
+    content: "\f180";
 }
 
 .lastudioicon-b-vimeo-squared:before {
-    content: '\f194'
+    content: "\f194";
 }
 
 .lastudioicon-b-wordpress:before {
-    content: '\f19a'
+    content: "\f19a";
 }
 
 .lastudioicon-b-yahoo:before {
-    content: '\f19e'
+    content: "\f19e";
 }
 
 .lastudioicon-b-reddit:before {
-    content: '\f1a1'
+    content: "\f1a1";
 }
 
 .lastudioicon-b-reddit-squared:before {
-    content: '\f1a2'
+    content: "\f1a2";
 }
 
 .lastudioicon-language:before {
-    content: '\f1ab'
+    content: "\f1ab";
 }
 
 .lastudioicon-b-spotify-1:before {
-    content: '\f1bc'
+    content: "\f1bc";
 }
 
 .lastudioicon-b-soundcloud:before {
-    content: '\f1be'
+    content: "\f1be";
 }
 
 .lastudioicon-b-vine:before {
-    content: '\f1ca'
+    content: "\f1ca";
 }
 
 .lastudioicon-b-yelp:before {
-    content: '\f1e9'
+    content: "\f1e9";
 }
 
 .lastudioicon-b-lastfm:before {
-    content: '\f202'
+    content: "\f202";
 }
 
 .lastudioicon-b-lastfm-squared:before {
-    content: '\f203'
+    content: "\f203";
 }
 
 .lastudioicon-b-pinterest:before {
-    content: '\f231'
+    content: "\f231";
 }
 
 .lastudioicon-b-whatsapp:before {
-    content: '\f232'
+    content: "\f232";
 }
 
 .lastudioicon-b-vimeo:before {
-    content: '\f27d'
+    content: "\f27d";
 }
 
 .lastudioicon-b-reddit-alien:before {
-    content: '\f281'
+    content: "\f281";
 }
 
 .lastudioicon-b-telegram:before {
-    content: '\f2c6'
+    content: "\f2c6";
 }
 
 .lastudioicon-b-github-squared:before {
-    content: '\f300'
+    content: "\f300";
 }
 
 .lastudioicon-b-flickr:before {
-    content: '\f303'
+    content: "\f303";
 }
 
 .lastudioicon-b-flickr-circled:before {
-    content: '\f304'
+    content: "\f304";
 }
 
 .lastudioicon-b-vimeo-circled:before {
-    content: '\f307'
+    content: "\f307";
 }
 
 .lastudioicon-b-twitter-circled:before {
-    content: '\f30a'
+    content: "\f30a";
 }
 
 .lastudioicon-b-linkedin-squared:before {
-    content: '\f30c'
+    content: "\f30c";
 }
 
 .lastudioicon-b-spotify:before {
-    content: '\f327'
+    content: "\f327";
 }
 
 .lastudioicon-b-instagram-1:before {
-    content: '\f32d'
+    content: "\f32d";
 }
 
 .lastudioicon-b-evernote:before {
-    content: '\f333'
+    content: "\f333";
 }
 
 .lastudioicon-b-soundcloud-1:before {
-    content: '\f348'
+    content: "\f348";
 }
