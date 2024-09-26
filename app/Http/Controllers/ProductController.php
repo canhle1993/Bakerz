@@ -44,7 +44,7 @@ class ProductController extends Controller
         $sort = $request->get('sort', 'price-ascending');
         $query = $request->input('query');
         $categoryId = $request->get('category_id');
-        $paginateBy = $request->get('paginate', 9);
+        $paginateBy = $request->get('paginate', 12);
         $minPrice = $request->get('min_price', 0);
         $maxPrice = $request->get('max_price', 50);
         // Khởi tạo query cho sản phẩm
@@ -125,7 +125,7 @@ class ProductController extends Controller
         $query->where('isdelete', '<>', 1)
               ->orWhereNull('isdelete');
     })
-    ->paginate(9); // Phân trang nếu cần
+    ->paginate(12); // Phân trang nếu cần
 
     // Lấy tất cả các danh mục để hiển thị
     $categories = Catalog::where(function ($query) {

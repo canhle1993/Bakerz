@@ -1,119 +1,107 @@
 <!DOCTYPE html>
-
 <html class="no-js" lang="en">
-
-
 <head>
-    @include('layouts.header')
     <style>
+        .pagination li {
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .pagination li a {
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
 
 
-.pagination li {
-    display: inline-block;
-    margin: 0 5px;
-}
+        }
 
-.pagination li a {
-    padding: 10px 15px;
-    color: #333;
-    text-decoration: none;
+        .pagination li.active a {
+            background-color: #dde028;
 
 
-}
+        }
 
-.pagination li.active a {
-    background-color: #dde028;
+        .pagination li.disabled a {
+            color: #ccc;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
 
+        .pagination li a:hover {
+            background-color: #9b8e8e;
+        }
+        .sidebars_widget__instagram {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            list-style: none;
+        }
 
-}
+        .sidebars_widget__instagram li {
+            width: 50%;
+        }
 
-.pagination li.disabled a {
-    color: #ccc;
-    pointer-events: none;
-    cursor: not-allowed;
-}
+        .sidebars_widget__instagram li a {
+            display: block;
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            overflow: hidden;
+        }
 
-.pagination li a:hover {
-    background-color: #9b8e8e;
-}
-.sidebars_widget__instagram {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    list-style: none;
-}
+        .sidebars_widget__instagram img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-.sidebars_widget__instagram li {
-    width: 50%;
-}
-
-.sidebars_widget__instagram li a {
-    display: block;
-    position: relative;
-    width: 100%;
-    padding-bottom: 100%;
-    overflow: hidden;
-}
-
-.sidebars_widget__instagram img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.sidebars_widget__instagram i {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 18px;
-}
+        .sidebars_widget__instagram i {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 18px;
+        }
 
 
-.sidebars_widget__banner {
-    position: relative;
-    display: block;
-    width: 100%;
-}
+        .sidebars_widget__banner {
+            position: relative;
+            display: block;
+            width: 100%;
+        }
 
-.sidebars_widget__banner img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+        .sidebars_widget__banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
-.banner-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    width: 100%;
-}
+        .banner-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+        }
 
-.banner-content_title {
-    font-size: 50px;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
-    border-radius: 5px;
-}
-
-
-
-
-
-
+        .banner-content_title {
+            font-size: 50px;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
     </style>
-
 </head>
 
 <body>
+@include('layouts.header')
     <!-- Breadcrumb Section Start -->
     <div class="breadcrumb" data-bg-image="{{ asset('assets/images/bg/breadcrumb-bg.jpg') }}">
         <div class="container">
@@ -589,6 +577,27 @@
 
 <!-- Script của bạn -->
 <script>
+    $(window).on("scroll", function (event) {
+            var scroll = $(window).scrollTop();
+            if (scroll <= 0) {
+                $(
+                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
+                ).removeClass("sticky");
+                $(".header-sticky .header-logo img").attr(
+                    "src",
+                    "{{asset('assets/images/logo-white.svg')}}"
+                );
+            } else {
+                $(
+                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
+                ).addClass("sticky");
+                $(".header-sticky .header-logo img").attr(
+                    "src",
+                    "{{asset('assets/images/logo.svg')}}"
+                );
+            }
+        });
+
 $(document).ready(function() {
     // Khởi tạo slider với khoảng giá từ 0 đến 100
     $("#price-range").ionRangeSlider({
