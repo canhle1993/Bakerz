@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -25,7 +26,6 @@ Route::get('/client/profile/user/{userid}', [ClientController::class, 'profile']
 use App\Http\Controllers\ProductController;
 
 Route::get('/client/heathyfilter', [ProductController::class, 'filter'])->name('client.heathyfilter');
-
 
 //Route cho client tìm kiếm thông tin sản phẩm
 Route::get('/search', [ProductController::class, 'search'])->name('product_search');
@@ -82,9 +82,22 @@ Route::delete('/admin/manage/admin/{id}', [ManageAdminController::class, 'destro
 Route::post('/admin/manage/lower-to-client/{id}', [ManageAdminController::class, 'lowerToClient'])->name('admin.lower_to_client');
 Route::post('/admin/manage/update-to-admin/{id}', [ManageAdminController::class, 'Upgradetoadmin'])->name('admin.update_to_admin');
 
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-// Route cho client shop product types
+
+// Route cho Product và Other
 Route::get('/shop_all', [ProductController::class, 'all_product'])->name('shop_all');
+Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'])->name('product.single');
+Route::get('shop/category/{category_id}', [ProductController::class, 'filterByCategory'])->name('shop.filterByCategory');
+Route::get('product/details/{id}', [ProductController::class, 'getProductDetails'])->name('product.details');
+
+
+
+
+
+
+
+
 Route::get('/product-simple', function () {
     return view('client.shop.product-types.product-simple');
 })->name('product-simple');
@@ -164,6 +177,18 @@ use App\Http\Controllers\Admin\CategoryController;
 
 Route::resource('catalog', CategoryController::class);
 
+//route cho heathy trang admin
+use App\Http\Controllers\Admin\HeathyController;
+
+Route::resource('heathy', HeathyController::class);
+
+//route cho discount trang admin
+use App\Http\Controllers\Admin\DiscountController;
+
+Route::resource('discount', DiscountController::class);
+Route::get('/discount/{discount}/setup', [DiscountController::class, 'setup'])->name('discount.setup');
+Route::get('/discount/updatesaleoff/{product_id}/{id}', [DiscountController::class, 'update_discount'])->name('discount.update_discount');
+Route::delete('/discount/deletealeoff/{product_id}/{id}', [DiscountController::class, 'destroy_discount'])->name('discount.destroy_discount');
 
 //Show thông tin sản phẩm khi người dùng bấm quick view
 Route::get('/quickview', [ProductController::class, 'quickView'])->name('quickview');
@@ -173,5 +198,3 @@ use App\Http\Controllers\Admin\CartController;
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
-
-Route::resource('heathy', HeathyController::class);

@@ -39,9 +39,19 @@
 <body>
 @include('layouts.header')
     <!-- Breadcrumb Section Start -->
-    <div class="breadcrumb" data-bg-image="assets/images/bg/breadcrumb-bg.jpg">
+    <div class="breadcrumb" data-bg-image="assets/images/bg/breadcrumb-bg-4.jpg">
         <div class="container">
-
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <h1 class="breadcrumb_title">Pricing Plans</h1>
+                        <ul class="breadcrumb_list">
+                            <li><a href="index.html">Home</a></li>
+                            <li>Pricing Plans</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Breadcrumb Section End -->
