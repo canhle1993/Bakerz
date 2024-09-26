@@ -56,16 +56,17 @@
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0">{{ Auth::user()->name }}</h6>
-                        <span>Admin</span>
+                        <span>{{Auth::user()->role->role_name}}</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle {{ (Request::is('product*') || Request::is('catalog*') || Request::is('heathy*')) ? 'active' : '' }} " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
-                        <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('product*') || Request::is('catalog*') || Request::is('heathy*')) ? 'show' : '' }}">
+                        <a href="#" class="nav-link dropdown-toggle {{ (Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'active' : '' }} " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
+                        <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'show' : '' }}">
                             <a href="{{ route('product.index') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('product.index') ? 'active' : '' }}">&nbsp;&nbsp;Product Management</a>
-                            <a href="{{ route('catalog.index') }}" class="bi-tag m-2 dropdown-item {{ Request::routeIs('catalog.index') ? 'active' : '' }}">&nbsp;&nbsp;Catagory</a>
+                            <a href="{{ route('catalog.index') }}" class="bi-tag m-2 dropdown-item {{ Request::routeIs('catalog.index') ? 'active' : '' }}">&nbsp;&nbsp;Category</a>
+                            <a href="{{ route('discount.index') }}" class="bi-lightning m-2 dropdown-item {{ Request::routeIs('discount.index') ? 'active' : '' }}">&nbsp;&nbsp;Discount</a>
                             <a href="{{ route('heathy.index') }}" class="m-2 dropdown-item {{ Request::routeIs('heathy.index') ? 'active' : '' }}">💞&nbsp;&nbsp;Heathy Type</a>
                         </div>
                     </div>
@@ -115,9 +116,7 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control bg-dark border-0" type="search" placeholder="Search">
-                </form>
+
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">

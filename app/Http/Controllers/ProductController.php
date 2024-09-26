@@ -13,7 +13,9 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         // Lấy tất cả danh mục sức khỏe
-        $heathyCatalogs = HeathyCatalog::all();
+        $heathyCatalogs = HeathyCatalog::where('isdelete', '<>', 1)
+                        ->orWhereNull('isdelete')
+                        ->get();
 
         // Lọc danh sách sản phẩm theo danh mục sức khỏe đã chọn
         $products = Product::where(function ($q) {
@@ -31,7 +33,6 @@ class ProductController extends Controller
                           ->havingRaw('COUNT(DISTINCT link_product_heathy.heath_id) = ?', [count($heathIds)]);
                 }
             })->get();
-
 
         // Trả về toàn bộ trang 'client.heathyfilter'
         return view('client.heathyfilter', compact('products', 'heathyCatalogs'));
@@ -87,6 +88,7 @@ class ProductController extends Controller
             'max_price' => $maxPrice,
         ]);
 
+
         // Lấy danh sách tất cả các danh mục
         $categories = Catalog::where(function ($query) {
             $query->where('isdelete', '<>', 1)
@@ -130,6 +132,7 @@ class ProductController extends Controller
         $query->where('isdelete', '<>', 1)
               ->orWhereNull('isdelete');
     })->get();
+
 
     // Trả về view shop_all với danh sách sản phẩm lọc theo danh mục
     return view('client.shop.shop_all', compact('products', 'categories'));

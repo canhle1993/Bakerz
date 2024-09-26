@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
     protected $table = 'user'; // Tên bảng trong cơ sở dữ liệu
     protected $primaryKey = 'user_id';
 
@@ -55,5 +56,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'role_id');
+    }
+
 }

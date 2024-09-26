@@ -27,7 +27,9 @@ class ClientController extends Controller
     public function filter(Request $request)
     {
         // Lấy tất cả danh mục sức khỏe
-        $heathyCatalogs = HeathyCatalog::all();
+        $heathyCatalogs = HeathyCatalog::where('isdelete', '<>', 1)
+                        ->orWhereNull('isdelete')
+                        ->get();
 
         // Lọc danh sách sản phẩm theo danh mục sức khỏe đã chọn
         $products = Product::where(function ($q) {
@@ -48,8 +50,9 @@ class ClientController extends Controller
 
         $client = User::all();
         
+        $discount_products = Product::whereHas('discounts')->get();
         // Trả về toàn bộ trang 'client.heathyfilter'
-        return view('client.home', compact('products', 'heathyCatalogs', 'client'));
+        return view('client.home', compact('products', 'heathyCatalogs', 'client','discount_products'));
     }
 
 }

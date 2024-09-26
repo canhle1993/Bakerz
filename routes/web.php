@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -176,6 +177,18 @@ use App\Http\Controllers\Admin\CategoryController;
 
 Route::resource('catalog', CategoryController::class);
 
+//route cho heathy trang admin
+use App\Http\Controllers\Admin\HeathyController;
+
+Route::resource('heathy', HeathyController::class);
+
+//route cho discount trang admin
+use App\Http\Controllers\Admin\DiscountController;
+
+Route::resource('discount', DiscountController::class);
+Route::get('/discount/{discount}/setup', [DiscountController::class, 'setup'])->name('discount.setup');
+Route::get('/discount/updatesaleoff/{product_id}/{id}', [DiscountController::class, 'update_discount'])->name('discount.update_discount');
+Route::delete('/discount/deletealeoff/{product_id}/{id}', [DiscountController::class, 'destroy_discount'])->name('discount.destroy_discount');
 
 //Show thông tin sản phẩm khi người dùng bấm quick view
 Route::get('/quickview', [ProductController::class, 'quickView'])->name('quickview');
@@ -185,5 +198,3 @@ use App\Http\Controllers\Admin\CartController;
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
-
-Route::resource('heathy', HeathyController::class);

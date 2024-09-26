@@ -197,6 +197,7 @@
                                         <a href="{{ route('product.show', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
                                     </h5>
                                     <span class="product-item__price">${{ number_format($product->price, 2) }}</span>
+
                                 </div>
                             </div>
                             <!-- Product Item End -->
@@ -220,6 +221,7 @@
                                     <button class="sidebars_search__btn" type="submit"><i class="lastudioicon-zoom-1"></i></button>
                                 </form>
                                 <!-- Search Widget End -->
+
 
 
                              <!-- Category Widget Start -->
@@ -572,6 +574,7 @@
     </div>
 
     {{-- QuickView --}}
+
 
     @include('layouts.footer')
 </body>
