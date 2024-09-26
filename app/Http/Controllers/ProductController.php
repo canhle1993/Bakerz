@@ -26,7 +26,7 @@ class ProductController extends Controller
                 // Nếu có yêu cầu lọc theo heath_id
                 if ($request->has('heath_id')) {
                     $heathIds = $request->heath_id;
-            
+
                     // Điều kiện AND: mỗi sản phẩm phải có đầy đủ các heath_id
                     $query->whereIn('link_product_heathy.heath_id', $heathIds)
                           ->groupBy('product_id')
@@ -39,92 +39,134 @@ class ProductController extends Controller
     }
 
 
-        public function all_product(Request $request)
+    public function all_product(Request $request)
     {
-        // Lấy giá trị sắp xếp từ request, mặc định là 'price-ascending'
         $sort = $request->get('sort', 'price-ascending');
-
-        // Lấy từ khóa tìm kiếm từ request (nếu có)
         $query = $request->input('query');
-
-        // Lấy danh mục từ request (nếu có)
         $categoryId = $request->get('category_id');
-
+        $paginateBy = $request->get('paginate', 9);
+        $minPrice = $request->get('min_price', 0);
+        $maxPrice = $request->get('max_price', 50);
         // Khởi tạo query cho sản phẩm
         $products = Product::query();
 
+        // Lọc những sản phẩm không bị xóa
         $products->where(function ($query) {
             $query->where('isdelete', '<>', 1)
                   ->orWhereNull('isdelete');
         });
-        
-        // Kiểm tra nếu có từ khóa tìm kiếm
+
+        // Tìm kiếm sản phẩm theo từ khóa
         if ($query) {
-            // Tìm kiếm sản phẩm theo tên chứa từ khóa
             $products->where('product_name', 'like', '%' . $query . '%');
         }
 
-        // Kiểm tra nếu có lọc theo danh mục
+        // Lọc theo danh mục nếu có
         if ($categoryId) {
             $products->whereHas('catalogs', function ($query) use ($categoryId) {
-                // Sử dụng đúng tên bảng liên kết là linkcatalogproduct
                 $query->where('linkcatalogproduct.category_id', $categoryId);
             });
         }
 
-        // Sắp xếp theo giá
+        // Lọc sản phẩm theo khoảng giá
+        $products->whereBetween('price', [$minPrice, $maxPrice]);
+
+        // Sắp xếp sản phẩm
         if ($sort == 'price-ascending') {
             $products->orderBy('price', 'asc');
         } elseif ($sort == 'price-descending') {
             $products->orderBy('price', 'desc');
         }
 
-        // Phân trang 10 sản phẩm, đồng thời duy trì từ khóa tìm kiếm và danh mục
-        $products = $products->paginate(12)->appends(['query' => $query, 'sort' => $sort, 'category_id' => $categoryId]);
+        // Phân trang sản phẩm dựa trên lựa chọn người dùng
+        $products = $products->paginate($paginateBy)->appends([
+            'query' => $query,
+            'sort' => $sort,
+            'category_id' => $categoryId,
+            'paginate' => $paginateBy,
+            'min_price' => $minPrice,
+            'max_price' => $maxPrice,
+        ]);
+
 
         // Lấy danh sách tất cả các danh mục
-        $categories = Catalog::query()
-        ->where(function ($query) {
+        $categories = Catalog::where(function ($query) {
             $query->where('isdelete', '<>', 1)
-                ->orWhere('isdelete', null);
-        })
-        ->get();
+                  ->orWhereNull('isdelete');
+        })->get();
 
-
-        // Trả về view với danh sách sản phẩm, danh mục và từ khóa tìm kiếm (nếu có)
-        return view('client.shop.shop_all', ['products' => $products, 'categories' => $categories, 'query' => $query]);
+        return view('client.shop.shop_all', [
+            'products' => $products,
+            'categories' => $categories,
+            'query' => $query,
+        ]);
     }
+
 
 
 
 
     //Chức năng xử lý trả sản phẩm khi client bấm vào danh mục
     public function filterByCategory($category_id)
-    {
-        // Lấy danh mục đã chọn
-        $category = Category::find($category_id);
+{
+    // Tìm danh mục dựa trên category_id
+    $category = Catalog::find($category_id);
 
-        if (!$category) {
-            // Nếu danh mục không tồn tại, trả về tất cả sản phẩm
-            return redirect()->route('shop_all');
-        }
-
-        // Lọc sản phẩm theo danh mục
-        $products = Product::whereHas('catalogs', function ($query) use ($category_id) {
-            $query->where('category_id', $category_id);
-        })->paginate(12);
-
-        // Lấy tất cả danh mục để hiển thị
-        $categories = Category::where('isdelete', '<>', 1)
-                    ->orWhere('isdelete', null);
-
-        return view('client.shop.shop_all', compact('products', 'categories'));
+    // Nếu không tìm thấy danh mục, chuyển hướng về trang tất cả sản phẩm
+    if (!$category) {
+        return redirect()->route('shop_all');
     }
 
-    public function showdetail($id){
+    // Lọc các sản phẩm theo danh mục
+    $products = Product::whereHas('catalogs', function ($query) use ($category_id) {
+        $query->where('linkcatalogproduct.category_id', $category_id);
+    })
+    ->where(function ($query) {
+        $query->where('isdelete', '<>', 1)
+              ->orWhereNull('isdelete');
+    })
+    ->paginate(9); // Phân trang nếu cần
+
+    // Lấy tất cả các danh mục để hiển thị
+    $categories = Catalog::where(function ($query) {
+        $query->where('isdelete', '<>', 1)
+              ->orWhereNull('isdelete');
+    })->get();
+
+
+    // Trả về view shop_all với danh sách sản phẩm lọc theo danh mục
+    return view('client.shop.shop_all', compact('products', 'categories'));
+}
+
+
+
+
+    public function getProductDetails($id)
+{
+    $product = Product::find($id);
+
+    if (!$product) {
+        return response()->json(['error' => 'Product not found'], 404);
+    }
+
+    return response()->json([
+        'product_id' => $product->product_id,
+        'product_name' => $product->product_name,
+        'price' => $product->price,
+        'description' => $product->describe,
+        'image' => $product->image,
+    ]);
+}
+
+public function singleProduct($id)
+    {
+        // Tìm sản phẩm dựa trên product_id
         $product = Product::findOrFail($id);
 
-
-        return view('client/shop/product-types/single-product', compact('product'));
+        // Trả về view và truyền dữ liệu sản phẩm vào
+        return view('client.shop.product-types.single-product', compact('product'));
     }
+
+
+
 }
