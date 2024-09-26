@@ -301,6 +301,19 @@
                     alt="Product"
                 /></a>
                 <ul class="product-item__meta">
+                 <li class="product-item__meta-action">
+                    <a
+                      class="labtn-icon-quickview"
+                      href="#"
+                      data-bs-tooltip="tooltip"
+                      data-bs-placement="top"
+                      title=""
+                      data-bs-original-title="Quick View"
+                      aria-label="Quick View"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleProductModal"
+                    ></a>
+                  </li>
                   <li class="product-item__meta-action">
                     <a
                       class="shadow-1 labtn-icon-cart"
@@ -323,17 +336,7 @@
                       data-bs-target="#modalWishlist"
                     ></a>
                   </li>
-                  <li class="product-item__meta-action">
-                    <a
-                      class="shadow-1 labtn-icon-compare"
-                      href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title="Add to compare"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalCompare"
-                    ></a>
-                  </li>
+
                 </ul>
               </div>
               <div class="product-item__content pt-5">
@@ -389,13 +392,23 @@
                                     <a href="single-product.html"><img width="350" height="350" src="img/Baked Goods/Apple Pie/Apple Pie.png" alt="Product"></a>
                                     <ul class="product-item__meta">
                                         <li class="product-item__meta-action">
+                                            <a
+                                            class="labtn-icon-quickview"
+                                            href="#"
+                                            data-bs-tooltip="tooltip"
+                                            data-bs-placement="top"
+                                            title=""
+                                            data-bs-original-title="Quick View"
+                                            aria-label="Quick View"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleProductModal"
+                                            ></a>
+                                        </li>
+                                        <li class="product-item__meta-action">
                                             <a class="shadow-1 labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
                                         </li>
                                         <li class="product-item__meta-action">
                                             <a class="shadow-1 labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -464,13 +477,21 @@
                                     <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-5-500x625.jpg" alt="Product"></a>
                                     <ul class="product-item__meta">
                                         <li class="product-item__meta-action">
+                                            <a
+                                            class="shadow-1 labtn-icon-wishlist"
+                                            href="#"
+                                            data-bs-tooltip="tooltip"
+                                            data-bs-placement="top"
+                                            title="Add to wishlist"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalWishlist"
+                                            ></a>
+                                        </li>
+                                        <li class="product-item__meta-action">
                                             <a class="shadow-1 labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
                                         </li>
                                         <li class="product-item__meta-action">
                                             <a class="shadow-1 labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -650,19 +671,6 @@
                       data-bs-target="#modalWishlist"
                     ></a>
                   </li>
-                  <li class="product-item__meta-action">
-                    <a
-                      class="labtn-icon-compare"
-                      href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title=""
-                      data-bs-original-title="Add to compare"
-                      aria-label="Add to compare"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalCompare"
-                    ></a>
-                  </li>
                 </ul>
               </div>
               <!-- Product Item End -->
@@ -732,7 +740,6 @@
                                         <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
                                         <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
                                         <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
                                     </ul>
                                 </div>
                                 <!-- Product Item End -->
@@ -849,9 +856,8 @@
                                             <li class="product-item__meta-action">
                                                 <a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
                                             </li>
-                                            <li class="product-item__meta-action">
-                                                <a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                            </li>
+                                            <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
+
                                         </ul>
                                     </div>
                                     <div class="product-item__content">
