@@ -34,6 +34,29 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="./assets/css/style.css">
 
+    <script>
+            $(window).on("scroll", function (event) {
+            var scroll = $(window).scrollTop();
+            if (scroll <= 0) {
+                $(
+                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
+                ).removeClass("sticky");
+                $(".header-sticky .header-logo img").attr(
+                    "src",
+                    "{{asset('assets/images/logo-white.svg')}}"
+                );
+            } else {
+                $(
+                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
+                ).addClass("sticky");
+                $(".header-sticky .header-logo img").attr(
+                    "src",
+                    "{{asset('assets/images/logo.svg')}}"
+                );
+            }
+        });
+    </script>
+
 </head>
 
 <body>
