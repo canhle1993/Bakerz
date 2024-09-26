@@ -10,16 +10,13 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-<<<<<<< HEAD
 
-=======
     protected $table = 'user'; // Tên bảng trong cơ sở dữ liệu
     protected $primaryKey = 'user_id';
 
     public $timestamps = true;
     const CREATED_AT = 'CreatedDate';
     const UPDATED_AT = 'ModifiedDate';
->>>>>>> 1fb4cbb0b5b95f7829e960a184d68e887ca76077
     /**
      * The attributes that are mass assignable.
      *
@@ -29,10 +26,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-<<<<<<< HEAD
-    ];
-
-=======
         'role_id',
         'phone',
         'gender',
@@ -41,7 +34,6 @@ class User extends Authenticatable
         'note',
         'avatar',
     ];
->>>>>>> 1fb4cbb0b5b95f7829e960a184d68e887ca76077
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -64,16 +56,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-<<<<<<< HEAD
-
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
-=======
-<<<<<<< HEAD
-=======
->>>>>>> quanguyen/QuaNguyen
-    
->>>>>>> 1fb4cbb0b5b95f7829e960a184d68e887ca76077
+
 }

@@ -34,7 +34,6 @@ class ProductController extends Controller
                 }
             })->get();
 
-
         // Trả về toàn bộ trang 'client.heathyfilter'
         return view('client.heathyfilter', compact('products', 'heathyCatalogs'));
     }

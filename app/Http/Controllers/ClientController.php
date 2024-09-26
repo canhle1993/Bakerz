@@ -50,8 +50,9 @@ class ClientController extends Controller
 
         $client = User::all();
         
+        $discount_products = Product::whereHas('discounts')->get();
         // Trả về toàn bộ trang 'client.heathyfilter'
-        return view('client.home', compact('products', 'heathyCatalogs', 'client'));
+        return view('client.home', compact('products', 'heathyCatalogs', 'client','discount_products'));
     }
 
 }
