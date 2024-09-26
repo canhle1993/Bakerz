@@ -101,16 +101,16 @@
 </head>
 
 <body>
-@include('layouts.header')
+<?php echo $__env->make('layouts.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- Breadcrumb Section Start -->
-    <div class="breadcrumb" data-bg-image="{{ asset('assets/images/bg/breadcrumb-bg.jpg') }}">
+    <div class="breadcrumb" data-bg-image="<?php echo e(asset('assets/images/bg/breadcrumb-bg.jpg')); ?>">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <h1 class="breadcrumb_title">Shop</h1>
                         <ul class="breadcrumb_list">
-                            <li><a href="{{ route('client.home') }}">Home</a></li>
+                            <li><a href="<?php echo e(route('client.home')); ?>">Home</a></li>
                             <li>Shop All Products</li>
                         </ul>
                     </div>
@@ -130,17 +130,17 @@
 <div class="shop-topbar">
 
     <div class="shop-topbar-item shop-topbar-left">
-        <p>Showing {{ $products->firstItem() }} - {{ $products->lastItem() }} of {{ $products->total() }} result</p>
+        <p>Showing <?php echo e($products->firstItem()); ?> - <?php echo e($products->lastItem()); ?> of <?php echo e($products->total()); ?> result</p>
     </div>
 
     <div class="shop-topbar-right">
         <div class="shop-topbar-item">
-            <form id="sortForm" action="{{ route('shop_all') }}" method="GET">
+            <form id="sortForm" action="<?php echo e(route('shop_all')); ?>" method="GET">
                 <select name="sort" id="SortBy" onchange="document.getElementById('sortForm').submit();">
-                    <option value="manual" {{ request('sort') == 'manual' ? 'selected' : '' }}>Sort by Rated</option>
-                    <option value="best-selling" {{ request('sort') == 'best-selling' ? 'selected' : '' }}>Sort by Latest</option>
-                    <option value="price-ascending" {{ request('sort') == 'price-ascending' ? 'selected' : '' }}>Price ↑</option>
-                    <option value="price-descending" {{ request('sort') == 'price-descending' ? 'selected' : '' }}>Price ↓</option>
+                    <option value="manual" <?php echo e(request('sort') == 'manual' ? 'selected' : ''); ?>>Sort by Rated</option>
+                    <option value="best-selling" <?php echo e(request('sort') == 'best-selling' ? 'selected' : ''); ?>>Sort by Latest</option>
+                    <option value="price-ascending" <?php echo e(request('sort') == 'price-ascending' ? 'selected' : ''); ?>>Price ↑</option>
+                    <option value="price-descending" <?php echo e(request('sort') == 'price-descending' ? 'selected' : ''); ?>>Price ↓</option>
                 </select>
             </form>
         </div>
@@ -154,19 +154,19 @@
                     <!-- Product Section Start -->
 
                     <div class="row row-cols-xl-3 row-cols-lg-2 row-cols-sm-2 row-cols-1 mb-n50">
-                        @foreach ($products as $product)
+                        <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col mb-50">
                             <!-- Product Item Start -->
                             <div class="product-item text-center">
 
                                 <div class="product-item__image border w-100">
-                                    <a href="{{ route('product.single', ['product' => $product->product_id]) }}">
+                                    <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>">
 
-                                        <img width="350" height="350" src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}">
+                                        <img width="350" height="350" src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="<?php echo e($product->product_name); ?>">
                                     </a>
                                     <ul class="product-item__meta">
                                         <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-id="{{ $product->product_id }}" data-bs-toggle="modal" data-bs-target="#exampleProductModal" title="Quick View"></a>
+                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-id="<?php echo e($product->product_id); ?>" data-bs-toggle="modal" data-bs-target="#exampleProductModal" title="Quick View"></a>
 
                                         </li>
                                         <li class="product-item__meta-action">
@@ -182,19 +182,19 @@
                                 </div>
                                 <div class="product-item__content pt-5">
                                     <h5 class="product-item__title">
-                                        <a href="{{ route('product.show', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
+                                        <a href="<?php echo e(route('product.show', ['product' => $product->product_id])); ?>"><?php echo e($product->product_name); ?></a>
                                     </h5>
-                                    <span class="product-item__price">${{ number_format($product->price, 2) }}</span>
+                                    <span class="product-item__price">$<?php echo e(number_format($product->price, 2)); ?></span>
 
                                 </div>
                             </div>
                             <!-- Product Item End -->
                         </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <!-- Shop bottom Bar Start -->
                     <div class="shop-bottombar">
-                        <div class="pagination">{{ $products->links('client.custom-pagination') }}</div>
+                        <div class="pagination"><?php echo e($products->links('client.custom-pagination')); ?></div>
                     </div>
 
                     <!-- Shop bottom Bar End -->
@@ -204,8 +204,8 @@
                     <div class="sidebars">
                         <div class="sidebars_inner">
                            <!-- Search Widget Start -->
-                                <form action="{{ route('shop_all') }}" method="GET" class="sidebars_search">
-                                    <input type="text" name="query" placeholder="Search Here" class="sidebars_search__input" value="{{ request()->query('query') }}">
+                                <form action="<?php echo e(route('shop_all')); ?>" method="GET" class="sidebars_search">
+                                    <input type="text" name="query" placeholder="Search Here" class="sidebars_search__input" value="<?php echo e(request()->query('query')); ?>">
                                     <button class="sidebars_search__btn" type="submit"><i class="lastudioicon-zoom-1"></i></button>
                                 </form>
                                 <!-- Search Widget End -->
@@ -216,9 +216,9 @@
                                     <div class="sidebars_widget">
                                         <h3 class="sidebars_widget__title">Category</h3>
                                         <ul class="sidebars_widget__category">
-                                            @foreach ($categories as $category)
-                                            <li><a href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}">{{ $category->category_name }}</a></li>
-                                            @endforeach
+                                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <li><a href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><?php echo e($category->category_name); ?></a></li>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </ul>
                                     </div>
                              <!-- Category Widget End -->
@@ -363,7 +363,7 @@
     <!-- Scroll Top End -->
 
 
-    {{-- QuickView --}}
+    
 
 
     <div class="quickview-product-modal modal fade" id="exampleProductModal">
@@ -561,10 +561,10 @@
         </div>
     </div>
 
-    {{-- QuickView --}}
+    
 
 
-    @include('layouts.footer')
+    <?php echo $__env->make('layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </body>
 
 
@@ -585,7 +585,7 @@
                 ).removeClass("sticky");
                 $(".header-sticky .header-logo img").attr(
                     "src",
-                    "{{asset('assets/images/logo-white.svg')}}"
+                    "<?php echo e(asset('assets/images/logo-white.svg')); ?>"
                 );
             } else {
                 $(
@@ -593,7 +593,7 @@
                 ).addClass("sticky");
                 $(".header-sticky .header-logo img").attr(
                     "src",
-                    "{{asset('assets/images/logo.svg')}}"
+                    "<?php echo e(asset('assets/images/logo.svg')); ?>"
                 );
             }
         });
@@ -655,4 +655,4 @@ $(document).on('click', '.labtn-icon-quickview', function() {
 </script>
 
 
-</html>
+</html><?php /**PATH C:\xampp\htdocs\baker-bite\resources\views/client/shop/shop_all.blade.php ENDPATH**/ ?>

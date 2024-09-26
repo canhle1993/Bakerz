@@ -17,7 +17,6 @@ class User extends Authenticatable
     public $timestamps = true;
     const CREATED_AT = 'CreatedDate';
     const UPDATED_AT = 'ModifiedDate';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -35,7 +34,6 @@ class User extends Authenticatable
         'note',
         'avatar',
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -58,9 +56,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
+
 }

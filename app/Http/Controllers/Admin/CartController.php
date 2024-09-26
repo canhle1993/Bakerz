@@ -96,4 +96,3 @@ class CartController extends Controller
         return response()->json(['message' => 'Invalid request'], 400);
     }
 }
-
