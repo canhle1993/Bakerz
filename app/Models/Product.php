@@ -39,6 +39,58 @@ class Product extends Model
         return $this->hasMany(ProductImage::class, 'product_id');
     }
 
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'product_id');
+    }
+    
+    public function getDiscountedPrice()
+    {
+        // Lấy tất cả các discount của sản phẩm
+        // Lấy tất cả các discount của sản phẩm dựa trên this_product_id
+        $discounts = $this->discounts()
+        ->where(function ($query) {
+            $query->where('discount.isdelete', '<>', 1)
+                ->orWhereNull('discount.isdelete');
+        })
+        ->where('discountproduct.product_id', $this->product_id) // Điều kiện product_id
+        ->get();
 
+        // Tính tổng phần trăm giảm giá từ tất cả các discount
+        $totalDiscount = $discounts->sum(function ($discount) {
+            return $discount->discount;
+        });
+        
+        $unitPrice= $this->price;
+        // Tính giá sau khi giảm
+        $discountedPrice = $unitPrice - ($unitPrice * $totalDiscount);
+
+        if ($totalDiscount>1){
+            $discountedPrice = 0;
+        }
+        // Trả về giá đã giảm
+        return $discountedPrice;
+    }
+
+    public function getDiscountPercent()
+    {
+        // Lấy tất cả các discount của sản phẩm
+        // Lấy tất cả các discount của sản phẩm dựa trên this_product_id
+        $discounts = $this->discounts()
+        ->where(function ($query) {
+            $query->where('discount.isdelete', '<>', 1)
+                ->orWhereNull('discount.isdelete');
+        })
+        ->where('discountproduct.product_id', $this->product_id) // Điều kiện product_id
+        ->get();
+
+        // Tính tổng phần trăm giảm giá từ tất cả các discount
+        $totalDiscount = $discounts->sum(function ($discount) {
+            return $discount->discount;
+        });
+        
+        // Trả về giá đã giảm
+        return $totalDiscount * 100;
+    }
 }
 

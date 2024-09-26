@@ -198,3 +198,6 @@ use App\Http\Controllers\Admin\CartController;
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+
+Route::post('/cart/new_add', [CartController::class, 'new_addToCart'])->name('cart.new_add');
+Route::get('/cart/show', [CartController::class, 'showCart'])->name('cart.show');

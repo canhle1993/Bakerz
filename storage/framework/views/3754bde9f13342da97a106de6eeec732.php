@@ -32,6 +32,8 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/style.css')); ?>">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+
 
     <style>
       .hidden-form {
@@ -259,16 +261,16 @@
 <div
   class="section-padding-03 pt-0"
   id="a1"
-  style="padding-top: 35px !important"
->
-  <div class="container">
+  style="padding-top: 35px !important; padding-bottom: 80px !important;">
+  <div class="container" id="a2">
     <div class="row">
       <div class="col-12">
         <!-- Section Title Strat -->
         <div class="section-title">
           <h2 class="section-title__title">
-            Products suitable for your health
-          </h2>
+            Products suitable for your health _______________ <a href="shop.html" class="read-more"
+            ><span>show more</span
+            ></a></h2>
         </div>
         <!-- Section Title End -->
       </div>
@@ -317,13 +319,9 @@
                   </li>
                   <li class="product-item__meta-action">
                     <a
-                      class="shadow-1 labtn-icon-cart"
+                      class="shadow-1 labtn-icon-cart add-to-cart"
                       href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title="Add to Cart"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalCart"
+                      data-product-id="<?php echo e($product->product_id); ?>"
                     ></a>
                   </li>
                   <li class="product-item__meta-action">
@@ -376,7 +374,9 @@
                 <div class="col-12">
                     <!-- Section Title Strat -->
                     <div class="section-title">
-                        <h2 class="section-title__title">Most recently purchased product</h2>
+                        <h2 class="section-title__title">Most recently purchased product _______________ <a href="shop.html" class="read-more"
+                        ><span>show more</span
+                        ></a></h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
@@ -602,15 +602,12 @@
             <div class="swiper-slide">
               <!-- Product Item Start -->
               <div class="product-item product-item-05 border text-center">
-                <?php if($disproduct->price>1): ?>
-                <!-- TODO:CHEAT -->
                 <div
-                  class="product-item__badge"
-                  style="background-color: red !important"
-                >
-                  Best Seller
-                </div>
-                <?php endif; ?>
+                    class="product-item__badge"
+                    style="background-color: red !important"
+                    >
+                    Sale <h6 style="color: white;"> <?php echo e($disproduct->getDiscountPercent()); ?> %</h6>
+                    </div>
                 <div class="product-item__image">
                   <a href="single-product.html"
                     ><img
@@ -628,7 +625,7 @@
                   </h5>
                     <span class="product-item__price">
                         <span class="original-price"><?php echo e(formatPriceVND($disproduct->price)); ?></span>
-                        <span class="discounted-price"><?php echo e(formatPriceVND($disproduct->discounted_price)); ?></span> <!-- Giá mới -->
+                        <span class="discounted-price"><?php echo e(formatPriceVND($disproduct->getDiscountedPrice())); ?></span> <!-- Giá mới -->
                     </span>
                  
                 </div>
@@ -1434,6 +1431,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
       document
         .getElementById("healthSuggestionBtn")
         .addEventListener("click", function () {
@@ -1458,24 +1456,24 @@
     });
 
 
- // Hàm để kiểm tra và cập nhật trạng thái của checkbox
- function updateHeathStatus(bmi) {
-    // Lấy checkbox "Thừa Cân" và "Thiếu Cân"
-    var thuaCanCheckbox = $('input[name="heath_id[]"][value="4"]');// 4 là thừa cân
-    var thieuCanCheckbox = $('input[name="heath_id[]"][value="5"]');// 5 là thiếu cân
+    // Hàm để kiểm tra và cập nhật trạng thái của checkbox
+    function updateHeathStatus(bmi) {
+        // Lấy checkbox "Thừa Cân" và "Thiếu Cân"
+        var thuaCanCheckbox = $('input[name="heath_id[]"][value="4"]');// 4 là thừa cân
+        var thieuCanCheckbox = $('input[name="heath_id[]"][value="5"]');// 5 là thiếu cân
 
-    // Xử lý tự động check/uncheck dựa vào BMI
-    if (bmi >= 25) {
-        thuaCanCheckbox.prop('checked', true);
-        thieuCanCheckbox.prop('checked', false);
-    } else if (bmi < 18.5) {
-        thieuCanCheckbox.prop('checked', true);
-        thuaCanCheckbox.prop('checked', false);
-    } else {
-        thuaCanCheckbox.prop('checked', false);
-        thieuCanCheckbox.prop('checked', false);
+        // Xử lý tự động check/uncheck dựa vào BMI
+        if (bmi >= 25) {
+            thuaCanCheckbox.prop('checked', true);
+            thieuCanCheckbox.prop('checked', false);
+        } else if (bmi < 18.5) {
+            thieuCanCheckbox.prop('checked', true);
+            thuaCanCheckbox.prop('checked', false);
+        } else {
+            thuaCanCheckbox.prop('checked', false);
+            thieuCanCheckbox.prop('checked', false);
+        }
     }
-}
 
     // Bắt sự kiện khi người dùng nhập chiều cao và cân nặng để tính BMI
     $('#heightInput, #weightInput').on('input', function() {
@@ -1545,7 +1543,9 @@
     });
     
     window.addEventListener('load', function() {
+        document.getElementById('a2').style.display = 'none';  // Show the product section
         if (sessionStorage.getItem('scrollToA1') === 'true') {
+            document.getElementById('a2').style.display = 'block';  // Show the product section
             document.getElementById('a1').scrollIntoView({
                 behavior: 'smooth'
             });
@@ -1553,6 +1553,52 @@
             sessionStorage.removeItem('scrollToA1');
         }
     });
+
+    // Add Cart
+    $(document).ready(function() {
+        $('.add-to-cart').on('click', function(e) {
+            e.preventDefault();
+
+            var productId = $(this).data('product-id');
+            $.ajax({
+                url: "<?php echo e(route('cart.new_add')); ?>",
+                method: "POST",
+                data: {
+                    _token: "<?php echo e(csrf_token()); ?>", // Gửi CSRF token
+                    product_id: productId,
+                    quantity: 1 // Số lượng sản phẩm có thể thay đổi
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Hiển thị modal sau khi thêm thành công
+                        // $('#modalCart').modal('show');
+                        updateCartView();
+
+                    } else {
+                        alert(response.message); // Hiển thị thông báo lỗi
+                    }
+                },
+                error: function(xhr) {
+                    // alert('An error occurred. Please try again.');
+                    console.error('Response:', xhr.responseText);
+                }
+            });
+        });
+    });
+
+    // Hàm cập nhật hiển thị giỏ hàng mà không load lại trang
+    function updateCartView() {
+        $.ajax({
+            url: "<?php echo e(route('cart.show')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
+            method: "GET",
+            success: function(response) {
+                $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+            },
+            error: function(xhr) {
+                alert('An error occurred while updating the cart.');
+            }
+        });
+    }
     </script>
 </body>
 
