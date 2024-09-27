@@ -295,7 +295,7 @@
               </div>
               @endif
               <div class="product-item__image border w-100">
-                <a href="single-product.html"
+                <a href="{{ route('product.single', ['product' => $product->product_id]) }}"
                   ><img
                     width="350"
                     height="350"
@@ -339,7 +339,7 @@
               </div>
               <div class="product-item__content pt-5">
                 <h5 class="product-item__title">
-                  <a href="single-product.html">{{ $product->product_name }}</a>
+                  <a href="{{ route('product.single', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
                 </h5>
                 <span class="product-item__price"
                   >{{ formatPriceVND($product->price) }}</span
@@ -605,10 +605,10 @@
                     class="product-item__badge"
                     style="background-color: red !important"
                     >
-                    Sale <h6 style="color: white;"> {{$disproduct->getDiscountPercent() }} %</h6>
+                    <h6 style="color: white;"> {{$disproduct->getDiscountPercent() }} %</h6>
                     </div>
                 <div class="product-item__image">
-                  <a href="single-product.html"
+                  <a href="{{ route('product.single', ['product' => $disproduct->product_id]) }}"
                     ><img
                       width="250"
                       height="250"
@@ -618,7 +618,7 @@
                 </div>
                 <div class="product-item__content">
                   <h5 class="product-item__title">
-                    <a href="single-product.html"
+                    <a href="{{ route('product.single', ['product' => $disproduct->product_id]) }}"
                       >{{ $disproduct->product_name }}</a
                     >
                   </h5>
@@ -644,15 +644,9 @@
                   </li>
                   <li class="product-item__meta-action">
                     <a
-                      class="labtn-icon-cart"
+                      class="shadow-1 labtn-icon-cart add-to-cart"
                       href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title=""
-                      data-bs-original-title="Select options"
-                      aria-label="Select options"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalCart"
+                      data-product-id="{{ $disproduct->product_id }}"
                     ></a>
                   </li>
                   <li class="product-item__meta-action">
@@ -727,7 +721,7 @@
                                 <!-- Product Item Start -->
                                 <div class="product-item product-item-05 border text-center">
                                     <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-12-500x625.jpg" alt="Product"></a>
+                                        <a href="single-product.html"><img width="250" height="250" src="img/product-8-1.png" alt="Product"></a>
                                     </div>
                                     <div class="product-item__content">
                                         <h5 class="product-item__title"><a href="single-product.html">Raisin Bread</a></h5>
@@ -1553,37 +1547,39 @@
         }
     });
 
-    // Add Cart
     $(document).ready(function() {
-        $('.add-to-cart').on('click', function(e) {
-            e.preventDefault();
+    $('.add-to-cart').on('click', function(e) {
+        e.preventDefault();
 
-            var productId = $(this).data('product-id');
-            $.ajax({
-                url: "{{ route('cart.new_add') }}",
-                method: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}", // Gửi CSRF token
-                    product_id: productId,
-                    quantity: 1 // Số lượng sản phẩm có thể thay đổi
-                },
-                success: function(response) {
-                    if (response.status === 'success') {
-                        // Hiển thị modal sau khi thêm thành công
-                        // $('#modalCart').modal('show');
-                        updateCartView();
-
-                    } else {
-                        alert(response.message); // Hiển thị thông báo lỗi
-                    }
-                },
-                error: function(xhr) {
-                    // alert('An error occurred. Please try again.');
-                    console.error('Response:', xhr.responseText);
+        var productId = $(this).data('product-id');
+        $.ajax({
+            url: "{{ route('cart.new_add') }}",
+            method: "POST",
+            data: {
+                _token: "{{ csrf_token() }}", 
+                product_id: productId,
+                quantity: 1
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    // Cập nhật số lượng sản phẩm trong giỏ hàng
+                    updateCartView();
+                    updateCartQuantity(response.totalQuantity);
+                } else {
+                    alert(response.message);
                 }
-            });
+            },
+            error: function(xhr) {
+                console.error('Error:', xhr.responseText);
+            }
         });
     });
+});
+
+// function updateCartQuantity(totalQuantity) {
+//     // Cập nhật số lượng hiển thị
+//     $('.badge.bg-primary').text(totalQuantity);
+// }
 
     // Hàm cập nhật hiển thị giỏ hàng mà không load lại trang
     function updateCartView() {
@@ -1598,6 +1594,7 @@
             }
         });
     }
+    
     </script>
 </body>
 

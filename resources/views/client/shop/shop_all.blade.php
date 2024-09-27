@@ -170,7 +170,11 @@
 
                                         </li>
                                         <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
+                                            <a
+                                            class="shadow-1 labtn-icon-cart add-to-cart"
+                                            href="#"
+                                            data-product-id="{{ $product->product_id }}"
+                                            ></a>
                                         </li>
                                         <li class="product-item__meta-action">
                                             <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
@@ -649,6 +653,51 @@ $(document).on('click', '.labtn-icon-quickview', function() {
     }
 });
 
+   // Add Cart
+   $(document).ready(function() {
+        $('.add-to-cart').on('click', function(e) {
+            e.preventDefault();
+
+            var productId = $(this).data('product-id');
+            $.ajax({
+                url: "{{ route('cart.new_add') }}",
+                method: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}", // Gửi CSRF token
+                    product_id: productId,
+                    quantity: 1 // Số lượng sản phẩm có thể thay đổi
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Hiển thị modal sau khi thêm thành công
+                        // $('#modalCart').modal('show');
+                        updateCartView();
+
+                    } else {
+                        alert(response.message); // Hiển thị thông báo lỗi
+                    }
+                },
+                error: function(xhr) {
+                    // alert('An error occurred. Please try again.');
+                    console.error('Response:', xhr.responseText);
+                }
+            });
+        });
+    });
+
+    // Hàm cập nhật hiển thị giỏ hàng mà không load lại trang
+    function updateCartView() {
+        $.ajax({
+            url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+            method: "GET",
+            success: function(response) {
+                $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+            },
+            error: function(xhr) {
+                alert('An error occurred while updating the cart.');
+            }
+        });
+    }
 
 
 // Script cho QuickView

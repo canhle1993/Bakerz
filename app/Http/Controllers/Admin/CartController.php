@@ -143,6 +143,7 @@ class CartController extends Controller
             ];
         }
 
+        session()->forget('cart'); // Xóa session 'cart'
         // Cập nhật lại giỏ hàng vào session
         session()->put('cart', $cart);
 
