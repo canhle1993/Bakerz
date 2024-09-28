@@ -205,8 +205,13 @@ Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart']
 
 use App\Http\Controllers\ReviewController;
 
-// Route để lưu đánh giá
-Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
 
 // Route cho trang chi tiết sản phẩm
 Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'])->name('product.single');
+
+// Route để lưu đánh giá
+Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
+
+// Route quản lý và xóa đánh giá
+Route::get('/admin/reviews/manage', [ReviewController::class, 'manage'])->name('admin.reviews.manage');
+Route::delete('/admin/reviews/{id}/delete', [ReviewController::class, 'delete'])->name('reviews.delete');

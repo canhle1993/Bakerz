@@ -84,7 +84,7 @@
                             <a href="{{route('manage-blacklist')}}" class="dropdown-item">Blacklist</a>
                         </div>
                     </div>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
+                    <a href="{{ route('admin.reviews.manage') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a>
 
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>User</a>
                         <div class="dropdown-menu bg-transparent border-0">
