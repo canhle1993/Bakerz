@@ -201,3 +201,12 @@ Route::post('/cart/update', [CartController::class, 'update'])->name('cart.updat
 
 Route::post('/cart/new_add', [CartController::class, 'new_addToCart'])->name('cart.new_add');
 Route::get('/cart/show', [CartController::class, 'showCart'])->name('cart.show');
+Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
+
+use App\Http\Controllers\ReviewController;
+
+// Route để lưu đánh giá
+Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
+
+// Route cho trang chi tiết sản phẩm
+Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'])->name('product.single');

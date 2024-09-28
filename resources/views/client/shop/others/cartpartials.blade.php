@@ -7,7 +7,10 @@
               @if(session('cart') && count(session('cart')) > 0)
                 @foreach(session('cart') as $id => $details)
                     <div class="mini-cart-item">
-                        <a href="#" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                        
+                        <a href="#" class="mini-cart-item__remove cart_delete" data-product-id="{{ $id }}">
+                            <i class="lastudioicon lastudioicon-e-remove"></i></a>
+                        
                         <div class="mini-cart-item__thumbnail">
                             <a href="single-product.html"><img width="70" height="88" src="{{ asset('storage/products/' . $details['image']) }}" alt="Cart"></a>
                         </div>

@@ -153,15 +153,40 @@ class CartController extends Controller
         
         $cart = session()->get('cart', []);
         $cart_html = view('client.shop.others.cartpartials', compact('cart'))->render(); // Tạo HTML từ view
-
+        $cart_html2 = view('client.shop.others.cartdetail', compact('cart'))->render(); // Tạo HTML từ view
         // Tính tổng số lượng sản phẩm trong giỏ hàng
         $totalQuantity = 0;
         foreach ($cart as $item) {
             $totalQuantity += $item['quantity'];
         }
 
-        return response()->json(['cart_html' => $cart_html, 'cart_quantity'=> $totalQuantity]);
+        return response()->json(['cart_html' => $cart_html, 'cart_html2' => $cart_html2, 'cart_quantity'=> $totalQuantity]);
     }
 
+    // Xóa sản phẩm khỏi giỏ hàng
+    public function deleteCart(Request $request, $product_id)
+    {
+        $currentUser = Auth::user(); // Lấy người dùng hiện tại
+        Cart::where('user_id', $currentUser->user_id)
+        ->where('product_id', $product_id)
+        ->delete();
+
+        $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
+
+        $cart = [];
+        foreach ($cartItems as $item) {
+            $cart[$item->product_id] = [
+                'name' => $item->product->product_name,
+                'quantity' => $item->quantity,
+                'price' => $item->product->price,
+                'image' => $item->product->image,
+            ];
+        }
+
+        session()->forget('cart'); // Xóa session 'cart'
+        // Cập nhật lại giỏ hàng vào session
+        session()->put('cart', $cart);
+        return response()->json(['status' => 'success', 'message' => 'Product is delete ']);
+    }
 }
 
