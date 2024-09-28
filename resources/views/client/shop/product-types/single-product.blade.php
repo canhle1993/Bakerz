@@ -70,19 +70,20 @@
                         <div class="single-product-vertical-tab swiper-container order-2">
 
                             <div class="swiper-wrapper popup-gallery" id="popup-gallery">
+                            @if(empty($product->images()))
+                                <a class="swiper-slide h-auto" href="{{ asset('assets/images/product/product-8-500x625.jpg') }}">
+                                    <img class="w-100" src="{{ asset('assets/images/product/product-8-500x625.jpg') }}" alt="">
+                                </a>
+                            @else
                                 <a class="swiper-slide h-auto" href="{{ asset('storage/products/' . $product->image) }}">
                                     <img class="w-100" src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}">
                                 </a>
-                                <a class="swiper-slide h-auto" href="{{ asset('storage/products/' . $product->images()->first()->image) }}">
-                                    <img class="w-100" src="{{ asset('storage/products/' . $product->images()->first()->image) }}" alt="{{ asset('storage/products/' . $product->images()->first()->image) }}">
+                            @endif
+                            @foreach($product->images as $image)
+                                <a class="swiper-slide h-auto" href="{{ asset('storage/products/' . $image->image) }}">
+                                    <img class="w-100" src="{{ asset('storage/products/' . $image->image) }}" alt="{{ asset('storage/products/' . $product->images()->first()->image) }}">
                                 </a>
-                                <a class="swiper-slide h-auto" href="{{ asset('storage/products/' . $product->images()->skip(1)->first()->image) }}">
-                                    <img class="w-100" src="{{ asset('storage/products/' . $product->images()->skip(1)->first()->image) }}" alt="{{ asset('storage/products/' . $product->images()->skip(1)->first()->image) }}">
-                                </a>
-                                <a class="swiper-slide h-auto" href="{{ asset('storage/products/' . $product->images()->skip(2)->first()->image) }}">
-                                    <img class="w-100" src="{{ asset('storage/products/' . $product->images()->skip(2)->first()->image) }}" alt="{{ asset('storage/products/' . $product->images()->skip(2)->first()->image) }}">
-                                </a>
-                                
+                            @endforeach
                             </div>
 
                             <!-- Next Previous Button Start -->
@@ -97,18 +98,21 @@
                         <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
 
                             <div class="swiper-wrapper">
+                            @if(empty($product->images()))
+                                <div class="swiper-slide">
+                                    <img src="{{ asset('assets/images/product/product-8-500x625.jpg') }}" alt="">
+
+                                </div>
+                            @else
                                 <div class="swiper-slide">
                                     <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ asset('storage/products/' . $product->image) }}">
                                 </div>
+                            @endif
+                            @foreach($product->images as $image)
                                 <div class="swiper-slide">
-                                    <img src="{{ asset('storage/products/' . $product->images()->first()->image) }}" alt="{{ asset('storage/products/' . $product->images()->first()->image) }}">
+                                    <img src="{{ asset('storage/products/' . $image->image) }}" alt="{{ asset('storage/products/' . $image->image) }}">
                                 </div>
-                                <div class="swiper-slide">
-                                    <img src="{{ asset('storage/products/' . $product->images()->skip(1)->first()->image) }}" alt="{{ asset('storage/products/' . $product->images()->skip(1)->first()->image) }}">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{{ asset('storage/products/' . $product->images()->skip(2)->first()->image) }}" alt="{{ asset('storage/products/' . $product->images()->skip(2)->first()->image) }}">
-                                </div>
+                            @endforeach
                             </div>
 
                         </div>
