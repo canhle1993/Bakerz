@@ -7708,3 +7708,164 @@
 #7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #8 {main}
 "} 
+[2024-09-26 13:57:27] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-09-26 13:57:27] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-09-26 13:57:27] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1203): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\xampp\\htdocs\\Bakerz\\artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#9 {main}
+"} 
+[2024-09-26 13:58:10] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1203): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\xampp\\htdocs\\Bakerz\\artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#9 {main}
+"} 
+[2024-09-26 13:58:27] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-09-26 13:58:27] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-09-26 13:59:07] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1203): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\xampp\\htdocs\\Bakerz\\artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#9 {main}
+"} 
+[2024-09-26 13:59:27] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-09-26 13:59:27] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-09-26 13:59:41] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1203): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\xampp\\htdocs\\Bakerz\\artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#9 {main}
+"} 
+[2024-09-26 14:00:27] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-09-26 14:00:27] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2024-09-26 14:00:32] local.ERROR: Class "App\Providers\AppServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"App\\Providers\\AppServiceProvider\" not found at C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:933)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(865): Illuminate\\Foundation\\Application->resolveProvider('App\\\\Providers\\\\A...')
+#1 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(75): Illuminate\\Foundation\\Application->register('App\\\\Providers\\\\A...')
+#2 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(843): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(316): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(473): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(195): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 C:\\xampp\\htdocs\\Bakerz\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1203): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\xampp\\htdocs\\Bakerz\\artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#9 {main}
+"} 
