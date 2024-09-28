@@ -271,6 +271,7 @@
                                             <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
                                             <li><a class="sub-item-link" href="{{ route('checkout') }}"><span>Checkout</span></a></li>
                                             <li><a class="sub-item-link" href="{{ route('order-tracking') }}"><span>Order Tracking</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('client_location') }}"><span>Client Location</span></a></li>
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item banner-menu-content-wrap">
