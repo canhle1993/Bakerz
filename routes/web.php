@@ -201,7 +201,9 @@ Route::post('/cart/update', [CartController::class, 'update'])->name('cart.updat
 
 Route::post('/cart/new_add', [CartController::class, 'new_addToCart'])->name('cart.new_add');
 Route::get('/cart/show', [CartController::class, 'showCart'])->name('cart.show');
+Route::post('/cart/{product_id}/update_quantity', [CartController::class, 'update_quantity'])->name('cart.update_quantity');
 Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
+Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.cart_checkout');
 
 use App\Http\Controllers\ReviewController;
 
