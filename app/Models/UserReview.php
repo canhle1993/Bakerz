@@ -15,7 +15,7 @@ class UserReview extends Model
     // Tắt timestamps tự động của Laravel
     public $timestamps = false;
 
-    // Các cột có thể thêm dữ liệu bằng phương thức create hoặc fill
+    // Cột có thể thêm dữ liệu bằng phương thức create hoặc fill
     protected $fillable = [
         'ratestar', 
         'comment', 
@@ -24,8 +24,12 @@ class UserReview extends Model
         'CreatedDate', 
         'CreatedBy', 
         'ModifiedDate', 
-        'ModifiedBy'
+        'ModifiedBy',
+        'is_deleted'
     ];
+
+    // Khóa chính
+    protected $primaryKey = 'ID';
 
     // Xác định quan hệ giữa đánh giá và sản phẩm
     public function product()
@@ -37,5 +41,13 @@ class UserReview extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // Thêm điều kiện cho tất cả các truy vấn để chỉ lấy những đánh giá chưa bị xóa
+    protected static function booted()
+    {
+        static::addGlobalScope('notDeleted', function ($builder) {
+            $builder->where('is_deleted', 0);
+        });
     }
 }

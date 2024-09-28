@@ -212,3 +212,7 @@ Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->
 
 // Route cho trang chi tiết sản phẩm
 Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'])->name('product.single');
+
+// Route quản lý và xóa đánh giá
+Route::get('/admin/reviews/manage', [ReviewController::class, 'manage'])->name('admin.reviews.manage');
+Route::delete('/admin/reviews/{id}/delete', [ReviewController::class, 'delete'])->name('reviews.delete');
