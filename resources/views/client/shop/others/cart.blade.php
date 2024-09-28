@@ -69,10 +69,9 @@
                                 @if(session('cart') && count(session('cart')) > 0)
                                     @foreach(session('cart') as $id => $details)
                                         <tr>
+                                            
                                             <th class="cart-remove">
-                                                <!-- Nút xóa sản phẩm -->
-                                                <button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $id }}" style="font-size: 12px; padding: 4px 8px;">Delete this</button>
-
+                                                <button data-id="{{ $id }}" class="remove-btn"><i class="lastudioicon lastudioicon-e-remove"></i></button>
                                             </th>
                                             <th class="cart-thumb">
                                                 <a href="single-product.html">
@@ -88,7 +87,7 @@
                                                     <input type="number" value="{{ $details['quantity'] }}" min="1" class="cart-quantity-input" data-id="{{ $id }}">
                                                 </div>
                                             </td>
-                                            <td class="subtotal" id="subtotal-{{ $id }}">{{ number_format($details['price'] * $details['quantity'], 2) }} $</td>
+                                            <td class="sub-total" id="subtotal-{{ $id }}">{{ number_format($details['price'] * $details['quantity'], 2) }} $</td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -306,7 +305,7 @@
             // Hàm tính tổng tất cả các subtotal và cập nhật vào mục total
             function updateTotalPrice() {
                 var total = 0;
-                $(".subtotal").each(function() {
+                $(".sub-total").each(function() {
                     var subtotal = parseFloat($(this).text().replace(/[^0-9.-]+/g, "")); // Lấy giá trị subtotal và loại bỏ các ký tự không phải số
                     total += subtotal;
                 });

@@ -5,18 +5,18 @@
           <li>
               <!-- Mini Cart Item Start  -->
               <?php if(session('cart') && count(session('cart')) > 0): ?>
-              <?php $__currentLoopData = session('cart'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="mini-cart-item">
-                    <a href="#" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                    <div class="mini-cart-item__thumbnail">
-                        <a href="single-product.html"><img width="70" height="88" src="<?php echo e(asset('storage/products/' . $details['image'])); ?>" alt="Cart"></a>
+                <?php $__currentLoopData = session('cart'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="mini-cart-item">
+                        <a href="#" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                        <div class="mini-cart-item__thumbnail">
+                            <a href="single-product.html"><img width="70" height="88" src="<?php echo e(asset('storage/products/' . $details['image'])); ?>" alt="Cart"></a>
+                        </div>
+                        <div class="mini-cart-item__content">
+                            <h6 class="mini-cart-item__title"><a href="single-product.html"><?php echo e($details['name']); ?></a></h6>
+                            <span class="mini-cart-item__quantity"><?php echo e($details['quantity']); ?> × <?php echo e(number_format($details['price'], 2)); ?> $</span>
+                            <span style="display: none;" class="mini-cart-item__quantity subtotal"><?php echo e($details['quantity'] * $details['price']); ?> $</span>
+                        </div>
                     </div>
-                    <div class="mini-cart-item__content">
-                        <h6 class="mini-cart-item__title"><a href="single-product.html"><?php echo e($details['name']); ?></a></h6>
-                        <span class="mini-cart-item__quantity"><?php echo e($details['quantity']); ?> $ × <?php echo e(number_format($details['price'], 2)); ?> $</span>
-                    </div>
-                </div>
-                        
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php else: ?>
                     <div class="mini-cart-item__content">

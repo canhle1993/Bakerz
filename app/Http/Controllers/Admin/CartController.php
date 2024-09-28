@@ -103,13 +103,11 @@ class CartController extends Controller
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity', 1); // Giá trị mặc định là 1 nếu không truyền
         $currentUser = Auth::user(); // Lấy người dùng hiện tại
-
         // Kiểm tra nếu sản phẩm tồn tại
         $product = Product::find($product_id);
         if (!$product) {
             return response()->json(['status' => 'error', 'message' => 'Product not found']);
         }
-
         // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
         $cartItem = Cart::where('user_id', $currentUser->user_id)
                         ->where('product_id', $product_id)
@@ -156,7 +154,13 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
         $cart_html = view('client.shop.others.cartpartials', compact('cart'))->render(); // Tạo HTML từ view
 
-        return response()->json(['cart_html' => $cart_html]);
+        // Tính tổng số lượng sản phẩm trong giỏ hàng
+        $totalQuantity = 0;
+        foreach ($cart as $item) {
+            $totalQuantity += $item['quantity'];
+        }
+
+        return response()->json(['cart_html' => $cart_html, 'cart_quantity'=> $totalQuantity]);
     }
 
 }

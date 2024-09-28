@@ -227,6 +227,7 @@
       input[type="file"] {
         display: none;
       }
+
     </style>
 
 </head>
@@ -314,9 +315,9 @@
                         <ul class="header-meta__action d-flex justify-content-end">
                             <li><button class="action search-open"><i class="lastudioicon-zoom-1"></i></button></li>
                             <li>
-                                <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
+                                <button id="cart_icon" class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
                                     <i class="lastudioicon-shopping-cart-2"></i>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>
+                                    <span id="cart_quantity" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary"></span>
                                 </button>
                             </li>
                             <!-- header-primary-menu d-flex justify-content-center -->
@@ -385,8 +386,8 @@
 
       <!-- Mini Cart Total End  -->
       <div class="mini-cart-totla">
-          <span class="label">Subtotal:</span>
-          <span class="value">$24.95</span>
+          <span class="label">Total:</span>
+          <span id="total_price" class="value">$24.95</span>
       </div>
       <!-- Mini Cart Total End  -->
 
@@ -443,7 +444,85 @@
             }
         });
         
+        $(document).ready(function() {
+          updateCartView();
+          $('.add-to-cart').on('click', function(e) {
+              e.preventDefault();
 
+              var productId = $(this).data('product-id');
+              $.ajax({
+                  url: "{{ route('cart.new_add') }}",
+                  method: "POST",
+                  data: {
+                      _token: "{{ csrf_token() }}", 
+                      product_id: productId,
+                      quantity: 1
+                  },
+                  success: function(response) {
+                      if (response.status === 'success') {
+                          // Cập nhật số lượng sản phẩm trong giỏ hàng
+                          updateCartView();
+                          animateCartQuantity();
+                      } else {
+                          alert(response.message);
+                      }
+                  },
+                  error: function(xhr) {
+                      window.location.href = "{{ route('login') }}"; // Sử dụng route trong Blade để tạo đường dẫn
+                      // console.error('Error:', xhr.responseText);
+                  }
+              });
+          });
+      });
+        function updateCartView() {
+            $.ajax({
+                url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                method: "GET",
+                success: function(response) {
+                    $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+                    $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
+                    calculateTotal();
+                    // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
+                    $('#cart_icon').css('color', 'red')// Đổi màu thành đỏ
+                    .animate({ 
+                          top: '-10px' 
+                      }, 200, function() {
+                          $(this).animate({ 
+                              top: '0px' 
+                          }, 200, function() {
+                              // Lặp lại lần nữa
+                              $(this).animate({ 
+                                  top: '-10px' 
+                              }, 200, function() {
+                                  $(this).animate({ 
+                                      top: '0px' 
+                                  }, 200, function() {
+                                      // Sau khi hiệu ứng hoàn thành, đổi lại màu ban đầu
+                                      $(this).css('color', ''); 
+                                  });
+                              });
+                          });
+                      });
+                  },
+                error: function(xhr) {
+                    // alert('An error occurred while updating the cart.');
+                }
+            });
+        }
+
+        function calculateTotal() {
+            var total = 0;
+            // Duyệt qua tất cả các phần tử có class 'subtotal'
+            $('.subtotal').each(function() {
+                // Lấy giá trị của từng phần tử và loại bỏ ký tự $
+                var subtotal = parseFloat($(this).text().replace('$', ''));
+                // Cộng tổng lại
+                total += subtotal;
+            });
+            
+            // Hiển thị tổng đã tính
+            $('#total_price').text(total.toFixed(2) + ' $');
+        }
     </script>
 </body>
 

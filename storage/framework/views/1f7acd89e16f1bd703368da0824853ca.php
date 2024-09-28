@@ -653,53 +653,6 @@ $(document).on('click', '.labtn-icon-quickview', function() {
     }
 });
 
-   // Add Cart
-   $(document).ready(function() {
-        $('.add-to-cart').on('click', function(e) {
-            e.preventDefault();
-
-            var productId = $(this).data('product-id');
-            $.ajax({
-                url: "<?php echo e(route('cart.new_add')); ?>",
-                method: "POST",
-                data: {
-                    _token: "<?php echo e(csrf_token()); ?>", // Gửi CSRF token
-                    product_id: productId,
-                    quantity: 1 // Số lượng sản phẩm có thể thay đổi
-                },
-                success: function(response) {
-                    if (response.status === 'success') {
-                        // Hiển thị modal sau khi thêm thành công
-                        // $('#modalCart').modal('show');
-                        updateCartView();
-
-                    } else {
-                        alert(response.message); // Hiển thị thông báo lỗi
-                    }
-                },
-                error: function(xhr) {
-                    // alert('An error occurred. Please try again.');
-                    console.error('Response:', xhr.responseText);
-                }
-            });
-        });
-    });
-
-    // Hàm cập nhật hiển thị giỏ hàng mà không load lại trang
-    function updateCartView() {
-        $.ajax({
-            url: "<?php echo e(route('cart.show')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
-            method: "GET",
-            success: function(response) {
-                $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
-            },
-            error: function(xhr) {
-                alert('An error occurred while updating the cart.');
-            }
-        });
-    }
-
-
 // Script cho QuickView
 </script>
 
