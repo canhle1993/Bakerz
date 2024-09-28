@@ -342,9 +342,14 @@
                 <h5 class="product-item__title">
                   <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><?php echo e($product->product_name); ?></a>
                 </h5>
+                <?php if($product->price != $product->getDiscountedPrice()): ?>
+                    <span class="original-price"><?php echo e(formatPriceVND($product->price)); ?></span>
+                    <span class="discounted-price">$<?php echo e(number_format($product->getDiscountedPrice(), 2)); ?></span> <!-- Giá mới -->
+                <?php else: ?>
                 <span class="product-item__price"
                   ><?php echo e(formatPriceVND($product->price)); ?></span
                 >
+                <?php endif; ?>
               </div>
             </div>
             <!-- Product Item End -->
@@ -1182,7 +1187,7 @@
                                 <div class="product-details-img d-flex overflow-hidden flex-row">
 
                                     <!-- Single Product Image Start -->
-                                    <div class="single-product-vertical-tab swiper-container order-2">
+                                    <!-- <div class="single-product-vertical-tab swiper-container order-2">
 
                                         <div class="swiper-wrapper">
                                             <a class="swiper-slide h-auto" href="#/">
@@ -1200,16 +1205,14 @@
 
                                         </div>
 
-                                        <!-- Next Previous Button Start -->
                                         <div class="swiper-button-vertical-next swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
                                         <div class="swiper-button-vertical-prev swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
-                                        <!-- Next Previous Button End -->
 
-                                    </div>
+                                    </div> -->
                                     <!-- Single Product Image End -->
 
                                     <!-- Single Product Thumb Start -->
-                                    <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
+                                    <!-- <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
 
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
@@ -1227,7 +1230,7 @@
                 
                                         </div>
 
-                                    </div>
+                                    </div> -->
                                     <!-- Single Product Thumb End -->
 
                                 </div>

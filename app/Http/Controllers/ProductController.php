@@ -159,14 +159,23 @@ class ProductController extends Controller
 }
 
 public function singleProduct($id)
-    {
-        // Tìm sản phẩm dựa trên product_id
-        $product = Product::findOrFail($id);
+{
+    // Tìm sản phẩm dựa trên product_id
+    $product = Product::with('reviews')->findOrFail($id);
 
-        // Trả về view và truyền dữ liệu sản phẩm vào
-        return view('client.shop.product-types.single-product', compact('product'));
-    }
+    // Trả về view và truyền dữ liệu sản phẩm vào
+    return view('client.shop.product-types.single-product', compact('product'));
+}
 
+
+public function show($product_id)
+{
+    // Lấy sản phẩm cùng với các đánh giá và thông tin người dùng
+    $product = Product::with(['reviews.user'])->findOrFail($product_id);
+
+    // Trả về view và truyền dữ liệu
+    return view('client.shop.product-types.single-product', compact('product'));
+}
 
 
 }
