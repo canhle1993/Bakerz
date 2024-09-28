@@ -51,6 +51,12 @@ class Product extends Model
         return $this->hasMany(UserReview::class, 'product_id');
     }
     
+    // Định nghĩa quan hệ với bảng userreview
+    public function reviews()
+    {
+        return $this->hasMany(UserReview::class, 'product_id');
+    }
+    
     public function getDiscountedPrice()
     {
         $discounts = $this->discounts()
