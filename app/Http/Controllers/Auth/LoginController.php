@@ -59,6 +59,7 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        session()->forget('cart'); // Xóa session 'cart'
 
         return redirect('/');
     }

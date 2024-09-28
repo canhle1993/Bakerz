@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
@@ -95,4 +97,70 @@ class CartController extends Controller
 
         return response()->json(['message' => 'Invalid request'], 400);
     }
+    
+    public function new_addToCart(Request $request)
+    {
+        $product_id = $request->input('product_id');
+        $quantity = $request->input('quantity', 1); // Giá trị mặc định là 1 nếu không truyền
+        $currentUser = Auth::user(); // Lấy người dùng hiện tại
+        // Kiểm tra nếu sản phẩm tồn tại
+        $product = Product::find($product_id);
+        if (!$product) {
+            return response()->json(['status' => 'error', 'message' => 'Product not found']);
+        }
+        // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+        $cartItem = Cart::where('user_id', $currentUser->user_id)
+                        ->where('product_id', $product_id)
+                        ->first();
+
+        if ($cartItem) {
+            // Nếu sản phẩm đã có, tăng số lượng
+            if ($quantity < $product->inventory){
+                $cartItem->quantity += $quantity;
+            }
+            $cartItem->save();
+        } else {
+            // Nếu chưa có, thêm sản phẩm mới vào giỏ hàng
+            Cart::create([
+                'user_id' => $currentUser->user_id,
+                'product_id' => $product_id,
+                'quantity' => $quantity,
+            ]);
+        }
+
+        // Lấy tất cả các sản phẩm trong giỏ hàng của người dùng
+        $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
+
+        $cart = [];
+        foreach ($cartItems as $item) {
+            $cart[$item->product_id] = [
+                'name' => $item->product->product_name,
+                'quantity' => $item->quantity,
+                'price' => $item->product->price,
+                'image' => $item->product->image,
+            ];
+        }
+
+        session()->forget('cart'); // Xóa session 'cart'
+        // Cập nhật lại giỏ hàng vào session
+        session()->put('cart', $cart);
+
+        return response()->json(['status' => 'success', 'message' => 'Product added to cart']);
+    }
+
+    public function showCart()
+    {
+        
+        $cart = session()->get('cart', []);
+        $cart_html = view('client.shop.others.cartpartials', compact('cart'))->render(); // Tạo HTML từ view
+
+        // Tính tổng số lượng sản phẩm trong giỏ hàng
+        $totalQuantity = 0;
+        foreach ($cart as $item) {
+            $totalQuantity += $item['quantity'];
+        }
+
+        return response()->json(['cart_html' => $cart_html, 'cart_quantity'=> $totalQuantity]);
+    }
+
 }

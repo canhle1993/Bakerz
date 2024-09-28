@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\HeathyCatalog;
 use App\Models\Product;
 use App\Models\User;
@@ -49,6 +50,23 @@ class ClientController extends Controller
             })->get();
 
         $client = User::all();
+        $currentUser = Auth::user(); // Lấy người dùng hiện tại
+        session()->forget('cart'); // Xóa session 'cart'
+        if ($currentUser){
+            $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
+            $cart = [];
+            foreach ($cartItems as $item) {
+                $cart[$item->product_id] = [
+                    'name' => $item->product->product_name,
+                    'quantity' => $item->quantity,
+                    'price' => $item->product->getDiscountedPrice(),
+                    'image' => $item->product->image,
+                ];
+            }
+    
+            // Cập nhật lại giỏ hàng vào session
+            session()->put('cart', $cart);
+        }
         
         $discount_products = Product::whereHas('discounts')->get();
         // Trả về toàn bộ trang 'client.heathyfilter'

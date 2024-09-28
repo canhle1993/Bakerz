@@ -32,6 +32,8 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <style>
       .hidden-form {
@@ -258,16 +260,16 @@
 <div
   class="section-padding-03 pt-0"
   id="a1"
-  style="padding-top: 35px !important"
->
-  <div class="container">
+  style="padding-top: 35px !important; padding-bottom: 80px !important;">
+  <div class="container" id="a2">
     <div class="row">
       <div class="col-12">
         <!-- Section Title Strat -->
         <div class="section-title">
           <h2 class="section-title__title">
-            Products suitable for your health
-          </h2>
+            Products suitable for your health _______________ <a href="shop.html" class="read-more"
+            ><span>show more</span
+            ></a></h2>
         </div>
         <!-- Section Title End -->
       </div>
@@ -293,7 +295,7 @@
               </div>
               @endif
               <div class="product-item__image border w-100">
-                <a href="single-product.html"
+                <a href="{{ route('product.single', ['product' => $product->product_id]) }}"
                   ><img
                     width="350"
                     height="350"
@@ -316,13 +318,9 @@
                   </li>
                   <li class="product-item__meta-action">
                     <a
-                      class="shadow-1 labtn-icon-cart"
+                      class="shadow-1 labtn-icon-cart add-to-cart"
                       href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title="Add to Cart"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalCart"
+                      data-product-id="{{ $product->product_id }}"
                     ></a>
                   </li>
                   <li class="product-item__meta-action">
@@ -341,7 +339,7 @@
               </div>
               <div class="product-item__content pt-5">
                 <h5 class="product-item__title">
-                  <a href="single-product.html">{{ $product->product_name }}</a>
+                  <a href="{{ route('product.single', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
                 </h5>
                 <span class="product-item__price"
                   >{{ formatPriceVND($product->price) }}</span
@@ -375,7 +373,9 @@
                 <div class="col-12">
                     <!-- Section Title Strat -->
                     <div class="section-title">
-                        <h2 class="section-title__title">Most recently purchased product</h2>
+                        <h2 class="section-title__title">Most recently purchased product _______________ <a href="shop.html" class="read-more"
+                        ><span>show more</span
+                        ></a></h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
@@ -601,17 +601,14 @@
             <div class="swiper-slide">
               <!-- Product Item Start -->
               <div class="product-item product-item-05 border text-center">
-                @if($disproduct->price>1)
-                <!-- TODO:CHEAT -->
                 <div
-                  class="product-item__badge"
-                  style="background-color: red !important"
-                >
-                  Best Seller
-                </div>
-                @endif
+                    class="product-item__badge"
+                    style="background-color: red !important"
+                    >
+                    <h6 style="color: white;"> {{$disproduct->getDiscountPercent() }} %</h6>
+                    </div>
                 <div class="product-item__image">
-                  <a href="single-product.html"
+                  <a href="{{ route('product.single', ['product' => $disproduct->product_id]) }}"
                     ><img
                       width="250"
                       height="250"
@@ -621,13 +618,13 @@
                 </div>
                 <div class="product-item__content">
                   <h5 class="product-item__title">
-                    <a href="single-product.html"
+                    <a href="{{ route('product.single', ['product' => $disproduct->product_id]) }}"
                       >{{ $disproduct->product_name }}</a
-                    >
+                    >   
                   </h5>
                     <span class="product-item__price">
                         <span class="original-price">{{ formatPriceVND($disproduct->price) }}</span>
-                        <span class="discounted-price">{{ formatPriceVND($disproduct->discounted_price) }}</span> <!-- Giá mới -->
+                        <span class="discounted-price">${{ number_format($disproduct->getDiscountedPrice(), 2) }}</span> <!-- Giá mới -->
                     </span>
                  
                 </div>
@@ -647,15 +644,9 @@
                   </li>
                   <li class="product-item__meta-action">
                     <a
-                      class="labtn-icon-cart"
+                      class="shadow-1 labtn-icon-cart add-to-cart"
                       href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title=""
-                      data-bs-original-title="Select options"
-                      aria-label="Select options"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalCart"
+                      data-product-id="{{ $disproduct->product_id }}"
                     ></a>
                   </li>
                   <li class="product-item__meta-action">
@@ -730,7 +721,7 @@
                                 <!-- Product Item Start -->
                                 <div class="product-item product-item-05 border text-center">
                                     <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-12-500x625.jpg" alt="Product"></a>
+                                        <a href="single-product.html"><img width="250" height="250" src="img/product-8-1.png" alt="Product"></a>
                                     </div>
                                     <div class="product-item__content">
                                         <h5 class="product-item__title"><a href="single-product.html">Raisin Bread</a></h5>
@@ -1194,23 +1185,18 @@
 
                                         <div class="swiper-wrapper">
                                             <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-1.png" alt="Product">
+                                                <img class="w-100" src="{{ asset('storage/products/' . $product->image) }}" alt="Product">
                                             </a>
                                             <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-2.png" alt="Product">
+                                                <img class="w-100" src="{{ asset('storage/products/' . $product->images()->first()->image) }}">
                                             </a>
                                             <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-3.png" alt="Product">
+                                                <img class="w-100" src="{{ asset('storage/products/' . $product->images()->skip(1)->first()->image) }}" alt="Product">
                                             </a>
                                             <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-4.png" alt="Product">
+                                                <img class="w-100" src="{{ asset('storage/products/' . $product->images()->skip(2)->first()->image) }}" alt="Product">
                                             </a>
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-5.png" alt="Product">
-                                            </a>
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-6.png" alt="Product">
-                                            </a>
+
                                         </div>
 
                                         <!-- Next Previous Button Start -->
@@ -1226,23 +1212,18 @@
 
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-1.png" alt="Product">
+                                                <img src="{{ asset('storage/products/' . $product->image) }}" alt="Product">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-2.png" alt="Product">
+                                                <img src="{{ asset('storage/products/' . $product->images()->first()->image) }}" alt="Product">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-3.png" alt="Product">
+                                                <img src="{{ asset('storage/products/' . $product->images()->skip(1)->first()->image) }}" alt="Product">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-4.png" alt="Product">
+                                                <img src="{{ asset('storage/products/' . $product->images()->skip(2)->first()->image) }}" alt="Product">
                                             </div>
-                                            <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-5.png" alt="Product">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-6.png" alt="Product">
-                                            </div>
+                
                                         </div>
 
                                     </div>
@@ -1261,43 +1242,24 @@
                                     <div class="product-head mb-3">
 
                                         <!-- Price Start -->
-                                        <span class="product-head-price">$4.99</span>
+                                        <span class="product-head-price">{{ formatPriceVND($product->price) }}</span>
                                         <!-- Price End -->
 
                                     </div>
                                     <!-- Product Head End -->
 
                                     <!-- Description Start -->
-                                    <p class="desc-content">Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.</p>
+                                    <p class="desc-content">{!! nl2br(e($product->describe)) !!}</p>
                                     <!-- Description End -->
 
                                     <!-- Product Coler Variation Start -->
                                     <div class="product-color mb-2">
-                                        <label for="colorBy">Color</label>
-                                        <div class="select-wrapper">
-                                            <select name="color" id="colorBy">
-                                                <option value="manual">Chose an option</option>
-                                                <option value="blue">Blue</option>
-                                                <option value="red">Red</option>
-                                                <option value="green">Green</option>
-                                                <option value="black">Black</option>
-                                                <option value="yellow">Yellow</option>
-                                            </select>
-                                        </div>
+
                                     </div>
                                     <!-- Product Coler Variation End -->
 
                                     <!-- Product Size Start -->
                                     <div class="product-size mb-5">
-                                        <label for="sizeBy">Size</label>
-                                        <div class="select-wrapper">
-                                            <select name="size" id="sizeBy">
-                                                <option value="manual">Chose an option</option>
-                                                <option value="large">Large</option>
-                                                <option value="medium">Medium</option>
-                                                <option value="small">Small</option>
-                                            </select>
-                                        </div>
                                     </div>
                                     <!-- Product Size End -->
 
@@ -1313,9 +1275,9 @@
                                         <li>
                                             <!-- Cart Button Start -->
                                             <div class="cart-btn">
-                                                <div class="add-to_cart">
-                                                    <a class="btn btn-dark btn-hover-primary" href="cart.html">Add to cart</a>
-                                                </div>
+                                            <div class="add-to_cart">
+                                                <a class="btn btn-dark btn-hover-primary add-to-cart" href="#/" data-bs-toggle="modal" data-bs-target="#modalCart" data-product-id="{{ $product->product_id }}">Add to cart</a>
+                                            </div>
                                             </div>
                                             <!-- Cart Button End -->
                                         </li>
@@ -1323,7 +1285,6 @@
                                             <!-- Action Button Start -->
                                             <div class="actions">
                                                 <a href="compare.html" title="Compare" class="action compare"><i class="lastudioicon-heart-2"></i></a>
-                                                <a href="wishlist.html" title="Wishlist" class="action wishlist"><i class="lastudioicon-ic_compare_arrows_24px"></i></a>
                                             </div>
                                             <!-- Action Button End -->
                                         </li>
@@ -1333,21 +1294,24 @@
                                     <!-- Product Meta Start -->
                                     <ul class="product-meta">
                                         <li class="product-meta-wrapper">
-                                            <span class="product-meta-name">SKU:</span>
-                                            <span class="product-meta-detail">REF. LA-199</span>
+                                            <span class="product-meta-name">Remaining quantity:</span>
+                                            <span class="product-meta-detail">{{$product->inventory}}</span>
                                         </li>
                                         <li class="product-meta-wrapper">
                                             <span class="product-meta-name">category:</span>
                                             <span class="product-meta-detail">
-                                            <a href="#">Cake, </a>
-                                            <a href="#">New</a>
-                                        </span>
+                                                <a href="#"> @foreach($product->catalogs as $catalog)
+                                                {{ $catalog->category_name }}{{ !$loop->last ? ', ' : '' }}
+                                                @endforeach</a>
+                                            </span>
                                         </li>
                                         <li class="product-meta-wrapper">
-                                            <span class="product-meta-name">Tags:</span>
+                                            <span class="product-meta-name">Discount:</span>
                                             <span class="product-meta-detail">
-                                            <a href="#">Cake 1</a>
-                                        </span>
+                                                <a href="#">@foreach($product->discounts as $discount)
+                                                    {{ $discount->discount *100 }} %
+                                                @endforeach</a>
+                                            </span>
                                         </li>
                                     </ul>
                                     <!-- Product Meta End -->
@@ -1433,6 +1397,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
       document
         .getElementById("healthSuggestionBtn")
         .addEventListener("click", function () {
@@ -1457,24 +1422,24 @@
     });
 
 
- // Hàm để kiểm tra và cập nhật trạng thái của checkbox
- function updateHeathStatus(bmi) {
-    // Lấy checkbox "Thừa Cân" và "Thiếu Cân"
-    var thuaCanCheckbox = $('input[name="heath_id[]"][value="4"]');// 4 là thừa cân
-    var thieuCanCheckbox = $('input[name="heath_id[]"][value="5"]');// 5 là thiếu cân
+    // Hàm để kiểm tra và cập nhật trạng thái của checkbox
+    function updateHeathStatus(bmi) {
+        // Lấy checkbox "Thừa Cân" và "Thiếu Cân"
+        var thuaCanCheckbox = $('input[name="heath_id[]"][value="4"]');// 4 là thừa cân
+        var thieuCanCheckbox = $('input[name="heath_id[]"][value="5"]');// 5 là thiếu cân
 
-    // Xử lý tự động check/uncheck dựa vào BMI
-    if (bmi >= 25) {
-        thuaCanCheckbox.prop('checked', true);
-        thieuCanCheckbox.prop('checked', false);
-    } else if (bmi < 18.5) {
-        thieuCanCheckbox.prop('checked', true);
-        thuaCanCheckbox.prop('checked', false);
-    } else {
-        thuaCanCheckbox.prop('checked', false);
-        thieuCanCheckbox.prop('checked', false);
+        // Xử lý tự động check/uncheck dựa vào BMI
+        if (bmi >= 25) {
+            thuaCanCheckbox.prop('checked', true);
+            thieuCanCheckbox.prop('checked', false);
+        } else if (bmi < 18.5) {
+            thieuCanCheckbox.prop('checked', true);
+            thuaCanCheckbox.prop('checked', false);
+        } else {
+            thuaCanCheckbox.prop('checked', false);
+            thieuCanCheckbox.prop('checked', false);
+        }
     }
-}
 
     // Bắt sự kiện khi người dùng nhập chiều cao và cân nặng để tính BMI
     $('#heightInput, #weightInput').on('input', function() {
@@ -1544,7 +1509,9 @@
     });
     
     window.addEventListener('load', function() {
+        document.getElementById('a2').style.display = 'none';  // Show the product section
         if (sessionStorage.getItem('scrollToA1') === 'true') {
+            document.getElementById('a2').style.display = 'block';  // Show the product section
             document.getElementById('a1').scrollIntoView({
                 behavior: 'smooth'
             });
@@ -1552,6 +1519,8 @@
             sessionStorage.removeItem('scrollToA1');
         }
     });
+
+    
     </script>
 </body>
 

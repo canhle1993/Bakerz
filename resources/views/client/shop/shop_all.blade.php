@@ -170,7 +170,11 @@
 
                                         </li>
                                         <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
+                                            <a
+                                            class="shadow-1 labtn-icon-cart add-to-cart"
+                                            href="#"
+                                            data-product-id="{{ $product->product_id }}"
+                                            ></a>
                                         </li>
                                         <li class="product-item__meta-action">
                                             <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
@@ -648,8 +652,6 @@ $(document).on('click', '.labtn-icon-quickview', function() {
         console.log('Không tìm thấy product_id.');
     }
 });
-
-
 
 // Script cho QuickView
 </script>
