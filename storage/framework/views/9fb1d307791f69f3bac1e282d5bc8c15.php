@@ -446,6 +446,7 @@
         
         $(document).ready(function() {
           updateCartView();
+          
           $('.add-to-cart').on('click', function(e) {
               e.preventDefault();
 
@@ -473,13 +474,45 @@
                   }
               });
           });
-      });
-        function updateCartView() {
+
+          // delete cart
+          $(document).on('click', '.cart_delete', function(e) {
+                
+                e.preventDefault();
+
+                var productId = $(this).data('product-id');
+                console.log(productId); // In ra product_id để đảm bảo nó có giá trị đúng
+
+                $.ajax({
+                    url: "<?php echo e(route('cart.delete', ':id')); ?>".replace(':id', productId), // Truyền product_id vào URL
+                    method: "DELETE",
+                    data: {
+                        _token: "<?php echo e(csrf_token()); ?>", 
+                        product_id: productId
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            updateCartView();
+                            animateCartQuantity();
+                        } else {
+                            //   alert(response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert("FAIL");
+                        console.error('Error:', xhr.responseText);
+                    }
+                });
+            });
+            function updateCartView() {
             $.ajax({
                 url: "<?php echo e(route('cart.show')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
                 method: "GET",
                 success: function(response) {
                     $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+                    
+                    $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
+                    
                     $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
                     calculateTotal();
                     // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
@@ -505,10 +538,13 @@
                       });
                   },
                 error: function(xhr) {
+                    console.error('Error:', xhr.responseText);
                     // alert('An error occurred while updating the cart.');
                 }
             });
         }
+        });
+        
 
         function calculateTotal() {
             var total = 0;

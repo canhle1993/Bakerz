@@ -54,52 +54,10 @@
                 <div class="col-lg-8 col-12 mb-30">
 
                     <div class="table-responsive">
-                        <table class="cart-table table text-center align-middle mb-6 d-none d-md-table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th class="title text-start">Product</th>
-                                    <th class="price">Price</th>
-                                    <th class="quantity">Quantity</th>
-                                    <th class="total">Subtotal</th>
-                                </tr>
-                            </thead>
-                            <tbody class="border-top-0">
-                                <?php if(session('cart') && count(session('cart')) > 0): ?>
-                                    <?php $__currentLoopData = session('cart'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <tr>
-                                            <th class="cart-remove">
-                                                <!-- Nút xóa sản phẩm -->
-                                                <button class="btn btn-danger btn-sm remove-from-cart" data-id="<?php echo e($id); ?>" style="font-size: 12px; padding: 4px 8px;">Delete this</button>
-
-                                            </th>
-                                            <th class="cart-thumb">
-                                                <a href="single-product.html">
-                                                    <img src="<?php echo e(asset('storage/products/' . $details['image'])); ?>" alt="<?php echo e($details['name']); ?>">
-                                                </a>
-                                            </th>
-                                            <th class="text-start">
-                                                <a href="single-product.html"><?php echo e($details['name']); ?></a>
-                                            </th>
-                                            <td><?php echo e(number_format($details['price'], 2)); ?> $</td>
-                                            <td class="text-center cart-quantity">
-                                                <div class="quantity">
-                                                    <input type="number" value="<?php echo e($details['quantity']); ?>" min="1" class="cart-quantity-input" data-id="<?php echo e($id); ?>">
-                                                </div>
-                                            </td>
-                                            <td class="subtotal" id="subtotal-<?php echo e($id); ?>"><?php echo e(number_format($details['price'] * $details['quantity'], 2)); ?> $</td>
-                                        </tr>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <?php else: ?>
-                                    <tr>
-                                        <td colspan="6">Your cart is empty!</td>
-                                    </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
+                        
+                            <?php echo $__env->make('client.shop.others.cartdetail', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        
                     </div>
-
 
                     <!-- Cart Action Buttons Start -->
                     <div class="row justify-content-between gap-3">
@@ -303,10 +261,39 @@
                 });
             });
 
+            // delete cart
+            $(document).on('click', '.cart_delete', function(e) {
+                    e.preventDefault();
+
+                    var productId = $(this).data('product-id');
+                    console.log(productId); // In ra product_id để đảm bảo nó có giá trị đúng
+
+                    $.ajax({
+                        url: "<?php echo e(route('cart.delete', ':id')); ?>".replace(':id', productId), // Truyền product_id vào URL
+                        method: "DELETE",
+                        data: {
+                            _token: "<?php echo e(csrf_token()); ?>", 
+                            product_id: productId
+                        },
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                updateCartView();
+                                
+                            } else {
+                                //   alert(response.message);
+                            }
+                        },
+                        error: function(xhr) {
+                            alert("FAIL");
+                            console.error('Error:', xhr.responseText);
+                        }
+                    });
+                });
+        
             // Hàm tính tổng tất cả các subtotal và cập nhật vào mục total
             function updateTotalPrice() {
                 var total = 0;
-                $(".subtotal").each(function() {
+                $(".sub-total").each(function() {
                     var subtotal = parseFloat($(this).text().replace(/[^0-9.-]+/g, "")); // Lấy giá trị subtotal và loại bỏ các ký tự không phải số
                     total += subtotal;
                 });
@@ -318,10 +305,9 @@
             // Cập nhật tổng giá trị ban đầu khi trang được tải
             updateTotalPrice();
         });
+
+        
     </script>
-
-
-
 
 </body>
 

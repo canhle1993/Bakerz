@@ -7,7 +7,10 @@
               <?php if(session('cart') && count(session('cart')) > 0): ?>
                 <?php $__currentLoopData = session('cart'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="mini-cart-item">
-                        <a href="#" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
+                        
+                        <a href="#" class="mini-cart-item__remove cart_delete" data-product-id="<?php echo e($id); ?>">
+                            <i class="lastudioicon lastudioicon-e-remove"></i></a>
+                        
                         <div class="mini-cart-item__thumbnail">
                             <a href="single-product.html"><img width="70" height="88" src="<?php echo e(asset('storage/products/' . $details['image'])); ?>" alt="Cart"></a>
                         </div>

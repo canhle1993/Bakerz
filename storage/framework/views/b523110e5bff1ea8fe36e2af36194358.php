@@ -178,7 +178,7 @@
                         <!-- Rating Start -->
                         <div class="review-rating">
                             <span class="review-rating-bg">
-                                <span class="review-rating-active" style="width: <?php echo e($product->reviews->avg('ratestar') * 20); ?>%"></span>
+                                <span class="review-rating-active"></span>
                             </span>
                             <a href="#/" class="review-rating-text">(<?php echo e($product->reviews->count()); ?> Review<?php echo e($product->reviews->count() > 1 ? 's' : ''); ?>)</a>
                         </div>
@@ -294,7 +294,7 @@
                                         <div class="review_details ms-3">
                                             <div class="review-rating mb-2">
                                                 <span class="review-rating-bg">
-                                                    <span class="review-rating-active" style="width: <?php echo e(($review->ratestar / 5) * 100); ?>%"></span>
+                                                    <span class="review-rating-active review-rating-active2" data-review="<?php echo e($review->ratestar); ?>"></span>
                                                 </span>
                                             </div>
                                             <div class="review-title-date d-flex">
@@ -569,6 +569,7 @@
 
     <!-- Activation JS -->
     <!-- Vendors JS -->
+
     <script>
         $(window).on("scroll", function (event) {
             var scroll = $(window).scrollTop();
@@ -591,78 +592,20 @@
             }
         });
         $(document).ready(function() {
-    $('.add-to-cart').on('click', function(e) {
-        e.preventDefault();
+            $('.review-rating-active').each(function() {
+                var avgStarRating1 = "<?php echo e($product->reviews->avg('ratestar') * 20); ?>";
 
-        var productId = $(this).data('product-id');
-        $.ajax({
-            url: "<?php echo e(route('cart.new_add')); ?>",
-            method: "POST",
-            data: {
-                _token: "<?php echo e(csrf_token()); ?>", 
-                product_id: productId,
-                quantity: 1
-            },
-            success: function(response) {
-                if (response.status === 'success') {
-                    // Cập nhật số lượng sản phẩm trong giỏ hàng
-                    updateCartView();
-                    updateCartQuantity(response.totalQuantity);
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function(xhr) {
-                console.error('Error:', xhr.responseText);
-            }
+                $(this).css('width', avgStarRating1 + '%');
+            });
+            $('.review-rating-active2').each(function() {
+                var getData = $(this).attr('data-review');
+                var avgStarRating2 = (getData / 5) * 100;
+                console.log(avgStarRating2);
+                $(this).css('width', avgStarRating2 + '%');
+
+            });
         });
-    });
-});
 
-// function updateCartQuantity(totalQuantity) {
-//     // Cập nhật số lượng hiển thị
-//     $('.badge.bg-primary').text(totalQuantity);
-// }
-
-    // Hàm cập nhật hiển thị giỏ hàng mà không load lại trang
-    function updateCartView() {
-        $.ajax({
-            url: "<?php echo e(route('cart.show')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
-            method: "GET",
-            success: function(response) {
-                $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
-            },
-            error: function(xhr) {
-                alert('An error occurred while updating the cart.');
-            }
-        });
-    }
-        
-
-    </script>
-
-    <script>
-        $(window).on("scroll", function (event) {
-            var scroll = $(window).scrollTop();
-            if (scroll <= 0) {
-                $(
-                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
-                ).removeClass("sticky");
-                $(".header-sticky .header-logo img").attr(
-                    "src",
-                    "<?php echo e(asset('assets/images/logo-white.svg')); ?>"
-                );
-            } else {
-                $(
-                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
-                ).addClass("sticky");
-                $(".header-sticky .header-logo img").attr(
-                    "src",
-                    "<?php echo e(asset('assets/images/logo.svg')); ?>"
-                );
-            }
-        });
-        
     </script>
 
 </body>
