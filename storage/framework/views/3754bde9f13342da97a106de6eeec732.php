@@ -342,9 +342,14 @@
                 <h5 class="product-item__title">
                   <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><?php echo e($product->product_name); ?></a>
                 </h5>
+                <?php if($product->price != $product->getDiscountedPrice()): ?>
+                    <span class="original-price"><?php echo e(formatPriceVND($product->price)); ?></span>
+                    <span class="discounted-price">$<?php echo e(number_format($product->getDiscountedPrice(), 2)); ?></span> <!-- Giá mới -->
+                <?php else: ?>
                 <span class="product-item__price"
                   ><?php echo e(formatPriceVND($product->price)); ?></span
                 >
+                <?php endif; ?>
               </div>
             </div>
             <!-- Product Item End -->
