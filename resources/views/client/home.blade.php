@@ -341,9 +341,14 @@
                 <h5 class="product-item__title">
                   <a href="{{ route('product.single', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
                 </h5>
+                @if($product->price != $product->getDiscountedPrice())
+                    <span class="original-price">{{ formatPriceVND($product->price) }}</span>
+                    <span class="discounted-price">${{ number_format($product->getDiscountedPrice(), 2) }}</span> <!-- Giá mới -->
+                @else
                 <span class="product-item__price"
                   >{{ formatPriceVND($product->price) }}</span
                 >
+                @endif
               </div>
             </div>
             <!-- Product Item End -->
