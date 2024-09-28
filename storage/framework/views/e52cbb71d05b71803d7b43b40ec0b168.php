@@ -1187,7 +1187,7 @@
                                 <div class="product-details-img d-flex overflow-hidden flex-row">
 
                                     <!-- Single Product Image Start -->
-                                    <!-- <div class="single-product-vertical-tab swiper-container order-2">
+                                    <div class="single-product-vertical-tab swiper-container order-2">
 
                                         <div class="swiper-wrapper">
                                             <a class="swiper-slide h-auto" href="#/">
@@ -1205,14 +1205,16 @@
 
                                         </div>
 
+                                        <!-- Next Previous Button Start -->
                                         <div class="swiper-button-vertical-next swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
                                         <div class="swiper-button-vertical-prev swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
+                                        <!-- Next Previous Button End -->
 
-                                    </div> -->
+                                    </div>
                                     <!-- Single Product Image End -->
 
                                     <!-- Single Product Thumb Start -->
-                                    <!-- <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
+                                    <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
 
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
@@ -1230,7 +1232,7 @@
                 
                                         </div>
 
-                                    </div> -->
+                                    </div>
                                     <!-- Single Product Thumb End -->
 
                                 </div>
