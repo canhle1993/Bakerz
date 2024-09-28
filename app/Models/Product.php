@@ -50,6 +50,12 @@ class Product extends Model
         return $this->hasMany(UserReview::class, 'product_id');
     }
     
+    // One product can appear in many order details
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetails::class, 'product_id');
+    }
+    
     public function getDiscountedPrice()
     {
         // Lấy tất cả các discount của sản phẩm

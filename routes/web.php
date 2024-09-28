@@ -201,7 +201,9 @@ Route::post('/cart/update', [CartController::class, 'update'])->name('cart.updat
 
 Route::post('/cart/new_add', [CartController::class, 'new_addToCart'])->name('cart.new_add');
 Route::get('/cart/show', [CartController::class, 'showCart'])->name('cart.show');
+Route::post('/cart/{product_id}/update_quantity', [CartController::class, 'update_quantity'])->name('cart.update_quantity');
 Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
+Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.cart_checkout');
 
 use App\Http\Controllers\ReviewController;
 
@@ -210,3 +212,7 @@ Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->
 
 // Route cho trang chi tiết sản phẩm
 Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'])->name('product.single');
+
+// Route quản lý và xóa đánh giá
+Route::get('/admin/reviews/manage', [ReviewController::class, 'manage'])->name('admin.reviews.manage');
+Route::delete('/admin/reviews/{id}/delete', [ReviewController::class, 'delete'])->name('reviews.delete');

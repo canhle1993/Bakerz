@@ -234,29 +234,31 @@
     <script>
         $(document).ready(function() {
             // Lắng nghe sự thay đổi của input số lượng
-            $(".cart-quantity-input").on('change', function() {
+            $(document).on('click', '.cart-quantity-input', function(e) {
                 var productId = $(this).data('id'); // Lấy product_id
                 var quantity = $(this).val(); // Lấy số lượng mới
                 var _token = "{{ csrf_token() }}"; // CSRF token để bảo mật
-
+                
                 // Gửi request AJAX đến server để cập nhật số lượng
                 $.ajax({
-                    url: '{{ route("cart.update") }}', // URL để xử lý update giỏ hàng
+                    url: "{{ route('cart.update_quantity', ':id') }}".replace(':id', productId), // Truyền product_id vào URL
                     method: 'POST',
                     data: {
                         _token: _token,
-                        id: productId,
-                        quantity: quantity
+                        product_id: productId,
+                        quantity: quantity // Gửi số lượng mới lên server
+
                     },
                     success: function(response) {
                         // Cập nhật lại subtotal của sản phẩm này
                         $("#subtotal-" + productId).text(response.subtotal + " $");
-
+                        console.log(response.message);
                         // Cập nhật lại tổng giá trị của giỏ hàng (tính lại tổng subtotal)
                         updateTotalPrice();
+                        updateCartView();
                     },
                     error: function() {
-                        alert('Could not update the cart.');
+                        console.error('Error:', xhr.responseText);
                     }
                 });
             });
@@ -284,29 +286,85 @@
                             }
                         },
                         error: function(xhr) {
-                            alert("FAIL");
                             console.error('Error:', xhr.responseText);
                         }
                     });
                 });
         
             // Hàm tính tổng tất cả các subtotal và cập nhật vào mục total
-            function updateTotalPrice() {
-                var total = 0;
-                $(".sub-total").each(function() {
-                    var subtotal = parseFloat($(this).text().replace(/[^0-9.-]+/g, "")); // Lấy giá trị subtotal và loại bỏ các ký tự không phải số
-                    total += subtotal;
-                });
 
-                // Cập nhật lại mục tổng giá trị
-                $("#total-price").text(total.toFixed(2) + " $");
+            function updateCartView() {
+                $.ajax({
+                    url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+                        
+                        $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
+                        
+                        $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
+                        updateTotalPrice();
+                        calculateTotal();
+                        // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
+                        $('#cart_icon').css('color', 'red')// Đổi màu thành đỏ
+                        .animate({ 
+                            top: '-10px' 
+                        }, 200, function() {
+                            $(this).animate({ 
+                                top: '0px' 
+                            }, 200, function() {
+                                // Lặp lại lần nữa
+                                $(this).animate({ 
+                                    top: '-10px' 
+                                }, 200, function() {
+                                    $(this).animate({ 
+                                        top: '0px' 
+                                    }, 200, function() {
+                                        // Sau khi hiệu ứng hoàn thành, đổi lại màu ban đầu
+                                        $(this).css('color', ''); 
+                                    });
+                                });
+                            });
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
             }
 
             // Cập nhật tổng giá trị ban đầu khi trang được tải
             updateTotalPrice();
         });
 
+        function calculateTotal() {
+            var total = 0;
+            // Duyệt qua tất cả các phần tử có class 'subtotal'
+            $('.subtotal').each(function() {
+                // Lấy giá trị của từng phần tử và loại bỏ ký tự $
+                var subtotal = parseFloat($(this).text().replace('$', ''));
+                // Cộng tổng lại
+                total += subtotal;
+            });
+            
+            // Hiển thị tổng đã tính
+            $('#total_price').text(total.toFixed(2) + ' $');
+        }
         
+        function updateTotalPrice() {
+                var total = 0;
+                // Duyệt qua tất cả các phần tử có class 'subtotal'
+                $('.sub-total').each(function() {
+                    // Lấy giá trị của từng phần tử và loại bỏ ký tự $
+                    var subtotal = parseFloat($(this).text().replace('$', ''));
+                    // Cộng tổng lại
+                    total += subtotal;
+                });
+                
+                // Hiển thị tổng đã tính
+                $('#total-price').text(total.toFixed(2) + ' $');
+            }
     </script>
 
 </body>

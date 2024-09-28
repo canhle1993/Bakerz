@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 
 class CartController extends Controller
 {
@@ -128,22 +133,7 @@ class CartController extends Controller
             ]);
         }
 
-        // Lấy tất cả các sản phẩm trong giỏ hàng của người dùng
-        $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
-
-        $cart = [];
-        foreach ($cartItems as $item) {
-            $cart[$item->product_id] = [
-                'name' => $item->product->product_name,
-                'quantity' => $item->quantity,
-                'price' => $item->product->price,
-                'image' => $item->product->image,
-            ];
-        }
-
-        session()->forget('cart'); // Xóa session 'cart'
-        // Cập nhật lại giỏ hàng vào session
-        session()->put('cart', $cart);
+        $this->getsession();
 
         return response()->json(['status' => 'success', 'message' => 'Product added to cart']);
     }
@@ -163,6 +153,26 @@ class CartController extends Controller
         return response()->json(['cart_html' => $cart_html, 'cart_html2' => $cart_html2, 'cart_quantity'=> $totalQuantity]);
     }
 
+    // Update số lượng
+    public function update_quantity(Request $request, $product_id)
+    {
+        $currentUser = Auth::user(); // Lấy người dùng hiện tại
+        $cartItem = Cart::where('user_id', $currentUser->user_id)
+                    ->where('product_id', $product_id)
+                    ->first(); // Lấy đối tượng cụ thể
+
+        if ($cartItem) {
+            $cartItem->quantity = $request->quantity; // Cập nhật số lượng
+            $cartItem->save(); // Lưu lại thông tin đã thay đổi
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Product not found in cart'], 404);
+        }
+
+        $this->getsession();
+
+        return response()->json(['status' => 'success', 'message' => 'Product is updated ']);
+    }
+
     // Xóa sản phẩm khỏi giỏ hàng
     public function deleteCart(Request $request, $product_id)
     {
@@ -171,6 +181,61 @@ class CartController extends Controller
         ->where('product_id', $product_id)
         ->delete();
 
+        $this->getsession();
+        return response()->json(['status' => 'success', 'message' => 'Product is delete ']);
+    }
+
+    public function cart_checkout(Request $request){
+        $currentUser = Auth::user(); // Lấy người dùng hiện tại
+        $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
+        DB::beginTransaction(); // Start transaction to ensure atomicity
+        $total = 0;
+        foreach ($cartItems as $item) {
+            $total += ($item['quantity'] * $item->product->getDiscountedPrice());
+        }
+        try {
+            // Create a new order entry in the orders table
+            $order = Order::create([
+                'user_id' => $currentUser->user_id,
+                'total' => $total,
+                // 'discount' => $request->discount,
+                'pay' => $total - ($request->discount ?? 0),
+                'purchase_date' => Carbon::now(),
+                'status' => 'Pending', 
+                'delivery_address' => $request->delivery_address,
+                'delivery_phone' => $request->delivery_phone,
+                'delivery_fee' => $request->delivery_fee ?? 0, // Add delivery fee if any
+                'isdelete' => 0, // Active item, not deleted
+            ]);
+
+            // Insert each cart item into the orderdetails table
+            foreach ($cartItems as $item) {
+                OrderDetails::create([
+                    'order_id' => $order->order_id, // Use the order ID from the newly created order
+                    'product_id' => $item->product_id,
+                    'quantity' => $item->quantity,
+                    'selling_price' => $item->product->price,
+                    'discount' => $item->product->getDiscountedPrice(), // Adjust this if discount logic is different
+                    'purchase_date' => Carbon::now(),
+                    'status' => 'Active', // Set an appropriate status
+                    'isdelete' => 0, // Active item, not deleted
+                ]);
+            }
+            Cart::where('user_id', $currentUser->user_id)->delete();
+            DB::commit(); // Commit the transaction
+
+            $this->getsession();
+            return redirect()->route('client.filter');
+
+        } catch (\Exception $e) {
+            DB::rollBack(); // Rollback transaction if any error occurs
+            return response()->json(['status' => 'error', 'message' => 'Checkout failed: ' . $e->getMessage()]);
+        }
+    }
+
+    public function getsession(){
+        $currentUser = Auth::user(); // Lấy người dùng hiện tại
+
         $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
 
         $cart = [];
@@ -178,7 +243,7 @@ class CartController extends Controller
             $cart[$item->product_id] = [
                 'name' => $item->product->product_name,
                 'quantity' => $item->quantity,
-                'price' => $item->product->price,
+                'price' => $item->product->getDiscountedPrice(),
                 'image' => $item->product->image,
             ];
         }
@@ -186,7 +251,6 @@ class CartController extends Controller
         session()->forget('cart'); // Xóa session 'cart'
         // Cập nhật lại giỏ hàng vào session
         session()->put('cart', $cart);
-        return response()->json(['status' => 'success', 'message' => 'Product is delete ']);
     }
 }
 
