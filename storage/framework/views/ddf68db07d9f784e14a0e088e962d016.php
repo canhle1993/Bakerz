@@ -60,8 +60,8 @@
                         <div class="single-product-vertical-tab swiper-container order-2">
 
                             <div class="swiper-wrapper popup-gallery" id="popup-gallery">
-                                <a class="swiper-slide h-auto" href="assets/images/product/product-7-1.png">
-                                    <img class="w-100" src="assets/images/product/product-7-1.png" alt="Product">
+                                <a class="swiper-slide h-auto" href="<?php echo e(asset('img/product-8-1.png')); ?>">
+                                    <img class="w-100" src="<?php echo e(asset('img/product-8-1.png')); ?>" alt="<?php echo e(asset('img/product-8-1.png')); ?>">
                                 </a>
                                 <a class="swiper-slide h-auto" href="assets/images/product/product-7-2.png">
                                     <img class="w-100" src="assets/images/product/product-7-2.png" alt="Product">

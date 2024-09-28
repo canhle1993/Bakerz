@@ -257,7 +257,7 @@
 
             if(confirm("Are you sure you want to remove this item?")) {
                 $.ajax({
-                    url: '{{ route('cart.remove') }}',
+                    url: '<?php echo e(route('cart.remove')); ?>',
                     method: "POST",
                     data: {
                         _token: '{{ csrf_token() }}',

@@ -147,7 +147,7 @@
             </div>
             <div class="row-item">
               <div class="col-md-3 product-column">Description</div>
-              <div class="col-md-9 product-info">{{$product->describe}}</div>
+              <div class="col-md-9 product-info">{!! nl2br(e($product->describe)) !!}</div>
             </div>
           </div>
         </div>

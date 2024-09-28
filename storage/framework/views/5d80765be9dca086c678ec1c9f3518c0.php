@@ -378,83 +378,8 @@
       <h4 class="offcanvas-title">My Cart</h4>
       <button type="button" class="btn-close text-secondary" data-bs-dismiss="offcanvas"><i class="lastudioicon lastudioicon-e-remove"></i></button>
   </div>
-
-  <div class="offcanvas-body">
-      <!-- Offcanvas Cart Items Start  -->
-      <ul class="offcanvas-cart-items">
-          <li>
-              <!-- Mini Cart Item Start  -->
-              <div class="mini-cart-item">
-                  <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                  <div class="mini-cart-item__thumbnail">
-                      <a href="single-product.html"><img width="70" height="88" src="<?php echo e(asset('assets/images/mini-cart/cart-1.png')); ?>" alt="Cart"></a>
-                  </div>
-                  <div class="mini-cart-item__content">
-                      <h6 class="mini-cart-item__title"><a href="single-product.html">Macaron Cake</a></h6>
-                      <span class="mini-cart-item__quantity">1 × $4.99</span>
-                  </div>
-              </div>
-              <!-- Mini Cart Item End  -->
-          </li>
-          <li>
-              <!-- Mini Cart Item Start  -->
-              <div class="mini-cart-item">
-                  <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                  <div class="mini-cart-item__thumbnail">
-                      <a href="single-product.html"><img width="70" height="88" src="<?php echo e(asset('assets/images/mini-cart/cart-2.png')); ?>" alt="Cart"></a>
-                  </div>
-                  <div class="mini-cart-item__content">
-                      <h6 class="mini-cart-item__title"><a href="single-product.html">Cream Muffin</a></h6>
-                      <span class="mini-cart-item__quantity">1 × $4.99</span>
-                  </div>
-              </div>
-              <!-- Mini Cart Item End  -->
-          </li>
-          <li>
-              <!-- Mini Cart Item Start  -->
-              <div class="mini-cart-item">
-                  <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                  <div class="mini-cart-item__thumbnail">
-                      <a href="single-product.html"><img width="70" height="88" src="<?php echo e(asset('assets/images/mini-cart/cart-3.png')); ?>" alt="Cart"></a>
-                  </div>
-                  <div class="mini-cart-item__content">
-                      <h6 class="mini-cart-item__title"><a href="single-product.html">Brownie</a></h6>
-                      <span class="mini-cart-item__quantity">1 × $4.99</span>
-                  </div>
-              </div>
-              <!-- Mini Cart Item End  -->
-          </li>
-          <li>
-              <!-- Mini Cart Item Start  -->
-              <div class="mini-cart-item">
-                  <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                  <div class="mini-cart-item__thumbnail">
-                      <a href="single-product.html"><img width="70" height="88" src="<?php echo e(asset('assets/images/mini-cart/cart-4.png')); ?>" alt="Cart"></a>
-                  </div>
-                  <div class="mini-cart-item__content">
-                      <h6 class="mini-cart-item__title"><a href="single-product.html">Chocolate Muffin</a></h6>
-                      <span class="mini-cart-item__quantity">1 × $4.99</span>
-                  </div>
-              </div>
-              <!-- Mini Cart Item End  -->
-          </li>
-          <li>
-              <!-- Mini Cart Item Start  -->
-              <div class="mini-cart-item">
-                  <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                  <div class="mini-cart-item__thumbnail">
-                      <a href="single-product.html"><img width="70" height="88" src="<?php echo e(asset('assets/images/mini-cart/cart-5.png')); ?>" alt="Cart"></a>
-                  </div>
-                  <div class="mini-cart-item__content">
-                      <h6 class="mini-cart-item__title"><a href="single-product.html">No-bake chocolate</a></h6>
-                      <span class="mini-cart-item__quantity">1 × $4.99</span>
-                  </div>
-              </div>
-              <!-- Mini Cart Item End  -->
-          </li>
-      </ul>
-      <!-- Offcanvas Cart Items End  -->
-  </div>
+  
+  <?php echo $__env->make('client.shop.others.cartpartials', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <div class="offcanvas-footer d-flex flex-column gap-4">
 

@@ -32,6 +32,8 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <style>
       .hidden-form {
@@ -258,16 +260,16 @@
 <div
   class="section-padding-03 pt-0"
   id="a1"
-  style="padding-top: 35px !important"
->
-  <div class="container">
+  style="padding-top: 35px !important; padding-bottom: 80px !important;">
+  <div class="container" id="a2">
     <div class="row">
       <div class="col-12">
         <!-- Section Title Strat -->
         <div class="section-title">
           <h2 class="section-title__title">
-            Products suitable for your health
-          </h2>
+            Products suitable for your health _______________ <a href="shop.html" class="read-more"
+            ><span>show more</span
+            ></a></h2>
         </div>
         <!-- Section Title End -->
       </div>
@@ -293,7 +295,7 @@
               </div>
               @endif
               <div class="product-item__image border w-100">
-                <a href="single-product.html"
+                <a href="{{ route('product.single', ['product' => $product->product_id]) }}"
                   ><img
                     width="350"
                     height="350"
@@ -316,13 +318,9 @@
                   </li>
                   <li class="product-item__meta-action">
                     <a
-                      class="shadow-1 labtn-icon-cart"
+                      class="shadow-1 labtn-icon-cart add-to-cart"
                       href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title="Add to Cart"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalCart"
+                      data-product-id="{{ $product->product_id }}"
                     ></a>
                   </li>
                   <li class="product-item__meta-action">
@@ -341,7 +339,7 @@
               </div>
               <div class="product-item__content pt-5">
                 <h5 class="product-item__title">
-                  <a href="single-product.html">{{ $product->product_name }}</a>
+                  <a href="{{ route('product.single', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
                 </h5>
                 <span class="product-item__price"
                   >{{ formatPriceVND($product->price) }}</span
@@ -375,7 +373,9 @@
                 <div class="col-12">
                     <!-- Section Title Strat -->
                     <div class="section-title">
-                        <h2 class="section-title__title">Most recently purchased product</h2>
+                        <h2 class="section-title__title">Most recently purchased product _______________ <a href="shop.html" class="read-more"
+                        ><span>show more</span
+                        ></a></h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
@@ -601,17 +601,14 @@
             <div class="swiper-slide">
               <!-- Product Item Start -->
               <div class="product-item product-item-05 border text-center">
-                @if($disproduct->price>1)
-                <!-- TODO:CHEAT -->
                 <div
-                  class="product-item__badge"
-                  style="background-color: red !important"
-                >
-                  Best Seller
-                </div>
-                @endif
+                    class="product-item__badge"
+                    style="background-color: red !important"
+                    >
+                    <h6 style="color: white;"> {{$disproduct->getDiscountPercent() }} %</h6>
+                    </div>
                 <div class="product-item__image">
-                  <a href="single-product.html"
+                  <a href="{{ route('product.single', ['product' => $disproduct->product_id]) }}"
                     ><img
                       width="250"
                       height="250"
@@ -621,13 +618,13 @@
                 </div>
                 <div class="product-item__content">
                   <h5 class="product-item__title">
-                    <a href="single-product.html"
+                    <a href="{{ route('product.single', ['product' => $disproduct->product_id]) }}"
                       >{{ $disproduct->product_name }}</a
                     >
                   </h5>
                     <span class="product-item__price">
                         <span class="original-price">{{ formatPriceVND($disproduct->price) }}</span>
-                        <span class="discounted-price">{{ formatPriceVND($disproduct->discounted_price) }}</span> <!-- Giá mới -->
+                        <span class="discounted-price">{{ formatPriceVND($disproduct->getDiscountedPrice()) }}</span> <!-- Giá mới -->
                     </span>
                  
                 </div>
@@ -647,15 +644,9 @@
                   </li>
                   <li class="product-item__meta-action">
                     <a
-                      class="labtn-icon-cart"
+                      class="shadow-1 labtn-icon-cart add-to-cart"
                       href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title=""
-                      data-bs-original-title="Select options"
-                      aria-label="Select options"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalCart"
+                      data-product-id="{{ $disproduct->product_id }}"
                     ></a>
                   </li>
                   <li class="product-item__meta-action">
@@ -730,7 +721,7 @@
                                 <!-- Product Item Start -->
                                 <div class="product-item product-item-05 border text-center">
                                     <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-12-500x625.jpg" alt="Product"></a>
+                                        <a href="single-product.html"><img width="250" height="250" src="img/product-8-1.png" alt="Product"></a>
                                     </div>
                                     <div class="product-item__content">
                                         <h5 class="product-item__title"><a href="single-product.html">Raisin Bread</a></h5>
@@ -1433,6 +1424,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
       document
         .getElementById("healthSuggestionBtn")
         .addEventListener("click", function () {
@@ -1457,24 +1449,24 @@
     });
 
 
- // Hàm để kiểm tra và cập nhật trạng thái của checkbox
- function updateHeathStatus(bmi) {
-    // Lấy checkbox "Thừa Cân" và "Thiếu Cân"
-    var thuaCanCheckbox = $('input[name="heath_id[]"][value="4"]');// 4 là thừa cân
-    var thieuCanCheckbox = $('input[name="heath_id[]"][value="5"]');// 5 là thiếu cân
+    // Hàm để kiểm tra và cập nhật trạng thái của checkbox
+    function updateHeathStatus(bmi) {
+        // Lấy checkbox "Thừa Cân" và "Thiếu Cân"
+        var thuaCanCheckbox = $('input[name="heath_id[]"][value="4"]');// 4 là thừa cân
+        var thieuCanCheckbox = $('input[name="heath_id[]"][value="5"]');// 5 là thiếu cân
 
-    // Xử lý tự động check/uncheck dựa vào BMI
-    if (bmi >= 25) {
-        thuaCanCheckbox.prop('checked', true);
-        thieuCanCheckbox.prop('checked', false);
-    } else if (bmi < 18.5) {
-        thieuCanCheckbox.prop('checked', true);
-        thuaCanCheckbox.prop('checked', false);
-    } else {
-        thuaCanCheckbox.prop('checked', false);
-        thieuCanCheckbox.prop('checked', false);
+        // Xử lý tự động check/uncheck dựa vào BMI
+        if (bmi >= 25) {
+            thuaCanCheckbox.prop('checked', true);
+            thieuCanCheckbox.prop('checked', false);
+        } else if (bmi < 18.5) {
+            thieuCanCheckbox.prop('checked', true);
+            thuaCanCheckbox.prop('checked', false);
+        } else {
+            thuaCanCheckbox.prop('checked', false);
+            thieuCanCheckbox.prop('checked', false);
+        }
     }
-}
 
     // Bắt sự kiện khi người dùng nhập chiều cao và cân nặng để tính BMI
     $('#heightInput, #weightInput').on('input', function() {
@@ -1544,7 +1536,9 @@
     });
     
     window.addEventListener('load', function() {
+        document.getElementById('a2').style.display = 'none';  // Show the product section
         if (sessionStorage.getItem('scrollToA1') === 'true') {
+            document.getElementById('a2').style.display = 'block';  // Show the product section
             document.getElementById('a1').scrollIntoView({
                 behavior: 'smooth'
             });
@@ -1552,6 +1546,55 @@
             sessionStorage.removeItem('scrollToA1');
         }
     });
+
+    $(document).ready(function() {
+    $('.add-to-cart').on('click', function(e) {
+        e.preventDefault();
+
+        var productId = $(this).data('product-id');
+        $.ajax({
+            url: "{{ route('cart.new_add') }}",
+            method: "POST",
+            data: {
+                _token: "{{ csrf_token() }}", 
+                product_id: productId,
+                quantity: 1
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    // Cập nhật số lượng sản phẩm trong giỏ hàng
+                    updateCartView();
+                    updateCartQuantity(response.totalQuantity);
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr) {
+                console.error('Error:', xhr.responseText);
+            }
+        });
+    });
+});
+
+// function updateCartQuantity(totalQuantity) {
+//     // Cập nhật số lượng hiển thị
+//     $('.badge.bg-primary').text(totalQuantity);
+// }
+
+    // Hàm cập nhật hiển thị giỏ hàng mà không load lại trang
+    function updateCartView() {
+        $.ajax({
+            url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+            method: "GET",
+            success: function(response) {
+                $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+            },
+            error: function(xhr) {
+                alert('An error occurred while updating the cart.');
+            }
+        });
+    }
+    
     </script>
 </body>
 
