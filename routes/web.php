@@ -215,6 +215,8 @@ Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'
 Route::get('/admin/reviews/manage', [ReviewController::class, 'manage'])->name('admin.reviews.manage');
 Route::delete('/admin/reviews/{id}/delete', [ReviewController::class, 'delete'])->name('reviews.delete');
 Route::post('/admin/reviews/{id}/reply', [ReviewController::class, 'reply'])->name('reviews.reply');
+Route::post('/reviews/{id}/reply', [ReviewController::class, 'reply'])->name('reviews.reply');
+
 
 //Tính toán khoảng cách từ vị trí khách hàng đến cửa hàng
 use App\Http\Controllers\CalculateDistanceController;

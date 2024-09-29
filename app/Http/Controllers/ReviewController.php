@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserReview;
+use App\Models\UserReviewReply;
 
 class ReviewController extends Controller
 {
@@ -54,18 +55,23 @@ class ReviewController extends Controller
         return redirect()->route('admin.reviews.manage')->with('success', 'Đánh giá đã được ẩn thành công.');
     }
     public function reply(Request $request, $id)
-{
-    $request->validate([
-        'reply' => 'required|string',
-    ]);
+    {
+        $request->validate([
+            'reply' => 'required|string',
+        ]);
+    
+        // Tìm đánh giá theo ID
+        $review = UserReview::findOrFail($id);
+    
+        // Lưu câu trả lời mới
+        UserReviewReply::create([
+            'userreview_id' => $review->ID,
+            'user_id' => Auth::id(),
+            'reply' => $request->input('reply')
+        ]);
+    
+        return redirect()->back()->with('success', 'Trả lời đã được gửi thành công.');
+    }
 
-    $review = UserReview::findOrFail($id);
-
-    // Lưu câu trả lời vào trường 'reply'
-    $review->reply = $request->input('reply');
-    $review->save();
-
-    return redirect()->route('admin.reviews.manage')->with('success', 'Trả lời đã được gửi thành công.');
-}
 
 }
