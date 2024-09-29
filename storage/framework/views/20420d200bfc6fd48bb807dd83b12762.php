@@ -287,7 +287,7 @@
                                 <p>Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá sản phẩm này!</p>
                             <?php else: ?>
                                 <?php $__currentLoopData = $product->reviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <div class="review-top d-flex mb-4 align-items-center">
+                                    <div class="review-top d-flex mb-4 align-items-center" id="comment-<?php echo e($review->ID); ?>">
                                         <div class="review_thumb">
                                             <img alt="review images" src="<?php echo e(asset('storage/avatars/' . $review->user->avatar)); ?>">
                                         </div>
@@ -301,13 +301,20 @@
                                                 <h5 class="title me-1"><?php echo e($review->CreatedBy); ?> - </h5>
                                                 <span><?php echo e(\Carbon\Carbon::parse($review->CreatedDate)->format('M d, Y')); ?></span>
                                             </div>
-                                            <p><?php echo nl2br(e ($review->comment )); ?></p>
+                                            <p><?php echo nl2br(e($review->comment)); ?></p>
+                                            
+                                            <!-- Hiển thị câu trả lời nếu có -->
+                                            <?php if($review->reply): ?>
+                                                <div class="reply mt-3" style="position: relative; left: 30px; top: -15px;">
+                                                    <strong class="text-primary">Bakerz Bite - reply:</strong>
+                                                    <p><?php echo nl2br(e($review->reply)); ?></p>
+                                                </div>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php endif; ?>
-
-
+                        </div>
                             <!-- Form để thêm đánh giá mới -->
                             <?php if(auth()->guard()->check()): ?>
                             <div class="comments-area comments-reply-area">
@@ -342,6 +349,10 @@
                                         </form>
                                     </div>
                                 </div>
+                            </div>
+                            <?php else: ?>
+                            <div class="alert alert-warning">
+                            You need to <a href="<?php echo e(route('login')); ?>" class="text-danger">log in</a> to rate this product.
                             </div>
                         <?php endif; ?>
 

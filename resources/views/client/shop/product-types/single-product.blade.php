@@ -284,7 +284,7 @@
                                 <p>Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá sản phẩm này!</p>
                             @else
                                 @foreach($product->reviews as $review)
-                                    <div class="review-top d-flex mb-4 align-items-center">
+                                    <div class="review-top d-flex mb-4 align-items-center" id="comment-{{ $review->ID }}">
                                         <div class="review_thumb">
                                             <img alt="review images" src="{{ asset('storage/avatars/' . $review->user->avatar) }}">
                                         </div>
@@ -298,13 +298,20 @@
                                                 <h5 class="title me-1">{{ $review->CreatedBy }} - </h5>
                                                 <span>{{ \Carbon\Carbon::parse($review->CreatedDate)->format('M d, Y') }}</span>
                                             </div>
-                                            <p>{!! nl2br(e ($review->comment ))!!}</p>
+                                            <p>{!! nl2br(e($review->comment))!!}</p>
+                                            
+                                            <!-- Hiển thị câu trả lời nếu có -->
+                                            @if($review->reply)
+                                                <div class="reply mt-3" style="position: relative; left: 30px; top: -15px;">
+                                                    <strong class="text-primary">Bakerz Bite - reply:</strong>
+                                                    <p>{!! nl2br(e($review->reply))!!}</p>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
                             @endif
-
-
+                        </div>
                             <!-- Form để thêm đánh giá mới -->
                             @auth
                             <div class="comments-area comments-reply-area">
@@ -339,6 +346,10 @@
                                         </form>
                                     </div>
                                 </div>
+                            </div>
+                            @else
+                            <div class="alert alert-warning">
+                            You need to <a href="{{ route('login') }}" class="text-danger">log in</a> to rate this product.
                             </div>
                         @endauth
 

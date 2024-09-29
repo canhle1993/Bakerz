@@ -35,9 +35,9 @@ class ReviewController extends Controller
     // Hiển thị trang quản lý đánh giá
     public function manage()
     {
-        // Lấy tất cả đánh giá chưa bị xóa
-        $reviews = UserReview::with('user')->where('is_deleted', 0)->get();
+        $reviews = UserReview::with(['user', 'product.catalogs'])->where('is_deleted', 0)->get();
         return view('admin.reviews.manage', compact('reviews'));
+
     }
 
     // Xóa đánh giá (đánh dấu là đã xóa)
@@ -53,4 +53,19 @@ class ReviewController extends Controller
         // Chuyển hướng lại với thông báo thành công
         return redirect()->route('admin.reviews.manage')->with('success', 'Đánh giá đã được ẩn thành công.');
     }
+    public function reply(Request $request, $id)
+{
+    $request->validate([
+        'reply' => 'required|string',
+    ]);
+
+    $review = UserReview::findOrFail($id);
+
+    // Lưu câu trả lời vào trường 'reply'
+    $review->reply = $request->input('reply');
+    $review->save();
+
+    return redirect()->route('admin.reviews.manage')->with('success', 'Trả lời đã được gửi thành công.');
+}
+
 }
