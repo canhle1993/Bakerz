@@ -224,7 +224,7 @@ Route::post('/reviews/{id}/reply', [ReviewController::class, 'reply'])->name('re
 
 use App\Http\Controllers\CalculateDistanceController;
 
-// Hiển thị trang tính khoảng cách
+// Hiển thị trang để tính khoảng cách
 Route::get('/client-location', [CalculateDistanceController::class, 'showLocation'])->name('client_location');
 
 // Tính toán khoảng cách

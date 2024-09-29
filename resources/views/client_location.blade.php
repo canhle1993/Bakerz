@@ -81,7 +81,7 @@
 
     <!-- Nhúng Google Maps API với API Key của bạn -->
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7ETOwK6NMmiPXlHUAThIjfDbCxXq_A6c">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCL6FrEVskAymb9R3vRkVWGgQYc5LrCW8A&callback=initMap">
     </script>
     <a href="{{ route('client.home') }}">Quay về trang Home</a></li>
 </body>

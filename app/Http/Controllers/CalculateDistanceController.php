@@ -47,5 +47,4 @@ class CalculateDistanceController extends Controller
 
         return round($distance, 2); // Trả về khoảng cách đã làm tròn
     }
-    
 }
