@@ -271,6 +271,7 @@
                                             <li><a class="sub-item-link" href="<?php echo e(route('wishlist')); ?>"><span>Wishlist</span></a></li>
                                             <li><a class="sub-item-link" href="<?php echo e(route('checkout')); ?>"><span>Checkout</span></a></li>
                                             <li><a class="sub-item-link" href="<?php echo e(route('order-tracking')); ?>"><span>Order Tracking</span></a></li>
+                                            <li><a class="sub-item-link" href="<?php echo e(route('client_location')); ?>"><span>Client Location</span></a></li>
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item banner-menu-content-wrap">
@@ -379,7 +380,7 @@
       <h4 class="offcanvas-title">My Cart</h4>
       <button type="button" class="btn-close text-secondary" data-bs-dismiss="offcanvas"><i class="lastudioicon lastudioicon-e-remove"></i></button>
   </div>
-  
+
   <?php echo $__env->make('client.shop.others.cartpartials', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
   <div class="offcanvas-footer d-flex flex-column gap-4">
@@ -394,7 +395,7 @@
       <!-- Mini Cart Button End  -->
       <div class="mini-cart-btn d-flex flex-column gap-2">
           <a class="d-block btn btn-secondary btn-hover-primary" href="<?php echo e(route('cart')); ?>">View cart</a>
-          <a class="d-block btn btn-secondary btn-hover-primary" href="<?php echo e(route('checkout')); ?>">Checkout</a>
+          <a id="btnCheckout" class="d-block btn btn-secondary btn-hover-primary" href="<?php echo e(route('checkout')); ?>">Checkout</a>
       </div>
       <!-- Mini Cart Button End  -->
 
@@ -443,10 +444,9 @@
                 );
             }
         });
-        
+
         $(document).ready(function() {
           updateCartView();
-          
           $('.add-to-cart').on('click', function(e) {
               e.preventDefault();
 
@@ -455,7 +455,7 @@
                   url: "<?php echo e(route('cart.new_add')); ?>",
                   method: "POST",
                   data: {
-                      _token: "<?php echo e(csrf_token()); ?>", 
+                      _token: "<?php echo e(csrf_token()); ?>",
                       product_id: productId,
                       quantity: 1
                   },
@@ -476,7 +476,7 @@
 
           // delete cart
           $(document).on('click', '.cart_delete', function(e) {
-                
+
                 e.preventDefault();
 
                 var productId = $(this).data('product-id');
@@ -486,7 +486,7 @@
                     url: "<?php echo e(route('cart.delete', ':id')); ?>".replace(':id', productId), // Truyền product_id vào URL
                     method: "DELETE",
                     data: {
-                        _token: "<?php echo e(csrf_token()); ?>", 
+                        _token: "<?php echo e(csrf_token()); ?>",
                         product_id: productId
                     },
                     success: function(response) {
@@ -507,30 +507,36 @@
                     url: "<?php echo e(route('cart.show')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
                     method: "GET",
                     success: function(response) {
+                        var cartCount = response.cart_count; // Lấy số lượng sản phẩm trong giỏ hàng từ phản hồi
+                        if(cartCount > 0){
+                            document.getElementById("btnCheckout").style.visibility = 'visible'; // Hiển thị nút Checkout
+                            document.getElementById("btnCheckout2").style.visibility = 'visible'; // Hiển thị nút Checkout
+                        } else {
+                            document.getElementById("btnCheckout").style.visibility = 'hidden'; // Ẩn nút Checkout (phần tử vẫn chiếm không gian)
+                            document.getElementById("btnCheckout2").style.visibility = 'hidden'; // Ẩn nút Checkout (phần tử vẫn chiếm không gian)
+                        }
                         $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
-                        
                         $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
-                        
                         $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
                         console.log(response.cart_quantity);
                         calculateTotal();
                         // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
                         $('#cart_icon').css('color', 'red')// Đổi màu thành đỏ
-                        .animate({ 
-                            top: '-10px' 
+                        .animate({
+                            top: '-10px'
                         }, 200, function() {
-                            $(this).animate({ 
-                                top: '0px' 
+                            $(this).animate({
+                                top: '0px'
                             }, 200, function() {
                                 // Lặp lại lần nữa
-                                $(this).animate({ 
-                                    top: '-10px' 
+                                $(this).animate({
+                                    top: '-10px'
                                 }, 200, function() {
-                                    $(this).animate({ 
-                                        top: '0px' 
+                                    $(this).animate({
+                                        top: '0px'
                                     }, 200, function() {
                                         // Sau khi hiệu ứng hoàn thành, đổi lại màu ban đầu
-                                        $(this).css('color', ''); 
+                                        $(this).css('color', '');
                                     });
                                 });
                             });
@@ -543,7 +549,7 @@
                 });
             }
         });
-        
+
 
         function calculateTotal() {
             var total = 0;
@@ -554,7 +560,7 @@
                 // Cộng tổng lại
                 total += subtotal;
             });
-            
+
             // Hiển thị tổng đã tính
             $('#total_price').text(total.toFixed(2) + ' $');
         }

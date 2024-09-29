@@ -112,9 +112,6 @@ Route::get('/product-affiliate', function () {
 Route::get('/cart', function () {
     return view('client.shop.others.cart');
 })->name('cart');
-Route::get('/checkout', function () {
-    return view('client.shop.others.checkout');
-})->name('checkout');
 Route::get('/wishlist', function () {
     return view('client.shop.others.wishlist');
 })->name('wishlist');
@@ -203,6 +200,7 @@ Route::post('/cart/new_add', [CartController::class, 'new_addToCart'])->name('ca
 Route::get('/cart/show', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/{product_id}/update_quantity', [CartController::class, 'update_quantity'])->name('cart.update_quantity');
 Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
+Route::get('/showcheckout',[CartController::class, 'showcheckout'])->name('checkout');
 Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.cart_checkout');
 
 use App\Http\Controllers\ReviewController;

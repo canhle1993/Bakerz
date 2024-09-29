@@ -395,7 +395,7 @@
       <!-- Mini Cart Button End  -->
       <div class="mini-cart-btn d-flex flex-column gap-2">
           <a class="d-block btn btn-secondary btn-hover-primary" href="{{ route('cart') }}">View cart</a>
-          <a class="d-block btn btn-secondary btn-hover-primary" href="{{ route('checkout') }}">Checkout</a>
+          <a id="btnCheckout" class="d-block btn btn-secondary btn-hover-primary" href="{{ route('checkout') }}">Checkout</a>
       </div>
       <!-- Mini Cart Button End  -->
 
@@ -447,7 +447,6 @@
 
         $(document).ready(function() {
           updateCartView();
-
           $('.add-to-cart').on('click', function(e) {
               e.preventDefault();
 
@@ -508,10 +507,16 @@
                     url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
                     method: "GET",
                     success: function(response) {
+                        var cartCount = response.cart_count; // Lấy số lượng sản phẩm trong giỏ hàng từ phản hồi
+                        if(cartCount > 0){
+                            document.getElementById("btnCheckout").style.visibility = 'visible'; // Hiển thị nút Checkout
+                            document.getElementById("btnCheckout2").style.visibility = 'visible'; // Hiển thị nút Checkout
+                        } else {
+                            document.getElementById("btnCheckout").style.visibility = 'hidden'; // Ẩn nút Checkout (phần tử vẫn chiếm không gian)
+                            document.getElementById("btnCheckout2").style.visibility = 'hidden'; // Ẩn nút Checkout (phần tử vẫn chiếm không gian)
+                        }
                         $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
-
                         $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
-
                         $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
                         console.log(response.cart_quantity);
                         calculateTotal();
