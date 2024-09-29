@@ -175,14 +175,4 @@ class ProductController extends Controller
         return view('client.shop.product-types.single-product', compact('product', 'relatedProducts'));
     }
 
-
-    public function show($product_id)
-    {
-        // Lấy sản phẩm cùng với các đánh giá và thông tin người dùng
-        $product = Product::with(['reviews.user'])->findOrFail($product_id);
-    
-        // Trả về view và truyền dữ liệu
-        return view('client.shop.product-types.single-product', compact('product'));
-    }
-
 }

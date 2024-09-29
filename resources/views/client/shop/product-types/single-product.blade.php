@@ -401,7 +401,7 @@
                             <div class="swiper-slide">
                                 <!-- Product Item Start -->
                                 <div class="product-item text-center">
-                                    <div class="product-item__badge">Hot</div>
+                                    <!-- <div class="product-item__badge">Hot</div> -->
                                     <div class="product-item__image border w-100">
                                         <a href="{{ route('single-product', ['id' => $relatedProduct->product_id]) }}">
                                             <img width="350" height="350" src="{{ asset('storage/products/' . $relatedProduct->image) }}" alt="{{ $relatedProduct->product_name }}">
@@ -420,7 +420,14 @@
                                     </div>
                                     <div class="product-item__content pt-5">
                                         <h5 class="product-item__title"><a href="{{ route('single-product', ['id' => $relatedProduct->product_id]) }}">{{ $relatedProduct->product_name }}</a></h5>
-                                        <span class="product-item__price">${{ number_format($relatedProduct->price, 2) }}</span>
+                                        @if($relatedProduct->price != $relatedProduct->getDiscountedPrice())
+                                            <span class="original-price">{{ formatPriceVND($relatedProduct->price) }}</span>
+                                            <span class="discounted-price">${{ number_format($relatedProduct->getDiscountedPrice(), 2) }}</span> <!-- Giá mới -->
+                                        @else
+                                        <span class="product-item__price"
+                                        >{{ formatPriceVND($relatedProduct->price) }}</span
+                                        >
+                                        @endif
                                     </div>
                                 </div>
                                 <!-- Product Item End -->
