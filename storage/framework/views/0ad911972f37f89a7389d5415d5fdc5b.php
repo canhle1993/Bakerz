@@ -83,7 +83,8 @@
     <!-- Product Section Start -->
     <div class="shop-product-section section section-padding-03">
         <div class="container custom-container">
-            <form action="#" class="checkout-form">
+            <form action="<?php echo e(route('cart.cart_checkout')); ?>" class="checkout-form" method="POST" enctype="multipart/form-data">
+            <?php echo csrf_field(); ?>
                 <div class="row g-8">
 
                     <div class="col-lg-7">
@@ -98,14 +99,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Consignee phone number*</label>
-                                    <input class="form-field" type="text" placeholder="Phone..." required>
+                                    <input name="delivery_phone" class="form-field" type="text" placeholder="Phone..." required>
                                 </div>
                             </div>
                             <div class="row pt-3">
                                 <div class="col-md-12">
                                     <div id="sa" style="display: contents;">
                                     <label>Shipping address*</label>
-                                    <input class="form-field" type="text" placeholder="Address..."  required></div>
+                                    <input name="delivery_address" class="form-field" type="text" placeholder="Address..."  required></div>
                                 </div>
                             </div>
 
@@ -114,6 +115,7 @@
                     </div>
 
                     <div class="col-lg-5">
+                        
 
                         <!-- Checkout Summary Start -->
                         <div class="checkout-box">
@@ -180,12 +182,13 @@
                                 </div>
 
                             </div>
-
-                            <button class="btn btn-dark btn-primary-hover rounded-0 mt-6" id="place-order-btn" disabled>Place order</button>
+                            <!-- TODO: total tính sai nha -->
+                            <input type="hidden" name="total" value="<?php echo e(number_format($total, 2)); ?>">
+                            <button type="submit" name="redirect" class="btn btn-dark btn-primary-hover rounded-0 mt-6" id="place-order-btn" disabled>Place order</button>
 
                         </div>
                         <!-- Payment Method End -->
-
+                        
                     </div>
 
                 </div>

@@ -219,14 +219,14 @@ Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->
 Route::get('/admin/reviews/manage', [ReviewController::class, 'manage'])->name('admin.reviews.manage');
 Route::delete('/admin/reviews/{id}/delete', [ReviewController::class, 'delete'])->name('reviews.delete');
 
-//Tính toán khoảng cách từ vị trí khách hàng đến cửa hàng
 use App\Http\Controllers\CalculateDistanceController;
 
-// Hiển thị trang để tính khoảng cách
+// Hiển thị trang tính khoảng cách
 Route::get('/client-location', [CalculateDistanceController::class, 'showLocation'])->name('client_location');
 
 // Tính toán khoảng cách
 Route::post('/calculate-distance', [CalculateDistanceController::class, 'calculateDistance']);
+
 
 // VNPAY return
 use App\Http\Controllers\PaymentController;

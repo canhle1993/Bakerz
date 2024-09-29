@@ -59,6 +59,27 @@
 <body>
 <?php echo $__env->make('layouts.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
+
+<?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
+
+<?php if(isset($_SESSION['success'])): ?>
+    <script>
+        alert("<?php echo e($_SESSION['success']); ?>");
+    </script>
+    <?php unset($_SESSION['success']); ?>
+<?php endif; ?>
+
+<?php if(isset($_SESSION['error'])): ?>
+    <script>
+        alert("<?php echo e($_SESSION['error']); ?>");
+    </script>
+    <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
+
     <!-- Slider Section Strat -->
     <div class="slider-section-seven slider-active overflow-hidden">
         <div class="swiper">
