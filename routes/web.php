@@ -201,7 +201,9 @@ Route::post('/cart/update', [CartController::class, 'update'])->name('cart.updat
 
 Route::post('/cart/new_add', [CartController::class, 'new_addToCart'])->name('cart.new_add');
 Route::get('/cart/show', [CartController::class, 'showCart'])->name('cart.show');
+Route::post('/cart/{product_id}/update_quantity', [CartController::class, 'update_quantity'])->name('cart.update_quantity');
 Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
+Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.cart_checkout');
 
 use App\Http\Controllers\ReviewController;
 
@@ -212,6 +214,20 @@ Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'
 // Route để lưu đánh giá
 Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
 
+
 // Route quản lý và xóa đánh giá
 Route::get('/admin/reviews/manage', [ReviewController::class, 'manage'])->name('admin.reviews.manage');
 Route::delete('/admin/reviews/{id}/delete', [ReviewController::class, 'delete'])->name('reviews.delete');
+
+//Tính toán khoảng cách từ vị trí khách hàng đến cửa hàng
+use App\Http\Controllers\CalculateDistanceController;
+
+// Hiển thị trang để tính khoảng cách
+Route::get('/client-location', [CalculateDistanceController::class, 'showLocation'])->name('client_location');
+
+// Tính toán khoảng cách
+Route::post('/calculate-distance', [CalculateDistanceController::class, 'calculateDistance']);
+
+// VNPAY return
+use App\Http\Controllers\PaymentController;
+Route::get('/vnpay-return', [PaymentController::class, 'vnpayReturn'])->name('vnpay.return');

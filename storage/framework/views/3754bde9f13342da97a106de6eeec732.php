@@ -59,6 +59,27 @@
 <body>
 <?php echo $__env->make('layouts.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
+
+<?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
+
+<?php if(isset($_SESSION['success'])): ?>
+    <script>
+        alert("<?php echo e($_SESSION['success']); ?>");
+    </script>
+    <?php unset($_SESSION['success']); ?>
+<?php endif; ?>
+
+<?php if(isset($_SESSION['error'])): ?>
+    <script>
+        alert("<?php echo e($_SESSION['error']); ?>");
+    </script>
+    <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
+
     <!-- Slider Section Strat -->
     <div class="slider-section-seven slider-active overflow-hidden">
         <div class="swiper">
@@ -1190,18 +1211,20 @@
                                     <div class="single-product-vertical-tab swiper-container order-2">
 
                                         <div class="swiper-wrapper">
+                                        <?php if($product->images->isEmpty()): ?>
+                                            <a class="swiper-slide h-auto" href="#/">
+                                                <img class="w-100" src="<?php echo e(asset('assets/images/product/product-8-500x625.jpg')); ?>" alt="Product">
+                                            </a>
+                                        <?php else: ?>
                                             <a class="swiper-slide h-auto" href="#/">
                                                 <img class="w-100" src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="Product">
                                             </a>
+                                        <?php endif; ?>
+                                        <?php $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="<?php echo e(asset('storage/products/' . $product->images()->first()->image)); ?>">
+                                                <img class="w-100" src="<?php echo e(asset('storage/products/' . $image->image)); ?>">
                                             </a>
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="<?php echo e(asset('storage/products/' . $product->images()->skip(1)->first()->image)); ?>" alt="Product">
-                                            </a>
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="<?php echo e(asset('storage/products/' . $product->images()->skip(2)->first()->image)); ?>" alt="Product">
-                                            </a>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                         </div>
 
@@ -1217,18 +1240,20 @@
                                     <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
 
                                         <div class="swiper-wrapper">
+                                        <?php if($product->images->isEmpty()): ?>
+                                            <div class="swiper-slide">
+                                                <img src="<?php echo e(asset('assets/images/product/product-8-500x625.jpg')); ?>" alt="Product">
+                                            </div>
+                                        <?php else: ?>
                                             <div class="swiper-slide">
                                                 <img src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="Product">
                                             </div>
+                                            <?php $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="swiper-slide">
-                                                <img src="<?php echo e(asset('storage/products/' . $product->images()->first()->image)); ?>" alt="Product">
+                                                <img src="<?php echo e(asset('storage/products/' . $image->image)); ?>" alt="Product">
                                             </div>
-                                            <div class="swiper-slide">
-                                                <img src="<?php echo e(asset('storage/products/' . $product->images()->skip(1)->first()->image)); ?>" alt="Product">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="<?php echo e(asset('storage/products/' . $product->images()->skip(2)->first()->image)); ?>" alt="Product">
-                                            </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
                 
                                         </div>
 

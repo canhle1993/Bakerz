@@ -463,7 +463,6 @@
                       if (response.status === 'success') {
                           // Cập nhật số lượng sản phẩm trong giỏ hàng
                           updateCartView();
-                          animateCartQuantity();
                       } else {
                           alert(response.message);
                       }
@@ -493,7 +492,6 @@
                     success: function(response) {
                         if (response.status === 'success') {
                             updateCartView();
-                            animateCartQuantity();
                         } else {
                             //   alert(response.message);
                         }
@@ -505,44 +503,45 @@
                 });
             });
             function updateCartView() {
-            $.ajax({
-                url: "<?php echo e(route('cart.show')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
-                method: "GET",
-                success: function(response) {
-                    $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
-                    
-                    $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
-                    
-                    $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
-                    calculateTotal();
-                    // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
-                    $('#cart_icon').css('color', 'red')// Đổi màu thành đỏ
-                    .animate({ 
-                          top: '-10px' 
-                      }, 200, function() {
-                          $(this).animate({ 
-                              top: '0px' 
-                          }, 200, function() {
-                              // Lặp lại lần nữa
-                              $(this).animate({ 
-                                  top: '-10px' 
-                              }, 200, function() {
-                                  $(this).animate({ 
-                                      top: '0px' 
-                                  }, 200, function() {
-                                      // Sau khi hiệu ứng hoàn thành, đổi lại màu ban đầu
-                                      $(this).css('color', ''); 
-                                  });
-                              });
-                          });
-                      });
-                  },
-                error: function(xhr) {
-                    console.error('Error:', xhr.responseText);
-                    // alert('An error occurred while updating the cart.');
-                }
-            });
-        }
+                $.ajax({
+                    url: "<?php echo e(route('cart.show')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+                        
+                        $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
+                        
+                        $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
+                        console.log(response.cart_quantity);
+                        calculateTotal();
+                        // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
+                        $('#cart_icon').css('color', 'red')// Đổi màu thành đỏ
+                        .animate({ 
+                            top: '-10px' 
+                        }, 200, function() {
+                            $(this).animate({ 
+                                top: '0px' 
+                            }, 200, function() {
+                                // Lặp lại lần nữa
+                                $(this).animate({ 
+                                    top: '-10px' 
+                                }, 200, function() {
+                                    $(this).animate({ 
+                                        top: '0px' 
+                                    }, 200, function() {
+                                        // Sau khi hiệu ứng hoàn thành, đổi lại màu ban đầu
+                                        $(this).css('color', ''); 
+                                    });
+                                });
+                            });
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
+            }
         });
         
 

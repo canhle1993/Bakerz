@@ -59,6 +59,27 @@
 <body>
 @include('layouts.header')
 
+
+@php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+@endphp
+
+@if(isset($_SESSION['success']))
+    <script>
+        alert("{{ $_SESSION['success'] }}");
+    </script>
+    @php unset($_SESSION['success']); @endphp
+@endif
+
+@if(isset($_SESSION['error']))
+    <script>
+        alert("{{ $_SESSION['error'] }}");
+    </script>
+    @php unset($_SESSION['error']); @endphp
+@endif
+
     <!-- Slider Section Strat -->
     <div class="slider-section-seven slider-active overflow-hidden">
         <div class="swiper">
