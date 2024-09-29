@@ -185,14 +185,30 @@ class CartController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Product is delete ']);
     }
 
+    public function showcheckout(Request $request){
+        $this->getsession();
+        $currentUser = Auth::user(); // Lấy người dùng hiện tại
+        $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
+        if($cartItems){
+            return view('client.shop.others.checkout');
+
+        } else {
+            return redirect()->route('client.filter');
+        }
+
+    }
+
     public function cart_checkout(Request $request){
         $currentUser = Auth::user(); // Lấy người dùng hiện tại
         $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
-        DB::beginTransaction(); // Start transaction to ensure atomicity
         $total = 0;
         foreach ($cartItems as $item) {
             $total += ($item['quantity'] * $item->product->getDiscountedPrice());
         }
+        if ($total == 0){
+            return redirect()->route('client.filter');
+        }
+        DB::beginTransaction(); // Start transaction to ensure atomicity
         try {
             // Create a new order entry in the orders table
             $order = Order::create([
@@ -223,16 +239,16 @@ class CartController extends Controller
             }
             Cart::where('user_id', $currentUser->user_id)->delete();
             DB::commit(); // Commit the transaction
-
             $this->getsession();
             // Call VNPay
             $this->vnp($request, $order);
-            return redirect()->route('client.filter');
-
+            
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback transaction if any error occurs
-            return response()->json(['status' => 'error', 'message' => 'Checkout failed: ' . $e->getMessage()]);
+            $this->getsession();
+            return redirect()->route('client.filter');
         }
+        return redirect()->route('client.filter');
     }
 
     public function getsession(){
@@ -255,9 +271,10 @@ class CartController extends Controller
         session()->put('cart', $cart);
     }
 
+    // Không xài?
     public function payment($order_id, $total) {
 
-        $exchangeRate = 23000;
+        $exchangeRate = 25000;
         $total_vnd = $total * $exchangeRate;
 
         // VNPay yêu cầu số tiền được gửi đi dưới dạng VND và nhân 100
@@ -301,15 +318,15 @@ class CartController extends Controller
     public function vnp(Request $request, Order $order){
         $data= $request ->all();
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = route('vnpay.return');
+        $vnp_Returnurl = route('vnpay.return', ['order_id' => $order->order_id]);
         $vnp_TmnCode = "OT1X2F3Y";//Mã website tại VNPAY
         $vnp_HashSecret = "S9ZGL7JWJCZRSXD605B1C01YY0S67XS8"; //Chuỗi bí mật
 
-        $vnp_TxnRef = $order->order_id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này
+        $vnp_TxnRef = uniqid(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này
 
         $vnp_OrderInfo ="Bill Payment";
         $vnp_OrderType = "Bake Payment";
-        $vnp_Amount = ($data['total'] * 23000) * 100;
+        $vnp_Amount = ($order['pay'] * 25000) * 100;
         $vnp_Locale = "vn";
         // $vnp_BankCode = "NCB";
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -360,12 +377,12 @@ class CartController extends Controller
         $returnData = array('code' => '00'
             , 'message' => 'success'
             , 'data' => $vnp_Url);
-            if (isset($_POST['redirect'])) {
-                header('Location: ' . $vnp_Url);
-                die();
-            } else {
-                echo json_encode($returnData);
-            }
+        if (isset($_POST['redirect'])) {
+            header('Location: ' . $vnp_Url);
+            die();
+        } else {
+            echo json_encode($returnData);
+        }
     }
 
 }

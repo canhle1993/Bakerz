@@ -85,7 +85,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a href="{{ route('checkout') }}" class="btn btn-dark btn-hover-primary rounded-0 w-100">Proceed to checkout</a>
+                        <a id="btnCheckout2" href="{{ route('checkout') }}" class="btn btn-dark btn-hover-primary rounded-0 w-100">Proceed to checkout</a>
                     </div>
                 </div>
                 <!-- Cart Totals End -->

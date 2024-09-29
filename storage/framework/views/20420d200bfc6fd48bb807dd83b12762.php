@@ -286,11 +286,15 @@
                             <?php if($product->reviews->isEmpty()): ?>
                                 <p>Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá sản phẩm này!</p>
                             <?php else: ?>
-                                <?php $__currentLoopData = $product->reviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <div class="review-top d-flex mb-4 align-items-center">
+                            <?php $__currentLoopData = $product->reviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div class="review-top d-flex mb-4 align-items-center pt-5" id="comment-<?php echo e($review->ID); ?>">
+                                    <div class="row">
+                                    <div class="col-md-3">
                                         <div class="review_thumb">
                                             <img alt="review images" src="<?php echo e(asset('storage/avatars/' . $review->user->avatar)); ?>">
                                         </div>
+                                    </div>
+                                    <div class="col-md-9">
                                         <div class="review_details ms-3">
                                             <div class="review-rating mb-2">
                                                 <span class="review-rating-bg">
@@ -301,13 +305,32 @@
                                                 <h5 class="title me-1"><?php echo e($review->CreatedBy); ?> - </h5>
                                                 <span><?php echo e(\Carbon\Carbon::parse($review->CreatedDate)->format('M d, Y')); ?></span>
                                             </div>
-                                            <p><?php echo nl2br(e ($review->comment )); ?></p>
+                                            <p><?php echo nl2br(e($review->comment)); ?></p>
+
+                                            <!-- Hiển thị tất cả các câu trả lời -->
+                                            <?php $__currentLoopData = $review->replies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reply): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <div class="reply mt-3" style="position: relative; left: 30px; top: -15px;">
+                                                <p><strong class="text-primary">Bakerz Bite: </strong> - <?php echo e($reply->created_at->format('M d, Y H:i')); ?></p>
+                                                    <p><?php echo nl2br(e($reply->reply)); ?></p>
+                                                </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                            <!-- Form trả lời bình luận -->
+                                            <?php if(Auth::check() && (Auth::user()->role_id == 2 || Auth::user()->role_id == 3)): ?>
+                                                <form action="<?php echo e(route('reviews.reply', ['id' => $review->ID])); ?>" method="POST">
+                                                    <?php echo csrf_field(); ?>
+                                                    <textarea name="reply" class="form-control mb-2" placeholder="Enter your answer"></textarea>
+                                                    <button type="submit" class="btn btn-dark btn-hover-primary">Send</button>
+                                                </form>
+                                            <?php endif; ?>
+                                        </div>
                                         </div>
                                     </div>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </div>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                             <?php endif; ?>
-
-
+                        </div>
                             <!-- Form để thêm đánh giá mới -->
                             <?php if(auth()->guard()->check()): ?>
                             <div class="comments-area comments-reply-area">
@@ -342,6 +365,10 @@
                                         </form>
                                     </div>
                                 </div>
+                            </div>
+                            <?php else: ?>
+                            <div class="alert alert-warning">
+                            You need to <a href="<?php echo e(route('login')); ?>" class="text-danger">log in</a> to rate this product.
                             </div>
                         <?php endif; ?>
 

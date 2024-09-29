@@ -223,6 +223,20 @@
     <!-- Vendors JS -->
 
     <script>
+        $(document).ready(function() {
+
+            // Lưu trạng thái khi người dùng rời khỏi checkout
+            window.addEventListener('beforeunload', function() {
+                sessionStorage.setItem('checkoutVisited', 'true');
+            });
+            // Bắt sự kiện khi trang được hiển thị trở lại
+                window.addEventListener('pageshow', function(event) {
+                    if (sessionStorage.getItem('checkoutVisited') === 'true') {
+                        window.location.href = "{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}";
+                        sessionStorage.removeItem('checkoutVisited'); // Xóa trạng thái nếu không cần nữa
+                    }
+                });            
+        });
          $(window).on("scroll", function (event) {
             var scroll = $(window).scrollTop();
             if (scroll <= 0) {
