@@ -404,7 +404,7 @@
                             <div class="swiper-slide">
                                 <!-- Product Item Start -->
                                 <div class="product-item text-center">
-                                    <!-- <div class="product-item__badge">Hot</div> -->
+                                    <div class="product-item__badge">Hot</div>
                                     <div class="product-item__image border w-100">
                                         <a href="<?php echo e(route('single-product', ['id' => $relatedProduct->product_id])); ?>">
                                             <img width="350" height="350" src="<?php echo e(asset('storage/products/' . $relatedProduct->image)); ?>" alt="<?php echo e($relatedProduct->product_name); ?>">

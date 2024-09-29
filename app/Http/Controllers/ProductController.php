@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function filterByCategory($category_id)
     {
-        // Lấy danh sách các category chưa bị xóa   
+        // Lấy danh sách các category chưa bị xóa
         $categories = Catalog::where('isdelete', '<>', 1)->get();
 
         // Lọc các sản phẩm theo danh mục
@@ -61,9 +61,20 @@ class ProductController extends Controller
     }
 
     public function singleProduct($id)
-    {
-        $product = Product::with('catalogs')->findOrFail($id);
+{
+    // Tìm sản phẩm dựa trên product_id
+    $product = Product::with('reviews', 'catalogs')->findOrFail($id);
 
-        return view('client.shop.product-types.single-product', compact('product'));
-    }
+    // Lấy danh sách sản phẩm liên quan cùng danh mục
+    $relatedProducts = Product::whereHas('catalogs', function ($query) use ($product) {
+        $query->whereIn('category.category_id', $product->catalogs->pluck('category_id')); // Chỉ định rõ ràng bảng 'category'
+    })
+    ->where('product.product_id', '<>', $product->product_id) // Loại bỏ sản phẩm hiện tại khỏi danh sách
+    ->take(5) // Giới hạn số lượng sản phẩm hiển thị
+    ->get();
+
+    // Trả về view và truyền dữ liệu sản phẩm vào
+    return view('client.shop.product-types.single-product', compact('product', 'relatedProducts'));
+}
+
 }
