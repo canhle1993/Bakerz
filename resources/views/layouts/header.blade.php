@@ -507,17 +507,10 @@
                     url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
                     method: "GET",
                     success: function(response) {
-                        var cartCount = response.cart_count; // Lấy số lượng sản phẩm trong giỏ hàng từ phản hồi
-                        if(cartCount > 0){
-                            document.getElementById("btnCheckout").style.visibility = 'visible'; // Hiển thị nút Checkout
-                            document.getElementById("btnCheckout2").style.visibility = 'visible'; // Hiển thị nút Checkout
-                        } else {
-                            document.getElementById("btnCheckout").style.visibility = 'hidden'; // Ẩn nút Checkout (phần tử vẫn chiếm không gian)
-                            document.getElementById("btnCheckout2").style.visibility = 'hidden'; // Ẩn nút Checkout (phần tử vẫn chiếm không gian)
-                        }
                         $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
                         $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
                         $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
+
                         console.log(response.cart_quantity);
                         calculateTotal();
                         // Sử dụng jQuery animate để tạo hiệu ứng di chuyển

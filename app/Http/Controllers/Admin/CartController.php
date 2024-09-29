@@ -201,11 +201,14 @@ class CartController extends Controller
     public function cart_checkout(Request $request){
         $currentUser = Auth::user(); // Lấy người dùng hiện tại
         $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
-        DB::beginTransaction(); // Start transaction to ensure atomicity
         $total = 0;
         foreach ($cartItems as $item) {
             $total += ($item['quantity'] * $item->product->getDiscountedPrice());
         }
+        if ($total == 0){
+            return redirect()->route('client.filter');
+        }
+        DB::beginTransaction(); // Start transaction to ensure atomicity
         try {
             // Create a new order entry in the orders table
             $order = Order::create([
