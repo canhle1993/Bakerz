@@ -227,6 +227,7 @@
       input[type="file"] {
         display: none;
       }
+
     </style>
 
 </head>
@@ -365,55 +366,237 @@
             </div>
           </div>
           <div class="card">
-            <div class="tab-content p-4">
-              <div
-                class="tab-pane active show"
-                id="projects-tab"
-                role="tabpanel"
-              >
-                <div class="d-flex align-items-center">
-                  <div class="flex-1">
-                    <h4 class="card-title mb-4">Order history</h4>
-                  </div>
-                </div>
-                <div class="row" id="all-projects">
-                  <div class="col-md-6" id="project-items-1">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="d-flex mb-3">
-                          <div class="flex-grow-1 align-items-start">
-                            <div>
-                              <h6 class="mb-0 text-muted">
-                                <span class="team-date"
-                                  >Ngày Mua: 20/9/2024</span
-                                >
-                              </h6>
+            <!-- Blade Template -->
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card-body pb-0">
+                        <h4 class="card-title mb-4">Order History</h4>
+                        <ul class="nav nav-tabs" id="orderHistoryTabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pending-tab" data-bs-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="true">Pending</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="paid-tab" data-bs-toggle="tab" href="#paid" role="tab" aria-controls="paid" aria-selected="false">Paid</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="confirm-tab" data-bs-toggle="tab" href="#confirm" role="tab" aria-controls="confirm" aria-selected="false">Confirmed</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="delivered-tab" data-bs-toggle="tab" href="#delivered" role="tab" aria-controls="delivered" aria-selected="false">Delivered</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="cancel-tab" data-bs-toggle="tab" href="#cancel" role="tab" aria-controls="cancel" aria-selected="false">Cancel</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" id="orderHistoryContent">
+                            <!-- Pending Orders -->
+                            <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                                <div class="row">
+                                    <?php $__empty_1 = true; $__currentLoopData = $pendingOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                <div class="flex-grow-1 align-items-start">
+                                                    <div>
+                                                      <h6 class="mb-0 text-muted">
+                                                        <span class="team-date"
+                                                          >Purchase Date: <?php echo e($order->purchase_date); ?></span
+                                                        >
+                                                      </h6>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <h5 class="card-title">Order ID: <?php echo e($order->order_id); ?></h5>
+                                                <p><b>Phone Number:</b> <?php echo e($order->delivery_phone); ?></p>
+                                                <p><b>Delivery Address:</b> <?php echo e($order->delivery_address); ?></p>
+                                                <p><b>Price:</b> $<?php echo e($order->pay); ?></p>
+                                                <div class="d-flex">
+                                                <div class="align-self-end">
+                                                  <span>Status: </span>
+                                                  <span
+                                                    class="badge badge-soft-secondary p-2 team-status b1"
+                                                    ><a href="#" data-order-id="<?php echo e($order->order_id); ?>" class="status">Pending</a> 
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                    <p>No pending orders.</p>
+                                    <?php endif; ?>
+                                </div>
                             </div>
-                          </div>
+
+                            <!-- Paid Orders -->
+                            <div class="tab-pane fade" id="paid" role="tabpanel" aria-labelledby="paid-tab">
+                                <div class="row">
+                                <?php $__empty_1 = true; $__currentLoopData = $paidOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                <div class="flex-grow-1 align-items-start">
+                                                    <div>
+                                                      <h6 class="mb-0 text-muted">
+                                                        <span class="team-date"
+                                                          >Purchase Date: <?php echo e($order->purchase_date); ?></span
+                                                        >
+                                                      </h6>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <h5 class="card-title">Order ID: <?php echo e($order->order_id); ?></h5>
+                                                <p><b>Phone Number:</b> <?php echo e($order->delivery_phone); ?></p>
+                                                <p><b>Delivery Address:</b> <?php echo e($order->delivery_address); ?></p>
+                                                <p><b>Price:</b> $<?php echo e($order->pay); ?></p>
+                                                <div class="d-flex">
+                                                <div class="align-self-end">
+                                                  <span>Status: </span>
+                                                  <span
+                                                    class="badge badge-soft-success p-2 team-status b1"
+                                                    > <a href="#" data-order-id="<?php echo e($order->order_id); ?>" class="status">Paid</a> 
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                    <p>No paid orders.</p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <!-- Confirmed Orders -->
+                            <div class="tab-pane fade" id="confirm" role="tabpanel" aria-labelledby="confirm-tab">
+                                <div class="row">
+                                <?php $__empty_1 = true; $__currentLoopData = $confirmedOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                <div class="flex-grow-1 align-items-start">
+                                                    <div>
+                                                      <h6 class="mb-0 text-muted">
+                                                        <span class="team-date"
+                                                          >Purchase Date: <?php echo e($order->purchase_date); ?></span
+                                                        >
+                                                      </h6>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <h5 class="card-title">Order ID: <?php echo e($order->order_id); ?></h5>
+                                                <p><b>Phone Number:</b> <?php echo e($order->delivery_phone); ?></p>
+                                                <p><b>Delivery Address:</b> <?php echo e($order->delivery_address); ?></p>
+                                                <p><b>Price:</b> $<?php echo e($order->pay); ?></p>
+                                                <div class="d-flex">
+                                                <div class="align-self-end">
+                                                  <span>Status: </span>
+                                                  <span
+                                                    class="badge badge-soft-warning p-2 team-status b1"
+                                                    > <a href="#" data-order-id="<?php echo e($order->order_id); ?>" class="status">Confirm</a> 
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                    <p>No confirmed orders.</p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <!-- Delivered Orders -->
+                            <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
+                                <div class="row">
+                                <?php $__empty_1 = true; $__currentLoopData = $deliveredOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                <div class="flex-grow-1 align-items-start">
+                                                    <div>
+                                                      <h6 class="mb-0 text-muted">
+                                                        <span class="team-date"
+                                                          >Purchase Date: <?php echo e($order->purchase_date); ?></span
+                                                        >
+                                                      </h6>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <h5 class="card-title">Order ID: <?php echo e($order->order_id); ?></h5>
+                                                <p><b>Phone Number:</b> <?php echo e($order->delivery_phone); ?></p>
+                                                <p><b>Delivery Address:</b> <?php echo e($order->delivery_address); ?></p>
+                                                <p><b>Price:</b> $<?php echo e($order->pay); ?></p>
+                                                <div class="d-flex">
+                                                <div class="align-self-end">
+                                                  <span>Status: </span>
+                                                  <span
+                                                    class="badge badge-soft-danger p-2 team-status b1"
+                                                    > <a href="#" data-order-id="<?php echo e($order->order_id); ?>" class="status">Delivered</a> 
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                    <p>No delivered orders.</p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <!-- Cancel Orders -->
+                            <div class="tab-pane fade" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
+                                <div class="row">
+                                <?php $__empty_1 = true; $__currentLoopData = $cancelOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                <div class="flex-grow-1 align-items-start">
+                                                    <div>
+                                                      <h6 class="mb-0 text-muted">
+                                                        <span class="team-date"
+                                                          >Purchase Date: <?php echo e($order->purchase_date); ?></span
+                                                        >
+                                                      </h6>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <h5 class="card-title">Order ID: <?php echo e($order->order_id); ?></h5>
+                                                <p><b>Phone Number:</b> <?php echo e($order->delivery_phone); ?></p>
+                                                <p><b>Delivery Address:</b> <?php echo e($order->delivery_address); ?></p>
+                                                <p><b>Price:</b> $<?php echo e($order->pay); ?></p>
+                                                <div class="d-flex">
+                                                <div class="align-self-end">
+                                                  <span>Status: </span>
+                                                  <span
+                                                    class="badge badge-soft-danger p-2 team-status b1"
+                                                    > <a href="#" data-order-id="<?php echo e($order->order_id); ?>" class="status">Cancel</a> 
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                    <p>No cancel orders.</p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-4">
-                          <h2>Tên Bánh</h2>
-                          <strong>Đơn hàng id (mã đơn hàng):</strong> dbzs-123
-                          <br />
-                          <strong>Giá:</strong>
-                          <span class="text-navy">15$</span><br />
-                          <strong>Mô Tả:</strong> giới thiệu bánh <br />
-                        </div>
-                        <div class="d-flex">
-                          <div class="align-self-end">
-                            <span
-                              class="badge badge-soft-danger p-2 team-status b1"
-                              >trạng thái đơn hàng</span
-                            >
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  </div>
+                    
                 </div>
-              </div>
             </div>
-          </div>
+            <!--END  Blade Template -->
+        </div>
+
         </div>
 
         <div class="col-xl-4">
@@ -510,7 +693,40 @@
           </div>
         </div>
       </div>
-    </div><br><br><br><br>
+    </div>
+    <br><br><br><br>
+    <br><br><br><br>
+<!-- Nút để mở modal -->
+<!-- Modal Structure -->
+<div style="z-index: 1056;" class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cartModalLabel">Order Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
+        <!-- Nội dung giỏ hàng -->
+        <table class="cart-table table text-center align-middle mb-6" id="order-content">
+          <thead>
+              <tr>
+                  <th></th>
+                  <th class="title text-start">Product</th>
+                  <th class="price">Price</th>
+                  <th class="quantity">Quantity</th>
+                  <th class="total">Subtotal</th>
+              </tr>
+          </thead>
+          <tbody class="border-top-0">
+              
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      
+    </div>
+  </div>
+</div>
 
 <?php echo $__env->make('layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
      <!-- JS Vendor, Plugins & Activation Script Files -->
@@ -532,6 +748,8 @@
 
     <!-- Activation JS -->
     <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
+    
+
     <!-- Vendors JS -->
     <script>
     $(window).on("scroll", function (event) {
@@ -598,7 +816,60 @@
             document.getElementById("EditText").innerHTML = "Hide";
           }
         }
+        $(document).ready(function() {
+          $('.status').on('click', function(e) {
+            e.preventDefault();
+            var orderId = $(this).data('order-id');  // Lấy order ID từ thuộc tính data-order-id
 
+            // Gọi AJAX để lấy dữ liệu
+            $.ajax({
+              url: "<?php echo e(route('client.orderdetails', ':id')); ?>".replace(':id', orderId), // Thay :id bằng order ID
+              type: 'GET',
+              dataType: 'json',
+              success: function(response) {
+                if (response.status === 'success') {
+                  // Đổ dữ liệu vào modal
+                  var orderdetails = response.data.orderDetails; // Giả sử response trả về orderDetails
+                  var modalContent = '';
+                  
+
+                  // Lặp qua chi tiết đơn hàng và hiển thị
+                  orderdetails.forEach(function(item) {
+                    var imageUrl = `<?php echo e(asset('storage/products/')); ?>/${item.product.image}`; // Xây dựng URL hình ảnh
+                    modalContent += `
+                      <tr>
+                        <th class="cart-thumb">
+                            <a href="#">
+                                <img src="${imageUrl}" alt="${item.product.product_name}">
+                            </a>
+                        </th>
+                        <th class="text-start">
+                            <a href="#">${item.product.product_name}</a>
+                        </th>
+                        <td>${item.discount} $</td>
+                        <td class="text-center">${item.quantity}</td>
+                        <td>${item.quantity * item.discount} $</td>
+                      </tr>
+                    `;
+                  });
+
+                  // Gán nội dung vào bảng trong modal
+                  $('#order-content tbody').html(modalContent);
+
+                  // Hiển thị modal
+                  var myModal = new bootstrap.Modal(document.getElementById('cartModal'));
+                  myModal.show();
+                } else {
+                  alert(response.message); // Hiển thị thông báo lỗi nếu có
+                }
+              },
+              error: function(xhr, status, error) {
+                console.error(error); // Xử lý lỗi
+              }
+            });
+          });
+
+        });
     </script>
 </body>
 

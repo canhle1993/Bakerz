@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\HeathyCatalog;
+use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,11 +22,66 @@ class ClientController extends Controller
 
     public function profile($userid)
     {
-        $user= Auth::user();
-      
-        return view('client.profile');
+        // $user= Auth::user();
+        // $orders = Order::with('user')
+        // ->where('user_id', $user->user_id)
+        // ->orderBy('order_id', 'desc') // Sắp xếp giảm dần theo order_id
+        // ->get();
+    
+        $userId = Auth::id();
+
+        // Lấy các đơn hàng theo từng trạng thái
+        $pendingOrders = Order::where('user_id', $userId)
+                      ->where('status', 'Pending')
+                      ->orderBy('order_id', 'desc') // Sắp xếp giảm dần theo order_id
+                      ->get();
+
+        $paidOrders = Order::where('user_id', $userId)
+                        ->where('status', 'Paid')
+                        ->orderBy('order_id', 'desc') // Sắp xếp giảm dần theo order_id
+                        ->get();
+
+        $confirmedOrders = Order::where('user_id', $userId)
+                                ->where('status', 'Confirmed')
+                                ->orderBy('order_id', 'desc') // Sắp xếp giảm dần theo order_id
+                                ->get();
+
+        $deliveredOrders = Order::where('user_id', $userId)
+                                ->where('status', 'Delivered')
+                                ->orderBy('order_id', 'desc') // Sắp xếp giảm dần theo order_id
+                                ->get();
+
+        $cancelOrders = Order::where('user_id', $userId)
+                            ->where('status', 'Cancel')
+                            ->orderBy('order_id', 'desc') // Sắp xếp giảm dần theo order_id
+                            ->get();
+
+        return view('client.profile', compact('pendingOrders', 'paidOrders', 'confirmedOrders', 'deliveredOrders', 'cancelOrders'));
+
+        // return view('client.profile', compact('orders'));
     }
     
+    // Order Details
+    public function getOrderDetails($orderId)
+    {
+         // Lấy thông tin đơn hàng theo ID
+         $order = Order::with('orderDetails.product')->find($orderId);
+
+         if (!$order) {
+             return response()->json([
+                 'status' => 'error',
+                 'message' => 'Order not found'
+             ], 404);
+         }
+ 
+         return response()->json([
+             'status' => 'success',
+             'data' => [
+                 'orderDetails' => $order->orderDetails // Gửi thông tin chi tiết đơn hàng
+             ]
+         ]);
+    }
+
     public function filter(Request $request)
     {
         // Lấy tất cả danh mục sức khỏe

@@ -22,6 +22,8 @@ use App\Http\Controllers\ClientController;
 Route::get('/', [ClientController::class, 'home'])->name('client.home');
 Route::get('/filter', [ClientController::class, 'filter'])->name('client.filter');
 Route::get('/client/profile/user/{userid}', [ClientController::class, 'profile'])->name('client.profile');
+Route::get('/client/order-details/{orderId}', [ClientController::class, 'getOrderDetails'])->name('client.orderdetails');
+
 
 use App\Http\Controllers\ProductController;
 
