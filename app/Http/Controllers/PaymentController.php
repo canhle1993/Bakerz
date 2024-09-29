@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -32,8 +33,8 @@ class PaymentController extends Controller
         } else {
             $_SESSION['error'] = 'Thanh toán thất bại. Vui lòng thử lại.';
         }
-
+        $currentUser = Auth::user(); // Lấy người dùng hiện tại
         // Kiểm tra xem session có được lưu không
-        return redirect()->route('client.home');
+        return redirect()->route('client.profile', ['userid' => $currentUser->user_id]);;
     }
 }

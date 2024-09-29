@@ -238,6 +238,9 @@ class CartController extends Controller
                 ]);
             }
             Cart::where('user_id', $currentUser->user_id)->delete();
+            // TODO: dùng để tính điểm
+            $count = floor($total/10);
+
             DB::commit(); // Commit the transaction
             $this->getsession();
             // Call VNPay
@@ -248,7 +251,7 @@ class CartController extends Controller
             $this->getsession();
             return redirect()->route('client.filter');
         }
-        return redirect()->route('client.filter');
+        return redirect()->route('client.profile', ['userid' => $currentUser->user_id]);;
     }
 
     public function getsession(){
