@@ -234,3 +234,15 @@ Route::post('/calculate-distance', [CalculateDistanceController::class, 'calcula
 // VNPAY return
 use App\Http\Controllers\PaymentController;
 Route::get('/vnpay-return', [PaymentController::class, 'vnpayReturn'])->name('vnpay.return');
+
+
+
+
+// Route cho trang hiển thị 20 sản phẩm được mua nhiều nhất
+Route::get('/products/top', [ClientController::class, 'index'])->name('client.topProducts');
+
+// Route cho sản phẩm chi tiết
+Route::get('/single-product/{id}', [ProductController::class, 'show'])->name('single-product');
+
+
+

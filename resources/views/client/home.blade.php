@@ -145,7 +145,7 @@
     <!-- Slider Section End -->
 
         <!-- Category Section Start -->
-        <div class="category-four category-four_bg section-padding-03" data-bg-image="assets/images/bg/category-four-bg.jpg">
+    <div class="category-four category-four_bg section-padding-03" data-bg-image="assets/images/bg/category-four-bg.jpg">
         <div class="container custom-container-five">
             <div class="row row-cols-2 row-cols-lg-4 category-four_wrapper mb-n60">
                 <div class="col mb-60">
@@ -728,120 +728,74 @@
 
 
     <!-- Product Section Start -->
-    <div class="section-padding-03 custom-container-four pt-0">
-        <div class="product-row">
-            <div class="product-wrapper ps-md-5 ps-lg-6 ps-xl-8 ps-xxl-11 order-2 ">
-                <!-- Section Title Strat -->
-                <div class="section-title-05">
-                    <h5 class="section-title-05__title"><span>What’s Hot</span></h5>
-                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
-                </div>
-                <!-- Section Title End -->
-
-                <div class="product-active-three">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-
-                            <!-- swiper-slide start -->
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-05 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="img/product-8-1.png" alt="Product"></a>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Raisin Bread</a></h5>
-                                        <span class="product-item__price">$4.99</span>
-                                    </div>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-05 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-13-500x625.jpg" alt="Product"></a>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Poppy Bun</a></h5>
-                                        <span class="product-item__price">$5.00</span>
-                                    </div>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-05 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-11-500x625.jpg" alt="Product"></a>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Olivetta Bread</a></h5>
-                                        <span class="product-item__price">$7.55</span>
-                                    </div>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-05 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-17-500x625.jpg" alt="Product"></a>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Corn Ciabatta</a></h5>
-                                        <span class="product-item__price">$9.44</span>
-                                    </div>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <!-- swiper-slide end-->
-
-                        </div>
-                    </div>
-                    <div class="swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
-                    <div class="swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
-                </div>
-
-            </div>
-            <div class="boxbanner-wrapper order-1">
-                <!-- Ad Banner Start -->
-                <a href="single-product.html" class="boxbanner-bg boxbanner" data-bg-image="assets/images/banner/add-banner-two.jpg">
-                    <div class="boxbanner-two">
-                        <span class="boxbanner-title">a new cookie</span>
-                        <span class="boxbanner-discount-two">from only 4$</span>
-                    </div>
-                    <div class="boxbanner-btn-area">
-                        <span class="boxbanner-btn">Store Location <i class="lastudioicon lastudioicon-right-arrow"></i></span>
-                    </div>
+<!-- Product Section Start -->
+<div class="section-padding-03 custom-container-four pt-0">
+    <div class="product-row">
+        <div class="product-wrapper ps-md-5 ps-lg-6 ps-xl-8 ps-xxl-11 order-2 ">
+            <!-- Section Title Start -->
+            <div class="section-title-05">
+                <h5 class="section-title-05__title"><span>What’s Hot</span></h5>
+                <a href="{{ route('client.topProducts') }}" class="read-more">
+                    <span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i>
                 </a>
-                <!-- Ad Banner End -->
+            </div>
+            <!-- Section Title End -->
+
+            <div class="product-active-three">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                    @if($products->isNotEmpty())
+                    @foreach($products as $product)
+                        <div class="swiper-slide">
+                            <!-- Product Item Start -->
+                            <div class="product-item product-item-05 border text-center">
+                            <div class="product-item__badge">Hot</div>
+
+                                <div class="product-item__image">
+                                    <a href="{{ route('single-product', ['id' => $product->product_id]) }}">
+                                        <img width="250" height="250" src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}" />
+                                    </a>
+                                </div>
+                                <div class="product-item__content">
+                                    <h5 class="product-item__title">
+                                        <a href="{{ route('single-product', ['id' => $product->product_id]) }}">
+                                            {{ $product->product_name }}
+                                        </a>
+                                    </h5>
+                                    <span class="product-item__price">${{ number_format($product->price, 2) }}</span>
+                                </div>
+                            </div>
+                            <!-- Product Item End -->
+                        </div>
+                    @endforeach
+                @else
+                    <p>No products found.</p>
+                @endif
+
+                    </div>
+                </div>
+                <div class="swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
+                <div class="swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
             </div>
         </div>
+        <div class="boxbanner-wrapper order-1">
+            <!-- Ad Banner Start -->
+            <a href="{{ route('single-product', ['id' => 1]) }}" class="boxbanner-bg boxbanner" data-bg-image="assets/images/banner/add-banner-two.jpg">
+                <div class="boxbanner-two">
+                    <span class="boxbanner-title">a new cookie</span>
+                    <span class="boxbanner-discount-two">from only 4$</span>
+                </div>
+                <div class="boxbanner-btn-area">
+                    <span class="boxbanner-btn">Store Location <i class="lastudioicon lastudioicon-right-arrow"></i></span>
+                </div>
+            </a>
+            <!-- Ad Banner End -->
+        </div>
     </div>
+</div>
+
+<!-- Product Section End -->
+
     <!-- Product Section End -->
 
     <!-- Product Deal Section Start -->
