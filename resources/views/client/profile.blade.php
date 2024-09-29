@@ -393,7 +393,7 @@
                             <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                                 <div class="row">
                                     @forelse($pendingOrders as $order)
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex mb-3">
@@ -416,7 +416,7 @@
                                                   <span>Status: </span>
                                                   <span
                                                     class="badge badge-soft-secondary p-2 team-status b1"
-                                                    ><a href="#" data-order-id="{{ $order->order_id }}" class="status">Pending</a> 
+                                                    ><a href="#" data-order-id="{{ $order->order_id }}" class="status" >Pending</a> 
                                                   </span>
                                                 </div>
                                               </div>
@@ -433,7 +433,7 @@
                             <div class="tab-pane fade" id="paid" role="tabpanel" aria-labelledby="paid-tab">
                                 <div class="row">
                                 @forelse($paidOrders as $order)
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex mb-3">
@@ -473,7 +473,7 @@
                             <div class="tab-pane fade" id="confirm" role="tabpanel" aria-labelledby="confirm-tab">
                                 <div class="row">
                                 @forelse($confirmedOrders as $order)
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex mb-3">
@@ -513,7 +513,7 @@
                             <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
                                 <div class="row">
                                 @forelse($deliveredOrders as $order)
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex mb-3">
@@ -553,7 +553,7 @@
                             <div class="tab-pane fade" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
                                 <div class="row">
                                 @forelse($cancelOrders as $order)
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex mb-3">

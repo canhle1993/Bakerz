@@ -90,6 +90,7 @@ Route::post('/admin/manage/update-to-admin/{id}', [ManageAdminController::class,
 // Route cho Product và Other
 Route::get('/shop_all', [ProductController::class, 'all_product'])->name('shop_all');
 Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'])->name('product.single');
+Route::get('/single-product/{id}', [ProductController::class, 'show'])->name('single-product');
 Route::get('shop/category/{category_id}', [ProductController::class, 'filterByCategory'])->name('shop.filterByCategory');
 Route::get('product/details/{id}', [ProductController::class, 'getProductDetails'])->name('product.details');
 
@@ -193,6 +194,7 @@ Route::delete('/discount/deletealeoff/{product_id}/{id}', [DiscountController::c
 Route::get('/quickview', [ProductController::class, 'quickView'])->name('quickview');
 
 use App\Http\Controllers\Admin\CartController;
+
 //Thêm sản phẩm vào cart - xóa sản phẩm
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
@@ -232,3 +234,15 @@ Route::post('/calculate-distance', [CalculateDistanceController::class, 'calcula
 // VNPAY return
 use App\Http\Controllers\PaymentController;
 Route::get('/vnpay-return', [PaymentController::class, 'vnpayReturn'])->name('vnpay.return');
+
+use App\Http\Controllers\Admin\OrderController;
+Route::get('/order/pending', [OrderController::class, 'pending'])->name('order.pending');
+Route::post('/order/{order_id}/pending', [OrderController::class, 'gotoPaid'])->name('order.gotopaid');
+Route::get('/order/paid', [OrderController::class, 'paid'])->name('order.paid');
+Route::post('/order/{order_id}/paid', [OrderController::class, 'gotoConfirmed'])->name('order.gotoConfirmed');
+Route::get('/order/confirmed', [OrderController::class, 'confirmed'])->name('order.confirmed');
+Route::post('/order/{order_id}/confirmed', [OrderController::class, 'gotoDelivered'])->name('order.gotoDelivered');
+Route::get('/order/delivered', [OrderController::class, 'delivered'])->name('order.delivered');
+
+Route::get('/order/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
+Route::post('/order/{order_id}/cancel', [OrderController::class, 'gotoCancel'])->name('order.gotoCancel');

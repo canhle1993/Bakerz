@@ -394,7 +394,7 @@
                             <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                                 <div class="row">
                                     <?php $__empty_1 = true; $__currentLoopData = $pendingOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 status" data-order-id="<?php echo e($order->order_id); ?>">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex mb-3">
@@ -417,7 +417,7 @@
                                                   <span>Status: </span>
                                                   <span
                                                     class="badge badge-soft-secondary p-2 team-status b1"
-                                                    ><a href="#" data-order-id="<?php echo e($order->order_id); ?>" class="status">Pending</a> 
+                                                    ><a href="#" data-order-id="<?php echo e($order->order_id); ?>" class="status" >Pending</a> 
                                                   </span>
                                                 </div>
                                               </div>
@@ -434,7 +434,7 @@
                             <div class="tab-pane fade" id="paid" role="tabpanel" aria-labelledby="paid-tab">
                                 <div class="row">
                                 <?php $__empty_1 = true; $__currentLoopData = $paidOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 status" data-order-id="<?php echo e($order->order_id); ?>">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex mb-3">
@@ -474,7 +474,7 @@
                             <div class="tab-pane fade" id="confirm" role="tabpanel" aria-labelledby="confirm-tab">
                                 <div class="row">
                                 <?php $__empty_1 = true; $__currentLoopData = $confirmedOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 status" data-order-id="<?php echo e($order->order_id); ?>">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex mb-3">
@@ -514,7 +514,7 @@
                             <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
                                 <div class="row">
                                 <?php $__empty_1 = true; $__currentLoopData = $deliveredOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 status" data-order-id="<?php echo e($order->order_id); ?>">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex mb-3">
@@ -554,7 +554,7 @@
                             <div class="tab-pane fade" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
                                 <div class="row">
                                 <?php $__empty_1 = true; $__currentLoopData = $cancelOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 status" data-order-id="<?php echo e($order->order_id); ?>">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex mb-3">
