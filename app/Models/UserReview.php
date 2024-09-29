@@ -50,4 +50,9 @@ class UserReview extends Model
             $builder->where('is_deleted', 0);
         });
     }
+    public function replies()
+{
+    return $this->hasMany(UserReviewReply::class, 'userreview_id');
+}
+
 }

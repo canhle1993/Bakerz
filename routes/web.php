@@ -218,6 +218,8 @@ Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->
 // Route quản lý và xóa đánh giá
 Route::get('/admin/reviews/manage', [ReviewController::class, 'manage'])->name('admin.reviews.manage');
 Route::delete('/admin/reviews/{id}/delete', [ReviewController::class, 'delete'])->name('reviews.delete');
+Route::post('/admin/reviews/{id}/reply', [ReviewController::class, 'reply'])->name('reviews.reply');
+Route::post('/reviews/{id}/reply', [ReviewController::class, 'reply'])->name('reviews.reply');
 
 use App\Http\Controllers\CalculateDistanceController;
 

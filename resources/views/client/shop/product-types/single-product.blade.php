@@ -283,11 +283,15 @@
                             @if($product->reviews->isEmpty())
                                 <p>Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá sản phẩm này!</p>
                             @else
-                                @foreach($product->reviews as $review)
-                                    <div class="review-top d-flex mb-4 align-items-center">
+                            @foreach($product->reviews as $review)
+                                <div class="review-top d-flex mb-4 align-items-center pt-5" id="comment-{{ $review->ID }}">
+                                    <div class="row">
+                                    <div class="col-md-3">
                                         <div class="review_thumb">
                                             <img alt="review images" src="{{ asset('storage/avatars/' . $review->user->avatar) }}">
                                         </div>
+                                    </div>
+                                    <div class="col-md-9">
                                         <div class="review_details ms-3">
                                             <div class="review-rating mb-2">
                                                 <span class="review-rating-bg">
@@ -298,13 +302,32 @@
                                                 <h5 class="title me-1">{{ $review->CreatedBy }} - </h5>
                                                 <span>{{ \Carbon\Carbon::parse($review->CreatedDate)->format('M d, Y') }}</span>
                                             </div>
-                                            <p>{!! nl2br(e ($review->comment ))!!}</p>
+                                            <p>{!! nl2br(e($review->comment)) !!}</p>
+
+                                            <!-- Hiển thị tất cả các câu trả lời -->
+                                            @foreach ($review->replies as $reply)
+                                                <div class="reply mt-3" style="position: relative; left: 30px; top: -15px;">
+                                                <p><strong class="text-primary">Bakerz Bite: </strong> - {{ $reply->created_at->format('M d, Y H:i') }}</p>
+                                                    <p>{!! nl2br(e($reply->reply)) !!}</p>
+                                                </div>
+                                            @endforeach
+
+                                            <!-- Form trả lời bình luận -->
+                                            @if (Auth::check() && (Auth::user()->role_id == 2 || Auth::user()->role_id == 3))
+                                                <form action="{{ route('reviews.reply', ['id' => $review->ID]) }}" method="POST">
+                                                    @csrf
+                                                    <textarea name="reply" class="form-control mb-2" placeholder="Enter your answer"></textarea>
+                                                    <button type="submit" class="btn btn-dark btn-hover-primary">Send</button>
+                                                </form>
+                                            @endif
+                                        </div>
                                         </div>
                                     </div>
-                                @endforeach
+                                </div>
+                            @endforeach
+
                             @endif
-
-
+                        </div>
                             <!-- Form để thêm đánh giá mới -->
                             @auth
                             <div class="comments-area comments-reply-area">
@@ -339,6 +362,10 @@
                                         </form>
                                     </div>
                                 </div>
+                            </div>
+                            @else
+                            <div class="alert alert-warning">
+                            You need to <a href="{{ route('login') }}" class="text-danger">log in</a> to rate this product.
                             </div>
                         @endauth
 
