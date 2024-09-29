@@ -159,8 +159,9 @@
                                 </div>
 
                             </div>
-
-                            <button type="submit" class="btn btn-dark btn-primary-hover rounded-0 mt-6" id="place-order-btn" disabled>Place order</button>
+                            <!-- TODO: total tính sai nha -->
+                            <input type="hidden" name="total" value="{{number_format($total, 2)}}">
+                            <button type="submit" name="redirect" class="btn btn-dark btn-primary-hover rounded-0 mt-6" id="place-order-btn" disabled>Place order</button>
 
                         </div>
                         <!-- Payment Method End -->

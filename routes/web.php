@@ -216,3 +216,7 @@ Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'
 // Route quản lý và xóa đánh giá
 Route::get('/admin/reviews/manage', [ReviewController::class, 'manage'])->name('admin.reviews.manage');
 Route::delete('/admin/reviews/{id}/delete', [ReviewController::class, 'delete'])->name('reviews.delete');
+
+// VNPAY return
+use App\Http\Controllers\PaymentController;
+Route::get('/vnpay-return', [PaymentController::class, 'vnpayReturn'])->name('vnpay.return');
