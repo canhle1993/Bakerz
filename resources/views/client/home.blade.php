@@ -414,6 +414,7 @@
                             <!-- Product Item Start -->
                             <div class="product-item text-center">
                                 <div class="product-item__badge">Hot</div>
+
                                 <div class="product-item__image border w-100">
                                     <a href="single-product.html"><img width="350" height="350" src="img/wwwwww.jpg" alt="Product"></a>
                                     <ul class="product-item__meta">
