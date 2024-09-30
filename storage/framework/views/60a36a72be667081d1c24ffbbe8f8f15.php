@@ -31,6 +31,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-right: 15px;
         }
 
         .slideee img {
@@ -73,12 +74,29 @@
 <body>
     <div class="image-slideeerrr">
         <div class="slideeerrr-wrapper" id="slideeerrr-wrapper">
+            <?php if($coffeProducts->isEmpty()): ?>
+            <p>No Coffee found.</p>
+            <?php else: ?> <?php $__currentLoopData = $coffeProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <!-- Tạo 5 ảnh gốc với nút button -->
             <div class="slideee">
-                <img src="img/a1.png" alt="Ảnh 1">
-                <button>Iced Caramel Macchiato<br><span>$5</span></button>
+                <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><img src="<?php echo e($product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg')); ?>" alt="<?php echo e($product->product_name); ?>"></a>
+                <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>">
+                <button><?php echo e($product->product_name); ?><br><span>
+                <?php if($product->price != $product->getDiscountedPrice()): ?>
+                <del><?php echo e(formatPriceVND($product->price)); ?></del>
+                <!-- Giá gốc -->
+                <strong
+                ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
+                >
+                <!-- Giá sau khi giảm -->
+                <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
+
+                <!-- Giá không giảm -->
+                <?php endif; ?>
+                </span></button></a>
             </div>
-            <div class="slideee">
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
+            <!-- <div class="slideee">
                 <img src="img/a1.png" alt="Ảnh 2">
                 <button>Iced Caramel Macchiato<br><span>$5</span></button>
             </div>
@@ -93,15 +111,33 @@
             <div class="slideee">
                 <img src="img/a1.png" alt="Ảnh 5">
                 <button>Iced Caramel Macchiato<br><span>$5</span></button>
-            </div>
+            </div> -->
             
 
             <!-- Tạo thêm 5 ảnh lặp lại với nút button -->
+            <?php if($coffeProducts->isEmpty()): ?>
+            <p>No Coffee found.</p>
+            <?php else: ?> <?php $__currentLoopData = $coffeProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="slideee">
-                <img src="img/a1.png" alt="Ảnh 6">
-                <button>Iced Caramel Macchiato<br><span>$5</span></button>
+                <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><img src="<?php echo e($product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg')); ?>" alt="<?php echo e($product->product_name); ?>"></a>
+                <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>">
+                <button>
+                <?php echo e($product->product_name); ?><br><span>
+                <?php if($product->price != $product->getDiscountedPrice()): ?>
+                <del><?php echo e(formatPriceVND($product->price)); ?></del>
+                <!-- Giá gốc -->
+                <strong
+                ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
+                >
+                <!-- Giá sau khi giảm -->
+                <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
+
+                <!-- Giá không giảm -->
+                <?php endif; ?>
+            </span></button></a>
             </div>
-            <div class="slideee">
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
+            <!-- <div class="slideee">
                 <img src="img/a1.png" alt="Ảnh 7">
                 <button>Iced Caramel Macchiato<br><span>$5</span></button>
             </div>
@@ -116,7 +152,7 @@
             <div class="slideee">
                 <img src="img/a1.png" alt="Ảnh 10">
                 <button>Iced Caramel Macchiato<br><span>$5</span></button>
-            </div>
+            </div> -->
         </div>
     </div>
 

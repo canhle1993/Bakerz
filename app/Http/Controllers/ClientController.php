@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Catalog;
 use App\Models\HeathyCatalog;
 use App\Models\Order;
 use App\Models\OrderDetails;
@@ -148,8 +149,32 @@ class ClientController extends Controller
 
         $discount_products = Product::whereHas('discounts')->get();
 
+        // BTT
+        $seasonalCatalog = Catalog::where('category_name', 'Seasonal Products')->first();
+
+        if ($seasonalCatalog) {
+            // Fetch the products that belong to the "Seasonal Products" catalog
+            $seasonalProducts = Product::with('catalogs') // Use lowercase 'catalog'
+                ->whereHas('catalogs', function ($query) {
+                    $query->where('category_name', 'Seasonal Products');
+                })
+                ->get();
+        }      
+
+        // Drink
+        $coffeCatalog = Catalog::where('category_name', 'Coffee & Espresso')->first();
+
+        if ($coffeCatalog) {
+            // Fetch the products that belong to the "Seasonal Products" catalog
+            $coffeProducts = Product::with('catalogs') // Use lowercase 'catalog'
+                ->whereHas('catalogs', function ($query) {
+                    $query->where('category_name', 'Coffee & Espresso');
+                })
+                ->get();
+        }      
         // Trả về toàn bộ trang 'client.home' với danh sách các sản phẩm
-        return view('client.home', compact('products', 'heathyCatalogs', 'client', 'discount_products', 'recentPurchasedProducts', 'bestSellingProducts'));
+        return view('client.home', compact('products', 'heathyCatalogs', 'client', 
+        'discount_products', 'recentPurchasedProducts', 'bestSellingProducts','seasonalProducts','coffeProducts'));
     }
 
 }
