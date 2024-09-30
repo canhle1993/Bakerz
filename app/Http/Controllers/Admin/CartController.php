@@ -214,7 +214,7 @@ class CartController extends Controller
             $order = Order::create([
                 'user_id' => $currentUser->user_id,
                 'total' => $total,
-                // 'discount' => $request->discount,
+                'discount' => $request->discount,
                 'pay' => $total - ($request->discount ?? 0),
                 'purchase_date' => Carbon::now(),
                 'status' => 'Pending', 

@@ -78,10 +78,20 @@
                             <h4 class="title">Cart totals</h4>
                             <table class="table bg-transparent">
                                 <tbody>
+                                    @if(Auth::user()->rank === 'Gold' || Auth::user()->rank === 'Diamond')
                                     <tr>
                                         <th>Discount <span id="discountper"> </span></th>
-                                        <th class="amount"><strong id="discount-amount"></strong></th> <!-- Discount row -->
+                                        <th class="amount"><strong id="discount-amount"></strong>
+                                        <br>
+                                        @if(Auth::user()->rank === 'Gold')
+                                            <span>(Exclusive discount for Gold rank)</span>
+                                        @else
+                                            <span>(Exclusive discount for Diamond rank)</span>
+                                        @endif
+                                        </th> <!-- Discount row -->
+                                        
                                     </tr>
+                                    @endif
                                     <tr class="total">
                                         <th class="sub-title">Total</th>
                                         <td class="amount"><strong id="total-price">0.00 $</strong></td>
@@ -237,6 +247,7 @@
     {{-- Script xử lý thay đổi số lượng bánh thì tiền tăng theo --}}
     <script>
         $(document).ready(function() {
+            var userRank = "{{ Auth::user()->rank }}"; // Get the user's rank
             // Lắng nghe sự thay đổi của input số lượng
             $(document).on('input change', '.cart-quantity-input', function(e) {
                 var productId = $(this).data('id'); // Lấy product_id
@@ -260,7 +271,7 @@
                         $("#subtotal-" + productId).text((updatedQuantity * updatedDiscount).toFixed(2) + " $");
 
                         // Cập nhật lại tổng giá trị của giỏ hàng (tính lại tổng subtotal)
-                        updateTotalPrice();
+                        updateTotalPrice(userRank);
                         updateCartView();
                     },
                     error: function() {
@@ -309,7 +320,7 @@
                         // $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
                         
                         $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
-                        updateTotalPrice();
+                        updateTotalPrice(userRank);
                         calculateTotal();
                         // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
                         $('#cart_icon').css('color', 'red')// Đổi màu thành đỏ
@@ -341,7 +352,7 @@
             }
 
             // Cập nhật tổng giá trị ban đầu khi trang được tải
-            updateTotalPrice();
+            updateTotalPrice(userRank);
         });
 
         function calculateTotal() {
@@ -358,7 +369,7 @@
             $('#total_price').text(total.toFixed(2) + ' $');
         }
         
-        function updateTotalPrice() {
+        function updateTotalPrice(rank) {
                 var total = 0;
                 // Duyệt qua tất cả các phần tử có class 'subtotal'
                 $('.sub-total').each(function() {
@@ -367,9 +378,21 @@
                     // Cộng tổng lại
                     total += subtotal;
                 });
-                
-                // Hiển thị tổng đã tính
-                $('#total-price').text(total.toFixed(2) + ' $');
+                // Determine discount percentage based on rank
+                var discountPercentage = 0;
+                if (rank === 'Gold') {
+                    discountPercentage = 2; // 2% for Gold rank
+                } else if (rank === 'Diamond') {
+                    discountPercentage = 5; // 5% for Diamond rank
+                }
+                        // Calculate discount amount
+                var discountAmount = (total * discountPercentage) / 100;
+                var grandTotal = total - discountAmount;
+
+                // Update discount and grand total in DOM
+                $('#discountper').text("(" + discountPercentage + "%)");
+                $('#discount-amount').text("-" + discountAmount.toFixed(2) + " $");
+                $('#total-price').text(grandTotal.toFixed(2) + " $");
             }
     </script>
 
