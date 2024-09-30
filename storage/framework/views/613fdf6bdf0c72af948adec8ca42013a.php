@@ -129,6 +129,13 @@
 .custom-alert .close-btn:hover {
     color: #ddd;
 }
+#order-content img {
+    max-width: 100px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: cover; /* Ensure the image fits within the dimensions */
+}
 
 
 </style>
@@ -189,6 +196,9 @@
                 <td><?php echo e($item->status); ?></td>
 
                 <td class="text-center">
+                    <button data-order-id="<?php echo e($item->order_id); ?>" class="btn btn-sm btn-outline-info view">
+                        View
+                    </button>
                     <!-- Button to lower admin role to client -->
                     <form action="<?php echo e(route('order.gotoConfirmed', $item->order_id)); ?>" method="POST" style="display:inline-block;">
                         <?php echo csrf_field(); ?>
@@ -232,6 +242,36 @@
             </div>
         </div>
         </div>
+        <!-- Modal Structure -->
+<div style="z-index: 1056;" class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 800px;"> <!-- Reduce the modal width -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-primary" id="cartModalLabel">Order Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="max-height: 70vh; overflow-y: auto;"> <!-- Reduce the height -->
+        <!-- Nội dung giỏ hàng -->
+        <table class="cart-table table text-center align-middle mb-6" id="order-content">
+          <thead>
+              <tr>
+                  <th></th>
+                  <th class="title text-start">Product</th>
+                  <th class="price">Price</th>
+                  <th class="quantity">Quantity</th>
+                  <th class="total">Subtotal</th>
+              </tr>
+          </thead>
+          <tbody class="border-top-0">
+              <!-- Content loaded dynamically -->
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function showDeleteModal(element) {
         // Lấy giá trị URL từ thuộc tính data-url
@@ -244,6 +284,71 @@
         var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         deleteModal.show();
     }
+    
+    
+    $(document).ready(function() {
+          $('.view').on('click', function(e) {
+            
+            e.preventDefault();
+            var orderId = $(this).data('order-id');  // Lấy order ID từ thuộc tính data-order-id
+
+            // Gọi AJAX để lấy dữ liệu
+            $.ajax({
+              url: "<?php echo e(route('client.orderdetails', ':id')); ?>".replace(':id', orderId), // Thay :id bằng order ID
+              type: 'GET',
+              dataType: 'json',
+              success: function(response) {
+                if (response.status === 'success') {
+                  // Đổ dữ liệu vào modal
+                  var orderdetails = response.data.orderDetails; // Giả sử response trả về orderDetails
+                  var modalContent = '';
+                  
+
+                  // Lặp qua chi tiết đơn hàng và hiển thị
+                  orderdetails.forEach(function(item) {
+                    var imageUrl = `<?php echo e(asset('storage/products/')); ?>/${item.product.image}`; // Xây dựng URL hình ảnh
+                    modalContent += `
+                      <tr>
+                        <th class="cart-thumb">
+                            <a href="#">
+                                <img src="${imageUrl}" alt="${item.product.product_name}">
+                            </a>
+                        </th>
+                        <th class="text-start">
+                            <a href="#">${item.product.product_name}</a>
+                        </th>
+                        <td>${item.discount} $</td>
+                        <td class="text-center">${item.quantity}</td>
+                        <td>${item.quantity * item.discount} $</td>
+                      </tr>
+                    `;
+                  });
+
+                  // Gán nội dung vào bảng trong modal
+                  $('#order-content tbody').html(modalContent);
+
+                  // Hiển thị modal
+                  var myModal = new bootstrap.Modal(document.getElementById('cartModal'));
+                  myModal.show();
+                } else {
+                  alert(response.message); // Hiển thị thông báo lỗi nếu có
+                }
+              },
+              error: function(xhr, status, error) {
+                console.error(error); // Xử lý lỗi
+              }
+            });
+          });
+
+          document.getElementById('cartModal').addEventListener('hidden.bs.modal', function () {
+            // Xóa lớp backdrop khi modal bị ẩn
+            var backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+          });
+        });
+
 </script>
     
 <?php $__env->stopSection(); ?>

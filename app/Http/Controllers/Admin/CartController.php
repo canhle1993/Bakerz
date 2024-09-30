@@ -214,7 +214,7 @@ class CartController extends Controller
             $order = Order::create([
                 'user_id' => $currentUser->user_id,
                 'total' => $total,
-                // 'discount' => $request->discount,
+                'discount' => $request->discount,
                 'pay' => $total - ($request->discount ?? 0),
                 'purchase_date' => Carbon::now(),
                 'status' => 'Pending',
@@ -242,6 +242,7 @@ class CartController extends Controller
             $count = floor($total/10);
 
             DB::commit(); // Commit the transaction
+
             $this->getsession();
             // Call VNPay
             $this->vnp($request, $order);
@@ -251,7 +252,7 @@ class CartController extends Controller
             $this->getsession();
             return redirect()->route('client.filter');
         }
-        return redirect()->route('client.profile', ['userid' => $currentUser->user_id]);;
+        return redirect()->route('client.filter');
     }
 
     public function getsession(){

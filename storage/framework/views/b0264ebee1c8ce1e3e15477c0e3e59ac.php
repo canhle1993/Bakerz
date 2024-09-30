@@ -111,9 +111,7 @@
                                 ?>
 
                                 <?php $__currentLoopData = session('cart'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php
-                                        $total += $details['quantity'] * $details['price'];
-                                    ?>
+                                    
                                     <tbody>
                                         <tr>
                                             <td><?php echo e($details['name']); ?></td>
@@ -121,15 +119,49 @@
                                         </tr>
                                     </tbody>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-
                                 <tfoot>
+                                <?php
+                                    $total = 0;
+                                    $discountPercentage = 0;
+                                    $discountAmount = 0;
+                                    $grandtotal = 0;
+
+                                    // Loop through cart items to calculate the total
+                                    foreach(session('cart') as $id => $details) {
+                                        $total += $details['quantity'] * $details['price'];
+                                    }
+
+                                    // Check the user's rank to apply the discount
+                                    if(Auth::user()->rank === 'Gold') {
+                                        $discountPercentage = 2;  // 2% for Gold rank
+                                    } elseif(Auth::user()->rank === 'Diamond') {
+                                        $discountPercentage = 5;  // 5% for Diamond rank
+                                    }
+
+                                    // Calculate discount amount and grand total
+                                    $discountAmount = ($total * $discountPercentage) / 100;
+                                    $grandtotal = $total - $discountAmount;
+                                ?>
+                                <?php if($discountPercentage > 0): ?>
+                                    <tr>
+                                        <th>Discount (<?php echo e($discountPercentage); ?>%)</th>
+                                        <th class="amount"><strong id="discount-amount">-<?php echo e(number_format($discountAmount, 2)); ?> $</strong>
+                                        <br>
+                                        <?php if(Auth::user()->rank === 'Gold'): ?>
+                                            <span>(Exclusive discount for Gold rank)</span>
+                                        <?php else: ?>
+                                            <span>(Exclusive discount for Diamond rank)</span>
+                                        <?php endif; ?>
+                                        </th> <!-- Discount row -->
+                                        <input type="hidden" name="discount" value="<?php echo e(number_format($discountAmount, 2)); ?>">
+                                    </tr>
+                                    <?php endif; ?>
                                     <tr>
                                         <th class="border-top total">Grand Total</th>
-                                        <th class="border-top amount"><strong id="total-price"><?php echo e(number_format($total, 2)); ?> $</strong></th>
+                                        <th class="border-top amount"><strong id="total-price"><?php echo e(number_format($grandtotal, 2)); ?> $</strong></th>
                                     </tr>
                                 </tfoot>
-
+                                
                             </table>
 
                         </div>
@@ -209,10 +241,13 @@
             // Bắt sự kiện khi trang được hiển thị trở lại
                 window.addEventListener('pageshow', function(event) {
                     if (sessionStorage.getItem('checkoutVisited') === 'true') {
-                        window.location.href = "<?php echo e(route('client.profile', ['userid' => Auth::user()->user_id])); ?>";
+                        window.location.href = "<?php echo e(route('client.filter')); ?>";
+                        alert("Thanh toán thất bại. Hãy mở đơn hàng và thanh toán lại. ")
                         sessionStorage.removeItem('checkoutVisited'); // Xóa trạng thái nếu không cần nữa
                     }
                 });            
+
+
         });
          $(window).on("scroll", function (event) {
             var scroll = $(window).scrollTop();

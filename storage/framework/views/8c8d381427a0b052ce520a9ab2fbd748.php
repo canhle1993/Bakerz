@@ -240,6 +240,25 @@
       referrerpolicy="no-referrer"
     />
 <?php echo $__env->make('layouts.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
+
+<?php if(isset($_SESSION['success'])): ?>
+    <script>
+        alert("<?php echo e($_SESSION['success']); ?>");
+    </script>
+    <?php unset($_SESSION['success']); ?>
+<?php endif; ?>
+
+<?php if(isset($_SESSION['error'])): ?>
+    <script>
+        alert("<?php echo e($_SESSION['error']); ?>");
+    </script>
+    <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
 <div class="breadcrumb" data-bg-image="<?php echo e(asset('assets/images/bg/breadcrumb-bg.jpg')); ?>">
         <div class="container">
             <div class="row">
@@ -297,6 +316,14 @@
                     <h4 class="text-primary font-size-20 mt-3 mb-2">
                       <?php echo e(Auth::user()->name); ?>
 
+                      <?php if(Auth::user()->rank === 'Gold'): ?>
+                          <b style="float: right;" >Rank: Gold</b>
+                      <?php elseif(Auth::user()->rank === 'Diamond'): ?>
+                          <b style="float: right;" >Rank: Diamond</b>
+                      <?php else: ?>
+                          <b style="float: right;" >Rank: Bronze</b>
+                      <?php endif; ?>
+                      
                     </h4>
                       <p class="mb-0 text-muted"><?php echo e(Auth::user()->address); ?></p>
                     </div>
@@ -392,7 +419,7 @@
                         <div class="tab-content" id="orderHistoryContent">
                             <!-- Pending Orders -->
                             <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
-                                <div class="row">
+                                <div class="row pt-3">
                                     <?php $__empty_1 = true; $__currentLoopData = $pendingOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <div class="col-md-6 status" data-order-id="<?php echo e($order->order_id); ?>">
                                         <div class="card">
@@ -432,7 +459,7 @@
 
                             <!-- Paid Orders -->
                             <div class="tab-pane fade" id="paid" role="tabpanel" aria-labelledby="paid-tab">
-                                <div class="row">
+                                <div class="row pt-3">
                                 <?php $__empty_1 = true; $__currentLoopData = $paidOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <div class="col-md-6 status" data-order-id="<?php echo e($order->order_id); ?>">
                                         <div class="card">
@@ -472,7 +499,7 @@
 
                             <!-- Confirmed Orders -->
                             <div class="tab-pane fade" id="confirm" role="tabpanel" aria-labelledby="confirm-tab">
-                                <div class="row">
+                                <div class="row pt-3">
                                 <?php $__empty_1 = true; $__currentLoopData = $confirmedOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <div class="col-md-6 status" data-order-id="<?php echo e($order->order_id); ?>">
                                         <div class="card">
@@ -512,7 +539,7 @@
 
                             <!-- Delivered Orders -->
                             <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
-                                <div class="row">
+                                <div class="row pt-3">
                                 <?php $__empty_1 = true; $__currentLoopData = $deliveredOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <div class="col-md-6 status" data-order-id="<?php echo e($order->order_id); ?>">
                                         <div class="card">
@@ -536,8 +563,8 @@
                                                 <div class="align-self-end">
                                                   <span>Status: </span>
                                                   <span
-                                                    class="badge badge-soft-danger p-2 team-status b1"
-                                                    > <a href="#" data-order-id="<?php echo e($order->order_id); ?>" class="status">Delivered</a> 
+                                                    class="badge bg-primary text-light p-2 team-status b1"
+                                                    > <a href="#" data-order-id="<?php echo e($order->order_id); ?>" class="status text-light">Delivered</a> 
                                                   </span>
                                                 </div>
                                               </div>
@@ -552,7 +579,7 @@
 
                             <!-- Cancel Orders -->
                             <div class="tab-pane fade" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
-                                <div class="row">
+                                <div class="row pt-3">
                                 <?php $__empty_1 = true; $__currentLoopData = $cancelOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <div class="col-md-6 status" data-order-id="<?php echo e($order->order_id); ?>">
                                         <div class="card">
@@ -694,8 +721,7 @@
         </div>
       </div>
     </div>
-    <br><br><br><br>
-    <br><br><br><br>
+    <br><br><br><br><br>
 <!-- Nút để mở modal -->
 <!-- Modal Structure -->
 <div style="z-index: 1056;" class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
@@ -869,6 +895,13 @@
             });
           });
 
+          document.getElementById('cartModal').addEventListener('hidden.bs.modal', function () {
+            // Xóa lớp backdrop khi modal bị ẩn
+            var backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+          });
         });
     </script>
 </body>

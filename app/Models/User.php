@@ -33,6 +33,8 @@ class User extends Authenticatable
         'isdelete',
         'note',
         'avatar',
+        'score',
+        'rank',
     ];
     /**
      * The attributes that should be hidden for serialization.
