@@ -240,6 +240,25 @@
       referrerpolicy="no-referrer"
     />
 @include('layouts.header')
+@php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+@endphp
+
+@if(isset($_SESSION['success']))
+    <script>
+        alert("{{ $_SESSION['success'] }}");
+    </script>
+    @php unset($_SESSION['success']); @endphp
+@endif
+
+@if(isset($_SESSION['error']))
+    <script>
+        alert("{{ $_SESSION['error'] }}");
+    </script>
+    @php unset($_SESSION['error']); @endphp
+@endif
 <div class="breadcrumb" data-bg-image="{{asset('assets/images/bg/breadcrumb-bg.jpg')}}">
         <div class="container">
             <div class="row">
@@ -391,7 +410,7 @@
                         <div class="tab-content" id="orderHistoryContent">
                             <!-- Pending Orders -->
                             <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
-                                <div class="row">
+                                <div class="row pt-3">
                                     @forelse($pendingOrders as $order)
                                     <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
                                         <div class="card">
@@ -431,7 +450,7 @@
 
                             <!-- Paid Orders -->
                             <div class="tab-pane fade" id="paid" role="tabpanel" aria-labelledby="paid-tab">
-                                <div class="row">
+                                <div class="row pt-3">
                                 @forelse($paidOrders as $order)
                                     <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
                                         <div class="card">
@@ -471,7 +490,7 @@
 
                             <!-- Confirmed Orders -->
                             <div class="tab-pane fade" id="confirm" role="tabpanel" aria-labelledby="confirm-tab">
-                                <div class="row">
+                                <div class="row pt-3">
                                 @forelse($confirmedOrders as $order)
                                     <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
                                         <div class="card">
@@ -511,7 +530,7 @@
 
                             <!-- Delivered Orders -->
                             <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
-                                <div class="row">
+                                <div class="row pt-3">
                                 @forelse($deliveredOrders as $order)
                                     <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
                                         <div class="card">
@@ -535,8 +554,8 @@
                                                 <div class="align-self-end">
                                                   <span>Status: </span>
                                                   <span
-                                                    class="badge badge-soft-danger p-2 team-status b1"
-                                                    > <a href="#" data-order-id="{{ $order->order_id }}" class="status">Delivered</a> 
+                                                    class="badge bg-primary text-light p-2 team-status b1"
+                                                    > <a href="#" data-order-id="{{ $order->order_id }}" class="status text-light">Delivered</a> 
                                                   </span>
                                                 </div>
                                               </div>
@@ -551,7 +570,7 @@
 
                             <!-- Cancel Orders -->
                             <div class="tab-pane fade" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
-                                <div class="row">
+                                <div class="row pt-3">
                                 @forelse($cancelOrders as $order)
                                     <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
                                         <div class="card">
@@ -693,8 +712,7 @@
         </div>
       </div>
     </div>
-    <br><br><br><br>
-    <br><br><br><br>
+    <br><br><br><br><br>
 <!-- Nút để mở modal -->
 <!-- Modal Structure -->
 <div style="z-index: 1056;" class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">

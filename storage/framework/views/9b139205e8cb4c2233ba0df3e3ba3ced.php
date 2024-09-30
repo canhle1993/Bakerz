@@ -67,7 +67,6 @@
                     document.getElementById('distance').innerText = `Khoảng cách đến cửa hàng: ${response.data.distance} km`;
                 })
                 .catch(error => {
-                    console.log(error);
                     console.error('Lỗi khi tính toán khoảng cách:', error);
                 });
             }, function(error) {

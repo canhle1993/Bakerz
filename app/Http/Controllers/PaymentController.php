@@ -20,11 +20,11 @@ class PaymentController extends Controller
             // Lấy order_id từ URL
             $order_id = $request->get('order_id');
             if (!$order_id) {
-                return redirect()->route('client.home')->with('error', 'Order_id not found.');
+                return redirect()->route('client.profile')->with('error', 'Order_id not found.');
             }
             $order = Order::find($order_id);
             if (!$order) {
-                return redirect()->route('client.home')->with('error', 'Order not found.');
+                return redirect()->route('client.profile')->with('error', 'Order not found.');
             }
             $order->status = "Paid";
             $order->save();

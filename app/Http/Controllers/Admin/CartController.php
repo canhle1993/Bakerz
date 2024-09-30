@@ -242,6 +242,7 @@ class CartController extends Controller
             $count = floor($total/10);
 
             DB::commit(); // Commit the transaction
+
             $this->getsession();
             // Call VNPay
             $this->vnp($request, $order);
