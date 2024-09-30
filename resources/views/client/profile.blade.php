@@ -886,6 +886,13 @@
             });
           });
 
+          document.getElementById('cartModal').addEventListener('hidden.bs.modal', function () {
+            // Xóa lớp backdrop khi modal bị ẩn
+            var backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+          });
         });
     </script>
 </body>

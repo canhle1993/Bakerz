@@ -252,7 +252,7 @@ class CartController extends Controller
             $this->getsession();
             return redirect()->route('client.filter');
         }
-        return redirect()->route('client.profile', ['userid' => $currentUser->user_id]);;
+        return redirect()->route('client.filter');
     }
 
     public function getsession(){

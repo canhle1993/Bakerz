@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Order;
+use App\Models\OrderDetails;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -50,6 +53,31 @@ class OrderController extends Controller
         $order = Order::where('order_id', $orderid)->first();
         $order->status = "Delivered";
         $order->save();
+
+        $user = User::where('user_id', $order->user_id)->first();
+        $orderdetails = OrderDetails::where('order_id', $orderid)->get();
+        $total = 0;
+        foreach ($orderdetails as $item) {
+            $total += ($item['quantity'] * $item['discount']);
+        }        
+        $user->score += floor($total/10);
+        // Xác định rank của user
+        switch (true) {
+            case ($user->score >= 100 && $user->score < 500):  // Rank Vàng
+                $rank = 'Gold';
+                break;
+
+            case ($user->score >= 500):  // Rank Kim Cương
+                $rank = 'Diamond';
+                break;
+
+            default:
+                $rank = 'Bronze';
+                break;
+        }
+        // Cập nhật rank cho user
+        $user->rank = $rank;
+        $user->save();
         return redirect()->route('order.confirmed');
     }
 
