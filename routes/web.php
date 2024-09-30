@@ -69,8 +69,7 @@ Route::post('/admin/manage/client/store', [ManageClientController::class, 'store
 Route::get('/admin/manage/client/{id}/edit', [ManageClientController::class, 'edit'])->name('client.edit');
 Route::put('/admin/manage/client/{id}', [ManageClientController::class, 'update'])->name('client.update');
 Route::delete('/admin/manage/client/{id}', [ManageClientController::class, 'destroy'])->name('client.destroy');
-Route::get('/admin/manage/blacklist', [ManageClientController::class, 'blacklist'])->name('manage-blacklist');
-Route::post('/admin/manage/blacklist/{id}/restore', [ManageClientController::class, 'restore'])->name('blacklist.restore');
+
 
 // Route quản lý Admin
 use App\Http\Controllers\Admin\ManageAdminController;
@@ -83,6 +82,13 @@ Route::post('/admin/manage/admin/{id}', [ManageAdminController::class, 'update']
 Route::delete('/admin/manage/admin/{id}', [ManageAdminController::class, 'destroy'])->name('admin.destroy');
 Route::post('/admin/manage/lower-to-client/{id}', [ManageAdminController::class, 'lowerToClient'])->name('admin.lower_to_client');
 Route::post('/admin/manage/update-to-admin/{id}', [ManageAdminController::class, 'Upgradetoadmin'])->name('admin.update_to_admin');
+Route::post('/admin/upgrade_to_super/{id}', [ManageAdminController::class, 'upgradeToSuper'])->name('admin.up_to_super');
+Route::post('/category/restore/{id}', [ManageAdminController::class, 'restoreCategory'])->name('category.restore');
+Route::post('/product/restore/{id}', [ManageAdminController::class, 'restoreProduct'])->name('product.restore');
+Route::get('/admin/manage/blacklist', [ManageAdminController::class, 'blacklist'])->name('manage-blacklist');
+Route::post('/blacklist/restore/{id}', [ManageAdminController::class, 'restoreUser'])->name('blacklist.restore');
+Route::delete('/product/{id}', [ManageAdminController::class, 'delete'])->name('product.delete');
+
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------//
 

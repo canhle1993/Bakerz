@@ -29,7 +29,7 @@
                 <td><?php echo e(number_format($details['price'], 2)); ?> $</td>
                 <td class="text-center cart-quantity">
                     <div class="quantity">
-                        <input type="number" value="<?php echo e($details['quantity']); ?>" min="1" class="cart-quantity-input" data-id="<?php echo e($id); ?>">
+                        <input data-price="<?php echo e(number_format($details['price'], 2)); ?>" type="number" value="<?php echo e($details['quantity']); ?>" min="1" class="cart-quantity-input" data-id="<?php echo e($id); ?>">
                     </div>
                 </td>
                 <td class="sub-total" id="subtotal-<?php echo e($id); ?>"><?php echo e(number_format($details['price'] * $details['quantity'], 2)); ?> $</td>
