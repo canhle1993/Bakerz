@@ -69,7 +69,7 @@ class ProductController extends Controller
         }
 
         // Sắp xếp mặc định theo ngày cập nhật giảm dần nếu không có sắp xếp khác
-        $products = $query->orderBy('Product.ModifiedDate', 'desc')->paginate(10);
+        $products = $query->orderBy('Product.ModifiedDate', 'desc')->paginate(20);
 
         return view('admin.product_management', compact('products'));
     }
