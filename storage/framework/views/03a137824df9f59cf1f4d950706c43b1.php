@@ -85,20 +85,31 @@
                         </div>
                     </div>
                     <a href="<?php echo e(route('admin.reviews.manage')); ?>" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a>
-
+                    <!-- Order Manager -->
+                    <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('order*') ) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Order Manager</a>
+                        <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('order*') ) ? 'show' : ''); ?>">
+                            <a href="<?php echo e(route('order.pending')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.pending') ? 'active' : ''); ?>">&nbsp;&nbsp;Pending Order</a>
+                            <a href="<?php echo e(route('order.paid')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.paid') ? 'active' : ''); ?>">&nbsp;&nbsp;Paid Order</a>
+                            <a href="<?php echo e(route('order.confirmed')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.confirmed') ? 'active' : ''); ?>">&nbsp;&nbsp;Confirmed Order</a>
+                            <a href="<?php echo e(route('order.delivered')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.delivered') ? 'active' : ''); ?>">&nbsp;&nbsp;Deliveried Order</a>
+                            <a href="<?php echo e(route('order.cancel')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.cancel') ? 'active' : ''); ?>">&nbsp;&nbsp;Cancel Order</a>
+                        </div>
+                    </div>
+                    </div>
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>User</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="signin.html" class="dropdown-item">User Management</a>
                             <a href="signup.html" class="dropdown-item">Order</a>
                             <a href="404.html" class="dropdown-item">Evaluate</a>
                             <a href="blank.html" class="dropdown-item">Comment</a>
-                        </div>
-                    </div>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
 
+                        </div>
+                            <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
+                            <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
+                            <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
+                            <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
+                    </div>
 
                 </div>
             </nav>

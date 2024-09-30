@@ -113,6 +113,7 @@
                                 @foreach(session('cart') as $id => $details)
                                     @php
                                         $total += $details['quantity'] * $details['price'];
+                                        
                                     @endphp
                                     <tbody>
                                         <tr>
@@ -121,15 +122,14 @@
                                         </tr>
                                     </tbody>
                                 @endforeach
-
-
+                                
                                 <tfoot>
                                     <tr>
                                         <th class="border-top total">Grand Total</th>
                                         <th class="border-top amount"><strong id="total-price">{{ number_format($total, 2) }} $</strong></th>
                                     </tr>
                                 </tfoot>
-
+                                
                             </table>
 
                         </div>
@@ -209,10 +209,13 @@
             // Bắt sự kiện khi trang được hiển thị trở lại
                 window.addEventListener('pageshow', function(event) {
                     if (sessionStorage.getItem('checkoutVisited') === 'true') {
-                        window.location.href = "{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}";
+                        window.location.href = "{{ route('client.filter') }}";
+                        alert("Thanh toán thất bại. Hãy mở đơn hàng và thanh toán lại. ")
                         sessionStorage.removeItem('checkoutVisited'); // Xóa trạng thái nếu không cần nữa
                     }
                 });            
+
+
         });
          $(window).on("scroll", function (event) {
             var scroll = $(window).scrollTop();

@@ -29,7 +29,7 @@
                 <td>{{ number_format($details['price'], 2) }} $</td>
                 <td class="text-center cart-quantity">
                     <div class="quantity">
-                        <input type="number" value="{{ $details['quantity'] }}" min="1" class="cart-quantity-input" data-id="{{ $id }}">
+                        <input data-price="{{ number_format($details['price'], 2) }}" type="number" value="{{ $details['quantity'] }}" min="1" class="cart-quantity-input" data-id="{{ $id }}">
                     </div>
                 </td>
                 <td class="sub-total" id="subtotal-{{ $id }}">{{ number_format($details['price'] * $details['quantity'], 2) }} $</td>

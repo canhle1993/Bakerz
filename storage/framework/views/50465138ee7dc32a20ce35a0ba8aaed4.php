@@ -78,6 +78,10 @@
                             <h4 class="title">Cart totals</h4>
                             <table class="table bg-transparent">
                                 <tbody>
+                                    <tr>
+                                        <th>Discount <span id="discountper"> </span></th>
+                                        <th class="amount"><strong id="discount-amount"></strong></th> <!-- Discount row -->
+                                    </tr>
                                     <tr class="total">
                                         <th class="sub-title">Total</th>
                                         <td class="amount"><strong id="total-price">0.00 $</strong></td>
@@ -234,12 +238,11 @@
     <script>
         $(document).ready(function() {
             // Lắng nghe sự thay đổi của input số lượng
-            $(document).on('click', '.cart-quantity-input', function(e) {
+            $(document).on('input change', '.cart-quantity-input', function(e) {
                 var productId = $(this).data('id'); // Lấy product_id
                 var quantity = $(this).val(); // Lấy số lượng mới
                 var _token = "<?php echo e(csrf_token()); ?>"; // CSRF token để bảo mật
-                
-                // Gửi request AJAX đến server để cập nhật số lượng
+                var discount  = $(this).data('price'); // Lấy product_id
                 $.ajax({
                     url: "<?php echo e(route('cart.update_quantity', ':id')); ?>".replace(':id', productId), // Truyền product_id vào URL
                     method: 'POST',
@@ -250,9 +253,12 @@
 
                     },
                     success: function(response) {
+                        
                         // Cập nhật lại subtotal của sản phẩm này
-                        $("#subtotal-" + productId).text(response.subtotal + " $");
-                        console.log(response.message);
+                        var updatedQuantity = parseFloat(quantity) || 0;
+                        var updatedDiscount = parseFloat(discount) || 0;
+                        $("#subtotal-" + productId).text((updatedQuantity * updatedDiscount).toFixed(2) + " $");
+
                         // Cập nhật lại tổng giá trị của giỏ hàng (tính lại tổng subtotal)
                         updateTotalPrice();
                         updateCartView();
@@ -300,7 +306,7 @@
                     success: function(response) {
                         $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
                         
-                        $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
+                        // $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
                         
                         $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
                         updateTotalPrice();
