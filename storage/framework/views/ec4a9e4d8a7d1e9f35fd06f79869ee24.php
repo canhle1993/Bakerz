@@ -891,5 +891,4 @@
     </script>
 </body>
 
-</html>
-<?php /**PATH C:\xampp\htdocs\baker-bite\resources\views/client/profile.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\xampp\htdocs\baker-bite\resources\views/client/profile.blade.php ENDPATH**/ ?>

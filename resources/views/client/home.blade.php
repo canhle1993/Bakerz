@@ -738,7 +738,7 @@
     <!-- Product Section End -->
 
     <!-- Product Deal Section Start -->
-    <div class="custom-container-four container-fluid">
+    <div class="custom-container-four container-fluid" >
         <div class="row">
             <div class="col-12">
                 <!-- Section Title Strat -->
@@ -750,14 +750,14 @@
             </div>
             <div class="col-12">
                 <div class="product-active-four mt-4">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
+                    <div class="swiper" >
+                        <div class="swiper-wrapper" >
 
                             <!-- swiper-slide start -->
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" >
                                 <!-- Product Item Start -->
-                                <div class="product-item product-item-06 border text-center">
-                                    <div class="product-item__image">
+                                <div class="product-item product-item-06 border text-center" >
+                                    <div class="product-item__image" style="z-index: 1 !important;">
                                         <a href="single-product.html"><img width="350" height="350" src="assets/images/product/m5-prod1.jpg" alt="Product"></a>
                                         <ul class="product-item__meta meta-middle">
                                             <li class="product-item__meta-action">
@@ -864,9 +864,25 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><br><br><br>
     <!-- Product Deal Section End -->
 
+    <div class="custom-container-four container-fluid ">
+        <div class="row pt-5">
+            <div class="col-12">
+                <!-- Section Title Strat -->
+                <div class="section-title-05">
+                    <h5 class="section-title-05__title"><span>Coffee & Espresso</span></h5>
+                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
+                </div>
+                <!-- Section Title End -->
+            </div>
+            <div class="col-12">
+                @include('layouts.autoplay')
+            </div>
+        </div>
+    </div>
+    
     <!-- Counter Section Strat -->
     <div class="counter-section" style="background-image: url(assets/images/bg-01.jpg);">
         <div class="container custom-container">
@@ -1081,7 +1097,6 @@
         </div>
     </div>
     <!-- Call To Action Three Section End -->
-
 @include('layouts.footer')
 
     <div class="quickview-product-modal modal fade" id="exampleProductModal">
