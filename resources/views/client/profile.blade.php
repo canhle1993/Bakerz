@@ -315,6 +315,14 @@
                     <div>
                     <h4 class="text-primary font-size-20 mt-3 mb-2">
                       {{ Auth::user()->name }}
+                      @if(Auth::user()->rank === 'Gold')
+                          <b style="float: right;" >Rank: Gold</b>
+                      @elseif(Auth::user()->rank === 'Diamond')
+                          <b style="float: right;" >Rank: Diamond</b>
+                      @else
+                          <b style="float: right;" >Rank: Bronze</b>
+                      @endif
+                      
                     </h4>
                       <p class="mb-0 text-muted">{{ Auth::user()->address }}</p>
                     </div>
