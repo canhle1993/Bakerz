@@ -31,6 +31,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-right: 15px;
         }
 
         .slideee img {
@@ -73,12 +74,29 @@
 <body>
     <div class="image-slideeerrr">
         <div class="slideeerrr-wrapper" id="slideeerrr-wrapper">
+            @if($coffeProducts->isEmpty())
+            <p>No Coffee found.</p>
+            @else @foreach($coffeProducts as $product)
             <!-- Tạo 5 ảnh gốc với nút button -->
             <div class="slideee">
-                <img src="img/a1.png" alt="Ảnh 1">
-                <button>Iced Caramel Macchiato<br><span>$5</span></button>
+                <a href="{{ route('product.single', ['product' => $product->product_id]) }}"><img src="{{ $product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg') }}" alt="{{ $product->product_name }}"></a>
+                <a href="{{ route('product.single', ['product' => $product->product_id]) }}">
+                <button>{{ $product->product_name }}<br><span>
+                @if ($product->price != $product->getDiscountedPrice())
+                <del>{{ formatPriceVND($product->price) }}</del>
+                <!-- Giá gốc -->
+                <strong
+                >{{ formatPriceVND($product->getDiscountedPrice())
+                }}</strong
+                >
+                <!-- Giá sau khi giảm -->
+                @else {{ formatPriceVND($product->price) }}
+                <!-- Giá không giảm -->
+                @endif
+                </span></button></a>
             </div>
-            <div class="slideee">
+            @endforeach @endif
+            <!-- <div class="slideee">
                 <img src="img/a1.png" alt="Ảnh 2">
                 <button>Iced Caramel Macchiato<br><span>$5</span></button>
             </div>
@@ -93,15 +111,33 @@
             <div class="slideee">
                 <img src="img/a1.png" alt="Ảnh 5">
                 <button>Iced Caramel Macchiato<br><span>$5</span></button>
-            </div>
+            </div> -->
             
 
             <!-- Tạo thêm 5 ảnh lặp lại với nút button -->
+            @if($coffeProducts->isEmpty())
+            <p>No Coffee found.</p>
+            @else @foreach($coffeProducts as $product)
             <div class="slideee">
-                <img src="img/a1.png" alt="Ảnh 6">
-                <button>Iced Caramel Macchiato<br><span>$5</span></button>
+                <a href="{{ route('product.single', ['product' => $product->product_id]) }}"><img src="{{ $product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg') }}" alt="{{ $product->product_name }}"></a>
+                <a href="{{ route('product.single', ['product' => $product->product_id]) }}">
+                <button>
+                {{ $product->product_name }}<br><span>
+                @if ($product->price != $product->getDiscountedPrice())
+                <del>{{ formatPriceVND($product->price) }}</del>
+                <!-- Giá gốc -->
+                <strong
+                >{{ formatPriceVND($product->getDiscountedPrice())
+                }}</strong
+                >
+                <!-- Giá sau khi giảm -->
+                @else {{ formatPriceVND($product->price) }}
+                <!-- Giá không giảm -->
+                @endif
+            </span></button></a>
             </div>
-            <div class="slideee">
+            @endforeach @endif
+            <!-- <div class="slideee">
                 <img src="img/a1.png" alt="Ảnh 7">
                 <button>Iced Caramel Macchiato<br><span>$5</span></button>
             </div>
@@ -116,7 +152,7 @@
             <div class="slideee">
                 <img src="img/a1.png" alt="Ảnh 10">
                 <button>Iced Caramel Macchiato<br><span>$5</span></button>
-            </div>
+            </div> -->
         </div>
     </div>
 
