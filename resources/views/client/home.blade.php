@@ -864,9 +864,24 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div><br><br>
     <!-- Product Deal Section End -->
 
+    <div class="custom-container-four container-fluid ">
+        <div class="row pt-5">
+            <div class="col-12">
+                <!-- Section Title Strat -->
+                <div class="section-title-05">
+                    <h5 class="section-title-05__title"><span>Coffee & Espresso</span></h5>
+                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
+                </div>
+                <!-- Section Title End -->
+            </div>
+            <div class="col-12">
+                @include('layouts.autoplay')
+            </div>
+        </div>
+    </div>
     <!-- Counter Section Strat -->
     <div class="counter-section" style="background-image: url(assets/images/bg-01.jpg);">
         <div class="container custom-container">

@@ -111,10 +111,7 @@
                                 @endphp
 
                                 @foreach(session('cart') as $id => $details)
-                                    @php
-                                        $total += $details['quantity'] * $details['price'];
-                                        
-                                    @endphp
+                                    
                                     <tbody>
                                         <tr>
                                             <td>{{ $details['name'] }}</td>
@@ -122,11 +119,46 @@
                                         </tr>
                                     </tbody>
                                 @endforeach
-                                
                                 <tfoot>
+                                @php
+                                    $total = 0;
+                                    $discountPercentage = 0;
+                                    $discountAmount = 0;
+                                    $grandtotal = 0;
+
+                                    // Loop through cart items to calculate the total
+                                    foreach(session('cart') as $id => $details) {
+                                        $total += $details['quantity'] * $details['price'];
+                                    }
+
+                                    // Check the user's rank to apply the discount
+                                    if(Auth::user()->rank === 'Gold') {
+                                        $discountPercentage = 2;  // 2% for Gold rank
+                                    } elseif(Auth::user()->rank === 'Diamond') {
+                                        $discountPercentage = 5;  // 5% for Diamond rank
+                                    }
+
+                                    // Calculate discount amount and grand total
+                                    $discountAmount = ($total * $discountPercentage) / 100;
+                                    $grandtotal = $total - $discountAmount;
+                                @endphp
+                                @if($discountPercentage > 0)
+                                    <tr>
+                                        <th>Discount ({{ $discountPercentage }}%)</th>
+                                        <th class="amount"><strong id="discount-amount">-{{ number_format($discountAmount, 2) }} $</strong>
+                                        <br>
+                                        @if(Auth::user()->rank === 'Gold')
+                                            <span>(Exclusive discount for Gold rank)</span>
+                                        @else
+                                            <span>(Exclusive discount for Diamond rank)</span>
+                                        @endif
+                                        </th> <!-- Discount row -->
+                                        <input type="hidden" name="discount" value="{{ number_format($discountAmount, 2) }}">
+                                    </tr>
+                                    @endif
                                     <tr>
                                         <th class="border-top total">Grand Total</th>
-                                        <th class="border-top amount"><strong id="total-price">{{ number_format($total, 2) }} $</strong></th>
+                                        <th class="border-top amount"><strong id="total-price">{{ number_format($grandtotal, 2) }} $</strong></th>
                                     </tr>
                                 </tfoot>
                                 
