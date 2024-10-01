@@ -87,7 +87,12 @@ Route::post('/category/restore/{id}', [ManageAdminController::class, 'restoreCat
 Route::post('/product/restore/{id}', [ManageAdminController::class, 'restoreProduct'])->name('product.restore');
 Route::get('/admin/manage/blacklist', [ManageAdminController::class, 'blacklist'])->name('manage-blacklist');
 Route::post('/blacklist/restore/{id}', [ManageAdminController::class, 'restoreUser'])->name('blacklist.restore');
-Route::delete('/product/{id}', [ManageAdminController::class, 'delete'])->name('product.delete');
+Route::delete('delete/product/{id}', [ManageAdminController::class, 'delete'])->name('product.delete');
+Route::delete('/blacklist/delete/{id}', [ManageAdminController::class, 'deleteUser'])->name('user.delete');
+Route::delete('/category/delete/{id}', [ManageAdminController::class, 'deletecategory'])->name('category.delete');
+
+
+
 
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -210,7 +215,7 @@ Route::post('/cart/new_add', [CartController::class, 'new_addToCart'])->name('ca
 Route::get('/cart/show', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/{product_id}/update_quantity', [CartController::class, 'update_quantity'])->name('cart.update_quantity');
 Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
-Route::get('/showcheckout',[CartController::class, 'showcheckout'])->name('checkout');
+Route::get('/showcheckout', [CartController::class, 'showcheckout'])->name('checkout');
 Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.cart_checkout');
 
 use App\Http\Controllers\ReviewController;
@@ -239,9 +244,11 @@ Route::post('/calculate-distance', [CalculateDistanceController::class, 'calcula
 
 // VNPAY return
 use App\Http\Controllers\PaymentController;
+
 Route::get('/vnpay-return', [PaymentController::class, 'vnpayReturn'])->name('vnpay.return');
 
 use App\Http\Controllers\Admin\OrderController;
+
 Route::get('/order/pending', [OrderController::class, 'pending'])->name('order.pending');
 Route::post('/order/{order_id}/pending', [OrderController::class, 'gotoPaid'])->name('order.gotopaid');
 Route::get('/order/paid', [OrderController::class, 'paid'])->name('order.paid');
@@ -252,5 +259,3 @@ Route::get('/order/delivered', [OrderController::class, 'delivered'])->name('ord
 
 Route::get('/order/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
 Route::post('/order/{order_id}/cancel', [OrderController::class, 'gotoCancel'])->name('order.gotoCancel');
-
-

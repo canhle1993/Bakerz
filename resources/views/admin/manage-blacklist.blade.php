@@ -203,7 +203,7 @@
                         </button>
                     </form>
                      <!-- Button to delete product -->
-    <form action="{{ route('product.delete', $product->product_id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this product permanently?');">
+                     <form action="{{ route('user.delete', $user->user_id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this user permanently?');">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-sm btn-danger">
@@ -266,7 +266,7 @@
                                 <i class="bi bi-arrow-up-circle"></i> Restore
                             </button>
                         </form>
-                         <!-- Button to delete product -->
+                             <!-- Button to delete product -->
     <form action="{{ route('product.delete', $product->product_id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this product permanently?');">
         @csrf
         @method('DELETE')
@@ -285,6 +285,63 @@
             {{ $deletedProducts->links('pagination::bootstrap-5') }}
         </div>
     </div>
+
+    {{-- Category --}}
+
+<div class="p-4 rounded shadow-lg mb-5" style="background: linear-gradient(45deg, #fdfbfb, #ebedee); border: 1px solid #6c757d;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="text-dark">Deleted Categories</h1>
+    </div>
+
+    <table class="table table-hover table-bordered table-striped shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Category Image</th>
+                <th>Category ID</th>
+                <th>Category Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($deletedCategories as $category)
+            <tr>
+                <td>
+                    <img src="{{ asset('storage/catalogs/' . $category->image) }}" alt="Hình ảnh" width="100" class="mt-2">
+                </td>
+                <td>{{ $category->category_id }}</td>
+                <td>{{ $category->category_name }}</td>
+
+
+                <td class="text-center">
+                    <!-- Button to restore category -->
+                    <form action="{{ route('category.restore', $category->category_id) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-restore">
+                            <i class="bi bi-arrow-up-circle"></i> Restore
+                        </button>
+                    </form>
+
+                    <!-- Button to delete category -->
+                    <form action="{{ route('category.delete', $category->category_id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this category permanently?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </form>
+                </td>
+
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-4">
+        {{ $deletedCategories->links('pagination::bootstrap-5') }}
+    </div>
+</div>
+
 
 
 @endsection

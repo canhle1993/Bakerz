@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="utf-8">
-    <title>BakerzBite-Admin</title>
+    <title>BakerzBite</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -56,16 +56,17 @@
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0"><?php echo e(Auth::user()->name); ?></h6>
-                        <span>Admin</span>
+                        <span><?php echo e(Auth::user()->role->role_name); ?></span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="<?php echo e(route('admin.dashboard')); ?>" class="nav-item nav-link <?php echo e(Request::routeIs('admin.dashboard') ? 'active' : ''); ?>"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*')) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
-                        <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*')) ? 'show' : ''); ?>">
+                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
+                        <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'show' : ''); ?>">
                             <a href="<?php echo e(route('product.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Product Management</a>
-                            <a href="<?php echo e(route('catalog.index')); ?>" class="bi-tag m-2 dropdown-item <?php echo e(Request::routeIs('catalog.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Catagory</a>
+                            <a href="<?php echo e(route('catalog.index')); ?>" class="bi-tag m-2 dropdown-item <?php echo e(Request::routeIs('catalog.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Category</a>
+                            <a href="<?php echo e(route('discount.index')); ?>" class="bi-lightning m-2 dropdown-item <?php echo e(Request::routeIs('discount.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Discount</a>
                             <a href="<?php echo e(route('heathy.index')); ?>" class="m-2 dropdown-item <?php echo e(Request::routeIs('heathy.index') ? 'active' : ''); ?>">💞&nbsp;&nbsp;Heathy Type</a>
                         </div>
                     </div>
@@ -83,21 +84,32 @@
                             <a href="<?php echo e(route('manage-blacklist')); ?>" class="dropdown-item">Blacklist</a>
                         </div>
                     </div>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-
+                    <a href="<?php echo e(route('admin.reviews.manage')); ?>" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a>
+                    <!-- Order Manager -->
+                    <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('order*') ) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Order Manager</a>
+                        <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('order*') ) ? 'show' : ''); ?>">
+                            <a href="<?php echo e(route('order.pending')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.pending') ? 'active' : ''); ?>">&nbsp;&nbsp;Pending Order</a>
+                            <a href="<?php echo e(route('order.paid')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.paid') ? 'active' : ''); ?>">&nbsp;&nbsp;Paid Order</a>
+                            <a href="<?php echo e(route('order.confirmed')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.confirmed') ? 'active' : ''); ?>">&nbsp;&nbsp;Confirmed Order</a>
+                            <a href="<?php echo e(route('order.delivered')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.delivered') ? 'active' : ''); ?>">&nbsp;&nbsp;Deliveried Order</a>
+                            <a href="<?php echo e(route('order.cancel')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.cancel') ? 'active' : ''); ?>">&nbsp;&nbsp;Cancel Order</a>
+                        </div>
+                    </div>
+                    </div>
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>User</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="signin.html" class="dropdown-item">User Management</a>
                             <a href="signup.html" class="dropdown-item">Order</a>
                             <a href="404.html" class="dropdown-item">Evaluate</a>
                             <a href="blank.html" class="dropdown-item">Comment</a>
-                        </div>
-                    </div>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
 
+                        </div>
+                            <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
+                            <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
+                            <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
+                            <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
+                    </div>
 
                 </div>
             </nav>
@@ -115,9 +127,7 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control bg-dark border-0" type="search" placeholder="Search">
-                </form>
+
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">

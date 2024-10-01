@@ -1,5 +1,7 @@
 <?php $__env->startSection('product_content'); ?>
     <!-- Favicon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
@@ -28,6 +30,15 @@
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h4 class="mb-0">List Product</h4>
+                        <form class="d-none d-md-flex ms-4" method="GET" action="<?php echo e(route('product.index')); ?>">
+                            <input class="form-control bg-dark border-0" type="search" placeholder="Product name" name="search" value="<?php echo e(request()->query('search')); ?>">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                            <?php if(request()->query('search')): ?>
+                                <button type="button" class="btn btn-light ms-2" id="reset-search">✖</button>
+                            <?php endif; ?>
+                        </form>
+
+
                         <a href="<?php echo e(route('product.create')); ?>">Create Product</a>
                     </div>
                     <div class="table-responsive">
@@ -37,10 +48,61 @@
                                     <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
                                     <th scope="col">No.</th>
                                     <th scope="col">Image</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Inventory</th>
-                                    <th scope="col">Unit Price</th>
+                                    <th scope="col">
+                                        Name
+                                        <div style="float: right;">
+                                            <a href="<?php echo e(route('product.index', array_merge(request()->all(), ['sort' => 'name_asc']))); ?>">
+                                                <i class="fas fa-arrow-up"></i>
+                                            </a>
+                                            <a href="<?php echo e(route('product.index', array_merge(request()->all(), ['sort' => 'name_desc']))); ?>">
+                                                <i class="fas fa-arrow-down"></i>
+                                            </a>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        Category
+                                        <div style="float: right;">
+                                            <a href="<?php echo e(route('product.index', ['sort' => 'category_asc'])); ?>">
+                                                <i class="fas fa-arrow-up"></i>
+                                            </a>
+                                            <a href="<?php echo e(route('product.index', ['sort' => 'category_desc'])); ?>">
+                                                <i class="fas fa-arrow-down"></i>
+                                            </a>
+                                        </div>
+                                    </th>  
+                                    <th scope="col">
+                                        Inventory
+                                        <div style="float: right;">
+                                            <a href="<?php echo e(route('product.index', array_merge(request()->all(), ['sort' => 'inventory_asc']))); ?>">
+                                                <i class="fas fa-arrow-up"></i>
+                                            </a>
+                                            <a href="<?php echo e(route('product.index', array_merge(request()->all(), ['sort' => 'inventory_desc']))); ?>">
+                                                <i class="fas fa-arrow-down"></i>
+                                            </a>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        Price
+                                        <div style="float: right;">
+                                            <a href="<?php echo e(route('product.index', array_merge(request()->all(), ['sort' => 'price_asc']))); ?>">
+                                                <i class="fas fa-arrow-up"></i>
+                                            </a>
+                                            <a href="<?php echo e(route('product.index', array_merge(request()->all(), ['sort' => 'price_desc']))); ?>">
+                                                <i class="fas fa-arrow-down"></i>
+                                            </a>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        Discount
+                                        <div style="float: right;">
+                                            <a href="<?php echo e(route('product.index', array_merge(request()->all(), ['sort' => 'discount_asc']))); ?>">
+                                                <i class="fas fa-arrow-up"></i>
+                                            </a>
+                                            <a href="<?php echo e(route('product.index', array_merge(request()->all(), ['sort' => 'discount_desc']))); ?>">
+                                                <i class="fas fa-arrow-down"></i>
+                                            </a>
+                                        </div>
+                                    </th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -61,6 +123,11 @@
                                     </td>
                                     <td><?php echo e($product->inventory); ?></td>
                                     <td><?php echo e(formatPriceVND($product->price)); ?></td>
+                                    <td>
+                                    <?php $__currentLoopData = $product->discounts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $discount): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php echo e($discount->discount *100); ?> %
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </td>
                                     <td><a class="btn btn-outline-info m-2" href="<?php echo e(route('product.showDetail', $product->product_id)); ?>">Detail</a>
                                     <a class="btn btn-outline-danger m-2" href="#" data-url="<?php echo e(route('product.destroy', $product->product_id)); ?>" onclick="showDeleteModal(this)">Delete</a>
                                     </td>
@@ -71,10 +138,10 @@
                     </div>
                     <div style="height: 20px;"></div>
                     <div class="d-flex justify-content-center">
-                        <?php echo e($products->links('pagination::bootstrap-4')); ?>
-
+                        <?php echo e($products->appends(request()->except('page'))->links('pagination::bootstrap-4')); ?>
 
                     </div>
+
                 </div>
             </div>
             <!-- Recent Sales End -->
@@ -101,7 +168,9 @@
             </div>
             </div>
 
-            <script>
+<script>
+
+
                 
     function showDeleteModal(element) {
         // Lấy giá trị URL từ thuộc tính data-url
@@ -114,6 +183,10 @@
         var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         deleteModal.show();
     }
+    document.getElementById('reset-search').addEventListener('click', function() {
+        // Reset lại URL về trang không có tham số tìm kiếm
+        window.location.href="<?php echo e(route('product.index')); ?>";
+    });
 </script>
 
 
