@@ -299,7 +299,7 @@
                                     <li><a class="sub-item-link" href="<?php echo e(route('about')); ?>"><span>About</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('our-chef')); ?>"><span>Our Chef</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('faq')); ?>"><span>FAQs</span></a></li>
-                                    <li><a class="sub-item-link" href="<?php echo e(route('pricing-plan')); ?>"><span>Pricing Plans</span></a></li>
+                                    <li><a class="sub-item-link" href="<?php echo e(route('pricing-plan')); ?>"><span>Bakerz Bite Rewards</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('coming-soon')); ?>"><span>Coming Soon</span></a></li>
                                 </ul>
                             </li>

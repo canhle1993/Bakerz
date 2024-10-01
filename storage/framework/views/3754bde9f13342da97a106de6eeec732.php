@@ -633,6 +633,7 @@
             <div class="swiper-slide">
               <!-- Product Item Start -->
               <div class="product-item product-item-05 border text-center">
+                <div class="product-item__badge">Hot</div>
                 <div class="product-item__image">
                   <a
                     href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"
@@ -763,7 +764,7 @@
                                 <!-- Product Item Start -->
                                 <div class="product-item product-item-06 border text-center">
                                     <div class="product-item__image">
-                                        <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><img width="350" height="350" src="<?php echo e($product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg')); ?>" alt="<?php echo e($product->product_name); ?>"></a>
+                                        <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><img style="border: none !important; height: 287px !important;" width="350" height="350" src="<?php echo e($product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg')); ?>" alt="<?php echo e($product->product_name); ?>"></a>
                                         <ul class="product-item__meta meta-middle">
                                             <li class="product-item__meta-action">
                                                 <a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>

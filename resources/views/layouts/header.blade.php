@@ -299,7 +299,7 @@
                                     <li><a class="sub-item-link" href="{{ route('about') }}"><span>About</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('our-chef') }}"><span>Our Chef</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Pricing Plans</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Bakerz Bite Rewards</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
                                 </ul>
                             </li>

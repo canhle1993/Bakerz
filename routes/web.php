@@ -253,4 +253,3 @@ Route::get('/order/delivered', [OrderController::class, 'delivered'])->name('ord
 Route::get('/order/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
 Route::post('/order/{order_id}/cancel', [OrderController::class, 'gotoCancel'])->name('order.gotoCancel');
 
-
