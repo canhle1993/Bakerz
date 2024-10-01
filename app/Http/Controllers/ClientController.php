@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 class ClientController extends Controller
 {
     public function home()
-    
+
     {
         $client = User::all();
         return view('client.home', compact('client'));
@@ -16,9 +16,9 @@ class ClientController extends Controller
     public function profile($userid)
     {
         $user= Auth::user();
-      
+
         return view('client.profile');
     }
-    
+
 
 }

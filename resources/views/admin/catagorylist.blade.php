@@ -57,7 +57,7 @@
                                 <button type="submit" class="btn btn-success m-2" >Save</button>
                                 <button id="btnCancelAdd" type="button" class="btn btn-secondary m-2">Cancel</button>
                                 </td>
-                            </tr>   
+                            </tr>
                             </form>
                             @foreach($catalogs as $catalog)
                             <tr id="row-{{ $catalog->category_id }}">
@@ -194,9 +194,9 @@
     }
 
     document.getElementById('btnCreate').addEventListener('click', function(event) {
-        
+
         document.getElementById("row-create").style.display ='contents'
-        
+
     });
     document.getElementById('btnCancelAdd').addEventListener('click', function(event) {
         document.getElementById("row-create").style.display ='none'

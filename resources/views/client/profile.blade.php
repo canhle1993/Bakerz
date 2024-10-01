@@ -491,7 +491,7 @@
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <h1 class="breadcrumb_title">Profile</h1>
-   
+
                     </div>
                 </div>
             </div>
@@ -533,7 +533,7 @@
                       </div>
                     </form>
 
-                    
+
                   </div>
                 </div>
                 <div class="col-md-9">
@@ -671,8 +671,8 @@
                 <span><h6 id="EditText" class="text-primary">Edit</h6></span>
                 </a>
               </h4>
-                
-      
+
+
 
               <div class="table-responsive" id="profile-table">
                 <table class="table table-bordered mb-0">
@@ -706,7 +706,7 @@
                       <th scope="row">Email</th>
                       <td>{{ Auth::user()->email }}</td>
                     </tr>
-                    
+
                   </tbody>
                 </table>
               </div>
@@ -726,7 +726,7 @@
                     <div>
                       <input type="radio" id="male" name="gender" value="male" {{ Auth::user()->gender == 'male' ? 'checked' : '' }}>
                       <label for="male">Male</label>
-                      
+
                       <input type="radio" id="female" name="gender" value="female" {{ Auth::user()->gender == 'female' ? 'checked' : '' }}>
                       <label for="female">Female</label>
 
@@ -742,8 +742,8 @@
                     <label for="phone" class="form-label">Phone</label>
                     <input type="text" class="form-control" id="phone" name="phone" value="{{ Auth::user()->phone }}" required>
                   </div>
-                  
-                  
+
+
 
                   <button type="submit" class="d-block btn btn-secondary btn-hover-primary">Update Profile</button>
                 </form>
@@ -992,9 +992,9 @@
         .addEventListener("click", function () {
           document.getElementById("imgClick").click();
         });
-        
+
         var count =0;
-        function toggleEditForm() {          
+        function toggleEditForm() {
           count++;
           if (count%2==0){
             document.getElementById("profile-table").style.display = "block";
