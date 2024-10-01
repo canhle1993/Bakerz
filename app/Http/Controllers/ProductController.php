@@ -175,4 +175,5 @@ class ProductController extends Controller
         return view('client.shop.product-types.single-product', compact('product', 'relatedProducts'));
     }
 
+
 }
