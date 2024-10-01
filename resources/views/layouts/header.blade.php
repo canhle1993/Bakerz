@@ -242,8 +242,9 @@
                     <!-- Header Logo Start -->
                     <div class="header-logo">
                         <a href="{{ route('client.home')}}">
+                        
+                        <b><span style="left: 0px !important; top: 20px !important;" id="onlineCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span></b>                       
                             <img class="white-logo" src="{{asset('assets/images/logo-white.svg')}}" width="229" height="62" alt="Logo">
-                            <b style="color: #f34e4e; font-size: larger;" id="onlineCount"></b>
                         </a>
                     </div>
                     <!-- Header Logo End -->
@@ -452,7 +453,7 @@
           updateCartView();
           updateonlineUser();
           // Kiểm tra trạng thái mỗi giây (1000ms)
-          setInterval(updateonlineUser, 100);
+          setInterval(updateonlineUser, 1000);
 
         // Sử dụng visibilitychange để xử lý thay đổi ngay lập tức
         document.addEventListener("visibilitychange", updateonlineUser);

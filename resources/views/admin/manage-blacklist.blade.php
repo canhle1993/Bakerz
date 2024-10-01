@@ -202,14 +202,7 @@
                             <i class="bi bi-arrow-up-circle"></i> Restore
                         </button>
                     </form>
-                     <!-- Button to delete product -->
-    <!-- <form action="{{ route('product.delete', $product->product_id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this product permanently?');">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-sm btn-danger">
-            <i class="bi bi-trash"></i> Delete
-        </button>
-    </form> -->
+                     
                 </td>
 
             </tr>

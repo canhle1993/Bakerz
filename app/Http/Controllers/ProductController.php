@@ -143,19 +143,19 @@ class ProductController extends Controller
 
     public function getProductDetails($id)
 {
-    $product = Product::find($id);
+    $product = Product::with('images', 'discounts', 'catalogs')->find($id);
 
-    if (!$product) {
-        return response()->json(['error' => 'Product not found'], 404);
+    if ($product) {
+        return response()->json([
+            'status' => 'success',
+            'product' => $product
+        ]);
+    } else {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Product not found'
+        ]);
     }
-
-    return response()->json([
-        'product_id' => $product->product_id,
-        'product_name' => $product->product_name,
-        'price' => $product->price,
-        'description' => $product->describe,
-        'image' => $product->image,
-    ]);
 }
 
     public function singleProduct($id)

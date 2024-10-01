@@ -257,34 +257,34 @@
                             <ul class="sidebars_widget__product">
                                 <!-- Single Product Start -->
                                 <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb">
-                                        <img src="assets/img/bbb.png" alt="Sidebar-Image">
+                                    <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
+                                        <img src="img/Sweet Breads1/Brioche/Brioche3.png" alt="Sidebar-Image">
                                     </a>
                                     <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Brownie</a>
-                                        <span class="single-product_content__price">$4.99</span>
+                                        <a href="single-product.html" class="single-product_content__title">Brioche</a>
+                                        <span class="single-product_content__price">$10</span>
                                     </div>
                                 </li>
                                 <!-- Single Product End -->
                                 <!-- Single Product Start -->
                                 <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb">
-                                        <img src="assets/img/Honey butter toast/Honey butter toast.png" alt="Sidebar-Image">
+                                    <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
+                                        <img src="img/Sweet Breads1/Almond bread/Almond bread3.png" alt="Sidebar-Image">
                                     </a>
                                     <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Red Velvet</a>
-                                        <span class="single-product_content__price">$4.99</span>
+                                        <a href="single-product.html" class="single-product_content__title">Almond bread</a>
+                                        <span class="single-product_content__price">$5</span>
                                     </div>
                                 </li>
                                 <!-- Single Product End -->
                                 <!-- Single Product Start -->
                                 <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb">
-                                        <img src="assets/images/product/sidebar-3.png" alt="Sidebar-Image">
+                                    <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
+                                        <img src="img/Cakes (1)/Blueberry cake.png" alt="Sidebar-Image">
                                     </a>
                                     <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Cream Muffin</a>
-                                        <span class="single-product_content__price">$4.99</span>
+                                        <a href="single-product.html" class="single-product_content__title">Blueberry cake</a>
+                                        <span class="single-product_content__price">$10</span>
                                     </div>
                                 </li>
                                 <!-- Single Product End -->
