@@ -452,7 +452,7 @@
           updateCartView();
           updateonlineUser();
           // Kiểm tra trạng thái mỗi giây (1000ms)
-          setInterval(updateonlineUser, 1000);
+          setInterval(updateonlineUser, 100);
 
         // Sử dụng visibilitychange để xử lý thay đổi ngay lập tức
         document.addEventListener("visibilitychange", updateonlineUser);

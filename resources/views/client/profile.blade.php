@@ -316,11 +316,12 @@
                     <h4 class="text-primary font-size-20 mt-3 mb-2">
                       {{ Auth::user()->name }}
                       @if(Auth::user()->rank === 'Gold')
-                          <a href="{{ route('pricing-plan') }}" style="float: right;"><b>Rank: <span style="color: #FFC107 !important;">Gold</span></b></a>
+                          <a href="{{ route('pricing-plan') }}" style="float: right;"><b>Rank: <span style="color: #FFC107 !important;">Gold</span><br>Point: {{ Auth::user()->score }}</b></a>
                       @elseif(Auth::user()->rank === 'Diamond')
-                      <a href="{{ route('pricing-plan') }}" style="float: right;"><b>Rank: <span style="color: #07e2ff !important;">Diamond</span></b></a>
+                      <a href="{{ route('pricing-plan') }}" style="float: right;"><b>Rank: <span style="color: #07e2ff !important;">Diamond</span><br>Point: {{ Auth::user()->score }}</b></a>
                       @else
-                      <a href="{{ route('pricing-plan') }}" style="float: right;"><b>Rank: <span style="color: #4F1818 !important;">Bronze</span></b></a>
+                      <a href="{{ route('pricing-plan') }}" style="float: right;"><b>Rank: <span style="color: #4F1818 !important;">Bronze</span><br>Point: {{ Auth::user()->score }}</b></a>
+                      
                       @endif
                       
                     </h4>
