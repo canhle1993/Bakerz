@@ -253,3 +253,8 @@ Route::get('/order/delivered', [OrderController::class, 'delivered'])->name('ord
 Route::get('/order/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
 Route::post('/order/{order_id}/cancel', [OrderController::class, 'gotoCancel'])->name('order.gotoCancel');
 
+//Đếm số lượng người truy cập web
+use App\Http\Controllers\OnlineUserController;
+
+Route::get('/online-users', [OnlineUserController::class, 'countOnlineUsers'])->name('online-users');
+

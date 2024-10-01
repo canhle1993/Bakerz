@@ -272,6 +272,7 @@
                                             <li><a class="sub-item-link" href="<?php echo e(route('checkout')); ?>"><span>Checkout</span></a></li>
                                             <li><a class="sub-item-link" href="<?php echo e(route('order-tracking')); ?>"><span>Order Tracking</span></a></li>
                                             <li><a class="sub-item-link" href="<?php echo e(route('client_location')); ?>"><span>Client Location</span></a></li>
+                                            <li><a class="sub-item-link" href="<?php echo e(route('online-users')); ?>"><span>Check online user</span></a></li>
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item banner-menu-content-wrap">
@@ -395,7 +396,7 @@
       <!-- Mini Cart Button End  -->
       <div class="mini-cart-btn d-flex flex-column gap-2">
           <a class="d-block btn btn-secondary btn-hover-primary" href="<?php echo e(route('cart')); ?>">View cart</a>
-          <a class="d-block btn btn-secondary btn-hover-primary" href="<?php echo e(route('checkout')); ?>">Checkout</a>
+          <a id="btnCheckout" class="d-block btn btn-secondary btn-hover-primary" href="<?php echo e(route('checkout')); ?>">Checkout</a>
       </div>
       <!-- Mini Cart Button End  -->
 
@@ -447,7 +448,6 @@
 
         $(document).ready(function() {
           updateCartView();
-
           $('.add-to-cart').on('click', function(e) {
               e.preventDefault();
 
@@ -509,10 +509,9 @@
                     method: "GET",
                     success: function(response) {
                         $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
-
                         $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
-
                         $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
+
                         console.log(response.cart_quantity);
                         calculateTotal();
                         // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
