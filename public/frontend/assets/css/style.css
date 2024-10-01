@@ -23,20 +23,20 @@
         03 - 02 Product CSS
         03 - 03 Call to Action CSS
         03 - 04 Brand CSS
-        03 - 05 Banner CSS 
-        03 - 06 Instagram CSS 
+        03 - 05 Banner CSS
+        03 - 06 Instagram CSS
         03 - 07 Newsletter CSS
-        03 - 08 Features Card CSS 
-        03 - 09 Hot Product CSS 
+        03 - 08 Features Card CSS
+        03 - 09 Hot Product CSS
         03 - 10 Counter CSS
         03 - 11 Testimonial CSS
         03 - 12 Blog CSS
         03 - 13 Pricing CSS
-        03 - 14 About CSS 
-        03 - 15 Category CSS 
-        03 - 16 Video CSS 
-        03 - 17 Contact CSS 
-        03 - 18 Best Service CSS 
+        03 - 14 About CSS
+        03 - 15 Category CSS
+        03 - 16 Video CSS
+        03 - 17 Contact CSS
+        03 - 18 Best Service CSS
         03 - 19 Event CSS
         03 - 20 Shipping CSS
         03 - 21 Why Choose Us CSS
@@ -15328,7 +15328,7 @@ textarea.form-control {
   transition: 0.4s;
   z-index: 2;
 }
-.sidebars_widget__tags {
+/* .sidebars_widget__tags {
   display: flex;
   flex-wrap: wrap;
 }
@@ -15390,13 +15390,13 @@ textarea.form-control {
 .sidebars_widget__banner:hover img {
   transform: scale(1);
 }
-.sidebars_widget__banner:hover .banner-content {
-  width: 80%;
+.sidebars_widget__banner:hover .banner-content { */
+  /* width: 80%;
   height: 80%;
   transition: 0.4s;
   opacity: 1;
   visibility: visible;
-}
+} */
 
 /* Shop Sidebar */
 .sidebar-right .sidebars {

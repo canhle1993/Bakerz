@@ -57,7 +57,7 @@
     }
 
     /*--
-		Search 
+		Search
     -----------------------------------*/
     $(".search-open").click(function () {
         $(".search-popup").addClass("open");
@@ -873,7 +873,7 @@
     }
     scrollToTop();
 
-    /*-- 
+    /*--
     Scroll Counterup
     ------------------------------------*/
     const scrollCounterup = function () {

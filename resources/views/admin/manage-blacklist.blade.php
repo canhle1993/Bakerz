@@ -114,6 +114,19 @@
     color: #ddd;
 }
 
+ /* Delete button */
+ .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        box-shadow: 0px 4px 10px rgba(200, 35, 51, 0.5);
+        transform: scale(1.05);
+    }
 </style>
 
 @if(session('success'))
@@ -143,8 +156,9 @@
 @endif
 
 <div class="container mt-5">
+    <div class="p-4 rounded shadow-lg mb-5" style="background: linear-gradient(45deg, #ff9a9e, #fad0c4); border: 1px solid #ff6f91;">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="text-primary">Blacklisted Users</h1>
+        <h1 class="text-dark">Blacklisted Users</h1>
     </div>
 
     <table class="table table-hover table-bordered table-striped shadow-sm">
@@ -188,6 +202,14 @@
                             <i class="bi bi-arrow-up-circle"></i> Restore
                         </button>
                     </form>
+                     <!-- Button to delete product -->
+    <!-- <form action="{{ route('product.delete', $product->product_id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this product permanently?');">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-sm btn-danger">
+            <i class="bi bi-trash"></i> Delete
+        </button>
+    </form> -->
                 </td>
 
             </tr>
@@ -199,5 +221,70 @@
     <div class="d-flex justify-content-center mt-4">
         {{ $blacklistedUsers->links('pagination::bootstrap-5') }}
     </div>
+    </div>
+
+
+
+    {{-- Product --}}
+
+    <div class="p-4 rounded shadow-lg mb-5" style="background: linear-gradient(45deg, #a1c4fd, #c2e9fb); border: 1px solid #007bff;">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="text-dark">Deleted Products</h1>
+        </div>
+
+        <table class="table table-hover table-bordered table-striped shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th>Categories</th> <!-- Nhiều danh mục -->
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($deletedProducts as $product)
+                <tr>
+                    <td>
+                        <img src="{{ asset('storage/products/' . $product->image) }}" alt="Hình ảnh" width="100" class="mt-2">
+                    </td>
+                    <td>{{ $product->product_name }}</td>
+                    <td>
+                        @foreach ($product->catalogs as $catalog)
+                            {{ $catalog->category_name }}@if (!$loop->last), @endif
+                        @endforeach
+                    </td>
+                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->describe }}</td>
+
+                    <td class="text-center">
+                        <!-- Button to restore product -->
+                        <form action="{{ route('product.restore', $product->product_id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-restore">
+                                <i class="bi bi-arrow-up-circle"></i> Restore
+                            </button>
+                        </form>
+                         <!-- Button to delete product -->
+    <form action="{{ route('product.delete', $product->product_id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this product permanently?');">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-sm btn-danger">
+            <i class="bi bi-trash"></i> Delete
+        </button>
+    </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center mt-4">
+            {{ $deletedProducts->links('pagination::bootstrap-5') }}
+        </div>
+    </div>
+
 
 @endsection

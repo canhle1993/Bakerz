@@ -37,382 +37,11 @@
 </head>
 
 <body>
-
-        <!-- Header Start -->
-        <div class="header-section header-transparent header-sticky">
-            <div class="container position-relative">
-
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-xl-3 col-7">
-                        <!-- Header Logo Start -->
-                        <div class="header-logo">
-                            <a href="{{ route('client.home')}}">
-                                <img class="white-logo" src="assets/images/logo-white.svg" width="229" height="62" alt="Logo">
-                            </a>
-                        </div>
-                        <!-- Header Logo End -->
-                    </div>
-                    <div class="col-lg-7 col-xl-6 d-none d-lg-block">
-                        <!-- Header Menu Start -->
-                        <div class="header-menu">
-                            <ul class="header-primary-menu d-flex justify-content-center">
-                                <li >
-                                    <a  href="{{ route('client.home') }}"  class="menu-item-link"><span >Home</span></a>
-                                </li>
-                                <li class="position-static">
-                                    <a class="menu-item-link" href="{{ route('client.home')}}"><span>Shop</span></a>
-                                    <ul class="sub-menu sub-menu-mega">
-                                        <li class="mega-menu-item">
-                                            <ul>
-                                                <li class="mega-menu-item-title">Product Types</li>
-                                                <li><a class="sub-item-link" href="{{ route('product-simple') }}"><span>Product Simple</span></a></li>
-                                                <li><a class="sub-item-link" href="{{ route('product-grouped') }}"><span>Product Grouped</span></a></li>
-                                                <li><a class="sub-item-link" href="{{ route('product-affiliate') }}"><span>Product Affiliate</span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="mega-menu-item">
-                                            <ul>
-                                                <li class="mega-menu-item-title">Others</li>
-                                                <li><a class="sub-item-link" href="{{ route('cart') }}"><span>Cart</span></a></li>
-                                                <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
-                                                <li><a class="sub-item-link" href="{{ route('checkout') }}"><span>Checkout</span></a></li>
-                                                <li><a class="sub-item-link" href="{{ route('order-tracking') }}"><span>Order Tracking</span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="mega-menu-item banner-menu-content-wrap">
-                                            <ul>
-                                                <li>
-                                                    <a href="{{ route('client.home')}}">
-                                                        <img src="assets/images/product/featured-product-01.png" alt="Shop">
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="mega-menu-item banner-menu-content-wrap">
-                                            <ul>
-                                                <li>
-                                                    <a href="{{ route('client.home')}}">
-                                                        <img src="assets/images/product/featured-product-01.png" alt="Shop">
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Pages</span></a>
-                                    <ul class="sub-menu">
-                                        <li><a class="sub-item-link" href="{{ route('about') }}"><span>About</span></a></li>
-                                        <li><a class="sub-item-link" href="{{ route('our-chef') }}"><span>Our Chef</span></a></li>
-                                        <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
-                                        <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Pricing Plans</span></a></li>
-                                        <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Blog</span></a>
-                                    <ul class="sub-menu">
-                                        <li><a class="sub-item-link" href="{{ route('blog-detail') }}"><span>Blog Details</span></a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="menu-item-link" href="{{ route('contact') }}"><span>Contact</span></a></li>
-                            </ul>
-                        </div>
-                        <!-- Header Menu End -->
-                    </div>
-                    <div class="col-lg-2 col-xl-3 col-5">
-                        <!-- Header Meta Start -->
-                        <div class="header-meta">
-                            <ul class="header-meta__action d-flex justify-content-end">
-                                <li><button class="action search-open"><i class="lastudioicon-zoom-1"></i></button></li>
-                                <li>
-                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
-                                        <i class="lastudioicon-shopping-cart-2"></i>
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>
-                                    </button>
-                                </li>
-                                @auth
-                                <li >
-                                    <a  class="menu-item-link" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
-                                </li>
-                                <li >
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                    <a  class="menu-item-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
-                                </li>
-                                @endauth
-                                @guest
-
-                                <li >
-                                <form id="login-form" action="{{ route('login') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                    <a  class="menu-item-link" href="{{ route('login') }}">Login</a>
-                                </li>
-
-                                @endguest
-                                <li class="d-lg-none">
-                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"><i class="lastudioicon-menu-8-1"></i></button>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- Header Meta End -->
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!-- Header End -->
-
-        <!-- Search Start  -->
-        <div class="search-popup position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-6 bg-black bg-opacity-75">
-            <div class="search-popup__form position-relative">
-                <form action="{{ route('search') }}" method="GET">
-                    <input class="search-popup__field border-0 border-bottom bg-transparent text-white w-100 tra py-3" type="text" placeholder="Search…">
-                    <button class="search-popup__icon text-white border-0 bg-transparent position-absolute top-50 end-0 translate-middle-y"><i class="lastudioicon-zoom-1"></i></button>
-                </form>
-            </div>
-            <button class="search-popup__close position-absolute top-0 end-0 m-8 p-3 lh-1 border-0 text-white fs-4"><i class="lastudioicon-e-remove"></i></button>
-        </div>
-        <!-- Search End -->
-
-    <!-- offcanvas Menu Start -->
-    <div class="offcanvas offcanvas-end offcanvas-menu bg-secondary" id="offcanvasMenu">
-        <div class="offcanvas-header justify-content-end">
-            <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas"><i class="lastudioicon-e-remove"></i></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="mobile-primary-menu">
-                <li>
-                    <a href="#" class="menu-item-link active"><span>Home</span></a>
-                    <ul class="sub-menu">
-                        <li><a class="sub-item-link" href="index.html"><span>Cake Shop 01</span></a></li>
-                        <li><a class="sub-item-link" href="index-2.html"><span>Cake Shop 02</span></a></li>
-                        <li><a class="sub-item-link" href="index-3.html"><span>Cake Shop 03</span></a></li>
-                        <li><a class="sub-item-link" href="index-4.html"><span>Cake Shop 04</span></a></li>
-                        <li><a class="sub-item-link" href="index-5.html"><span>Cake Shop 05</span></a></li>
-                        <li><a class="sub-item-link" href="index-6.html"><span>Cake Shop 06</span></a></li>
-                        <li><a class="sub-item-link" href="index-7.html"><span>Bread Shop</span></a></li>
-                        <li><a class="sub-item-link" href="index-8.html"><span>Bread Shop 02</span></a></li>
-                        <li><a class="sub-item-link" href="index-9.html"><span>Cake Shop Fullscreen</span></a></li>
-                    </ul>
-                </li>
-                <li class="position-static">
-                    <a class="menu-item-link" href="#"><span>Shop</span></a>
-                    <ul class="sub-menu sub-menu-mega">
-                        <li class="mega-menu-item">
-                            <ul>
-                                <li class="mega-menu-item-title">Shop Layouts</li>
-                                <li><a class="sub-item-link" href="shop-right-sidebar.html"><span>Shop Right Sidebar</span></a></li>
-                                <li><a class="sub-item-link" href="shop-left-sidebar.html"><span>Shop Left Sidebar</span></a></li>
-                                <li><a class="sub-item-link" href="shop.html"><span>Shop 4 Columns</span></a></li>
-                                <li><a class="sub-item-link" href="shop-five-columns.html"><span>Shop 5 Columns</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="mega-menu-item">
-                            <ul>
-                                <li class="mega-menu-item-title">Product Types</li>
-                                <li><a class="sub-item-link" href="single-product.html"><span>Product Simple</span></a></li>
-                                <li><a class="sub-item-link" href="single-product-grouped.html"><span>Product Grouped</span></a></li>
-                                <li><a class="sub-item-link" href="single-product-variable.html"><span>Product Variable</span></a></li>
-                                <li><a class="sub-item-link" href="single-product-affiliate.html"><span>Product Affiliate</span></a></li>
-                                <li><a class="sub-item-link" href="single-product-Custom.html"><span>Custom Layout</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="mega-menu-item">
-                            <ul>
-                                <li class="mega-menu-item-title">Others</li>
-                                <li><a class="sub-item-link" href="shop-account.html"><span>My Account</span></a></li>
-                                <li><a class="sub-item-link" href="shop-cart.html"><span>Cart</span></a></li>
-                                <li><a class="sub-item-link" href="shop-wishlist.html"><span>Wishlist</span></a></li>
-                                <li><a class="sub-item-link" href="shop-checkout.html"><span>Checkout</span></a></li>
-                                <li><a class="sub-item-link" href="shop-compare.html"><span>Compare</span></a></li>
-                                <li><a class="sub-item-link" href="shop-order-tracking.html"><span>Order Tracking</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="mega-menu-item banner-menu-content-wrap">
-                            <ul>
-                                <li>
-                                    <a href="shop.html">
-                                        <img src="assets/images/product/featured-product-01.png" alt="Shop">
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a class="menu-item-link" href="#"><span>Pages</span></a>
-                    <ul class="sub-menu">
-                        <li><a class="sub-item-link" href="about.html"><span>About</span></a></li>
-                        <li><a class="sub-item-link" href="contact.html"><span>Contact</span></a></li>
-                        <li><a class="sub-item-link" href="contact-2.html"><span>Contact 2</span></a></li>
-                        <li><a class="sub-item-link" href="our-chef.html"><span>Our Chef</span></a></li>
-                        <li><a class="sub-item-link" href="faq.html"><span>FAQs</span></a></li>
-                        <li><a class="sub-item-link" href="pricing.html"><span>Pricing Plans</span></a></li>
-                        <li><a class="sub-item-link" href="404.html"><span>404 Not Found</span></a></li>
-                        <li><a class="sub-item-link" href="coming-soon.html"><span>Coming Soon</span></a></li>
-                    </ul>
-                </li>
-                <li><a class="menu-item-link" href="#"><span>Blog</span></a>
-                    <ul class="sub-menu">
-                        <li><a class="sub-item-link" href="blog-right-sidebar.html"><span>Blog Right Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-left-sidebar.html"><span>Blog Left Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-no-sidebar.html"><span>Blog No Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-grid-right-sidebar.html"><span>Blog Grid Right Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-grid-left-sidebar.html"><span>Blog Grid Left Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-grid-no-sidebar.html"><span>Blog Grid No Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-details-right-sidebar.html"><span>Blog Post Right Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-details-left-sidebar.html"><span>Blog Post Left Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-details.html"><span>Blog Details</span></a></li>
-                    </ul>
-                </li>
-                <li><a class="menu-item-link" href="contact.html"><span>Contact</span></a></li>
-            </ul>
-            <ul class="hotline-wrapper offcanvas-hotline">
-                <li>
-                    <div class="hotline">
-                        <i class="lastudioicon lastudioicon-support248"></i>
-                        <div class="hotline-content">
-                            <span class="hotline-text">Hotline</span>
-                            <a class="hotline-link" href="tel:0123456789">(012) 345-6789</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="hotline">
-                        <i class="lastudioicon lastudioicon-pin-check"></i>
-                        <div class="hotline-content">
-                            <span class="hotline-text">Store Location</span>
-                            <a class="hotline-link" href="#/">6391 Elgin St. Celina, Delaware 10299</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- offcanvas Menu End -->
-
-    <!-- Offcanvas Cart Start  -->
-    <div class="offcanvas offcanvas-end offcanvas-cart" id="offcanvasCart">
-
-        <div class="offcanvas-header">
-            <h4 class="offcanvas-title">My Cart</h4>
-            <button type="button" class="btn-close text-secondary" data-bs-dismiss="offcanvas"><i class="lastudioicon lastudioicon-e-remove"></i></button>
-        </div>
-
-        <div class="offcanvas-body">
-            <!-- Offcanvas Cart Items Start  -->
-            <ul class="offcanvas-cart-items">
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-1.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">Macaron Cake</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-2.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">Cream Muffin</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-3.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">Brownie</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-4.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">Chocolate Muffin</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-5.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">No-bake chocolate</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-            </ul>
-            <!-- Offcanvas Cart Items End  -->
-        </div>
-
-        <div class="offcanvas-footer d-flex flex-column gap-4">
-
-            <!-- Mini Cart Total End  -->
-            <div class="mini-cart-totla">
-                <span class="label">Subtotal:</span>
-                <span class="value">$24.95</span>
-            </div>
-            <!-- Mini Cart Total End  -->
-
-            <!-- Mini Cart Button End  -->
-            <div class="mini-cart-btn d-flex flex-column gap-2">
-                <a class="d-block btn btn-secondary btn-hover-primary" href="#">View cart</a>
-                <a class="d-block btn btn-secondary btn-hover-primary" href="#">Checkout</a>
-            </div>
-            <!-- Mini Cart Button End  -->
-
-        </div>
-
-    </div>
-    <!-- Offcanvas Cart End -->
-
+@include('layouts.header')
     <!-- Breadcrumb Section Start -->
     <div class="breadcrumb" data-bg-image="assets/images/bg/breadcrumb-bg.jpg">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb_content">
-                        <h1 class="breadcrumb_title">Cart</h1>
-                        <ul class="breadcrumb_list">
-                            <li><a href="index.html">Home</a></li>
-                            <li>Shopping Cart</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
     <!-- Breadcrumb Section End -->
@@ -424,127 +53,11 @@
 
                 <div class="col-lg-8 col-12 mb-30">
 
-                    <!-- Cart Table For Tablet & Up Devices Start -->
                     <div class="table-responsive">
-                        <table class="cart-table table text-center align-middle mb-6 d-none d-md-table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th class="title text-start">Product</th>
-                                    <th class="price">Price</th>
-                                    <th class="quantity">Quantity</th>
-                                    <th class="total">Subtotal</th>
-                                </tr>
-                            </thead>
-                            <tbody class="border-top-0">
-                                <tr>
-                                    <th class="cart-remove">
-                                        <button class="remove-btn"><i class="lastudioicon lastudioicon-e-remove"></i></button>
-                                    </th>
-                                    <th class="cart-thumb">
-                                        <a href="single-product.html">
-                                            <img src="assets/images/product/product-tab-1.png" alt="Croissant Italy Cake">
-                                        </a>
-                                    </th>
-                                    <th class="text-start">
-                                        <a href="single-product.html">Croissant Italy Cake</a>
-                                    </th>
-                                    <td>$110.00</td>
-                                    <td class="text-center cart-quantity">
-                                        <!-- Quantity Start -->
-                                        <div class="quantity">
-                                            <div class="cart-plus-minus border-0 mx-auto"></div>
-                                        </div>
-                                        <!-- Quantity End -->
-                                    </td>
-                                    <td>$110.00</td>
-                                </tr>
-                                <tr>
-                                    <th class="cart-remove">
-                                        <button class="remove-btn"><i class="lastudioicon lastudioicon-e-remove"></i></button>
-                                    </th>
-                                    <th class="cart-thumb">
-                                        <a href="single-product.html">
-                                            <img src="assets/images/product/product-tab-2.png" alt="Chocolate Muffin">
-                                        </a>
-                                    </th>
-                                    <th class="text-start">
-                                        <a href="single-product.html">Chocolate Muffin</a>
-                                    </th>
-                                    <td>$19.00</td>
-                                    <td class="text-center cart-quantity">
-                                        <!-- Quantity Start -->
-                                        <div class="quantity">
-                                            <div class="cart-plus-minus border-0 mx-auto"></div>
-                                        </div>
-                                        <!-- Quantity End -->
-                                    </td>
-                                    <td>$19.00</td>
-                                </tr>
-                                <tr>
-                                    <th class="cart-remove">
-                                        <button class="remove-btn"><i class="lastudioicon lastudioicon-e-remove"></i></button>
-                                    </th>
-                                    <th class="cart-thumb">
-                                        <a href="single-product.html">
-                                            <img src="assets/images/product/product-tab-2.png" alt="Chocolate Muffin">
-                                        </a>
-                                    </th>
-                                    <th class="text-start">
-                                        <a href="single-product.html">Chocolate Muffin</a>
-                                    </th>
-                                    <td>$19.00</td>
-                                    <td class="text-center cart-quantity">
-                                        <!-- Quantity Start -->
-                                        <div class="quantity">
-                                            <div class="cart-plus-minus border-0 mx-auto"></div>
-                                        </div>
-                                        <!-- Quantity End -->
-                                    </td>
-                                    <td>$19.00</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        
+                            @include('client.shop.others.cartdetail')
+                        
                     </div>
-                    <!-- Cart Table For Tablet & Up Devices End -->
-
-                    <!-- Cart Table For Mobile Devices Start -->
-                    <div class="cart-products-mobile d-md-none">
-                        <div class="cart-product-mobile">
-                            <div class="cart-product-mobile-thumb">
-                                <a href="single-product.html" class="cart-product-mobile-image"><img src="assets/images/product/product-tab-1.png" alt="Croissant Italy Cake" width="90" height="103"></a>
-                                <button class="cart-product-mobile-remove"><i class="lastudioicon lastudioicon-e-remove"></i></button>
-                            </div>
-                            <div class="cart-product-mobile-content">
-                                <h5 class="cart-product-mobile-title"><a href="single-product.html">Croissant Italy Cake</a></h5>
-                                <span class="cart-product-mobile-quantity">1 x $110.00</span>
-                                <span class="cart-product-mobile-total"><b>Total:</b> $110.00</span>
-                                <!-- Quantity Start -->
-                                <div class="quantity">
-                                    <div class="cart-plus-minus border-0"></div>
-                                </div>
-                                <!-- Quantity End -->
-                            </div>
-                        </div>
-                        <div class="cart-product-mobile">
-                            <div class="cart-product-mobile-thumb">
-                                <a href="single-product.html" class="cart-product-mobile-image"><img src="assets/images/product/product-tab-2.png" alt="Chocolate Muffin" width="90" height="103"></a>
-                                <button class="cart-product-mobile-remove"><i class="lastudioicon lastudioicon-e-remove"></i></button>
-                            </div>
-                            <div class="cart-product-mobile-content">
-                                <h5 class="cart-product-mobile-title"><a href="single-product.html">Chocolate Muffin</a></h5>
-                                <span class="cart-product-mobile-quantity">1 x $19.00</span>
-                                <span class="cart-product-mobile-total"><b>Total:</b> $19.00</span>
-                                <!-- Quantity Start -->
-                                <div class="quantity">
-                                    <div class="cart-plus-minus border-0"></div>
-                                </div>
-                                <!-- Quantity End -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Cart Table For Mobile Devices End -->
 
                     <!-- Cart Action Buttons Start -->
                     <div class="row justify-content-between gap-3">
@@ -565,18 +78,28 @@
                             <h4 class="title">Cart totals</h4>
                             <table class="table bg-transparent">
                                 <tbody>
-                                    <tr class="subtotal">
-                                        <th class="sub-title">Subtotal</th>
-                                        <td class="amount"><span >£148.00</span></td>
+                                    @if(Auth::user()->rank === 'Gold' || Auth::user()->rank === 'Diamond')
+                                    <tr>
+                                        <th>Discount <span id="discountper"> </span></th>
+                                        <th class="amount"><strong id="discount-amount"></strong>
+                                        <br>
+                                        @if(Auth::user()->rank === 'Gold')
+                                            <span>(Exclusive discount for Gold rank)</span>
+                                        @else
+                                            <span>(Exclusive discount for Diamond rank)</span>
+                                        @endif
+                                        </th> <!-- Discount row -->
+                                        
                                     </tr>
+                                    @endif
                                     <tr class="total">
                                         <th class="sub-title">Total</th>
-                                        <td class="amount"><strong>£148.00</strong></td>
+                                        <td class="amount"><strong id="total-price">0.00 $</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <a href="{{ route('checkout') }}" class="btn btn-dark btn-hover-primary rounded-0 w-100">Proceed to checkout</a>
+                        <a id="btnCheckout2" href="{{ route('checkout') }}" class="btn btn-dark btn-hover-primary rounded-0 w-100">Proceed to checkout</a>
                     </div>
                 </div>
                 <!-- Cart Totals End -->
@@ -588,6 +111,7 @@
 
     <div class="bg-dark-four dark-footer">
         <!-- Footer Strat -->
+
     <div class="footer-section">
 
         <!-- Footer Widget Section Strat -->
@@ -694,6 +218,183 @@
 
     <!-- Activation JS -->
     <script src="./assets/js/main.js"></script>
+
+
+    {{-- Script xóa sản phẩm  --}}
+    <script type="text/javascript">
+        $(".remove-from-cart").click(function (e) {
+            e.preventDefault();
+
+            var ele = $(this);
+
+            if(confirm("Are you sure you want to remove this item?")) {
+                $.ajax({
+                    url: '<?php echo e(route('cart.remove')); ?>',
+                    method: "POST",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: ele.attr("data-id")
+                    },
+                    success: function (response) {
+                        alert(response.message);
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+    </script>
+
+    {{-- Script xử lý thay đổi số lượng bánh thì tiền tăng theo --}}
+    <script>
+        $(document).ready(function() {
+            var userRank = "{{ Auth::user()->rank }}"; // Get the user's rank
+            // Lắng nghe sự thay đổi của input số lượng
+            $(document).on('input change', '.cart-quantity-input', function(e) {
+                var productId = $(this).data('id'); // Lấy product_id
+                var quantity = $(this).val(); // Lấy số lượng mới
+                var _token = "{{ csrf_token() }}"; // CSRF token để bảo mật
+                var discount  = $(this).data('price'); // Lấy product_id
+                $.ajax({
+                    url: "{{ route('cart.update_quantity', ':id') }}".replace(':id', productId), // Truyền product_id vào URL
+                    method: 'POST',
+                    data: {
+                        _token: _token,
+                        product_id: productId,
+                        quantity: quantity // Gửi số lượng mới lên server
+
+                    },
+                    success: function(response) {
+                        
+                        // Cập nhật lại subtotal của sản phẩm này
+                        var updatedQuantity = parseFloat(quantity) || 0;
+                        var updatedDiscount = parseFloat(discount) || 0;
+                        $("#subtotal-" + productId).text((updatedQuantity * updatedDiscount).toFixed(2) + " $");
+
+                        // Cập nhật lại tổng giá trị của giỏ hàng (tính lại tổng subtotal)
+                        updateTotalPrice(userRank);
+                        updateCartView();
+                    },
+                    error: function() {
+                        console.error('Error:', xhr.responseText);
+                    }
+                });
+            });
+
+            // delete cart
+            $(document).on('click', '.cart_delete', function(e) {
+                    e.preventDefault();
+
+                    var productId = $(this).data('product-id');
+                    console.log(productId); // In ra product_id để đảm bảo nó có giá trị đúng
+
+                    $.ajax({
+                        url: "{{ route('cart.delete', ':id') }}".replace(':id', productId), // Truyền product_id vào URL
+                        method: "DELETE",
+                        data: {
+                            _token: "{{ csrf_token() }}", 
+                            product_id: productId
+                        },
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                updateCartView();
+                                
+                            } else {
+                                //   alert(response.message);
+                            }
+                        },
+                        error: function(xhr) {
+                            console.error('Error:', xhr.responseText);
+                        }
+                    });
+                });
+        
+            // Hàm tính tổng tất cả các subtotal và cập nhật vào mục total
+
+            function updateCartView() {
+                $.ajax({
+                    url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+                        
+                        // $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
+                        
+                        $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
+                        updateTotalPrice(userRank);
+                        calculateTotal();
+                        // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
+                        $('#cart_icon').css('color', 'red')// Đổi màu thành đỏ
+                        .animate({ 
+                            top: '-10px' 
+                        }, 200, function() {
+                            $(this).animate({ 
+                                top: '0px' 
+                            }, 200, function() {
+                                // Lặp lại lần nữa
+                                $(this).animate({ 
+                                    top: '-10px' 
+                                }, 200, function() {
+                                    $(this).animate({ 
+                                        top: '0px' 
+                                    }, 200, function() {
+                                        // Sau khi hiệu ứng hoàn thành, đổi lại màu ban đầu
+                                        $(this).css('color', ''); 
+                                    });
+                                });
+                            });
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
+            }
+
+            // Cập nhật tổng giá trị ban đầu khi trang được tải
+            updateTotalPrice(userRank);
+        });
+
+        function calculateTotal() {
+            var total = 0;
+            // Duyệt qua tất cả các phần tử có class 'subtotal'
+            $('.subtotal').each(function() {
+                // Lấy giá trị của từng phần tử và loại bỏ ký tự $
+                var subtotal = parseFloat($(this).text().replace('$', ''));
+                // Cộng tổng lại
+                total += subtotal;
+            });
+            
+            // Hiển thị tổng đã tính
+            $('#total_price').text(total.toFixed(2) + ' $');
+        }
+        
+        function updateTotalPrice(rank) {
+                var total = 0;
+                // Duyệt qua tất cả các phần tử có class 'subtotal'
+                $('.sub-total').each(function() {
+                    // Lấy giá trị của từng phần tử và loại bỏ ký tự $
+                    var subtotal = parseFloat($(this).text().replace('$', ''));
+                    // Cộng tổng lại
+                    total += subtotal;
+                });
+                // Determine discount percentage based on rank
+                var discountPercentage = 0;
+                if (rank === 'Gold') {
+                    discountPercentage = 2; // 2% for Gold rank
+                } else if (rank === 'Diamond') {
+                    discountPercentage = 5; // 5% for Diamond rank
+                }
+                        // Calculate discount amount
+                var discountAmount = (total * discountPercentage) / 100;
+                var grandTotal = total - discountAmount;
+
+                // Update discount and grand total in DOM
+                $('#discountper').text("(" + discountPercentage + "%)");
+                $('#discount-amount').text("-" + discountAmount.toFixed(2) + " $");
+                $('#total-price').text(grandTotal.toFixed(2) + " $");
+            }
+    </script>
 
 </body>
 

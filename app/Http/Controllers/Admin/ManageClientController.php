@@ -137,17 +137,5 @@ class ManageClientController extends Controller
         return redirect()->route('manage-client')->with('success', 'Client deleted successfully');
     }
 
-    public function blacklist(){
 
-        $blacklistedUsers = User::where('isdelete', '1')->paginate(5);
-    return view('admin.manage-blacklist', compact('blacklistedUsers'));
-    }
-
-    public function restore($id)
-{
-    $user = User::findOrFail($id);
-    $user->update(['isdelete' => null]);
-
-    return redirect()->route('manage-blacklist')->with('success', 'User restored successfully');
-}
 }

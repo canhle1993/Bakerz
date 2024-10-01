@@ -166,10 +166,7 @@
 @endif
 
 <div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="text-primary">Client Management</h1>
-        <a href="{{ route('client.create') }}" class="btn btn-primary">Add Client</a>
-    </div>
+
 
     <table class="table table-hover table-bordered table-striped shadow-sm">
         <thead class="table-dark">
@@ -208,9 +205,8 @@
                 <td>{{ $client->note }}</td>
 
                 <td class="text-center">
-                    <a href="{{ route('client.edit', $client->user_id) }}" class="btn btn-sm btn-warning me-1">
-                        <i class="bi bi-pencil-square"></i> Edit
-                    </a>
+
+
                     <form action="{{ route('client.destroy', $client->user_id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
@@ -218,7 +214,16 @@
                             <i class="bi bi-trash"></i> Delete
                         </button>
                     </form>
+
+                    <form action="{{ route('admin.update_to_admin', $client->user_id) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-warning me-1">
+                            <i class="bi bi-arrow-up-circle"></i> Update to Admin
+                        </button>
+                    </form>
                 </td>
+
+
 
             </tr>
             @endforeach

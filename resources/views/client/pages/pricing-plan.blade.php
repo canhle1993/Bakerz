@@ -37,378 +37,17 @@
 </head>
 
 <body>
-
-       <!-- Header Start -->
-       <div class="header-section header-transparent header-sticky">
-        <div class="container position-relative">
-
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-xl-3 col-7">
-                    <!-- Header Logo Start -->
-                    <div class="header-logo">
-                        <a href="{{ route('client.home')}}">
-                            <img class="white-logo" src="assets/images/logo-white.svg" width="229" height="62" alt="Logo">
-                        </a>
-                    </div>
-                    <!-- Header Logo End -->
-                </div>
-                <div class="col-lg-7 col-xl-6 d-none d-lg-block">
-                    <!-- Header Menu Start -->
-                    <div class="header-menu">
-                        <ul class="header-primary-menu d-flex justify-content-center">
-                            <li >
-                                <a  href="{{ route('client.home') }}"  class="menu-item-link"><span >Home</span></a>
-                            </li>
-                            <li class="position-static">
-                                <a class="menu-item-link" href="{{ route('client.home')}}"><span>Shop</span></a>
-                                <ul class="sub-menu sub-menu-mega">
-                                    <li class="mega-menu-item">
-                                        <ul>
-                                            <li class="mega-menu-item-title">Product Types</li>
-                                            <li><a class="sub-item-link" href="{{ route('product-simple') }}"><span>Product Simple</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('product-grouped') }}"><span>Product Grouped</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('product-affiliate') }}"><span>Product Affiliate</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-item">
-                                        <ul>
-                                            <li class="mega-menu-item-title">Others</li>
-                                            <li><a class="sub-item-link" href="{{ route('cart') }}"><span>Cart</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('checkout') }}"><span>Checkout</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('order-tracking') }}"><span>Order Tracking</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-item banner-menu-content-wrap">
-                                        <ul>
-                                            <li>
-                                                <a href="{{ route('client.home')}}">
-                                                    <img src="assets/images/product/featured-product-01.png" alt="Shop">
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-item banner-menu-content-wrap">
-                                        <ul>
-                                            <li>
-                                                <a href="{{ route('client.home')}}">
-                                                    <img src="assets/images/product/featured-product-01.png" alt="Shop">
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Pages</span></a>
-                                <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="{{ route('about') }}"><span>About</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('our-chef') }}"><span>Our Chef</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Pricing Plans</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Blog</span></a>
-                                <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="{{ route('blog-detail') }}"><span>Blog Details</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a class="menu-item-link" href="{{ route('contact') }}"><span>Contact</span></a></li>
-                        </ul>
-                    </div>
-                    <!-- Header Menu End -->
-                </div>
-                <div class="col-lg-2 col-xl-3 col-5">
-                    <!-- Header Meta Start -->
-                    <div class="header-meta">
-                        <ul class="header-meta__action d-flex justify-content-end">
-                            <li><button class="action search-open"><i class="lastudioicon-zoom-1"></i></button></li>
-                            <li>
-                                <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
-                                    <i class="lastudioicon-shopping-cart-2"></i>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>
-                                </button>
-                            </li>
-                            @auth
-                            <li >
-                                <a  class="menu-item-link" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
-                            </li>
-                            <li >
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                                <a  class="menu-item-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-                            </li>
-                            @endauth
-                            @guest
-
-                            <li >
-                            <form id="login-form" action="{{ route('login') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                                <a  class="menu-item-link" href="{{ route('login') }}">Login</a>
-                            </li>
-
-                            @endguest
-                            <li class="d-lg-none">
-                                <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"><i class="lastudioicon-menu-8-1"></i></button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Header Meta End -->
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!-- Header End -->
-
-    <!-- Search Start  -->
-    <div class="search-popup position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-6 bg-black bg-opacity-75">
-        <div class="search-popup__form position-relative">
-            <form action="{{ route('search') }}" method="GET">
-                <input class="search-popup__field border-0 border-bottom bg-transparent text-white w-100 tra py-3" type="text" placeholder="Search…">
-                <button class="search-popup__icon text-white border-0 bg-transparent position-absolute top-50 end-0 translate-middle-y"><i class="lastudioicon-zoom-1"></i></button>
-            </form>
-        </div>
-        <button class="search-popup__close position-absolute top-0 end-0 m-8 p-3 lh-1 border-0 text-white fs-4"><i class="lastudioicon-e-remove"></i></button>
-    </div>
-    <!-- Search End -->
-
-    <!-- offcanvas Menu Start -->
-    <div class="offcanvas offcanvas-end offcanvas-menu bg-secondary" id="offcanvasMenu">
-        <div class="offcanvas-header justify-content-end">
-            <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas"><i class="lastudioicon-e-remove"></i></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="mobile-primary-menu">
-                <li>
-                    <a href="#" class="menu-item-link active"><span>Home</span></a>
-                    <ul class="sub-menu">
-                        <li><a class="sub-item-link" href="index.html"><span>Cake Shop 01</span></a></li>
-                        <li><a class="sub-item-link" href="index-2.html"><span>Cake Shop 02</span></a></li>
-                        <li><a class="sub-item-link" href="index-3.html"><span>Cake Shop 03</span></a></li>
-                        <li><a class="sub-item-link" href="index-4.html"><span>Cake Shop 04</span></a></li>
-                        <li><a class="sub-item-link" href="index-5.html"><span>Cake Shop 05</span></a></li>
-                        <li><a class="sub-item-link" href="index-6.html"><span>Cake Shop 06</span></a></li>
-                        <li><a class="sub-item-link" href="index-7.html"><span>Bread Shop</span></a></li>
-                        <li><a class="sub-item-link" href="index-8.html"><span>Bread Shop 02</span></a></li>
-                        <li><a class="sub-item-link" href="index-9.html"><span>Cake Shop Fullscreen</span></a></li>
-                    </ul>
-                </li>
-                <li class="position-static">
-                    <a class="menu-item-link" href="#"><span>Shop</span></a>
-                    <ul class="sub-menu sub-menu-mega">
-                        <li class="mega-menu-item">
-                            <ul>
-                                <li class="mega-menu-item-title">Shop Layouts</li>
-                                <li><a class="sub-item-link" href="shop-right-sidebar.html"><span>Shop Right Sidebar</span></a></li>
-                                <li><a class="sub-item-link" href="shop-left-sidebar.html"><span>Shop Left Sidebar</span></a></li>
-                                <li><a class="sub-item-link" href="shop.html"><span>Shop 4 Columns</span></a></li>
-                                <li><a class="sub-item-link" href="shop-five-columns.html"><span>Shop 5 Columns</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="mega-menu-item">
-                            <ul>
-                                <li class="mega-menu-item-title">Product Types</li>
-                                <li><a class="sub-item-link" href="single-product.html"><span>Product Simple</span></a></li>
-                                <li><a class="sub-item-link" href="single-product-grouped.html"><span>Product Grouped</span></a></li>
-                                <li><a class="sub-item-link" href="single-product-variable.html"><span>Product Variable</span></a></li>
-                                <li><a class="sub-item-link" href="single-product-affiliate.html"><span>Product Affiliate</span></a></li>
-                                <li><a class="sub-item-link" href="single-product-Custom.html"><span>Custom Layout</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="mega-menu-item">
-                            <ul>
-                                <li class="mega-menu-item-title">Others</li>
-                                <li><a class="sub-item-link" href="shop-account.html"><span>My Account</span></a></li>
-                                <li><a class="sub-item-link" href="shop-cart.html"><span>Cart</span></a></li>
-                                <li><a class="sub-item-link" href="shop-wishlist.html"><span>Wishlist</span></a></li>
-                                <li><a class="sub-item-link" href="shop-checkout.html"><span>Checkout</span></a></li>
-                                <li><a class="sub-item-link" href="shop-compare.html"><span>Compare</span></a></li>
-                                <li><a class="sub-item-link" href="shop-order-tracking.html"><span>Order Tracking</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="mega-menu-item banner-menu-content-wrap">
-                            <ul>
-                                <li>
-                                    <a href="shop.html">
-                                        <img src="assets/images/product/featured-product-01.png" alt="Shop">
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a class="menu-item-link" href="#"><span>Pages</span></a>
-                    <ul class="sub-menu">
-                        <li><a class="sub-item-link" href="about.html"><span>About</span></a></li>
-                        <li><a class="sub-item-link" href="contact.html"><span>Contact</span></a></li>
-                        <li><a class="sub-item-link" href="contact-2.html"><span>Contact 2</span></a></li>
-                        <li><a class="sub-item-link" href="our-chef.html"><span>Our Chef</span></a></li>
-                        <li><a class="sub-item-link" href="faq.html"><span>FAQs</span></a></li>
-                        <li><a class="sub-item-link" href="pricing.html"><span>Pricing Plans</span></a></li>
-                        <li><a class="sub-item-link" href="404.html"><span>404 Not Found</span></a></li>
-                        <li><a class="sub-item-link" href="coming-soon.html"><span>Coming Soon</span></a></li>
-                    </ul>
-                </li>
-                <li><a class="menu-item-link" href="#"><span>Blog</span></a>
-                    <ul class="sub-menu">
-                        <li><a class="sub-item-link" href="blog-right-sidebar.html"><span>Blog Right Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-left-sidebar.html"><span>Blog Left Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-no-sidebar.html"><span>Blog No Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-grid-right-sidebar.html"><span>Blog Grid Right Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-grid-left-sidebar.html"><span>Blog Grid Left Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-grid-no-sidebar.html"><span>Blog Grid No Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-details-right-sidebar.html"><span>Blog Post Right Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-details-left-sidebar.html"><span>Blog Post Left Sidebar</span></a></li>
-                        <li><a class="sub-item-link" href="blog-details.html"><span>Blog Details</span></a></li>
-                    </ul>
-                </li>
-                <li><a class="menu-item-link" href="contact.html"><span>Contact</span></a></li>
-            </ul>
-            <ul class="hotline-wrapper offcanvas-hotline">
-                <li>
-                    <div class="hotline">
-                        <i class="lastudioicon lastudioicon-support248"></i>
-                        <div class="hotline-content">
-                            <span class="hotline-text">Hotline</span>
-                            <a class="hotline-link" href="tel:0123456789">(012) 345-6789</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="hotline">
-                        <i class="lastudioicon lastudioicon-pin-check"></i>
-                        <div class="hotline-content">
-                            <span class="hotline-text">Store Location</span>
-                            <a class="hotline-link" href="#/">6391 Elgin St. Celina, Delaware 10299</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- offcanvas Menu End -->
-
-    <!-- Offcanvas Cart Start  -->
-    <div class="offcanvas offcanvas-end offcanvas-cart" id="offcanvasCart">
-
-        <div class="offcanvas-header">
-            <h4 class="offcanvas-title">My Cart</h4>
-            <button type="button" class="btn-close text-secondary" data-bs-dismiss="offcanvas"><i class="lastudioicon lastudioicon-e-remove"></i></button>
-        </div>
-
-        <div class="offcanvas-body">
-            <!-- Offcanvas Cart Items Start  -->
-            <ul class="offcanvas-cart-items">
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-1.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">Macaron Cake</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-2.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">Cream Muffin</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-3.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">Brownie</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-4.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">Chocolate Muffin</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-                <li>
-                    <!-- Mini Cart Item Start  -->
-                    <div class="mini-cart-item">
-                        <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                        <div class="mini-cart-item__thumbnail">
-                            <a href="single-product.html"><img width="70" height="88" src="assets/images/mini-cart/cart-5.png" alt="Cart"></a>
-                        </div>
-                        <div class="mini-cart-item__content">
-                            <h6 class="mini-cart-item__title"><a href="single-product.html">No-bake chocolate</a></h6>
-                            <span class="mini-cart-item__quantity">1 × $4.99</span>
-                        </div>
-                    </div>
-                    <!-- Mini Cart Item End  -->
-                </li>
-            </ul>
-            <!-- Offcanvas Cart Items End  -->
-        </div>
-
-        <div class="offcanvas-footer d-flex flex-column gap-4">
-
-            <!-- Mini Cart Total End  -->
-            <div class="mini-cart-totla">
-                <span class="label">Subtotal:</span>
-                <span class="value">$24.95</span>
-            </div>
-            <!-- Mini Cart Total End  -->
-
-            <!-- Mini Cart Button End  -->
-            <div class="mini-cart-btn d-flex flex-column gap-2">
-                <a class="d-block btn btn-secondary btn-hover-primary" href="#">View cart</a>
-                <a class="d-block btn btn-secondary btn-hover-primary" href="#">Checkout</a>
-            </div>
-            <!-- Mini Cart Button End  -->
-
-        </div>
-
-    </div>
-    <!-- Offcanvas Cart End -->
-
+@include('layouts.header')
     <!-- Breadcrumb Section Start -->
     <div class="breadcrumb" data-bg-image="assets/images/bg/breadcrumb-bg-4.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
-                        <h1 class="breadcrumb_title">Pricing Plans</h1>
+                        <h1 class="breadcrumb_title">Bakerz Bite Rewards</h1>
                         <ul class="breadcrumb_list">
-                            <li><a href="index.html">Home</a></li>
-                            <li>Pricing Plans</li>
+                            <li><a href="{{ route('client.home') }}">Home</a></li>
+                            <li>Bakerz Bite Rewards</li>
                         </ul>
                     </div>
                 </div>
@@ -416,14 +55,41 @@
         </div>
     </div>
     <!-- Breadcrumb Section End -->
-
+    <!-- Product Section Start -->
+    <div class="blog-sidebar blog-sidebar-right">
+        <div class="container custom-container">
+            <div class="row">
+                <div class="col-12 section-padding-04">
+                    <div class="">
+                        <div class="single-blog">                          
+                            <div class="single-blog-content">
+                                <ul class="blog-post-two__meta">
+                                    <li><a href="{{ route('client.home') }}">Bakerz Bite</a></li>
+                                    <li>-</li>
+                                    <li><span>August 14, 2024</span></li>
+                                </ul>
+                                <h2 class="single-blog-title">What is Bakerz Bite Rewards?</h2>
+                                <p class="single-blog-description">Bakerz Bite Rewards is a program created by Bakerz Bite for the purpose of paying tribute to Bakerz Bite customers. When you join, you will receive incentives based on the ranks you have achieved, divided into ranks such as: Bronze, Gold, and Diamond. Rankings will be calculated based on the level of spending and the number of points you accumulate for each order.</p>
+                                <p class="single-blog-description">Bakerz Bite's upgrade criteria will be gradually increased by tier with the upgrade criteria will be:</p>
+                                <al>
+                                    <li>Bronze Member: This will be the most basic rank that every user will be able to use when making purchases at Bakerz Bite.</li>
+                                    <li>Gold Tier: You need to accumulate 100 points, when you buy with $10 you will get 1 point, points are calculated according to the total value of each order.</li>
+                                    <li>Diamond Tier: You need to accumulate 500 points, when you buy with $10 you will get 1 point, points are calculated according to the total value of each order.</li>
+                                </al>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product Section End -->
     <!-- Pricing Section Strat -->
-    <div class="pricing-section section-padding-01">
+    <div class="pricing-section section-padding-01" style="padding-top: 0px !important;">
         <div class="container">
-
             <!-- Section Title Strat -->
             <div class="section-title-02 text-center">
-                <h2 class="section-title-02__title">CHOOSE YOUR BEST OFFER</h2>
+                <h2 class="section-title-02__title">Bakerz Bite Rewards Upgrade Criteria</h2>
             </div>
             <!-- Section Title End -->
 
@@ -434,23 +100,24 @@
                     <div class="pricing-card">
                         <div class="pricing-card__header">
                             <div class="pricing-card__heading pricing-bg-1">
-                                <h3 class="pricing-card__title text-white">Standard</h3>
+                                <h3 class="pricing-card__title text-white">Bronze</h3>
+                                <span class="pricing-card__sub-title text-white">( Nember )</span>
                             </div>
                         </div>
                         <div class="pricing-card__body">
                             <ul>
-                                <li>Vestibulum eu quam nec neque pellentesque efficitur id eget nisl.</li>
-                                <li>Proin porta est convallis lacus blandit pretium sed non enim.</li>
-                                <li>Maecenas lacinia non orci at aliquam.</li>
+                                <li>You will get free shipping on orders under 5klm.</li>
+                                <li>Receive a Members' Day offer notification.</li>
+                                <li>Get free customer care consultation.</li>
                             </ul>
                         </div>
                         <div class="pricing-card__footer pricing-bg-1">
                             <div class="pricing-card__price">
-                                <span class="pricing-card__price-value">$199</span>
-                                <span class="pricing-card__price-suffix">/ per month</span>
+                                <span class="pricing-card__price-value">0</span>
+                                <span class="pricing-card__price-suffix">/ 99 point</span>
                             </div>
                             <div class="pricing-card__action">
-                                <a class="pricing-card__icon" href="#">
+                                <a class="pricing-card__icon" href="{{ route('shop_all') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="44" height="16" fill="none" viewBox="0 0 44 16">
                                         <path fill="currentColor" d="M43.707 8.707a1 1 0 0 0 0-1.414L37.343.929a1 1 0 1 0-1.414 1.414L41.586 8l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM0 9h43V7H0v2z"></path>
                                     </svg>
@@ -466,25 +133,26 @@
                     <!-- Pricing Card Strat -->
                     <div class="pricing-card">
                         <div class="pricing-card__header">
-                            <div class="pricing-card__heading pricing-bg-2">
-                                <h3 class="pricing-card__title text-white">Member</h3>
-                                <span class="pricing-card__sub-title text-white">( Recommend )</span>
+                            <div class="pricing-card__heading pricing-bg-2" style="background-color: #FFC107 !important;">
+                                <h3 class="pricing-card__title text-white">Gold</h3>
+                                <span class="pricing-card__sub-title text-white">( Vip )</span>
                             </div>
                         </div>
                         <div class="pricing-card__body">
                             <ul>
-                                <li>Vestibulum eu quam nec neque pellentesque efficitur id eget nisl.</li>
-                                <li>Proin porta est convallis lacus blandit pretium sed non enim.</li>
-                                <li>Maecenas lacinia non orci at aliquam. Donec finibus, urna bibendum ultricies laoreet, augue eros luctus sapien, ut euismod leo tortor ac enim.</li>
+                                <li>Get all Bronze offers.</li>
+                                <li>Get exceptional customer care.</li>
+                                <li>Get birthday notifications from Bakerz Bite, with up to 50% off orders under $100.</li>
+                                <li class="text-danger">Especially, all orders at checkout are discounted by 2%.</li>
                             </ul>
                         </div>
-                        <div class="pricing-card__footer pricing-bg-2">
+                        <div class="pricing-card__footer pricing-bg-2" style="background-color: #FFC107 !important;">
                             <div class="pricing-card__price">
-                                <span class="pricing-card__price-value">$499</span>
-                                <span class="pricing-card__price-suffix">/ per month</span>
+                                <span class="pricing-card__price-value">100</span>
+                                <span class="pricing-card__price-suffix">/ 499 point</span>
                             </div>
                             <div class="pricing-card__action">
-                                <a class="pricing-card__icon" href="#">
+                                <a class="pricing-card__icon" href="{{ route('shop_all') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="44" height="16" fill="none" viewBox="0 0 44 16">
                                         <path fill="currentColor" d="M43.707 8.707a1 1 0 0 0 0-1.414L37.343.929a1 1 0 1 0-1.414 1.414L41.586 8l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM0 9h43V7H0v2z"></path>
                                     </svg>
@@ -500,25 +168,25 @@
                     <!-- Pricing Card Strat -->
                     <div class="pricing-card">
                         <div class="pricing-card__header">
-                            <div class="pricing-card__heading pricing-bg-3">
-                                <h3 class="pricing-card__title text-white">Premium</h3>
+                            <div class="pricing-card__heading pricing-bg-3" style="background-color: #07e2ff  !important;">
+                                <h3 class="pricing-card__title text-white">Diamond</h3>
+                                <span class="pricing-card__sub-title text-white">( Supper Vip )</span>
                             </div>
                         </div>
                         <div class="pricing-card__body">
                             <ul>
-                                <li>Vestibulum eu quam nec neque pellentesque efficitur id eget nisl.</li>
-                                <li>Proin porta est convallis lacus blandit pretium sed non enim.</li>
-                                <li>Maecenas lacinia non orci at aliquam. Donec finibus, urna bibendum ultricies laoreet, augue eros luctus sapien, ut euismod leo tortor ac enim.</li>
-                                <li>In hac habitasse platea dictumst. Sed cursus venenatis tellus, non lobortis diam volutpat sit amet.</li>
+                                <li>Get all Gold offers.</li>
+                                <li>All orders at checkout are discounted by 5%.</li>
+                                <li class="text-danger">In particular, they are enrolled in the Bakerz Bite's Workshop, enthusiastically guided by the store's famous chefs to create their own favorite cake.</li>
                             </ul>
                         </div>
-                        <div class="pricing-card__footer pricing-bg-3">
+                        <div class="pricing-card__footer pricing-bg-3" style="background-color: #07e2ff  !important;">
                             <div class="pricing-card__price">
-                                <span class="pricing-card__price-value">$799</span>
-                                <span class="pricing-card__price-suffix">/ per month</span>
+                                <span class="pricing-card__price-value">500</span>
+                                <span class="pricing-card__price-suffix">/ Supper Vip</span>
                             </div>
                             <div class="pricing-card__action">
-                                <a class="pricing-card__icon" href="#">
+                                <a class="pricing-card__icon" href="{{ route('shop_all') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="44" height="16" fill="none" viewBox="0 0 44 16">
                                         <path fill="currentColor" d="M43.707 8.707a1 1 0 0 0 0-1.414L37.343.929a1 1 0 1 0-1.414 1.414L41.586 8l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM0 9h43V7H0v2z"></path>
                                     </svg>

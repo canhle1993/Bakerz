@@ -227,6 +227,7 @@
       input[type="file"] {
         display: none;
       }
+
     </style>
 
 </head>
@@ -238,253 +239,26 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <!-- Header Start -->
-    <div class="header-section header-transparent header-sticky">
-        <div class="container position-relative">
+@include('layouts.header')
+@php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+@endphp
 
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-xl-3 col-7">
-                    <!-- Header Logo Start -->
-                    <div class="header-logo">
-                        <a href="{{ route('client.home')}}">
-                            <img class="white-logo" src="{{asset('assets/images/logo-white.svg')}}" width="229" height="62" alt="Logo">
-                        </a>
-                    </div>
-                    <!-- Header Logo End -->
-                </div>
-                <div class="col-lg-7 col-xl-6 d-none d-lg-block">
-                    <!-- Header Menu Start -->
-                    <div class="header-menu">
-                        <ul class="header-primary-menu d-flex justify-content-center">
-                            <li >
-                                <a  href="{{ route('client.home') }}"  class="menu-item-link"><span >Home</span></a>
-                            </li>
-                            <li class="position-static">
-                                <a class="menu-item-link" href="{{ route('shop_all')}}"><span>Shop</span></a>
-                                <ul class="sub-menu sub-menu-mega">
-                                    <li class="mega-menu-item">
-                                        <ul>
-                                            <li class="mega-menu-item-title">Product Types</li>
-                                            <li><a class="sub-item-link" href="{{ route('product-simple') }}"><span>Product Simple</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('product-grouped') }}"><span>Product Grouped</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('product-affiliate') }}"><span>Product Affiliate</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-item">
-                                        <ul>
-                                            <li class="mega-menu-item-title">Others</li>
-                                            <li><a class="sub-item-link" href="{{ route('cart') }}"><span>Cart</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('checkout') }}"><span>Checkout</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('order-tracking') }}"><span>Order Tracking</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-item banner-menu-content-wrap">
-                                        <ul>
-                                            <li>
-                                                <a href="{{ route('client.home')}}">
-                                                    <img src="{{asset('assets/images/product/featured-product-01.png')}}" alt="Shop">
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-item banner-menu-content-wrap">
-                                        <ul>
-                                            <li>
-                                                <a href="{{ route('client.home')}}">
-                                                    <img src="{{asset('assets/images/product/featured-product-01.png')}}" alt="Shop">
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Pages</span></a>
-                                <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="{{ route('about') }}"><span>About</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('our-chef') }}"><span>Our Chef</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Pricing Plans</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Blog</span></a>
-                                <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="{{ route('blog-detail') }}"><span>Blog Details</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a class="menu-item-link" href="{{ route('contact') }}"><span>Contact</span></a></li>
-                        </ul>
-                    </div>
-                    <!-- Header Menu End -->
-                </div>
-                <div class="col-lg-2 col-xl-3 col-5">
-                    <!-- Header Meta Start -->
-                    <div class="header-meta">
-                        <ul class="header-meta__action d-flex justify-content-end">
-                            <li><button class="action search-open"><i class="lastudioicon-zoom-1"></i></button></li>
-                            <li>
-                                <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
-                                    <i class="lastudioicon-shopping-cart-2"></i>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>
-                                </button>
-                            </li>
-                            <!-- header-primary-menu d-flex justify-content-center -->
-                            <div class="header-meta__action d-flex justify-content-end">
-                            @auth
-                            <li >
-                                <a  class=" action" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
-                            </li>
-                            <li >
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                                <a  class="action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-                            </li>
-                            @endauth
-                            @guest
+@if(isset($_SESSION['success']))
+    <script>
+        alert("{{ $_SESSION['success'] }}");
+    </script>
+    @php unset($_SESSION['success']); @endphp
+@endif
 
-                            <li >
-                            <form id="login-form" action="{{ route('login') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                                <a  class="action" href="{{ route('login') }}">Login</a>
-                            </li>
-
-                            @endguest
-                            </div>
-                            <li class="d-lg-none">
-                                <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"><i class="lastudioicon-menu-8-1"></i></button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Header Meta End -->
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!-- Header End -->
-
-    <!-- Search Start  -->
-    <div class="search-popup position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-6 bg-black bg-opacity-75">
-        <div class="search-popup__form position-relative">
-            <form action="" method="GET">
-                <input class="search-popup__field border-0 border-bottom bg-transparent text-white w-100 tra py-3" type="text" placeholder="Search…">
-                <button class="search-popup__icon text-white border-0 bg-transparent position-absolute top-50 end-0 translate-middle-y"><i class="lastudioicon-zoom-1"></i></button>
-            </form>
-        </div>
-        <button class="search-popup__close position-absolute top-0 end-0 m-8 p-3 lh-1 border-0 text-white fs-4"><i class="lastudioicon-e-remove"></i></button>
-    </div>
-    <!-- Search End -->
-
-        <!-- Offcanvas Cart Start  -->
-        <div class="offcanvas offcanvas-end offcanvas-cart" id="offcanvasCart">
-
-<div class="offcanvas-header">
-    <h4 class="offcanvas-title">My Cart</h4>
-    <button type="button" class="btn-close text-secondary" data-bs-dismiss="offcanvas"><i class="lastudioicon lastudioicon-e-remove"></i></button>
-</div>
-
-<div class="offcanvas-body">
-    <!-- Offcanvas Cart Items Start  -->
-    <ul class="offcanvas-cart-items">
-        <li>
-            <!-- Mini Cart Item Start  -->
-            <div class="mini-cart-item">
-                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                <div class="mini-cart-item__thumbnail">
-                    <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-1.png')}}" alt="Cart"></a>
-                </div>
-                <div class="mini-cart-item__content">
-                    <h6 class="mini-cart-item__title"><a href="single-product.html">Macaron Cake</a></h6>
-                    <span class="mini-cart-item__quantity">1 × $4.99</span>
-                </div>
-            </div>
-            <!-- Mini Cart Item End  -->
-        </li>
-        <li>
-            <!-- Mini Cart Item Start  -->
-            <div class="mini-cart-item">
-                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                <div class="mini-cart-item__thumbnail">
-                    <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-2.png')}}" alt="Cart"></a>
-                </div>
-                <div class="mini-cart-item__content">
-                    <h6 class="mini-cart-item__title"><a href="single-product.html">Cream Muffin</a></h6>
-                    <span class="mini-cart-item__quantity">1 × $4.99</span>
-                </div>
-            </div>
-            <!-- Mini Cart Item End  -->
-        </li>
-        <li>
-            <!-- Mini Cart Item Start  -->
-            <div class="mini-cart-item">
-                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                <div class="mini-cart-item__thumbnail">
-                    <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-3.png')}}" alt="Cart"></a>
-                </div>
-                <div class="mini-cart-item__content">
-                    <h6 class="mini-cart-item__title"><a href="single-product.html">Brownie</a></h6>
-                    <span class="mini-cart-item__quantity">1 × $4.99</span>
-                </div>
-            </div>
-            <!-- Mini Cart Item End  -->
-        </li>
-        <li>
-            <!-- Mini Cart Item Start  -->
-            <div class="mini-cart-item">
-                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                <div class="mini-cart-item__thumbnail">
-                    <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-4.png')}}" alt="Cart"></a>
-                </div>
-                <div class="mini-cart-item__content">
-                    <h6 class="mini-cart-item__title"><a href="single-product.html">Chocolate Muffin</a></h6>
-                    <span class="mini-cart-item__quantity">1 × $4.99</span>
-                </div>
-            </div>
-            <!-- Mini Cart Item End  -->
-        </li>
-        <li>
-            <!-- Mini Cart Item Start  -->
-            <div class="mini-cart-item">
-                <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                <div class="mini-cart-item__thumbnail">
-                    <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-5.png')}}" alt="Cart"></a>
-                </div>
-                <div class="mini-cart-item__content">
-                    <h6 class="mini-cart-item__title"><a href="single-product.html">No-bake chocolate</a></h6>
-                    <span class="mini-cart-item__quantity">1 × $4.99</span>
-                </div>
-            </div>
-            <!-- Mini Cart Item End  -->
-        </li>
-    </ul>
-    <!-- Offcanvas Cart Items End  -->
-</div>
-
-<div class="offcanvas-footer d-flex flex-column gap-4">
-
-    <!-- Mini Cart Total End  -->
-    <div class="mini-cart-totla">
-        <span class="label">Subtotal:</span>
-        <span class="value">$24.95</span>
-    </div>
-    <!-- Mini Cart Total End  -->
-
-    <!-- Mini Cart Button End  -->
-    <div class="mini-cart-btn d-flex flex-column gap-2">
-        <a class="d-block btn btn-secondary btn-hover-primary" href="#">View cart</a>
-        <a class="d-block btn btn-secondary btn-hover-primary" href="#">Checkout</a>
-    </div>
-    <!-- Mini Cart Button End  -->
-
-</div>
-
-</div>
-<!-- Offcanvas Cart End -->
+@if(isset($_SESSION['error']))
+    <script>
+        alert("{{ $_SESSION['error'] }}");
+    </script>
+    @php unset($_SESSION['error']); @endphp
+@endif
 <div class="breadcrumb" data-bg-image="{{asset('assets/images/bg/breadcrumb-bg.jpg')}}">
         <div class="container">
             <div class="row">
@@ -541,6 +315,14 @@
                     <div>
                     <h4 class="text-primary font-size-20 mt-3 mb-2">
                       {{ Auth::user()->name }}
+                      @if(Auth::user()->rank === 'Gold')
+                          <a href="{{ route('pricing-plan') }}" style="float: right;"><b>Rank: <span style="color: #FFC107 !important;">Gold</span></b></a>
+                      @elseif(Auth::user()->rank === 'Diamond')
+                      <a href="{{ route('pricing-plan') }}" style="float: right;"><b>Rank: <span style="color: #07e2ff !important;">Diamond</span></b></a>
+                      @else
+                      <a href="{{ route('pricing-plan') }}" style="float: right;"><b>Rank: <span style="color: #4F1818 !important;">Bronze</span></b></a>
+                      @endif
+                      
                     </h4>
                       <p class="mb-0 text-muted">{{ Auth::user()->address }}</p>
                     </div>
@@ -610,55 +392,237 @@
             </div>
           </div>
           <div class="card">
-            <div class="tab-content p-4">
-              <div
-                class="tab-pane active show"
-                id="projects-tab"
-                role="tabpanel"
-              >
-                <div class="d-flex align-items-center">
-                  <div class="flex-1">
-                    <h4 class="card-title mb-4">Order history</h4>
-                  </div>
-                </div>
-                <div class="row" id="all-projects">
-                  <div class="col-md-6" id="project-items-1">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="d-flex mb-3">
-                          <div class="flex-grow-1 align-items-start">
-                            <div>
-                              <h6 class="mb-0 text-muted">
-                                <span class="team-date"
-                                  >Ngày Mua: 20/9/2024</span
-                                >
-                              </h6>
+            <!-- Blade Template -->
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card-body pb-0">
+                        <h4 class="card-title mb-4">Order History</h4>
+                        <ul class="nav nav-tabs" id="orderHistoryTabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pending-tab" data-bs-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="true">Pending</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="paid-tab" data-bs-toggle="tab" href="#paid" role="tab" aria-controls="paid" aria-selected="false">Paid</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="confirm-tab" data-bs-toggle="tab" href="#confirm" role="tab" aria-controls="confirm" aria-selected="false">Confirmed</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="delivered-tab" data-bs-toggle="tab" href="#delivered" role="tab" aria-controls="delivered" aria-selected="false">Delivered</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="cancel-tab" data-bs-toggle="tab" href="#cancel" role="tab" aria-controls="cancel" aria-selected="false">Cancel</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" id="orderHistoryContent">
+                            <!-- Pending Orders -->
+                            <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                                <div class="row pt-3">
+                                    @forelse($pendingOrders as $order)
+                                    <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                <div class="flex-grow-1 align-items-start">
+                                                    <div>
+                                                      <h6 class="mb-0 text-muted">
+                                                        <span class="team-date"
+                                                          >Purchase Date: {{ $order->purchase_date }}</span
+                                                        >
+                                                      </h6>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
+                                                <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
+                                                <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Price:</b> ${{ $order->pay }}</p>
+                                                <div class="d-flex">
+                                                <div class="align-self-end">
+                                                  <span>Status: </span>
+                                                  <span
+                                                    class="badge badge-soft-secondary p-2 team-status b1"
+                                                    ><a href="#" data-order-id="{{ $order->order_id }}" class="status" >Pending</a> 
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @empty
+                                    <p>No pending orders.</p>
+                                    @endforelse
+                                </div>
                             </div>
-                          </div>
+
+                            <!-- Paid Orders -->
+                            <div class="tab-pane fade" id="paid" role="tabpanel" aria-labelledby="paid-tab">
+                                <div class="row pt-3">
+                                @forelse($paidOrders as $order)
+                                    <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                <div class="flex-grow-1 align-items-start">
+                                                    <div>
+                                                      <h6 class="mb-0 text-muted">
+                                                        <span class="team-date"
+                                                          >Purchase Date: {{ $order->purchase_date }}</span
+                                                        >
+                                                      </h6>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
+                                                <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
+                                                <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Price:</b> ${{ $order->pay }}</p>
+                                                <div class="d-flex">
+                                                <div class="align-self-end">
+                                                  <span>Status: </span>
+                                                  <span
+                                                    class="badge badge-soft-success p-2 team-status b1"
+                                                    > <a href="#" data-order-id="{{ $order->order_id }}" class="status">Paid</a> 
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @empty
+                                    <p>No paid orders.</p>
+                                    @endforelse
+                                </div>
+                            </div>
+
+                            <!-- Confirmed Orders -->
+                            <div class="tab-pane fade" id="confirm" role="tabpanel" aria-labelledby="confirm-tab">
+                                <div class="row pt-3">
+                                @forelse($confirmedOrders as $order)
+                                    <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                <div class="flex-grow-1 align-items-start">
+                                                    <div>
+                                                      <h6 class="mb-0 text-muted">
+                                                        <span class="team-date"
+                                                          >Purchase Date: {{ $order->purchase_date }}</span
+                                                        >
+                                                      </h6>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
+                                                <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
+                                                <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Price:</b> ${{ $order->pay }}</p>
+                                                <div class="d-flex">
+                                                <div class="align-self-end">
+                                                  <span>Status: </span>
+                                                  <span
+                                                    class="badge badge-soft-warning p-2 team-status b1"
+                                                    > <a href="#" data-order-id="{{ $order->order_id }}" class="status">Confirm</a> 
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @empty
+                                    <p>No confirmed orders.</p>
+                                    @endforelse
+                                </div>
+                            </div>
+
+                            <!-- Delivered Orders -->
+                            <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
+                                <div class="row pt-3">
+                                @forelse($deliveredOrders as $order)
+                                    <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                <div class="flex-grow-1 align-items-start">
+                                                    <div>
+                                                      <h6 class="mb-0 text-muted">
+                                                        <span class="team-date"
+                                                          >Purchase Date: {{ $order->purchase_date }}</span
+                                                        >
+                                                      </h6>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
+                                                <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
+                                                <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Price:</b> ${{ $order->pay }}</p>
+                                                <div class="d-flex">
+                                                <div class="align-self-end">
+                                                  <span>Status: </span>
+                                                  <span
+                                                    class="badge bg-primary text-light p-2 team-status b1"
+                                                    > <a href="#" data-order-id="{{ $order->order_id }}" class="status text-light">Delivered</a> 
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @empty
+                                    <p>No delivered orders.</p>
+                                    @endforelse
+                                </div>
+                            </div>
+
+                            <!-- Cancel Orders -->
+                            <div class="tab-pane fade" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
+                                <div class="row pt-3">
+                                @forelse($cancelOrders as $order)
+                                    <div class="col-md-6 status" data-order-id="{{ $order->order_id }}">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex mb-3">
+                                                <div class="flex-grow-1 align-items-start">
+                                                    <div>
+                                                      <h6 class="mb-0 text-muted">
+                                                        <span class="team-date"
+                                                          >Purchase Date: {{ $order->purchase_date }}</span
+                                                        >
+                                                      </h6>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
+                                                <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
+                                                <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Price:</b> ${{ $order->pay }}</p>
+                                                <div class="d-flex">
+                                                <div class="align-self-end">
+                                                  <span>Status: </span>
+                                                  <span
+                                                    class="badge badge-soft-danger p-2 team-status b1"
+                                                    > <a href="#" data-order-id="{{ $order->order_id }}" class="status">Cancel</a> 
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @empty
+                                    <p>No cancel orders.</p>
+                                    @endforelse
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-4">
-                          <h2>Tên Bánh</h2>
-                          <strong>Đơn hàng id (mã đơn hàng):</strong> dbzs-123
-                          <br />
-                          <strong>Giá:</strong>
-                          <span class="text-navy">15$</span><br />
-                          <strong>Mô Tả:</strong> giới thiệu bánh <br />
-                        </div>
-                        <div class="d-flex">
-                          <div class="align-self-end">
-                            <span
-                              class="badge badge-soft-danger p-2 team-status b1"
-                              >trạng thái đơn hàng</span
-                            >
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  </div>
+                    
                 </div>
-              </div>
             </div>
-          </div>
+            <!--END  Blade Template -->
+        </div>
+
         </div>
 
         <div class="col-xl-4">
@@ -755,172 +719,41 @@
           </div>
         </div>
       </div>
-    </div><br><br><br><br>
-
-    <!-- Contact form section Start -->
-    <div class="section-padding-03 contact-section contact-section_bg" data-bg-image="{{asset('assets/images/bg/contact-bg.jpg')}}">
-        <div class="container custom-container-five">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="contact-section_content">
-                        <h2 class="contact-section__title">Our Contact</h2>
-                        <ul class="contact-section_list">
-                            <li>
-                                <span class="contact-section_list__icon"><i class="lastudioicon lastudioicon-phone-2"></i></span>
-                                <span class="contact-section_list__text">Phone Number : <span>1800 1779</span></span>
-                            </li>
-                            <li>
-                                <span class="contact-section_list__icon"><i class="lastudioicon lastudioicon-pin-3-2"></i></span>
-                                <span class="contact-section_list__text">Address : <span>35/6 đường D5, Q. Bình Thạnh, TP.HCM</span></span>
-                            </li>
-                            <li>
-                                <span class="contact-section_list__icon"><i class="lastudioicon lastudioicon-mail"></i></span>
-                                <span class="contact-section_list__text">Email Adress : <span>aptech2@aprotrain.com</span></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="contact-section_formbg" data-bg-image="{{asset('assets/images/bg/contact-form-bg.jpg')}}">
-                        <h2 class="contact-section_form__title">Get in touch.</h2>
-                        <form class="contact-section_form" id="contact-form" action="http://whizthemes.com/mail-php/raju/arden/mail.php" method="post">
-                            <div class="row">
-                                <div class="col-md-6 form-p">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" name="con_name" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 form-p">
-                                    <div class="form-group">
-                                        <input class="form-control" type="email" name="con_email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 form-p">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" name="con_phone" placeholder="Phone">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 form-p">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" name="con_address" placeholder="Address">
-                                    </div>
-                                </div>
-                                <div class="col-md-12 form-p">
-                                    <div class="form-group">
-                                        <textarea class="form-control text-area" name="con_message" placeholder="Message"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 form-p">
-                                    <div class="form-group mb-0">
-                                        <button class="btn btn-theme" type="submit">Send Message</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <!-- Message Notification -->
-                        <div class="form-message"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="contact-section_shape">
-            <img src="{{asset('assets/images/shape/shape-10.png')}}" alt="Shape-Image">
-        </div>
     </div>
-    <!-- Contact form section End -->
-
-    <!-- Scroll Top Start -->
-    <a href="#" class="scroll-top" id="scroll-top">
-        <i class="lastudioicon-up-arrow"></i>
-    </a>
-    <!-- Scroll Top End -->
-
-    <!-- Footer Strat -->
-    <div class="footer-section">
-
-        <!-- Footer Widget Section Strat -->
-        <div class="footer-widget-section">
-            <div class="container custom-container">
-                <div class="row gy-6">
-                    <div class="col-md-4">
-                        <!-- Footer Widget Section Strat -->
-                        <div class="footer-widget">
-                            <div class="footer-widget__logo">
-                                <a class="logo-dark" href="{{ route('client.home')}}"><img src="{{asset('assets/images/logo.svg')}}" alt="Logo"></a>
-                                <a class="logo-white d-none" href="index.html"><img src="{{asset('assets/images/logo-white.svg')}}" alt="Logo"></a>
-                            </div>
-                            <div class="footer-widget__social">
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-facebook"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-twitter"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-instagram"></i></a>
-                            </div>
-                        </div>
-                        <!-- Footer Widget Section End -->
-                    </div>
-                    <div class="col-md-8">
-                        <!-- Footer Widget Wrapper Strat -->
-                        <div class="footer-widget-wrapper d-flex flex-wrap gap-4">
-
-                            <!-- Footer Widget Strat -->
-                            <div class="footer-widget flex-grow-1">
-                                <h4 class="footer-widget__title">Categories</h4>
-
-                                <ul class="footer-widget__link">
-                                    <li><a href="{{ route('category')}}">Sweet Breads</a></li>
-                                    <li><a href="{{ route('category')}}">Baked Goods</a></li>
-                                    <li><a href="{{ route('category')}}">Cakes</a></li>
-                                    <li><a href="{{ route('category')}}">Cheesecakes</a></li>
-                                </ul>
-                            </div>
-                            <!-- Footer Widget End -->
-
-                            <!-- Footer Widget Strat -->
-                            <div class="footer-widget flex-grow-1">
-                                <h4 class="footer-widget__title">Services</h4>
-
-                                <ul class="footer-widget__link">
-                                    <li><a href="{{ route('delivery')}}">Delivery</a></li>
-                                    <li><a href="{{ route('checkout')}}">Payment</a></li>
-                                    <li><a href="{{ route('exchange-return-policy')}}">Exchange & Return Policy</a></li>
-                                </ul>
-                            </div>
-                            <!-- Footer Widget End -->
-
-                            <!-- Footer Widget Strat -->
-                            <div class="footer-widget flex-grow-1">
-                                <h4 class="footer-widget__title">Information</h4>
-
-                                <ul class="footer-widget__link">
-                                    <li><a href="{{ route('about')}}">About Us</a></li>
-                                    <li><a href="{{ route('contact')}}">Contact Us</a></li>
-                                    <li><a href="{{ route('blog-detail')}}">Latest Post</a></li>
-                                </ul>
-                            </div>
-                            <!-- Footer Widget End -->
-
-                        </div>
-                        <!-- Footer Widget Wrapper End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer Widget Section End -->
-
-        <!-- Footer Copyright Strat -->
-        <div class="footer-copyright footer-copyright-two">
-            <div class="container">
-                <!-- Footer Copyright Text Strat -->
-                <div class="footer-copyright-text text-center">
-                    <p>&copy; 2024 <strong> Bakerz Bite </strong> Made with <i class="lastudioicon-heart-1"></i> by <a href="https://aptechvietnam.com.vn/">Bakerz</a></p>
-                </div>
-                <!-- Footer Copyright Text End -->
-            </div>
-        </div>
-        <!-- Footer Copyright End -->
-
+    <br><br><br><br><br>
+<!-- Nút để mở modal -->
+<!-- Modal Structure -->
+<div style="z-index: 1056;" class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cartModalLabel">Order Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
+        <!-- Nội dung giỏ hàng -->
+        <table class="cart-table table text-center align-middle mb-6" id="order-content">
+          <thead>
+              <tr>
+                  <th></th>
+                  <th class="title text-start">Product</th>
+                  <th class="price">Price</th>
+                  <th class="quantity">Quantity</th>
+                  <th class="total">Subtotal</th>
+              </tr>
+          </thead>
+          <tbody class="border-top-0">
+              
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      
     </div>
-    <!-- Footer End -->
+  </div>
+</div>
+
+@include('layouts.footer')
      <!-- JS Vendor, Plugins & Activation Script Files -->
 
     <!-- Vendors JS -->
@@ -940,6 +773,8 @@
 
     <!-- Activation JS -->
     <script src="{{asset('assets/js/main.js')}}"></script>
+    
+
     <!-- Vendors JS -->
     <script>
     $(window).on("scroll", function (event) {
@@ -1006,7 +841,67 @@
             document.getElementById("EditText").innerHTML = "Hide";
           }
         }
+        $(document).ready(function() {
+          $('.status').on('click', function(e) {
+            e.preventDefault();
+            var orderId = $(this).data('order-id');  // Lấy order ID từ thuộc tính data-order-id
 
+            // Gọi AJAX để lấy dữ liệu
+            $.ajax({
+              url: "{{ route('client.orderdetails', ':id') }}".replace(':id', orderId), // Thay :id bằng order ID
+              type: 'GET',
+              dataType: 'json',
+              success: function(response) {
+                if (response.status === 'success') {
+                  // Đổ dữ liệu vào modal
+                  var orderdetails = response.data.orderDetails; // Giả sử response trả về orderDetails
+                  var modalContent = '';
+                  
+
+                  // Lặp qua chi tiết đơn hàng và hiển thị
+                  orderdetails.forEach(function(item) {
+                    var imageUrl = `{{ asset('storage/products/') }}/${item.product.image}`; // Xây dựng URL hình ảnh
+                    modalContent += `
+                      <tr>
+                        <th class="cart-thumb">
+                            <a href="#">
+                                <img src="${imageUrl}" alt="${item.product.product_name}">
+                            </a>
+                        </th>
+                        <th class="text-start">
+                            <a href="#">${item.product.product_name}</a>
+                        </th>
+                        <td>${item.discount} $</td>
+                        <td class="text-center">${item.quantity}</td>
+                        <td>${item.quantity * item.discount} $</td>
+                      </tr>
+                    `;
+                  });
+
+                  // Gán nội dung vào bảng trong modal
+                  $('#order-content tbody').html(modalContent);
+
+                  // Hiển thị modal
+                  var myModal = new bootstrap.Modal(document.getElementById('cartModal'));
+                  myModal.show();
+                } else {
+                  alert(response.message); // Hiển thị thông báo lỗi nếu có
+                }
+              },
+              error: function(xhr, status, error) {
+                console.error(error); // Xử lý lỗi
+              }
+            });
+          });
+
+          document.getElementById('cartModal').addEventListener('hidden.bs.modal', function () {
+            // Xóa lớp backdrop khi modal bị ẩn
+            var backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+          });
+        });
     </script>
 </body>
 

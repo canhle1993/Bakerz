@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
     protected $table = 'user'; // Tên bảng trong cơ sở dữ liệu
     protected $primaryKey = 'user_id';
 
@@ -32,6 +33,8 @@ class User extends Authenticatable
         'isdelete',
         'note',
         'avatar',
+        'score',
+        'rank',
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -55,5 +58,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'role_id');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'user_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
+    }
+
 }
