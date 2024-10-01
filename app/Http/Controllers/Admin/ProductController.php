@@ -15,14 +15,65 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     // Hiển thị danh sách các sản phẩm
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::where('isdelete', '<>', 1)
-                   ->orWhereNull('isdelete')
-                   ->orderBy('ModifiedDate', 'desc')  // Sắp xếp theo ngày cập nhật giảm dần
-                   ->paginate(5);
+        $query = Product::select('Product.*')
+                ->distinct()  // Loại bỏ các bản ghi trùng lặp
+                ->join('LinkCatalogProduct', 'Product.product_id', '=', 'LinkCatalogProduct.product_id')
+                ->join('Category', 'LinkCatalogProduct.category_id', '=', 'Category.category_id')
+                ->where(function ($query) {
+                    $query->where('Product.isdelete', '<>', 1)
+                          ->orWhereNull('Product.isdelete');
+                });
+
+
+        // Kiểm tra nếu có tìm kiếm
+        if ($request->has('search')) {
+            $query->where('Product.product_name', 'like', '%' . $request->search . '%');
+        }
+
+        // Xử lý sắp xếp theo các cột
+        if ($request->has('sort')) {
+            // Sắp xếp theo Category
+            if ($request->sort == 'category_asc') {
+                $query->orderBy('category_name', 'asc');
+            } elseif ($request->sort == 'category_desc') {
+                $query->orderBy('category_name', 'desc');
+            } 
+            // Sắp xếp theo Name
+            elseif ($request->sort == 'name_asc') {
+                $query->orderBy('Product.product_name', 'asc');
+            } elseif ($request->sort == 'name_desc') {
+                $query->orderBy('Product.product_name', 'desc');
+            } 
+            // Sắp xếp theo Inventory
+            elseif ($request->sort == 'inventory_asc') {
+                $query->orderBy('Product.inventory', 'asc');
+            } elseif ($request->sort == 'inventory_desc') {
+                $query->orderBy('Product.inventory', 'desc');
+            }
+            // Sắp xếp theo Unit Price
+            elseif ($request->sort == 'price_asc') {
+                $query->orderBy('Product.price', 'asc');
+            } elseif ($request->sort == 'price_desc') {
+                $query->orderBy('Product.price', 'desc');
+            }
+            // Sắp xếp theo Discount
+            elseif ($request->sort == 'discount_asc') {
+                $query->join('DiscountProduct', 'Product.product_id', '=', 'DiscountProduct.product_id')
+                    ->orderBy('DiscountProduct.discount', 'asc');
+            } elseif ($request->sort == 'discount_desc') {
+                $query->join('DiscountProduct', 'Product.product_id', '=', 'DiscountProduct.product_id')
+                    ->orderBy('DiscountProduct.discount', 'desc');
+            }
+        }
+
+        // Sắp xếp mặc định theo ngày cập nhật giảm dần nếu không có sắp xếp khác
+        $products = $query->orderBy('Product.ModifiedDate', 'desc')->paginate(10);
+
         return view('admin.product_management', compact('products'));
     }
+
 
     // Hiển thị form thêm sản phẩm mới
     public function create()
@@ -32,7 +83,9 @@ class ProductController extends Controller
             $query->where('isdelete', '<>', 1)
                 ->orWhere('isdelete', null);
         })->get();
-        $heathys = HeathyCatalog::all();  // Lấy tất cả heathycase
+        $heathys = HeathyCatalog::where('isdelete', '<>', 1)
+                        ->orWhereNull('isdelete')
+                        ->get();
         return view('admin.newproduct',compact('catalogs','heathys'));
     }
 
@@ -214,7 +267,9 @@ class ProductController extends Controller
             $query->where('isdelete', '<>', 1)
                 ->orWhere('isdelete', null);
         })->get();
-        $heathys = HeathyCatalog::all();  // Lấy tất cả heathycase
+        $heathys = HeathyCatalog::where('isdelete', '<>', 1)
+                        ->orWhereNull('isdelete')
+                        ->get();
         // Lưu các thay đổi
         $product->save();
         $product = Product::with('catalogs')->find($id); // Lấy sản phẩm cùng với các catalog đã liên kết
@@ -244,7 +299,10 @@ class ProductController extends Controller
             $query->where('isdelete', '<>', 1)
                 ->orWhere('isdelete', null);
         })->get();
-        $heathys = HeathyCatalog::all();  // Lấy tất cả heathycase
+        
+        $heathys = HeathyCatalog::where('isdelete', '<>', 1)
+                        ->orWhereNull('isdelete')
+                        ->get();
         // Logic xử lý
         return view('admin.productdetail', compact('product','catalogs','heathys'));
     }

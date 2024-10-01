@@ -32,6 +32,8 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <style>
       .hidden-form {
@@ -42,6 +44,14 @@
         border-radius: 8px;
         background-color: #dcdad1;
       }
+      .discounted-price {
+        color: red; /* Màu sắc cho giá đã gạch ngang (tùy chọn) */
+        font-weight: bold; /* Làm đậm giá mới (tùy chọn) */
+        }
+        .original-price {
+        text-decoration: line-through; /* Thêm gạch ngang */
+        }
+
     </style>
 
 </head>
@@ -54,7 +64,7 @@
         <div class="swiper">
             <div class="swiper-wrapper">
                 <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-1.jpg);">
+                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-1.jpg); height: 775px !important;">
                     <div class="image movex">
                         <img class="img-center" src="assets/images/slider/slider-7-01.png" alt="Slider-Image">
                     </div>
@@ -72,7 +82,7 @@
                 </div>
                 <!-- Single Slider End -->
                 <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-2.jpg);">
+                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-2.jpg); height: 775px !important;">
                     <div class="image movex">
                         <img class="img-center" src="assets/images/slider/slider-7-02.png" alt="Slider-Image">
                     </div>
@@ -90,7 +100,7 @@
                 </div>
                 <!-- Single Slider End -->
                 <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-3.jpg);">
+                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-3.jpg); height: 775px !important;">
                     <div class="image movex">
                         <img class="img-center" src="assets/images/slider/slider-7-03.png" alt="Slider-Image">
                     </div>
@@ -206,6 +216,14 @@
                     <div class="col-md-6 mb-3">
                         <div class="mb-3">
                             <label class="form-label">Select health status:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="heath_dump" value=""
+                                id="heath_0"
+                                {{ request('heath_dump') ? 'checked' : '' }}>
+                                <label class="form-check-label" for="heath_0">
+                                Normal
+                                </label>
+                            </div>
                             @foreach($heathyCatalogs as $catalog)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="heath_id[]" value="{{ $catalog->heath_id }}"
@@ -222,7 +240,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="d-flex justify-content-center" style="margin-top: -5%;">
-                            <button type="submit" class="slider-content__btn btn btn-primary btn-hover-black">Filter</button>
+                            <button id="btnFilter" type="submit" class="slider-content__btn btn btn-primary btn-hover-black">Filter</button>
                         </div>   
                     </div>
                 </div>
@@ -238,146 +256,203 @@
 </div>
     <!-- Testimonial Five Section End -->
 
-
-
-
-<div class="section-padding-01" >
-    <div class="container" style="padding-bottom: 50px !important;" >
-    <!-- Section Title Strat -->
-        <div class="section-title text-center max-width-720 mx-auto" >
-            <h2 class="section-title__title">Products suitable for your health</h2>
-            <p>Wish you the best experience</p>
+<!-- Product Section Strat -->
+<div
+  class="section-padding-03 pt-0"
+  id="a1"
+  style="padding-top: 35px !important; padding-bottom: 80px !important;">
+  <div class="container" id="a2">
+    <div class="row">
+      <div class="col-12">
+        <!-- Section Title Strat -->
+        <div class="section-title">
+          <h2 class="section-title__title">
+            Products suitable for your health _______________ <a href="shop.html" class="read-more"
+            ><span>show more</span
+            ></a></h2>
         </div>
-    <!-- Section Title End -->
+        <!-- Section Title End -->
+      </div>
+    </div>
+    <!-- Product Active Strat -->
+    <div class="product-active">
+      <div class="swiper">
+        <div id="productList" class="swiper-wrapper">
+          @if($products->isEmpty())
+          <p>----- No products found.</p>
+          @else 
+          @foreach($products as $product)
+          <div class="swiper-slide">
+            <!-- Product Item Start -->
+            <div class="product-item text-center">
+              @if($product->price>5)
+              <!-- TODO:CHEAT -->
+              <div
+                class="product-item__badge"
+                style="background-color: red !important"
+              >
+                Best Seller
+              </div>
+              @endif
+              <div class="product-item__image border w-100">
+                <a href="{{ route('product.single', ['product' => $product->product_id]) }}"
+                  ><img
+                    width="350"
+                    height="350"
+                    src="{{ asset('storage/products/' . $product->image) }}"
+                    alt="Product"
+                /></a>
+                <ul class="product-item__meta">
+                 <li class="product-item__meta-action">
+                    <a
+                      class="labtn-icon-quickview"
+                      href="#"
+                      data-bs-tooltip="tooltip"
+                      data-bs-placement="top"
+                      title=""
+                      data-bs-original-title="Quick View"
+                      aria-label="Quick View"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleProductModal"
+                    ></a>
+                  </li>
+                  <li class="product-item__meta-action">
+                    <a
+                      class="shadow-1 labtn-icon-cart add-to-cart"
+                      href="#"
+                      data-product-id="{{ $product->product_id }}"
+                    ></a>
+                  </li>
+                  <li class="product-item__meta-action">
+                    <a
+                      class="shadow-1 labtn-icon-wishlist"
+                      href="#"
+                      data-bs-tooltip="tooltip"
+                      data-bs-placement="top"
+                      title="Add to wishlist"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalWishlist"
+                    ></a>
+                  </li>
 
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="tab1">
-                <div id="productList" class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 mb-n50" >
-                @if($products->isEmpty())
-                    <p>No products found.</p>
+                </ul>
+              </div>
+              <div class="product-item__content pt-5">
+                <h5 class="product-item__title">
+                  <a href="{{ route('product.single', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
+                </h5>
+                @if($product->price != $product->getDiscountedPrice())
+                    <span class="original-price">{{ formatPriceVND($product->price) }}</span>
+                    <span class="discounted-price">${{ number_format($product->getDiscountedPrice(), 2) }}</span> <!-- Giá mới -->
                 @else
-                    @foreach($products as $product)
-                    <div class="col mb-50">
-                        <!-- Product Item Start -->
-                        <div class="product-item text-center">
-                            @if($product->price>10) <!-- TODO:CHEAT -->
-                            <div class="product-item__badge">Best Seller</div>
-                            @endif
-                            <div class="product-item__image border w-100">
-                                <a href="single-product.html"><img width="350" height="350" src="{{ asset('storage/products/' . $product->image) }}" alt="Product"></a>
-                                <ul class="product-item__meta">
-                                    <li class="product-item__meta-action">
-                                        <a class="shadow-1 labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                    </li>
-                                    <li class="product-item__meta-action">
-                                        <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                    </li>
-                                    <li class="product-item__meta-action">
-                                        <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                    </li>
-                                    <li class="product-item__meta-action">
-                                        <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="product-item__content pt-5">
-                                <h5 class="product-item__title"><a href="single-product.html">{{ $product->product_name }}</a></h5>
-                                <span class="product-item__price">{{ formatPriceVND($product->price) }}</span>
-                            </div>
-                        </div>
-                        <!-- Product Item End -->
-                    </div>
-                    @endforeach
+                <span class="product-item__price"
+                  >{{ formatPriceVND($product->price) }}</span
+                >
                 @endif
-                </div>
+              </div>
             </div>
+            <!-- Product Item End -->
+          </div>
+          @endforeach 
+          @endif
         </div>
+
+        <div class="swiper-button-next">
+          <i class="lastudioicon-arrow-right"></i>
+        </div>
+        <div class="swiper-button-prev">
+          <i class="lastudioicon-arrow-left"></i>
+        </div>
+      </div>
+    </div>
+    <!-- Product Active End -->
+  </div>
 </div>
+<!-- Product Section End -->
 
 
     <!-- Product Section Strat -->
-    <div class="section-padding-01" style="padding-bottom: 25px !important;">
-        <div class="container">
-
-            <!-- Section Title Strat -->
-            <div class="section-title text-center max-width-720 mx-auto">
-                <h2 class="section-title__title">Most recently purchased product</h2>
-            </div>
-            <!-- Section Title End -->
-
-            <div class="row g-6 gx-lg-10">
-                <div class="col-lg-4 col-md-6">
-                    <!-- Product Item Start -->
-                    <div class="product-item border text-center">
-                        <div class="product-item__badge">Hot</div>
-                        <div class="product-item__image">
-                            <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-1.jpg" alt="Product"></a>
-                            <ul class="product-item__meta meta-middle">
-                                <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                            </ul>
-                        </div>
-                        <div class="product-item__content pb-3">
-                            <h5 class="product-item__title"><a href="single-product.html">Italian Loaf</a></h5>
-                            <span class="product-item__price fs-2">$4.99</span>
-                            <a href="single-product.html" class="product-item__arrow"><img width="40" height="15" src="assets/images/arrow.svg" alt="arrow"></a>
-                        </div>
-                    </div>
-                    <!-- Product Item End -->
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <!-- Product Item Start -->
-                    <div class="product-item border text-center">
-                        <div class="d-none">Hot</div>
-                        <div class="product-item__image">
-                            <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-2.jpg" alt="Product"></a>
-                            <ul class="product-item__meta meta-middle">
-                                <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                            </ul>
-                        </div>
-                        <div class="product-item__content pb-3">
-                            <h5 class="product-item__title"><a href="single-product.html">Croissant Italy Cake</a></h5>
-                            <span class="product-item__price fs-2">$5.00</span>
-                            <a href="single-product.html" class="product-item__arrow"><img width="40" height="15" src="assets/images/arrow.svg" alt="arrow"></a>
-                        </div>
-                    </div>
-                    <!-- Product Item End -->
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <!-- Product Item Start -->
-                    <div class="product-item border text-center">
-                        <div class="d-none">Hot</div>
-                        <div class="product-item__image">
-                            <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-3.jpg" alt="Product"></a>
-                            <ul class="product-item__meta meta-middle">
-                                <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                            </ul>
-                        </div>
-                        <div class="product-item__content pb-3">
-                            <h5 class="product-item__title"><a href="single-product.html">Chocolate Muffin</a></h5>
-                            <span class="product-item__price fs-2">$7.55</span>
-                            <a href="single-product.html" class="product-item__arrow"><img width="40" height="15" src="assets/images/arrow.svg" alt="arrow"></a>
-                        </div>
-                    </div>
-                    <!-- Product Item End -->
+<!-- Product Section Strat -->
+<div class="section-padding-03 pt-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2 class="section-title__title">Most recently purchased products _______________ <a href="{{ route('shop_all') }}" class="read-more"><span>show more</span></a></h2>
                 </div>
             </div>
+        </div>
+        <div class="product-active">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    @if($recentPurchasedProducts->isEmpty())
+                        <p>----- No products found.</p>
+                    @else
+                        @foreach($recentPurchasedProducts as $product)
+                        <div class="swiper-slide">
+                            <div class="product-item text-center">
+                                <div class="product-item__image border w-100">
+                                    <a href="{{ route('product.single', ['product' => $product->product_id]) }}">
+                                        <img width="350" height="350" src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}">
+                                    </a>
+                                    <ul class="product-item__meta">
+                                        <li class="product-item__meta-action">
+                                            <a
+                                            class="labtn-icon-quickview"
+                                            href="#"
+                                            data-bs-tooltip="tooltip"
+                                            data-bs-placement="top"
+                                            title=""
+                                            data-bs-original-title="Quick View"
+                                            aria-label="Quick View"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleProductModal"
+                                            ></a>
+                                        </li>
+                                        <li class="product-item__meta-action">
+                                            <a
+                                            class="shadow-1 labtn-icon-cart add-to-cart"
+                                            href="#"
+                                            data-product-id="{{ $product->product_id }}"
+                                            ></a>
+                                        </li>
+                                        <li class="product-item__meta-action">
+                                            <a
+                                            class="shadow-1 labtn-icon-wishlist"
+                                            href="#"
+                                            data-bs-tooltip="tooltip"
+                                            data-bs-placement="top"
+                                            title="Add to wishlist"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalWishlist"
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-item__content pt-5">
+                                    <h5 class="product-item__title">
+                                        <a href="{{ route('product.single', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
+                                    </h5>
+                                    <span class="product-item__price">{{ formatPriceVND($product->price) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    @endif
+                </div>
 
+                <div class="swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
+                <div class="swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
+            </div>
         </div>
     </div>
-    <!-- Product Section End -->
+</div>
+<!-- Product Section End -->
 
-        <!-- Product Deal Section Start -->
+
+    <!-- Product Deal Section Start -->
         <div class="section-padding-03 deal-two_bg" data-bg-image="assets/images/bg/product-deal-bg.jpg">
-        <div class="container custom-container-two">
+            <div class="container custom-container-two">
             <div class="row row-cols-lg-2 row-cols-md-2 row-cols-1 align-items-center mb-n30">
                 <div class="col mb-30">
                     <div class="deal-two_images">
@@ -402,244 +477,264 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
-    </div>
     <!-- Product Deal Section End -->
 
 </div>
-    <!-- Product Section Start -->
-    <div class="section-padding-03 custom-container-four" style="padding-top: 0px !important;" >
-        <div class="product-row">
-            <div class="product-wrapper pe-md-5 pe-lg-6 pe-xl-8 pe-xxl-11 order-md-1 order-2">
-                <!-- Section Title Strat -->
-                <div class="section-title-05">
-                    <h5 class="section-title-05__title"><span>Discount</span></h5>
-                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
-                </div>
-                <!-- Section Title End -->
+<!-- Product Section Start -->
+<div class="section-padding-03 custom-container-four" >
+  <div class="product-row">
+    <div
+      class="product-wrapper pe-md-5 pe-lg-6 pe-xl-8 pe-xxl-11 order-md-1 order-2"
+    >
+      <!-- Section Title Strat -->
+      <div class="section-title-05">
+        <h5 class="section-title-05__title"><span>Discount Products</span></h5>
+        <a href="shop.html" class="read-more"
+          ><span>show more</span
+          ><i class="lastudioicon lastudioicon-right-arrow"></i
+        ></a>
+      </div>
+      <!-- Section Title End -->
 
-                <div class="product-active-two">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-
-                            <!-- swiper-slide start -->
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-05 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-9-500x625.jpg" alt="Product"></a>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Raisin Bread</a></h5>
-                                        <span class="product-item__price">$4.99</span>
-                                    </div>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-05 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-15-500x625.jpg" alt="Product"></a>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Poppy Roll</a></h5>
-                                        <span class="product-item__price">$5.00</span>
-                                    </div>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-05 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-16-500x625.jpg" alt="Product"></a>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Wheat Loaf</a></h5>
-                                        <span class="product-item__price">$7.55</span>
-                                    </div>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-05 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-17-500x625.jpg" alt="Product"></a>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Corn Ciabatta</a></h5>
-                                        <span class="product-item__price">$9.44</span>
-                                    </div>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <!-- swiper-slide end-->
-
-                        </div>
+      <div class="product-active-two">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <!-- swiper-slide start -->
+            @if($discount_products->isEmpty())
+            <p>No discount products available.</p>
+            @else
+            @foreach($discount_products as $disproduct)
+            <div class="swiper-slide">
+              <!-- Product Item Start -->
+              <div class="product-item product-item-05 border text-center">
+                <div
+                    class="product-item__badge"
+                    style="background-color: red !important"
+                    >
+                    <h6 style="color: white;"> {{$disproduct->getDiscountPercent() }} %</h6>
                     </div>
-                    <div class="swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
-                    <div class="swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
+                <div class="product-item__image">
+                  <a href="{{ route('product.single', ['product' => $disproduct->product_id]) }}"
+                    ><img
+                      width="250"
+                      height="250"
+                      src="{{ asset('storage/products/' . $disproduct->image) }}"
+                      alt="Product"
+                  /></a>
                 </div>
-
+                <div class="product-item__content">
+                  <h5 class="product-item__title">
+                    <a href="{{ route('product.single', ['product' => $disproduct->product_id]) }}"
+                      >{{ $disproduct->product_name }}</a
+                    >   
+                  </h5>
+                    <span class="product-item__price">
+                        <span class="original-price">{{ formatPriceVND($disproduct->price) }}</span>
+                        <span class="discounted-price">${{ number_format($disproduct->getDiscountedPrice(), 2) }}</span> <!-- Giá mới -->
+                    </span>
+                 
+                </div>
+                <ul class="product-item__meta">
+                  <li class="product-item__meta-action">
+                    <a
+                      class="labtn-icon-quickview"
+                      href="#"
+                      data-bs-tooltip="tooltip"
+                      data-bs-placement="top"
+                      title=""
+                      data-bs-original-title="Quick View"
+                      aria-label="Quick View"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleProductModal"
+                    ></a>
+                  </li>
+                  <li class="product-item__meta-action">
+                    <a
+                      class="shadow-1 labtn-icon-cart add-to-cart"
+                      href="#"
+                      data-product-id="{{ $disproduct->product_id }}"
+                    ></a>
+                  </li>
+                  <li class="product-item__meta-action">
+                    <a
+                      class="labtn-icon-wishlist"
+                      href="#"
+                      data-bs-tooltip="tooltip"
+                      data-bs-placement="top"
+                      title=""
+                      data-bs-original-title="Add to wishlist"
+                      aria-label="Add to wishlist"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalWishlist"
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+              <!-- Product Item End -->
             </div>
-            <div class="boxbanner-wrapper order-md-2 order-1">
-                <!-- Ad Banner Start -->
-                <a href="single-product.html" class="boxbanner-bg boxbanner" data-bg-image="assets/images/banner/add-banner.jpg">
-                    <span class="boxbanner-subtitle">only buy in stores</span>
-                    <span class="boxbanner-title">Discount</span>
-                    <span class="boxbanner-discount">50%</span>
-                    <div class="boxbanner-btn-area">
-                        <span class="boxbanner-btn">Store Location <i class="lastudioicon lastudioicon-right-arrow"></i></span>
-                    </div>
-                </a>
-                <!-- Ad Banner End -->
-            </div>
+            @endforeach @endif
+            <!-- swiper-slide end-->
+          </div>
         </div>
+        <div class="swiper-button-next">
+          <i class="lastudioicon-arrow-right"></i>
+        </div>
+        <div class="swiper-button-prev">
+          <i class="lastudioicon-arrow-left"></i>
+        </div>
+      </div>
     </div>
-    <!-- Product Section End -->
+    <div class="boxbanner-wrapper order-md-2 order-1">
+      <!-- Ad Banner Start -->
+      <a
+        href="single-product.html"
+        class="boxbanner-bg boxbanner"
+        data-bg-image="assets/images/banner/add-banner.jpg"
+      >
+        <span class="boxbanner-subtitle">only buy in stores</span>
+        <span class="boxbanner-title">Discount</span>
+        <span class="boxbanner-discount">15%</span>
+        <div class="boxbanner-btn-area">
+          <span class="boxbanner-btn"
+            >Store Location <i class="lastudioicon lastudioicon-right-arrow"></i
+          ></span>
+        </div>
+      </a>
+      <!-- Ad Banner End -->
+    </div>
+  </div>
+</div>
+<!-- Product Section End -->
+
 
     <!-- Product Section Start -->
-    <div class="section-padding-03 custom-container-four pt-0">
-        <div class="product-row">
-            <div class="product-wrapper ps-md-5 ps-lg-6 ps-xl-8 ps-xxl-11 order-2 ">
-                <!-- Section Title Strat -->
-                <div class="section-title-05">
-                    <h5 class="section-title-05__title"><span>What’s Hot</span></h5>
-                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
+<div class="section-padding-03 custom-container-four pt-0">
+  <div class="product-row">
+    <div class="product-wrapper ps-md-5 ps-lg-6 ps-xl-8 ps-xxl-11 order-2">
+      <!-- Section Title Start -->
+      <div class="section-title-05">
+        <h5 class="section-title-05__title"><span>What’s Hot</span></h5>
+        <a href="shop.html" class="read-more"
+          ><span>show more</span
+          ><i class="lastudioicon lastudioicon-right-arrow"></i
+        ></a>
+      </div>
+      <!-- Section Title End -->
+
+      <div class="product-active-three">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            @if($bestSellingProducts->isEmpty())
+            <p>No best-selling products found.</p>
+            @else @foreach($bestSellingProducts as $product)
+            <div class="swiper-slide">
+              <!-- Product Item Start -->
+              <div class="product-item product-item-05 border text-center">
+                <div class="product-item__image">
+                  <a
+                    href="{{ route('product.single', ['product' => $product->product_id]) }}"
+                  >
+                    <img
+                      width="250"
+                      height="250"
+                      src="{{ $product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg') }}"
+                      alt="{{ $product->product_name }}"
+                    />
+                  </a>
                 </div>
-                <!-- Section Title End -->
-
-                <div class="product-active-three">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-
-                            <!-- swiper-slide start -->
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-05 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-12-500x625.jpg" alt="Product"></a>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Raisin Bread</a></h5>
-                                        <span class="product-item__price">$4.99</span>
-                                    </div>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-05 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-13-500x625.jpg" alt="Product"></a>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Poppy Bun</a></h5>
-                                        <span class="product-item__price">$5.00</span>
-                                    </div>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-05 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-11-500x625.jpg" alt="Product"></a>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Olivetta Bread</a></h5>
-                                        <span class="product-item__price">$7.55</span>
-                                    </div>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-05 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="250" height="250" src="assets/images/product/product-17-500x625.jpg" alt="Product"></a>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Corn Ciabatta</a></h5>
-                                        <span class="product-item__price">$9.44</span>
-                                    </div>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Select options" aria-label="Select options" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to wishlist" aria-label="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
-                                        <li class="product-item__meta-action"><a class="labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Add to compare" aria-label="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a></li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <!-- swiper-slide end-->
-
-                        </div>
-                    </div>
-                    <div class="swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
-                    <div class="swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
+                <div class="product-item__content">
+                  <h5 class="product-item__title">
+                    <a
+                      href="{{ route('product.single', ['product' => $product->product_id]) }}"
+                    >
+                      {{ $product->product_name }}
+                    </a>
+                  </h5>
+                  <span class="product-item__price">
+                    @if ($product->price != $product->getDiscountedPrice())
+                    <del>{{ formatPriceVND($product->price) }}</del>
+                    <!-- Giá gốc -->
+                    <strong
+                      >{{ formatPriceVND($product->getDiscountedPrice())
+                      }}</strong
+                    >
+                    <!-- Giá sau khi giảm -->
+                    @else {{ formatPriceVND($product->price) }}
+                    <!-- Giá không giảm -->
+                    @endif
+                  </span>
                 </div>
-
+                <ul class="product-item__meta">
+                  <li class="product-item__meta-action">
+                    <a
+                      class="labtn-icon-quickview"
+                      href="#"
+                      data-bs-tooltip="tooltip"
+                      data-bs-placement="top"
+                      title="Quick View"
+                      aria-label="Quick View"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleProductModal"
+                    ></a>
+                  </li>
+                  <li class="product-item__meta-action">
+                    <a
+                      class="shadow-1 labtn-icon-cart add-to-cart"
+                      href="#"
+                      data-product-id="{{ $product->product_id }}"
+                    ></a>
+                  </li>
+                  <li class="product-item__meta-action">
+                    <a
+                      class="labtn-icon-wishlist"
+                      href="#"
+                      data-bs-tooltip="tooltip"
+                      data-bs-placement="top"
+                      title="Add to wishlist"
+                      aria-label="Add to wishlist"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalWishlist"
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+              <!-- Product Item End -->
             </div>
-            <div class="boxbanner-wrapper order-1">
-                <!-- Ad Banner Start -->
-                <a href="single-product.html" class="boxbanner-bg boxbanner" data-bg-image="assets/images/banner/add-banner-two.jpg">
-                    <div class="boxbanner-two">
-                        <span class="boxbanner-title">a new cookie</span>
-                        <span class="boxbanner-discount-two">from only 4$</span>
-                    </div>
-                    <div class="boxbanner-btn-area">
-                        <span class="boxbanner-btn">Store Location <i class="lastudioicon lastudioicon-right-arrow"></i></span>
-                    </div>
-                </a>
-                <!-- Ad Banner End -->
-            </div>
+            @endforeach @endif
+          </div>
+          <div class="swiper-button-next">
+            <i class="lastudioicon-arrow-right"></i>
+          </div>
+          <div class="swiper-button-prev">
+            <i class="lastudioicon-arrow-left"></i>
+          </div>
         </div>
+      </div>
     </div>
+    <div class="boxbanner-wrapper order-1">
+      <!-- Ad Banner Start -->
+      <a
+        href="single-product.html"
+        class="boxbanner-bg boxbanner"
+        data-bg-image="assets/images/banner/add-banner-two.jpg"
+      >
+        <div class="boxbanner-two">
+          <span class="boxbanner-title">a new cookie</span>
+          <span class="boxbanner-discount-two">from only 4$</span>
+        </div>
+        <div class="boxbanner-btn-area">
+          <span class="boxbanner-btn"
+            >Store Location <i class="lastudioicon lastudioicon-right-arrow"></i
+          ></span>
+        </div>
+      </a>
+      <!-- Ad Banner End -->
+    </div>
+  </div>
+</div>
+
     <!-- Product Section End -->
 
     <!-- Product Deal Section Start -->
@@ -652,18 +747,21 @@
                     <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
                 </div>
                 <!-- Section Title End -->
+                 <!-- BTT -->
             </div>
             <div class="col-12">
                 <div class="product-active-four mt-4">
                     <div class="swiper">
                         <div class="swiper-wrapper">
-
+                        @if($seasonalProducts->isEmpty())
+                        <p>No best-selling products found.</p>
+                        @else @foreach($seasonalProducts as $product)
                             <!-- swiper-slide start -->
                             <div class="swiper-slide">
                                 <!-- Product Item Start -->
                                 <div class="product-item product-item-06 border text-center">
                                     <div class="product-item__image">
-                                        <a href="single-product.html"><img width="350" height="350" src="assets/images/product/m5-prod1.jpg" alt="Product"></a>
+                                        <a href="{{ route('product.single', ['product' => $product->product_id]) }}"><img width="350" height="350" src="{{ $product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg') }}" alt="{{ $product->product_name }}"></a>
                                         <ul class="product-item__meta meta-middle">
                                             <li class="product-item__meta-action">
                                                 <a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
@@ -672,107 +770,61 @@
                                                 <a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
                                             </li>
                                             <li class="product-item__meta-action">
-                                                <a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
+                                            <a
+                                                class="shadow-1 labtn-icon-cart add-to-cart"
+                                                href="#"
+                                                data-product-id="{{ $product->product_id }}"
+                                                ></a>
                                             </li>
+
                                         </ul>
                                     </div>
                                     <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">White Chocolate Rasberry</a></h5>
-                                        <span class="product-item__price">$4.99</span>
-                                        <p class="product-item__text">Aliqua id fugiat nostrud irure ex duis ea quis id…</p>
-                                        <a href="#/" class="product-item__btn" data-bs-toggle="modal" data-bs-target="#modalCart">Add to cart</a>
+                                        <h5 class="product-item__title"><a href="single-product.html">{{ $product->product_name }}</a></h5>
+                                        <span class="product-item__price">
+                                            @if ($product->price != $product->getDiscountedPrice())
+                                            <del>{{ formatPriceVND($product->price) }}</del>
+                                            <!-- Giá gốc -->
+                                            <strong
+                                            >{{ formatPriceVND($product->getDiscountedPrice())
+                                            }}</strong
+                                            >
+                                            <!-- Giá sau khi giảm -->
+                                            @else {{ formatPriceVND($product->price) }}
+                                            <!-- Giá không giảm -->
+                                            @endif
+                                        </span>
+                                        <p class="product-item__text">{{ \Illuminate\Support\Str::limit($product->describe, 70, '...') }}                                        </p>
+                                        <a href="#/" class="product-item__btn add-to-cart" data-product-id="{{ $product->product_id }}" data-bs-toggle="modal" data-bs-target="#modalCart">Add to cart</a>
                                     </div>
                                 </div>
                                 <!-- Product Item End -->
                             </div>
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-06 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="350" height="350" src="assets/images/product/m5-prod2.jpg" alt="Product"></a>
-                                        <ul class="product-item__meta meta-middle">
-                                            <li class="product-item__meta-action">
-                                                <a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                            </li>
-                                            <li class="product-item__meta-action">
-                                                <a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                            </li>
-                                            <li class="product-item__meta-action">
-                                                <a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Caramel Apple</a></h5>
-                                        <span class="product-item__price">$5.00</span>
-                                        <p class="product-item__text">Aliqua id fugiat nostrud irure ex duis ea quis id…</p>
-                                        <a href="#/" class="product-item__btn" data-bs-toggle="modal" data-bs-target="#modalCart">Add to cart</a>
-                                    </div>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-06 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="350" height="350" src="assets/images/product/m5-prod3.jpg" alt="Product"></a>
-                                        <ul class="product-item__meta meta-middle">
-                                            <li class="product-item__meta-action">
-                                                <a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                            </li>
-                                            <li class="product-item__meta-action">
-                                                <a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                            </li>
-                                            <li class="product-item__meta-action">
-                                                <a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">German Chocolate Cake</a></h5>
-                                        <span class="product-item__price">$7.55</span>
-                                        <p class="product-item__text">Aliqua id fugiat nostrud irure ex duis ea quis id…</p>
-                                        <a href="#/" class="product-item__btn" data-bs-toggle="modal" data-bs-target="#modalCart">Add to cart</a>
-                                    </div>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <div class="swiper-slide">
-                                <!-- Product Item Start -->
-                                <div class="product-item product-item-06 border text-center">
-                                    <div class="product-item__image">
-                                        <a href="single-product.html"><img width="350" height="350" src="assets/images/product/m5-prod2.jpg" alt="Product"></a>
-                                        <ul class="product-item__meta meta-middle">
-                                            <li class="product-item__meta-action">
-                                                <a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
-                                            </li>
-                                            <li class="product-item__meta-action">
-                                                <a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                            </li>
-                                            <li class="product-item__meta-action">
-                                                <a class="labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-item__content">
-                                        <h5 class="product-item__title"><a href="single-product.html">Caramel Apple</a></h5>
-                                        <span class="product-item__price">$9.44</span>
-                                        <p class="product-item__text">Aliqua id fugiat nostrud irure ex duis ea quis id…</p>
-                                        <a href="#/" class="product-item__btn" data-bs-toggle="modal" data-bs-target="#modalCart">Add to cart</a>
-                                    </div>
-                                </div>
-                                <!-- Product Item End -->
-                            </div>
-                            <!-- swiper-slide end-->
+                            @endforeach @endif
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        </div><br><br>
     <!-- Product Deal Section End -->
 
+    <div class="custom-container-four container-fluid ">
+        <div class="row pt-5">
+            <div class="col-12">
+                <!-- Section Title Strat -->
+                <div class="section-title-05">
+                    <h5 class="section-title-05__title"><span>Coffee & Espresso</span></h5>
+                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
+                </div>
+                <!-- Section Title End -->
+            </div>
+            <div class="col-12">
+                @include('layouts.autoplay')
+            </div>
+        </div>
+    </div>
     <!-- Counter Section Strat -->
     <div class="counter-section" style="background-image: url(assets/images/bg-01.jpg);">
         <div class="container custom-container">
@@ -1009,24 +1061,21 @@
                                     <div class="single-product-vertical-tab swiper-container order-2">
 
                                         <div class="swiper-wrapper">
+                                        @if($product->images->isEmpty())
                                             <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-1.png" alt="Product">
+                                                <img class="w-100" src="{{ asset('assets/images/product/product-8-500x625.jpg') }}" alt="Product">
                                             </a>
+                                        @else
                                             <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-2.png" alt="Product">
+                                                <img class="w-100" src="{{ asset('storage/products/' . $product->image) }}" alt="Product">
                                             </a>
+                                        @endif
+                                        @foreach($product->images as $image)
                                             <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-3.png" alt="Product">
+                                                <img class="w-100" src="{{ asset('storage/products/' . $image->image) }}">
                                             </a>
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-4.png" alt="Product">
-                                            </a>
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-5.png" alt="Product">
-                                            </a>
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-6.png" alt="Product">
-                                            </a>
+                                        @endforeach
+
                                         </div>
 
                                         <!-- Next Previous Button Start -->
@@ -1041,24 +1090,21 @@
                                     <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
 
                                         <div class="swiper-wrapper">
+                                        @if($product->images->isEmpty())
                                             <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-1.png" alt="Product">
+                                                <img src="{{ asset('assets/images/product/product-8-500x625.jpg') }}" alt="Product">
                                             </div>
+                                        @else
                                             <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-2.png" alt="Product">
+                                                <img src="{{ asset('storage/products/' . $product->image) }}" alt="Product">
                                             </div>
+                                            @foreach($product->images as $image)
                                             <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-3.png" alt="Product">
+                                                <img src="{{ asset('storage/products/' . $image->image) }}" alt="Product">
                                             </div>
-                                            <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-4.png" alt="Product">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-5.png" alt="Product">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-6.png" alt="Product">
-                                            </div>
+                                            @endforeach
+                                        @endif
+                
                                         </div>
 
                                     </div>
@@ -1077,43 +1123,24 @@
                                     <div class="product-head mb-3">
 
                                         <!-- Price Start -->
-                                        <span class="product-head-price">$4.99</span>
+                                        <span class="product-head-price">{{ formatPriceVND($product->price) }}</span>
                                         <!-- Price End -->
 
                                     </div>
                                     <!-- Product Head End -->
 
                                     <!-- Description Start -->
-                                    <p class="desc-content">Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.</p>
+                                    <p class="desc-content">{!! nl2br(e($product->describe)) !!}</p>
                                     <!-- Description End -->
 
                                     <!-- Product Coler Variation Start -->
                                     <div class="product-color mb-2">
-                                        <label for="colorBy">Color</label>
-                                        <div class="select-wrapper">
-                                            <select name="color" id="colorBy">
-                                                <option value="manual">Chose an option</option>
-                                                <option value="blue">Blue</option>
-                                                <option value="red">Red</option>
-                                                <option value="green">Green</option>
-                                                <option value="black">Black</option>
-                                                <option value="yellow">Yellow</option>
-                                            </select>
-                                        </div>
+
                                     </div>
                                     <!-- Product Coler Variation End -->
 
                                     <!-- Product Size Start -->
                                     <div class="product-size mb-5">
-                                        <label for="sizeBy">Size</label>
-                                        <div class="select-wrapper">
-                                            <select name="size" id="sizeBy">
-                                                <option value="manual">Chose an option</option>
-                                                <option value="large">Large</option>
-                                                <option value="medium">Medium</option>
-                                                <option value="small">Small</option>
-                                            </select>
-                                        </div>
                                     </div>
                                     <!-- Product Size End -->
 
@@ -1129,9 +1156,9 @@
                                         <li>
                                             <!-- Cart Button Start -->
                                             <div class="cart-btn">
-                                                <div class="add-to_cart">
-                                                    <a class="btn btn-dark btn-hover-primary" href="cart.html">Add to cart</a>
-                                                </div>
+                                            <div class="add-to_cart">
+                                                <a class="btn btn-dark btn-hover-primary add-to-cart" href="#/" data-bs-toggle="modal" data-bs-target="#modalCart" data-product-id="{{ $product->product_id }}">Add to cart</a>
+                                            </div>
                                             </div>
                                             <!-- Cart Button End -->
                                         </li>
@@ -1139,7 +1166,6 @@
                                             <!-- Action Button Start -->
                                             <div class="actions">
                                                 <a href="compare.html" title="Compare" class="action compare"><i class="lastudioicon-heart-2"></i></a>
-                                                <a href="wishlist.html" title="Wishlist" class="action wishlist"><i class="lastudioicon-ic_compare_arrows_24px"></i></a>
                                             </div>
                                             <!-- Action Button End -->
                                         </li>
@@ -1149,21 +1175,24 @@
                                     <!-- Product Meta Start -->
                                     <ul class="product-meta">
                                         <li class="product-meta-wrapper">
-                                            <span class="product-meta-name">SKU:</span>
-                                            <span class="product-meta-detail">REF. LA-199</span>
+                                            <span class="product-meta-name">Remaining quantity:</span>
+                                            <span class="product-meta-detail">{{$product->inventory}}</span>
                                         </li>
                                         <li class="product-meta-wrapper">
                                             <span class="product-meta-name">category:</span>
                                             <span class="product-meta-detail">
-                                            <a href="#">Cake, </a>
-                                            <a href="#">New</a>
-                                        </span>
+                                                <a href="#"> @foreach($product->catalogs as $catalog)
+                                                {{ $catalog->category_name }}{{ !$loop->last ? ', ' : '' }}
+                                                @endforeach</a>
+                                            </span>
                                         </li>
                                         <li class="product-meta-wrapper">
-                                            <span class="product-meta-name">Tags:</span>
+                                            <span class="product-meta-name">Discount:</span>
                                             <span class="product-meta-detail">
-                                            <a href="#">Cake 1</a>
-                                        </span>
+                                                <a href="#">@foreach($product->discounts as $discount)
+                                                    {{ $discount->discount *100 }} %
+                                                @endforeach</a>
+                                            </span>
                                         </li>
                                     </ul>
                                     <!-- Product Meta End -->
@@ -1249,6 +1278,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
       document
         .getElementById("healthSuggestionBtn")
         .addEventListener("click", function () {
@@ -1273,24 +1303,24 @@
     });
 
 
- // Hàm để kiểm tra và cập nhật trạng thái của checkbox
- function updateHeathStatus(bmi) {
-    // Lấy checkbox "Thừa Cân" và "Thiếu Cân"
-    var thuaCanCheckbox = $('input[name="heath_id[]"][value="4"]');// 4 là thừa cân
-    var thieuCanCheckbox = $('input[name="heath_id[]"][value="5"]');// 5 là thiếu cân
+    // Hàm để kiểm tra và cập nhật trạng thái của checkbox
+    function updateHeathStatus(bmi) {
+        // Lấy checkbox "Thừa Cân" và "Thiếu Cân"
+        var thuaCanCheckbox = $('input[name="heath_id[]"][value="4"]');// 4 là thừa cân
+        var thieuCanCheckbox = $('input[name="heath_id[]"][value="5"]');// 5 là thiếu cân
 
-    // Xử lý tự động check/uncheck dựa vào BMI
-    if (bmi >= 25) {
-        thuaCanCheckbox.prop('checked', true);
-        thieuCanCheckbox.prop('checked', false);
-    } else if (bmi < 18.5) {
-        thieuCanCheckbox.prop('checked', true);
-        thuaCanCheckbox.prop('checked', false);
-    } else {
-        thuaCanCheckbox.prop('checked', false);
-        thieuCanCheckbox.prop('checked', false);
+        // Xử lý tự động check/uncheck dựa vào BMI
+        if (bmi >= 25) {
+            thuaCanCheckbox.prop('checked', true);
+            thieuCanCheckbox.prop('checked', false);
+        } else if (bmi < 18.5) {
+            thieuCanCheckbox.prop('checked', true);
+            thuaCanCheckbox.prop('checked', false);
+        } else {
+            thuaCanCheckbox.prop('checked', false);
+            thieuCanCheckbox.prop('checked', false);
+        }
     }
-}
 
     // Bắt sự kiện khi người dùng nhập chiều cao và cân nặng để tính BMI
     $('#heightInput, #weightInput').on('input', function() {
@@ -1354,6 +1384,24 @@
     $('#weightInput').on('keydown', function(event) {
         handleKeyDown.call(this, event, 500); // Giới hạn cân nặng tối đa là 500 kg
     });
+
+    document.getElementById('btnFilter').addEventListener('click', function() {
+        sessionStorage.setItem('scrollToA1', 'true');
+    });
+    
+    window.addEventListener('load', function() {
+        document.getElementById('a2').style.display = 'none';  // Show the product section
+        if (sessionStorage.getItem('scrollToA1') === 'true') {
+            document.getElementById('a2').style.display = 'block';  // Show the product section
+            document.getElementById('a1').scrollIntoView({
+                behavior: 'smooth'
+            });
+            // Xóa cờ sau khi đã cuộn xong để không lặp lại trong lần tải sau
+            sessionStorage.removeItem('scrollToA1');
+        }
+    });
+
+    
     </script>
 </body>
 

@@ -926,7 +926,4 @@
         });
     };
     scrollCounterup();
-
-
-
 })(jQuery);

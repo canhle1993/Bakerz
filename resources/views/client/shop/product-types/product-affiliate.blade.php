@@ -60,8 +60,8 @@
                         <div class="single-product-vertical-tab swiper-container order-2">
 
                             <div class="swiper-wrapper popup-gallery" id="popup-gallery">
-                                <a class="swiper-slide h-auto" href="assets/images/product/product-7-1.png">
-                                    <img class="w-100" src="assets/images/product/product-7-1.png" alt="Product">
+                                <a class="swiper-slide h-auto" href="{{asset('img/product-8-1.png')}}">
+                                    <img class="w-100" src="{{asset('img/product-8-1.png')}}" alt="{{asset('img/product-8-1.png')}}">
                                 </a>
                                 <a class="swiper-slide h-auto" href="assets/images/product/product-7-2.png">
                                     <img class="w-100" src="assets/images/product/product-7-2.png" alt="Product">
@@ -377,7 +377,7 @@
                             <div class="product-item text-center">
                                 <div class="product-item__badge">Hot</div>
                                 <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="assets/images/product/product-8-500x625.jpg" alt="Product"></a>
+                                    <a href="single-product.html"><img width="350" height="350" src="img/Baked Goods/Apple Pie/Apple Pie.png" alt="Product"></a>
                                     <ul class="product-item__meta">
                                         <li class="product-item__meta-action">
                                             <a class="shadow-1 labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>

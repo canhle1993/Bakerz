@@ -227,6 +227,7 @@
       input[type="file"] {
         display: none;
       }
+
     </style>
 
 </head>
@@ -270,6 +271,7 @@
                                             <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
                                             <li><a class="sub-item-link" href="{{ route('checkout') }}"><span>Checkout</span></a></li>
                                             <li><a class="sub-item-link" href="{{ route('order-tracking') }}"><span>Order Tracking</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('client_location') }}"><span>Client Location</span></a></li>
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item banner-menu-content-wrap">
@@ -301,10 +303,7 @@
                                     <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
                                 </ul>
                             </li>
-                            <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Blog</span></a>
-                                <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="{{ route('blog-detail') }}"><span>Blog Details</span></a></li>
-                                </ul>
+                            <li><a class="menu-item-link" href="{{ route('blog-detail') }}"><span>Workshop</span></a>
                             </li>
                             <li><a class="menu-item-link" href="{{ route('contact') }}"><span>Contact</span></a></li>
                         </ul>
@@ -317,9 +316,9 @@
                         <ul class="header-meta__action d-flex justify-content-end">
                             <li><button class="action search-open"><i class="lastudioicon-zoom-1"></i></button></li>
                             <li>
-                                <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
+                                <button id="cart_icon" class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
                                     <i class="lastudioicon-shopping-cart-2"></i>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>
+                                    <span id="cart_quantity" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary"></span>
                                 </button>
                             </li>
                             <!-- header-primary-menu d-flex justify-content-center -->
@@ -364,12 +363,13 @@
     <!-- Search Start  -->
     <div class="search-popup position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-6 bg-black bg-opacity-75">
         <div class="search-popup__form position-relative">
-            <form action="" method="GET">
-                <input class="search-popup__field border-0 border-bottom bg-transparent text-white w-100 tra py-3" type="text" placeholder="Search…">
-                <button class="search-popup__icon text-white border-0 bg-transparent position-absolute top-50 end-0 translate-middle-y"><i class="lastudioicon-zoom-1"></i></button>
+
+            <form action="{{ route('shop_all') }}" method="GET">
+                <input class="search-popup__field border-0 border-bottom bg-transparent text-white w-100 tra py-3" name="query" type="text" placeholder="Search…" value="{{ request()->query('query') }}">
+                <button type="submit"  class="search-popup__icon text-white border-0 bg-transparent position-absolute top-50 end-0 translate-middle-y"><i class="lastudioicon-zoom-1"></i></button>
             </form>
         </div>
-        <button class="search-popup__close position-absolute top-0 end-0 m-8 p-3 lh-1 border-0 text-white fs-4"><i class="lastudioicon-e-remove"></i></button>
+        <button type="submit" class="search-popup__close position-absolute top-0 end-0 m-8 p-3 lh-1 border-0 text-white fs-4"><i class="lastudioicon-e-remove"></i></button>
     </div>
     <!-- Search End -->
 
@@ -381,96 +381,21 @@
       <button type="button" class="btn-close text-secondary" data-bs-dismiss="offcanvas"><i class="lastudioicon lastudioicon-e-remove"></i></button>
   </div>
 
-  <div class="offcanvas-body">
-      <!-- Offcanvas Cart Items Start  -->
-      <ul class="offcanvas-cart-items">
-          <li>
-              <!-- Mini Cart Item Start  -->
-              <div class="mini-cart-item">
-                  <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                  <div class="mini-cart-item__thumbnail">
-                      <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-1.png')}}" alt="Cart"></a>
-                  </div>
-                  <div class="mini-cart-item__content">
-                      <h6 class="mini-cart-item__title"><a href="single-product.html">Macaron Cake</a></h6>
-                      <span class="mini-cart-item__quantity">1 × $4.99</span>
-                  </div>
-              </div>
-              <!-- Mini Cart Item End  -->
-          </li>
-          <li>
-              <!-- Mini Cart Item Start  -->
-              <div class="mini-cart-item">
-                  <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                  <div class="mini-cart-item__thumbnail">
-                      <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-2.png')}}" alt="Cart"></a>
-                  </div>
-                  <div class="mini-cart-item__content">
-                      <h6 class="mini-cart-item__title"><a href="single-product.html">Cream Muffin</a></h6>
-                      <span class="mini-cart-item__quantity">1 × $4.99</span>
-                  </div>
-              </div>
-              <!-- Mini Cart Item End  -->
-          </li>
-          <li>
-              <!-- Mini Cart Item Start  -->
-              <div class="mini-cart-item">
-                  <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                  <div class="mini-cart-item__thumbnail">
-                      <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-3.png')}}" alt="Cart"></a>
-                  </div>
-                  <div class="mini-cart-item__content">
-                      <h6 class="mini-cart-item__title"><a href="single-product.html">Brownie</a></h6>
-                      <span class="mini-cart-item__quantity">1 × $4.99</span>
-                  </div>
-              </div>
-              <!-- Mini Cart Item End  -->
-          </li>
-          <li>
-              <!-- Mini Cart Item Start  -->
-              <div class="mini-cart-item">
-                  <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                  <div class="mini-cart-item__thumbnail">
-                      <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-4.png')}}" alt="Cart"></a>
-                  </div>
-                  <div class="mini-cart-item__content">
-                      <h6 class="mini-cart-item__title"><a href="single-product.html">Chocolate Muffin</a></h6>
-                      <span class="mini-cart-item__quantity">1 × $4.99</span>
-                  </div>
-              </div>
-              <!-- Mini Cart Item End  -->
-          </li>
-          <li>
-              <!-- Mini Cart Item Start  -->
-              <div class="mini-cart-item">
-                  <a href="#/" class="mini-cart-item__remove"><i class="lastudioicon lastudioicon-e-remove"></i></a>
-                  <div class="mini-cart-item__thumbnail">
-                      <a href="single-product.html"><img width="70" height="88" src="{{asset('assets/images/mini-cart/cart-5.png')}}" alt="Cart"></a>
-                  </div>
-                  <div class="mini-cart-item__content">
-                      <h6 class="mini-cart-item__title"><a href="single-product.html">No-bake chocolate</a></h6>
-                      <span class="mini-cart-item__quantity">1 × $4.99</span>
-                  </div>
-              </div>
-              <!-- Mini Cart Item End  -->
-          </li>
-      </ul>
-      <!-- Offcanvas Cart Items End  -->
-  </div>
+  @include('client.shop.others.cartpartials')
 
   <div class="offcanvas-footer d-flex flex-column gap-4">
 
       <!-- Mini Cart Total End  -->
       <div class="mini-cart-totla">
-          <span class="label">Subtotal:</span>
-          <span class="value">$24.95</span>
+          <span class="label">Total:</span>
+          <span id="total_price" class="value">$24.95</span>
       </div>
       <!-- Mini Cart Total End  -->
 
       <!-- Mini Cart Button End  -->
       <div class="mini-cart-btn d-flex flex-column gap-2">
           <a class="d-block btn btn-secondary btn-hover-primary" href="{{ route('cart') }}">View cart</a>
-          <a class="d-block btn btn-secondary btn-hover-primary" href="{{ route('checkout') }}">Checkout</a>
+          <a id="btnCheckout" class="d-block btn btn-secondary btn-hover-primary" href="{{ route('checkout') }}">Checkout</a>
       </div>
       <!-- Mini Cart Button End  -->
 
@@ -520,6 +445,118 @@
             }
         });
 
+        $(document).ready(function() {
+          updateCartView();
+          $('.add-to-cart').on('click', function(e) {
+              e.preventDefault();
+
+              var productId = $(this).data('product-id');
+              $.ajax({
+                  url: "{{ route('cart.new_add') }}",
+                  method: "POST",
+                  data: {
+                      _token: "{{ csrf_token() }}",
+                      product_id: productId,
+                      quantity: 1
+                  },
+                  success: function(response) {
+                      if (response.status === 'success') {
+                          // Cập nhật số lượng sản phẩm trong giỏ hàng
+                          updateCartView();
+                      } else {
+                          alert(response.message);
+                      }
+                  },
+                  error: function(xhr) {
+                      window.location.href = "{{ route('login') }}"; // Sử dụng route trong Blade để tạo đường dẫn
+                      // console.error('Error:', xhr.responseText);
+                  }
+              });
+          });
+
+          // delete cart
+          $(document).on('click', '.cart_delete', function(e) {
+
+                e.preventDefault();
+
+                var productId = $(this).data('product-id');
+                console.log(productId); // In ra product_id để đảm bảo nó có giá trị đúng
+
+                $.ajax({
+                    url: "{{ route('cart.delete', ':id') }}".replace(':id', productId), // Truyền product_id vào URL
+                    method: "DELETE",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        product_id: productId
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            updateCartView();
+                        } else {
+                            //   alert(response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert("FAIL");
+                        console.error('Error:', xhr.responseText);
+                    }
+                });
+            });
+            function updateCartView() {
+                $.ajax({
+                    url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+                        $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
+                        $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
+
+                        console.log(response.cart_quantity);
+                        calculateTotal();
+                        // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
+                        $('#cart_icon').css('color', 'red')// Đổi màu thành đỏ
+                        .animate({
+                            top: '-10px'
+                        }, 200, function() {
+                            $(this).animate({
+                                top: '0px'
+                            }, 200, function() {
+                                // Lặp lại lần nữa
+                                $(this).animate({
+                                    top: '-10px'
+                                }, 200, function() {
+                                    $(this).animate({
+                                        top: '0px'
+                                    }, 200, function() {
+                                        // Sau khi hiệu ứng hoàn thành, đổi lại màu ban đầu
+                                        $(this).css('color', '');
+                                    });
+                                });
+                            });
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
+            }
+        });
+
+
+        function calculateTotal() {
+            var total = 0;
+            // Duyệt qua tất cả các phần tử có class 'subtotal'
+            $('.subtotal').each(function() {
+                // Lấy giá trị của từng phần tử và loại bỏ ký tự $
+                var subtotal = parseFloat($(this).text().replace('$', ''));
+                // Cộng tổng lại
+                total += subtotal;
+            });
+
+            // Hiển thị tổng đã tính
+            $('#total_price').text(total.toFixed(2) + ' $');
+        }
     </script>
 </body>
 

@@ -9,14 +9,21 @@ use Illuminate\Support\Facades\Auth;
 
 class HeathyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $heathies = HeathyCatalog::where('isdelete', '<>', 1)
-                   ->orWhereNull('isdelete')
-                   ->orderBy('ModifiedDate', 'desc')  // Sắp xếp theo ngày cập nhật giảm dần
-                   ->paginate(5);
+        $query = HeathyCatalog::where('isdelete', '<>', 1)
+                            ->orWhereNull('isdelete');
+
+        // Nếu có tham số tìm kiếm
+        if ($request->has('search')) {
+            $query->where('heath_catalog', 'like', '%' . $request->search . '%');
+        }
+
+        $heathies = $query->orderBy('ModifiedDate', 'desc')->paginate(5);
+
         return view('admin.heathylist', compact('heathies'));
     }
+
 
     public function store(Request $request)
     {

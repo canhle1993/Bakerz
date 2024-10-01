@@ -54,52 +54,10 @@
                 <div class="col-lg-8 col-12 mb-30">
 
                     <div class="table-responsive">
-                        <table class="cart-table table text-center align-middle mb-6 d-none d-md-table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th class="title text-start">Product</th>
-                                    <th class="price">Price</th>
-                                    <th class="quantity">Quantity</th>
-                                    <th class="total">Subtotal</th>
-                                </tr>
-                            </thead>
-                            <tbody class="border-top-0">
-                                @if(session('cart') && count(session('cart')) > 0)
-                                    @foreach(session('cart') as $id => $details)
-                                        <tr>
-                                            <th class="cart-remove">
-                                                <!-- Nút xóa sản phẩm -->
-                                                <button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $id }}" style="font-size: 12px; padding: 4px 8px;">Delete this</button>
-
-                                            </th>
-                                            <th class="cart-thumb">
-                                                <a href="single-product.html">
-                                                    <img src="{{ asset('storage/products/' . $details['image']) }}" alt="{{ $details['name'] }}">
-                                                </a>
-                                            </th>
-                                            <th class="text-start">
-                                                <a href="single-product.html">{{ $details['name'] }}</a>
-                                            </th>
-                                            <td>{{ number_format($details['price'], 2) }} $</td>
-                                            <td class="text-center cart-quantity">
-                                                <div class="quantity">
-                                                    <input type="number" value="{{ $details['quantity'] }}" min="1" class="cart-quantity-input" data-id="{{ $id }}">
-                                                </div>
-                                            </td>
-                                            <td class="subtotal" id="subtotal-{{ $id }}">{{ number_format($details['price'] * $details['quantity'], 2) }} $</td>
-                                        </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="6">Your cart is empty!</td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
+                        
+                            @include('client.shop.others.cartdetail')
+                        
                     </div>
-
 
                     <!-- Cart Action Buttons Start -->
                     <div class="row justify-content-between gap-3">
@@ -120,6 +78,20 @@
                             <h4 class="title">Cart totals</h4>
                             <table class="table bg-transparent">
                                 <tbody>
+                                    @if(Auth::user()->rank === 'Gold' || Auth::user()->rank === 'Diamond')
+                                    <tr>
+                                        <th>Discount <span id="discountper"> </span></th>
+                                        <th class="amount"><strong id="discount-amount"></strong>
+                                        <br>
+                                        @if(Auth::user()->rank === 'Gold')
+                                            <span>(Exclusive discount for Gold rank)</span>
+                                        @else
+                                            <span>(Exclusive discount for Diamond rank)</span>
+                                        @endif
+                                        </th> <!-- Discount row -->
+                                        
+                                    </tr>
+                                    @endif
                                     <tr class="total">
                                         <th class="sub-title">Total</th>
                                         <td class="amount"><strong id="total-price">0.00 $</strong></td>
@@ -127,7 +99,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a href="{{ route('checkout') }}" class="btn btn-dark btn-hover-primary rounded-0 w-100">Proceed to checkout</a>
+                        <a id="btnCheckout2" href="{{ route('checkout') }}" class="btn btn-dark btn-hover-primary rounded-0 w-100">Proceed to checkout</a>
                     </div>
                 </div>
                 <!-- Cart Totals End -->
@@ -257,7 +229,7 @@
 
             if(confirm("Are you sure you want to remove this item?")) {
                 $.ajax({
-                    url: '{{ route('cart.remove') }}',
+                    url: '<?php echo e(route('cart.remove')); ?>',
                     method: "POST",
                     data: {
                         _token: '{{ csrf_token() }}',
@@ -275,53 +247,154 @@
     {{-- Script xử lý thay đổi số lượng bánh thì tiền tăng theo --}}
     <script>
         $(document).ready(function() {
+            var userRank = "{{ Auth::user()->rank }}"; // Get the user's rank
             // Lắng nghe sự thay đổi của input số lượng
-            $(".cart-quantity-input").on('change', function() {
+            $(document).on('input change', '.cart-quantity-input', function(e) {
                 var productId = $(this).data('id'); // Lấy product_id
                 var quantity = $(this).val(); // Lấy số lượng mới
                 var _token = "{{ csrf_token() }}"; // CSRF token để bảo mật
-
-                // Gửi request AJAX đến server để cập nhật số lượng
+                var discount  = $(this).data('price'); // Lấy product_id
                 $.ajax({
-                    url: '{{ route("cart.update") }}', // URL để xử lý update giỏ hàng
+                    url: "{{ route('cart.update_quantity', ':id') }}".replace(':id', productId), // Truyền product_id vào URL
                     method: 'POST',
                     data: {
                         _token: _token,
-                        id: productId,
-                        quantity: quantity
+                        product_id: productId,
+                        quantity: quantity // Gửi số lượng mới lên server
+
                     },
                     success: function(response) {
+                        
                         // Cập nhật lại subtotal của sản phẩm này
-                        $("#subtotal-" + productId).text(response.subtotal + " $");
+                        var updatedQuantity = parseFloat(quantity) || 0;
+                        var updatedDiscount = parseFloat(discount) || 0;
+                        $("#subtotal-" + productId).text((updatedQuantity * updatedDiscount).toFixed(2) + " $");
 
                         // Cập nhật lại tổng giá trị của giỏ hàng (tính lại tổng subtotal)
-                        updateTotalPrice();
+                        updateTotalPrice(userRank);
+                        updateCartView();
                     },
                     error: function() {
-                        alert('Could not update the cart.');
+                        console.error('Error:', xhr.responseText);
                     }
                 });
             });
 
-            // Hàm tính tổng tất cả các subtotal và cập nhật vào mục total
-            function updateTotalPrice() {
-                var total = 0;
-                $(".subtotal").each(function() {
-                    var subtotal = parseFloat($(this).text().replace(/[^0-9.-]+/g, "")); // Lấy giá trị subtotal và loại bỏ các ký tự không phải số
-                    total += subtotal;
-                });
+            // delete cart
+            $(document).on('click', '.cart_delete', function(e) {
+                    e.preventDefault();
 
-                // Cập nhật lại mục tổng giá trị
-                $("#total-price").text(total.toFixed(2) + " $");
+                    var productId = $(this).data('product-id');
+                    console.log(productId); // In ra product_id để đảm bảo nó có giá trị đúng
+
+                    $.ajax({
+                        url: "{{ route('cart.delete', ':id') }}".replace(':id', productId), // Truyền product_id vào URL
+                        method: "DELETE",
+                        data: {
+                            _token: "{{ csrf_token() }}", 
+                            product_id: productId
+                        },
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                updateCartView();
+                                
+                            } else {
+                                //   alert(response.message);
+                            }
+                        },
+                        error: function(xhr) {
+                            console.error('Error:', xhr.responseText);
+                        }
+                    });
+                });
+        
+            // Hàm tính tổng tất cả các subtotal và cập nhật vào mục total
+
+            function updateCartView() {
+                $.ajax({
+                    url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+                        
+                        // $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
+                        
+                        $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
+                        updateTotalPrice(userRank);
+                        calculateTotal();
+                        // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
+                        $('#cart_icon').css('color', 'red')// Đổi màu thành đỏ
+                        .animate({ 
+                            top: '-10px' 
+                        }, 200, function() {
+                            $(this).animate({ 
+                                top: '0px' 
+                            }, 200, function() {
+                                // Lặp lại lần nữa
+                                $(this).animate({ 
+                                    top: '-10px' 
+                                }, 200, function() {
+                                    $(this).animate({ 
+                                        top: '0px' 
+                                    }, 200, function() {
+                                        // Sau khi hiệu ứng hoàn thành, đổi lại màu ban đầu
+                                        $(this).css('color', ''); 
+                                    });
+                                });
+                            });
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
             }
 
             // Cập nhật tổng giá trị ban đầu khi trang được tải
-            updateTotalPrice();
+            updateTotalPrice(userRank);
         });
+
+        function calculateTotal() {
+            var total = 0;
+            // Duyệt qua tất cả các phần tử có class 'subtotal'
+            $('.subtotal').each(function() {
+                // Lấy giá trị của từng phần tử và loại bỏ ký tự $
+                var subtotal = parseFloat($(this).text().replace('$', ''));
+                // Cộng tổng lại
+                total += subtotal;
+            });
+            
+            // Hiển thị tổng đã tính
+            $('#total_price').text(total.toFixed(2) + ' $');
+        }
+        
+        function updateTotalPrice(rank) {
+                var total = 0;
+                // Duyệt qua tất cả các phần tử có class 'subtotal'
+                $('.sub-total').each(function() {
+                    // Lấy giá trị của từng phần tử và loại bỏ ký tự $
+                    var subtotal = parseFloat($(this).text().replace('$', ''));
+                    // Cộng tổng lại
+                    total += subtotal;
+                });
+                // Determine discount percentage based on rank
+                var discountPercentage = 0;
+                if (rank === 'Gold') {
+                    discountPercentage = 2; // 2% for Gold rank
+                } else if (rank === 'Diamond') {
+                    discountPercentage = 5; // 5% for Diamond rank
+                }
+                        // Calculate discount amount
+                var discountAmount = (total * discountPercentage) / 100;
+                var grandTotal = total - discountAmount;
+
+                // Update discount and grand total in DOM
+                $('#discountper').text("(" + discountPercentage + "%)");
+                $('#discount-amount').text("-" + discountAmount.toFixed(2) + " $");
+                $('#total-price').text(grandTotal.toFixed(2) + " $");
+            }
     </script>
-
-
-
 
 </body>
 
