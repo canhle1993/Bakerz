@@ -237,11 +237,13 @@
         <div class="container position-relative">
 
             <div class="row align-items-center">
+                
                 <div class="col-lg-3 col-xl-3 col-7">
                     <!-- Header Logo Start -->
                     <div class="header-logo">
                         <a href="<?php echo e(route('client.home')); ?>">
                             <img class="white-logo" src="<?php echo e(asset('assets/images/logo-white.svg')); ?>" width="229" height="62" alt="Logo">
+                            <b style="color: #f34e4e; font-size: larger;" id="onlineCount"></b>
                         </a>
                     </div>
                     <!-- Header Logo End -->
@@ -448,6 +450,12 @@
 
         $(document).ready(function() {
           updateCartView();
+          updateonlineUser();
+          // Kiểm tra trạng thái mỗi giây (1000ms)
+          setInterval(updateonlineUser, 1000);
+
+        // Sử dụng visibilitychange để xử lý thay đổi ngay lập tức
+        document.addEventListener("visibilitychange", updateonlineUser);
           $('.add-to-cart').on('click', function(e) {
               e.preventDefault();
 
@@ -542,9 +550,8 @@
                     }
                 });
             }
+
         });
-
-
         function calculateTotal() {
             var total = 0;
             // Duyệt qua tất cả các phần tử có class 'subtotal'
@@ -558,6 +565,19 @@
             // Hiển thị tổng đã tính
             $('#total_price').text(total.toFixed(2) + ' $');
         }
+        function updateonlineUser() {
+                $.ajax({
+                    url: "<?php echo e(route('online-users')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
+            }
     </script>
 </body>
 

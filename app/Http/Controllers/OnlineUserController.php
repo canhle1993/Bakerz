@@ -18,8 +18,8 @@ class OnlineUserController extends Controller
                 $activeSessions++;
             }
         }
+        // return redirect()->route('client.filter',compact(['onlineCount' => $activeSessions]));
+        return response()->json(['onlineCount' => $activeSessions]);
 
-        // Trả về view với số lượng người dùng đang online
-        return view('your_view', ['onlineCount' => $activeSessions]);
     }
 }
