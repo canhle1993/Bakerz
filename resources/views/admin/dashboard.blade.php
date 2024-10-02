@@ -21,7 +21,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-
     <link href="{{asset('darkpan-1.0.0/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
     <link href="{{asset('darkpan-1.0.0/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
 
@@ -42,7 +41,6 @@
         </div>
         <!-- Spinner End -->
 
-
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
@@ -51,12 +49,11 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0">{{ Auth::user()->name }}</h6>
-                        <span>{{Auth::user()->role->role_name}}</span>
+                        <span>{{ Auth::user()->role->role_name }}</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -71,51 +68,42 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Management</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{route('manage-client')}}" class="dropdown-item">Client</a>
-
+                            <a href="{{ route('manage-client') }}" class="dropdown-item">Client</a>
                             @if(Auth::user()->role_id == 3)
-                            <!-- Chỉ hiển thị phần quản lý Admin nếu user là Manager -->
-                            <a href="{{ route('manage-admin') }}" class="dropdown-item">Admin</a>
-                        @endif
-
-                            <a href="{{route('manage-blacklist')}}" class="dropdown-item">Blacklist</a>
+                                <a href="{{ route('manage-admin') }}" class="dropdown-item">Admin</a>
+                            @endif
+                            <a href="{{ route('manage-blacklist') }}" class="dropdown-item">Blacklist</a>
                         </div>
                     </div>
                     <a href="{{ route('admin.reviews.manage') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a>
                     <!-- Order Manager -->
                     <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle {{ (Request::is('order*') ) ? 'active' : '' }} " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Order Manager</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ (Request::is('order*') ) ? 'active' : '' }} " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Order Manager</a>
                         <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('order*') ) ? 'show' : '' }}">
                             <a href="{{ route('order.pending') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.pending') ? 'active' : '' }}">&nbsp;&nbsp;Pending Order</a>
                             <a href="{{ route('order.paid') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.paid') ? 'active' : '' }}">&nbsp;&nbsp;Paid Order</a>
                             <a href="{{ route('order.confirmed') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.confirmed') ? 'active' : '' }}">&nbsp;&nbsp;Confirmed Order</a>
-                            <a href="{{ route('order.delivered') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.delivered') ? 'active' : '' }}">&nbsp;&nbsp;Deliveried Order</a>
+                            <a href="{{ route('order.delivered') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.delivered') ? 'active' : '' }}">&nbsp;&nbsp;Delivered Order</a>
                             <a href="{{ route('order.cancel') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.cancel') ? 'active' : '' }}">&nbsp;&nbsp;Cancel Order</a>
                         </div>
                     </div>
-                    </div>
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>User</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">User Management</a>
-                            <a href="signup.html" class="dropdown-item">Order</a>
-                            <a href="404.html" class="dropdown-item">Evaluate</a>
-                            <a href="blank.html" class="dropdown-item">Comment</a>
-
-                        </div>
-                            <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                            <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                            <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                            <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                    </div>
-
                 </div>
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>User</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="signin.html" class="dropdown-item">User Management</a>
+                    <a href="signup.html" class="dropdown-item">Order</a>
+                    <a href="404.html" class="dropdown-item">Evaluate</a>
+                    <a href="blank.html" class="dropdown-item">Comment</a>
+                </div>
+                <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
+                <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
+                <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
+                <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
             </nav>
         </div>
         <!-- Sidebar End -->
-
 
         <!-- Content Start -->
         <div class="content">
@@ -129,52 +117,42 @@
                 </a>
 
                 <div class="navbar-nav align-items-center ms-auto">
+                    <!-- Message Dropdown -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-envelope me-lg-2"></i>
+                            <i class="fa fa-envelope me-lg-2 position-relative">
+                                @if($notifications->count() > 0)
+                                    <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;">{{ $notifications->count() }}</span>
+                                @endif
+                            </i>
                             <span class="d-none d-lg-inline-flex">Message</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all message</a>
+                            @if($notifications->isEmpty())
+                                <p class="dropdown-item text-center">Không có thông báo mới.</p>
+                            @else
+                                @foreach($notifications as $notification)
+                                    <a href="{{ route('message.read', $notification->id) }}" class="dropdown-item">
+                                        <div class="d-flex align-items-center">
+                                            <img class="rounded-circle" src="{{ asset('storage/avatars/' . $notification->user->avatar) }}" alt="User avatar" style="width: 40px; height: 40px;">
+                                            <div class="ms-2">
+                                                <h6 class="fw-normal mb-0">{{ $notification->user->name }} đã {{ $notification->review_id ? 'gửi một đánh giá' : 'trả lời đánh giá' }}.</h6>
+                                                <small>{{ \Carbon\Carbon::parse($notification->created_at)->diffForHumans() }}</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <hr class="dropdown-divider">
+                                @endforeach
+                                <a href="{{ route('admin.reviews.manage') }}" class="dropdown-item text-center">Xem tất cả thông báo</a>
+                            @endif
                         </div>
                     </div>
+
+                    <!-- Notification Dropdown -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notificatin</span>
+                            <span class="d-none d-lg-inline-flex">Notification</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
@@ -195,20 +173,21 @@
                             <a href="#" class="dropdown-item text-center">See all notifications</a>
                         </div>
                     </div>
+
+                    <!-- Profile Dropdown -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-
                             <img class="rounded-circle me-lg-2" src="{{ asset('storage/avatars/' . Auth::user()->avatar) }}" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">{{ Auth::user()->name }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="{{ route('client.home') }}" class="dropdown-item"><i class="fa fa-home"></i> Home</a>
-                            <a href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}" class="dropdown-item"><i class=" fa fa-suitcase"></i> My Profile</a>
+                            <a href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}" class="dropdown-item"><i class="fa fa-suitcase"></i> My Profile</a>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item"><i class="fa fa-key"></i> Log Out</a>
                         </div>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </nav>
@@ -225,39 +204,25 @@
             @yield('manage_client_edit')
             @yield('manage_admin_create')
             @yield('manage_blacklist')
-
-            <!-- Body -->
-
-
+            <!-- Body End -->
 
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">
-                    <div class="bg-secondary rounded-top p-4">
-                        <div class="row">
-                            <div
-                                class="col-12 col-sm-6 text-center text-sm-start"
-                            >
-                                &copy; <a href="#">bakerz bite</a>, All Right
-                                Reserved.
-                            </div>
-                            <div
-                                class="col-12 col-sm-6 text-center text-sm-end"
-                            >
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                                Designed By
-                                <a href="https://htmlcodex.com">HTML Codex</a>
-                                <br />Distributed By:
-                                <a href="https://themewagon.com" target="_blank"
-                                    >ThemeWagon</a
-                                >
-                            </div>
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">BakerzBite</a>, All Rights Reserved.
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            Designed By <a href="https://htmlcodex.com">HTML Codex</a><br>
+                            Distributed By: <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
                         </div>
                     </div>
                 </div>
+            </div>
             <!-- Footer End -->
         </div>
         <!-- Content End -->
-
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

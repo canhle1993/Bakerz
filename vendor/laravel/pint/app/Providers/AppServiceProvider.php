@@ -3,8 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use PhpCsFixer\Error\ErrorsManager;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Notification;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +16,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Thêm View Composer để truyền biến notifications vào tất cả các view
+        View::composer('admin.*', function ($view) {
+            if (Auth::check()) {
+                $notifications = Notification::with('user')
+                    ->where('is_read', 0)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                $view->with('notifications', $notifications);
+            }
+        });
     }
 
     /**

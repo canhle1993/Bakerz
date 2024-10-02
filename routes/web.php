@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -73,6 +73,11 @@ Route::delete('/admin/manage/client/{id}', [ManageClientController::class, 'dest
 
 // Route quản lý Admin
 use App\Http\Controllers\Admin\ManageAdminController;
+
+
+// Route để đánh dấu thông báo là đã đọc và chuyển hướng đến trang review
+Route::get('/admin/message/read', [DashboardController::class, 'markAsRead'])->name('message.read');
+
 
 Route::get('/admin/manage/admin', [ManageAdminController::class, 'index'])->name('manage-admin');
 Route::get('/admin/manage/admin/create', [ManageAdminController::class, 'create'])->name('admin.create');
@@ -218,7 +223,7 @@ Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart']
 Route::get('/showcheckout', [CartController::class, 'showcheckout'])->name('checkout');
 Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.cart_checkout');
 
-use App\Http\Controllers\ReviewController;
+
 
 // Route để lưu đánh giá
 Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
