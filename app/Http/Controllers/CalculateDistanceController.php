@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Location;
 
 class CalculateDistanceController extends Controller
 {
@@ -12,12 +13,18 @@ class CalculateDistanceController extends Controller
         return view('client_location');
     }
 
-    // Hàm tính khoảng cách giữa hai tọa độ
+    // Hàm tính khoảng cách giữa hai tọa độ và lưu vị trí
     public function calculateDistance(Request $request)
     {
         // Lấy tọa độ của người dùng từ request
         $userLatitude = $request->input('latitude');
         $userLongitude = $request->input('longitude');
+
+        // Lưu vị trí vào bảng locations
+        $location = new Location();
+        $location->latitude = $userLatitude;
+        $location->longitude = $userLongitude;
+        $location->save();
 
         // Tọa độ của cửa hàng
         $storeLatitude = 10.80688612;

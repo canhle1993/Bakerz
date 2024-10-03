@@ -37,7 +37,7 @@ class User extends Authenticatable
         'rank',
     ];
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for serialization..
      *
      * @var array<int, string>
      */

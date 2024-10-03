@@ -664,6 +664,61 @@ $(document).on('click', '.labtn-icon-quickview', function() {
         console.log('Không tìm thấy product_id.');
     }
 });
+$('.quickview').on('click', function(e) {
+            e.preventDefault();
+            var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+            // Gọi AJAX để lấy dữ liệu sản phẩm
+            $.ajax({
+                url: "{{ route('product.details', ':id') }}".replace(':id', productid), // Thay :id bằng product ID
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        var product = response.product;  // Đối tượng product từ server
+                        
+                        // Đổ dữ liệu vào modal
+                        $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
+                        $('#modal-single-product .desc-content').html(product.describe);  // Đổ mô tả sản phẩm
+                        
+                        // Cập nhật hình ảnh sản phẩm
+                        var imagesHtml = '';
+                        var productImage = "{{ asset('storage/products/') }}/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
+
+                        imagesHtml += '<div class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + productImage + '" alt="Product"></div>';
+                        product.images.forEach(function(image) {
+                            var imageUrl = "{{ asset('storage/products') }}/" + image.image; // Access the correct field inside image object
+                            imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
+                        });
+
+                        $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
+                        $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
+                        
+                        // Hiển thị modal
+                        $('#exampleProductModal').modal('show');
+                    } else {
+                        alert(response.message); // Hiển thị thông báo lỗi nếu có
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // Xử lý lỗi
+                }
+            });
+        });
+
+        function updateonlineUser() {
+                $.ajax({
+                    url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
+            }
 
 // Script cho QuickView
 </script>

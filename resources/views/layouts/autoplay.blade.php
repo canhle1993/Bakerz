@@ -19,8 +19,8 @@
 
         .slideeerrr-wrapper {
             display: flex;
-            width: calc(10 * 300px); /* 5 ảnh gốc + 5 ảnh lặp lại */
-            animation: slideee 40s linear infinite;
+            width: calc(14 * 300px); /* 5 ảnh gốc + 5 ảnh lặp lại */
+            animation: slideee 50s linear infinite;
         }
 
         .slideee {
