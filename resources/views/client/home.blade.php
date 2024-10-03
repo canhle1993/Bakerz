@@ -376,7 +376,7 @@
 <div class="section-padding-03 pt-0">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" >
                 <div class="section-title">
                     <h2 class="section-title__title">Most recently purchased products _______________ <a href="{{ route('shop_all') }}" class="read-more"><span>show more</span></a></h2>
                 </div>
