@@ -44,10 +44,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
-                        <h1 class="breadcrumb_title">Pricing Plans</h1>
+                        <h1 class="breadcrumb_title">Bakerz Bite Rewards</h1>
                         <ul class="breadcrumb_list">
-                            <li><a href="index.html">Home</a></li>
-                            <li>Pricing Plans</li>
+                            <li><a href="<?php echo e(route('client.home')); ?>">Home</a></li>
+                            <li>Bakerz Bite Rewards</li>
                         </ul>
                     </div>
                 </div>
@@ -55,14 +55,41 @@
         </div>
     </div>
     <!-- Breadcrumb Section End -->
-
+    <!-- Product Section Start -->
+    <div class="blog-sidebar blog-sidebar-right">
+        <div class="container custom-container">
+            <div class="row">
+                <div class="col-12 section-padding-04">
+                    <div class="">
+                        <div class="single-blog">                          
+                            <div class="single-blog-content">
+                                <ul class="blog-post-two__meta">
+                                    <li><a href="<?php echo e(route('client.home')); ?>">Bakerz Bite</a></li>
+                                    <li>-</li>
+                                    <li><span>August 14, 2024</span></li>
+                                </ul>
+                                <h2 class="single-blog-title">What is Bakerz Bite Rewards?</h2>
+                                <p class="single-blog-description">Bakerz Bite Rewards is a program created by Bakerz Bite for the purpose of paying tribute to Bakerz Bite customers. When you join, you will receive incentives based on the ranks you have achieved, divided into ranks such as: Bronze, Gold, and Diamond. Rankings will be calculated based on the level of spending and the number of points you accumulate for each order.</p>
+                                <p class="single-blog-description">Bakerz Bite's upgrade criteria will be gradually increased by tier with the upgrade criteria will be:</p>
+                                <al>
+                                    <li>Bronze Member: This will be the most basic rank that every user will be able to use when making purchases at Bakerz Bite.</li>
+                                    <li>Gold Tier: You need to accumulate 100 points, when you buy with $10 you will get 1 point, points are calculated according to the total value of each order.</li>
+                                    <li>Diamond Tier: You need to accumulate 500 points, when you buy with $10 you will get 1 point, points are calculated according to the total value of each order.</li>
+                                </al>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product Section End -->
     <!-- Pricing Section Strat -->
-    <div class="pricing-section section-padding-01">
+    <div class="pricing-section section-padding-01" style="padding-top: 0px !important;">
         <div class="container">
-
             <!-- Section Title Strat -->
             <div class="section-title-02 text-center">
-                <h2 class="section-title-02__title">CHOOSE YOUR BEST OFFER</h2>
+                <h2 class="section-title-02__title">Bakerz Bite Rewards Upgrade Criteria</h2>
             </div>
             <!-- Section Title End -->
 
@@ -73,23 +100,24 @@
                     <div class="pricing-card">
                         <div class="pricing-card__header">
                             <div class="pricing-card__heading pricing-bg-1">
-                                <h3 class="pricing-card__title text-white">Standard</h3>
+                                <h3 class="pricing-card__title text-white">Bronze</h3>
+                                <span class="pricing-card__sub-title text-white">( Nember )</span>
                             </div>
                         </div>
                         <div class="pricing-card__body">
                             <ul>
-                                <li>Vestibulum eu quam nec neque pellentesque efficitur id eget nisl.</li>
-                                <li>Proin porta est convallis lacus blandit pretium sed non enim.</li>
-                                <li>Maecenas lacinia non orci at aliquam.</li>
+                                <li>You will get free shipping on orders under 5klm.</li>
+                                <li>Receive a Members' Day offer notification.</li>
+                                <li>Get free customer care consultation.</li>
                             </ul>
                         </div>
                         <div class="pricing-card__footer pricing-bg-1">
                             <div class="pricing-card__price">
-                                <span class="pricing-card__price-value">$199</span>
-                                <span class="pricing-card__price-suffix">/ per month</span>
+                                <span class="pricing-card__price-value">0</span>
+                                <span class="pricing-card__price-suffix">/ 99 point</span>
                             </div>
                             <div class="pricing-card__action">
-                                <a class="pricing-card__icon" href="#">
+                                <a class="pricing-card__icon" href="<?php echo e(route('shop_all')); ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="44" height="16" fill="none" viewBox="0 0 44 16">
                                         <path fill="currentColor" d="M43.707 8.707a1 1 0 0 0 0-1.414L37.343.929a1 1 0 1 0-1.414 1.414L41.586 8l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM0 9h43V7H0v2z"></path>
                                     </svg>
@@ -105,25 +133,26 @@
                     <!-- Pricing Card Strat -->
                     <div class="pricing-card">
                         <div class="pricing-card__header">
-                            <div class="pricing-card__heading pricing-bg-2">
-                                <h3 class="pricing-card__title text-white">Member</h3>
-                                <span class="pricing-card__sub-title text-white">( Recommend )</span>
+                            <div class="pricing-card__heading pricing-bg-2" style="background-color: #FFC107 !important;">
+                                <h3 class="pricing-card__title text-white">Gold</h3>
+                                <span class="pricing-card__sub-title text-white">( Vip )</span>
                             </div>
                         </div>
                         <div class="pricing-card__body">
                             <ul>
-                                <li>Vestibulum eu quam nec neque pellentesque efficitur id eget nisl.</li>
-                                <li>Proin porta est convallis lacus blandit pretium sed non enim.</li>
-                                <li>Maecenas lacinia non orci at aliquam. Donec finibus, urna bibendum ultricies laoreet, augue eros luctus sapien, ut euismod leo tortor ac enim.</li>
+                                <li>Get all Bronze offers.</li>
+                                <li>Get exceptional customer care.</li>
+                                <li>Get birthday notifications from Bakerz Bite, with up to 50% off orders under $100.</li>
+                                <li class="text-danger">Especially, all orders at checkout are discounted by 2%.</li>
                             </ul>
                         </div>
-                        <div class="pricing-card__footer pricing-bg-2">
+                        <div class="pricing-card__footer pricing-bg-2" style="background-color: #FFC107 !important;">
                             <div class="pricing-card__price">
-                                <span class="pricing-card__price-value">$499</span>
-                                <span class="pricing-card__price-suffix">/ per month</span>
+                                <span class="pricing-card__price-value">100</span>
+                                <span class="pricing-card__price-suffix">/ 499 point</span>
                             </div>
                             <div class="pricing-card__action">
-                                <a class="pricing-card__icon" href="#">
+                                <a class="pricing-card__icon" href="<?php echo e(route('shop_all')); ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="44" height="16" fill="none" viewBox="0 0 44 16">
                                         <path fill="currentColor" d="M43.707 8.707a1 1 0 0 0 0-1.414L37.343.929a1 1 0 1 0-1.414 1.414L41.586 8l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM0 9h43V7H0v2z"></path>
                                     </svg>
@@ -139,25 +168,25 @@
                     <!-- Pricing Card Strat -->
                     <div class="pricing-card">
                         <div class="pricing-card__header">
-                            <div class="pricing-card__heading pricing-bg-3">
-                                <h3 class="pricing-card__title text-white">Premium</h3>
+                            <div class="pricing-card__heading pricing-bg-3" style="background-color: #07e2ff  !important;">
+                                <h3 class="pricing-card__title text-white">Diamond</h3>
+                                <span class="pricing-card__sub-title text-white">( Supper Vip )</span>
                             </div>
                         </div>
                         <div class="pricing-card__body">
                             <ul>
-                                <li>Vestibulum eu quam nec neque pellentesque efficitur id eget nisl.</li>
-                                <li>Proin porta est convallis lacus blandit pretium sed non enim.</li>
-                                <li>Maecenas lacinia non orci at aliquam. Donec finibus, urna bibendum ultricies laoreet, augue eros luctus sapien, ut euismod leo tortor ac enim.</li>
-                                <li>In hac habitasse platea dictumst. Sed cursus venenatis tellus, non lobortis diam volutpat sit amet.</li>
+                                <li>Get all Gold offers.</li>
+                                <li>All orders at checkout are discounted by 5%.</li>
+                                <li class="text-danger">In particular, they are enrolled in the Bakerz Bite's Workshop, enthusiastically guided by the store's famous chefs to create their own favorite cake.</li>
                             </ul>
                         </div>
-                        <div class="pricing-card__footer pricing-bg-3">
+                        <div class="pricing-card__footer pricing-bg-3" style="background-color: #07e2ff  !important;">
                             <div class="pricing-card__price">
-                                <span class="pricing-card__price-value">$799</span>
-                                <span class="pricing-card__price-suffix">/ per month</span>
+                                <span class="pricing-card__price-value">500</span>
+                                <span class="pricing-card__price-suffix">/ Supper Vip</span>
                             </div>
                             <div class="pricing-card__action">
-                                <a class="pricing-card__icon" href="#">
+                                <a class="pricing-card__icon" href="<?php echo e(route('shop_all')); ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="44" height="16" fill="none" viewBox="0 0 44 16">
                                         <path fill="currentColor" d="M43.707 8.707a1 1 0 0 0 0-1.414L37.343.929a1 1 0 1 0-1.414 1.414L41.586 8l-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM0 9h43V7H0v2z"></path>
                                     </svg>

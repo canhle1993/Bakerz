@@ -237,10 +237,13 @@
         <div class="container position-relative">
 
             <div class="row align-items-center">
+                
                 <div class="col-lg-3 col-xl-3 col-7">
                     <!-- Header Logo Start -->
                     <div class="header-logo">
                         <a href="{{ route('client.home')}}">
+                        
+                        <b><span style="left: 0px !important; top: 20px !important;" id="onlineCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span></b>                       
                             <img class="white-logo" src="{{asset('assets/images/logo-white.svg')}}" width="229" height="62" alt="Logo">
                         </a>
                     </div>
@@ -272,6 +275,7 @@
                                             <li><a class="sub-item-link" href="{{ route('checkout') }}"><span>Checkout</span></a></li>
                                             <li><a class="sub-item-link" href="{{ route('order-tracking') }}"><span>Order Tracking</span></a></li>
                                             <li><a class="sub-item-link" href="{{ route('client_location') }}"><span>Client Location</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('online-users') }}"><span>Check online user</span></a></li>
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item banner-menu-content-wrap">
@@ -299,7 +303,7 @@
                                     <li><a class="sub-item-link" href="{{ route('about') }}"><span>About</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('our-chef') }}"><span>Our Chef</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Pricing Plans</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Bakerz Bite Rewards</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
                                 </ul>
                             </li>
@@ -447,6 +451,12 @@
 
         $(document).ready(function() {
           updateCartView();
+          updateonlineUser();
+          // Kiểm tra trạng thái mỗi giây (1000ms)
+          setInterval(updateonlineUser, 1000);
+
+        // Sử dụng visibilitychange để xử lý thay đổi ngay lập tức
+        document.addEventListener("visibilitychange", updateonlineUser);
           $('.add-to-cart').on('click', function(e) {
               e.preventDefault();
 
@@ -541,9 +551,8 @@
                     }
                 });
             }
+
         });
-
-
         function calculateTotal() {
             var total = 0;
             // Duyệt qua tất cả các phần tử có class 'subtotal'
@@ -557,6 +566,19 @@
             // Hiển thị tổng đã tính
             $('#total_price').text(total.toFixed(2) + ' $');
         }
+        function updateonlineUser() {
+                $.ajax({
+                    url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
+            }
     </script>
 </body>
 

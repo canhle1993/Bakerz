@@ -210,6 +210,7 @@
             <i class="bi bi-trash"></i> Delete
         </button>
     </form>
+
                 </td>
 
             </tr>

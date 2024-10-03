@@ -68,7 +68,7 @@ Route::get('/admin/manage/client/create', [ManageClientController::class, 'creat
 Route::post('/admin/manage/client/store', [ManageClientController::class, 'store'])->name('client.store');
 Route::get('/admin/manage/client/{id}/edit', [ManageClientController::class, 'edit'])->name('client.edit');
 Route::put('/admin/manage/client/{id}', [ManageClientController::class, 'update'])->name('client.update');
-Route::delete('/admin/manage/client/{id}', [ManageClientController::class, 'destroy'])->name('client.destroy');
+
 
 
 // Route quản lý Admin
@@ -264,3 +264,4 @@ Route::get('/order/delivered', [OrderController::class, 'delivered'])->name('ord
 
 Route::get('/order/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
 Route::post('/order/{order_id}/cancel', [OrderController::class, 'gotoCancel'])->name('order.gotoCancel');
+

@@ -253,3 +253,4 @@ class ManageAdminController extends Controller
         return redirect()->route('manage-blacklist')->with('success', 'Category deleted permanently');
     }
 }
+

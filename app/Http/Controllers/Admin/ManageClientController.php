@@ -137,3 +137,4 @@ class ManageClientController extends Controller
         return redirect()->route('manage-client')->with('success', 'Client deleted successfully');
     }
 }
+

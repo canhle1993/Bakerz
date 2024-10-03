@@ -399,8 +399,9 @@
                                     <ul class="product-item__meta">
                                         <li class="product-item__meta-action">
                                             <a
-                                            class="labtn-icon-quickview"
+                                            class="labtn-icon-quickview quickview"
                                             href="#"
+                                            data-product-id="<?php echo e($product->product_id); ?>"
                                             data-bs-tooltip="tooltip"
                                             data-bs-placement="top"
                                             title=""
@@ -540,8 +541,9 @@
                 <ul class="product-item__meta">
                   <li class="product-item__meta-action">
                     <a
-                      class="labtn-icon-quickview"
-                      href="#"
+                      class="labtn-icon-quickview quickview"
+                        href="#"
+                        data-product-id="<?php echo e($disproduct->product_id); ?>"
                       data-bs-tooltip="tooltip"
                       data-bs-placement="top"
                       title=""
@@ -633,6 +635,7 @@
             <div class="swiper-slide">
               <!-- Product Item Start -->
               <div class="product-item product-item-05 border text-center">
+                <div class="product-item__badge">Hot</div>
                 <div class="product-item__image">
                   <a
                     href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"
@@ -671,8 +674,9 @@
                 <ul class="product-item__meta">
                   <li class="product-item__meta-action">
                     <a
-                      class="labtn-icon-quickview"
-                      href="#"
+                      class="labtn-icon-quickview quickview"
+                                            href="#"
+                                            data-product-id="<?php echo e($product->product_id); ?>"
                       data-bs-tooltip="tooltip"
                       data-bs-placement="top"
                       title="Quick View"
@@ -763,10 +767,12 @@
                                 <!-- Product Item Start -->
                                 <div class="product-item product-item-06 border text-center">
                                     <div class="product-item__image">
-                                        <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><img width="350" height="350" src="<?php echo e($product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg')); ?>" alt="<?php echo e($product->product_name); ?>"></a>
+                                        <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><img style="border: none !important; height: 287px !important;" width="350" height="350" src="<?php echo e($product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg')); ?>" alt="<?php echo e($product->product_name); ?>"></a>
                                         <ul class="product-item__meta meta-middle">
                                             <li class="product-item__meta-action">
-                                                <a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
+                                                <a class="labtn-icon-quickview quickview"
+                                            href="#"
+                                            data-product-id="<?php echo e($product->product_id); ?>" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
                                             </li>
                                             <li class="product-item__meta-action">
                                                 <a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
@@ -1051,7 +1057,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <i class="lastudioicon lastudioicon-e-remove"></i>
                     </button>
-                    <div class="modal-body">
+                    <div class="modal-body" id='modal-single-product'>
                         <!-- Single Product Top Area Start -->
                         <div class="row">
                             <div class="col-lg-6 offset-lg-0 col-md-10 offset-md-1">
@@ -1063,20 +1069,7 @@
                                     <div class="single-product-vertical-tab swiper-container order-2">
 
                                         <div class="swiper-wrapper">
-                                        <?php if($product->images->isEmpty()): ?>
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="<?php echo e(asset('assets/images/product/product-8-500x625.jpg')); ?>" alt="Product">
-                                            </a>
-                                        <?php else: ?>
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="Product">
-                                            </a>
-                                        <?php endif; ?>
-                                        <?php $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="<?php echo e(asset('storage/products/' . $image->image)); ?>">
-                                            </a>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        
 
                                         </div>
 
@@ -1092,20 +1085,7 @@
                                     <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
 
                                         <div class="swiper-wrapper">
-                                        <?php if($product->images->isEmpty()): ?>
-                                            <div class="swiper-slide">
-                                                <img src="<?php echo e(asset('assets/images/product/product-8-500x625.jpg')); ?>" alt="Product">
-                                            </div>
-                                        <?php else: ?>
-                                            <div class="swiper-slide">
-                                                <img src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="Product">
-                                            </div>
-                                            <?php $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <div class="swiper-slide">
-                                                <img src="<?php echo e(asset('storage/products/' . $image->image)); ?>" alt="Product">
-                                            </div>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        <?php endif; ?>
+                                        
                 
                                         </div>
 
@@ -1281,6 +1261,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        
 
       document
         .getElementById("healthSuggestionBtn")
@@ -1404,7 +1385,48 @@
         }
     });
 
-    
+    $('.quickview').on('click', function(e) {
+            e.preventDefault();
+            var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+            // Gọi AJAX để lấy dữ liệu sản phẩm
+            $.ajax({
+                url: "<?php echo e(route('product.details', ':id')); ?>".replace(':id', productid), // Thay :id bằng product ID
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        var product = response.product;  // Đối tượng product từ server
+                        
+                        // Đổ dữ liệu vào modal
+                        $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
+                        $('#modal-single-product .desc-content').html(product.describe);  // Đổ mô tả sản phẩm
+                        
+                        // Cập nhật hình ảnh sản phẩm
+                        var imagesHtml = '';
+                        var productImage = "<?php echo e(asset('storage/products/')); ?>/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
+
+                        imagesHtml += '<div class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + productImage + '" alt="Product"></div>';
+                        product.images.forEach(function(image) {
+                            var imageUrl = "<?php echo e(asset('storage/products')); ?>/" + image.image; // Access the correct field inside image object
+                            imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
+                        });
+
+                        $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
+                        $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
+                        
+                        // Hiển thị modal
+                        $('#exampleProductModal').modal('show');
+                    } else {
+                        alert(response.message); // Hiển thị thông báo lỗi nếu có
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // Xử lý lỗi
+                }
+            });
+        });
+
     </script>
 </body>
 

@@ -317,11 +317,12 @@
                       <?php echo e(Auth::user()->name); ?>
 
                       <?php if(Auth::user()->rank === 'Gold'): ?>
-                          <b style="float: right;" >Rank: Gold</b>
+                          <a href="<?php echo e(route('pricing-plan')); ?>" style="float: right;"><b>Rank: <span style="color: #FFC107 !important;">Gold</span><br>Point: <?php echo e(Auth::user()->score); ?></b></a>
                       <?php elseif(Auth::user()->rank === 'Diamond'): ?>
-                          <b style="float: right;" >Rank: Diamond</b>
+                      <a href="<?php echo e(route('pricing-plan')); ?>" style="float: right;"><b>Rank: <span style="color: #07e2ff !important;">Diamond</span><br>Point: <?php echo e(Auth::user()->score); ?></b></a>
                       <?php else: ?>
-                          <b style="float: right;" >Rank: Bronze</b>
+                      <a href="<?php echo e(route('pricing-plan')); ?>" style="float: right;"><b>Rank: <span style="color: #4F1818 !important;">Bronze</span><br>Point: <?php echo e(Auth::user()->score); ?></b></a>
+                      
                       <?php endif; ?>
                       
                     </h4>
