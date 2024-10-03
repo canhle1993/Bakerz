@@ -108,8 +108,10 @@ Route::get('/shop_all', [ProductController::class, 'all_product'])->name('shop_a
 Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'])->name('product.single');
 Route::get('/single-product/{id}', [ProductController::class, 'show'])->name('single-product');
 Route::get('shop/category/{category_id}', [ProductController::class, 'filterByCategory'])->name('shop.filterByCategory');
+Route::get('/shop/filter-by-category/{category_id}', [ProductController::class, 'filterByCategory'])->name('shop.filterByCategory');
 Route::get('product/details/{id}', [ProductController::class, 'getProductDetails'])->name('product.details');
-
+Route::get('/shop/filter-by-coffee', [ProductController::class, 'filterByCoffee'])->name('shop.filterByCoffee');
+Route::get('shop/{isOption}/filter_nonCatagory}', [ProductController::class, 'filter_nonCatagory'])->name('shop.filter_nonCatagory');
 
 
 
@@ -183,10 +185,21 @@ Route::get('/exchange-return-policy', function () {
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 
 
-Route::resource('product', AdminProductController::class);
+Route::resource('product', AdminProductController::class)->except(['show']);
 Route::get('/product/create', [AdminProductController::class, 'create'])->name('product.create');
 Route::get('product/{product}/detail', [AdminProductController::class, 'showDetail'])->name('product.showDetail');
 Route::delete('/product/{product}/delete', [AdminProductController::class, 'destroy'])->name('product.destroy');
+Route::get('/product/index2', [AdminProductController::class, 'index2'])->name('product.index2');
+Route::get('/product/index_instock', [AdminProductController::class, 'index_instock'])->name('product.index_instock');
+Route::get('/product/index_outstock', [AdminProductController::class, 'index_outstock'])->name('product.index_outstock');
+Route::get('/product/index_stockcheck', [AdminProductController::class, 'index_stockcheck'])->name('product.index_stockcheck');
+Route::post('/product/{id}/goto_stockin', [AdminProductController::class, 'goto_stockin'])->name('product.goto_stockin');
+Route::post('/product/goallquanlity_stockin', [AdminProductController::class, 'goallquanlity_stockin'])->name('product.goallquanlity_stockin');
+Route::post('/product/goallto_stockin', [AdminProductController::class, 'goallto_stockin'])->name('product.goallto_stockin');
+Route::post('/product/{id}/stockin_byid', [AdminProductController::class, 'stockin_byid'])->name('product.stockin_byid');
+Route::post('/product/stockin_all', [AdminProductController::class, 'stockin_all'])->name('product.stockin_all');
+Route::post('/product/{id}/stockin_cancel', [AdminProductController::class, 'stockin_cancel'])->name('product.stockin_cancel');
+
 
 //route cho catalog trang admin
 use App\Http\Controllers\Admin\CategoryController;
@@ -222,8 +235,7 @@ Route::post('/cart/{product_id}/update_quantity', [CartController::class, 'updat
 Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
 Route::get('/showcheckout', [CartController::class, 'showcheckout'])->name('checkout');
 Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.cart_checkout');
-
-
+Route::get('/cart/checkinventory', [CartController::class, 'checkinventory'])->name('cart.checkinventory');
 
 // Route để lưu đánh giá
 Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
@@ -271,4 +283,129 @@ Route::post('/order/{order_id}/cancel', [OrderController::class, 'gotoCancel'])-
 use App\Http\Controllers\OnlineUserController;
 
 Route::get('/online-users', [OnlineUserController::class, 'countOnlineUsers'])->name('online-users');
+
+//route cho banner trang admin
+use App\Http\Controllers\Admin\BannerController;
+
+Route::resource('banner', BannerController::class);
+
+
+use App\Http\Controllers\ChefController;
+use App\Http\Controllers\AdminChefController;
+
+// Route để hiển thị danh sách các Chef trên trang client
+Route::get('/our-chef', [ChefController::class, 'index'])->name('our-chef');
+
+// Route quản lý Chef cho admin
+Route::prefix('admin')->group(function () {
+    // Hiển thị trang quản lý Chef (bao gồm form thêm và danh sách Chef)
+    Route::get('/chefs', [AdminChefController::class, 'create'])->name('admin.chefs.create');
+
+    // Lưu Chef mới
+    Route::post('/chefs', [AdminChefController::class, 'store'])->name('admin.chefs.store');
+
+    // Cập nhật Chef (Sửa Chef)
+    Route::put('/chefs/{id}', [AdminChefController::class, 'update'])->name('admin.chefs.update');
+
+    // Xóa Chef
+    Route::delete('/chefs/{id}', [AdminChefController::class, 'destroy'])->name('admin.chefs.destroy');
+});
+
+Route::get('/admin/notify/read', [DashboardController::class, 'markasreadOrder'])->name('notification.read');
+
+
+use App\Http\Controllers\BlogController;
+
+// Blog routes
+Route::prefix('admin/blog')->group(function () {
+    Route::get('/', [BlogController::class, 'index'])->name('blog.index');
+    Route::post('/store', [BlogController::class, 'store'])->name('blog.store');
+    Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::put('/update/{id}', [BlogController::class, 'update'])->name('blog.update');  // Chỉ định phương thức PUT
+    Route::delete('/delete/{id}', [BlogController::class, 'destroy'])->name('blog.delete');
+});
+
+
+
+Route::get('/client/blog', [BlogController::class, 'showBlog'])->name('client.blog');
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog-pd');
+
+
+//Thả tim cho sản phẩm để vào trang wishlist
+Route::post('/add-to-wishlist', [ProductController::class, 'addToWishlist'])->name('add.to.wishlist');
+Route::get('/wishlist', [ProductController::class, 'showWishlist'])->name('wishlist');
+Route::post('/remove-from-wishlist', [ProductController::class, 'removeFromWishlist'])->name('remove.from.wishlist');
+
+Route::get('/about', [ReviewController::class, 'showFiveStarReviews'])->name('about');
+
+
+// Định tuyến cho Deal of the Day
+use App\Http\Controllers\Admin\DealOfTheDayController;
+
+// Group route cho admin
+Route::prefix('admin')->name('admin.')->group(function() {
+    
+    // Route để hiển thị danh sách Deal
+    Route::get('/deal-of-the-day', [DealOfTheDayController::class, 'index'])->name('deal.index');
+
+    // Route để thêm Deal mới
+    Route::post('/deal-of-the-day/store', [DealOfTheDayController::class, 'store'])->name('deal.store');
+
+    // Route để cập nhật Deal
+    Route::put('/deal-of-the-day/{id}/update', [DealOfTheDayController::class, 'update'])->name('deal.update');
+
+    // Route để xóa Deal
+    Route::put('/deal-of-the-day/{id}/delete', [DealOfTheDayController::class, 'destroy'])->name('deal.destroy');
+});
+
+use App\Http\Controllers\Admin\ComingSoonController;
+
+Route::prefix('admin')->name('admin.')->group(function() {
+    // Routes cho Coming Soon
+    Route::get('/coming-soon', [ComingSoonController::class, 'index'])->name('coming_soon.index');
+    Route::post('/coming-soon/store', [ComingSoonController::class, 'store'])->name('coming_soon.store');
+    Route::put('/coming-soon/{id}/update', [ComingSoonController::class, 'update'])->name('coming_soon.update');
+    Route::put('/coming-soon/{id}/delete', [ComingSoonController::class, 'destroy'])->name('coming_soon.destroy');
+});
+
+
+use App\Http\Controllers\ContactUsController;
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact_us.index');
+    Route::get('/contact-us/reply/{id}', [ContactUsController::class, 'showReplyForm'])->name('contact_us.reply'); // Hiển thị form trả lời
+    Route::post('/contact-us/reply/{id}', [ContactUsController::class, 'sendReply'])->name('contact_us.sendReply'); // Gửi trả lời
+    Route::delete('/contact-us/delete/{id}', [ContactUsController::class, 'delete'])->name('contact_us.delete'); // Xóa thông tin liên hệ
+});
+
+Route::post('/contact-us/store', [ContactUsController::class, 'store'])->name('contact.store');
+
+use App\Http\Controllers\WorkshopController;
+Route::prefix('admin/workshop')->group(function () {
+    Route::get('/', [WorkshopController::class, 'index'])->name('admin.workshop.index');
+    Route::post('/approve/{id}', [WorkshopController::class, 'approve'])->name('admin.workshop.approve');
+    Route::post('/cancel/{id}', [WorkshopController::class, 'cancel'])->name('admin.workshop.cancel');
+    Route::delete('/delete/{id}', [WorkshopController::class, 'delete'])->name('admin.workshop.delete');
+    Route::post('/register-workshop', [WorkshopController::class, 'registerWorkshop'])->name('workshop.register');
+});
+
+Route::get('/clear-success-session', function () {
+    session()->forget('isdone');
+    session()->forget('iserror');
+    return response()->json(['message' => 'Session cleared']);
+})->name('session.clearSuccess');
+
+use App\Http\Controllers\Admin\SocialMediaController;
+
+// Route to display the Social Media page
+Route::get('/admin/socialmedia', [SocialMediaController::class, 'index'])->name('admin.socialmedia.index');
+
+// Route to store a new Social Media link
+Route::post('/admin/socialmedia/store', [SocialMediaController::class, 'store'])->name('admin.socialmedia.store');
+
+// Route to update an existing Social Media link
+Route::put('/admin/socialmedia/update/{id}', [SocialMediaController::class, 'update'])->name('admin.socialmedia.update');
+
+// Route to soft delete a Social Media link
+Route::delete('/admin/socialmedia/delete/{id}', [SocialMediaController::class, 'destroy'])->name('admin.socialmedia.delete');
 

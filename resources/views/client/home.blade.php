@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -36,6 +36,11 @@
 
 
     <style>
+        .expired-text {
+            color: #00fb33;
+            font-weight: bold;
+            font-size: 1.2em; /* Tùy chỉnh kích thước chữ */
+        }
       .hidden-form {
         display: none;
       }
@@ -58,65 +63,35 @@
 
 <body>
 @include('layouts.header')
+@if(session('error'))
+    <script>
+        alert("{{ session('error') }}");
+    </script>
+@endif
 
     <!-- Slider Section Strat -->
     <div class="slider-section-seven slider-active overflow-hidden">
         <div class="swiper">
             <div class="swiper-wrapper">
                 <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-1.jpg); height: 775px !important;">
+                @foreach($banners as $banner)
+                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('{{ asset('storage/banners/' . $banner->image_banner) }}'); height: 860px !important;">
                     <div class="image movex">
-                        <img class="img-center" src="assets/images/slider/slider-7-01.png" alt="Slider-Image">
+                        <img class="img-center" src="{{ asset('storage/banners/' . $banner->image_product) }}" alt="Slider-Image">
                     </div>
                     <div class="slider-content-07 container">
                         <div class="row align-items-end">
                             <div class="col-12 col-sm-6 text-center text-sm-end pe-lg-16">
-                                <h2 class="slider-content-07__title">Bread that <br>makes Friends</h2>
-                                <a class="slider-content-07__btn btn slider-btn-01" href="shop.html">Discover</a>
+                                <h2 class="slider-content-07__title">{{$banner->title1}} <br>{{$banner->title2}}</h2>
+                                <a class="slider-content-07__btn btn slider-btn-01" href="{{ route('product.single', ['product' => $banner->product_id]) }}">Discover</a>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <p class="slider-content-07__text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
+                                <p class="slider-content-07__text">{{$banner->description}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Single Slider End -->
-                <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-2.jpg); height: 775px !important;">
-                    <div class="image movex">
-                        <img class="img-center" src="assets/images/slider/slider-7-02.png" alt="Slider-Image">
-                    </div>
-                    <div class="slider-content-07 container">
-                        <div class="row align-items-end">
-                            <div class="col-12 col-sm-6 text-center text-sm-end pe-lg-16">
-                                <h2 class="slider-content-07__title">Quality is our <br>Recipe</h2>
-                                <a class="slider-content-07__btn btn slider-btn-01" href="shop.html">Discover</a>
-                            </div>
-                            <div class="col-12 col-sm-6 ">
-                                <p class="slider-content-07__text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Slider End -->
-                <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-3.jpg); height: 775px !important;">
-                    <div class="image movex">
-                        <img class="img-center" src="assets/images/slider/slider-7-03.png" alt="Slider-Image">
-                    </div>
-                    <div class="slider-content-07 container">
-                        <div class="row align-items-end">
-                            <div class="col-12 col-sm-6 text-center text-sm-end pe-lg-16">
-                                <h2 class="slider-content-07__title">Love from <br>The oven</h2>
-                                <a class="slider-content-07__btn btn slider-btn-01" href="shop.html">Discover</a>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <p class="slider-content-07__text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Slider End -->
+                @endforeach
             </div>
             <div class="swiper-pagination container"></div>
         </div>
@@ -126,62 +101,28 @@
         <!-- Category Section Start -->
         <div class="category-four category-four_bg section-padding-03" data-bg-image="assets/images/bg/category-four-bg.jpg">
         <div class="container custom-container-five">
-            <div class="row row-cols-2 row-cols-lg-4 category-four_wrapper mb-n60">
-                <div class="col mb-60">
-                    <!-- Single Category Four Start -->
-                    <div class="category-four_box">
-                        <span class="category-four_border"></span>
-                        <a href="{{ route('shop_all') }}" class="category-four_thumb">
-                            <img src="assets/images/category/category-08.jpg" alt="Category-Image">
-                        </a>
-                        <div class="category-four_content">
-                            <a href="{{ route('shop_all') }}" class="category-four_name">Sweet Breads</a>
-                        </div>
+    <div class="row row-cols-2 row-cols-lg-4 category-four_wrapper mb-n60">
+        @foreach ($categories->take(4) as $category) <!-- Hiển thị 4 danh mục đầu tiên -->
+            <div class="col mb-60">
+                <!-- Single Category Four Start -->
+                <div class="category-four_box">
+                    <span class="category-four_border"></span>
+                    <a href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}" class="category-four_thumb">
+                        <!-- Hiển thị hình ảnh của danh mục -->
+                        <img src="{{ asset('storage/catalogs/' . $category->image) }}" alt="{{ $category->category_name }}">
+                    </a>
+                    <div class="category-four_content">
+                        <a href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}" class="category-four_name">{{ $category->category_name }}</a>
                     </div>
-                    <!-- Single Category Four End -->
                 </div>
-                <div class="col mb-60">
-                    <!-- Single Category Four Start -->
-                    <div class="category-four_box">
-                        <span class="category-four_border"></span>
-                        <a href="shop.html" class="category-four_thumb">
-                            <img src="assets/images/category/category-09.jpg" alt="Category-Image">
-                        </a>
-                        <div class="category-four_content">
-                            <a href="shop.html" class="category-four_name">Baked Goods</a>
-                        </div>
-                    </div>
-                    <!-- Single Category Four End -->
-                </div>
-                <div class="col mb-60">
-                    <!-- Single Category Four Start -->
-                    <div class="category-four_box">
-                        <span class="category-four_border"></span>
-                        <a href="shop.html" class="category-four_thumb">
-                            <img src="assets/images/category/category-10.jpg" alt="Category-Image">
-                        </a>
-                        <div class="category-four_content">
-                            <a href="shop.html" class="category-four_name">Cakes</a>
-                        </div>
-                    </div>
-                    <!-- Single Category Four End -->
-                </div>
-                <div class="col mb-60">
-                    <!-- Single Category Four Start -->
-                    <div class="category-four_box">
-                        <span class="category-four_border"></span>
-                        <a href="shop.html" class="category-four_thumb">
-                            <img src="assets/images/category/category-11.jpg" alt="Category-Image">
-                        </a>
-                        <div class="category-four_content">
-                            <a href="shop.html" class="category-four_name">Cheese Cakes </a>
-                        </div>
-                    </div>
-                    <!-- Single Category Four End -->
-                </div>
+                <!-- Single Category Four End -->
             </div>
-        </div>
+        @endforeach
     </div>
+</div>
+
+</div>
+
     <!-- Category Section End -->
 
     <!-- Testimonial Five Section Start -->
@@ -194,7 +135,7 @@
                     <span class="testimonial-five_border"></span>
                     <span class="testimonial-five_author">
                         <button id="healthSuggestionBtn" style="margin-top: 0px !important;" class="slider-content__btn btn btn-primary btn-hover-black">
-                            Gợi ý món ăn theo sức khỏe
+                        Health-Based Meal Suggestions
                         </button>
                     </span>
                 </div>
@@ -216,14 +157,6 @@
                     <div class="col-md-6 mb-3">
                         <div class="mb-3">
                             <label class="form-label">Select health status:</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="heath_dump" value=""
-                                id="heath_0"
-                                {{ request('heath_dump') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="heath_0">
-                                Normal
-                                </label>
-                            </div>
                             @foreach($heathyCatalogs as $catalog)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="heath_id[]" value="{{ $catalog->heath_id }}"
@@ -265,12 +198,18 @@
     <div class="row">
       <div class="col-12">
         <!-- Section Title Strat -->
-        <div class="section-title">
-          <h2 class="section-title__title">
-            Products suitable for your health _______________ <a href="shop.html" class="read-more"
-            ><span>show more</span
-            ></a></h2>
-        </div>
+        <form action="{{ route('shop.filter_nonCatagory', ['isOption' => 1]) }}" method="GET" id="show_heathyproduct">
+            <input type="text" id="heathyIdsInput" name="heathyIds" value="{{ implode(',', request('heath_id', [])) }}" hidden >
+
+             <div class="section-title-05">
+                     
+             <h5 class="section-title-05__title"><span>Products suitable for your health</span></h5>
+                 <a href="#" class="read-more" id="health_readmore">
+                    <span>show more </span></a>
+             <i class="lastudioicon lastudioicon-right-arrow"></i
+             ></a>
+             </div>
+         </form>
         <!-- Section Title End -->
       </div>
     </div>
@@ -286,13 +225,6 @@
             <!-- Product Item Start -->
             <div class="product-item text-center">
               @if($product->price>5)
-              <!-- TODO:CHEAT -->
-              <!-- <div
-                class="product-item__badge"
-                style="background-color: red !important"
-              >
-                Best Seller
-              </div> -->
               @endif
               <div class="product-item__image border w-100">
                 <a href="{{ route('product.single', ['product' => $product->product_id]) }}"
@@ -324,15 +256,7 @@
                     ></a>
                   </li>
                   <li class="product-item__meta-action">
-                    <a
-                      class="shadow-1 labtn-icon-wishlist"
-                      href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title="Add to wishlist"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalWishlist"
-                    ></a>
+                    <a class="labtn-icon-wishlist" href="#" data-product-id="{{ $product->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
                   </li>
 
                 </ul>
@@ -377,8 +301,13 @@
     <div class="container">
         <div class="row">
             <div class="col-12" >
-                <div class="section-title">
-                    <h2 class="section-title__title">Most recently purchased products _______________ <a href="{{ route('shop_all') }}" class="read-more"><span>show more</span></a></h2>
+                <div class="section-title-05">
+                
+                <h5 class="section-title-05__title"><span>Most recently purchased products</span></h5>
+                <a href="{{ route('shop.filter_nonCatagory', ['isOption' => 2]) }}" class="read-more"
+                ><span>show more</span
+                ><i class="lastudioicon lastudioicon-right-arrow"></i
+                ></a>
                 </div>
             </div>
         </div>
@@ -418,15 +347,7 @@
                                             ></a>
                                         </li>
                                         <li class="product-item__meta-action">
-                                            <a
-                                            class="shadow-1 labtn-icon-wishlist"
-                                            href="#"
-                                            data-bs-tooltip="tooltip"
-                                            data-bs-placement="top"
-                                            title="Add to wishlist"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modalWishlist"
-                                            ></a>
+                                            <a class="labtn-icon-wishlist" href="#" data-product-id="{{ $product->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -438,8 +359,9 @@
                                         @if ($product->price != $product->getDiscountedPrice())
                                         <del>{{ formatPriceVND($product->price) }}</del>
                                         <!-- Giá gốc -->
+                                    
                                         <strong style="color: red;"
-                                        >{{ formatPriceVND($product->getDiscountedPrice())
+                                        >${{ number_format($product->getDiscountedPrice(),2)
                                         }}</strong
                                         >
                                         <!-- Giá sau khi giảm -->
@@ -447,6 +369,7 @@
                                         <!-- Giá không giảm -->
                                         @endif
                                     </span>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -463,36 +386,67 @@
 <!-- Product Section End -->
 
 
+@if($deals->count() > 0)
+    @foreach($deals as $deal)
     <!-- Product Deal Section Start -->
-        <div class="section-padding-03 deal-two_bg" data-bg-image="assets/images/bg/product-deal-bg.jpg">
-            <div class="container custom-container-two">
+    <div class="section-padding-03 deal-two_bg" data-bg-image="assets/images/bg/product-deal-bg.jpg">
+        <div class="container custom-container-two">
             <div class="row row-cols-lg-2 row-cols-md-2 row-cols-1 align-items-center mb-n30">
                 <div class="col mb-30">
                     <div class="deal-two_images">
-                        <img class="deal-two_thumb" src="assets/images/product/product-deal.png" alt="Deal-Image">
+                        <!-- Thêm link ảnh từ deal -->
+                        <img class="deal-two_thumb" src="{{ asset('storage/' . $deal->image) }}" alt="{{ $deal->name }}">
                         <img class="deal-two_sale" src="assets/images/shape/hot-sale.png" alt="Sale-Image">
                     </div>
                 </div>
                 <div class="col mb-30">
                     <div class="deal-two_content">
                         <span class="deal-two_subtitle">Deal of the day</span>
-                        <h4 class="deal-two_title">Sesame Rye Bread</h4>
+                        <!-- Thêm tên deal -->
+                        <h4 class="deal-two_title">{{ $deal->name }}</h4>
                         <div class="countdown-area">
-                            <div class="countdown-wrapper" data-countdown="2028/12/28"></div>
+                            <!-- Thêm ngày khuyến mãi -->
+                            <div class="countdown-wrapper" data-countdown="{{ $deal->promotion_date }}"></div>
                         </div>
-                        <span class="deal-two_price"><span>$</span>4.99</span>
+                        <!-- Thêm giá tiền -->
+                        <span class="deal-two_price"><span>$</span>{{ number_format($deal->price, 2) }}</span>
 
                         <ul class="product-item__meta deal-two_meta">
-                            <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
-                            <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                            <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                            <li class="product-item__meta-action">
+                                <a
+                                class="shadow-1 labtn-icon-cart add-to-cart"
+                                href="#"
+                                data-product-id="{{ $deal->product_id }}"
+                                ></a>
+                            </li>
+                            <li class="product-item__meta-action">
+                                <a
+                                class="labtn-icon-quickview quickview"
+                                    href="#"
+                                    data-product-id="{{ $deal->product_id }}"
+                                data-bs-tooltip="tooltip"
+                                data-bs-placement="top"
+                                title=""
+                                data-bs-original-title="Quick View"
+                                aria-label="Quick View"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleProductModal"
+                                ></a>
+                            </li>
+                            <li class="product-item__meta-action">
+                                <a class="labtn-icon-wishlist" href="#" data-product-id="{{ $deal->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
+                            </li>
                         </ul>
+
                     </div>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
     <!-- Product Deal Section End -->
+    @endforeach
+@endif
+
 
 </div>
 <!-- Product Section Start -->
@@ -504,7 +458,7 @@
       <!-- Section Title Strat -->
       <div class="section-title-05">
         <h5 class="section-title-05__title"><span>Discount Products</span></h5>
-        <a href="shop.html" class="read-more"
+        <a href="{{ route('shop.filter_nonCatagory', ['isOption' => 3]) }}" class="read-more"
           ><span>show more</span
           ><i class="lastudioicon lastudioicon-right-arrow"></i
         ></a>
@@ -572,17 +526,7 @@
                     ></a>
                   </li>
                   <li class="product-item__meta-action">
-                    <a
-                      class="labtn-icon-wishlist"
-                      href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title=""
-                      data-bs-original-title="Add to wishlist"
-                      aria-label="Add to wishlist"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalWishlist"
-                    ></a>
+                    <a class="labtn-icon-wishlist" href="#" data-product-id="{{ $product->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
                   </li>
                 </ul>
               </div>
@@ -630,7 +574,7 @@
       <!-- Section Title Start -->
       <div class="section-title-05">
         <h5 class="section-title-05__title"><span>What’s Hot</span></h5>
-        <a href="shop.html" class="read-more"
+        <a href="{{ route('shop.filter_nonCatagory', ['isOption' => 4]) }}" class="read-more"
           ><span>show more</span
           ><i class="lastudioicon lastudioicon-right-arrow"></i
         ></a>
@@ -667,19 +611,20 @@
                       {{ $product->product_name }}
                     </a>
                   </h5>
-                  <span class="product-item__price">
-                    @if ($product->price != $product->getDiscountedPrice())
-                    <del>{{ formatPriceVND($product->price) }}</del>
-                    <!-- Giá gốc -->
-                    <strong style="color: red;"
-                      >{{ formatPriceVND($product->getDiscountedPrice())
-                      }}</strong
-                    >
-                    <!-- Giá sau khi giảm -->
-                    @else {{ formatPriceVND($product->price) }}
-                    <!-- Giá không giảm -->
-                    @endif
-                  </span>
+                    <span class="product-item__price">
+                        @if ($product->price != $product->getDiscountedPrice())
+                        <del>{{ formatPriceVND($product->price) }}</del>
+                        <!-- Giá gốc -->
+                    
+                        <strong style="color: red;"
+                        >${{ number_format($product->getDiscountedPrice(),2)
+                        }}</strong
+                        >
+                        <!-- Giá sau khi giảm -->
+                        @else {{ formatPriceVND($product->price) }}
+                        <!-- Giá không giảm -->
+                        @endif
+                    </span>
                 </div>
                 <ul class="product-item__meta">
                   <li class="product-item__meta-action">
@@ -703,16 +648,7 @@
                     ></a>
                   </li>
                   <li class="product-item__meta-action">
-                    <a
-                      class="labtn-icon-wishlist"
-                      href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title="Add to wishlist"
-                      aria-label="Add to wishlist"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalWishlist"
-                    ></a>
+                    <a class="labtn-icon-wishlist" href="#" data-product-id="{{ $product->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
                   </li>
                 </ul>
               </div>
@@ -760,7 +696,10 @@
                 <!-- Section Title Strat -->
                 <div class="section-title-05">
                     <h5 class="section-title-05__title"><span>Seasonal Products</span></h5>
-                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
+                    <!-- Thay thế đường dẫn cho nút "show more" -->
+                    <a href="{{ route('shop.filterByCategory', ['category_id' => $seasonalCatalog->category_id ?? '']) }}" class="read-more">
+                        <span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i>
+                    </a>                
                 </div>
                 <!-- Section Title End -->
                  <!-- BTT -->
@@ -784,15 +723,16 @@
                                             href="#"
                                             data-product-id="{{ $product->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
                                             </li>
-                                            <li class="product-item__meta-action">
-                                                <a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                            </li>
+                                            
                                             <li class="product-item__meta-action">
                                             <a
                                                 class="shadow-1 labtn-icon-cart add-to-cart"
                                                 href="#"
                                                 data-product-id="{{ $product->product_id }}"
                                                 ></a>
+                                            </li>
+                                            <li class="product-item__meta-action">
+                                                <a class="labtn-icon-wishlist" href="#" data-product-id="{{ $product->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
                                             </li>
 
                                         </ul>
@@ -803,8 +743,9 @@
                                             @if ($product->price != $product->getDiscountedPrice())
                                             <del>{{ formatPriceVND($product->price) }}</del>
                                             <!-- Giá gốc -->
-                                            <strong
-                                            >{{ formatPriceVND($product->getDiscountedPrice())
+                                        
+                                            <strong style="color: red;"
+                                            >${{ number_format($product->getDiscountedPrice(),2)
                                             }}</strong
                                             >
                                             <!-- Giá sau khi giảm -->
@@ -813,7 +754,7 @@
                                             @endif
                                         </span>
                                         <p class="product-item__text">{{ \Illuminate\Support\Str::limit($product->describe, 70, '...') }}                                        </p>
-                                        <a href="#/" class="product-item__btn add-to-cart" data-product-id="{{ $product->product_id }}" data-bs-toggle="modal" data-bs-target="#modalCart">Add to cart</a>
+                                        <a href="#/" class="product-item__btn add-to-cart" data-product-id="{{ $product->product_id }}" >Add to cart</a>
                                     </div>
                                 </div>
                                 <!-- Product Item End -->
@@ -834,7 +775,9 @@
                 <!-- Section Title Strat -->
                 <div class="section-title-05">
                     <h5 class="section-title-05__title"><span>Coffee & Espresso</span></h5>
-                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
+                    <a href="{{ route('shop.filterByCoffee') }}" class="read-more">
+                        <span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i>
+                    </a>
                 </div>
                 <!-- Section Title End -->
             </div>
@@ -858,8 +801,8 @@
                 <div class="col-4">
                     <!-- Counter Item Strat -->
                     <div class="counter-item text-center">
-                        <span class="counter-item__label text-global-color-03"><span id="onlineCount" class="count scroll-counter" data-counter-time="1500">10</span></span>
-                        <p class="counter-item__value text-secondary">Client</p>
+                        <span class="counter-item__label text-global-color-03"><span id="" class="count scroll-counter" data-counter-time="1500">10</span>K+</span>
+                        <p class="counter-item__value text-secondary">Clients</p>
                     </div>
                     <!-- Counter Item End -->
                 </div>
@@ -887,86 +830,37 @@
     </div>
     <div class="testimonial-section">
 
-        <!-- Testimonial Active Strat -->
-        <div class="testimonial-active-two">
-            <div class="swiper">
-                <div class="swiper-wrapper">
-
-                    <!-- swiper-slide start -->
-                    <!-- Testimonial Item Strat -->
-                    <div class="swiper-slide">
-                        <div class="testimonial-two text-center">
-                            <div class="testimonial-two_quote">
+    <!-- Testimonial Active Strat -->
+    <div class="testimonial-active-two my-0 mx-auto">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+            @if(isset($fiveStarReviews) && $fiveStarReviews->count() > 0)
+             @foreach($fiveStarReviews as $review)
+             @if($review->is_deleted == 0) <!-- Đảm bảo chỉ hiển thị các đánh giá chưa bị xóa -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-two text-center">
+                                <div class="testimonial-two_quote">
                                 <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
                                 </svg>
+                                </div>
+                                <p class="testimonial-two_text">{!! nl2br(e($review->comment)) !!}</p>
+                                <div class="testimonial-two_image">
+                                    <img width="56" height="56" src="{{ asset('storage/avatars/' . $review->avatar) }}" alt="Author"> <!-- Thay đổi đường dẫn avatar -->
+                                </div>
+                                <span class="testimonial-two_name">{{ $review->name }}</span>
+                                <span class="testimonial-two_position">{{ $review->address }}</span> <!-- Nếu có thêm địa chỉ -->
                             </div>
-                            <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
-                            <div class="testimonial-two_image">
-                                <img width="56" height="56" src="assets/images/avatar/testimoial-1.png" alt="Author">
-                            </div>
-                            <span class="testimonial-two_name">Esther Howard</span>
-                            <span class="testimonial-two_position">New Yourk</span>
                         </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                    <!-- Testimonial Item Strat -->
-                    <div class="swiper-slide">
-                        <div class="testimonial-two text-center">
-                            <div class="testimonial-two_quote">
-                                <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
-                                </svg>
-                            </div>
-                            <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
-                            <div class="testimonial-two_image">
-                                <img width="56" height="56" src="assets/images/avatar/testimoial-2.png" alt="Author">
-                            </div>
-                            <span class="testimonial-two_name">Elanor Pera</span>
-                            <span class="testimonial-two_position">Canada</span>
-                        </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                    <!-- Testimonial Item Strat -->
-                    <div class="swiper-slide">
-                        <div class="testimonial-two text-center">
-                            <div class="testimonial-two_quote">
-                                <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
-                                </svg>
-                            </div>
-                            <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
-                            <div class="testimonial-two_image">
-                                <img width="56" height="56" src="assets/images/avatar/testimoial-3.png" alt="Author">
-                            </div>
-                            <span class="testimonial-two_name">Krishna Barbe</span>
-                            <span class="testimonial-two_position">Singapore</span>
-                        </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                    <!-- Testimonial Item Strat -->
-                    <div class="swiper-slide">
-                        <div class="testimonial-two text-center">
-                            <div class="testimonial-two_quote">
-                                <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
-                                </svg>
-                            </div>
-                            <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
-                            <div class="testimonial-two_image">
-                                <img width="56" height="56" src="assets/images/avatar/testimoial-2.png" alt="Author">
-                            </div>
-                            <span class="testimonial-two_name">Esther Howard</span>
-                            <span class="testimonial-two_position">Dubai</span>
-                        </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                    <!-- swiper-slide end-->
-
-                </div>
+                        @endif
+                    @endforeach
+                @else
+                    <p>Không có đánh giá 5 sao nào.</p>
+                @endif
             </div>
         </div>
-        <!-- Testimonial Active End -->
+    </div>
+    <!-- Testimonial Active End -->
 
     </div>
     <!-- Testimonial Section End -->
@@ -977,7 +871,7 @@
             <div class="row row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-1 mb-n30" style="margin-bottom: 10px !important;">
                 <div class="col mb-30">
                     <!-- Single Call To Actio 03 Start -->
-                    <a href="contact.html" class="callto-action-03">
+                    <a href="{{ route('contact')}}" class="callto-action-03">
                         <span class="callto-action-03_icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="63" height="63" fill="none" viewBox="0 0 63 63"><path fill="currentColor" d="M39.206 6.34H23.794C10.45 6.34 0 11.111 0 17.205c0 1.636.732 3.194 2.177 4.634.512.508.806 1.234.806 1.992v9.07a.923.923 0 0 0 1.845 0v-9.07c0-1.246-.492-2.45-1.35-3.301-1.083-1.08-1.632-2.198-1.632-3.325 0-2.233 2.239-4.488 6.144-6.185 4.206-1.829 9.818-2.836 15.804-2.836 5.985 0 11.597 1.007 15.803 2.836 3.905 1.697 6.144 3.952 6.144 6.185 0 1.127-.55 2.246-1.632 3.324-.858.852-1.35 2.056-1.35 3.302v18.644a.923.923 0 1 0 1.846 0V23.832c0-.758.293-1.484.806-1.993 1.444-1.438 2.176-2.997 2.176-4.633 0-3.8-4.063-7.085-10.357-9.021h1.976c5.985 0 11.598 1.007 15.804 2.836 3.905 1.697 6.144 3.952 6.144 6.185 0 1.127-.55 2.246-1.632 3.324-.858.852-1.35 2.056-1.35 3.302v1.995a.923.923 0 0 0 1.845 0v-1.995c0-.758.294-1.484.806-1.993C62.269 20.4 63 18.842 63 17.206c0-6.094-10.451-10.867-23.794-10.867z"></path><path fill="currentColor" d="M59.094 29.224a.923.923 0 0 0-.923.922v23.106c0 .862-.701 1.563-1.563 1.563H44.223c.243-.468.381-1 .381-1.563v-6.457a.923.923 0 1 0-1.846 0v6.457c0 .862-.701 1.563-1.563 1.563H6.392a1.565 1.565 0 0 1-1.564-1.563v-16.03a.923.923 0 1 0-1.846 0v16.03c0 1.88 1.53 3.409 3.41 3.409h50.216c1.88 0 3.41-1.53 3.41-3.409V30.146a.923.923 0 0 0-.924-.922z"></path><path fill="currentColor" d="M7.884 52.683h31.82c.51 0 .923-.413.923-.923V23.831c0-1.808.72-3.562 1.978-4.812.458-.456 1.005-1.14 1.005-1.813 0-1.053-1.504-2.77-4.862-4.23-3.887-1.69-9.338-2.66-14.954-2.66-5.617 0-11.068.97-14.954 2.66-3.36 1.46-4.862 3.176-4.862 4.23 0 .672.546 1.357 1.004 1.812 1.258 1.25 1.979 3.005 1.979 4.813v27.93c0 .509.413.922.923.922zm-1.6-34.973a2.802 2.802 0 0 1-.418-.506c.238-.391 1.208-1.448 3.71-2.536 3.663-1.592 8.845-2.506 14.218-2.506 5.372 0 10.555.914 14.218 2.506 2.501 1.088 3.471 2.145 3.71 2.537a2.805 2.805 0 0 1-.419.505c-1.603 1.594-2.522 3.825-2.522 6.121v27.006H8.806V23.831c0-2.296-.92-4.527-2.522-6.121z"></path><path fill="currentColor" d="M12.483 24.29a1.243 1.243 0 1 0 0-2.485 1.243 1.243 0 0 0 0 2.486zm0-4.971a1.243 1.243 0 1 0 0-2.486 1.243 1.243 0 0 0 0 2.486zm4.971 0a1.243 1.243 0 1 0 0-2.486 1.243 1.243 0 0 0 0 2.486z"></path></svg>
                         </span>
@@ -990,7 +884,7 @@
                 </div>
                 <div class="col mb-30">
                     <!-- Single Call To Actio 03 Start -->
-                    <a href="contact.html" class="callto-action-03">
+                    <a href="{{ route('contact')}}" class="callto-action-03">
                         <span class="callto-action-03_icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="63" height="63" fill="none" viewBox="0 0 63 63"><g fill="currentColor"><path d="M17.063 49.875h-5.25a1.313 1.313 0 0 1 0-2.625h5.25a1.313 1.313 0 0 1 0 2.625zm42.657 0h-3.282a1.313 1.313 0 0 1 0-2.625h2.192l1.77-9.43c-.024-4.824-4.146-8.945-9.212-8.945H42.57L38.394 47.25h7.544a1.313 1.313 0 0 1 0 2.625H36.75a1.313 1.313 0 0 1-1.28-1.602l4.772-21a1.311 1.311 0 0 1 1.28-1.023h9.666c6.513 0 11.813 5.3 11.813 11.812l-1.993 10.742a1.309 1.309 0 0 1-1.289 1.07z"></path><path d="M51.188 55.125a6.57 6.57 0 0 1-6.563-6.563A6.57 6.57 0 0 1 51.188 42a6.57 6.57 0 0 1 6.562 6.562 6.57 6.57 0 0 1-6.563 6.563zm0-10.5a3.942 3.942 0 0 0-3.938 3.937 3.942 3.942 0 0 0 3.938 3.938 3.942 3.942 0 0 0 3.937-3.938 3.942 3.942 0 0 0-3.938-3.937zm-28.875 10.5a6.57 6.57 0 0 1-6.563-6.563A6.57 6.57 0 0 1 22.313 42a6.57 6.57 0 0 1 6.562 6.562 6.57 6.57 0 0 1-6.563 6.563zm0-10.5a3.942 3.942 0 0 0-3.938 3.937 3.942 3.942 0 0 0 3.938 3.938 3.942 3.942 0 0 0 3.937-3.938 3.942 3.942 0 0 0-3.938-3.937zm-5.25-18.375h-10.5a1.313 1.313 0 0 1 0-2.625h10.5a1.313 1.313 0 0 1 0 2.625zm0 7.875H3.938a1.313 1.313 0 0 1 0-2.625h13.124a1.313 1.313 0 0 1 0 2.625zm0 7.875H1.313a1.313 1.313 0 0 1 0-2.625h15.75a1.313 1.313 0 0 1 0 2.625z"></path><path d="M36.75 49.875h-9.188a1.313 1.313 0 0 1 0-2.625h8.14L41.668 21H11.812a1.313 1.313 0 0 1 0-2.625h31.5a1.313 1.313 0 0 1 1.282 1.601L38.03 48.851a1.314 1.314 0 0 1-1.281 1.024z"></path></g></svg>
                         </span>
@@ -1003,7 +897,7 @@
                 </div>
                 <div class="col mb-30">
                     <!-- Single Call To Actio 03 Start -->
-                    <a href="contact.html" class="callto-action-03">
+                    <a href="{{ route('contact')}}" class="callto-action-03">
                         <span class="callto-action-03_icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="63" height="63" fill="none" viewBox="0 0 63 63"><g fill="currentColor"><path d="M53.298 19.762l-2.958-3.588a3.175 3.175 0 0 1-.714-1.724l-.446-4.629a5.068 5.068 0 0 0-4.55-4.55L40 4.824a3.181 3.181 0 0 1-1.724-.714l-3.588-2.958a5.068 5.068 0 0 0-6.436 0L24.665 4.11a3.178 3.178 0 0 1-1.724.714l-4.629.445a5.069 5.069 0 0 0-4.55 4.551l-.446 4.63a3.182 3.182 0 0 1-.714 1.723l-2.958 3.588a5.068 5.068 0 0 0 0 6.436l2.958 3.588c.406.493.653 1.089.714 1.724l.445 4.63a5.069 5.069 0 0 0 4.551 4.55l2.83.272-6.723 16.065c-.182.438-.1.93.215 1.285.315.354.793.494 1.248.365l5.832-1.647a.053.053 0 0 1 .062.025l2.92 5.31a1.214 1.214 0 0 0 1.135.633 1.22 1.22 0 0 0 1.068-.75l7.098-16.962c.24-.138.472-.297.692-.478l3.589-2.958a3.173 3.173 0 0 1 1.578-.695l6.429 15.361-4.55-1.284a1.915 1.915 0 0 0-2.205.922l-2.278 4.142-3.018-7.212a.934.934 0 0 0-1.723.72l3.535 8.45c.185.435.593.72 1.066.744l.064.002c.447 0 .853-.239 1.07-.634l2.92-5.31a.054.054 0 0 1 .062-.026l5.832 1.647c.456.129.934-.011 1.249-.365.314-.355.397-.847.214-1.286L41.8 40.962l2.83-.273a5.068 5.068 0 0 0 4.55-4.55l.446-4.63c.06-.634.308-1.23.714-1.723l2.958-3.588a5.067 5.067 0 0 0 0-6.436zM25.69 60.296l-2.279-4.143a1.914 1.914 0 0 0-2.205-.921l-4.549 1.284 6.428-15.36a3.172 3.172 0 0 1 1.579.693l3.588 2.959a5.05 5.05 0 0 0 3.439 1.147L25.69 60.296zM51.856 25.01l-2.958 3.588a5.038 5.038 0 0 0-1.132 2.733l-.446 4.629a3.196 3.196 0 0 1-2.87 2.87l-4.066.392a.56.56 0 0 0-.048.004l-.515.05a5.04 5.04 0 0 0-2.733 1.132L33.5 43.366a3.196 3.196 0 0 1-4.059 0l-3.588-2.958a5.036 5.036 0 0 0-2.733-1.132l-.518-.05a.618.618 0 0 0-.042-.004l-4.07-.392a3.196 3.196 0 0 1-2.87-2.87l-.445-4.629a5.037 5.037 0 0 0-1.132-2.733l-2.958-3.588a3.196 3.196 0 0 1 0-4.06l2.958-3.588a5.037 5.037 0 0 0 1.132-2.733l.446-4.63a3.196 3.196 0 0 1 2.87-2.869l4.629-.446a5.04 5.04 0 0 0 2.733-1.132l3.588-2.957a3.186 3.186 0 0 1 2.03-.728c.72 0 1.44.243 2.029.728l3.588 2.957a5.037 5.037 0 0 0 2.733 1.132l4.63.446A3.196 3.196 0 0 1 47.32 10l.445 4.63a5.038 5.038 0 0 0 1.132 2.732l2.958 3.589a3.197 3.197 0 0 1 0 4.059z"></path><path d="M31.47 8.387c-.624 0-1.252.04-1.867.118a.934.934 0 0 0 .237 1.853 12.858 12.858 0 0 1 1.63-.103c7.017 0 12.726 5.709 12.726 12.726 0 7.017-5.71 12.725-12.726 12.725-7.017 0-12.726-5.709-12.726-12.726a12.75 12.75 0 0 1 7.519-11.615.934.934 0 1 0-.766-1.704 14.622 14.622 0 0 0-8.621 13.32c0 8.047 6.547 14.593 14.594 14.593s14.594-6.546 14.594-14.594c0-8.047-6.547-14.593-14.594-14.593z"></path><path d="M22.193 21.898a2.86 2.86 0 0 0 0 4.04l4.08 4.08a2.84 2.84 0 0 0 2.02.837 2.84 2.84 0 0 0 2.02-.837l8.907-8.907a2.86 2.86 0 0 0 0-4.04 2.86 2.86 0 0 0-4.04 0l-6.887 6.887-2.06-2.06a2.86 2.86 0 0 0-4.04 0zm6.1 4.316a.934.934 0 0 0 .66-.274l7.548-7.548A.99.99 0 0 1 37.9 19.79l-8.907 8.907a.982.982 0 0 1-.699.29.982.982 0 0 1-.699-.29l-4.08-4.08a.99.99 0 0 1 .699-1.687.98.98 0 0 1 .698.289l2.721 2.72a.935.935 0 0 0 .661.275z"></path></g></svg>
                         </span>
@@ -1016,7 +910,7 @@
                 </div>
                 <div class="col mb-30">
                     <!-- Single Call To Actio 03 Start -->
-                    <a href="contact.html" class="callto-action-03">
+                    <a href="{{ route('contact')}}" class="callto-action-03">
                         <span class="callto-action-03_icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="63" height="63" fill="none" viewBox="0 0 63 63"><g fill="currentColor"><path d="M17.063 49.875h-5.25a1.313 1.313 0 0 1 0-2.625h5.25a1.313 1.313 0 0 1 0 2.625zm42.657 0h-3.282a1.313 1.313 0 0 1 0-2.625h2.192l1.77-9.43c-.024-4.824-4.146-8.945-9.212-8.945H42.57L38.394 47.25h7.544a1.313 1.313 0 0 1 0 2.625H36.75a1.313 1.313 0 0 1-1.28-1.602l4.772-21a1.311 1.311 0 0 1 1.28-1.023h9.666c6.513 0 11.813 5.3 11.813 11.812l-1.993 10.742a1.309 1.309 0 0 1-1.289 1.07z"></path><path d="M51.188 55.125a6.57 6.57 0 0 1-6.563-6.563A6.57 6.57 0 0 1 51.188 42a6.57 6.57 0 0 1 6.562 6.562 6.57 6.57 0 0 1-6.563 6.563zm0-10.5a3.942 3.942 0 0 0-3.938 3.937 3.942 3.942 0 0 0 3.938 3.938 3.942 3.942 0 0 0 3.937-3.938 3.942 3.942 0 0 0-3.938-3.937zm-28.875 10.5a6.57 6.57 0 0 1-6.563-6.563A6.57 6.57 0 0 1 22.313 42a6.57 6.57 0 0 1 6.562 6.562 6.57 6.57 0 0 1-6.563 6.563zm0-10.5a3.942 3.942 0 0 0-3.938 3.937 3.942 3.942 0 0 0 3.938 3.938 3.942 3.942 0 0 0 3.937-3.938 3.942 3.942 0 0 0-3.938-3.937zm-5.25-18.375h-10.5a1.313 1.313 0 0 1 0-2.625h10.5a1.313 1.313 0 0 1 0 2.625zm0 7.875H3.938a1.313 1.313 0 0 1 0-2.625h13.124a1.313 1.313 0 0 1 0 2.625zm0 7.875H1.313a1.313 1.313 0 0 1 0-2.625h15.75a1.313 1.313 0 0 1 0 2.625z"></path><path d="M36.75 49.875h-9.188a1.313 1.313 0 0 1 0-2.625h8.14L41.668 21H11.812a1.313 1.313 0 0 1 0-2.625h31.5a1.313 1.313 0 0 1 1.282 1.601L38.03 48.851a1.314 1.314 0 0 1-1.281 1.024z"></path></g></svg>
                         </span>
@@ -1029,7 +923,7 @@
                 </div>
                 <div class="col mb-30">
                     <!-- Single Call To Actio 03 Start -->
-                    <a href="contact.html" class="callto-action-03">
+                    <a href="{{ route('contact')}}" class="callto-action-03">
                         <span class="callto-action-03_icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="63" height="63" fill="none" viewBox="0 0 63 63"><g fill="currentColor"><path d="M31.5 60.375a1.32 1.32 0 0 1-1.005-.467L.307 24.053a1.312 1.312 0 0 1-.147-1.475l10.584-19.27c.231-.42.672-.683 1.15-.683h39.212c.48 0 .922.263 1.15.683l10.581 19.27c.263.475.203 1.06-.147 1.475L32.504 59.908a1.31 1.31 0 0 1-1.003.467zM2.898 23.05L31.5 57.026 60.102 23.05 50.33 5.25H12.671l-9.773 17.8z"></path><path d="M61.031 24.937H1.97a1.313 1.313 0 0 1 0-2.625h59.06a1.313 1.313 0 0 1 0 2.625z"></path><path d="M44.789 24.2c-.412 0-.82-.194-1.074-.56L31.506 6.23 19.452 23.548a1.31 1.31 0 0 1-1.824.328 1.309 1.309 0 0 1-.328-1.827L30.425 3.187a1.308 1.308 0 0 1 1.073-.562h.003c.428 0 .827.208 1.074.56l13.287 18.95a1.31 1.31 0 0 1-.32 1.826c-.226.16-.49.239-.753.239z"></path><path d="M31.5 60.375c-.556 0-1.05-.349-1.236-.871L10.658 4.379a1.315 1.315 0 0 1 .795-1.678 1.303 1.303 0 0 1 1.677.796l18.37 51.65 18.37-51.65a1.31 1.31 0 0 1 1.677-.796 1.31 1.31 0 0 1 .796 1.678L32.736 59.504c-.186.522-.68.871-1.236.871z"></path></g></svg>
                         </span>
@@ -1042,7 +936,7 @@
                 </div>
                 <div class="col mb-30">
                     <!-- Single Call To Actio 03 Start -->
-                    <a href="contact.html" class="callto-action-03">
+                    <a href="{{ route('contact')}}" class="callto-action-03">
                         <span class="callto-action-03_icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="63" height="63" fill="none" viewBox="0 0 63 63"><path fill="currentColor" d="M39.206 6.34H23.794C10.45 6.34 0 11.111 0 17.205c0 1.636.732 3.194 2.177 4.634.512.508.806 1.234.806 1.992v9.07a.923.923 0 0 0 1.845 0v-9.07c0-1.246-.492-2.45-1.35-3.301-1.083-1.08-1.632-2.198-1.632-3.325 0-2.233 2.239-4.488 6.144-6.185 4.206-1.829 9.818-2.836 15.804-2.836 5.985 0 11.597 1.007 15.803 2.836 3.905 1.697 6.144 3.952 6.144 6.185 0 1.127-.55 2.246-1.632 3.324-.858.852-1.35 2.056-1.35 3.302v18.644a.923.923 0 1 0 1.846 0V23.832c0-.758.293-1.484.806-1.993 1.444-1.438 2.176-2.997 2.176-4.633 0-3.8-4.063-7.085-10.357-9.021h1.976c5.985 0 11.598 1.007 15.804 2.836 3.905 1.697 6.144 3.952 6.144 6.185 0 1.127-.55 2.246-1.632 3.324-.858.852-1.35 2.056-1.35 3.302v1.995a.923.923 0 0 0 1.845 0v-1.995c0-.758.294-1.484.806-1.993C62.269 20.4 63 18.842 63 17.206c0-6.094-10.451-10.867-23.794-10.867z"></path><path fill="currentColor" d="M59.094 29.224a.923.923 0 0 0-.923.922v23.106c0 .862-.701 1.563-1.563 1.563H44.223c.243-.468.381-1 .381-1.563v-6.457a.923.923 0 1 0-1.846 0v6.457c0 .862-.701 1.563-1.563 1.563H6.392a1.565 1.565 0 0 1-1.564-1.563v-16.03a.923.923 0 1 0-1.846 0v16.03c0 1.88 1.53 3.409 3.41 3.409h50.216c1.88 0 3.41-1.53 3.41-3.409V30.146a.923.923 0 0 0-.924-.922z"></path><path fill="currentColor" d="M7.884 52.683h31.82c.51 0 .923-.413.923-.923V23.831c0-1.808.72-3.562 1.978-4.812.458-.456 1.005-1.14 1.005-1.813 0-1.053-1.504-2.77-4.862-4.23-3.887-1.69-9.338-2.66-14.954-2.66-5.617 0-11.068.97-14.954 2.66-3.36 1.46-4.862 3.176-4.862 4.23 0 .672.546 1.357 1.004 1.812 1.258 1.25 1.979 3.005 1.979 4.813v27.93c0 .509.413.922.923.922zm-1.6-34.973a2.802 2.802 0 0 1-.418-.506c.238-.391 1.208-1.448 3.71-2.536 3.663-1.592 8.845-2.506 14.218-2.506 5.372 0 10.555.914 14.218 2.506 2.501 1.088 3.471 2.145 3.71 2.537a2.805 2.805 0 0 1-.419.505c-1.603 1.594-2.522 3.825-2.522 6.121v27.006H8.806V23.831c0-2.296-.92-4.527-2.522-6.121z"></path><path fill="currentColor" d="M12.483 24.29a1.243 1.243 0 1 0 0-2.485 1.243 1.243 0 0 0 0 2.486zm0-4.971a1.243 1.243 0 1 0 0-2.486 1.243 1.243 0 0 0 0 2.486zm4.971 0a1.243 1.243 0 1 0 0-2.486 1.243 1.243 0 0 0 0 2.486z"></path></svg>
                         </span>
@@ -1115,7 +1009,20 @@
                                     <div class="product-head mb-3">
 
                                         <!-- Price Start -->
-                                        <span class="product-head-price">{{ formatPriceVND($product->price) }}</span>
+                                        <span class="product-head-price">
+                                            @if ($product->price != $product->getDiscountedPrice())
+                                            <del >{{ formatPriceVND($product->price) }}</del>
+                                            <!-- Giá gốc -->
+                                        
+                                            <strong style="color: red;"
+                                            >${{ number_format($product->getDiscountedPrice(),2)
+                                            }}</strong
+                                            >
+                                            <!-- Giá sau khi giảm -->
+                                            @else <span style="color: white;">{{ formatPriceVND($product->price) }}</span>
+                                            <!-- Giá không giảm -->
+                                            @endif
+                                        </span>
                                         <!-- Price End -->
 
                                     </div>
@@ -1139,18 +1046,11 @@
                                     <!-- Product Quantity, Cart Button, Wishlist and Compare Start -->
                                     <ul class="product-cta">
                                         <li>
-                                            <!-- Quantity Start -->
-                                            <div class="quantity">
-                                                <div class="cart-plus-minus"></div>
-                                            </div>
-                                            <!-- Quantity End -->
-                                        </li>
-                                        <li>
                                             <!-- Cart Button Start -->
                                             <div class="cart-btn">
-                                            <div class="add-to_cart">
-                                                <a class="btn btn-dark btn-hover-primary add-to-cart" href="#/" data-bs-toggle="modal" data-bs-target="#modalCart" data-product-id="{{ $product->product_id }}">Add to cart</a>
-                                            </div>
+                                                <div class="add-to_cart">
+                                                    <a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="{{ $product->product_id }}">Add to cart</a>
+                                                </div>
                                             </div>
                                             <!-- Cart Button End -->
                                         </li>
@@ -1188,16 +1088,6 @@
                                         </li>
                                     </ul>
                                     <!-- Product Meta End -->
-
-                                    <!-- Product Shear Start -->
-                                    <div class="product-share">
-                                        <a href="#"><i class="lastudioicon-b-facebook"></i></a>
-                                        <a href="#"><i class="lastudioicon-b-twitter"></i></a>
-                                        <a href="#"><i class="lastudioicon-b-pinterest"></i></a>
-                                        <a href="#"><i class="lastudioicon-b-instagram"></i></a>
-                                    </div>
-                                    <!-- Product Shear End -->
-
                                 </div>
                                 <!-- Product Summery End -->
 
@@ -1270,7 +1160,39 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        
+        document.addEventListener('DOMContentLoaded', function () {
+        // Lặp qua tất cả các phần tử có class 'countdown-wrapper'
+        document.querySelectorAll('.countdown-wrapper').forEach(function (countdownElement) {
+            var countdownDate = new Date(countdownElement.getAttribute('data-countdown')).getTime();
+
+            // Hàm tính thời gian đếm ngược
+            var countdownFunction = setInterval(function () {
+                var now = new Date().getTime();
+                var distance = countdownDate - now;
+
+                // Tính thời gian còn lại
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000)) / 1000);
+
+                // Hiển thị thời gian còn lại trong countdownElement
+                // countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+                // Nếu đếm ngược về 0 thì ẩn phần tử ul
+                if (distance < 0) {
+                    clearInterval(countdownFunction);
+                    countdownElement.innerHTML = "<span class='expired-text'>Promotion period expired</span>";
+                    
+                    // Tìm phần tử ul gần nhất và ẩn nó
+                    var dealMeta = countdownElement.closest('.deal-two_content').querySelector('.deal-two_meta');
+                    if (dealMeta) {
+                        dealMeta.style.display = 'none';
+                    }
+                }
+            }, 1000);
+        });
+    });
 
       document
         .getElementById("healthSuggestionBtn")
@@ -1385,7 +1307,7 @@
     });
     
     window.addEventListener('load', function() {
-        updateonlineUser();
+        
         document.getElementById('a2').style.display = 'none';  // Show the product section
         if (sessionStorage.getItem('scrollToA1') === 'true') {
             document.getElementById('a2').style.display = 'block';  // Show the product section
@@ -1396,7 +1318,7 @@
             sessionStorage.removeItem('scrollToA1');
         }
     });
-
+    
     $('.quickview').on('click', function(e) {
             e.preventDefault();
             var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
@@ -1408,24 +1330,32 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.status === 'success') {
-                        var product = response.product;  // Đối tượng product từ server
+                        // Hủy Swiper nếu đã tồn tại trước đó
                         
+                        var product = response.product;  // Đối tượng product từ server
                         // Đổ dữ liệu vào modal
-                        $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
-                        $('#modal-single-product .desc-content').html(product.describe);  // Đổ mô tả sản phẩm
+                        $('#modal-single-product .product-head-price').text("$" + response.discounted_price);  // Đổ giá sản phẩm
+                        
+                        $('#modal-single-product .desc-content').html(product.describe.replace(/\n/g, '<br>'));
                         
                         // Cập nhật hình ảnh sản phẩm
                         var imagesHtml = '';
+                        var thumbImageHtml = '';
                         var productImage = "{{ asset('storage/products/') }}/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
 
-                        imagesHtml += '<div class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + productImage + '" alt="Product"></div>';
+                        imagesHtml +='<a class="swiper-slide h-auto" href="' + productImage + '"><img class="w-100" src="' + productImage + '" alt="{{ $product->product_name }}"></a>'
+                        
+                        thumbImageHtml+= '<div class="swiper-slide"><img src="' + productImage + '" alt=""></div>';
                         product.images.forEach(function(image) {
                             var imageUrl = "{{ asset('storage/products') }}/" + image.image; // Access the correct field inside image object
-                            imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
+                            imagesHtml += '<a class="swiper-slide h-auto" href="' + imageUrl + '"><img class="w-100" src="' + imageUrl + '" alt="{{ $product->product_name }}"></a>'
+                            thumbImageHtml+= '<div class="swiper-slide"><img src="' + imageUrl + '" alt=""></div>';
                         });
-
+                        var addCart = '<a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="'+ product.product_id +'">Add to cart</a>';
                         $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
-                        $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
+                        $('.product-thumb-vertical .swiper-wrapper').html(thumbImageHtml);
+                        console.log("Product ID:" + product.product_id);
+                        $('.add-to_cart .add-to-cart').replaceWith(addCart);
                         
                         // Hiển thị modal
                         $('#exampleProductModal').modal('show');
@@ -1437,21 +1367,39 @@
                     console.error(error); // Xử lý lỗi
                 }
             });
+            
+        });
+        
+        // Bắt sự kiện click vào thẻ <a> và submit form
+        $(document).on('click', '#health_readmore', function(e) {
+            e.preventDefault(); // Ngăn không cho thẻ <a> chuyển trang
+            $('#show_heathyproduct').submit(); // Submit form với id là filterForm
         });
 
-        function updateonlineUser() {
-                $.ajax({
-                    url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
-                    method: "GET",
-                    success: function(response) {
-                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
-                    },
-                    error: function(xhr) {
-                        console.error('Error:', xhr.responseText);
-                        // alert('An error occurred while updating the cart.');
-                    }
-                });
+        $(document).on('click', '.labtn-icon-wishlist', function(e) {
+    e.preventDefault();
+
+    var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+    $.ajax({
+        url: "{{ route('add.to.wishlist') }}",
+        method: 'POST',
+        data: {
+            product_id: productId,
+            _token: "{{ csrf_token() }}",  // Token bảo mật
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                alert('Product added to wishlist!');
+            } else {
+                alert(response.message);
             }
+        },
+        error: function(xhr) {
+            console.error('Error:', xhr);
+        }
+    });
+    });
     </script>
 </body>
 

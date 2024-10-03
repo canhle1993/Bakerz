@@ -215,12 +215,13 @@
                         </button>
                     </form>
 
-                    <form action="{{ route('admin.update_to_admin', $client->user_id) }}" method="POST" style="display:inline-block;">
+                    {{-- <form action="{{ route('admin.update_to_admin', $client->user_id) }}" method="POST" style="display:inline-block;">
                         @csrf
-                        <button type="submit" class="btn btn-sm btn-warning me-1">
+                        <button type="submit" class="btn btn-sm btn-warning me-1" disabled>
                             <i class="bi bi-arrow-up-circle"></i> Update to Admin
                         </button>
-                    </form>
+                    </form> --}}
+
                 </td>
 
 

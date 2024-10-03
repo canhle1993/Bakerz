@@ -5,12 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Bakerfresh - Cake Shop HTML Template</title>
+    <title>Bakerz Bite</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="./assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -61,10 +61,9 @@
 
                     <!-- Cart Action Buttons Start -->
                     <div class="row justify-content-between gap-3">
-                        <div class="col-auto"><button class="btn btn-outline-dark btn-primary-hover rounded-0">Continue Shopping</button></div>
+                        <div class="col-auto"><a href="<?php echo e(route('shop_all')); ?>"><button class="btn btn-outline-dark btn-primary-hover rounded-0">Continue Shopping</button></a></div>
                         <div class="col-auto d-flex flex-wrap gap-3">
-                            <button class="btn btn-outline-dark btn-primary-hover rounded-0">Update Cart</button>
-                            <button class="btn btn-outline-dark btn-primary-hover rounded-0">Clear Cart</button>
+                            <a href=""><button class="btn btn-outline-dark btn-primary-hover rounded-0">Clear Cart</button></a>
                         </div>
                     </div>
                     <!-- Cart Action Buttons End -->
@@ -254,7 +253,30 @@
                 var quantity = $(this).val(); // Lấy số lượng mới
                 var _token = "<?php echo e(csrf_token()); ?>"; // CSRF token để bảo mật
                 var discount  = $(this).data('price'); // Lấy product_id
+                if (quantity < 1) {
+                    quantity = 1;
+                }
+                var $input = $(this); // Lưu lại context của input để sử dụng sau
+                $input.prop('readonly', true);
                 $.ajax({
+                  url: "<?php echo e(route('cart.checkinventory')); ?>",
+                  method: "GET",
+                  data: {
+                      _token: "<?php echo e(csrf_token()); ?>",
+                      product_id: productId,
+                      quantity: quantity,
+                      quantity_input: quantity,
+                  },
+                  success: function(response) {
+                    console.log("quanlity: " + quantity);
+                    if (response.error === 'out_of_stock'){
+                        $input.val(response.max_quantity); // Gán lại số lượng hợp lệ
+                        var outStockModal = new bootstrap.Modal(document.getElementById('outOfStock'));
+                        outStockModal.show();
+                        $input.prop('readonly', false);
+                        return;
+                    }
+                    $.ajax({
                     url: "<?php echo e(route('cart.update_quantity', ':id')); ?>".replace(':id', productId), // Truyền product_id vào URL
                     method: 'POST',
                     data: {
@@ -264,7 +286,7 @@
 
                     },
                     success: function(response) {
-                        
+                        $input.prop('readonly', false);
                         // Cập nhật lại subtotal của sản phẩm này
                         var updatedQuantity = parseFloat(quantity) || 0;
                         var updatedDiscount = parseFloat(discount) || 0;
@@ -276,16 +298,30 @@
                     },
                     error: function() {
                         console.error('Error:', xhr.responseText);
+                        $input.prop('readonly', false);
                     }
+                    });
+                },
+                  error: function(xhr) {
+                    window.location.href = "<?php echo e(route('login')); ?>"; // Sử dụng route trong Blade để tạo đường dẫn
+                    console.error('Error:', xhr.responseText);
+                    $input.prop('readonly', false);
+                  }
                 });
             });
 
+            document.getElementById('outOfStock').addEventListener('hidden.bs.modal', function () {
+                // Xóa lớp backdrop khi modal bị ẩn
+                var backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.remove();
+                }
+            });
             // delete cart
             $(document).on('click', '.cart_delete', function(e) {
                     e.preventDefault();
 
                     var productId = $(this).data('product-id');
-                    console.log(productId); // In ra product_id để đảm bảo nó có giá trị đúng
 
                     $.ajax({
                         url: "<?php echo e(route('cart.delete', ':id')); ?>".replace(':id', productId), // Truyền product_id vào URL

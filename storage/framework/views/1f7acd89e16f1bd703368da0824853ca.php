@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
+<title>Bakerz Bite</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
     <style>
         .pagination li {
             display: inline-block;
@@ -16,7 +22,7 @@
         }
 
         .pagination li.active a {
-            background-color: #dde028;
+            background-color: #BC8157;
 
 
         }
@@ -165,9 +171,19 @@
                                         <img width="350" height="350" src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="<?php echo e($product->product_name); ?>">
                                     </a>
                                     <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-id="<?php echo e($product->product_id); ?>" data-bs-toggle="modal" data-bs-target="#exampleProductModal" title="Quick View"></a>
-
+                                    <li class="product-item__meta-action">
+                                            <a
+                                            class="labtn-icon-quickview quickview"
+                                            href="#"
+                                            data-product-id="<?php echo e($product->product_id); ?>"
+                                            data-bs-tooltip="tooltip"
+                                            data-bs-placement="top"
+                                            title=""
+                                            data-bs-original-title="Quick View"
+                                            aria-label="Quick View"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleProductModal"
+                                            ></a>
                                         </li>
                                         <li class="product-item__meta-action">
                                             <a
@@ -177,23 +193,21 @@
                                             ></a>
                                         </li>
                                         <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
+                                            <a class="labtn-icon-wishlist" href="#" data-product-id="<?php echo e($product->product_id); ?>" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="product-item__content pt-5">
                                     <h5 class="product-item__title">
-                                        <a href="<?php echo e(route('product.show', ['product' => $product->product_id])); ?>"><?php echo e($product->product_name); ?></a>
+                                        <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><?php echo e($product->product_name); ?></a>
                                     </h5>
                                     <span class="product-item__price">
                                         <?php if($product->price != $product->getDiscountedPrice()): ?>
                                         <del><?php echo e(formatPriceVND($product->price)); ?></del>
                                         <!-- Giá gốc -->
+                                    
                                         <strong style="color: red;"
-                                        ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
+                                        >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
                                         >
                                         <!-- Giá sau khi giảm -->
                                         <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
@@ -232,6 +246,9 @@
                                     <div class="sidebars_widget">
                                         <h3 class="sidebars_widget__title">Category</h3>
                                         <ul class="sidebars_widget__category">
+                                            <li><a href="<?php echo e(route('shop_all')); ?>">All Products</a></li>
+                                            <li><a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>" >Discount</a></li>
+                                            <li><a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 4])); ?>">What Hot</a></li>
                                             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <li><a href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><?php echo e($category->category_name); ?></a></li>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -258,109 +275,98 @@
                                     </div>
                                 </div>
 
-
-
-
                             <!-- Price Filter Widget End -->
 
-                          <!-- Popular Product Widget Start -->
-                          <div class="sidebars_widget">
-                            <h3 class="sidebars_widget__title">Popular products</h3>
-                            <ul class="sidebars_widget__product">
-                                <!-- Single Product Start -->
-                                <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                        <img src="img/Sweet Breads1/Brioche/Brioche3.png" alt="Sidebar-Image">
-                                    </a>
-                                    <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Brioche</a>
-                                        <span class="single-product_content__price">$10</span>
-                                    </div>
-                                </li>
-                                <!-- Single Product End -->
-                                    <!-- Single Product Start -->
-                                    <li class="single-product">
-                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                            <img src="img/Sweet Breads1/Almond bread/Almond bread3.png" alt="Sidebar-Image">
-                                        </a>
-                                        <div class="single-product_content">
-                                            <a href="single-product.html" class="single-product_content__title">Almond bread</a>
-                                            <span class="single-product_content__price">$5</span>
-                                        </div>
-                                    </li>
-                                    <!-- Single Product End -->
-                                    <!-- Single Product Start -->
-                                    <li class="single-product">
-                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                            <img src="img/Cakes (1)/Blueberry cake.png" alt="Sidebar-Image">
-                                        </a>
-                                        <div class="single-product_content">
-                                            <a href="single-product.html" class="single-product_content__title">Blueberry cake</a>
-                                            <span class="single-product_content__price">$10</span>
-                                        </div>
-                                    </li>
-                                    <!-- Single Product End -->
-                            </ul>
-                        </div>
-                        <!-- Popular Product Widget End -->
+<!-- Popular Product Widget Start -->
+<div class="sidebars_widget">
+    <h3 class="sidebars_widget__title">Popular products</h3>
+    <ul class="sidebars_widget__product">
+        <?php $__currentLoopData = $bestSellingProducts->take(3); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <!-- Single Product Start -->
+        <li class="single-product">
+            <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>" class="single-product_thumb" style="border: none; width: 127px;">
+                <img src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="<?php echo e($product->product_name); ?>">
+            </a>
+            <div class="single-product_content">
+                <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>" class="single-product_content__title"><?php echo e($product->product_name); ?></a>
+                <span class="single-product_content__price">
+                    <?php if($product->price != $product->getDiscountedPrice()): ?>
+                        <del><?php echo e(formatPriceVND($product->price)); ?></del>
+                        <!-- Giá gốc -->
+                    
+                        <strong style="color: red;"
+                        >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
+                        >
+                    <!-- Giá sau khi giảm -->
+                    <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
+
+                    <!-- Giá không giảm -->
+                    <?php endif; ?>
+                </span>
+            </div>
+        </li>
+        <!-- Single Product End -->
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </ul>
+</div>
+<!-- Popular Product Widget End -->
+
 
                          <!-- Instagram Widget Start -->
                          <div class="sidebars_widget">
                             <h3 class="sidebars_widget__title">Instagram</h3>
                             <ul class="sidebars_widget__instagram " >
+                            <?php $__currentLoopData = $socialMedia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $media): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if(strpos($media->name, 'Instagram') !== false): ?>
                                 <li>
-                                    <a class="instagram-thumb" href="#">
+                                    <a class="instagram-thumb" href="<?php echo e($media->link); ?>">
                                         <img src="https://i.pinimg.com/564x/80/35/60/803560020f0f772bb12862e1eb2f50c0.jpg"  alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="instagram-thumb" href="#">
+                                    <a class="instagram-thumb" href="<?php echo e($media->link); ?>">
                                         <img src="https://i.pinimg.com/564x/61/e1/38/61e13860559dac54522ad4c622c37705.jpg" alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="instagram-thumb" href="#">
+                                    <a class="instagram-thumb" href="<?php echo e($media->link); ?>">
                                         <img src="https://i.pinimg.com/564x/d0/e5/10/d0e5108a1db4e95a60a13e520531bc13.jpg" alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="instagram-thumb" href="#">
+                                    <a class="instagram-thumb" href="<?php echo e($media->link); ?>">
                                         <img src="https://i.pinimg.com/564x/8e/f4/b9/8ef4b9e35ed97c97fde4b0cfb45d5af3.jpg" alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
+                                <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </ul>
                         </div>
                         <!-- Instagram Widget End -->
 
                         <!-- Banner Widget Start -->
-                        <div class="sidebars_widget">
-                            <a href="shop.html" class="sidebars_widget__banner">
-                                <img src="https://i.pinimg.com/564x/fe/69/a9/fe69a9c516fda99fbec304e802be28e2.jpg" alt="banner-Image">
-
-                                <div class="banner-content">
-                                    <span class="banner-content_title">Check it now</span>
-                                </div>
-                                <div class="banner-content">
-                                    <span class="banner-content_title">Check it now</span>
-                                </div>
-                                <div class="banner-content">
-                                    <span class="banner-content_title">Check it now</span>
-                                </div>
-                                <div class="banner-content">
-                                    <span class="banner-content_title">Check it now</span>
-                                </div>
-                                <div class="banner-content">
-                                    <span class="banner-content_title">Check it now</span>
-                                </div>
-                                <div class="banner-content">
-                                    <span class="banner-content_title">Check it now</span>
-                                </div>
-                            </a>
-                        </div>
+                            <!-- Banner Widget Start -->
+                            <div class="sidebars_widget">
+                            <?php $__currentLoopData = $socialMedia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $media): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if(strpos($media->name, 'Advertise') !== false): ?>
+                                <a href="<?php echo e($media->link); ?>" class="sidebars_widget__banner">
+                                <?php if($media->image): ?>
+                                    <img src="<?php echo e(asset('storage/' . $media->image)); ?>" alt="banner-Image">
+                                <?php else: ?>
+                                    <img src="<?php echo e(asset('assets/images/banner/default-banner.jpg')); ?>" alt="default-banner">
+                                <?php endif; ?>
+                                    <div class="banner-content">
+                                        <span class="banner-content_title">Check it now</span>
+                                    </div>
+                                </a>
+                            <?php endif; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </div>
+                            <!-- Banner Widget End -->
                         <!-- Banner Widget End -->
 
 
@@ -575,7 +581,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><br><br>
 
     
 
@@ -723,6 +729,34 @@ $('.quickview').on('click', function(e) {
 // Script cho QuickView
 </script>
 
+
+<script>
+    $(document).on('click', '.labtn-icon-wishlist', function(e) {
+    e.preventDefault();
+
+    var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+    $.ajax({
+        url: "<?php echo e(route('add.to.wishlist')); ?>",
+        method: 'POST',
+        data: {
+            product_id: productId,
+            _token: "<?php echo e(csrf_token()); ?>",  // Token bảo mật
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                alert('Product added to wishlist!');
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function(xhr) {
+            console.error('Error:', xhr);
+        }
+    });
+    });
+
+</script>
 
 </html>
 <?php /**PATH C:\xampp\htdocs\bakerz\resources\views/client/shop/shop_all.blade.php ENDPATH**/ ?>

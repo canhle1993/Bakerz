@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -150,8 +150,9 @@
                             @if ($product->price != $product->getDiscountedPrice())
                             <del>{{ formatPriceVND($product->price) }}</del>
                             <!-- Giá gốc -->
+                        
                             <strong style="color: red;"
-                            >{{ formatPriceVND($product->getDiscountedPrice())
+                            >${{ number_format($product->getDiscountedPrice(),2)
                             }}</strong
                             >
                             <!-- Giá sau khi giảm -->
@@ -208,7 +209,7 @@
                             <!-- Cart Button Start -->
                             <div class="cart-btn">       
                                 <div class="add-to_cart">
-                                    <a class="btn btn-dark btn-hover-primary add-to-cart" href="#/" data-bs-toggle="modal" data-bs-target="#modalCart" data-product-id="{{ $product->product_id }}">Add to cart</a>
+                                    <a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="{{ $product->product_id }}">Add to cart</a>
                                 </div>
                             </div>
                             <!-- Cart Button End -->
@@ -250,10 +251,22 @@
 
                     <!-- Product Share Start -->
                     <div class="product-share">
-                        <a href="#"><i class="lastudioicon-b-facebook"></i></a>
-                        <a href="#"><i class="lastudioicon-b-twitter"></i></a>
-                        <a href="#"><i class="lastudioicon-b-pinterest"></i></a>
-                        <a href="#"><i class="lastudioicon-b-instagram"></i></a>
+                    @foreach ($socialMedia as $socialMedia)
+                        <a href="{{ $socialMedia->link }}" target="_blank">
+                            <!-- Tùy chỉnh icon dựa trên name hoặc thêm icon chung cho tất cả -->
+                            @if (strpos($socialMedia->name, 'Facebook') !== false)
+                                <i class="lastudioicon-b-facebook"></i>
+                            @elseif (strpos($socialMedia->name, 'Twitter') !== false)
+                                <i class="lastudioicon-b-twitter"></i>
+                            @elseif (strpos($socialMedia->name, 'Pinterest') !== false)
+                                <i class="lastudioicon-b-pinterest"></i>
+                            @elseif (strpos($socialMedia->name, 'Instagram') !== false)
+                                <i class="lastudioicon-b-instagram"></i>
+                            @else
+                                <i class="lastudioicon-b-globe"></i> <!-- Biểu tượng mặc định -->
+                            @endif
+                        </a>
+                    @endforeach
                     </div>
                     <!-- Product Share End -->
 
@@ -349,9 +362,14 @@
                                         <form action="{{ route('reviews.store', ['product_id' => $product->product_id]) }}" method="POST" class="comments-area_form">
                                             @csrf
                                             <div class="mb-3">
+                                            @if ($errors->has('ratestar'))
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ $errors->first('ratestar') }}</strong>
+                                                </div>
+                                            @endif
                                                 <label for="ratestar">Rating (1-5):</label>
                                                 <div class="star-rating">
-                                                    <input type="radio" id="star5" name="ratestar" value="5" required />
+                                                    <input type="radio" id="star5" name="ratestar" value="5" checked required />
                                                     <label for="star5" title="5 stars">★</label>
                                                     <input type="radio" id="star4" name="ratestar" value="4" />
                                                     <label for="star4" title="4 stars">★</label>
@@ -414,7 +432,7 @@
                                 <div class="product-item text-center">
                                     <!-- <div class="product-item__badge">Hot</div> -->
                                     <div class="product-item__image border w-100">
-                                        <a href="{{ route('single-product', ['id' => $relatedProduct->product_id]) }}">
+                                        <a href="{{ route('product.single', ['product' => $relatedProduct->product_id]) }}">
                                             <img width="350" height="350" src="{{ asset('storage/products/' . $relatedProduct->image) }}" alt="{{ $relatedProduct->product_name }}">
                                         </a>
                                         <ul class="product-item__meta">
@@ -422,7 +440,7 @@
                                             <a
                                             class="shadow-1 labtn-icon-cart add-to-cart"
                                             href="#"
-                                            data-product-id="{{ $product->product_id }}"
+                                            data-product-id="{{ $relatedProduct->product_id }}"
                                             ></a>
                                         </li>
                                             <li class="product-item__meta-action">
@@ -431,17 +449,18 @@
                                         </ul>
                                     </div>
                                     <div class="product-item__content pt-5">
-                                        <h5 class="product-item__title"><a href="{{ route('single-product', ['id' => $relatedProduct->product_id]) }}">{{ $relatedProduct->product_name }}</a></h5>
+                                        <h5 class="product-item__title"><a href="{{ route('product.single', ['product' => $relatedProduct->product_id]) }}">{{ $relatedProduct->product_name }}</a></h5>
                                         <span class="product-item__price">
-                                        @if ($product->price != $product->getDiscountedPrice())
-                                        <del>{{ formatPriceVND($product->price) }}</del>
+                                        @if ($relatedProduct->price != $relatedProduct->getDiscountedPrice())
+                                        <del>{{ formatPriceVND($relatedProduct->price) }}</del>
                                         <!-- Giá gốc -->
+                                    
                                         <strong style="color: red;"
-                                        >{{ formatPriceVND($product->getDiscountedPrice())
+                                        >${{ number_format($relatedProduct->getDiscountedPrice(),2)
                                         }}</strong
                                         >
                                         <!-- Giá sau khi giảm -->
-                                        @else {{ formatPriceVND($product->price) }}
+                                        @else {{ formatPriceVND($relatedProduct->price) }}
                                         <!-- Giá không giảm -->
                                         @endif
                                     </span>

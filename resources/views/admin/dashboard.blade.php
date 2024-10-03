@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,6 +29,8 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('darkpan-1.0.0/css/style.css')}}" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -42,29 +44,35 @@
         <!-- Spinner End -->
 
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-secondary navbar-dark">
-                <a href="{{ route('admin.dashboard') }}" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>BakerzBite</h3>
+        <div class="sidebar pe-4 pb-3" style="background-color: white !important;">
+            <nav class="navbar bg-secondary navbar-dark" style="background-color: white !important;">
+                <a  href="{{ route('admin.dashboard') }}"  class="navbar-brand mx-4 mb-3">
+                    <h3 style="color: #BC8157;"><i class="fa fa-user me-2"></i>BakerzBite</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                        <h6 style="color: #BC8157 !important;" class="mb-0">{{ Auth::user()->name }}</h6>
                         <span>{{ Auth::user()->role->role_name }}</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    
+                    <a  href="{{ route('admin.dashboard') }}" class="nav-item nav-link {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle {{ (Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'active' : '' }} " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ (Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'active' : '' }} " data-bs-toggle="dropdown"><i class="fa fa-box me-2"></i>Product
+                        </a>
                         <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'show' : '' }}">
                             <a href="{{ route('product.index') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('product.index') ? 'active' : '' }}">&nbsp;&nbsp;Product Management</a>
                             <a href="{{ route('catalog.index') }}" class="bi-tag m-2 dropdown-item {{ Request::routeIs('catalog.index') ? 'active' : '' }}">&nbsp;&nbsp;Category</a>
                             <a href="{{ route('discount.index') }}" class="bi-lightning m-2 dropdown-item {{ Request::routeIs('discount.index') ? 'active' : '' }}">&nbsp;&nbsp;Discount</a>
                             <a href="{{ route('heathy.index') }}" class="m-2 dropdown-item {{ Request::routeIs('heathy.index') ? 'active' : '' }}">💞&nbsp;&nbsp;Heathy Type</a>
+                            <a href="{{ route('product.index_instock') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('product.index_instock') ? 'active' : '' }}">&nbsp;&nbsp;InStock Product</a>
+                            <a href="{{ route('product.index_outstock') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('product.index_outstock') ? 'active' : '' }}">&nbsp;&nbsp;OutStock Product</a>
+                            <a href="{{ route('product.index_stockcheck') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('product.index_stockcheck') ? 'active' : '' }}">&nbsp;&nbsp;Stock Check</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
@@ -77,30 +85,43 @@
                             <a href="{{ route('manage-blacklist') }}" class="dropdown-item">Blacklist</a>
                         </div>
                     </div>
-                    <a href="{{ route('admin.reviews.manage') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a>
+                    <div  class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle {{ (Request::is('banner*') || Request::is('admin.chefs.create*') || Request::is('blog*') || Request::is('blog*')) ? 'active' : '' }} " data-bs-toggle="dropdown"><i class="fa fa-list me-2"></i>Pages
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('banner*') || Request::is('admin.chefs.create*') || Request::is('blog*')) ? 'show' : '' }}">
+                            <a href="{{ route('banner.index') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('product.index') ? 'active' : '' }}">&nbsp;&nbsp;Banner</a>
+                            <a href="{{ route('admin.chefs.create') }}" class="bi-tag m-2 dropdown-item {{ Request::routeIs('catalog.index') ? 'active' : '' }}">&nbsp;&nbsp;Chefs</a>
+                            <a href="{{ route('blog.index') }}" class="bi-lightning m-2 dropdown-item {{ Request::routeIs('discount.index') ? 'active' : '' }}">&nbsp;&nbsp;Blog</a>
+                            <!-- <a href="{{ route('admin.reviews.manage') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a> -->
+                            <a href="{{ route('message.read') }}" class="m-2 dropdown-item {{ Request::routeIs('message.read') ? 'active' : '' }}">💞&nbsp;&nbsp;Review</a>
+                        </div>
+                    </div>
+
                     <!-- Order Manager -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle {{ (Request::is('order*') ) ? 'active' : '' }} " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Order Manager</a>
                         <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('order*') ) ? 'show' : '' }}">
                             <a href="{{ route('order.pending') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.pending') ? 'active' : '' }}">&nbsp;&nbsp;Pending</a>
-                            <a href="{{ route('order.paid') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.paid') ? 'active' : '' }}">&nbsp;&nbsp;Confirmed</a>
+                            <!-- <a href="{{ route('order.paid') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.paid') ? 'active' : '' }}">&nbsp;&nbsp;Confirmed</a> -->
+                            <a href="{{ route('notification.read') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.paid') ? 'active' : '' }}">&nbsp;&nbsp;Confirmed</a>
                             <a href="{{ route('order.confirmed') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.confirmed') ? 'active' : '' }}">&nbsp;&nbsp;Being delivered</a>
                             <a href="{{ route('order.delivered') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.delivered') ? 'active' : '' }}">&nbsp;&nbsp;Delivered</a>
                             <a href="{{ route('order.cancel') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.cancel') ? 'active' : '' }}">&nbsp;&nbsp;Cancel</a>
                         </div>
                     </div>
-                </div>
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>User</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="signin.html" class="dropdown-item">User Management</a>
-                    <a href="signup.html" class="dropdown-item">Order</a>
-                    <a href="404.html" class="dropdown-item">Evaluate</a>
-                    <a href="blank.html" class="dropdown-item">Comment</a>
-                </div>
-                <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
+                    <!-- Deal of the Day -->
+                    <a href="{{ route('admin.deal.index') }}" class="nav-item nav-link">
+                        <i class="fa fa-gift me-2"></i>Deal of the Day
+                    </a>
+                    <a href="{{ route('admin.coming_soon.index') }}" class="nav-item nav-link">
+                    <i class="fa fa-clock me-2"></i><span>Coming Soon</span>
+                    </a>
+                    <a href="{{ route('admin.contact_us.index') }}" class="nav-item nav-link"><i class="fa fa-envelope me-2"></i><span>ContactUs</span>
+                    </a>
+                    <a href="{{ route('admin.workshop.index') }}" class="nav-item nav-link"><i class="fa fa-chalkboard-teacher me-2"></i><span>Workshop</span></a>
+                    <a href="{{ route('admin.socialmedia.index') }}" class="nav-item nav-link"><i class="fa fa-chalkboard-teacher me-2"></i><span>Social Media</span></a>
+                    </div>
+                
             </nav>
         </div>
         <!-- Sidebar End -->
@@ -108,7 +129,7 @@
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0" style="background-color: white !important;">
                 <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
                 </a>
@@ -121,18 +142,18 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-envelope me-lg-2 position-relative">
-                                @if($notifications->count() > 0)
-                                    <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;">{{ $notifications->count() }}</span>
+                                @if($reviewNotifications->count() > 0)
+                                    <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;">{{ $reviewNotifications->count() }}</span>
                                 @endif
                             </i>
                             <span class="d-none d-lg-inline-flex">Message</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            @if($notifications->isEmpty())
+                            @if($reviewNotifications->isEmpty())
                                 <p class="dropdown-item text-center">Không có thông báo mới.</p>
                             @else
-                                @foreach($notifications as $notification)
-                                    <a href="{{ route('message.read', $notification->id) }}" class="dropdown-item">
+                                @foreach($reviewNotifications as $notification)
+                                <a href="{{ route('message.read', $notification->id) }}" class="dropdown-item">
                                         <div class="d-flex align-items-center">
                                             <img class="rounded-circle" src="{{ asset('storage/avatars/' . $notification->user->avatar) }}" alt="User avatar" style="width: 40px; height: 40px;">
                                             <div class="ms-2">
@@ -150,29 +171,39 @@
 
                     <!-- Notification Dropdown -->
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notification</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Profile updated</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">New user added</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Password changed</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all notifications</a>
-                        </div>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fa fa-bell me-lg-2 position-relative">
+                            @php
+                                $orderCount = $orderNotifications->count();
+                            @endphp
+                            @if($orderCount > 0)
+                                <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;">{{ $orderCount }}</span>
+                            @endif
+                        </i>
+                        <span class="d-none d-lg-inline-flex"> Notifications</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        @if($orderNotifications->isEmpty())
+                            <p class="dropdown-item text-center">Không có thông báo đơn hàng mới.</p>
+                        @else
+                            @foreach($orderNotifications as $notification)
+                                <a href="{{ route('notification.read', $notification->order_id) }}" class="dropdown-item">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Hiển thị avatar của user -->
+                                        <img class="rounded-circle" src="{{ asset('storage/avatars/' . $notification->user->avatar) }}" alt="User avatar" style="width: 40px; height: 40px;">
+                                        <div class="ms-2">
+                                            <!-- Hiển thị tên user và thông báo -->
+                                            <h6 class="fw-normal mb-0">{{ $notification->user->name }} vừa đặt đơn hàng mới.</h6>
+                                            <small>{{ $notification->created_at->diffForHumans() }}</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <hr class="dropdown-divider">
+                            @endforeach
+                        @endif
+
                     </div>
+                </div>
 
                     <!-- Profile Dropdown -->
                     <div class="nav-item dropdown">
@@ -180,7 +211,7 @@
                             <img class="rounded-circle me-lg-2" src="{{ asset('storage/avatars/' . Auth::user()->avatar) }}" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">{{ Auth::user()->name }}</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0" style="background-color: #FFFFFF !important;">
                             <a href="{{ route('client.home') }}" class="dropdown-item"><i class="fa fa-home"></i> Home</a>
                             <a href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}" class="dropdown-item"><i class="fa fa-suitcase"></i> My Profile</a>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item"><i class="fa fa-key"></i> Log Out</a>
@@ -204,11 +235,19 @@
             @yield('manage_client_edit')
             @yield('manage_admin_create')
             @yield('manage_blacklist')
-            <!-- Body End -->
+            @yield('admin_content')
+            @yield('blog_content')
+            @yield('deal_of_the_day_content')
+            @yield('coming_soon_content') <!-- Thêm phần này cho Coming Soon -->
+            @yield('admint_content')
+            @yield('workshop_content') <!-- Thêm phần này cho Workshop -->
+            @yield('SocialMedia_content')
 
+
+            <!-- Body End -->
             <!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary rounded-top p-4">
+            <div class="container-fluid pt-4 px-4" >
+                <div class="bg-secondary rounded-top p-4" style="background-color: #FFFFFF !important;">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
                             &copy; <a href="#">BakerzBite</a>, All Rights Reserved.
@@ -225,7 +264,6 @@
         <!-- Content End -->
 
         <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
     <!-- JavaScript Libraries -->

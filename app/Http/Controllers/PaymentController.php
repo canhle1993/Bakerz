@@ -15,26 +15,26 @@ class PaymentController extends Controller
         }
 
         $vnp_ResponseCode = $request->get('vnp_ResponseCode');
-
+        $currentUser = Auth::user(); // Lấy người dùng hiện tại
         if ($vnp_ResponseCode == '00') {
             // Lấy order_id từ URL
             $order_id = $request->get('order_id');
             if (!$order_id) {
-                return redirect()->route('client.filter')->with('error', 'Order_id not found.');
+                return redirect()->route('client.profile', $currentUser->user_id)->with('error', 'Order_id not found.');
             }
             $order = Order::find($order_id);
             if (!$order) {
-                return redirect()->route('client.filter')->with('error', 'Order not found.');
+                return redirect()->route('client.profile', $currentUser->user_id)->with('error', 'Order not found.');
             }
             $order->status = "Paid";
             $order->save();
-            $_SESSION['success'] = 'Đã thanh toán thành công. Mong gặp lại quý khách lần sau!';
+            $_SESSION['success'] = 'The payment has been successfully completed. We look forward to seeing you again!';
             // Lấy thông tin của order từ database
         } else {
-            $_SESSION['error'] = 'Thanh toán thất bại. Vui lòng thử lại.';
+            $_SESSION['error'] = 'Payment failed. Please try again.';
         }
-        $currentUser = Auth::user(); // Lấy người dùng hiện tại
+        
         // Kiểm tra xem session có được lưu không
-        return redirect()->route('client.filter');
+        return redirect()->route('client.profile', $currentUser->user_id);
     }
 }

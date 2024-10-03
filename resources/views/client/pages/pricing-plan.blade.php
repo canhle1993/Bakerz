@@ -5,12 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Bakerfresh - Cake Shop HTML Template</title>
+    <title>Bakerz Bite</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="./assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -66,7 +66,7 @@
                                 <ul class="blog-post-two__meta">
                                     <li><a href="{{ route('client.home') }}">Bakerz Bite</a></li>
                                     <li>-</li>
-                                    <li><span>August 14, 2024</span></li>
+                                    <li><span>Oct 05, 2024</span></li>
                                 </ul>
                                 <h2 class="single-blog-title">What is Bakerz Bite Rewards?</h2>
                                 <p class="single-blog-description">Bakerz Bite Rewards is a program created by Bakerz Bite for the purpose of paying tribute to Bakerz Bite customers. When you join, you will receive incentives based on the ranks you have achieved, divided into ranks such as: Bronze, Gold, and Diamond. Rankings will be calculated based on the level of spending and the number of points you accumulate for each order.</p>

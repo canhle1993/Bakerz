@@ -1,6 +1,6 @@
-Chào: <?php echo e($data['name']); ?>,<br>
-Bạn đã reset password thành công! 😉<br>
-Lưu ý không chia sẽ tài khoản cho bất kỳ ai.<br>
-Tài khoản đăng nhập của bạn là: <?php echo e($data['email']); ?>,<br>
-Mật khẩu là: <?php echo e($data['password']); ?>,<br>
-Chúc bạn có trải nghiệm vui vẻ!.<br><?php /**PATH C:\xampp\htdocs\bakerz\resources\views/mail/test-email.blade.php ENDPATH**/ ?>
+Hello: <?php echo e($data['name']); ?>,<br> 
+You have successfully reset your password! 😉<br> 
+Please note not to share your account with anyone.<br> 
+Your login account is: <?php echo e($data['email']); ?>,<br> 
+Your password is: <?php echo e($data['password']); ?>,<br> 
+Wishing you a pleasant experience!<br><?php /**PATH C:\xampp\htdocs\bakerz\resources\views/mail/test-email.blade.php ENDPATH**/ ?>

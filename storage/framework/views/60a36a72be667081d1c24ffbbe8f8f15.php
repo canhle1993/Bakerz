@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bakerz Bite</title>
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
+
     <style>
         * {
             margin: 0;
@@ -81,19 +83,21 @@
             <div class="slideee">
                 <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><img src="<?php echo e($product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg')); ?>" alt="<?php echo e($product->product_name); ?>"></a>
                 <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>">
-                <button><?php echo e($product->product_name); ?><br><span>
-                <?php if($product->price != $product->getDiscountedPrice()): ?>
-                <del><?php echo e(formatPriceVND($product->price)); ?></del>
-                <!-- Giá gốc -->
-                <strong
-                ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
-                >
-                <!-- Giá sau khi giảm -->
-                <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
-
-                <!-- Giá không giảm -->
-                <?php endif; ?>
-                </span></button></a>
+                <button><?php echo e($product->product_name); ?><br>                    
+                    <span class="product-item__price">
+                        <?php if($product->price != $product->getDiscountedPrice()): ?>
+                        <del ><?php echo e(formatPriceVND($product->price)); ?></del>
+                        <!-- Giá gốc -->
+                    
+                        <strong style="color: red;"
+                        >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
+                        >
+                        <!-- Giá sau khi giảm -->
+                        <?php else: ?> <span style="color: white;"><?php echo e(formatPriceVND($product->price)); ?></span>
+                        <!-- Giá không giảm -->
+                        <?php endif; ?>
+                    </span>
+                </button></a>
             </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
             <!-- <div class="slideee">
@@ -122,19 +126,19 @@
                 <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><img src="<?php echo e($product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg')); ?>" alt="<?php echo e($product->product_name); ?>"></a>
                 <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>">
                 <button>
-                <?php echo e($product->product_name); ?><br><span>
-                <?php if($product->price != $product->getDiscountedPrice()): ?>
-                <del><?php echo e(formatPriceVND($product->price)); ?></del>
-                <!-- Giá gốc -->
-                <strong
-                ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
-                >
-                <!-- Giá sau khi giảm -->
-                <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
+                <?php echo e($product->product_name); ?><br><span class="product-item__price">
+                    <?php if($product->price != $product->getDiscountedPrice()): ?>
+                    <del><?php echo e(formatPriceVND($product->price)); ?></del>
+                    <!-- Giá gốc -->
+                    <strong style="color: red;"
+                      >$<?php echo e(number_format($disproduct->getDiscountedPrice(), 2)); ?></strong
+                    >
+                    <!-- Giá sau khi giảm -->
+                    <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
 
-                <!-- Giá không giảm -->
-                <?php endif; ?>
-            </span></button></a>
+                    <!-- Giá không giảm -->
+                    <?php endif; ?>
+                  </span></button></a>
             </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
             <!-- <div class="slideee">

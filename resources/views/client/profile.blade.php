@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -371,7 +371,7 @@
                           <span class="d-none d-sm-block">Change password</span>
                         </a>
                       </li>
-
+                      @if (Auth::check() && (Auth::user()->role_id == 2 || Auth::user()->role_id == 3))
                       <li class="nav-item" role="presentation" id="checkAdmin">
                         <a
                           class="nav-link px-4"
@@ -386,6 +386,8 @@
                           <span class="d-none d-sm-block">Dashboard</span>
                         </a>
                       </li>
+                      @endif
+
                     </ul>
                   </div>
                 </div>
@@ -438,6 +440,7 @@
                                                 <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
                                                 <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
                                                 <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Discount:</b> -${{ $order->discount ? $order->discount : 0 }}</p>
                                                 <p><b>Price:</b> ${{ $order->pay }}</p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -478,6 +481,7 @@
                                                 <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
                                                 <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
                                                 <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Discount:</b> -${{ $order->discount ? $order->discount : 0 }}</p>
                                                 <p><b>Price:</b> ${{ $order->pay }}</p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -518,6 +522,7 @@
                                                 <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
                                                 <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
                                                 <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Discount:</b> -${{ $order->discount ? $order->discount : 0 }}</p>
                                                 <p><b>Price:</b> ${{ $order->pay }}</p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -558,6 +563,7 @@
                                                 <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
                                                 <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
                                                 <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Discount:</b> -${{ $order->discount ? $order->discount : 0 }}</p>
                                                 <p><b>Price:</b> ${{ $order->pay }}</p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -598,6 +604,7 @@
                                                 <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
                                                 <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
                                                 <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Discount:</b> -${{ $order->discount ? $order->discount : 0 }}</p>
                                                 <p><b>Price:</b> ${{ $order->pay }}</p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -903,6 +910,51 @@
             }
           });
         });
+    
+        window.addEventListener('load', updateCartView)
+        
+        function updateCartView() {
+          
+              $.ajax({
+                  url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                  method: "GET",
+                  success: function(response) {
+                    console.log("OK");
+                      $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+                      $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
+                      $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
+
+                      console.log(response.cart_quantity);
+                      calculateTotal();
+                      // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
+                      $('#cart_icon').css('color', 'red')// Đổi màu thành đỏ
+                      .animate({
+                          top: '-10px'
+                      }, 200, function() {
+                          $(this).animate({
+                              top: '0px'
+                          }, 200, function() {
+                              // Lặp lại lần nữa
+                              $(this).animate({
+                                  top: '-10px'
+                              }, 200, function() {
+                                  $(this).animate({
+                                      top: '0px'
+                                  }, 200, function() {
+                                      // Sau khi hiệu ứng hoàn thành, đổi lại màu ban đầu
+                                      $(this).css('color', '');
+                                  });
+                              });
+                          });
+                      });
+                  },
+                  error: function(xhr) {
+                    console.log("FAIL");
+                      console.error('Error:', xhr.responseText);
+                      // alert('An error occurred while updating the cart.');
+                  }
+              });
+            }
     </script>
 </body>
 

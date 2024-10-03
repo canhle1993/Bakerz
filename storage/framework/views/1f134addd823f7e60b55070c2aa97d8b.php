@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/favicon.png')); ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -257,31 +258,32 @@
                 <div class="col-md-6">
                     <div class="contact-section_formbg" data-bg-image="<?php echo e(asset('assets/images/bg/contact-form-bg.jpg')); ?>">
                         <h2 class="contact-section_form__title">Get in touch.</h2>
-                        <form class="contact-section_form" id="contact-form" action="http://whizthemes.com/mail-php/raju/arden/mail.php" method="post">
+                        <form class="contact-section_form" id="contact-form" action="<?php echo e(route('contact.store')); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
                             <div class="row">
                                 <div class="col-md-6 form-p">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="con_name" placeholder="Name">
+                                        <input class="form-control" type="text" name="name" placeholder="Name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 form-p">
                                     <div class="form-group">
-                                        <input class="form-control" type="email" name="con_email" placeholder="Email">
+                                        <input class="form-control" type="email" name="email" placeholder="Email" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 form-p">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="con_phone" placeholder="Phone">
+                                        <input class="form-control" type="text" name="phone" placeholder="Phone" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 form-p">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="con_address" placeholder="Address">
+                                        <input class="form-control" type="text" name="address" placeholder="Address" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-p">
                                     <div class="form-group">
-                                        <textarea class="form-control text-area" name="con_message" placeholder="Message"></textarea>
+                                        <textarea class="form-control text-area" name="comment" placeholder="Message" required></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-p">
@@ -291,6 +293,7 @@
                                 </div>
                             </div>
                         </form>
+
                         <!-- Message Notification -->
                         <div class="form-message"></div>
                     </div>
@@ -324,11 +327,28 @@
                                 <a class="logo-white d-none" href="index.html"><img src="<?php echo e(asset('assets/images/logo-white.svg')); ?>" alt="Logo"></a>
                             </div>
                             <div class="footer-widget__social">
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-facebook"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-twitter"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-instagram"></i></a>
-                            </div>
+                              <?php $__currentLoopData = $socialMedia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $socialMedia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <a href="<?php echo e($socialMedia->link); ?>" target="_blank">
+                                      <!-- Tùy chỉnh icon dựa trên name hoặc thêm icon chung cho tất cả -->
+                                      <?php if(strpos($socialMedia->name, 'Facebook') !== false): ?>
+                                          <i class="lastudioicon-b-facebook"></i>
+                                      <?php elseif(strpos($socialMedia->name, 'Twitter') !== false): ?>
+                                          <i class="lastudioicon-b-twitter"></i>
+                                      <?php elseif(strpos($socialMedia->name, 'Pinterest') !== false): ?>
+                                          <i class="lastudioicon-b-pinterest"></i>
+                                      <?php elseif(strpos($socialMedia->name, 'Instagram') !== false): ?>
+                                          <i class="lastudioicon-b-instagram"></i>
+                                      <?php else: ?>
+                                          <i class="lastudioicon-b-globe"></i> <!-- Biểu tượng mặc định -->
+                                      <?php endif; ?>
+                                  </a>
+                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                              <b style="padding: 3px 0px;">
+                                  <i class="fas fa-users"></i>
+                                  <span id="onlineCount" style="padding: 2px 7px 2px 7px; border-radius: 99px;"></span>
+                              </b>
+                          </div>
+
                         </div>
                         <!-- Footer Widget Section End -->
                     </div>
@@ -341,10 +361,9 @@
                                 <h4 class="footer-widget__title">Categories</h4>
 
                                 <ul class="footer-widget__link">
-                                    <li><a href="<?php echo e(route('category')); ?>">Sweet Breads</a></li>
-                                    <li><a href="<?php echo e(route('category')); ?>">Baked Goods</a></li>
-                                    <li><a href="<?php echo e(route('category')); ?>">Cakes</a></li>
-                                    <li><a href="<?php echo e(route('category')); ?>">Cheesecakes</a></li>
+                                  <?php $__currentLoopData = $categories->take(4); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <li><a class="sub-item-link" href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><span><?php echo e($category->category_name); ?></span></a></li>
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -354,9 +373,7 @@
                                 <h4 class="footer-widget__title">Services</h4>
 
                                 <ul class="footer-widget__link">
-                                    <li><a href="<?php echo e(route('delivery')); ?>">Delivery</a></li>
                                     <li><a href="<?php echo e(route('checkout')); ?>">Payment</a></li>
-                                    <li><a href="<?php echo e(route('exchange-return-policy')); ?>">Exchange & Return Policy</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -368,7 +385,7 @@
                                 <ul class="footer-widget__link">
                                     <li><a href="<?php echo e(route('about')); ?>">About Us</a></li>
                                     <li><a href="<?php echo e(route('contact')); ?>">Contact Us</a></li>
-                                    <li><a href="<?php echo e(route('blog-detail')); ?>">Latest Post</a></li>
+                                    <li><a href="<?php echo e(route('faq')); ?>">FAQs</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -384,11 +401,17 @@
         <!-- Footer Copyright Strat -->
         <div class="footer-copyright footer-copyright-two">
             <div class="container">
-                <!-- Footer Copyright Text Strat -->
-                <div class="footer-copyright-text text-center">
-                    <p>&copy; 2024 <strong> Bakerz Bite </strong> Made with <i class="lastudioicon-heart-1"></i> by <a href="https://aptechvietnam.com.vn/">Bakerz</a></p>
+              <div class="row">
+                <div class="col-md-2" style="margin-top: 4px;">
+                  <!-- <b style="font-size: x-large;" class="footer-copyright-text" id="onlineCount"><i style="font-size: x-large;" class="fas fa-users"></i> </b> -->
                 </div>
-                <!-- Footer Copyright Text End -->
+                <div class="col-md-8">
+                  <div class="footer-copyright-text text-center">
+                      <p >&copy; 2024 <strong> Bakerz Bite </strong> Made with <i class="lastudioicon-heart-1"></i> by <a href="https://aptechvietnam.com.vn/">Bakerz</a></p>
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
             </div>
         </div>
         <!-- Footer Copyright End -->
@@ -415,6 +438,24 @@
     <!-- Activation JS -->
     <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      window.addEventListener('load', function() {
+        updateonlineUser();
+      });
+      function updateonlineUser() {
+                $.ajax({
+                    url: "<?php echo e(route('online-users')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
+            }
+    </script>
     <!-- Vendors JS -->
 </body>
 
