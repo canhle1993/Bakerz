@@ -201,7 +201,15 @@
                             <i class="bi bi-arrow-up-circle"></i> Restore
                         </button>
                     </form>
-                     
+                     <!-- Button to delete product -->
+                     <form action="<?php echo e(route('user.delete', $user->user_id)); ?>" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this user permanently?');">
+        <?php echo csrf_field(); ?>
+        <?php echo method_field('DELETE'); ?>
+        <button type="submit" class="btn btn-sm btn-danger">
+            <i class="bi bi-trash"></i> Delete
+        </button>
+    </form>
+
                 </td>
 
             </tr>
@@ -259,7 +267,7 @@
                                 <i class="bi bi-arrow-up-circle"></i> Restore
                             </button>
                         </form>
-                         <!-- Button to delete product -->
+                             <!-- Button to delete product -->
     <form action="<?php echo e(route('product.delete', $product->product_id)); ?>" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this product permanently?');">
         <?php echo csrf_field(); ?>
         <?php echo method_field('DELETE'); ?>
@@ -279,6 +287,64 @@
 
         </div>
     </div>
+
+    
+
+<div class="p-4 rounded shadow-lg mb-5" style="background: linear-gradient(45deg, #fdfbfb, #ebedee); border: 1px solid #6c757d;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="text-dark">Deleted Categories</h1>
+    </div>
+
+    <table class="table table-hover table-bordered table-striped shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Category Image</th>
+                <th>Category ID</th>
+                <th>Category Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $__currentLoopData = $deletedCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <tr>
+                <td>
+                    <img src="<?php echo e(asset('storage/catalogs/' . $category->image)); ?>" alt="Hình ảnh" width="100" class="mt-2">
+                </td>
+                <td><?php echo e($category->category_id); ?></td>
+                <td><?php echo e($category->category_name); ?></td>
+
+
+                <td class="text-center">
+                    <!-- Button to restore category -->
+                    <form action="<?php echo e(route('category.restore', $category->category_id)); ?>" method="POST" style="display:inline-block;">
+                        <?php echo csrf_field(); ?>
+                        <button type="submit" class="btn btn-sm btn-restore">
+                            <i class="bi bi-arrow-up-circle"></i> Restore
+                        </button>
+                    </form>
+
+                    <!-- Button to delete category -->
+                    <form action="<?php echo e(route('category.delete', $category->category_id)); ?>" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this category permanently?');">
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('DELETE'); ?>
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </form>
+                </td>
+
+            </tr>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-4">
+        <?php echo e($deletedCategories->links('pagination::bootstrap-5')); ?>
+
+    </div>
+</div>
+
 
 
 <?php $__env->stopSection(); ?>
