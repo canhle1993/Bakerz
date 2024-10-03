@@ -193,7 +193,7 @@
                 <td>{{ $item->delivery_phone }}</td>
                 <td>{{ $item->delivery_address }}</td>
                 <td>{{ $item->pay }}</td>
-                <td>{{ $item->status }}</td>
+                <td>Being delivered</td>
 
                 <td class="text-center">
                     <button data-order-id="{{ $item->order_id }}" class="btn btn-sm btn-outline-info view">

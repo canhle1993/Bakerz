@@ -1,6 +1,4 @@
-@extends('admin.dashboard')
-
-@section('manage_admin')
+<?php $__env->startSection('manage_admin'); ?>
 <style>
 .pagination {
     display: flex;
@@ -142,9 +140,10 @@
 
 </style>
 
-@if(session('success'))
+<?php if(session('success')): ?>
     <div id="custom-alert" class="custom-alert">
-        {{ session('success') }}
+        <?php echo e(session('success')); ?>
+
         <button class="close-btn" onclick="closeAlert()">×</button>
     </div>
 
@@ -166,7 +165,7 @@
             }, 500);
         }
     </script>
-@endif
+<?php endif; ?>
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -187,38 +186,40 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($orders as $item)
+            <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
-                <td class="text-center">{{ $item->order_id }}</td>
-                <td>{{ $item->purchase_date }}</td>
-                <td>{{ $item->delivery_phone }}</td>
-                <td>{{ $item->delivery_address }}</td>
-                <td>{{ $item->pay }}</td>
-                <td>Confirmed</td>
+                <td class="text-center"><?php echo e($item->order_id); ?></td>
+                <td><?php echo e($item->purchase_date); ?></td>
+                <td><?php echo e($item->delivery_phone); ?></td>
+                <td><?php echo e($item->delivery_address); ?></td>
+                <td><?php echo e($item->pay); ?></td>
+                <td><?php echo e($item->status); ?></td>
 
                 <td class="text-center">
-                    <button data-order-id="{{ $item->order_id }}" class="btn btn-sm btn-outline-info view">
+                    <button data-order-id="<?php echo e($item->order_id); ?>" class="btn btn-sm btn-outline-info view">
                         View
                     </button>
                     <!-- Button to lower admin role to client -->
-                    <form action="{{route('order.gotoConfirmed', $item->order_id)}}" method="POST" style="display:inline-block;">
-                        @csrf
+                    <form action="<?php echo e(route('order.gotopaid', $item->order_id)); ?>" method="POST" style="display:inline-block;">
+                        <?php echo csrf_field(); ?>
                         <button type="submit" class="btn btn-sm btn-lower">
-                            <i class="bi bi-box-arrow-right"></i> Confimed
+                            <i class="bi bi-box-arrow-right"></i> Paid
                         </button>
                     </form>
-                    <a class="btn btn-sm btn-danger bi bi-trash" href="#" data-url="{{ route('order.gotoCancel', $item->order_id) }}" onclick="showDeleteModal(this)">Cancel</a>
+                    
+                    <a class="btn btn-sm btn-danger bi bi-trash" href="#" data-url="<?php echo e(route('order.gotoCancel', $item->order_id)); ?>" onclick="showDeleteModal(this)">Cancel</a>
                     
                 </td>
 
             </tr>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </tbody>
     </table>
 
     <!-- Pagination -->
     <div class="d-flex justify-content-center mt-4">
-        {{ $orders->links('pagination::bootstrap-5') }}
+        <?php echo e($orders->links('pagination::bootstrap-5')); ?>
+
     </div>
 
     <!-- Modal Popup -->
@@ -235,14 +236,15 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <form id="deleteForm" method="POST" action="">
-                    @csrf
+                    <?php echo csrf_field(); ?>
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </div>
             </div>
         </div>
         </div>
-        <!-- Modal Structure -->
+
+<!-- Modal Structure -->
 <div style="z-index: 1056;" class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" style="max-width: 800px;"> <!-- Reduce the modal width -->
     <div class="modal-content">
@@ -271,7 +273,10 @@
     </div>
   </div>
 </div>
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     function showDeleteModal(element) {
         // Lấy giá trị URL từ thuộc tính data-url
@@ -284,8 +289,7 @@
         var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         deleteModal.show();
     }
-    
-    
+
     $(document).ready(function() {
           $('.view').on('click', function(e) {
             
@@ -294,7 +298,7 @@
 
             // Gọi AJAX để lấy dữ liệu
             $.ajax({
-              url: "{{ route('client.orderdetails', ':id') }}".replace(':id', orderId), // Thay :id bằng order ID
+              url: "<?php echo e(route('client.orderdetails', ':id')); ?>".replace(':id', orderId), // Thay :id bằng order ID
               type: 'GET',
               dataType: 'json',
               success: function(response) {
@@ -306,7 +310,7 @@
 
                   // Lặp qua chi tiết đơn hàng và hiển thị
                   orderdetails.forEach(function(item) {
-                    var imageUrl = `{{ asset('storage/products/') }}/${item.product.image}`; // Xây dựng URL hình ảnh
+                    var imageUrl = `<?php echo e(asset('storage/products/')); ?>/${item.product.image}`; // Xây dựng URL hình ảnh
                     modalContent += `
                       <tr>
                         <th class="cart-thumb">
@@ -348,7 +352,8 @@
             }
           });
         });
-
 </script>
     
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bakerz\resources\views/admin/orders/pending.blade.php ENDPATH**/ ?>
