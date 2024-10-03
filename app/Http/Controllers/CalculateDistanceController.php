@@ -12,39 +12,33 @@ class CalculateDistanceController extends Controller
         return view('client_location');
     }
 
+    // Hàm tính khoảng cách giữa hai tọa độ
     public function calculateDistance(Request $request)
     {
-        // Tọa độ của cửa hàng tại Aptech Latitude là vĩ độ, Long titude là kinh độ
+        // Lấy tọa độ của người dùng từ request
+        $userLatitude = $request->input('latitude');
+        $userLongitude = $request->input('longitude');
+
+        // Tọa độ của cửa hàng
         $storeLatitude = 10.80688612;
         $storeLongitude = 106.71420533;
 
-        // Lấy tọa độ người dùng từ request
-        $clientLatitude = $request->input('latitude');
-        $clientLongitude = $request->input('longitude');
+        // Tính khoảng cách bằng công thức Haversine
+        $earthRadius = 6371; // Bán kính Trái Đất tính bằng km
 
-        // Tính khoảng cách
-        $distance = $this->getDistance($storeLatitude, $storeLongitude, $clientLatitude, $clientLongitude);
+        $latFrom = deg2rad($userLatitude);
+        $lonFrom = deg2rad($userLongitude);
+        $latTo = deg2rad($storeLatitude);
+        $lonTo = deg2rad($storeLongitude);
 
-        // Trả về khoảng cách dưới dạng JSON
-        return response()->json(['distance' => $distance]);
-    }
+        $latDelta = $latTo - $latFrom;
+        $lonDelta = $lonTo - $lonFrom;
 
-    // Hàm tính khoảng cách giữa 2 tọa độ (Haversine Formula)
-    private function getDistance($lat1, $lon1, $lat2, $lon2)
-    {
-        $earthRadius = 6371; // Bán kính trái đất tính bằng km
+        $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+                cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+        $distance = $angle * $earthRadius;
 
-        $dLat = deg2rad($lat2 - $lat1);
-        $dLon = deg2rad($lon2 - $lon1);
-
-        $a = sin($dLat / 2) * sin($dLat / 2) +
-            cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
-            sin($dLon / 2) * sin($dLon / 2);
-
-        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-
-        $distance = $earthRadius * $c;
-
-        return round($distance, 2); // Trả về khoảng cách đã làm tròn
+        // Trả về khoảng cách tính bằng km
+        return response()->json(['distance' => round($distance, 2)]);
     }
 }

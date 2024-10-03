@@ -316,11 +316,11 @@
                     <h4 class="text-primary font-size-20 mt-3 mb-2">
                       {{ Auth::user()->name }}
                       @if(Auth::user()->rank === 'Gold')
-                          <a href="{{ route('pricing-plan') }}" style="float: right;"><b>Rank: <span style="color: #FFC107 !important;">Gold</span><br>Point: {{ Auth::user()->score }}</b></a>
+                          <a href="{{ route('pricing-plan') }}" style="float: right;"><b style="margin-left: 25px"><img style="border: none; width: 50px; height: 70px;" src="{{asset('img/2.png')}}" alt="gold"><br>Point: {{ Auth::user()->score }}</b></a>
                       @elseif(Auth::user()->rank === 'Diamond')
-                      <a href="{{ route('pricing-plan') }}" style="float: right;"><b>Rank: <span style="color: #07e2ff !important;">Diamond</span><br>Point: {{ Auth::user()->score }}</b></a>
+                      <a href="{{ route('pricing-plan') }}" style="float: right;"><b style="margin-left: 25px"><img style="border: none; width: 50px; height: 70px;" src="{{asset('img/3.png')}}" alt="diamond"><br>Point: {{ Auth::user()->score }}</b></a>
                       @else
-                      <a href="{{ route('pricing-plan') }}" style="float: right;"><b>Rank: <span style="color: #4F1818 !important;">Bronze</span><br>Point: {{ Auth::user()->score }}</b></a>
+                      <a href="{{ route('pricing-plan') }}" style="float: right;"><b ><img style="border: none; width: 50px; height: 70px;" src="{{asset('img/1.png')}}" alt="Bronze"><br><span >Point: {{ Auth::user()->score }}</span></b></a>
                       
                       @endif
                       
@@ -403,10 +403,10 @@
                                 <a class="nav-link active" id="pending-tab" data-bs-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="true">Pending</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="paid-tab" data-bs-toggle="tab" href="#paid" role="tab" aria-controls="paid" aria-selected="false">Paid</a>
+                                <a class="nav-link" id="paid-tab" data-bs-toggle="tab" href="#paid" role="tab" aria-controls="paid" aria-selected="false">Confirmed</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="confirm-tab" data-bs-toggle="tab" href="#confirm" role="tab" aria-controls="confirm" aria-selected="false">Confirmed</a>
+                                <a class="nav-link" id="confirm-tab" data-bs-toggle="tab" href="#confirm" role="tab" aria-controls="confirm" aria-selected="false">Being delivered</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="delivered-tab" data-bs-toggle="tab" href="#delivered" role="tab" aria-controls="delivered" aria-selected="false">Delivered</a>
@@ -484,7 +484,7 @@
                                                   <span>Status: </span>
                                                   <span
                                                     class="badge badge-soft-success p-2 team-status b1"
-                                                    > <a href="#" data-order-id="{{ $order->order_id }}" class="status">Paid</a> 
+                                                    > <a href="#" data-order-id="{{ $order->order_id }}" class="status">Confirmed</a> 
                                                   </span>
                                                 </div>
                                               </div>
@@ -524,7 +524,7 @@
                                                   <span>Status: </span>
                                                   <span
                                                     class="badge badge-soft-warning p-2 team-status b1"
-                                                    > <a href="#" data-order-id="{{ $order->order_id }}" class="status">Confirm</a> 
+                                                    > <a href="#" data-order-id="{{ $order->order_id }}" class="status">Being delivered</a> 
                                                   </span>
                                                 </div>
                                               </div>

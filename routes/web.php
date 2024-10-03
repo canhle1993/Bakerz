@@ -241,6 +241,7 @@ Route::post('/reviews/{id}/reply', [ReviewController::class, 'reply'])->name('re
 //Tính toán khoảng cách từ vị trí khách hàng đến cửa hàng
 use App\Http\Controllers\CalculateDistanceController;
 
+
 // Hiển thị trang để tính khoảng cách
 Route::get('/client-location', [CalculateDistanceController::class, 'showLocation'])->name('client_location');
 

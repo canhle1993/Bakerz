@@ -146,7 +146,19 @@
                     <div class="product-head mb-3">
 
                         <!-- Price Start -->
-                        <span class="product-head-price">{{ formatPriceVND($product->price) }}</span>
+                        <span class="product-item__price">
+                            @if ($product->price != $product->getDiscountedPrice())
+                            <del>{{ formatPriceVND($product->price) }}</del>
+                            <!-- Giá gốc -->
+                            <strong style="color: red;"
+                            >{{ formatPriceVND($product->getDiscountedPrice())
+                            }}</strong
+                            >
+                            <!-- Giá sau khi giảm -->
+                            @else {{ formatPriceVND($product->price) }}
+                            <!-- Giá không giảm -->
+                            @endif
+                        </span>
                         <!-- Price End -->
                          <div>
                                 <!-- Hiển thị thông báo -->
@@ -420,14 +432,19 @@
                                     </div>
                                     <div class="product-item__content pt-5">
                                         <h5 class="product-item__title"><a href="{{ route('single-product', ['id' => $relatedProduct->product_id]) }}">{{ $relatedProduct->product_name }}</a></h5>
-                                        @if($relatedProduct->price != $relatedProduct->getDiscountedPrice())
-                                            <span class="original-price">{{ formatPriceVND($relatedProduct->price) }}</span>
-                                            <span class="discounted-price">${{ number_format($relatedProduct->getDiscountedPrice(), 2) }}</span> <!-- Giá mới -->
-                                        @else
-                                        <span class="product-item__price"
-                                        >{{ formatPriceVND($relatedProduct->price) }}</span
+                                        <span class="product-item__price">
+                                        @if ($product->price != $product->getDiscountedPrice())
+                                        <del>{{ formatPriceVND($product->price) }}</del>
+                                        <!-- Giá gốc -->
+                                        <strong style="color: red;"
+                                        >{{ formatPriceVND($product->getDiscountedPrice())
+                                        }}</strong
                                         >
+                                        <!-- Giá sau khi giảm -->
+                                        @else {{ formatPriceVND($product->price) }}
+                                        <!-- Giá không giảm -->
                                         @endif
+                                    </span>
                                     </div>
                                 </div>
                                 <!-- Product Item End -->

@@ -188,7 +188,19 @@
                                     <h5 class="product-item__title">
                                         <a href="{{ route('product.show', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
                                     </h5>
-                                    <span class="product-item__price">${{ number_format($product->price, 2) }}</span>
+                                    <span class="product-item__price">
+                                        @if ($product->price != $product->getDiscountedPrice())
+                                        <del>{{ formatPriceVND($product->price) }}</del>
+                                        <!-- Giá gốc -->
+                                        <strong style="color: red;"
+                                        >{{ formatPriceVND($product->getDiscountedPrice())
+                                        }}</strong
+                                        >
+                                        <!-- Giá sau khi giảm -->
+                                        @else {{ formatPriceVND($product->price) }}
+                                        <!-- Giá không giảm -->
+                                        @endif
+                                    </span>
 
                                 </div>
                             </div>
@@ -266,28 +278,28 @@
                                     </div>
                                 </li>
                                 <!-- Single Product End -->
-                                <!-- Single Product Start -->
-                                <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                        <img src="img/Sweet Breads1/Almond bread/Almond bread3.png" alt="Sidebar-Image">
-                                    </a>
-                                    <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Almond bread</a>
-                                        <span class="single-product_content__price">$5</span>
-                                    </div>
-                                </li>
-                                <!-- Single Product End -->
-                                <!-- Single Product Start -->
-                                <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                        <img src="img/Cakes (1)/Blueberry cake.png" alt="Sidebar-Image">
-                                    </a>
-                                    <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Blueberry cake</a>
-                                        <span class="single-product_content__price">$10</span>
-                                    </div>
-                                </li>
-                                <!-- Single Product End -->
+                                    <!-- Single Product Start -->
+                                    <li class="single-product">
+                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
+                                            <img src="img/Sweet Breads1/Almond bread/Almond bread3.png" alt="Sidebar-Image">
+                                        </a>
+                                        <div class="single-product_content">
+                                            <a href="single-product.html" class="single-product_content__title">Almond bread</a>
+                                            <span class="single-product_content__price">$5</span>
+                                        </div>
+                                    </li>
+                                    <!-- Single Product End -->
+                                    <!-- Single Product Start -->
+                                    <li class="single-product">
+                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
+                                            <img src="img/Cakes (1)/Blueberry cake.png" alt="Sidebar-Image">
+                                        </a>
+                                        <div class="single-product_content">
+                                            <a href="single-product.html" class="single-product_content__title">Blueberry cake</a>
+                                            <span class="single-product_content__price">$10</span>
+                                        </div>
+                                    </li>
+                                    <!-- Single Product End -->
                             </ul>
                         </div>
                         <!-- Popular Product Widget End -->

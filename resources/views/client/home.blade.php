@@ -131,11 +131,11 @@
                     <!-- Single Category Four Start -->
                     <div class="category-four_box">
                         <span class="category-four_border"></span>
-                        <a href="shop.html" class="category-four_thumb">
+                        <a href="{{ route('shop_all') }}" class="category-four_thumb">
                             <img src="assets/images/category/category-08.jpg" alt="Category-Image">
                         </a>
                         <div class="category-four_content">
-                            <a href="shop.html" class="category-four_name">Sweet Breads</a>
+                            <a href="{{ route('shop_all') }}" class="category-four_name">Sweet Breads</a>
                         </div>
                     </div>
                     <!-- Single Category Four End -->
@@ -287,12 +287,12 @@
             <div class="product-item text-center">
               @if($product->price>5)
               <!-- TODO:CHEAT -->
-              <div
+              <!-- <div
                 class="product-item__badge"
                 style="background-color: red !important"
               >
                 Best Seller
-              </div>
+              </div> -->
               @endif
               <div class="product-item__image border w-100">
                 <a href="{{ route('product.single', ['product' => $product->product_id]) }}"
@@ -434,7 +434,19 @@
                                     <h5 class="product-item__title">
                                         <a href="{{ route('product.single', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
                                     </h5>
-                                    <span class="product-item__price">{{ formatPriceVND($product->price) }}</span>
+                                    <span class="product-item__price">
+                                        @if ($product->price != $product->getDiscountedPrice())
+                                        <del>{{ formatPriceVND($product->price) }}</del>
+                                        <!-- Giá gốc -->
+                                        <strong style="color: red;"
+                                        >{{ formatPriceVND($product->getDiscountedPrice())
+                                        }}</strong
+                                        >
+                                        <!-- Giá sau khi giảm -->
+                                        @else {{ formatPriceVND($product->price) }}
+                                        <!-- Giá không giảm -->
+                                        @endif
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -659,7 +671,7 @@
                     @if ($product->price != $product->getDiscountedPrice())
                     <del>{{ formatPriceVND($product->price) }}</del>
                     <!-- Giá gốc -->
-                    <strong
+                    <strong style="color: red;"
                       >{{ formatPriceVND($product->getDiscountedPrice())
                       }}</strong
                     >
@@ -838,7 +850,7 @@
                 <div class="col-4">
                     <!-- Counter Item Strat -->
                     <div class="counter-item text-center">
-                        <span class="counter-item__label text-global-color-03"><span class="count scroll-counter" data-counter-time="1500">70</span>+</span>
+                        <span class="counter-item__label text-global-color-03"><span class="count scroll-counter" data-counter-time="1500">10</span>+</span>
                         <p class="counter-item__value text-secondary">Years</p>
                     </div>
                     <!-- Counter Item End -->
@@ -846,7 +858,7 @@
                 <div class="col-4">
                     <!-- Counter Item Strat -->
                     <div class="counter-item text-center">
-                        <span class="counter-item__label text-global-color-03"><span class="count scroll-counter" data-counter-time="1500">10</span>K+</span>
+                        <span class="counter-item__label text-global-color-03"><span id="onlineCount" class="count scroll-counter" data-counter-time="1500">10</span></span>
                         <p class="counter-item__value text-secondary">Client</p>
                     </div>
                     <!-- Counter Item End -->
@@ -854,7 +866,7 @@
                 <div class="col-4">
                     <!-- Counter Item Strat -->
                     <div class="counter-item text-center">
-                        <span class="counter-item__label text-global-color-03"><span class="count scroll-counter" data-counter-time="1500">500</span>+</span>
+                        <span class="counter-item__label text-global-color-03"><span class="count scroll-counter" data-counter-time="1500">100</span>+</span>
                         <p class="counter-item__value text-secondary">Cakes</p>
                     </div>
                     <!-- Counter Item End -->
@@ -1267,6 +1279,8 @@
           form.classList.toggle("hidden-form");
         });
 
+    document.addEventListener("visibilitychange", updateonlineUser);
+
             // Bắt sự kiện thay đổi trạng thái của các checkbox
     $('input[name="heath_id[]"]').on('change', function() {
         $.ajax({
@@ -1371,6 +1385,7 @@
     });
     
     window.addEventListener('load', function() {
+        updateonlineUser();
         document.getElementById('a2').style.display = 'none';  // Show the product section
         if (sessionStorage.getItem('scrollToA1') === 'true') {
             document.getElementById('a2').style.display = 'block';  // Show the product section
@@ -1424,6 +1439,19 @@
             });
         });
 
+        function updateonlineUser() {
+                $.ajax({
+                    url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
+            }
     </script>
 </body>
 

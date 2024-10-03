@@ -1,5 +1,3 @@
-<!-- resources/views/client_location.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +19,8 @@
     <div id="map">Đang tải bản đồ...</div>
 
     <script>
-        // Khởi tạo bản đồ Google Maps
-        function initMap(latitude, longitude) {
+        // Khởi tạo bản đồ Google Maps sau khi lấy vị trí người dùng
+        function displayMap(latitude, longitude) {
             var userLocation = { lat: latitude, lng: longitude };
             var storeLocation = { lat: 10.80688612, lng: 106.71420533 }; // Tọa độ cửa hàng
 
@@ -55,20 +53,25 @@
                 console.log("Vị trí của bạn:", latitude, longitude);
 
                 // Hiển thị bản đồ với vị trí của người dùng
-                initMap(latitude, longitude);
+                displayMap(latitude, longitude);
 
                 // Gửi tọa độ đến server để tính toán khoảng cách
                 axios.post('/calculate-distance', {
                     latitude: latitude,
                     longitude: longitude
+                }, {
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
                 })
                 .then(response => {
-                    // Hiển thị kết quả khoảng cách
+                    console.log(response.data);
                     document.getElementById('distance').innerText = `Khoảng cách đến cửa hàng: ${response.data.distance} km`;
                 })
                 .catch(error => {
                     console.error('Lỗi khi tính toán khoảng cách:', error);
                 });
+
             }, function(error) {
                 console.error('Lỗi khi lấy vị trí:', error);
                 document.getElementById('distance').innerText = "Không thể lấy vị trí của bạn.";
@@ -79,10 +82,10 @@
         }
     </script>
 
-    <!-- Nhúng Google Maps API với API Key của bạn -->
+    <!-- Nhúng Google Maps API với API Key của bạn mà không có callback -->
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLyLJ5CjThpOJAlZc593fLNIMm0XiBCHs&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLyLJ5CjThpOJAlZc593fLNIMm0XiBCHs">
     </script>
-    <a href="{{ route('client.home') }}">Quay về trang Home</a></li>
+    <a href="{{ route('client.home') }}">Quay về trang Home</a>
 </body>
 </html>
