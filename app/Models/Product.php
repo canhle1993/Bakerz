@@ -56,6 +56,12 @@ class Product extends Model
         return $this->hasMany(OrderDetails::class, 'product_id');
     }
     
+    // Thiết lập mối quan hệ 1-1 với bảng Banner
+    public function banners()
+    {
+        return $this->hasMany(Banner::class, 'product_id');
+    }
+
     public function getDiscountedPrice()
     {
         // Lấy tất cả các discount của sản phẩm

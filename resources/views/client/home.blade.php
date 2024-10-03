@@ -64,7 +64,25 @@
         <div class="swiper">
             <div class="swiper-wrapper">
                 <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-1.jpg); height: 775px !important;">
+                @foreach($banners as $banner)
+                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('{{ asset('storage/banners/' . $banner->image_banner) }}'); height: 775px !important;">
+                    <div class="image movex">
+                        <img class="img-center" src="{{ asset('storage/banners/' . $banner->image_product) }}" alt="Slider-Image">
+                    </div>
+                    <div class="slider-content-07 container">
+                        <div class="row align-items-end">
+                            <div class="col-12 col-sm-6 text-center text-sm-end pe-lg-16">
+                                <h2 class="slider-content-07__title">{{$banner->title1}} <br>{{$banner->title2}}</h2>
+                                <a class="slider-content-07__btn btn slider-btn-01" href="{{ route('product.single', ['product' => $banner->product_id]) }}">Discover</a>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <p class="slider-content-07__text">{{$banner->description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                <!-- <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-1.jpg); height: 775px !important;">
                     <div class="image movex">
                         <img class="img-center" src="assets/images/slider/slider-7-01.png" alt="Slider-Image">
                     </div>
@@ -79,10 +97,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Single Slider End -->
                 <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-2.jpg); height: 775px !important;">
+                <!-- <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-2.jpg); height: 775px !important;">
                     <div class="image movex">
                         <img class="img-center" src="assets/images/slider/slider-7-02.png" alt="Slider-Image">
                     </div>
@@ -97,10 +115,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Single Slider End -->
                 <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-3.jpg); height: 775px !important;">
+                <!-- <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-3.jpg); height: 775px !important;">
                     <div class="image movex">
                         <img class="img-center" src="assets/images/slider/slider-7-03.png" alt="Slider-Image">
                     </div>
@@ -115,7 +133,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Single Slider End -->
             </div>
             <div class="swiper-pagination container"></div>

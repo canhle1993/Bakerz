@@ -186,7 +186,7 @@
                                 </div>
                                 <div class="product-item__content pt-5">
                                     <h5 class="product-item__title">
-                                        <a href="{{ route('product.show', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
+                                        <a href="{{ route('product.single', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
                                     </h5>
                                     <span class="product-item__price">
                                         @if ($product->price != $product->getDiscountedPrice())

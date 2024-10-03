@@ -183,10 +183,12 @@ Route::get('/exchange-return-policy', function () {
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 
 
-Route::resource('product', AdminProductController::class);
+Route::resource('product', AdminProductController::class)->except(['show']);
 Route::get('/product/create', [AdminProductController::class, 'create'])->name('product.create');
 Route::get('product/{product}/detail', [AdminProductController::class, 'showDetail'])->name('product.showDetail');
 Route::delete('/product/{product}/delete', [AdminProductController::class, 'destroy'])->name('product.destroy');
+Route::get('/product/index2', [AdminProductController::class, 'index2'])->name('product.index2');
+
 
 //route cho catalog trang admin
 use App\Http\Controllers\Admin\CategoryController;
@@ -272,3 +274,7 @@ use App\Http\Controllers\OnlineUserController;
 
 Route::get('/online-users', [OnlineUserController::class, 'countOnlineUsers'])->name('online-users');
 
+//route cho banner trang admin
+use App\Http\Controllers\Admin\BannerController;
+
+Route::resource('banner', BannerController::class);

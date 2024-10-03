@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Cart;
 use App\Models\Catalog;
 use App\Models\HeathyCatalog;
@@ -172,8 +173,17 @@ class ClientController extends Controller
                 ->whereHas('catalogs', function ($query) {
                     $query->where('category_name', 'Coffee & Espresso');
                 })
+                ->where(function ($query) {
+                    $query->where('isdelete', '<>', 1)
+                          ->orWhereNull('isdelete');
+                })
                 ->get();
         }
+
+        $banners = Banner::where('isdelete', '<>', 1)
+        ->orderBy('ModifiedDate', 'desc')
+        ->take(3) // Giới hạn kết quả chỉ lấy 3 bản ghi
+        ->get();
         // Trả về toàn bộ trang 'client.home' với danh sách các sản phẩm
         return view('client.home', compact(
             'products',
@@ -183,7 +193,8 @@ class ClientController extends Controller
             'recentPurchasedProducts',
             'bestSellingProducts',
             'seasonalProducts',
-            'coffeProducts'
+            'coffeProducts',
+            'banners',
         ));
     }
 }

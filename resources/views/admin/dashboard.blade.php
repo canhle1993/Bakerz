@@ -58,6 +58,7 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="{{ route('admin.dashboard') }}" class="nav-item nav-link {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="{{ route('banner.index') }}" class="nav-item nav-link"><i class="fa bi-card-image me-2"></i>Banner</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle {{ (Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'active' : '' }} " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
                         <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'show' : '' }}">

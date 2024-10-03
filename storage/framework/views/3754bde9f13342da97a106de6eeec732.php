@@ -64,7 +64,25 @@
         <div class="swiper">
             <div class="swiper-wrapper">
                 <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-1.jpg); height: 775px !important;">
+                <?php $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $banner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('<?php echo e(asset('storage/banners/' . $banner->image_banner)); ?>'); height: 775px !important;">
+                    <div class="image movex">
+                        <img class="img-center" src="<?php echo e(asset('storage/banners/' . $banner->image_product)); ?>" alt="Slider-Image">
+                    </div>
+                    <div class="slider-content-07 container">
+                        <div class="row align-items-end">
+                            <div class="col-12 col-sm-6 text-center text-sm-end pe-lg-16">
+                                <h2 class="slider-content-07__title"><?php echo e($banner->title1); ?> <br><?php echo e($banner->title2); ?></h2>
+                                <a class="slider-content-07__btn btn slider-btn-01" href="<?php echo e(route('product.single', ['product' => $banner->product_id])); ?>">Discover</a>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <p class="slider-content-07__text"><?php echo e($banner->description); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <!-- <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-1.jpg); height: 775px !important;">
                     <div class="image movex">
                         <img class="img-center" src="assets/images/slider/slider-7-01.png" alt="Slider-Image">
                     </div>
@@ -79,10 +97,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Single Slider End -->
                 <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-2.jpg); height: 775px !important;">
+                <!-- <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-2.jpg); height: 775px !important;">
                     <div class="image movex">
                         <img class="img-center" src="assets/images/slider/slider-7-02.png" alt="Slider-Image">
                     </div>
@@ -97,10 +115,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Single Slider End -->
                 <!-- Single Slider Start -->
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-3.jpg); height: 775px !important;">
+                <!-- <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-3.jpg); height: 775px !important;">
                     <div class="image movex">
                         <img class="img-center" src="assets/images/slider/slider-7-03.png" alt="Slider-Image">
                     </div>
@@ -115,7 +133,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Single Slider End -->
             </div>
             <div class="swiper-pagination container"></div>
