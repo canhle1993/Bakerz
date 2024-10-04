@@ -34,7 +34,7 @@ class ReviewController extends Controller
      Notification::create([
         'user_id' => Auth::id(),
         'review_id' => $review->ID,
-        'reply_id' => null,
+        // 'reply_id' => null,
         'is_read' => 0,
 
     ]);

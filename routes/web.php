@@ -278,3 +278,28 @@ Route::get('/online-users', [OnlineUserController::class, 'countOnlineUsers'])->
 use App\Http\Controllers\Admin\BannerController;
 
 Route::resource('banner', BannerController::class);
+
+
+use App\Http\Controllers\ChefController;
+use App\Http\Controllers\AdminChefController;
+
+// Route để hiển thị danh sách các Chef trên trang client
+Route::get('/our-chef', [ChefController::class, 'index'])->name('our-chef');
+
+// Route quản lý Chef cho admin
+Route::prefix('admin')->group(function () {
+    // Hiển thị trang quản lý Chef (bao gồm form thêm Chef trong modal và bảng danh sách Chef)
+    Route::get('/chefs', [AdminChefController::class, 'create'])->name('admin.chefs.create');
+
+    // Lưu Chef mới
+    Route::post('/chefs', [AdminChefController::class, 'store'])->name('admin.chefs.store');
+
+    // Cập nhật Chef (Sửa Chef bằng modal-dialog)
+    Route::put('/chefs/{id}', [AdminChefController::class, 'update'])->name('admin.chefs.update');
+
+    // Xóa Chef (xóa mềm)
+    Route::delete('/chefs/{id}', [AdminChefController::class, 'destroy'])->name('admin.chefs.destroy');
+});
+
+
+

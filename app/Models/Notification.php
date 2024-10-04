@@ -17,7 +17,7 @@ class Notification extends Model
     protected $fillable = [
         'user_id',
         'review_id',
-        'reply_id',
+        // 'reply_id',
         'is_read',
         'created_at' // Thêm created_at vào fillable nếu bạn muốn tạo record với timestamp
     ];
@@ -35,10 +35,10 @@ class Notification extends Model
     }
 
     // Quan hệ với bảng UserReviewReply
-    public function reply()
-    {
-        return $this->belongsTo(UserReviewReply::class, 'reply_id');
-    }
+    // public function reply()
+    // {
+    //     return $this->belongsTo(UserReviewReply::class, 'reply_id');
+    // }
 
     // Quan hệ với bảng User
     public function user()
