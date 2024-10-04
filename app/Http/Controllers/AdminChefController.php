@@ -47,7 +47,7 @@ class AdminChefController extends Controller
         $chef = Chef::findOrFail($id);
         $chef->delete();
 
-        return redirect()->route('admin.chefs.create')->with('success', 'Chef deleted successfully.');
+        return redirect()->route('our-chef')->with('success', 'Chef deleted successfully.');
     }
 
     // Phương thức cập nhật thông tin chef
@@ -60,7 +60,7 @@ class AdminChefController extends Controller
         'name' => 'required',
         'position' => 'required',
         'description' => 'required',
-        'image' => 'sometimes|image|max:2048',
+        'image' => 'sometimes|image|max:2048', // Ảnh có thể tùy chọn
     ]);
 
     // Xử lý file ảnh nếu có upload mới
@@ -76,7 +76,8 @@ class AdminChefController extends Controller
 
     $chef->save();
 
-    return redirect()->route('admin.chefs.create')->with('success', 'Chef updated successfully.');
+    return redirect()->route('admin.chefs.create')->with('success', 'Chef added successfully.');
 }
+
 
 }

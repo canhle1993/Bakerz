@@ -262,18 +262,19 @@
                                         <ul>
                                             <li class="mega-menu-item-title">Product Types</li>
                                             <li><a class="sub-item-link" href="{{ route('shop_all') }}"><span>All Products</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('product-grouped') }}"><span>Product Grouped</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('product-affiliate') }}"><span>Product Affiliate</span></a></li>
+                                            @foreach ($categories->take(4) as $category)
+                                            <li><a class="sub-item-link" href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}"><span>{{ $category->category_name }}</span></a></li>
+                                            @endforeach
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item">
                                         <ul>
-                                            <li class="mega-menu-item-title">Others</li>
-                                            <li><a class="sub-item-link" href="{{ route('cart') }}"><span>Cart</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('checkout') }}"><span>Checkout</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('order-tracking') }}"><span>Order Tracking</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('client_location') }}"><span>Client Location</span></a></li>
+                                            <li class="mega-menu-item-title">Featured Product</li>
+                                            <!-- Hiển thị 2 category cuối cùng -->
+                                            @foreach ($categories->slice(-2) as $category)
+                                            <li><a class="sub-item-link" href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}"><span>{{ $category->category_name }}</span></a></li>
+                                            @endforeach
+                                            
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item banner-menu-content-wrap">
@@ -298,14 +299,17 @@
                             </li>
                             <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Pages</span></a>
                                 <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="{{ route('about') }}"><span>About</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('blog-detail') }}"><span>Workshop</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('blog') }}"><span>Blog</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('our-chef') }}"><span>Our Chef</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Bakerz Bite Rewards</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('client_location') }}"><span>Client Location</span></a></li>
                                 </ul>
                             </li>
-                            <li><a class="menu-item-link" href="{{ route('blog-detail') }}"><span>Workshop</span></a>
+                            <li><a class="menu-item-link" href="{{ route('about') }}"><span>About</span></a>
                             </li>
                             <li><a class="menu-item-link" href="{{ route('contact') }}"><span>Contact</span></a></li>
                         </ul>

@@ -165,9 +165,19 @@
                                         <img width="350" height="350" src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="<?php echo e($product->product_name); ?>">
                                     </a>
                                     <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-id="<?php echo e($product->product_id); ?>" data-bs-toggle="modal" data-bs-target="#exampleProductModal" title="Quick View"></a>
-
+                                    <li class="product-item__meta-action">
+                                            <a
+                                            class="labtn-icon-quickview quickview"
+                                            href="#"
+                                            data-product-id="<?php echo e($product->product_id); ?>"
+                                            data-bs-tooltip="tooltip"
+                                            data-bs-placement="top"
+                                            title=""
+                                            data-bs-original-title="Quick View"
+                                            aria-label="Quick View"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleProductModal"
+                                            ></a>
                                         </li>
                                         <li class="product-item__meta-action">
                                             <a
@@ -178,9 +188,6 @@
                                         </li>
                                         <li class="product-item__meta-action">
                                             <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -232,6 +239,7 @@
                                     <div class="sidebars_widget">
                                         <h3 class="sidebars_widget__title">Category</h3>
                                         <ul class="sidebars_widget__category">
+                                            <li><a href="<?php echo e(route('shop_all')); ?>">All Products</a></li>
                                             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <li><a href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><?php echo e($category->category_name); ?></a></li>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

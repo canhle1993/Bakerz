@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\HeathyCatalog;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 
 class ProductController extends Controller
@@ -102,10 +103,6 @@ class ProductController extends Controller
         ]);
     }
 
-
-
-
-
     //Chức năng xử lý trả sản phẩm khi client bấm vào danh mục
     public function filterByCategory($category_id)
 {
@@ -133,9 +130,8 @@ class ProductController extends Controller
               ->orWhereNull('isdelete');
     })->get();
 
-
     // Trả về view shop_all với danh sách sản phẩm lọc theo danh mục
-    return view('client.shop.shop_all', compact('products', 'categories'));
+    return view('client.shop.shop_all', compact('products', 'categories', 'category'));
 }
 
 
@@ -174,6 +170,37 @@ class ProductController extends Controller
         // Trả về view và truyền dữ liệu sản phẩm vào
         return view('client.shop.product-types.single-product', compact('product', 'relatedProducts'));
     }
+    public function filterByCoffee()
+{
+    // Lấy danh mục "Coffee & Espresso"
+    $coffeeCatalog = Catalog::where('category_name', 'Coffee & Espresso')->first();
+
+    // Nếu không tìm thấy danh mục, chuyển hướng về trang tất cả sản phẩm
+    if (!$coffeeCatalog) {
+        return redirect()->route('shop_all');
+    }
+
+    // Lọc các sản phẩm theo danh mục
+    $products = Product::whereHas('catalogs', function ($query) {
+        $query->where('category_name', 'Coffee & Espresso');
+    })
+    ->where(function ($query) {
+        $query->where('isdelete', '<>', 1)
+              ->orWhereNull('isdelete');
+    })
+    ->paginate(12); // Phân trang nếu cần
+
+    // Lấy tất cả các danh mục để hiển thị
+    $categories = Catalog::where(function ($query) {
+        $query->where('isdelete', '<>', 1)
+              ->orWhereNull('isdelete');
+    })->get();
+
+    // Trả về view shop_all với danh sách sản phẩm lọc theo danh mục
+    return view('client.shop.shop_all', compact('products', 'categories', 'coffeeCatalog'));
+}
+
+
 
 
 }

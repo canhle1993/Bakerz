@@ -82,59 +82,6 @@
                     </div>
                 </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                <!-- <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-1.jpg); height: 775px !important;">
-                    <div class="image movex">
-                        <img class="img-center" src="assets/images/slider/slider-7-01.png" alt="Slider-Image">
-                    </div>
-                    <div class="slider-content-07 container">
-                        <div class="row align-items-end">
-                            <div class="col-12 col-sm-6 text-center text-sm-end pe-lg-16">
-                                <h2 class="slider-content-07__title">Bread that <br>makes Friends</h2>
-                                <a class="slider-content-07__btn btn slider-btn-01" href="shop.html">Discover</a>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <p class="slider-content-07__text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- Single Slider End -->
-                <!-- Single Slider Start -->
-                <!-- <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-2.jpg); height: 775px !important;">
-                    <div class="image movex">
-                        <img class="img-center" src="assets/images/slider/slider-7-02.png" alt="Slider-Image">
-                    </div>
-                    <div class="slider-content-07 container">
-                        <div class="row align-items-end">
-                            <div class="col-12 col-sm-6 text-center text-sm-end pe-lg-16">
-                                <h2 class="slider-content-07__title">Quality is our <br>Recipe</h2>
-                                <a class="slider-content-07__btn btn slider-btn-01" href="shop.html">Discover</a>
-                            </div>
-                            <div class="col-12 col-sm-6 ">
-                                <p class="slider-content-07__text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- Single Slider End -->
-                <!-- Single Slider Start -->
-                <!-- <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url(assets/images/slider/slider-bg-7-3.jpg); height: 775px !important;">
-                    <div class="image movex">
-                        <img class="img-center" src="assets/images/slider/slider-7-03.png" alt="Slider-Image">
-                    </div>
-                    <div class="slider-content-07 container">
-                        <div class="row align-items-end">
-                            <div class="col-12 col-sm-6 text-center text-sm-end pe-lg-16">
-                                <h2 class="slider-content-07__title">Love from <br>The oven</h2>
-                                <a class="slider-content-07__btn btn slider-btn-01" href="shop.html">Discover</a>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <p class="slider-content-07__text">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- Single Slider End -->
             </div>
             <div class="swiper-pagination container"></div>
         </div>
@@ -144,62 +91,28 @@
         <!-- Category Section Start -->
         <div class="category-four category-four_bg section-padding-03" data-bg-image="assets/images/bg/category-four-bg.jpg">
         <div class="container custom-container-five">
-            <div class="row row-cols-2 row-cols-lg-4 category-four_wrapper mb-n60">
-                <div class="col mb-60">
-                    <!-- Single Category Four Start -->
-                    <div class="category-four_box">
-                        <span class="category-four_border"></span>
-                        <a href="<?php echo e(route('shop_all')); ?>" class="category-four_thumb">
-                            <img src="assets/images/category/category-08.jpg" alt="Category-Image">
-                        </a>
-                        <div class="category-four_content">
-                            <a href="<?php echo e(route('shop_all')); ?>" class="category-four_name">Sweet Breads</a>
-                        </div>
+    <div class="row row-cols-2 row-cols-lg-4 category-four_wrapper mb-n60">
+        <?php $__currentLoopData = $categories->take(4); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <!-- Hiển thị 4 danh mục đầu tiên -->
+            <div class="col mb-60">
+                <!-- Single Category Four Start -->
+                <div class="category-four_box">
+                    <span class="category-four_border"></span>
+                    <a href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>" class="category-four_thumb">
+                        <!-- Hiển thị hình ảnh của danh mục -->
+                        <img src="<?php echo e(asset('storage/catalogs/' . $category->image)); ?>" alt="<?php echo e($category->category_name); ?>">
+                    </a>
+                    <div class="category-four_content">
+                        <a href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>" class="category-four_name"><?php echo e($category->category_name); ?></a>
                     </div>
-                    <!-- Single Category Four End -->
                 </div>
-                <div class="col mb-60">
-                    <!-- Single Category Four Start -->
-                    <div class="category-four_box">
-                        <span class="category-four_border"></span>
-                        <a href="shop.html" class="category-four_thumb">
-                            <img src="assets/images/category/category-09.jpg" alt="Category-Image">
-                        </a>
-                        <div class="category-four_content">
-                            <a href="shop.html" class="category-four_name">Baked Goods</a>
-                        </div>
-                    </div>
-                    <!-- Single Category Four End -->
-                </div>
-                <div class="col mb-60">
-                    <!-- Single Category Four Start -->
-                    <div class="category-four_box">
-                        <span class="category-four_border"></span>
-                        <a href="shop.html" class="category-four_thumb">
-                            <img src="assets/images/category/category-10.jpg" alt="Category-Image">
-                        </a>
-                        <div class="category-four_content">
-                            <a href="shop.html" class="category-four_name">Cakes</a>
-                        </div>
-                    </div>
-                    <!-- Single Category Four End -->
-                </div>
-                <div class="col mb-60">
-                    <!-- Single Category Four Start -->
-                    <div class="category-four_box">
-                        <span class="category-four_border"></span>
-                        <a href="shop.html" class="category-four_thumb">
-                            <img src="assets/images/category/category-11.jpg" alt="Category-Image">
-                        </a>
-                        <div class="category-four_content">
-                            <a href="shop.html" class="category-four_name">Cheese Cakes </a>
-                        </div>
-                    </div>
-                    <!-- Single Category Four End -->
-                </div>
+                <!-- Single Category Four End -->
             </div>
-        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
+</div>
+
+</div>
+
     <!-- Category Section End -->
 
     <!-- Testimonial Five Section Start -->
@@ -780,7 +693,10 @@
                 <!-- Section Title Strat -->
                 <div class="section-title-05">
                     <h5 class="section-title-05__title"><span>Seasonal Products</span></h5>
-                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
+                    <!-- Thay thế đường dẫn cho nút "show more" -->
+                    <a href="<?php echo e(route('shop.filterByCategory', ['category_id' => $seasonalCatalog->category_id ?? ''])); ?>" class="read-more">
+                        <span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i>
+                    </a>                
                 </div>
                 <!-- Section Title End -->
                  <!-- BTT -->
@@ -854,7 +770,9 @@
                 <!-- Section Title Strat -->
                 <div class="section-title-05">
                     <h5 class="section-title-05__title"><span>Coffee & Espresso</span></h5>
-                    <a href="shop.html" class="read-more"><span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i></a>
+                    <a href="<?php echo e(route('shop.filterByCoffee')); ?>" class="read-more">
+                        <span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i>
+                    </a>
                 </div>
                 <!-- Section Title End -->
             </div>

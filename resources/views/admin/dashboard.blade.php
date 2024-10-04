@@ -123,7 +123,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-envelope me-lg-2 position-relative">
-                                @if($notifications->count() > 0)
+                                @if($notifications->isEmpty())
                                     <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;">{{ $notifications->count() }}</span>
                                 @endif
                             </i>

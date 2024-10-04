@@ -262,18 +262,19 @@
                                         <ul>
                                             <li class="mega-menu-item-title">Product Types</li>
                                             <li><a class="sub-item-link" href="<?php echo e(route('shop_all')); ?>"><span>All Products</span></a></li>
-                                            <li><a class="sub-item-link" href="<?php echo e(route('product-grouped')); ?>"><span>Product Grouped</span></a></li>
-                                            <li><a class="sub-item-link" href="<?php echo e(route('product-affiliate')); ?>"><span>Product Affiliate</span></a></li>
+                                            <?php $__currentLoopData = $categories->take(4); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <li><a class="sub-item-link" href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><span><?php echo e($category->category_name); ?></span></a></li>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item">
                                         <ul>
-                                            <li class="mega-menu-item-title">Others</li>
-                                            <li><a class="sub-item-link" href="<?php echo e(route('cart')); ?>"><span>Cart</span></a></li>
-                                            <li><a class="sub-item-link" href="<?php echo e(route('wishlist')); ?>"><span>Wishlist</span></a></li>
-                                            <li><a class="sub-item-link" href="<?php echo e(route('checkout')); ?>"><span>Checkout</span></a></li>
-                                            <li><a class="sub-item-link" href="<?php echo e(route('order-tracking')); ?>"><span>Order Tracking</span></a></li>
-                                            <li><a class="sub-item-link" href="<?php echo e(route('client_location')); ?>"><span>Client Location</span></a></li>
+                                            <li class="mega-menu-item-title">Featured Product</li>
+                                            <!-- Hiển thị 2 category cuối cùng -->
+                                            <?php $__currentLoopData = $categories->slice(-2); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <li><a class="sub-item-link" href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><span><?php echo e($category->category_name); ?></span></a></li>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item banner-menu-content-wrap">
@@ -298,14 +299,17 @@
                             </li>
                             <li><a class="menu-item-link" href="<?php echo e(route('client.home')); ?>"><span>Pages</span></a>
                                 <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="<?php echo e(route('about')); ?>"><span>About</span></a></li>
+                                    <li><a class="sub-item-link" href="<?php echo e(route('blog-detail')); ?>"><span>Workshop</span></a></li>
+                                    <li><a class="sub-item-link" href="<?php echo e(route('blog')); ?>"><span>Blog</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('our-chef')); ?>"><span>Our Chef</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('faq')); ?>"><span>FAQs</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('pricing-plan')); ?>"><span>Bakerz Bite Rewards</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('coming-soon')); ?>"><span>Coming Soon</span></a></li>
+                                    <li><a class="sub-item-link" href="<?php echo e(route('wishlist')); ?>"><span>Wishlist</span></a></li>
+                                    <li><a class="sub-item-link" href="<?php echo e(route('client_location')); ?>"><span>Client Location</span></a></li>
                                 </ul>
                             </li>
-                            <li><a class="menu-item-link" href="<?php echo e(route('blog-detail')); ?>"><span>Workshop</span></a>
+                            <li><a class="menu-item-link" href="<?php echo e(route('about')); ?>"><span>About</span></a>
                             </li>
                             <li><a class="menu-item-link" href="<?php echo e(route('contact')); ?>"><span>Contact</span></a></li>
                         </ul>

@@ -108,7 +108,9 @@ Route::get('/shop_all', [ProductController::class, 'all_product'])->name('shop_a
 Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'])->name('product.single');
 Route::get('/single-product/{id}', [ProductController::class, 'show'])->name('single-product');
 Route::get('shop/category/{category_id}', [ProductController::class, 'filterByCategory'])->name('shop.filterByCategory');
+Route::get('/shop/filter-by-category/{category_id}', [ProductController::class, 'filterByCategory'])->name('shop.filterByCategory');
 Route::get('product/details/{id}', [ProductController::class, 'getProductDetails'])->name('product.details');
+Route::get('/shop/filter-by-coffee', [ProductController::class, 'filterByCoffee'])->name('shop.filterByCoffee');
 
 
 
@@ -159,6 +161,12 @@ Route::get('/pricing-plan', function () {
 Route::get('/blog-detail', function () {
     return view('client.blog.blog-detail');
 })->name('blog-detail');
+Route::get('/blog', function () {
+    return view('client.blog.blog');
+})->name('blog');
+Route::get('/blog-pd', function () {
+    return view('client.blog.blog-pd');
+})->name('blog-pd');
 
 //Route cho client contact
 Route::get('/contact', function () {
@@ -288,18 +296,20 @@ Route::get('/our-chef', [ChefController::class, 'index'])->name('our-chef');
 
 // Route quản lý Chef cho admin
 Route::prefix('admin')->group(function () {
-    // Hiển thị trang quản lý Chef (bao gồm form thêm Chef trong modal và bảng danh sách Chef)
+    // Hiển thị trang quản lý Chef (bao gồm form thêm và danh sách Chef)
     Route::get('/chefs', [AdminChefController::class, 'create'])->name('admin.chefs.create');
 
     // Lưu Chef mới
     Route::post('/chefs', [AdminChefController::class, 'store'])->name('admin.chefs.store');
 
-    // Cập nhật Chef (Sửa Chef bằng modal-dialog)
+    // Cập nhật Chef (Sửa Chef)
     Route::put('/chefs/{id}', [AdminChefController::class, 'update'])->name('admin.chefs.update');
 
-    // Xóa Chef (xóa mềm)
+    // Xóa Chef
     Route::delete('/chefs/{id}', [AdminChefController::class, 'destroy'])->name('admin.chefs.destroy');
 });
+
+
 
 
 
