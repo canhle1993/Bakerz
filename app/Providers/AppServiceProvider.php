@@ -8,7 +8,7 @@ use App\Models\Category;
 use App\Models\Catalog;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
-
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,7 +19,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // $this->app->singleton(ErrorsManager::class, function ($app) {
+        //     return new ErrorsManager($app['config']);
+        // });
+        $this->app->singleton(EventDispatcher::class, function () {
+            return new EventDispatcher;
+        });
     }
 
     /**
@@ -54,6 +59,29 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('notifications', $notifications);
             }
         });
+
+        View::composer('admin.*', function ($view) {
+            if (Auth::check()) {
+                // Lấy thông báo review chưa đọc
+                $reviewNotifications = Notification::with('user')
+                    ->where('is_read', 0)
+                    ->where('type', 'review')  // Chỉ lấy thông báo thuộc loại review
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+    
+                // Lấy thông báo order chưa đọc
+                $orderNotifications = Notification::with('user')
+                    ->where('is_read', 0)
+                    ->where('type', 'order')  // Chỉ lấy thông báo thuộc loại order
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+    
+                // Truyền cả hai loại thông báo vào view
+                $view->with('reviewNotifications', $reviewNotifications);
+                $view->with('orderNotifications', $orderNotifications);
+            }
+        });
     }
+
     
 }

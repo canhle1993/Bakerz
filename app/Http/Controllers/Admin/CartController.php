@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\Notification;
 
 
 class CartController extends Controller
@@ -224,6 +225,15 @@ class CartController extends Controller
                 'isdelete' => 0, // Active item, not deleted
             ]);
 
+            Notification::create([
+                'user_id' => Auth::id(),  // ID người dùng đã đặt hàng
+                'order_id' => $order->id,  // ID của đơn hàng
+                'is_read' => 0,  // Đánh dấu là chưa đọc
+                'type' => 'order',  // Loại thông báo là order
+                'message' => 'Khách hàng ' . Auth::user()->name . ' đã đặt đơn hàng mới.',  // Thông báo đặt hàng mới
+                'created_at' => Carbon::now(),  // Thời gian tạo thông báo
+            ]);
+
             // Insert each cart item into the orderdetails table
             foreach ($cartItems as $item) {
                 OrderDetails::create([
@@ -347,4 +357,3 @@ class CartController extends Controller
     }
 
 }
-

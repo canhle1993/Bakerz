@@ -17,16 +17,18 @@ class Notification extends Model
     protected $fillable = [
         'user_id',
         'review_id',
-        // 'reply_id',
+        'reply_id',
         'is_read',
-        'created_at' // Thêm created_at vào fillable nếu bạn muốn tạo record với timestamp
+        'created_at', // Thêm created_at vào fillable nếu bạn muốn tạo record với timestamp
+        'order_id',   // Thêm cột order_id
+        'type',       // Thêm cột type để xác định loại thông báo
     ];
 
     // Đảm bảo rằng Laravel hiểu 'created_at' là một cột datetime
     protected $dates = ['created_at'];
 
     // Tắt timestamps tự động của Laravel nếu không có cột updated_at, created_at
-    public $timestamps = false;
+    public $timestamps = true;
 
     // Quan hệ với bảng UserReview
     public function review()
@@ -35,10 +37,10 @@ class Notification extends Model
     }
 
     // Quan hệ với bảng UserReviewReply
-    // public function reply()
-    // {
-    //     return $this->belongsTo(UserReviewReply::class, 'reply_id');
-    // }
+    public function reply()
+    {
+        return $this->belongsTo(UserReviewReply::class, 'reply_id');
+    }
 
     // Quan hệ với bảng User
     public function user()
@@ -50,5 +52,11 @@ class Notification extends Model
     public function getCreatedAtAttribute($value)
     {
         return Carbon::parse($value); // Chuyển đổi chuỗi thành Carbon instance
+    }
+
+    // Quan hệ với bảng Order
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id'); // Liên kết với bảng orders
     }
 }

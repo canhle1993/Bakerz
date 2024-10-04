@@ -309,6 +309,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/chefs/{id}', [AdminChefController::class, 'destroy'])->name('admin.chefs.destroy');
 });
 
+Route::get('/admin/notify/read', [DashboardController::class, 'markasreadOrder'])->name('notification.read');
 
 
 

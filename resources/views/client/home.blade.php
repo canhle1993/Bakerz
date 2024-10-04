@@ -409,7 +409,7 @@
                         <span class="deal-two_subtitle">Deal of the day</span>
                         <h4 class="deal-two_title">Sesame Rye Bread</h4>
                         <div class="countdown-area">
-                            <div class="countdown-wrapper" data-countdown="2028/12/28"></div>
+                            <div class="countdown-wrapper" data-countdown="2024/10/04"></div>
                         </div>
                         <span class="deal-two_price"><span>$</span>4.99</span>
 
@@ -794,7 +794,7 @@
                 <div class="col-4">
                     <!-- Counter Item Strat -->
                     <div class="counter-item text-center">
-                        <span class="counter-item__label text-global-color-03"><span id="onlineCount" class="count scroll-counter" data-counter-time="1500">10</span></span>
+                        <span class="counter-item__label text-global-color-03"><span id="" class="count scroll-counter" data-counter-time="1500">10</span>K+</span>
                         <p class="counter-item__value text-secondary">Client</p>
                     </div>
                     <!-- Counter Item End -->
@@ -1321,7 +1321,7 @@
     });
     
     window.addEventListener('load', function() {
-        updateonlineUser();
+        
         document.getElementById('a2').style.display = 'none';  // Show the product section
         if (sessionStorage.getItem('scrollToA1') === 'true') {
             document.getElementById('a2').style.display = 'block';  // Show the product section
@@ -1375,19 +1375,6 @@
             });
         });
 
-        function updateonlineUser() {
-                $.ajax({
-                    url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
-                    method: "GET",
-                    success: function(response) {
-                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
-                    },
-                    error: function(xhr) {
-                        console.error('Error:', xhr.responseText);
-                        // alert('An error occurred while updating the cart.');
-                    }
-                });
-            }
     </script>
 </body>
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserReview;
 use App\Models\UserReviewReply;
+use Carbon\Carbon;
 
 class ReviewController extends Controller
 {
@@ -31,13 +32,14 @@ class ReviewController extends Controller
         ]);
 
         // Tạo thông báo cho admin
-     Notification::create([
-        'user_id' => Auth::id(),
-        'review_id' => $review->ID,
-        // 'reply_id' => null,
-        'is_read' => 0,
-
-    ]);
+        Notification::create([
+            'user_id' => Auth::id(),  // ID người dùng
+            'review_id' => $review->id,  // ID của review
+            'reply_id' => null,  // Không có reply
+            'is_read' => 0,  // Đánh dấu là chưa đọc
+            'type' => 'review',  // Loại thông báo là review
+            'created_at' => Carbon::now(),  // Thời gian tạo thông báo
+        ]);
 
         return redirect()->route('product.single', ['product' => $product_id])->with('success', 'Đánh giá của bạn đã được gửi thành công!');
     }

@@ -79,13 +79,15 @@
                             <a href="{{ route('manage-blacklist') }}" class="dropdown-item">Blacklist</a>
                         </div>
                     </div>
-                    <a href="{{ route('admin.reviews.manage') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a>
+                    <!-- <a href="{{ route('admin.reviews.manage') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a> -->
+                    <a href="{{ route('message.read') }}" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a>
                     <!-- Order Manager -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle {{ (Request::is('order*') ) ? 'active' : '' }} " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Order Manager</a>
                         <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('order*') ) ? 'show' : '' }}">
                             <a href="{{ route('order.pending') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.pending') ? 'active' : '' }}">&nbsp;&nbsp;Pending</a>
-                            <a href="{{ route('order.paid') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.paid') ? 'active' : '' }}">&nbsp;&nbsp;Confirmed</a>
+                            <!-- <a href="{{ route('order.paid') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.paid') ? 'active' : '' }}">&nbsp;&nbsp;Confirmed</a> -->
+                            <a href="{{ route('notification.read') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.paid') ? 'active' : '' }}">&nbsp;&nbsp;Confirmed</a>
                             <a href="{{ route('order.confirmed') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.confirmed') ? 'active' : '' }}">&nbsp;&nbsp;Being delivered</a>
                             <a href="{{ route('order.delivered') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.delivered') ? 'active' : '' }}">&nbsp;&nbsp;Delivered</a>
                             <a href="{{ route('order.cancel') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.cancel') ? 'active' : '' }}">&nbsp;&nbsp;Cancel</a>
@@ -123,18 +125,18 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-envelope me-lg-2 position-relative">
-                                @if($notifications->isEmpty())
-                                    <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;">{{ $notifications->count() }}</span>
+                                @if($reviewNotifications->count() > 0)
+                                    <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;">{{ $reviewNotifications->count() }}</span>
                                 @endif
                             </i>
                             <span class="d-none d-lg-inline-flex">Message</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            @if($notifications->isEmpty())
+                            @if($reviewNotifications->isEmpty())
                                 <p class="dropdown-item text-center">Không có thông báo mới.</p>
                             @else
-                                @foreach($notifications as $notification)
-                                    <a href="{{ route('message.read', $notification->id) }}" class="dropdown-item">
+                                @foreach($reviewNotifications as $notification)
+                                <a href="{{ route('message.read', $notification->id) }}" class="dropdown-item">
                                         <div class="d-flex align-items-center">
                                             <img class="rounded-circle" src="{{ asset('storage/avatars/' . $notification->user->avatar) }}" alt="User avatar" style="width: 40px; height: 40px;">
                                             <div class="ms-2">
@@ -152,29 +154,39 @@
 
                     <!-- Notification Dropdown -->
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notification</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Profile updated</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">New user added</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Password changed</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all notifications</a>
-                        </div>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fa fa-bell me-lg-2 position-relative">
+                            @php
+                                $orderCount = $orderNotifications->count();
+                            @endphp
+                            @if($orderCount > 0)
+                                <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;">{{ $orderCount }}</span>
+                            @endif
+                        </i>
+                        <span class="d-none d-lg-inline-flex"> Notifications</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        @if($orderNotifications->isEmpty())
+                            <p class="dropdown-item text-center">Không có thông báo đơn hàng mới.</p>
+                        @else
+                            @foreach($orderNotifications as $notification)
+                                <a href="{{ route('notification.read', $notification->order_id) }}" class="dropdown-item">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Hiển thị avatar của user -->
+                                        <img class="rounded-circle" src="{{ asset('storage/avatars/' . $notification->user->avatar) }}" alt="User avatar" style="width: 40px; height: 40px;">
+                                        <div class="ms-2">
+                                            <!-- Hiển thị tên user và thông báo -->
+                                            <h6 class="fw-normal mb-0">{{ $notification->user->name }} vừa đặt đơn hàng mới.</h6>
+                                            <small>{{ $notification->created_at->diffForHumans() }}</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <hr class="dropdown-divider">
+                            @endforeach
+                        @endif
+
                     </div>
+                </div>
 
                     <!-- Profile Dropdown -->
                     <div class="nav-item dropdown">

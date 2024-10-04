@@ -329,8 +329,8 @@
                                 <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-twitter"></i></a>
                                 <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
                                 <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-instagram"></i></a>
-                                <b style="padding: 3px 0px;" id="onlineCount"><i class="fas fa-users"></i>
-                                <span style="border: none; background-color: #0771fb; color: #eff0f2; padding: 2px 7px 2px 7px; border-radius: 99px; left: -4px; top: -8px; position: relative;">1</span></b>
+                                <b style="padding: 3px 0px;"><i class="fas fa-users"></i>
+                                <span  id="onlineCount" style="border: none; background-color: #0771fb; color: #eff0f2; padding: 2px 7px 2px 7px; border-radius: 99px; left: -4px; top: -8px; position: relative;"></span></b>
                             </div>
                         </div>
                         <!-- Footer Widget Section End -->
@@ -425,6 +425,9 @@
     <script src="{{asset('assets/js/main.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+      window.addEventListener('load', function() {
+        updateonlineUser();
+      });
       function updateonlineUser() {
                 $.ajax({
                     url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
