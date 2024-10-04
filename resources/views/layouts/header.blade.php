@@ -227,6 +227,7 @@
       input[type="file"] {
         display: none;
       }
+
     </style>
 
 </head>
@@ -236,10 +237,12 @@
         <div class="container position-relative">
 
             <div class="row align-items-center">
+                
                 <div class="col-lg-3 col-xl-3 col-7">
                     <!-- Header Logo Start -->
                     <div class="header-logo">
                         <a href="{{ route('client.home')}}">
+                        
                             <img class="white-logo" src="{{asset('assets/images/logo-white.svg')}}" width="229" height="62" alt="Logo">
                         </a>
                     </div>
@@ -259,17 +262,19 @@
                                         <ul>
                                             <li class="mega-menu-item-title">Product Types</li>
                                             <li><a class="sub-item-link" href="{{ route('shop_all') }}"><span>All Products</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('product-grouped') }}"><span>Product Grouped</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('product-affiliate') }}"><span>Product Affiliate</span></a></li>
+                                            @foreach ($categories->take(4) as $category)
+                                            <li><a class="sub-item-link" href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}"><span>{{ $category->category_name }}</span></a></li>
+                                            @endforeach
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item">
                                         <ul>
-                                            <li class="mega-menu-item-title">Others</li>
-                                            <li><a class="sub-item-link" href="{{ route('cart') }}"><span>Cart</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('checkout') }}"><span>Checkout</span></a></li>
-                                            <li><a class="sub-item-link" href="{{ route('order-tracking') }}"><span>Order Tracking</span></a></li>
+                                            <li class="mega-menu-item-title">Featured Product</li>
+                                            <!-- Hiển thị 2 category cuối cùng -->
+                                            @foreach ($categories->slice(-2) as $category)
+                                            <li><a class="sub-item-link" href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}"><span>{{ $category->category_name }}</span></a></li>
+                                            @endforeach
+                                            
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item banner-menu-content-wrap">
@@ -294,14 +299,17 @@
                             </li>
                             <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Pages</span></a>
                                 <ul class="sub-menu">
-                                    <li><a class="sub-item-link" href="{{ route('about') }}"><span>About</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('blog-detail') }}"><span>Workshop</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('blog') }}"><span>Blog</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('our-chef') }}"><span>Our Chef</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Pricing Plans</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Bakerz Bite Rewards</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('client_location') }}"><span>Client Location</span></a></li>
                                 </ul>
                             </li>
-                            <li><a class="menu-item-link" href="{{ route('blog-detail') }}"><span>Workshop</span></a>
+                            <li><a class="menu-item-link" href="{{ route('about') }}"><span>About</span></a>
                             </li>
                             <li><a class="menu-item-link" href="{{ route('contact') }}"><span>Contact</span></a></li>
                         </ul>
@@ -314,9 +322,9 @@
                         <ul class="header-meta__action d-flex justify-content-end">
                             <li><button class="action search-open"><i class="lastudioicon-zoom-1"></i></button></li>
                             <li>
-                                <button class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
+                                <button id="cart_icon" class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
                                     <i class="lastudioicon-shopping-cart-2"></i>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>
+                                    <span id="cart_quantity" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary"></span>
                                 </button>
                             </li>
                             <!-- header-primary-menu d-flex justify-content-center -->
@@ -378,22 +386,22 @@
       <h4 class="offcanvas-title">My Cart</h4>
       <button type="button" class="btn-close text-secondary" data-bs-dismiss="offcanvas"><i class="lastudioicon lastudioicon-e-remove"></i></button>
   </div>
-  
+
   @include('client.shop.others.cartpartials')
 
   <div class="offcanvas-footer d-flex flex-column gap-4">
 
       <!-- Mini Cart Total End  -->
       <div class="mini-cart-totla">
-          <span class="label">Subtotal:</span>
-          <span class="value">$24.95</span>
+          <span class="label">Total:</span>
+          <span id="total_price" class="value">$24.95</span>
       </div>
       <!-- Mini Cart Total End  -->
 
       <!-- Mini Cart Button End  -->
       <div class="mini-cart-btn d-flex flex-column gap-2">
           <a class="d-block btn btn-secondary btn-hover-primary" href="{{ route('cart') }}">View cart</a>
-          <a class="d-block btn btn-secondary btn-hover-primary" href="{{ route('checkout') }}">Checkout</a>
+          <a id="btnCheckout" class="d-block btn btn-secondary btn-hover-primary" href="{{ route('checkout') }}">Checkout</a>
       </div>
       <!-- Mini Cart Button End  -->
 
@@ -442,8 +450,121 @@
                 );
             }
         });
-        
 
+        $(document).ready(function() {
+          updateCartView();
+          // Kiểm tra trạng thái mỗi giây (1000ms)
+          setInterval(updateonlineUser, 1000);
+
+          $('.add-to-cart').on('click', function(e) {
+              e.preventDefault();
+
+              var productId = $(this).data('product-id');
+              $.ajax({
+                  url: "{{ route('cart.new_add') }}",
+                  method: "POST",
+                  data: {
+                      _token: "{{ csrf_token() }}",
+                      product_id: productId,
+                      quantity: 1
+                  },
+                  success: function(response) {
+                      if (response.status === 'success') {
+                          // Cập nhật số lượng sản phẩm trong giỏ hàng
+                          updateCartView();
+                      } else {
+                          alert(response.message);
+                      }
+                  },
+                  error: function(xhr) {
+                      window.location.href = "{{ route('login') }}"; // Sử dụng route trong Blade để tạo đường dẫn
+                      // console.error('Error:', xhr.responseText);
+                  }
+              });
+          });
+
+          // delete cart
+          $(document).on('click', '.cart_delete', function(e) {
+
+                e.preventDefault();
+
+                var productId = $(this).data('product-id');
+                console.log(productId); // In ra product_id để đảm bảo nó có giá trị đúng
+
+                $.ajax({
+                    url: "{{ route('cart.delete', ':id') }}".replace(':id', productId), // Truyền product_id vào URL
+                    method: "DELETE",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        product_id: productId
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            updateCartView();
+                        } else {
+                            //   alert(response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert("FAIL");
+                        console.error('Error:', xhr.responseText);
+                    }
+                });
+            });
+            function updateCartView() {
+                $.ajax({
+                    url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+                        $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
+                        $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
+
+                        console.log(response.cart_quantity);
+                        calculateTotal();
+                        // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
+                        $('#cart_icon').css('color', 'red')// Đổi màu thành đỏ
+                        .animate({
+                            top: '-10px'
+                        }, 200, function() {
+                            $(this).animate({
+                                top: '0px'
+                            }, 200, function() {
+                                // Lặp lại lần nữa
+                                $(this).animate({
+                                    top: '-10px'
+                                }, 200, function() {
+                                    $(this).animate({
+                                        top: '0px'
+                                    }, 200, function() {
+                                        // Sau khi hiệu ứng hoàn thành, đổi lại màu ban đầu
+                                        $(this).css('color', '');
+                                    });
+                                });
+                            });
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
+            }
+
+        });
+        function calculateTotal() {
+            var total = 0;
+            // Duyệt qua tất cả các phần tử có class 'subtotal'
+            $('.subtotal').each(function() {
+                // Lấy giá trị của từng phần tử và loại bỏ ký tự $
+                var subtotal = parseFloat($(this).text().replace('$', ''));
+                // Cộng tổng lại
+                total += subtotal;
+            });
+
+            // Hiển thị tổng đã tính
+            $('#total_price').text(total.toFixed(2) + ' $');
+        }
     </script>
 </body>
 

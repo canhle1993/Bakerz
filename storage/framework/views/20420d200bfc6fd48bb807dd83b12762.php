@@ -33,433 +33,437 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/style.css')); ?>">
+    <style>
+    .star-rating {
+        direction: rtl;
+        display: inline-flex;
+    }
+    .star-rating input {
+        display: none;
+    }
+    .star-rating label {
+        font-size: 2rem;
+        color: #ddd;
+        cursor: pointer;
+        transition: color 0.2s ease-in-out;
+    }
+    .star-rating input:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+        color: #f5c518;
+    }
+</style>
 
 </head>
 
 <body>
 <?php echo $__env->make('layouts.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <!-- Breadcrumb Section Start -->
-    <div class="breadcrumb" data-bg-image="<?php echo e(asset('assets/images/bg/breadcrumb-bg.jpg')); ?>">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb_content">
-                        <h1 class="breadcrumb_title"><?php echo e($product->product_name); ?></h1>
-                        <ul class="breadcrumb_list">
-                            <li><a href="<?php echo e(route('client.home')); ?>">Home</a></li>
-                            <li><?php echo e($product->product_name); ?></li>
-                        </ul>
-                    </div>
+
+<!-- Breadcrumb Section Start -->
+<div class="breadcrumb" data-bg-image="<?php echo e(asset('assets/images/bg/breadcrumb-bg.jpg')); ?>">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <h1 class="breadcrumb_title"><?php echo e($product->product_name); ?></h1>
+                    <ul class="breadcrumb_list">
+                        <li><a href="<?php echo e(route('client.home')); ?>">Home</a></li>
+                        <li><?php echo e($product->product_name); ?></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Breadcrumb Section End -->
+</div>
+<!-- Breadcrumb Section End -->
 
-    <!-- Single Product Section Start -->
-    <div class="section section-margin-top section-padding-03">
-        <div class="container">
+<!-- Single Product Section Start -->
+<div class="section section-margin-top section-padding-03">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-0 col-md-10 offset-md-1">
 
-            <div class="row">
-                <div class="col-lg-6 offset-lg-0 col-md-10 offset-md-1">
-
-                    <!-- Product Details Image Start -->
-                    <div class="product-details-img d-flex overflow-hidden flex-row">
-
-                        <!-- Single Product Image Start -->
-                        <div class="single-product-vertical-tab swiper-container order-2">
-
-                            <div class="swiper-wrapper popup-gallery" id="popup-gallery">
+                <!-- Product Details Image Start -->
+                <div class="product-details-img d-flex overflow-hidden flex-row">
+                    <!-- Single Product Image Start -->
+                    <div class="single-product-vertical-tab swiper-container order-2">
+                        <div class="swiper-wrapper popup-gallery" id="popup-gallery">
+                            <?php if($product->images->isEmpty()): ?>
+                                <a class="swiper-slide h-auto" href="<?php echo e(asset('assets/images/product/product-8-500x625.jpg')); ?>">
+                                    <img class="w-100" src="<?php echo e(asset('assets/images/product/product-8-500x625.jpg')); ?>" alt="">
+                                </a>
+                            <?php else: ?>
                                 <a class="swiper-slide h-auto" href="<?php echo e(asset('storage/products/' . $product->image)); ?>">
                                     <img class="w-100" src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="<?php echo e($product->product_name); ?>">
                                 </a>
-                                <a class="swiper-slide h-auto" href="<?php echo e(asset('storage/products/' . $product->images()->first()->image)); ?>">
-                                    <img class="w-100" src="<?php echo e(asset('storage/products/' . $product->images()->first()->image)); ?>" alt="<?php echo e(asset('storage/products/' . $product->images()->first()->image)); ?>">
-                                </a>
-                                <a class="swiper-slide h-auto" href="<?php echo e(asset('storage/products/' . $product->images()->skip(1)->first()->image)); ?>">
-                                    <img class="w-100" src="<?php echo e(asset('storage/products/' . $product->images()->skip(1)->first()->image)); ?>" alt="<?php echo e(asset('storage/products/' . $product->images()->skip(1)->first()->image)); ?>">
-                                </a>
-                                <a class="swiper-slide h-auto" href="<?php echo e(asset('storage/products/' . $product->images()->skip(2)->first()->image)); ?>">
-                                    <img class="w-100" src="<?php echo e(asset('storage/products/' . $product->images()->skip(2)->first()->image)); ?>" alt="<?php echo e(asset('storage/products/' . $product->images()->skip(2)->first()->image)); ?>">
-                                </a>
-                                
-                            </div>
-
-                            <!-- Next Previous Button Start -->
-                            <div class="swiper-button-vertical-next swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
-                            <div class="swiper-button-vertical-prev swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
-                            <!-- Next Previous Button End -->
-
+                                <?php $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <a class="swiper-slide h-auto" href="<?php echo e(asset('storage/products/' . $image->image)); ?>">
+                                        <img class="w-100" src="<?php echo e(asset('storage/products/' . $image->image)); ?>" alt="<?php echo e($product->product_name); ?>">
+                                    </a>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
                         </div>
-                        <!-- Single Product Image End -->
 
-                        <!-- Single Product Thumb Start -->
-                        <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
-
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="<?php echo e(asset('storage/products/' . $product->image)); ?>">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="<?php echo e(asset('storage/products/' . $product->images()->first()->image)); ?>" alt="<?php echo e(asset('storage/products/' . $product->images()->first()->image)); ?>">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="<?php echo e(asset('storage/products/' . $product->images()->skip(1)->first()->image)); ?>" alt="<?php echo e(asset('storage/products/' . $product->images()->skip(1)->first()->image)); ?>">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="<?php echo e(asset('storage/products/' . $product->images()->skip(2)->first()->image)); ?>" alt="<?php echo e(asset('storage/products/' . $product->images()->skip(2)->first()->image)); ?>">
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- Single Product Thumb End -->
+                        <!-- Next Previous Button Start -->
+                        <div class="swiper-button-vertical-next swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
+                        <div class="swiper-button-vertical-prev swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
+                        <!-- Next Previous Button End -->
 
                     </div>
-                    <!-- Product Details Image End -->
+                    <!-- Single Product Image End -->
 
-                </div>
-                <div class="col-lg-6">
-
-                    <!-- Product Summery Start -->
-                    <div class="product-summery position-relative">
-
-                        <!-- Product Head Start -->
-                        <div class="product-head mb-3">
-
-                            <!-- Price Start -->
-                            <span class="product-head-price"><?php echo e(formatPriceVND($product->price)); ?></span>
-                            <!-- Price End -->
-
-                            <!-- Rating Start -->
-                            <div class="review-rating">
-                                <span class="review-rating-bg">
-                                    <span class="review-rating-active" style="width: 90%"></span>
-                                </span>
-                                <a href="#/" class="review-rating-text">(1 Review)</a>
-                            </div>
-                            <!-- Rating End -->
-
-                        </div>
-                        <!-- Product Head End -->
-
-                        <!-- Description Start -->
-                        <p class="desc-content"><?php echo nl2br(e($product->describe)); ?></p>
-                        <!-- Description End -->
-
-                        <!-- Product Quantity, Cart Button, Wishlist and Compare Start -->
-                        <ul class="product-cta">
-                            <li>
-                                <!-- Cart Button Start -->
-                                <div class="cart-btn">       
-                                    <div class="add-to_cart">
-                                        <a class="btn btn-dark btn-hover-primary add-to-cart" href="#/" data-bs-toggle="modal" data-bs-target="#modalCart" data-product-id="<?php echo e($product->product_id); ?>">Add to cart</a>
+                    <!-- Single Product Thumb Start -->
+                    <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
+                        <div class="swiper-wrapper">
+                            <?php if($product->images->isEmpty()): ?>
+                                <div class="swiper-slide">
+                                    <img src="<?php echo e(asset('assets/images/product/product-8-500x625.jpg')); ?>" alt="">
+                                </div>
+                            <?php else: ?>
+                                <div class="swiper-slide">
+                                    <img src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="<?php echo e($product->product_name); ?>">
+                                </div>
+                                <?php $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="swiper-slide">
+                                        <img src="<?php echo e(asset('storage/products/' . $image->image)); ?>" alt="<?php echo e($product->product_name); ?>">
                                     </div>
-                                </div>
-                                <!-- Cart Button End -->
-                            </li>
-                            <li>
-                                <!-- Action Button Start -->
-                                <div class="actions">
-                                    <a href="#/" title="Wishlist" class="action compare" data-bs-toggle="modal" data-bs-target="#modalWishlist"><i class="lastudioicon-heart-2"></i></a>
-                                    <a href="#/" title="Compare" class="action wishlist" data-bs-toggle="modal" data-bs-target="#modalCompare"><i class="lastudioicon-ic_compare_arrows_24px"></i></a>
-                                </div>
-                                <!-- Action Button End -->
-                            </li>
-                        </ul>
-                        <!-- Product Quantity, Cart Button, Wishlist and Compare End -->
-
-                        <!-- Product Meta Start -->
-                        <ul class="product-meta">
-                            <li class="product-meta-wrapper">
-                                <span class="product-meta-name">Remaining quantity:</span>
-                                <span class="product-meta-detail"><?php echo e($product->inventory); ?></span>
-                            </li>
-                            <li class="product-meta-wrapper">
-                                <span class="product-meta-name">category:</span>
-                                <span class="product-meta-detail">
-                                    <a href="#"> <?php $__currentLoopData = $product->catalogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $catalog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php echo e($catalog->category_name); ?><?php echo e(!$loop->last ? ', ' : ''); ?>
-
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></a>
-                                </span>
-                            </li>
-                            <li class="product-meta-wrapper">
-                                <span class="product-meta-name">Discount:</span>
-                                <span class="product-meta-detail">
-                                    <a href="#"><?php $__currentLoopData = $product->discounts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $discount): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php echo e($discount->discount *100); ?> %
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></a>
-                                </span>
-                            </li>
-                        </ul>
-                        <!-- Product Meta End -->
-
-                        <!-- Product Shear Start -->
-                        <div class="product-share">
-                            <a href="#"><i class="lastudioicon-b-facebook"></i></a>
-                            <a href="#"><i class="lastudioicon-b-twitter"></i></a>
-                            <a href="#"><i class="lastudioicon-b-pinterest"></i></a>
-                            <a href="#"><i class="lastudioicon-b-instagram"></i></a>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
                         </div>
-                        <!-- Product Shear End -->
-
                     </div>
-                    <!-- Product Summery End -->
+                    <!-- Single Product Thumb End -->
 
                 </div>
-            </div>
+                <!-- Product Details Image End -->
 
-            <div class="row section-margin">
-                <!-- Single Product Tab Start -->
-                <div class="col-lg-12 single-product-tab">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#connect-1" role="tab" aria-selected="true">Description</a>
+            </div>
+            <div class="col-lg-6">
+
+                <!-- Product Summery Start -->
+                <div class="product-summery position-relative">
+
+                    <!-- Product Head Start -->
+                    <div class="product-head mb-3">
+
+                        <!-- Price Start -->
+                        <span class="product-item__price">
+                            <?php if($product->price != $product->getDiscountedPrice()): ?>
+                            <del><?php echo e(formatPriceVND($product->price)); ?></del>
+                            <!-- Giá gốc -->
+                            <strong style="color: red;"
+                            ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
+                            >
+                            <!-- Giá sau khi giảm -->
+                            <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
+
+                            <!-- Giá không giảm -->
+                            <?php endif; ?>
+                        </span>
+                        <!-- Price End -->
+                         <div>
+                                <!-- Hiển thị thông báo -->
+                            <?php if(session('success')): ?>
+                                <div class="alert alert-success">
+                                    <?php echo e(session('success')); ?>
+
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if(session('error')): ?>
+                                <div class="alert alert-danger">
+                                    <?php echo e(session('error')); ?>
+
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if($errors->any()): ?>
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <li><?php echo e($error); ?></li>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
+                         </div>
+
+                        <!-- Rating Start -->
+                        <div class="review-rating">
+                            <span class="review-rating-bg">
+                                <span class="review-rating-active"></span>
+                            </span>
+                            <a href="#/" class="review-rating-text">(<?php echo e($product->reviews->count()); ?> Review<?php echo e($product->reviews->count() > 1 ? 's' : ''); ?>)</a>
+                        </div>
+
+                        <!-- Rating End -->
+
+                    </div>
+                    <!-- Product Head End -->
+
+                    <!-- Description Start -->
+                    <p class="desc-content"><?php echo nl2br(e($product->describe)); ?></p>
+                    <!-- Description End -->
+
+                    <!-- Product Quantity, Cart Button, Wishlist and Compare Start -->
+                    <ul class="product-cta">
+                        <li>
+                            <!-- Cart Button Start -->
+                            <div class="cart-btn">       
+                                <div class="add-to_cart">
+                                    <a class="btn btn-dark btn-hover-primary add-to-cart" href="#/" data-bs-toggle="modal" data-bs-target="#modalCart" data-product-id="<?php echo e($product->product_id); ?>">Add to cart</a>
+                                </div>
+                            </div>
+                            <!-- Cart Button End -->
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#connect-2" role="tab" aria-selected="false">Reviews (1)</a>
+                        <li>
+                            <!-- Action Button Start -->
+                            <div class="actions">
+                                <a href="#/" title="Wishlist" class="action compare" data-bs-toggle="modal" data-bs-target="#modalWishlist"><i class="lastudioicon-heart-2"></i></a>
+                            </div>
+                            <!-- Action Button End -->
                         </li>
                     </ul>
-                    <div class="tab-content mb-text" id="myTabContent">
-                        <div class="tab-pane fade show active" id="connect-1" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="product-desc-row">
-                                <div class="product-desc-img">
-                                    <img src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="Image">
-                                </div>
-                                <div class="product-desc-content">
-                                    <h5 class="product-desc-title"><?php echo e($product->product_name); ?></h5>
-                                    <p class="product-desc-text"><?php echo nl2br(e($product->describe)); ?></p>
-                                </div>
+                    <!-- Product Quantity, Cart Button, Wishlist and Compare End -->
+
+                    <!-- Product Meta Start -->
+                    <ul class="product-meta">
+                        <li class="product-meta-wrapper">
+                            <span class="product-meta-name">Remaining quantity:</span>
+                            <span class="product-meta-detail"><?php echo e($product->inventory); ?></span>
+                        </li>
+                        <li class="product-meta-wrapper">
+                            <span class="product-meta-name">Category:</span>
+                            <span class="product-meta-detail">
+                                <?php $__currentLoopData = $product->catalogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $catalog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php echo e($catalog->category_name); ?><?php echo e(!$loop->last ? ', ' : ''); ?>
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </span>
+                        </li>
+                        <li class="product-meta-wrapper">
+                            <span class="product-meta-name">Discount:</span>
+                            <span class="product-meta-detail">
+                                <?php $__currentLoopData = $product->discounts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $discount): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php echo e($discount->discount * 100); ?>%
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </span>
+                        </li>
+                    </ul>
+                    <!-- Product Meta End -->
+
+                    <!-- Product Share Start -->
+                    <div class="product-share">
+                        <a href="#"><i class="lastudioicon-b-facebook"></i></a>
+                        <a href="#"><i class="lastudioicon-b-twitter"></i></a>
+                        <a href="#"><i class="lastudioicon-b-pinterest"></i></a>
+                        <a href="#"><i class="lastudioicon-b-instagram"></i></a>
+                    </div>
+                    <!-- Product Share End -->
+
+                </div>
+                <!-- Product Summery End -->
+
+            </div>
+        </div>
+
+        <div class="row section-margin">
+            <!-- Single Product Tab Start -->
+            <div class="col-lg-12 single-product-tab">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#connect-1" role="tab" aria-selected="true">Description</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#connect-2" role="tab" aria-selected="false">Reviews (<?php echo e($product->reviews->count()); ?>)</a>
+                    </li>
+                </ul>
+                <div class="tab-content mb-text" id="myTabContent">
+                    <div class="tab-pane fade show active" id="connect-1" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="product-desc-row">
+                            <div class="product-desc-img">
+                                <img src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="Image">
                             </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="connect-2" role="tabpanel" aria-labelledby="profile-tab">
-                            <!-- Start Single Content -->
-                            <div class="review">
-
-                                <!-- Review Top Start -->
-                                <div class="review-top d-flex mb-4 align-items-center">
-
-                                    <!-- Review Thumb Start -->
-                                    <div class="review_thumb">
-                                        <img alt="review images" src="<?php echo e(asset('storage/avatars/' . Auth::user()->avatar)); ?>">
-                                    </div>
-                                    <!-- Review Thumb End -->
-
-                                    <!-- Review Details Start -->
-                                    <div class="review_details ms-3">
-                                        <!-- Rating Start -->
-                                        <div class="review-rating mb-2">
-                                            <span class="review-rating-bg">
-                                                <span class="review-rating-active" style="width: 90%"></span>
-                                            </span>
-                                        </div>
-                                        <!-- Rating End -->
-                                        <!-- Review Title & Date Start -->
-                                        <div class="review-title-date d-flex">
-                                            <h5 class="title me-1"><?php echo e(Auth::user()->name); ?> - </h5>
-                                            <span>January 19, 2021</span>
-                                        </div>
-                                        <!-- Review Title & Date End -->
-                                        <p>Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et.</p>
-                                    </div>
-                                    <!-- Review Details End -->
-
-                                </div>
-                                <!-- Review Top End -->
-
-                                <!-- Comments ans Replay Start -->
-                                <div class="comments-area comments-reply-area">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-custom">
-                                            <h5 class="title mb-2">Add a review</h5>
-            
-                                            <!-- Comment form Start -->
-                                            <form action="#" class="comments-area_form">
-                                                <!-- Comment Texarea Start -->
-                                                <div class="mb-3">
-                                                    <label>Comment</label>
-                                                    <textarea class="comments-area_textarea" required="required"></textarea>
-                                                </div>
-                                                <!-- Comment Texarea End -->
-
-                                                <!-- Comment Submit Button Start -->
-                                                <div class="comment-form-submit">
-                                                    <button class="btn btn-dark btn-hover-primary">Submit</button>
-                                                </div>
-                                                <!-- Comment Submit Button End -->
-
-                                            </form>
-                                            <!-- Comment form End -->
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Comments ans Replay End -->
-
+                            <div class="product-desc-content">
+                                <h5 class="product-desc-title"><?php echo e($product->product_name); ?></h5>
+                                <p class="product-desc-text"><?php echo nl2br(e($product->describe)); ?></p>
                             </div>
-                            <!-- End Single Content -->
                         </div>
                     </div>
-                </div>
-                <!-- Single Product Tab End -->
-            </div>
 
+                    <div class="tab-pane fade" id="connect-2" role="tabpanel" aria-labelledby="profile-tab">
+                        <!-- Start Single Content -->
+                        <div class="review">
+                            <h4>Reviews</h4>
+                            <?php if($product->reviews->isEmpty()): ?>
+                                <p>Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá sản phẩm này!</p>
+                            <?php else: ?>
+                            <?php $__currentLoopData = $product->reviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div class="review-top d-flex mb-4 align-items-center pt-5" id="comment-<?php echo e($review->ID); ?>">
+                                    <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="review_thumb">
+                                            <img alt="review images" src="<?php echo e(asset('storage/avatars/' . $review->user->avatar)); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="review_details ms-3">
+                                            <div class="review-rating mb-2">
+                                                <span class="review-rating-bg">
+                                                    <span class="review-rating-active review-rating-active2" data-review="<?php echo e($review->ratestar); ?>"></span>
+                                                </span>
+                                            </div>
+                                            <div class="review-title-date d-flex">
+                                                <h5 class="title me-1"><?php echo e($review->CreatedBy); ?> - </h5>
+                                                <span><?php echo e(\Carbon\Carbon::parse($review->CreatedDate)->format('M d, Y')); ?></span>
+                                            </div>
+                                            <p><?php echo nl2br(e($review->comment)); ?></p>
+
+                                            <!-- Hiển thị tất cả các câu trả lời -->
+                                            <?php $__currentLoopData = $review->replies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reply): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <div class="reply mt-3" style="position: relative; left: 30px; top: -15px;">
+                                                <p><strong class="text-primary">Bakerz Bite: </strong> - <?php echo e($reply->created_at->format('M d, Y H:i')); ?></p>
+                                                    <p><?php echo nl2br(e($reply->reply)); ?></p>
+                                                </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                            <!-- Form trả lời bình luận -->
+                                            <?php if(Auth::check() && (Auth::user()->role_id == 2 || Auth::user()->role_id == 3)): ?>
+                                                <form action="<?php echo e(route('reviews.reply', ['id' => $review->ID])); ?>" method="POST">
+                                                    <?php echo csrf_field(); ?>
+                                                    <textarea name="reply" class="form-control mb-2" placeholder="Enter your answer"></textarea>
+                                                    <button type="submit" class="btn btn-dark btn-hover-primary">Send</button>
+                                                </form>
+                                            <?php endif; ?>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                            <?php endif; ?>
+                        </div>
+                            <!-- Form để thêm đánh giá mới -->
+                            <?php if(auth()->guard()->check()): ?>
+                            <div class="comments-area comments-reply-area">
+                                <div class="row">
+                                    <div class="col-lg-12 col-custom">
+                                        <h5 class="title mb-2">Thêm đánh giá</h5>
+
+                                        <form action="<?php echo e(route('reviews.store', ['product_id' => $product->product_id])); ?>" method="POST" class="comments-area_form">
+                                            <?php echo csrf_field(); ?>
+                                            <div class="mb-3">
+                                                <label for="ratestar">Rating (1-5):</label>
+                                                <div class="star-rating">
+                                                    <input type="radio" id="star5" name="ratestar" value="5" required />
+                                                    <label for="star5" title="5 stars">★</label>
+                                                    <input type="radio" id="star4" name="ratestar" value="4" />
+                                                    <label for="star4" title="4 stars">★</label>
+                                                    <input type="radio" id="star3" name="ratestar" value="3" />
+                                                    <label for="star3" title="3 stars">★</label>
+                                                    <input type="radio" id="star2" name="ratestar" value="2" />
+                                                    <label for="star2" title="2 stars">★</label>
+                                                    <input type="radio" id="star1" name="ratestar" value="1" />
+                                                    <label for="star1" title="1 star">★</label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="comment">Comment:</label>
+                                                <textarea name="comment" class="form-control" rows="3" required></textarea>
+                                            </div>
+                                            
+                                            <button type="submit" class="btn btn-dark btn-hover-primary">Submit Review</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php else: ?>
+                            <div class="alert alert-warning">
+                            You need to <a href="<?php echo e(route('login')); ?>" class="text-danger">log in</a> to rate this product.
+                            </div>
+                        <?php endif; ?>
+
+                        </div>
+                        <!-- End Single Content -->
+                    </div>
+                </div>
+            </div>
+            <!-- Single Product Tab End -->
         </div>
     </div>
-    <!-- Single Product Section End -->
+</div><br><br>
+<!-- Single Product Section End -->
 
     <!-- Product Section Strat -->
     <div class="section-padding-03 pt-0">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Section Title Strat -->
-                    <div class="section-title">
-                        <h2 class="section-title__title">Related Product</h2>
-                    </div>
-                    <!-- Section Title End -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section Title Strat -->
+                <div class="section-title">
+                    <h2 class="section-title__title">Related Products</h2>
                 </div>
+                <!-- Section Title End -->
             </div>
-            <!-- Product Active Strat -->
-            <div class="product-active">
-                <div class="swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="<?php echo e(asset('assets/images/product/product-8-500x625.jpg')); ?>" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Brownie</a></h5>
-                                    <span class="product-item__price ">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="swiper-slide">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="<?php echo e(asset('assets/images/product/product-8-500x625.jpg')); ?>" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Red Velvet</a></h5>
-                                    <span class="product-item__price ">$5.00</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="swiper-slide">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="<?php echo e(asset('assets/images/product/product-8-500x625.jpg')); ?>" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Cream Muffin</a></h5>
-                                    <span class="product-item__price ">$7.55</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="swiper-slide">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">@badge</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="<?php echo e(asset('assets/images/product/product-8-500x625.jpg')); ?>" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">Macaron Cake</a></h5>
-                                    <span class="product-item__price ">$9.44</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                        <div class="swiper-slide">
-                            <!-- Product Item Start -->
-                            <div class="product-item text-center">
-                                <div class="product-item__badge d-none">Hot</div>
-                                <div class="product-item__image border w-100">
-                                    <a href="single-product.html"><img width="350" height="350" src="<?php echo e(asset('assets/images/product/product-8-500x625.jpg')); ?>" alt="Product"></a>
-                                    <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-item__content pt-5">
-                                    <h5 class="product-item__title"><a href="single-product.html">No-bake chocolate</a></h5>
-                                    <span class="product-item__price ">$4.99</span>
-                                </div>
-                            </div>
-                            <!-- Product Item End -->
-                        </div>
-                    </div>
-
-                    <div class="swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
-                    <div class="swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
-                </div>
-            </div>
-            <!-- Product Active End -->
-
         </div>
-    </div><br><br>
+        <!-- Product Active Strat -->
+        <div class="product-active">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <?php if($relatedProducts->isNotEmpty()): ?>
+                        <?php $__currentLoopData = $relatedProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $relatedProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div class="swiper-slide">
+                                <!-- Product Item Start -->
+                                <div class="product-item text-center">
+                                    <!-- <div class="product-item__badge">Hot</div> -->
+                                    <div class="product-item__image border w-100">
+                                        <a href="<?php echo e(route('single-product', ['id' => $relatedProduct->product_id])); ?>">
+                                            <img width="350" height="350" src="<?php echo e(asset('storage/products/' . $relatedProduct->image)); ?>" alt="<?php echo e($relatedProduct->product_name); ?>">
+                                        </a>
+                                        <ul class="product-item__meta">
+                                        <li class="product-item__meta-action">
+                                            <a
+                                            class="shadow-1 labtn-icon-cart add-to-cart"
+                                            href="#"
+                                            data-product-id="<?php echo e($product->product_id); ?>"
+                                            ></a>
+                                        </li>
+                                            <li class="product-item__meta-action">
+                                                <a class="shadow-1 labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-item__content pt-5">
+                                        <h5 class="product-item__title"><a href="<?php echo e(route('single-product', ['id' => $relatedProduct->product_id])); ?>"><?php echo e($relatedProduct->product_name); ?></a></h5>
+                                        <span class="product-item__price">
+                                        <?php if($product->price != $product->getDiscountedPrice()): ?>
+                                        <del><?php echo e(formatPriceVND($product->price)); ?></del>
+                                        <!-- Giá gốc -->
+                                        <strong style="color: red;"
+                                        ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
+                                        >
+                                        <!-- Giá sau khi giảm -->
+                                        <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
+
+                                        <!-- Giá không giảm -->
+                                        <?php endif; ?>
+                                    </span>
+                                    </div>
+                                </div>
+                                <!-- Product Item End -->
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php else: ?>
+                        <p>No related products found.</p>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
+            <div class="swiper-button-prev"><i class="lastudioicon-arrow-left"></i></div>
+        </div>
+    </div>
+</div>
+<br><br>
     <!-- Product Section End -->
 
  <?php echo $__env->make('layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -522,6 +526,7 @@
 
     <!-- Activation JS -->
     <!-- Vendors JS -->
+
     <script>
         $(window).on("scroll", function (event) {
             var scroll = $(window).scrollTop();
@@ -544,53 +549,74 @@
             }
         });
         $(document).ready(function() {
-    $('.add-to-cart').on('click', function(e) {
-        e.preventDefault();
+            $('.review-rating-active').each(function() {
+                var avgStarRating1 = "<?php echo e($product->reviews->avg('ratestar') * 20); ?>";
 
-        var productId = $(this).data('product-id');
-        $.ajax({
-            url: "<?php echo e(route('cart.new_add')); ?>",
-            method: "POST",
-            data: {
-                _token: "<?php echo e(csrf_token()); ?>", 
-                product_id: productId,
-                quantity: 1
-            },
-            success: function(response) {
-                if (response.status === 'success') {
-                    // Cập nhật số lượng sản phẩm trong giỏ hàng
-                    updateCartView();
-                    updateCartQuantity(response.totalQuantity);
-                } else {
-                    alert(response.message);
+                $(this).css('width', avgStarRating1 + '%');
+            });
+            $('.review-rating-active2').each(function() {
+                var getData = $(this).attr('data-review');
+                var avgStarRating2 = (getData / 5) * 100;
+                console.log(avgStarRating2);
+                $(this).css('width', avgStarRating2 + '%');
+
+            });
+        });
+        $('.quickview').on('click', function(e) {
+            e.preventDefault();
+            var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+            // Gọi AJAX để lấy dữ liệu sản phẩm
+            $.ajax({
+                url: "<?php echo e(route('product.details', ':id')); ?>".replace(':id', productid), // Thay :id bằng product ID
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        var product = response.product;  // Đối tượng product từ server
+                        
+                        // Đổ dữ liệu vào modal
+                        $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
+                        $('#modal-single-product .desc-content').html(product.describe);  // Đổ mô tả sản phẩm
+                        
+                        // Cập nhật hình ảnh sản phẩm
+                        var imagesHtml = '';
+                        var productImage = "<?php echo e(asset('storage/products/')); ?>/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
+
+                        imagesHtml += '<div class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + productImage + '" alt="Product"></div>';
+                        product.images.forEach(function(image) {
+                            var imageUrl = "<?php echo e(asset('storage/products')); ?>/" + image.image; // Access the correct field inside image object
+                            imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
+                        });
+
+                        $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
+                        $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
+                        
+                        // Hiển thị modal
+                        $('#exampleProductModal').modal('show');
+                    } else {
+                        alert(response.message); // Hiển thị thông báo lỗi nếu có
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // Xử lý lỗi
                 }
-            },
-            error: function(xhr) {
-                console.error('Error:', xhr.responseText);
-            }
+            });
         });
-    });
-});
 
-// function updateCartQuantity(totalQuantity) {
-//     // Cập nhật số lượng hiển thị
-//     $('.badge.bg-primary').text(totalQuantity);
-// }
-
-    // Hàm cập nhật hiển thị giỏ hàng mà không load lại trang
-    function updateCartView() {
-        $.ajax({
-            url: "<?php echo e(route('cart.show')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
-            method: "GET",
-            success: function(response) {
-                $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
-            },
-            error: function(xhr) {
-                alert('An error occurred while updating the cart.');
+        function updateonlineUser() {
+                $.ajax({
+                    url: "<?php echo e(route('online-users')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
             }
-        });
-    }
-        
 
     </script>
 

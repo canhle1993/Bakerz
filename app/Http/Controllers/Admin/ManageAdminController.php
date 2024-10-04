@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Catalog;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ManageAdminController extends Controller
 {
@@ -148,5 +152,104 @@ class ManageAdminController extends Controller
             'role_id' => 2 // Nâng quyền lên Admin
         ]);
         return redirect()->route('manage-admin')->with('success', 'Client role updated to Admin successfully');
+    }
+
+
+    // Nâng quyền admin lên supper
+    public function upgradeToSuper($id)
+    {
+        $admin = User::findOrFail($id);
+        $admin->update([
+            'role_id' => 3
+        ]);
+
+        return redirect()->route('manage-admin')->with('success', 'Admin role upgraded to Supper successfully');
+    }
+
+    // Phục hồi danh mục từ danh sách bị xóa (isdelete = 1)
+    public function restoreCategory($id)
+    {
+        $category = Catalog::findOrFail($id);
+        $category->update(['isdelete' => null]);
+
+        return redirect()->route('manage-blacklist')->with('success', 'Category restored successfully');
+    }
+
+    public function restoreProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->update(['isdelete' => null]);
+
+        return redirect()->route('manage-blacklist')->with('success', 'Product restored successfully');
+    }
+
+    // Phục hồi người dùng từ blacklist (isdelete = 1)
+    public function restoreUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->update(['isdelete' => null]);
+
+        return redirect()->route('manage-blacklist')->with('success', 'User restored successfully');
+    }
+
+
+
+    public function blacklist()
+    {
+        // Truy vấn người dùng có isdelete = 1 (bị blacklist)
+        $blacklistedUsers = User::where('isdelete', 1)->paginate(5);
+
+        // Truy vấn danh mục có isdelete = 1 (bị xóa)
+        $deletedCategories = Category::where('isdelete', 1)->paginate(5);
+
+        // Truy vấn sản phẩm có isdelete = 1 (bị xóa)
+        $deletedProducts = Product::where('isdelete', 1)->paginate(5);
+
+        // Truyền cả 3 biến vào view
+        return view('admin.manage-blacklist', compact('blacklistedUsers', 'deletedCategories', 'deletedProducts'));
+    }
+
+
+    public function
+    delete($id)
+    {
+        // Xóa tất cả các bản ghi liên quan trong bảng orderdetails trước
+        DB::table('orderdetails')->where('product_id', $id)->delete();
+
+        // Xóa tất cả các bản ghi liên quan trong bảng discountproduct
+        DB::table('discountproduct')->where('product_id', $id)->delete();
+
+        // Xóa các bản ghi liên quan trong bảng link_product_heathy
+        DB::table('link_product_heathy')->where('product_id', $id)->delete();
+
+        // Xóa các bản ghi liên quan trong bảng linkcatalogproduct
+        DB::table('linkcatalogproduct')->where('product_id', $id)->delete();
+
+        // Sau đó xóa sản phẩm khỏi bảng product
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('manage-blacklist')->with('success', 'Product deleted permanently');
+    }
+
+    public function deleteUser($id)
+    {
+
+        // Tìm và xóa user
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('manage-blacklist')->with('success', 'User deleted permanently');
+    }
+
+    public function deletecategory($id)
+    {
+
+        DB::table('linkcatalogproduct')->where('category_id', $id)->delete();
+        // Xóa danh mục
+        $category = Catalog::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('manage-blacklist')->with('success', 'Category deleted permanently');
     }
 }

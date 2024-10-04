@@ -44,6 +44,24 @@ class Product extends Model
         return $this->hasMany(Cart::class, 'product_id');
     }
     
+    // Định nghĩa quan hệ với bảng userreview
+    public function reviews()
+    {
+        return $this->hasMany(UserReview::class, 'product_id');
+    }
+    
+    // One product can appear in many order details
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetails::class, 'product_id');
+    }
+    
+    // Thiết lập mối quan hệ 1-1 với bảng Banner
+    public function banners()
+    {
+        return $this->hasMany(Banner::class, 'product_id');
+    }
+
     public function getDiscountedPrice()
     {
         // Lấy tất cả các discount của sản phẩm

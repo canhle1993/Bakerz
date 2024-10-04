@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -328,6 +329,8 @@
                                 <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-twitter"></i></a>
                                 <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
                                 <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-instagram"></i></a>
+                                <b style="padding: 3px 0px;"><i class="fas fa-users"></i>
+                                <span  id="onlineCount" style="border: none; background-color: #0771fb; color: #eff0f2; padding: 2px 7px 2px 7px; border-radius: 99px; left: -4px; top: -8px; position: relative;"></span></b>
                             </div>
                         </div>
                         <!-- Footer Widget Section End -->
@@ -384,11 +387,17 @@
         <!-- Footer Copyright Strat -->
         <div class="footer-copyright footer-copyright-two">
             <div class="container">
-                <!-- Footer Copyright Text Strat -->
-                <div class="footer-copyright-text text-center">
-                    <p>&copy; 2024 <strong> Bakerz Bite </strong> Made with <i class="lastudioicon-heart-1"></i> by <a href="https://aptechvietnam.com.vn/">Bakerz</a></p>
+              <div class="row">
+                <div class="col-md-2" style="margin-top: 4px;">
+                  <!-- <b style="font-size: x-large;" class="footer-copyright-text" id="onlineCount"><i style="font-size: x-large;" class="fas fa-users"></i> </b> -->
                 </div>
-                <!-- Footer Copyright Text End -->
+                <div class="col-md-8">
+                  <div class="footer-copyright-text text-center">
+                      <p >&copy; 2024 <strong> Bakerz Bite </strong> Made with <i class="lastudioicon-heart-1"></i> by <a href="https://aptechvietnam.com.vn/">Bakerz</a></p>
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
             </div>
         </div>
         <!-- Footer Copyright End -->
@@ -414,6 +423,25 @@
 
     <!-- Activation JS -->
     <script src="{{asset('assets/js/main.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      window.addEventListener('load', function() {
+        updateonlineUser();
+      });
+      function updateonlineUser() {
+                $.ajax({
+                    url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
+            }
+    </script>
     <!-- Vendors JS -->
 </body>
 

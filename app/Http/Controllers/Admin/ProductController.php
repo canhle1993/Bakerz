@@ -328,4 +328,35 @@ class ProductController extends Controller
         return response()->json($data);
     }
 
+    public function index2(Request $request)
+    {
+        try {
+            // Logic để lấy dữ liệu sản phẩm
+            $query = Product::select('Product.*')
+                ->distinct()
+                ->where(function ($query) {
+                    $query->where('Product.isdelete', '<>', 1)
+                        ->orWhereNull('Product.isdelete');
+                });
+
+            if ($request->has('search')) {
+                $query->where('Product.product_name', 'like', '%' . $request->search . '%');
+            }
+
+            $products = $query->orderBy('Product.ModifiedDate', 'desc')->get();
+
+            return response()->json([
+                'status' => 'success',
+                'data' => [
+                    'products' => $products
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
 }

@@ -94,6 +94,19 @@
     transform: scale(1.05);
 }
 
+
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    box-shadow: 0px 4px 10px rgba(40, 167, 69, 0.5);
+    transform: scale(1.05);
+}
 .custom-alert {
     position: fixed;
     top: 10%;
@@ -133,6 +146,7 @@
 }
 
 
+
 </style>
 
 @if(session('success'))
@@ -164,7 +178,7 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="text-primary">Admin Management</h1>
-        <a href="{{ route('admin.create') }}" class="btn btn-primary">Add Admin</a>
+        {{-- <a href="{{ route('admin.create') }}" class="btn btn-primary">Add Admin</a> --}}
     </div>
 
     <table class="table table-hover table-bordered table-striped shadow-sm">
@@ -214,6 +228,14 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger">
                             <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </form>
+
+                    <!-- Button to up admin role to super -->
+                    <form action="{{ route('admin.up_to_super', $admin->user_id) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-success">
+                            <i class="bi bi-arrow-up-circle"></i> Up to Supper
                         </button>
                     </form>
                 </td>

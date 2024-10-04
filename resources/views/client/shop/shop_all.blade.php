@@ -165,9 +165,19 @@
                                         <img width="350" height="350" src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}">
                                     </a>
                                     <ul class="product-item__meta">
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-id="{{ $product->product_id }}" data-bs-toggle="modal" data-bs-target="#exampleProductModal" title="Quick View"></a>
-
+                                    <li class="product-item__meta-action">
+                                            <a
+                                            class="labtn-icon-quickview quickview"
+                                            href="#"
+                                            data-product-id="{{ $product->product_id }}"
+                                            data-bs-tooltip="tooltip"
+                                            data-bs-placement="top"
+                                            title=""
+                                            data-bs-original-title="Quick View"
+                                            aria-label="Quick View"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleProductModal"
+                                            ></a>
                                         </li>
                                         <li class="product-item__meta-action">
                                             <a
@@ -179,16 +189,25 @@
                                         <li class="product-item__meta-action">
                                             <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
                                         </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
-                                        </li>
                                     </ul>
                                 </div>
                                 <div class="product-item__content pt-5">
                                     <h5 class="product-item__title">
-                                        <a href="{{ route('product.show', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
+                                        <a href="{{ route('product.single', ['product' => $product->product_id]) }}">{{ $product->product_name }}</a>
                                     </h5>
-                                    <span class="product-item__price">${{ number_format($product->price, 2) }}</span>
+                                    <span class="product-item__price">
+                                        @if ($product->price != $product->getDiscountedPrice())
+                                        <del>{{ formatPriceVND($product->price) }}</del>
+                                        <!-- Giá gốc -->
+                                        <strong style="color: red;"
+                                        >{{ formatPriceVND($product->getDiscountedPrice())
+                                        }}</strong
+                                        >
+                                        <!-- Giá sau khi giảm -->
+                                        @else {{ formatPriceVND($product->price) }}
+                                        <!-- Giá không giảm -->
+                                        @endif
+                                    </span>
 
                                 </div>
                             </div>
@@ -220,6 +239,7 @@
                                     <div class="sidebars_widget">
                                         <h3 class="sidebars_widget__title">Category</h3>
                                         <ul class="sidebars_widget__category">
+                                            <li><a href="{{ route('shop_all')}}">All Products</a></li>
                                             @foreach ($categories as $category)
                                             <li><a href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}">{{ $category->category_name }}</a></li>
                                             @endforeach
@@ -257,37 +277,37 @@
                             <ul class="sidebars_widget__product">
                                 <!-- Single Product Start -->
                                 <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb">
-                                        <img src="assets/img/bbb.png" alt="Sidebar-Image">
+                                    <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
+                                        <img src="img/Sweet Breads1/Brioche/Brioche3.png" alt="Sidebar-Image">
                                     </a>
                                     <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Brownie</a>
-                                        <span class="single-product_content__price">$4.99</span>
+                                        <a href="single-product.html" class="single-product_content__title">Brioche</a>
+                                        <span class="single-product_content__price">$10</span>
                                     </div>
                                 </li>
                                 <!-- Single Product End -->
-                                <!-- Single Product Start -->
-                                <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb">
-                                        <img src="assets/img/Honey butter toast/Honey butter toast.png" alt="Sidebar-Image">
-                                    </a>
-                                    <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Red Velvet</a>
-                                        <span class="single-product_content__price">$4.99</span>
-                                    </div>
-                                </li>
-                                <!-- Single Product End -->
-                                <!-- Single Product Start -->
-                                <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb">
-                                        <img src="assets/images/product/sidebar-3.png" alt="Sidebar-Image">
-                                    </a>
-                                    <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Cream Muffin</a>
-                                        <span class="single-product_content__price">$4.99</span>
-                                    </div>
-                                </li>
-                                <!-- Single Product End -->
+                                    <!-- Single Product Start -->
+                                    <li class="single-product">
+                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
+                                            <img src="img/Sweet Breads1/Almond bread/Almond bread3.png" alt="Sidebar-Image">
+                                        </a>
+                                        <div class="single-product_content">
+                                            <a href="single-product.html" class="single-product_content__title">Almond bread</a>
+                                            <span class="single-product_content__price">$5</span>
+                                        </div>
+                                    </li>
+                                    <!-- Single Product End -->
+                                    <!-- Single Product Start -->
+                                    <li class="single-product">
+                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
+                                            <img src="img/Cakes (1)/Blueberry cake.png" alt="Sidebar-Image">
+                                        </a>
+                                        <div class="single-product_content">
+                                            <a href="single-product.html" class="single-product_content__title">Blueberry cake</a>
+                                            <span class="single-product_content__price">$10</span>
+                                        </div>
+                                    </li>
+                                    <!-- Single Product End -->
                             </ul>
                         </div>
                         <!-- Popular Product Widget End -->
@@ -652,53 +672,61 @@ $(document).on('click', '.labtn-icon-quickview', function() {
         console.log('Không tìm thấy product_id.');
     }
 });
-
-   // Add Cart
-   $(document).ready(function() {
-        $('.add-to-cart').on('click', function(e) {
+$('.quickview').on('click', function(e) {
             e.preventDefault();
+            var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
 
-            var productId = $(this).data('product-id');
+            // Gọi AJAX để lấy dữ liệu sản phẩm
             $.ajax({
-                url: "{{ route('cart.new_add') }}",
-                method: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}", // Gửi CSRF token
-                    product_id: productId,
-                    quantity: 1 // Số lượng sản phẩm có thể thay đổi
-                },
+                url: "{{ route('product.details', ':id') }}".replace(':id', productid), // Thay :id bằng product ID
+                type: 'GET',
+                dataType: 'json',
                 success: function(response) {
                     if (response.status === 'success') {
-                        // Hiển thị modal sau khi thêm thành công
-                        // $('#modalCart').modal('show');
-                        updateCartView();
+                        var product = response.product;  // Đối tượng product từ server
+                        
+                        // Đổ dữ liệu vào modal
+                        $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
+                        $('#modal-single-product .desc-content').html(product.describe);  // Đổ mô tả sản phẩm
+                        
+                        // Cập nhật hình ảnh sản phẩm
+                        var imagesHtml = '';
+                        var productImage = "{{ asset('storage/products/') }}/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
 
+                        imagesHtml += '<div class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + productImage + '" alt="Product"></div>';
+                        product.images.forEach(function(image) {
+                            var imageUrl = "{{ asset('storage/products') }}/" + image.image; // Access the correct field inside image object
+                            imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
+                        });
+
+                        $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
+                        $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
+                        
+                        // Hiển thị modal
+                        $('#exampleProductModal').modal('show');
                     } else {
-                        alert(response.message); // Hiển thị thông báo lỗi
+                        alert(response.message); // Hiển thị thông báo lỗi nếu có
                     }
                 },
-                error: function(xhr) {
-                    // alert('An error occurred. Please try again.');
-                    console.error('Response:', xhr.responseText);
+                error: function(xhr, status, error) {
+                    console.error(error); // Xử lý lỗi
                 }
             });
         });
-    });
 
-    // Hàm cập nhật hiển thị giỏ hàng mà không load lại trang
-    function updateCartView() {
-        $.ajax({
-            url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
-            method: "GET",
-            success: function(response) {
-                $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
-            },
-            error: function(xhr) {
-                alert('An error occurred while updating the cart.');
+        function updateonlineUser() {
+                $.ajax({
+                    url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
             }
-        });
-    }
-
 
 // Script cho QuickView
 </script>

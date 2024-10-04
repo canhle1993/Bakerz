@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -22,6 +22,8 @@ use App\Http\Controllers\ClientController;
 Route::get('/', [ClientController::class, 'home'])->name('client.home');
 Route::get('/filter', [ClientController::class, 'filter'])->name('client.filter');
 Route::get('/client/profile/user/{userid}', [ClientController::class, 'profile'])->name('client.profile');
+Route::get('/client/order-details/{orderId}', [ClientController::class, 'getOrderDetails'])->name('client.orderdetails');
+
 
 use App\Http\Controllers\ProductController;
 
@@ -66,12 +68,16 @@ Route::get('/admin/manage/client/create', [ManageClientController::class, 'creat
 Route::post('/admin/manage/client/store', [ManageClientController::class, 'store'])->name('client.store');
 Route::get('/admin/manage/client/{id}/edit', [ManageClientController::class, 'edit'])->name('client.edit');
 Route::put('/admin/manage/client/{id}', [ManageClientController::class, 'update'])->name('client.update');
-Route::delete('/admin/manage/client/{id}', [ManageClientController::class, 'destroy'])->name('client.destroy');
-Route::get('/admin/manage/blacklist', [ManageClientController::class, 'blacklist'])->name('manage-blacklist');
-Route::post('/admin/manage/blacklist/{id}/restore', [ManageClientController::class, 'restore'])->name('blacklist.restore');
+
+
 
 // Route quản lý Admin
 use App\Http\Controllers\Admin\ManageAdminController;
+
+
+// Route để đánh dấu thông báo là đã đọc và chuyển hướng đến trang review
+Route::get('/admin/message/read', [DashboardController::class, 'markAsRead'])->name('message.read');
+
 
 Route::get('/admin/manage/admin', [ManageAdminController::class, 'index'])->name('manage-admin');
 Route::get('/admin/manage/admin/create', [ManageAdminController::class, 'create'])->name('admin.create');
@@ -81,6 +87,18 @@ Route::post('/admin/manage/admin/{id}', [ManageAdminController::class, 'update']
 Route::delete('/admin/manage/admin/{id}', [ManageAdminController::class, 'destroy'])->name('admin.destroy');
 Route::post('/admin/manage/lower-to-client/{id}', [ManageAdminController::class, 'lowerToClient'])->name('admin.lower_to_client');
 Route::post('/admin/manage/update-to-admin/{id}', [ManageAdminController::class, 'Upgradetoadmin'])->name('admin.update_to_admin');
+Route::post('/admin/upgrade_to_super/{id}', [ManageAdminController::class, 'upgradeToSuper'])->name('admin.up_to_super');
+Route::post('/category/restore/{id}', [ManageAdminController::class, 'restoreCategory'])->name('category.restore');
+Route::post('/product/restore/{id}', [ManageAdminController::class, 'restoreProduct'])->name('product.restore');
+Route::get('/admin/manage/blacklist', [ManageAdminController::class, 'blacklist'])->name('manage-blacklist');
+Route::post('/blacklist/restore/{id}', [ManageAdminController::class, 'restoreUser'])->name('blacklist.restore');
+Route::delete('delete/product/{id}', [ManageAdminController::class, 'delete'])->name('product.delete');
+Route::delete('/blacklist/delete/{id}', [ManageAdminController::class, 'deleteUser'])->name('user.delete');
+Route::delete('/category/delete/{id}', [ManageAdminController::class, 'deletecategory'])->name('category.delete');
+Route::delete('/category/destoy/{id}', [ManageAdminController::class, 'destroy'])->name('client.destroy');
+
+
+
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -88,8 +106,11 @@ Route::post('/admin/manage/update-to-admin/{id}', [ManageAdminController::class,
 // Route cho Product và Other
 Route::get('/shop_all', [ProductController::class, 'all_product'])->name('shop_all');
 Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'])->name('product.single');
+Route::get('/single-product/{id}', [ProductController::class, 'show'])->name('single-product');
 Route::get('shop/category/{category_id}', [ProductController::class, 'filterByCategory'])->name('shop.filterByCategory');
+Route::get('/shop/filter-by-category/{category_id}', [ProductController::class, 'filterByCategory'])->name('shop.filterByCategory');
 Route::get('product/details/{id}', [ProductController::class, 'getProductDetails'])->name('product.details');
+Route::get('/shop/filter-by-coffee', [ProductController::class, 'filterByCoffee'])->name('shop.filterByCoffee');
 
 
 
@@ -112,9 +133,6 @@ Route::get('/product-affiliate', function () {
 Route::get('/cart', function () {
     return view('client.shop.others.cart');
 })->name('cart');
-Route::get('/checkout', function () {
-    return view('client.shop.others.checkout');
-})->name('checkout');
 Route::get('/wishlist', function () {
     return view('client.shop.others.wishlist');
 })->name('wishlist');
@@ -143,6 +161,12 @@ Route::get('/pricing-plan', function () {
 Route::get('/blog-detail', function () {
     return view('client.blog.blog-detail');
 })->name('blog-detail');
+Route::get('/blog', function () {
+    return view('client.blog.blog');
+})->name('blog');
+Route::get('/blog-pd', function () {
+    return view('client.blog.blog-pd');
+})->name('blog-pd');
 
 //Route cho client contact
 Route::get('/contact', function () {
@@ -167,10 +191,12 @@ Route::get('/exchange-return-policy', function () {
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 
 
-Route::resource('product', AdminProductController::class);
+Route::resource('product', AdminProductController::class)->except(['show']);
 Route::get('/product/create', [AdminProductController::class, 'create'])->name('product.create');
 Route::get('product/{product}/detail', [AdminProductController::class, 'showDetail'])->name('product.showDetail');
 Route::delete('/product/{product}/delete', [AdminProductController::class, 'destroy'])->name('product.destroy');
+Route::get('/product/index2', [AdminProductController::class, 'index2'])->name('product.index2');
+
 
 //route cho catalog trang admin
 use App\Http\Controllers\Admin\CategoryController;
@@ -194,6 +220,7 @@ Route::delete('/discount/deletealeoff/{product_id}/{id}', [DiscountController::c
 Route::get('/quickview', [ProductController::class, 'quickView'])->name('quickview');
 
 use App\Http\Controllers\Admin\CartController;
+
 //Thêm sản phẩm vào cart - xóa sản phẩm
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
@@ -201,3 +228,89 @@ Route::post('/cart/update', [CartController::class, 'update'])->name('cart.updat
 
 Route::post('/cart/new_add', [CartController::class, 'new_addToCart'])->name('cart.new_add');
 Route::get('/cart/show', [CartController::class, 'showCart'])->name('cart.show');
+Route::post('/cart/{product_id}/update_quantity', [CartController::class, 'update_quantity'])->name('cart.update_quantity');
+Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
+Route::get('/showcheckout', [CartController::class, 'showcheckout'])->name('checkout');
+Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.cart_checkout');
+
+
+
+// Route để lưu đánh giá
+Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
+
+// Route cho trang chi tiết sản phẩm
+Route::get('productsingle/{product}', [ProductController::class, 'singleProduct'])->name('product.single');
+
+// Route quản lý và xóa đánh giá
+Route::get('/admin/reviews/manage', [ReviewController::class, 'manage'])->name('admin.reviews.manage');
+Route::delete('/admin/reviews/{id}/delete', [ReviewController::class, 'delete'])->name('reviews.delete');
+Route::post('/admin/reviews/{id}/reply', [ReviewController::class, 'reply'])->name('reviews.reply');
+Route::post('/reviews/{id}/reply', [ReviewController::class, 'reply'])->name('reviews.reply');
+
+
+//Tính toán khoảng cách từ vị trí khách hàng đến cửa hàng
+use App\Http\Controllers\CalculateDistanceController;
+
+
+// Hiển thị trang để tính khoảng cách
+Route::get('/client-location', [CalculateDistanceController::class, 'showLocation'])->name('client_location');
+
+// Tính toán khoảng cách
+Route::post('/calculate-distance', [CalculateDistanceController::class, 'calculateDistance']);
+
+// VNPAY return
+use App\Http\Controllers\PaymentController;
+
+Route::get('/vnpay-return', [PaymentController::class, 'vnpayReturn'])->name('vnpay.return');
+
+use App\Http\Controllers\Admin\OrderController;
+
+Route::get('/order/pending', [OrderController::class, 'pending'])->name('order.pending');
+Route::post('/order/{order_id}/pending', [OrderController::class, 'gotoPaid'])->name('order.gotopaid');
+Route::get('/order/paid', [OrderController::class, 'paid'])->name('order.paid');
+Route::post('/order/{order_id}/paid', [OrderController::class, 'gotoConfirmed'])->name('order.gotoConfirmed');
+Route::get('/order/confirmed', [OrderController::class, 'confirmed'])->name('order.confirmed');
+Route::post('/order/{order_id}/confirmed', [OrderController::class, 'gotoDelivered'])->name('order.gotoDelivered');
+Route::get('/order/delivered', [OrderController::class, 'delivered'])->name('order.delivered');
+
+Route::get('/order/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
+Route::post('/order/{order_id}/cancel', [OrderController::class, 'gotoCancel'])->name('order.gotoCancel');
+
+
+//Đếm số lượng người truy cập web
+use App\Http\Controllers\OnlineUserController;
+
+Route::get('/online-users', [OnlineUserController::class, 'countOnlineUsers'])->name('online-users');
+
+//route cho banner trang admin
+use App\Http\Controllers\Admin\BannerController;
+
+Route::resource('banner', BannerController::class);
+
+
+use App\Http\Controllers\ChefController;
+use App\Http\Controllers\AdminChefController;
+
+// Route để hiển thị danh sách các Chef trên trang client
+Route::get('/our-chef', [ChefController::class, 'index'])->name('our-chef');
+
+// Route quản lý Chef cho admin
+Route::prefix('admin')->group(function () {
+    // Hiển thị trang quản lý Chef (bao gồm form thêm và danh sách Chef)
+    Route::get('/chefs', [AdminChefController::class, 'create'])->name('admin.chefs.create');
+
+    // Lưu Chef mới
+    Route::post('/chefs', [AdminChefController::class, 'store'])->name('admin.chefs.store');
+
+    // Cập nhật Chef (Sửa Chef)
+    Route::put('/chefs/{id}', [AdminChefController::class, 'update'])->name('admin.chefs.update');
+
+    // Xóa Chef
+    Route::delete('/chefs/{id}', [AdminChefController::class, 'destroy'])->name('admin.chefs.destroy');
+});
+
+Route::get('/admin/notify/read', [DashboardController::class, 'markasreadOrder'])->name('notification.read');
+
+
+
+
