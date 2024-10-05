@@ -60,6 +60,8 @@
                     <a href="<?php echo e(route('admin.dashboard')); ?>" class="nav-item nav-link <?php echo e(Request::routeIs('admin.dashboard') ? 'active' : ''); ?>"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="<?php echo e(route('banner.index')); ?>" class="nav-item nav-link"><i class="fa bi-card-image me-2"></i>Banner</a>
                     <a href="<?php echo e(route('admin.chefs.create')); ?>" class="nav-item nav-link"><i class="fa bi-card-image me-2"></i>Chefs</a>
+                    <!-- Blog link -->
+                    <a href="<?php echo e(route('blog.index')); ?>" class="nav-item nav-link"><i class="fa bi-card-image me-2"></i>Blog</a> <!-- Updated route -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
                         <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'show' : ''); ?>">
@@ -219,6 +221,7 @@
             <?php echo $__env->yieldContent('manage_admin_create'); ?>
             <?php echo $__env->yieldContent('manage_blacklist'); ?>
             <?php echo $__env->yieldContent('admin_content'); ?>
+            <?php echo $__env->yieldContent('blog_content'); ?>
             <!-- Body End -->
 
             <!-- Footer Start -->

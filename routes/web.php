@@ -161,12 +161,6 @@ Route::get('/pricing-plan', function () {
 Route::get('/blog-detail', function () {
     return view('client.blog.blog-detail');
 })->name('blog-detail');
-Route::get('/blog', function () {
-    return view('client.blog.blog');
-})->name('blog');
-Route::get('/blog-pd', function () {
-    return view('client.blog.blog-pd');
-})->name('blog-pd');
 
 //Route cho client contact
 Route::get('/contact', function () {
@@ -311,6 +305,22 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/admin/notify/read', [DashboardController::class, 'markasreadOrder'])->name('notification.read');
 
+
+use App\Http\Controllers\BlogController;
+
+// Blog routes
+Route::prefix('admin/blog')->group(function () {
+    Route::get('/', [BlogController::class, 'index'])->name('blog.index');
+    Route::post('/store', [BlogController::class, 'store'])->name('blog.store');
+    Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::put('/update/{id}', [BlogController::class, 'update'])->name('blog.update');  // Chỉ định phương thức PUT
+    Route::delete('/delete/{id}', [BlogController::class, 'destroy'])->name('blog.delete');
+});
+
+
+
+Route::get('/client/blog', [BlogController::class, 'showBlog'])->name('client.blog');
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog-pd');
 
 
 

@@ -300,7 +300,7 @@
                             <li><a class="menu-item-link" href="{{ route('client.home')}}"><span>Pages</span></a>
                                 <ul class="sub-menu">
                                     <li><a class="sub-item-link" href="{{ route('blog-detail') }}"><span>Workshop</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('blog') }}"><span>Blog</span></a></li>
+                                    <li><a class="sub-item-link" href="{{ route('client.blog') }}"><span>Blog</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('our-chef') }}"><span>Our Chef</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Bakerz Bite Rewards</span></a></li>

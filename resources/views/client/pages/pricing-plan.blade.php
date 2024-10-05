@@ -66,7 +66,7 @@
                                 <ul class="blog-post-two__meta">
                                     <li><a href="{{ route('client.home') }}">Bakerz Bite</a></li>
                                     <li>-</li>
-                                    <li><span>August 14, 2024</span></li>
+                                    <li><span>Oct 05, 2024</span></li>
                                 </ul>
                                 <h2 class="single-blog-title">What is Bakerz Bite Rewards?</h2>
                                 <p class="single-blog-description">Bakerz Bite Rewards is a program created by Bakerz Bite for the purpose of paying tribute to Bakerz Bite customers. When you join, you will receive incentives based on the ranks you have achieved, divided into ranks such as: Bronze, Gold, and Diamond. Rankings will be calculated based on the level of spending and the number of points you accumulate for each order.</p>
