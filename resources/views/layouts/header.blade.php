@@ -237,12 +237,12 @@
         <div class="container position-relative">
 
             <div class="row align-items-center">
-                
+
                 <div class="col-lg-3 col-xl-3 col-7">
                     <!-- Header Logo Start -->
                     <div class="header-logo">
                         <a href="{{ route('client.home')}}">
-                        
+
                             <img class="white-logo" src="{{asset('assets/images/logo-white.svg')}}" width="229" height="62" alt="Logo">
                         </a>
                     </div>
@@ -274,7 +274,7 @@
                                             @foreach ($categories->slice(-2) as $category)
                                             <li><a class="sub-item-link" href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}"><span>{{ $category->category_name }}</span></a></li>
                                             @endforeach
-                                            
+
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item banner-menu-content-wrap">

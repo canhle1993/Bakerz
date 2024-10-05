@@ -165,26 +165,50 @@
                                         <img width="350" height="350" src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="<?php echo e($product->product_name); ?>">
                                     </a>
                                     <ul class="product-item__meta">
+                                    <li class="product-item__meta-action">
+                                            <a
+                                            class="labtn-icon-quickview quickview"
+                                            href="#"
+                                            data-product-id="<?php echo e($product->product_id); ?>"
+                                            data-bs-tooltip="tooltip"
+                                            data-bs-placement="top"
+                                            title=""
+                                            data-bs-original-title="Quick View"
+                                            aria-label="Quick View"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleProductModal"
+                                            ></a>
+                                        </li>
                                         <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-quickview" href="#/" data-id="<?php echo e($product->product_id); ?>" data-bs-toggle="modal" data-bs-target="#exampleProductModal" title="Quick View"></a>
+                                            <a
+                                            class="shadow-1 labtn-icon-cart add-to-cart"
+                                            href="#"
+                                            data-product-id="<?php echo e($product->product_id); ?>"
+                                            ></a>
+                                        </li>
+                                        <li class="product-item__meta-action">
+                                            <a class="labtn-icon-wishlist" href="#" data-product-id="<?php echo e($product->product_id); ?>" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
 
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#modalCart"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
-                                        </li>
-                                        <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-compare" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare" data-bs-toggle="modal" data-bs-target="#modalCompare"></a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="product-item__content pt-5">
                                     <h5 class="product-item__title">
-                                        <a href="<?php echo e(route('product.show', ['product' => $product->product_id])); ?>"><?php echo e($product->product_name); ?></a>
+                                        <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><?php echo e($product->product_name); ?></a>
                                     </h5>
-                                    <span class="product-item__price">$<?php echo e(number_format($product->price, 2)); ?></span>
+                                    <span class="product-item__price">
+                                        <?php if($product->price != $product->getDiscountedPrice()): ?>
+                                        <del><?php echo e(formatPriceVND($product->price)); ?></del>
+                                        <!-- Giá gốc -->
+                                        <strong style="color: red;"
+                                        ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
+                                        >
+                                        <!-- Giá sau khi giảm -->
+                                        <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
+
+                                        <!-- Giá không giảm -->
+                                        <?php endif; ?>
+                                    </span>
 
                                 </div>
                             </div>
@@ -216,6 +240,7 @@
                                     <div class="sidebars_widget">
                                         <h3 class="sidebars_widget__title">Category</h3>
                                         <ul class="sidebars_widget__category">
+                                            <li><a href="<?php echo e(route('shop_all')); ?>">All Products</a></li>
                                             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <li><a href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><?php echo e($category->category_name); ?></a></li>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -253,37 +278,37 @@
                             <ul class="sidebars_widget__product">
                                 <!-- Single Product Start -->
                                 <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb">
-                                        <img src="assets/img/bbb.png" alt="Sidebar-Image">
+                                    <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
+                                        <img src="img/Sweet Breads1/Brioche/Brioche3.png" alt="Sidebar-Image">
                                     </a>
                                     <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Brownie</a>
-                                        <span class="single-product_content__price">$4.99</span>
+                                        <a href="single-product.html" class="single-product_content__title">Brioche</a>
+                                        <span class="single-product_content__price">$10</span>
                                     </div>
                                 </li>
                                 <!-- Single Product End -->
-                                <!-- Single Product Start -->
-                                <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb">
-                                        <img src="assets/img/Honey butter toast/Honey butter toast.png" alt="Sidebar-Image">
-                                    </a>
-                                    <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Red Velvet</a>
-                                        <span class="single-product_content__price">$4.99</span>
-                                    </div>
-                                </li>
-                                <!-- Single Product End -->
-                                <!-- Single Product Start -->
-                                <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb">
-                                        <img src="assets/images/product/sidebar-3.png" alt="Sidebar-Image">
-                                    </a>
-                                    <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Cream Muffin</a>
-                                        <span class="single-product_content__price">$4.99</span>
-                                    </div>
-                                </li>
-                                <!-- Single Product End -->
+                                    <!-- Single Product Start -->
+                                    <li class="single-product">
+                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
+                                            <img src="img/Sweet Breads1/Almond bread/Almond bread3.png" alt="Sidebar-Image">
+                                        </a>
+                                        <div class="single-product_content">
+                                            <a href="single-product.html" class="single-product_content__title">Almond bread</a>
+                                            <span class="single-product_content__price">$5</span>
+                                        </div>
+                                    </li>
+                                    <!-- Single Product End -->
+                                    <!-- Single Product Start -->
+                                    <li class="single-product">
+                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
+                                            <img src="img/Cakes (1)/Blueberry cake.png" alt="Sidebar-Image">
+                                        </a>
+                                        <div class="single-product_content">
+                                            <a href="single-product.html" class="single-product_content__title">Blueberry cake</a>
+                                            <span class="single-product_content__price">$10</span>
+                                        </div>
+                                    </li>
+                                    <!-- Single Product End -->
                             </ul>
                         </div>
                         <!-- Popular Product Widget End -->
@@ -627,31 +652,114 @@ $(document).ready(function() {
 // Script cho QuickView
 
 
-$(document).on('click', '.labtn-icon-quickview', function() {
-    var productId = $(this).data('id');  // Lấy product_id từ thuộc tính data-id
-    if (productId) {
-        $.ajax({
-            url: '/product/details/' + productId,  // Sử dụng productId trong URL
-            type: 'GET',
-            success: function(response) {
-                // Cập nhật modal với thông tin sản phẩm
-                $('#exampleProductModal .product-head-price').text('$' + response.price);
-                $('#exampleProductModal .desc-content').text(response.description);
-                $('#exampleProductModal .product-details-img img').attr('src', '/storage/products/' + response.image);
-                $('#exampleProductModal').modal('show');
-            },
-            error: function(xhr, status, error) {
-                console.log('Lỗi:', error);
-            }
+            $(document).on('click', '.labtn-icon-quickview', function() {
+                var productId = $(this).data('id');  // Lấy product_id từ thuộc tính data-id
+                if (productId) {
+                    $.ajax({
+                        url: '/product/details/' + productId,  // Sử dụng productId trong URL
+                        type: 'GET',
+                        success: function(response) {
+                            // Cập nhật modal với thông tin sản phẩm
+                            $('#exampleProductModal .product-head-price').text('$' + response.price);
+                            $('#exampleProductModal .desc-content').text(response.description);
+                            $('#exampleProductModal .product-details-img img').attr('src', '/storage/products/' + response.image);
+                            $('#exampleProductModal').modal('show');
+                        },
+                        error: function(xhr, status, error) {
+                            console.log('Lỗi:', error);
+                        }
+                    });
+                } else {
+                    console.log('Không tìm thấy product_id.');
+                }
+            });
+            $('.quickview').on('click', function(e) {
+            e.preventDefault();
+            var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+            // Gọi AJAX để lấy dữ liệu sản phẩm
+            $.ajax({
+                url: "<?php echo e(route('product.details', ':id')); ?>".replace(':id', productid), // Thay :id bằng product ID
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        var product = response.product;  // Đối tượng product từ server
+
+                        // Đổ dữ liệu vào modal
+                        $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
+                        $('#modal-single-product .desc-content').html(product.describe);  // Đổ mô tả sản phẩm
+
+                        // Cập nhật hình ảnh sản phẩm
+                        var imagesHtml = '';
+                        var productImage = "<?php echo e(asset('storage/products/')); ?>/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
+
+                        imagesHtml += '<div class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + productImage + '" alt="Product"></div>';
+                        product.images.forEach(function(image) {
+                            var imageUrl = "<?php echo e(asset('storage/products')); ?>/" + image.image; // Access the correct field inside image object
+                            imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
+                        });
+
+                        $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
+                        $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
+
+                        // Hiển thị modal
+                        $('#exampleProductModal').modal('show');
+                    } else {
+                        alert(response.message); // Hiển thị thông báo lỗi nếu có
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // Xử lý lỗi
+                }
+            });
         });
-    } else {
-        console.log('Không tìm thấy product_id.');
-    }
-});
 
-
+        function updateonlineUser() {
+                $.ajax({
+                    url: "<?php echo e(route('online-users')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
+            }
 
 // Script cho QuickView
+</script>
+
+
+
+<script>
+    $(document).on('click', '.labtn-icon-wishlist', function(e) {
+    e.preventDefault();
+
+    var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+    $.ajax({
+        url: "<?php echo e(route('add.to.wishlist')); ?>",
+        method: 'POST',
+        data: {
+            product_id: productId,
+            _token: "<?php echo e(csrf_token()); ?>",  // Token bảo mật
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                alert('Product added to wishlist!');
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function(xhr) {
+            console.error('Error:', xhr);
+        }
+    });
+    });
+
 </script>
 
 

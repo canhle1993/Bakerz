@@ -187,7 +187,8 @@
                                             ></a>
                                         </li>
                                         <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
+                                            <a class="labtn-icon-wishlist" href="#" data-product-id="{{ $product->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
+
                                         </li>
                                     </ul>
                                 </div>
@@ -651,28 +652,28 @@ $(document).ready(function() {
 // Script cho QuickView
 
 
-$(document).on('click', '.labtn-icon-quickview', function() {
-    var productId = $(this).data('id');  // Lấy product_id từ thuộc tính data-id
-    if (productId) {
-        $.ajax({
-            url: '/product/details/' + productId,  // Sử dụng productId trong URL
-            type: 'GET',
-            success: function(response) {
-                // Cập nhật modal với thông tin sản phẩm
-                $('#exampleProductModal .product-head-price').text('$' + response.price);
-                $('#exampleProductModal .desc-content').text(response.description);
-                $('#exampleProductModal .product-details-img img').attr('src', '/storage/products/' + response.image);
-                $('#exampleProductModal').modal('show');
-            },
-            error: function(xhr, status, error) {
-                console.log('Lỗi:', error);
-            }
-        });
-    } else {
-        console.log('Không tìm thấy product_id.');
-    }
-});
-$('.quickview').on('click', function(e) {
+            $(document).on('click', '.labtn-icon-quickview', function() {
+                var productId = $(this).data('id');  // Lấy product_id từ thuộc tính data-id
+                if (productId) {
+                    $.ajax({
+                        url: '/product/details/' + productId,  // Sử dụng productId trong URL
+                        type: 'GET',
+                        success: function(response) {
+                            // Cập nhật modal với thông tin sản phẩm
+                            $('#exampleProductModal .product-head-price').text('$' + response.price);
+                            $('#exampleProductModal .desc-content').text(response.description);
+                            $('#exampleProductModal .product-details-img img').attr('src', '/storage/products/' + response.image);
+                            $('#exampleProductModal').modal('show');
+                        },
+                        error: function(xhr, status, error) {
+                            console.log('Lỗi:', error);
+                        }
+                    });
+                } else {
+                    console.log('Không tìm thấy product_id.');
+                }
+            });
+            $('.quickview').on('click', function(e) {
             e.preventDefault();
             var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
 
@@ -684,11 +685,11 @@ $('.quickview').on('click', function(e) {
                 success: function(response) {
                     if (response.status === 'success') {
                         var product = response.product;  // Đối tượng product từ server
-                        
+
                         // Đổ dữ liệu vào modal
                         $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
                         $('#modal-single-product .desc-content').html(product.describe);  // Đổ mô tả sản phẩm
-                        
+
                         // Cập nhật hình ảnh sản phẩm
                         var imagesHtml = '';
                         var productImage = "{{ asset('storage/products/') }}/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
@@ -701,7 +702,7 @@ $('.quickview').on('click', function(e) {
 
                         $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
                         $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
-                        
+
                         // Hiển thị modal
                         $('#exampleProductModal').modal('show');
                     } else {
@@ -729,6 +730,36 @@ $('.quickview').on('click', function(e) {
             }
 
 // Script cho QuickView
+</script>
+
+
+{{-- Script xử lý bấm vào nút tim để thêm sản phẩm vào trang wishlist --}}
+<script>
+    $(document).on('click', '.labtn-icon-wishlist', function(e) {
+    e.preventDefault();
+
+    var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+    $.ajax({
+        url: "{{ route('add.to.wishlist') }}",
+        method: 'POST',
+        data: {
+            product_id: productId,
+            _token: "{{ csrf_token() }}",  // Token bảo mật
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                alert('Product added to wishlist!');
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function(xhr) {
+            console.error('Error:', xhr);
+        }
+    });
+    });
+
 </script>
 
 

@@ -64,3 +64,10 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+<!-- Các bước xử lý chức năng bấm vào tim để thêm sản phẩm vào trang wishlist -->
+1. Tạo bảng wishlist trong database với khóa ngoại nối đến bảng user (user_id) và bảng product (product_id). Không tạo model mà dùng Query Builder (DB::table()) để truy vấn dữ liệu từ bảng wishlists
+2. tạo 3 hàm xử lý trong product controller để thêm, hiển thị, xóa sản phẩm ra khỏi trang wishlist và bảng wishlist trong database
+3. trong trang shop_all kéo hàm xử lý từ controller và thêm script AJAX 
+4. trong trang wishlist kéo hàm xử lý từ controller và thêm script xử lý remove sản phẩm

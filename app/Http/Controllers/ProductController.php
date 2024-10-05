@@ -171,35 +171,93 @@ class ProductController extends Controller
         return view('client.shop.product-types.single-product', compact('product', 'relatedProducts'));
     }
     public function filterByCoffee()
-{
-    // Lấy danh mục "Coffee & Espresso"
-    $coffeeCatalog = Catalog::where('category_name', 'Coffee & Espresso')->first();
+    {
+        // Lấy danh mục "Coffee & Espresso"
+        $coffeeCatalog = Catalog::where('category_name', 'Coffee & Espresso')->first();
 
-    // Nếu không tìm thấy danh mục, chuyển hướng về trang tất cả sản phẩm
-    if (!$coffeeCatalog) {
-        return redirect()->route('shop_all');
+        // Nếu không tìm thấy danh mục, chuyển hướng về trang tất cả sản phẩm
+        if (!$coffeeCatalog) {
+            return redirect()->route('shop_all');
+        }
+
+        // Lọc các sản phẩm theo danh mục
+        $products = Product::whereHas('catalogs', function ($query) {
+            $query->where('category_name', 'Coffee & Espresso');
+        })
+        ->where(function ($query) {
+            $query->where('isdelete', '<>', 1)
+                ->orWhereNull('isdelete');
+        })
+        ->paginate(12); // Phân trang nếu cần
+
+        // Lấy tất cả các danh mục để hiển thị
+        $categories = Catalog::where(function ($query) {
+            $query->where('isdelete', '<>', 1)
+                ->orWhereNull('isdelete');
+        })->get();
+
+        // Trả về view shop_all với danh sách sản phẩm lọc theo danh mục
+        return view('client.shop.shop_all', compact('products', 'categories', 'coffeeCatalog'));
     }
 
-    // Lọc các sản phẩm theo danh mục
-    $products = Product::whereHas('catalogs', function ($query) {
-        $query->where('category_name', 'Coffee & Espresso');
-    })
-    ->where(function ($query) {
-        $query->where('isdelete', '<>', 1)
-              ->orWhereNull('isdelete');
-    })
-    ->paginate(12); // Phân trang nếu cần
 
-    // Lấy tất cả các danh mục để hiển thị
-    $categories = Catalog::where(function ($query) {
-        $query->where('isdelete', '<>', 1)
-              ->orWhereNull('isdelete');
-    })->get();
 
-    // Trả về view shop_all với danh sách sản phẩm lọc theo danh mục
-    return view('client.shop.shop_all', compact('products', 'categories', 'coffeeCatalog'));
-}
+    //Hàm xử lý thả tim cho sản phẩm để sản phẩm vào trong trang wishlist
+    public function addToWishlist(Request $request)
+    {
+        $product_id = $request->input('product_id');
+        $user_id = auth()->id();  // Lấy ID của user hiện tại
 
+        if (!auth()->check()) {
+            return response()->json(['status' => 'error', 'message' => 'You must be logged in to add to wishlist']);
+        }
+
+        // Kiểm tra xem sản phẩm đã có trong wishlist chưa
+        $exists = DB::table('wishlists')
+                    ->where('product_id', $product_id)
+                    ->where('user_id', $user_id)
+                    ->exists();
+
+        if (!$exists) {
+            // Thêm sản phẩm vào wishlist
+            DB::table('wishlists')->insert([
+                'user_id' => $user_id,
+                'product_id' => $product_id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            return response()->json(['status' => 'success', 'message' => 'Added to wishlist']);
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'Product already in wishlist']);
+    }
+
+
+    //Show thông tin sản phẩm được tim qua trang wishlist
+    public function showWishlist()
+    {
+        $user_id = auth()->id();  // Lấy ID user hiện tại
+
+        // Lấy danh sách sản phẩm trong wishlist của user hiện tại
+        $wishlistItems = DB::table('wishlists')
+            ->join('product', 'wishlists.product_id', '=', 'product.product_id')
+            ->where('wishlists.user_id', $user_id)
+            ->get();
+
+        return view('client.shop.others.wishlist', ['wishlistItems' => $wishlistItems]);
+    }
+
+    //Xóa sản phẩm trong wishlist
+    public function removeFromWishlist(Request $request)
+    {
+        $product_id = $request->input('product_id');
+        $user_id = auth()->id();  // Lấy ID của user hiện tại
+
+        // Xóa sản phẩm khỏi wishlist dựa trên user_id và product_id
+        DB::table('wishlists')->where('user_id', $user_id)->where('product_id', $product_id)->delete();
+
+        return response()->json(['status' => 'success', 'message' => 'Product removed from wishlist']);
+    }
 
 
 

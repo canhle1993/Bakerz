@@ -237,12 +237,12 @@
         <div class="container position-relative">
 
             <div class="row align-items-center">
-                
+
                 <div class="col-lg-3 col-xl-3 col-7">
                     <!-- Header Logo Start -->
                     <div class="header-logo">
                         <a href="<?php echo e(route('client.home')); ?>">
-                        
+
                             <img class="white-logo" src="<?php echo e(asset('assets/images/logo-white.svg')); ?>" width="229" height="62" alt="Logo">
                         </a>
                     </div>
@@ -274,7 +274,7 @@
                                             <?php $__currentLoopData = $categories->slice(-2); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <li><a class="sub-item-link" href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><span><?php echo e($category->category_name); ?></span></a></li>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            
+
                                         </ul>
                                     </li>
                                     <li class="mega-menu-item banner-menu-content-wrap">
@@ -300,7 +300,7 @@
                             <li><a class="menu-item-link" href="<?php echo e(route('client.home')); ?>"><span>Pages</span></a>
                                 <ul class="sub-menu">
                                     <li><a class="sub-item-link" href="<?php echo e(route('blog-detail')); ?>"><span>Workshop</span></a></li>
-                                    <li><a class="sub-item-link" href="<?php echo e(route('blog')); ?>"><span>Blog</span></a></li>
+                                    <li><a class="sub-item-link" href="<?php echo e(route('client.blog')); ?>"><span>Blog</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('our-chef')); ?>"><span>Our Chef</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('faq')); ?>"><span>FAQs</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('pricing-plan')); ?>"><span>Bakerz Bite Rewards</span></a></li>

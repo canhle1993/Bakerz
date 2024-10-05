@@ -323,4 +323,10 @@ Route::get('/client/blog', [BlogController::class, 'showBlog'])->name('client.bl
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog-pd');
 
 
+//Thả tim cho sản phẩm để vào trang wishlist
+Route::post('/add-to-wishlist', [ProductController::class, 'addToWishlist'])->name('add.to.wishlist');
+Route::get('/wishlist', [ProductController::class, 'showWishlist'])->name('wishlist');
+Route::post('/remove-from-wishlist', [ProductController::class, 'removeFromWishlist'])->name('remove.from.wishlist');
+
+
 
