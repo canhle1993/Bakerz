@@ -481,7 +481,7 @@
                       quantity: 1
                   },
                   success: function(response) {
-                    if (response.error === 'out_of_stock'){
+                      if (response.error === 'out_of_stock'){
                         var outStockModal = new bootstrap.Modal(document.getElementById('outOfStock'));
                         outStockModal.show();
                         return;
@@ -509,7 +509,6 @@
                       });
                   },
                   error: function(xhr) {
-                    window.location.href = "<?php echo e(route('login')); ?>"; // Sử dụng route trong Blade để tạo đường dẫn
                     console.error('Error:', xhr.responseText);
                   }
               });

@@ -239,15 +239,13 @@
                 sessionStorage.setItem('checkoutVisited', 'true');
             });
             // Bắt sự kiện khi trang được hiển thị trở lại
-                window.addEventListener('pageshow', function(event) {
-                    if (sessionStorage.getItem('checkoutVisited') === 'true') {
-                        window.location.href = "<?php echo e(route('client.filter')); ?>";
-                        alert("Thanh toán thất bại. Hãy mở đơn hàng và thanh toán lại. ")
-                        sessionStorage.removeItem('checkoutVisited'); // Xóa trạng thái nếu không cần nữa
-                    }
-                });            
-
-
+            window.addEventListener('pageshow', function(event) {
+                if (event.persisted && sessionStorage.getItem('checkoutVisited') === 'true') {
+                    window.location.href = "<?php echo e(route('client.filter')); ?>";
+                    alert("Thanh toán thất bại. Hãy mở đơn hàng và thanh toán lại. ")
+                    sessionStorage.removeItem('checkoutVisited'); // Xóa trạng thái nếu không cần nữa
+                }
+            });
         });
          $(window).on("scroll", function (event) {
             var scroll = $(window).scrollTop();

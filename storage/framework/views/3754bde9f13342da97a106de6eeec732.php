@@ -130,7 +130,7 @@
                     <span class="testimonial-five_border"></span>
                     <span class="testimonial-five_author">
                         <button id="healthSuggestionBtn" style="margin-top: 0px !important;" class="slider-content__btn btn btn-primary btn-hover-black">
-                            Gợi ý món ăn theo sức khỏe
+                        Health-Based Meal Suggestions
                         </button>
                     </span>
                 </div>
@@ -375,8 +375,9 @@
                                         <?php if($product->price != $product->getDiscountedPrice()): ?>
                                         <del><?php echo e(formatPriceVND($product->price)); ?></del>
                                         <!-- Giá gốc -->
+                                    
                                         <strong style="color: red;"
-                                        ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
+                                        >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
                                         >
                                         <!-- Giá sau khi giảm -->
                                         <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
@@ -384,6 +385,7 @@
                                         <!-- Giá không giảm -->
                                         <?php endif; ?>
                                     </span>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -605,19 +607,20 @@
 
                     </a>
                   </h5>
-                  <span class="product-item__price">
-                    <?php if($product->price != $product->getDiscountedPrice()): ?>
-                    <del><?php echo e(formatPriceVND($product->price)); ?></del>
-                    <!-- Giá gốc -->
-                    <strong style="color: red;"
-                      ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
-                    >
-                    <!-- Giá sau khi giảm -->
-                    <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
+                    <span class="product-item__price">
+                        <?php if($product->price != $product->getDiscountedPrice()): ?>
+                        <del><?php echo e(formatPriceVND($product->price)); ?></del>
+                        <!-- Giá gốc -->
+                    
+                        <strong style="color: red;"
+                        >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
+                        >
+                        <!-- Giá sau khi giảm -->
+                        <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
 
-                    <!-- Giá không giảm -->
-                    <?php endif; ?>
-                  </span>
+                        <!-- Giá không giảm -->
+                        <?php endif; ?>
+                    </span>
                 </div>
                 <ul class="product-item__meta">
                   <li class="product-item__meta-action">
@@ -744,8 +747,9 @@
                                             <?php if($product->price != $product->getDiscountedPrice()): ?>
                                             <del><?php echo e(formatPriceVND($product->price)); ?></del>
                                             <!-- Giá gốc -->
-                                            <strong
-                                            ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
+                                        
+                                            <strong style="color: red;"
+                                            >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
                                             >
                                             <!-- Giá sau khi giảm -->
                                             <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
@@ -1058,7 +1062,19 @@
                                     <div class="product-head mb-3">
 
                                         <!-- Price Start -->
-                                        <span class="product-head-price"><?php echo e(formatPriceVND($product->price)); ?></span>
+                                        <span class="product-head-price">
+                                            <?php if($product->price != $product->getDiscountedPrice()): ?>
+                                            <del ><?php echo e(formatPriceVND($product->price)); ?></del>
+                                            <!-- Giá gốc -->
+                                        
+                                            <strong style="color: red;"
+                                            >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
+                                            >
+                                            <!-- Giá sau khi giảm -->
+                                            <?php else: ?> <span style="color: white;"><?php echo e(formatPriceVND($product->price)); ?></span>
+                                            <!-- Giá không giảm -->
+                                            <?php endif; ?>
+                                        </span>
                                         <!-- Price End -->
 
                                     </div>

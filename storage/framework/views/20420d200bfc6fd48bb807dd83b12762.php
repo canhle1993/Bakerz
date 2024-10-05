@@ -150,8 +150,9 @@
                             <?php if($product->price != $product->getDiscountedPrice()): ?>
                             <del><?php echo e(formatPriceVND($product->price)); ?></del>
                             <!-- Giá gốc -->
+                        
                             <strong style="color: red;"
-                            ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
+                            >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
                             >
                             <!-- Giá sau khi giảm -->
                             <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
@@ -210,7 +211,7 @@
                             <!-- Cart Button Start -->
                             <div class="cart-btn">       
                                 <div class="add-to_cart">
-                                    <a class="btn btn-dark btn-hover-primary add-to-cart" href="#/" data-bs-toggle="modal" data-bs-target="#modalCart" data-product-id="<?php echo e($product->product_id); ?>">Add to cart</a>
+                                    <a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="<?php echo e($product->product_id); ?>">Add to cart</a>
                                 </div>
                             </div>
                             <!-- Cart Button End -->
@@ -422,7 +423,7 @@
                                 <div class="product-item text-center">
                                     <!-- <div class="product-item__badge">Hot</div> -->
                                     <div class="product-item__image border w-100">
-                                        <a href="<?php echo e(route('single-product', ['id' => $relatedProduct->product_id])); ?>">
+                                        <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>">
                                             <img width="350" height="350" src="<?php echo e(asset('storage/products/' . $relatedProduct->image)); ?>" alt="<?php echo e($relatedProduct->product_name); ?>">
                                         </a>
                                         <ul class="product-item__meta">
@@ -439,13 +440,14 @@
                                         </ul>
                                     </div>
                                     <div class="product-item__content pt-5">
-                                        <h5 class="product-item__title"><a href="<?php echo e(route('single-product', ['id' => $relatedProduct->product_id])); ?>"><?php echo e($relatedProduct->product_name); ?></a></h5>
+                                        <h5 class="product-item__title"><a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><?php echo e($relatedProduct->product_name); ?></a></h5>
                                         <span class="product-item__price">
                                         <?php if($product->price != $product->getDiscountedPrice()): ?>
                                         <del><?php echo e(formatPriceVND($product->price)); ?></del>
                                         <!-- Giá gốc -->
+                                    
                                         <strong style="color: red;"
-                                        ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
+                                        >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
                                         >
                                         <!-- Giá sau khi giảm -->
                                         <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>

@@ -81,19 +81,22 @@
             <div class="slideee">
                 <a href="{{ route('product.single', ['product' => $product->product_id]) }}"><img src="{{ $product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg') }}" alt="{{ $product->product_name }}"></a>
                 <a href="{{ route('product.single', ['product' => $product->product_id]) }}">
-                <button>{{ $product->product_name }}<br><span>
-                @if ($product->price != $product->getDiscountedPrice())
-                <del>{{ formatPriceVND($product->price) }}</del>
-                <!-- Giá gốc -->
-                <strong
-                >{{ formatPriceVND($product->getDiscountedPrice())
-                }}</strong
-                >
-                <!-- Giá sau khi giảm -->
-                @else {{ formatPriceVND($product->price) }}
-                <!-- Giá không giảm -->
-                @endif
-                </span></button></a>
+                <button>{{ $product->product_name }}<br>                    
+                    <span class="product-item__price">
+                        @if ($product->price != $product->getDiscountedPrice())
+                        <del >{{ formatPriceVND($product->price) }}</del>
+                        <!-- Giá gốc -->
+                    
+                        <strong style="color: red;"
+                        >${{ number_format($product->getDiscountedPrice(),2)
+                        }}</strong
+                        >
+                        <!-- Giá sau khi giảm -->
+                        @else <span style="color: white;">{{ formatPriceVND($product->price) }}</span>
+                        <!-- Giá không giảm -->
+                        @endif
+                    </span>
+                </button></a>
             </div>
             @endforeach @endif
             <!-- <div class="slideee">
@@ -122,19 +125,18 @@
                 <a href="{{ route('product.single', ['product' => $product->product_id]) }}"><img src="{{ $product->image ? asset('storage/products/' . $product->image) : asset('path/to/default-image.jpg') }}" alt="{{ $product->product_name }}"></a>
                 <a href="{{ route('product.single', ['product' => $product->product_id]) }}">
                 <button>
-                {{ $product->product_name }}<br><span>
-                @if ($product->price != $product->getDiscountedPrice())
-                <del>{{ formatPriceVND($product->price) }}</del>
-                <!-- Giá gốc -->
-                <strong
-                >{{ formatPriceVND($product->getDiscountedPrice())
-                }}</strong
-                >
-                <!-- Giá sau khi giảm -->
-                @else {{ formatPriceVND($product->price) }}
-                <!-- Giá không giảm -->
-                @endif
-            </span></button></a>
+                {{ $product->product_name }}<br><span class="product-item__price">
+                    @if ($product->price != $product->getDiscountedPrice())
+                    <del>{{ formatPriceVND($product->price) }}</del>
+                    <!-- Giá gốc -->
+                    <strong style="color: red;"
+                      >${{ number_format($disproduct->getDiscountedPrice(), 2) }}</strong
+                    >
+                    <!-- Giá sau khi giảm -->
+                    @else {{ formatPriceVND($product->price) }}
+                    <!-- Giá không giảm -->
+                    @endif
+                  </span></button></a>
             </div>
             @endforeach @endif
             <!-- <div class="slideee">

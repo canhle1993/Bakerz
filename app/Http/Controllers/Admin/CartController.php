@@ -190,7 +190,7 @@ class CartController extends Controller
         $this->getsession();
         $currentUser = Auth::user(); // Lấy người dùng hiện tại
         $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
-        if($cartItems){
+        if(isset($cartItems)){
             return view('client.shop.others.checkout');
 
         } else {
@@ -208,7 +208,8 @@ class CartController extends Controller
             $total += ($item['quantity'] * $item->product->getDiscountedPrice());
             $request->merge([
                 'product_id' => $item['product_id'],
-                'quantity' => $item['quantity']
+                'quantity' => $item['quantity'],
+                'quantity_input' => $item['quantity']
             ]);
             $checkInventoryResponse = $this->checkinventory($request);
             $checkInventory = $checkInventoryResponse->getData(true); // true để chuyển đổi thành mảng
@@ -379,25 +380,31 @@ class CartController extends Controller
         $currentUser = Auth::user();
         // Tìm sản phẩm theo product_id
         $product = Product::findOrFail($request->product_id);
+
         $cart = Cart::where('user_id', $currentUser->user_id)
                         ->where('product_id', $request->product_id)
                         ->first();
         
-        $totalQuantity = $request->quantity_input ?? $request->quantity;
+        
+        $totalQuantity = 1;
 
-        if (!$request->quantity_input) {
-            $totalQuantity = 1;
-            if ($cart) {
-                $totalQuantity += $cart->quantity;
-            }
+        if (isset($request->quantity_input)) {
+            $totalQuantity = $request->quantity;
+
+        } elseif (isset($cart)) {
+            $totalQuantity += $cart->quantity;
         }
         if ($totalQuantity > $product->inventory) {
-            $setvalue = $cart->quantity ?? $cart->quantity;
-            if($cart->quantity > $product->inventory){
+            if (isset($cart) && $cart->quantity > $product->inventory) {
+                // Nếu số lượng trong giỏ hàng lớn hơn tồn kho, đặt giá trị bằng tồn kho
                 $setvalue = $product->inventory;
+            } else {
+                // Nếu không, đặt giá trị bằng tồn kho hoặc 0 nếu không có giỏ hàng
+                $setvalue = $cart ? min($cart->quantity, $product->inventory) : $product->inventory;
             }
-            return response()->json(['error' => 'out_of_stock', 'message' => 'Out of Stock','max_quantity'=> $setvalue]);
+            return response()->json(['error' => 'out_of_stock', 'message' => 'Out of Stock', 'max_quantity' => $setvalue]);
         }
+        
         return response()->json(['sucess' => 'success']);
     }
 

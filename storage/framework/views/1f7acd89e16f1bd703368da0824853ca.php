@@ -199,8 +199,9 @@
                                         <?php if($product->price != $product->getDiscountedPrice()): ?>
                                         <del><?php echo e(formatPriceVND($product->price)); ?></del>
                                         <!-- Giá gốc -->
+                                    
                                         <strong style="color: red;"
-                                        ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
+                                        >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
                                         >
                                         <!-- Giá sau khi giảm -->
                                         <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
