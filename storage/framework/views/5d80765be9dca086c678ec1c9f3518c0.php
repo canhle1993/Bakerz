@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/favicon.png')); ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame.png')); ?>">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -379,6 +379,19 @@
     </div>
     <!-- Search End -->
 
+    <!-- Add cart Error modal  -->
+<div class="quickview-product-modal modal fade"  id="outOfStock">
+    <div class="modal-dialog modal-dialog-centered mw-100">
+            <div class="custom-content">
+                <button type="button" class="btn-close bg-warning" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="lastudioicon lastudioicon-e-remove"></i>
+                </button>
+                <div class="modal-body">
+                    <i class="fas fa-exclamation-triangle"></i> Out Of Stock!
+                </div>
+            </div>
+        </div>
+</div>
         <!-- Offcanvas Cart Start  -->
 <div class="offcanvas offcanvas-end offcanvas-cart" id="offcanvasCart">
 
@@ -458,29 +471,49 @@
 
           $('.add-to-cart').on('click', function(e) {
               e.preventDefault();
-
               var productId = $(this).data('product-id');
               $.ajax({
-                  url: "<?php echo e(route('cart.new_add')); ?>",
-                  method: "POST",
+                  url: "<?php echo e(route('cart.checkinventory')); ?>",
+                  method: "GET",
                   data: {
                       _token: "<?php echo e(csrf_token()); ?>",
                       product_id: productId,
                       quantity: 1
                   },
                   success: function(response) {
-                      if (response.status === 'success') {
-                          // Cập nhật số lượng sản phẩm trong giỏ hàng
-                          updateCartView();
-                      } else {
-                          alert(response.message);
-                      }
+                    if (response.error === 'out_of_stock'){
+                        var outStockModal = new bootstrap.Modal(document.getElementById('outOfStock'));
+                        outStockModal.show();
+                        return;
+                    }
+                      $.ajax({
+                          url: "<?php echo e(route('cart.new_add')); ?>",
+                          method: "POST",
+                          data: {
+                              _token: "<?php echo e(csrf_token()); ?>",
+                              product_id: productId,
+                              quantity: 1
+                          },
+                          success: function(response) {
+                              if (response.status === 'success') {
+                                  // Cập nhật số lượng sản phẩm trong giỏ hàng
+                                  updateCartView();
+                              } else {
+                                  alert(response.message);
+                              }
+                          },
+                          error: function(xhr) {
+                              window.location.href = "<?php echo e(route('login')); ?>"; // Sử dụng route trong Blade để tạo đường dẫn
+                              // console.error('Error:', xhr.responseText);
+                          }
+                      });
                   },
                   error: function(xhr) {
-                      window.location.href = "<?php echo e(route('login')); ?>"; // Sử dụng route trong Blade để tạo đường dẫn
-                      // console.error('Error:', xhr.responseText);
+                    window.location.href = "<?php echo e(route('login')); ?>"; // Sử dụng route trong Blade để tạo đường dẫn
+                    console.error('Error:', xhr.responseText);
                   }
               });
+
           });
 
           // delete cart
@@ -506,7 +539,6 @@
                         }
                     },
                     error: function(xhr) {
-                        alert("FAIL");
                         console.error('Error:', xhr.responseText);
                     }
                 });

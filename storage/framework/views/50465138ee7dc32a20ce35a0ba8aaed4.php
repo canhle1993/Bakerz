@@ -253,7 +253,28 @@
                 var quantity = $(this).val(); // Lấy số lượng mới
                 var _token = "<?php echo e(csrf_token()); ?>"; // CSRF token để bảo mật
                 var discount  = $(this).data('price'); // Lấy product_id
+                if (quantity < 1) {
+                    quantity = 1;
+                }
+                var $input = $(this); // Lưu lại context của input để sử dụng sau
                 $.ajax({
+                  url: "<?php echo e(route('cart.checkinventory')); ?>",
+                  method: "GET",
+                  data: {
+                      _token: "<?php echo e(csrf_token()); ?>",
+                      product_id: productId,
+                      quantity: quantity,
+                      quantity_input: quantity,
+                  },
+                  success: function(response) {
+                    console.log("quanlity: " + quantity);
+                    if (response.error === 'out_of_stock'){
+                        $input.val(response.max_quantity); // Gán lại số lượng hợp lệ
+                        var outStockModal = new bootstrap.Modal(document.getElementById('outOfStock'));
+                        outStockModal.show();
+                        return;
+                    }
+                    $.ajax({
                     url: "<?php echo e(route('cart.update_quantity', ':id')); ?>".replace(':id', productId), // Truyền product_id vào URL
                     method: 'POST',
                     data: {
@@ -276,15 +297,27 @@
                     error: function() {
                         console.error('Error:', xhr.responseText);
                     }
+                    });
+                },
+                  error: function(xhr) {
+                    window.location.href = "<?php echo e(route('login')); ?>"; // Sử dụng route trong Blade để tạo đường dẫn
+                    console.error('Error:', xhr.responseText);
+                  }
                 });
             });
 
+            document.getElementById('outOfStock').addEventListener('hidden.bs.modal', function () {
+                // Xóa lớp backdrop khi modal bị ẩn
+                var backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.remove();
+                }
+            });
             // delete cart
             $(document).on('click', '.cart_delete', function(e) {
                     e.preventDefault();
 
                     var productId = $(this).data('product-id');
-                    console.log(productId); // In ra product_id để đảm bảo nó có giá trị đúng
 
                     $.ajax({
                         url: "<?php echo e(route('cart.delete', ':id')); ?>".replace(':id', productId), // Truyền product_id vào URL
@@ -316,7 +349,7 @@
                     success: function(response) {
                         $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
                         
-                        // $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
+                        $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
                         
                         $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
                         updateTotalPrice(userRank);

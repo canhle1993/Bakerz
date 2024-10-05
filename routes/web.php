@@ -226,8 +226,7 @@ Route::post('/cart/{product_id}/update_quantity', [CartController::class, 'updat
 Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
 Route::get('/showcheckout', [CartController::class, 'showcheckout'])->name('checkout');
 Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.cart_checkout');
-
-
+Route::get('/cart/checkinventory', [CartController::class, 'checkinventory'])->name('cart.checkinventory');
 
 // Route để lưu đánh giá
 Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
