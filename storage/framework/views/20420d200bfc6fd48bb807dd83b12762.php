@@ -352,9 +352,14 @@
                                         <form action="<?php echo e(route('reviews.store', ['product_id' => $product->product_id])); ?>" method="POST" class="comments-area_form">
                                             <?php echo csrf_field(); ?>
                                             <div class="mb-3">
+                                            <?php if($errors->has('ratestar')): ?>
+                                                <div class="alert alert-danger">
+                                                    <strong><?php echo e($errors->first('ratestar')); ?></strong>
+                                                </div>
+                                            <?php endif; ?>
                                                 <label for="ratestar">Rating (1-5):</label>
                                                 <div class="star-rating">
-                                                    <input type="radio" id="star5" name="ratestar" value="5" required />
+                                                    <input type="radio" id="star5" name="ratestar" value="5" checked required />
                                                     <label for="star5" title="5 stars">★</label>
                                                     <input type="radio" id="star4" name="ratestar" value="4" />
                                                     <label for="star4" title="4 stars">★</label>

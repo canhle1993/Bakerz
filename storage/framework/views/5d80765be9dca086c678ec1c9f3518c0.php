@@ -300,7 +300,7 @@
                             <li><a class="menu-item-link" href="<?php echo e(route('client.home')); ?>"><span>Pages</span></a>
                                 <ul class="sub-menu">
                                     <li><a class="sub-item-link" href="<?php echo e(route('blog-detail')); ?>"><span>Workshop</span></a></li>
-                                    <li><a class="sub-item-link" href="<?php echo e(route('blog')); ?>"><span>Blog</span></a></li>
+                                    <li><a class="sub-item-link" href="<?php echo e(route('client.blog')); ?>"><span>Blog</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('our-chef')); ?>"><span>Our Chef</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('faq')); ?>"><span>FAQs</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('pricing-plan')); ?>"><span>Bakerz Bite Rewards</span></a></li>

@@ -349,9 +349,14 @@
                                         <form action="{{ route('reviews.store', ['product_id' => $product->product_id]) }}" method="POST" class="comments-area_form">
                                             @csrf
                                             <div class="mb-3">
+                                            @if ($errors->has('ratestar'))
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ $errors->first('ratestar') }}</strong>
+                                                </div>
+                                            @endif
                                                 <label for="ratestar">Rating (1-5):</label>
                                                 <div class="star-rating">
-                                                    <input type="radio" id="star5" name="ratestar" value="5" required />
+                                                    <input type="radio" id="star5" name="ratestar" value="5" checked required />
                                                     <label for="star5" title="5 stars">★</label>
                                                     <input type="radio" id="star4" name="ratestar" value="4" />
                                                     <label for="star4" title="4 stars">★</label>
