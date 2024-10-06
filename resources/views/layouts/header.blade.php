@@ -321,6 +321,7 @@
                     <div class="header-meta">
                         <ul class="header-meta__action d-flex justify-content-end">
                             <li><button class="action search-open"><i class="lastudioicon-zoom-1"></i></button></li>
+
                             <li>
                                 <button id="cart_icon" class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
                                     <i class="lastudioicon-shopping-cart-2"></i>

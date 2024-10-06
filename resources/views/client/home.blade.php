@@ -421,7 +421,7 @@
                         <span class="deal-two_price"><span>$</span>4.99</span>
 
                         <ul class="product-item__meta deal-two_meta">
-                            <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" data-bs-toggle="modal" data-bs-target="#modalCart"></a></li>
+                            <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" ></a></li>
                             <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
                             <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
                         </ul>
@@ -756,7 +756,7 @@
                                             @endif
                                         </span>
                                         <p class="product-item__text">{{ \Illuminate\Support\Str::limit($product->describe, 70, '...') }}                                        </p>
-                                        <a href="#/" class="product-item__btn add-to-cart" data-product-id="{{ $product->product_id }}" data-bs-toggle="modal" data-bs-target="#modalCart">Add to cart</a>
+                                        <a href="#/" class="product-item__btn add-to-cart" data-product-id="{{ $product->product_id }}" >Add to cart</a>
                                     </div>
                                 </div>
                                 <!-- Product Item End -->
@@ -1107,7 +1107,7 @@
                                             <!-- Cart Button Start -->
                                             <div class="cart-btn">
                                             <div class="add-to_cart">
-                                                <a class="btn btn-dark btn-hover-primary add-to-cart" href="#/" data-bs-toggle="modal" data-bs-target="#modalCart" data-product-id="{{ $product->product_id }}">Add to cart</a>
+                                                <a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="{{ $product->product_id }}">Add to cart</a>
                                             </div>
                                             </div>
                                             <!-- Cart Button End -->
