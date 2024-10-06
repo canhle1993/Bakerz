@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame.png')); ?>">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,11 +57,16 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
+                    
                     <a href="<?php echo e(route('admin.dashboard')); ?>" class="nav-item nav-link <?php echo e(Request::routeIs('admin.dashboard') ? 'active' : ''); ?>"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="<?php echo e(route('banner.index')); ?>" class="nav-item nav-link"><i class="fa bi-card-image me-2"></i>Banner</a>
-                    <a href="<?php echo e(route('admin.chefs.create')); ?>" class="nav-item nav-link"><i class="fa bi-card-image me-2"></i>Chefs</a>
-                    <!-- Blog link -->
-                    <a href="<?php echo e(route('blog.index')); ?>" class="nav-item nav-link"><i class="fa bi-card-image me-2"></i>Blog</a> <!-- Updated route -->
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('banner*') || Request::is('admin.chefs.create*') || Request::is('blog*')) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Pages</a>
+                        <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('banner*') || Request::is('admin.chefs.create*') || Request::is('blog*')) ? 'show' : ''); ?>">
+                            <a href="<?php echo e(route('banner.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Banner</a>
+                            <a href="<?php echo e(route('admin.chefs.create')); ?>" class="bi-tag m-2 dropdown-item <?php echo e(Request::routeIs('catalog.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Chefs</a>
+                            <a href="<?php echo e(route('blog.index')); ?>" class="bi-lightning m-2 dropdown-item <?php echo e(Request::routeIs('discount.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Blog</a>
+                        </div>
+                    </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
                         <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'show' : ''); ?>">
@@ -69,6 +74,9 @@
                             <a href="<?php echo e(route('catalog.index')); ?>" class="bi-tag m-2 dropdown-item <?php echo e(Request::routeIs('catalog.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Category</a>
                             <a href="<?php echo e(route('discount.index')); ?>" class="bi-lightning m-2 dropdown-item <?php echo e(Request::routeIs('discount.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Discount</a>
                             <a href="<?php echo e(route('heathy.index')); ?>" class="m-2 dropdown-item <?php echo e(Request::routeIs('heathy.index') ? 'active' : ''); ?>">💞&nbsp;&nbsp;Heathy Type</a>
+                            <a href="<?php echo e(route('product.index_instock')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index_instock') ? 'active' : ''); ?>">&nbsp;&nbsp;InStock Product</a>
+                            <a href="<?php echo e(route('product.index_outstock')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index_outstock') ? 'active' : ''); ?>">&nbsp;&nbsp;OutStock Product</a>
+                            <a href="<?php echo e(route('product.index_stockcheck')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index_stockcheck') ? 'active' : ''); ?>">&nbsp;&nbsp;Stock Check</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
