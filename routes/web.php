@@ -111,7 +111,7 @@ Route::get('shop/category/{category_id}', [ProductController::class, 'filterByCa
 Route::get('/shop/filter-by-category/{category_id}', [ProductController::class, 'filterByCategory'])->name('shop.filterByCategory');
 Route::get('product/details/{id}', [ProductController::class, 'getProductDetails'])->name('product.details');
 Route::get('/shop/filter-by-coffee', [ProductController::class, 'filterByCoffee'])->name('shop.filterByCoffee');
-
+Route::get('shop/{isOption}/filter_nonCatagory}', [ProductController::class, 'filter_nonCatagory'])->name('shop.filter_nonCatagory');
 
 
 
@@ -322,4 +322,7 @@ Route::get('/client/blog', [BlogController::class, 'showBlog'])->name('client.bl
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog-pd');
 
 
-
+//Thả tim cho sản phẩm để vào trang wishlist
+Route::post('/add-to-wishlist', [ProductController::class, 'addToWishlist'])->name('add.to.wishlist');
+Route::get('/wishlist', [ProductController::class, 'showWishlist'])->name('wishlist');
+Route::post('/remove-from-wishlist', [ProductController::class, 'removeFromWishlist'])->name('remove.from.wishlist');

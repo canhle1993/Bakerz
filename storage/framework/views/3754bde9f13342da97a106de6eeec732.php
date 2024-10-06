@@ -202,12 +202,18 @@
     <div class="row">
       <div class="col-12">
         <!-- Section Title Strat -->
-        <div class="section-title">
-          <h2 class="section-title__title">
-            Products suitable for your health _______________ <a href="shop.html" class="read-more"
-            ><span>show more</span
-            ></a></h2>
-        </div>
+        <form action="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 1])); ?>" method="GET" id="show_heathyproduct">
+            <input type="text" id="heathyIdsInput" name="heathyIds" value="<?php echo e(implode(',', request('heath_id', []))); ?>" hidden >
+
+             <div class="section-title-05">
+                     
+             <h5 class="section-title-05__title"><span>Products suitable for your health</span></h5>
+                 <a href="#" class="read-more" id="health_readmore">
+                    <span>show more </span></a>
+             <i class="lastudioicon lastudioicon-right-arrow"></i
+             ></a>
+             </div>
+         </form>
         <!-- Section Title End -->
       </div>
     </div>
@@ -314,8 +320,13 @@
     <div class="container">
         <div class="row">
             <div class="col-12" >
-                <div class="section-title">
-                    <h2 class="section-title__title">Most recently purchased products _______________ <a href="<?php echo e(route('shop_all')); ?>" class="read-more"><span>show more</span></a></h2>
+                <div class="section-title-05">
+                
+                <h5 class="section-title-05__title"><span>Most recently purchased products</span></h5>
+                <a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 2])); ?>" class="read-more"
+                ><span>show more</span
+                ><i class="lastudioicon lastudioicon-right-arrow"></i
+                ></a>
                 </div>
             </div>
         </div>
@@ -443,7 +454,7 @@
       <!-- Section Title Strat -->
       <div class="section-title-05">
         <h5 class="section-title-05__title"><span>Discount Products</span></h5>
-        <a href="shop.html" class="read-more"
+        <a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>" class="read-more"
           ><span>show more</span
           ><i class="lastudioicon lastudioicon-right-arrow"></i
         ></a>
@@ -569,7 +580,7 @@
       <!-- Section Title Start -->
       <div class="section-title-05">
         <h5 class="section-title-05__title"><span>What’s Hot</span></h5>
-        <a href="shop.html" class="read-more"
+        <a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 4])); ?>" class="read-more"
           ><span>show more</span
           ><i class="lastudioicon lastudioicon-right-arrow"></i
         ></a>
@@ -1399,6 +1410,11 @@
             });
         });
 
+        // Bắt sự kiện click vào thẻ <a> và submit form
+        $(document).on('click', '#health_readmore', function(e) {
+            e.preventDefault(); // Ngăn không cho thẻ <a> chuyển trang
+            $('#show_heathyproduct').submit(); // Submit form với id là filterForm
+        });
     </script>
 </body>
 

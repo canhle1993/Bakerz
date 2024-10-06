@@ -270,6 +270,8 @@
                                     <li class="mega-menu-item">
                                         <ul>
                                             <li class="mega-menu-item-title">Featured Product</li>
+                                            <li><a class="sub-item-link" href="{{ route('shop.filter_nonCatagory', ['isOption' => 3]) }}">Discount</a></li>
+                                            <li><a class="sub-item-link" href="{{ route('shop.filter_nonCatagory', ['isOption' => 4]) }}">What Hot</a></li>
                                             <!-- Hiển thị 2 category cuối cùng -->
                                             @foreach ($categories->slice(-2) as $category)
                                             <li><a class="sub-item-link" href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}"><span>{{ $category->category_name }}</span></a></li>

@@ -187,7 +187,8 @@
                                             ></a>
                                         </li>
                                         <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
+                                            <!-- <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a> -->
+                                            <a class="labtn-icon-wishlist" href="#" data-product-id="{{ $product->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -241,6 +242,8 @@
                                         <h3 class="sidebars_widget__title">Category</h3>
                                         <ul class="sidebars_widget__category">
                                             <li><a href="{{ route('shop_all')}}">All Products</a></li>
+                                            <li><a href="{{ route('shop.filter_nonCatagory', ['isOption' => 3]) }}">Discount</a></li>
+                                            <li><a href="{{ route('shop.filter_nonCatagory', ['isOption' => 4]) }}">What Hot</a></li>
                                             @foreach ($categories as $category)
                                             <li><a href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}">{{ $category->category_name }}</a></li>
                                             @endforeach
@@ -732,5 +735,33 @@ $('.quickview').on('click', function(e) {
 // Script cho QuickView
 </script>
 
+{{-- Script xử lý bấm vào nút tim để thêm sản phẩm vào trang wishlist --}}
+<script>
+    $(document).on('click', '.labtn-icon-wishlist', function(e) {
+    e.preventDefault();
+
+    var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+    $.ajax({
+        url: "{{ route('add.to.wishlist') }}",
+        method: 'POST',
+        data: {
+            product_id: productId,
+            _token: "{{ csrf_token() }}",  // Token bảo mật
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                alert('Product added to wishlist!');
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function(xhr) {
+            console.error('Error:', xhr);
+        }
+    });
+    });
+
+</script>
 
 </html>
