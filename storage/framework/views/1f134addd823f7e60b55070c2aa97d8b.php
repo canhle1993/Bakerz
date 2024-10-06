@@ -325,10 +325,10 @@
                                 <a class="logo-white d-none" href="index.html"><img src="<?php echo e(asset('assets/images/logo-white.svg')); ?>" alt="Logo"></a>
                             </div>
                             <div class="footer-widget__social">
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-facebook"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-twitter"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-instagram"></i></a>
+                                <a href="https://aptechvietnam.com.vn/" target="blank"><i class="lastudioicon-b-facebook"></i></a>
+                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-twitter"></i></a>
+                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
+                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-instagram"></i></a>
                                 <b style="padding: 3px 0px;"><i class="fas fa-users"></i>
                                 <span  id="onlineCount" style="border: none; background-color: #0771fb; color: #eff0f2; padding: 2px 7px 2px 7px; border-radius: 99px; left: -4px; top: -8px; position: relative;"></span></b>
                             </div>
@@ -344,10 +344,9 @@
                                 <h4 class="footer-widget__title">Categories</h4>
 
                                 <ul class="footer-widget__link">
-                                    <li><a href="<?php echo e(route('category')); ?>">Sweet Breads</a></li>
-                                    <li><a href="<?php echo e(route('category')); ?>">Baked Goods</a></li>
-                                    <li><a href="<?php echo e(route('category')); ?>">Cakes</a></li>
-                                    <li><a href="<?php echo e(route('category')); ?>">Cheesecakes</a></li>
+                                  <?php $__currentLoopData = $categories->take(4); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <li><a class="sub-item-link" href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><span><?php echo e($category->category_name); ?></span></a></li>
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -357,9 +356,7 @@
                                 <h4 class="footer-widget__title">Services</h4>
 
                                 <ul class="footer-widget__link">
-                                    <li><a href="<?php echo e(route('delivery')); ?>">Delivery</a></li>
                                     <li><a href="<?php echo e(route('checkout')); ?>">Payment</a></li>
-                                    <li><a href="<?php echo e(route('exchange-return-policy')); ?>">Exchange & Return Policy</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -371,7 +368,7 @@
                                 <ul class="footer-widget__link">
                                     <li><a href="<?php echo e(route('about')); ?>">About Us</a></li>
                                     <li><a href="<?php echo e(route('contact')); ?>">Contact Us</a></li>
-                                    <li><a href="<?php echo e(route('blog-detail')); ?>">Latest Post</a></li>
+                                    <li><a href="<?php echo e(route('faq')); ?>">FAQs</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->

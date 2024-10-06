@@ -307,7 +307,6 @@
                                     <li><a class="sub-item-link" href="<?php echo e(route('faq')); ?>"><span>FAQs</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('pricing-plan')); ?>"><span>Bakerz Bite Rewards</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('coming-soon')); ?>"><span>Coming Soon</span></a></li>
-                                    <li><a class="sub-item-link" href="<?php echo e(route('wishlist')); ?>"><span>Wishlist</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('client_location')); ?>"><span>Client Location</span></a></li>
                                 </ul>
                             </li>
@@ -323,6 +322,13 @@
                     <div class="header-meta">
                         <ul class="header-meta__action d-flex justify-content-end">
                             <li><button class="action search-open"><i class="lastudioicon-zoom-1"></i></button></li>
+                            <?php if(auth()->guard()->check()): ?>
+                            <li>
+                                <a href="<?php echo e(route('wishlist')); ?>"><button class="action" data-bs-toggle="offcanvas" data-bs-target="#">
+                                    <i class="far fa-heart"></i>
+                                </button></a>
+                            </li>
+                            <?php endif; ?>
 
                             <li>
                                 <button id="cart_icon" class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
@@ -334,14 +340,18 @@
                             <div class="header-meta__action d-flex justify-content-end">
                             <?php if(auth()->guard()->check()): ?>
                             <li >
-                                <a  class=" action" href="<?php echo e(route('client.profile', ['userid' => Auth::user()->user_id])); ?>">Profile</a>
+                                <a  class=" action" href="<?php echo e(route('client.profile', ['userid' => Auth::user()->user_id])); ?>">
+                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="far fa-user"></i>
+                                    </button>
+                                </a>
                             </li>
                             <li >
                                 <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
                                     <?php echo csrf_field(); ?>
                                 </form>
                                 <a  class="action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Logout
+                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="fas fa-sign-out-alt"></i>
+                                    </button>
                                 </a>
                             </li>
                             <?php endif; ?>

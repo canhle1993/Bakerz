@@ -74,6 +74,9 @@
                             <a href="{{ route('catalog.index') }}" class="bi-tag m-2 dropdown-item {{ Request::routeIs('catalog.index') ? 'active' : '' }}">&nbsp;&nbsp;Category</a>
                             <a href="{{ route('discount.index') }}" class="bi-lightning m-2 dropdown-item {{ Request::routeIs('discount.index') ? 'active' : '' }}">&nbsp;&nbsp;Discount</a>
                             <a href="{{ route('heathy.index') }}" class="m-2 dropdown-item {{ Request::routeIs('heathy.index') ? 'active' : '' }}">💞&nbsp;&nbsp;Heathy Type</a>
+                            <a href="{{ route('product.index_instock') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('product.index_instock') ? 'active' : '' }}">&nbsp;&nbsp;InStock Product</a>
+                            <a href="{{ route('product.index_outstock') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('product.index_outstock') ? 'active' : '' }}">&nbsp;&nbsp;OutStock Product</a>
+                            <a href="{{ route('product.index_stockcheck') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('product.index_stockcheck') ? 'active' : '' }}">&nbsp;&nbsp;Stock Check</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">

@@ -190,7 +190,12 @@ Route::get('/product/create', [AdminProductController::class, 'create'])->name('
 Route::get('product/{product}/detail', [AdminProductController::class, 'showDetail'])->name('product.showDetail');
 Route::delete('/product/{product}/delete', [AdminProductController::class, 'destroy'])->name('product.destroy');
 Route::get('/product/index2', [AdminProductController::class, 'index2'])->name('product.index2');
-
+Route::get('/product/index_instock', [AdminProductController::class, 'index_instock'])->name('product.index_instock');
+Route::get('/product/index_outstock', [AdminProductController::class, 'index_outstock'])->name('product.index_outstock');
+Route::get('/product/index_stockcheck', [AdminProductController::class, 'index_stockcheck'])->name('product.index_stockcheck');
+Route::post('/product/{id}/goto_stockin', [AdminProductController::class, 'goto_stockin'])->name('product.goto_stockin');
+Route::post('/product/{id}/stockin_byid', [AdminProductController::class, 'stockin_byid'])->name('product.stockin_byid');
+Route::post('/product/stockin_all', [AdminProductController::class, 'stockin_all'])->name('product.stockin_all');
 
 //route cho catalog trang admin
 use App\Http\Controllers\Admin\CategoryController;

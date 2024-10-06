@@ -187,7 +187,6 @@
                                             ></a>
                                         </li>
                                         <li class="product-item__meta-action">
-                                            <!-- <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a> -->
                                             <a class="labtn-icon-wishlist" href="#" data-product-id="<?php echo e($product->product_id); ?>" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
                                         </li>
                                     </ul>

@@ -307,7 +307,6 @@
                                     <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Bakerz Bite Rewards</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('client_location') }}"><span>Client Location</span></a></li>
                                 </ul>
                             </li>
@@ -323,6 +322,13 @@
                     <div class="header-meta">
                         <ul class="header-meta__action d-flex justify-content-end">
                             <li><button class="action search-open"><i class="lastudioicon-zoom-1"></i></button></li>
+                            @auth
+                            <li>
+                                <a href="{{ route('wishlist') }}"><button class="action" data-bs-toggle="offcanvas" data-bs-target="#">
+                                    <i class="far fa-heart"></i>
+                                </button></a>
+                            </li>
+                            @endauth
 
                             <li>
                                 <button id="cart_icon" class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
@@ -334,14 +340,18 @@
                             <div class="header-meta__action d-flex justify-content-end">
                             @auth
                             <li >
-                                <a  class=" action" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
+                                <a  class=" action" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">
+                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="far fa-user"></i>
+                                    </button>
+                                </a>
                             </li>
                             <li >
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                                 <a  class="action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Logout
+                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="fas fa-sign-out-alt"></i>
+                                    </button>
                                 </a>
                             </li>
                             @endauth
