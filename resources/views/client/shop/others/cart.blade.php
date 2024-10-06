@@ -257,6 +257,7 @@
                     quantity = 1;
                 }
                 var $input = $(this); // Lưu lại context của input để sử dụng sau
+                $input.prop('readonly', true);
                 $.ajax({
                   url: "{{ route('cart.checkinventory') }}",
                   method: "GET",
@@ -272,6 +273,7 @@
                         $input.val(response.max_quantity); // Gán lại số lượng hợp lệ
                         var outStockModal = new bootstrap.Modal(document.getElementById('outOfStock'));
                         outStockModal.show();
+                        $input.prop('readonly', false);
                         return;
                     }
                     $.ajax({
@@ -284,7 +286,7 @@
 
                     },
                     success: function(response) {
-                        
+                        $input.prop('readonly', false);
                         // Cập nhật lại subtotal của sản phẩm này
                         var updatedQuantity = parseFloat(quantity) || 0;
                         var updatedDiscount = parseFloat(discount) || 0;
@@ -296,12 +298,14 @@
                     },
                     error: function() {
                         console.error('Error:', xhr.responseText);
+                        $input.prop('readonly', false);
                     }
                     });
                 },
                   error: function(xhr) {
                     window.location.href = "{{ route('login') }}"; // Sử dụng route trong Blade để tạo đường dẫn
                     console.error('Error:', xhr.responseText);
+                    $input.prop('readonly', false);
                   }
                 });
             });
@@ -349,7 +353,7 @@
                     success: function(response) {
                         $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
                         
-                        $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
+                        // $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
                         
                         $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
                         updateTotalPrice(userRank);
