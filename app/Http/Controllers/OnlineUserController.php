@@ -14,7 +14,7 @@ class OnlineUserController extends Controller
 
         // Đếm các phiên hoạt động trong 1 giây qua
         foreach ($files as $file) {
-            if (filemtime($file) >= now()->subSeconds(1)->timestamp) {
+            if (filemtime($file) >= now()->subSeconds(60)->timestamp) {
                 $activeSessions++;
             }
         }

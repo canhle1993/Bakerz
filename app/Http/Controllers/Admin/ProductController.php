@@ -359,4 +359,208 @@ class ProductController extends Controller
         }
     }
 
+    public function index_instock(Request $request){
+        $query = Product::select('Product.*')
+                ->distinct()  // Loại bỏ các bản ghi trùng lặp
+                ->join('LinkCatalogProduct', 'Product.product_id', '=', 'LinkCatalogProduct.product_id')
+                ->join('Category', 'LinkCatalogProduct.category_id', '=', 'Category.category_id')
+                ->where(function ($query) {
+                    $query->where('Product.isdelete', '<>', 1)
+                          ->orWhereNull('Product.isdelete');
+                })
+                ->where(function ($query) {
+                    $query->where('Product.inventory', '<>', 0);
+                })
+                ->where(function ($query) {
+                    $query->where('Product.status', '<>', 'Check Stock')
+                    ->orWhereNull('Product.status');
+                })
+                ->orderBy('Product.inventory', 'asc');
+
+
+        // Kiểm tra nếu có tìm kiếm
+        if ($request->has('search')) {
+            $query->where('Product.product_name', 'like', '%' . $request->search . '%');
+        }
+
+        // Xử lý sắp xếp theo các cột
+        if ($request->has('sort')) {
+            // Sắp xếp theo Category
+            if ($request->sort == 'category_asc') {
+                $query->orderBy('category_name', 'asc');
+            } elseif ($request->sort == 'category_desc') {
+                $query->orderBy('category_name', 'desc');
+            } 
+            // Sắp xếp theo Name
+            elseif ($request->sort == 'name_asc') {
+                $query->orderBy('Product.product_name', 'asc');
+            } elseif ($request->sort == 'name_desc') {
+                $query->orderBy('Product.product_name', 'desc');
+            } 
+            // Sắp xếp theo Inventory
+            elseif ($request->sort == 'inventory_asc') {
+                $query->orderBy('Product.inventory', 'asc');
+            } elseif ($request->sort == 'inventory_desc') {
+                $query->orderBy('Product.inventory', 'desc');
+            }
+            // Sắp xếp theo Unit Price
+            elseif ($request->sort == 'price_asc') {
+                $query->orderBy('Product.price', 'asc');
+            } elseif ($request->sort == 'price_desc') {
+                $query->orderBy('Product.price', 'desc');
+            }
+        }
+
+        // Sắp xếp mặc định theo ngày cập nhật giảm dần nếu không có sắp xếp khác
+        $products = $query->orderBy('Product.ModifiedDate', 'desc')->paginate(10);
+        return view('admin.instocklist', compact('products'));
+    }
+
+    public function index_outstock(Request $request){
+        $query = Product::select('Product.*')
+                ->distinct()  // Loại bỏ các bản ghi trùng lặp
+                ->join('LinkCatalogProduct', 'Product.product_id', '=', 'LinkCatalogProduct.product_id')
+                ->join('Category', 'LinkCatalogProduct.category_id', '=', 'Category.category_id')
+                ->where(function ($query) {
+                    $query->where('Product.isdelete', '<>', 1)
+                          ->orWhereNull('Product.isdelete');
+                })
+                ->where(function ($query) {
+                    $query->where('Product.inventory', 0)
+                    ->orWhereNull('Product.inventory');
+                })
+                ->where(function ($query) {
+                    $query->where('Product.status', '<>', 'Check Stock')
+                    ->orWhereNull('Product.status');
+                });
+
+
+        // Kiểm tra nếu có tìm kiếm
+        if ($request->has('search')) {
+            $query->where('Product.product_name', 'like', '%' . $request->search . '%');
+        }
+
+        // Xử lý sắp xếp theo các cột
+        if ($request->has('sort')) {
+            // Sắp xếp theo Category
+            if ($request->sort == 'category_asc') {
+                $query->orderBy('category_name', 'asc');
+            } elseif ($request->sort == 'category_desc') {
+                $query->orderBy('category_name', 'desc');
+            } 
+            // Sắp xếp theo Name
+            elseif ($request->sort == 'name_asc') {
+                $query->orderBy('Product.product_name', 'asc');
+            } elseif ($request->sort == 'name_desc') {
+                $query->orderBy('Product.product_name', 'desc');
+            } 
+            // Sắp xếp theo Inventory
+            elseif ($request->sort == 'inventory_asc') {
+                $query->orderBy('Product.inventory', 'asc');
+            } elseif ($request->sort == 'inventory_desc') {
+                $query->orderBy('Product.inventory', 'desc');
+            }
+            // Sắp xếp theo Unit Price
+            elseif ($request->sort == 'price_asc') {
+                $query->orderBy('Product.price', 'asc');
+            } elseif ($request->sort == 'price_desc') {
+                $query->orderBy('Product.price', 'desc');
+            }
+        }
+
+        // Sắp xếp mặc định theo ngày cập nhật giảm dần nếu không có sắp xếp khác
+        $products = $query->orderBy('Product.ModifiedDate', 'desc')->paginate(10);
+        return view('admin.outstocklist', compact('products'));
+    }
+
+    public function index_stockcheck(Request $request){
+        $query = Product::select('Product.*')
+                ->distinct()  // Loại bỏ các bản ghi trùng lặp
+                ->join('LinkCatalogProduct', 'Product.product_id', '=', 'LinkCatalogProduct.product_id')
+                ->join('Category', 'LinkCatalogProduct.category_id', '=', 'Category.category_id')
+                ->where(function ($query) {
+                    $query->where('Product.isdelete', '<>', 1)
+                          ->orWhereNull('Product.isdelete');
+                })
+                ->where(function ($query) {
+                    $query->where('Product.status', 'Check Stock');
+                });
+
+
+        // Kiểm tra nếu có tìm kiếm
+        if ($request->has('search')) {
+            $query->where('Product.product_name', 'like', '%' . $request->search . '%');
+        }
+
+        // Xử lý sắp xếp theo các cột
+        if ($request->has('sort')) {
+            // Sắp xếp theo Category
+            if ($request->sort == 'category_asc') {
+                $query->orderBy('category_name', 'asc');
+            } elseif ($request->sort == 'category_desc') {
+                $query->orderBy('category_name', 'desc');
+            } 
+            // Sắp xếp theo Name
+            elseif ($request->sort == 'name_asc') {
+                $query->orderBy('Product.product_name', 'asc');
+            } elseif ($request->sort == 'name_desc') {
+                $query->orderBy('Product.product_name', 'desc');
+            } 
+            // Sắp xếp theo Inventory
+            elseif ($request->sort == 'inventory_asc') {
+                $query->orderBy('Product.inventory', 'asc');
+            } elseif ($request->sort == 'inventory_desc') {
+                $query->orderBy('Product.inventory', 'desc');
+            }
+            // Sắp xếp theo Unit Price
+            elseif ($request->sort == 'price_asc') {
+                $query->orderBy('Product.price', 'asc');
+            } elseif ($request->sort == 'price_desc') {
+                $query->orderBy('Product.price', 'desc');
+            }
+        }
+
+        // Sắp xếp mặc định theo ngày cập nhật giảm dần nếu không có sắp xếp khác
+        $products = $query->orderBy('Product.ModifiedDate', 'desc')->paginate(10);
+        return view('admin.stockcheck', compact('products'));
+    }
+    public function goto_stockin(Request $request, $id){
+        $product = Product::findOrFail($id);
+        $product->status = "Check Stock";
+        $product->save();
+
+        // Redirect về trang hiện tại
+        return redirect()->back()->with('success', 'Product status updated to Check Stock');
+
+    }
+
+    public function stockin_byid(Request $request, $id){
+        $product = Product::findOrFail($id);
+        $product->inventory += $request->quanlity_stockin;
+        $product->status = "";
+        $product->save();
+        // Redirect về trang hiện tại
+        return redirect()->back()->withInput(); // Giữ lại dữ liệu qua request khi reload trang
+    }
+
+    public function stockin_all(Request $request){
+        $products = Product::select('Product.*')
+                ->distinct()  // Loại bỏ các bản ghi trùng lặp
+                ->join('LinkCatalogProduct', 'Product.product_id', '=', 'LinkCatalogProduct.product_id')
+                ->join('Category', 'LinkCatalogProduct.category_id', '=', 'Category.category_id')
+                ->where(function ($query) {
+                    $query->where('Product.isdelete', '<>', 1)
+                          ->orWhereNull('Product.isdelete');
+                })
+                ->where(function ($query) {
+                    $query->where('Product.status', 'Check Stock');
+                })->get();
+        foreach ($products as $product) {
+            $product->inventory += $request->quanlity_stockin;
+            $product->status = "";
+            $product->save();
+        }
+        // Redirect về trang hiện tại
+        return redirect()->back()->withInput(); // Giữ lại dữ liệu qua request khi reload trang
+    }
 }

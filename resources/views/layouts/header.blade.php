@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame.png')}}">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -270,6 +270,8 @@
                                     <li class="mega-menu-item">
                                         <ul>
                                             <li class="mega-menu-item-title">Featured Product</li>
+                                            <li><a class="sub-item-link" href="{{ route('shop.filter_nonCatagory', ['isOption' => 3]) }}">Discount</a></li>
+                                            <li><a class="sub-item-link" href="{{ route('shop.filter_nonCatagory', ['isOption' => 4]) }}">What Hot</a></li>
                                             <!-- Hiển thị 2 category cuối cùng -->
                                             @foreach ($categories->slice(-2) as $category)
                                             <li><a class="sub-item-link" href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}"><span>{{ $category->category_name }}</span></a></li>
@@ -305,7 +307,6 @@
                                     <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Bakerz Bite Rewards</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('wishlist') }}"><span>Wishlist</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('client_location') }}"><span>Client Location</span></a></li>
                                 </ul>
                             </li>
@@ -321,6 +322,14 @@
                     <div class="header-meta">
                         <ul class="header-meta__action d-flex justify-content-end">
                             <li><button class="action search-open"><i class="lastudioicon-zoom-1"></i></button></li>
+                            @auth
+                            <li>
+                                <a href="{{ route('wishlist') }}"><button class="action" data-bs-toggle="offcanvas" data-bs-target="#">
+                                    <i class="far fa-heart"></i>
+                                </button></a>
+                            </li>
+                            @endauth
+
                             <li>
                                 <button id="cart_icon" class="action" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
                                     <i class="lastudioicon-shopping-cart-2"></i>
@@ -331,14 +340,18 @@
                             <div class="header-meta__action d-flex justify-content-end">
                             @auth
                             <li >
-                                <a  class=" action" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">Profile</a>
+                                <a  class=" action" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">
+                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="far fa-user"></i>
+                                    </button>
+                                </a>
                             </li>
                             <li >
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                                 <a  class="action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Logout
+                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="fas fa-sign-out-alt"></i>
+                                    </button>
                                 </a>
                             </li>
                             @endauth
@@ -379,6 +392,19 @@
     </div>
     <!-- Search End -->
 
+    <!-- Add cart Error modal  -->
+<div class="quickview-product-modal modal fade"  id="outOfStock">
+    <div class="modal-dialog modal-dialog-centered mw-100">
+            <div class="custom-content">
+                <button type="button" class="btn-close bg-warning" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="lastudioicon lastudioicon-e-remove"></i>
+                </button>
+                <div class="modal-body">
+                    <i class="fas fa-exclamation-triangle"></i> Out Of Stock!
+                </div>
+            </div>
+        </div>
+</div>
         <!-- Offcanvas Cart Start  -->
 <div class="offcanvas offcanvas-end offcanvas-cart" id="offcanvasCart">
 
@@ -458,29 +484,48 @@
 
           $('.add-to-cart').on('click', function(e) {
               e.preventDefault();
-
               var productId = $(this).data('product-id');
               $.ajax({
-                  url: "{{ route('cart.new_add') }}",
-                  method: "POST",
+                  url: "{{ route('cart.checkinventory') }}",
+                  method: "GET",
                   data: {
                       _token: "{{ csrf_token() }}",
                       product_id: productId,
                       quantity: 1
                   },
                   success: function(response) {
-                      if (response.status === 'success') {
-                          // Cập nhật số lượng sản phẩm trong giỏ hàng
-                          updateCartView();
-                      } else {
-                          alert(response.message);
-                      }
+                      if (response.error === 'out_of_stock'){
+                        var outStockModal = new bootstrap.Modal(document.getElementById('outOfStock'));
+                        outStockModal.show();
+                        return;
+                    }
+                      $.ajax({
+                          url: "{{ route('cart.new_add') }}",
+                          method: "POST",
+                          data: {
+                              _token: "{{ csrf_token() }}",
+                              product_id: productId,
+                              quantity: 1
+                          },
+                          success: function(response) {
+                              if (response.status === 'success') {
+                                  // Cập nhật số lượng sản phẩm trong giỏ hàng
+                                  updateCartView();
+                              } else {
+                                  alert(response.message);
+                              }
+                          },
+                          error: function(xhr) {
+                              window.location.href = "{{ route('login') }}"; // Sử dụng route trong Blade để tạo đường dẫn
+                              // console.error('Error:', xhr.responseText);
+                          }
+                      });
                   },
                   error: function(xhr) {
-                      window.location.href = "{{ route('login') }}"; // Sử dụng route trong Blade để tạo đường dẫn
-                      // console.error('Error:', xhr.responseText);
+                    console.error('Error:', xhr.responseText);
                   }
               });
+
           });
 
           // delete cart
@@ -506,7 +551,6 @@
                         }
                     },
                     error: function(xhr) {
-                        alert("FAIL");
                         console.error('Error:', xhr.responseText);
                     }
                 });

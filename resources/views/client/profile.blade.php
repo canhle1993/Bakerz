@@ -438,6 +438,7 @@
                                                 <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
                                                 <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
                                                 <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Discount:</b> -${{ $order->discount ? $order->discount : 0 }}</p>
                                                 <p><b>Price:</b> ${{ $order->pay }}</p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -478,6 +479,7 @@
                                                 <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
                                                 <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
                                                 <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Discount:</b> -${{ $order->discount ? $order->discount : 0 }}</p>
                                                 <p><b>Price:</b> ${{ $order->pay }}</p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -518,6 +520,7 @@
                                                 <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
                                                 <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
                                                 <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Discount:</b> -${{ $order->discount ? $order->discount : 0 }}</p>
                                                 <p><b>Price:</b> ${{ $order->pay }}</p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -558,6 +561,7 @@
                                                 <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
                                                 <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
                                                 <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Discount:</b> -${{ $order->discount ? $order->discount : 0 }}</p>
                                                 <p><b>Price:</b> ${{ $order->pay }}</p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -598,6 +602,7 @@
                                                 <h5 class="card-title">Order ID: {{ $order->order_id }}</h5>
                                                 <p><b>Phone Number:</b> {{ $order->delivery_phone }}</p>
                                                 <p><b>Delivery Address:</b> {{ $order->delivery_address }}</p>
+                                                <p><b>Discount:</b> -${{ $order->discount ? $order->discount : 0 }}</p>
                                                 <p><b>Price:</b> ${{ $order->pay }}</p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">

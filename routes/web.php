@@ -111,7 +111,7 @@ Route::get('shop/category/{category_id}', [ProductController::class, 'filterByCa
 Route::get('/shop/filter-by-category/{category_id}', [ProductController::class, 'filterByCategory'])->name('shop.filterByCategory');
 Route::get('product/details/{id}', [ProductController::class, 'getProductDetails'])->name('product.details');
 Route::get('/shop/filter-by-coffee', [ProductController::class, 'filterByCoffee'])->name('shop.filterByCoffee');
-
+Route::get('shop/{isOption}/filter_nonCatagory}', [ProductController::class, 'filter_nonCatagory'])->name('shop.filter_nonCatagory');
 
 
 
@@ -190,7 +190,12 @@ Route::get('/product/create', [AdminProductController::class, 'create'])->name('
 Route::get('product/{product}/detail', [AdminProductController::class, 'showDetail'])->name('product.showDetail');
 Route::delete('/product/{product}/delete', [AdminProductController::class, 'destroy'])->name('product.destroy');
 Route::get('/product/index2', [AdminProductController::class, 'index2'])->name('product.index2');
-
+Route::get('/product/index_instock', [AdminProductController::class, 'index_instock'])->name('product.index_instock');
+Route::get('/product/index_outstock', [AdminProductController::class, 'index_outstock'])->name('product.index_outstock');
+Route::get('/product/index_stockcheck', [AdminProductController::class, 'index_stockcheck'])->name('product.index_stockcheck');
+Route::post('/product/{id}/goto_stockin', [AdminProductController::class, 'goto_stockin'])->name('product.goto_stockin');
+Route::post('/product/{id}/stockin_byid', [AdminProductController::class, 'stockin_byid'])->name('product.stockin_byid');
+Route::post('/product/stockin_all', [AdminProductController::class, 'stockin_all'])->name('product.stockin_all');
 
 //route cho catalog trang admin
 use App\Http\Controllers\Admin\CategoryController;
@@ -226,8 +231,7 @@ Route::post('/cart/{product_id}/update_quantity', [CartController::class, 'updat
 Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
 Route::get('/showcheckout', [CartController::class, 'showcheckout'])->name('checkout');
 Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.cart_checkout');
-
-
+Route::get('/cart/checkinventory', [CartController::class, 'checkinventory'])->name('cart.checkinventory');
 
 // Route để lưu đánh giá
 Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
@@ -327,6 +331,3 @@ Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog-pd');
 Route::post('/add-to-wishlist', [ProductController::class, 'addToWishlist'])->name('add.to.wishlist');
 Route::get('/wishlist', [ProductController::class, 'showWishlist'])->name('wishlist');
 Route::post('/remove-from-wishlist', [ProductController::class, 'removeFromWishlist'])->name('remove.from.wishlist');
-
-
-

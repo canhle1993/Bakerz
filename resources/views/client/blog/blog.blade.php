@@ -26,6 +26,36 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <style>
+        .pagination li {
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .pagination li a {
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+
+
+        }
+
+        .pagination li.active a {
+            background-color: #BC8157;
+
+
+        }
+
+        .pagination li.disabled a {
+            color: #ccc;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
+        .pagination li a:hover {
+            background-color: #9b8e8e;
+        }
+    </style>
 </head>
 
 <body>

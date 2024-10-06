@@ -16,7 +16,7 @@
         }
 
         .pagination li.active a {
-            background-color: #dde028;
+            background-color: #BC8157;
 
 
         }
@@ -188,7 +188,6 @@
                                         </li>
                                         <li class="product-item__meta-action">
                                             <a class="labtn-icon-wishlist" href="#" data-product-id="{{ $product->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
-
                                         </li>
                                     </ul>
                                 </div>
@@ -200,8 +199,9 @@
                                         @if ($product->price != $product->getDiscountedPrice())
                                         <del>{{ formatPriceVND($product->price) }}</del>
                                         <!-- Giá gốc -->
+
                                         <strong style="color: red;"
-                                        >{{ formatPriceVND($product->getDiscountedPrice())
+                                        >${{ number_format($product->getDiscountedPrice(),2)
                                         }}</strong
                                         >
                                         <!-- Giá sau khi giảm -->
@@ -241,6 +241,8 @@
                                         <h3 class="sidebars_widget__title">Category</h3>
                                         <ul class="sidebars_widget__category">
                                             <li><a href="{{ route('shop_all')}}">All Products</a></li>
+                                            <li><a href="{{ route('shop.filter_nonCatagory', ['isOption' => 3]) }}">Discount</a></li>
+                                            <li><a href="{{ route('shop.filter_nonCatagory', ['isOption' => 4]) }}">What Hot</a></li>
                                             @foreach ($categories as $category)
                                             <li><a href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}">{{ $category->category_name }}</a></li>
                                             @endforeach
@@ -732,7 +734,6 @@ $(document).ready(function() {
 // Script cho QuickView
 </script>
 
-
 {{-- Script xử lý bấm vào nút tim để thêm sản phẩm vào trang wishlist --}}
 <script>
     $(document).on('click', '.labtn-icon-wishlist', function(e) {
@@ -761,6 +762,5 @@ $(document).ready(function() {
     });
 
 </script>
-
 
 </html>

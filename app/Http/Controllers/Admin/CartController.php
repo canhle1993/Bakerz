@@ -190,7 +190,7 @@ class CartController extends Controller
         $this->getsession();
         $currentUser = Auth::user(); // Lấy người dùng hiện tại
         $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
-        if($cartItems){
+        if(isset($cartItems)){
             return view('client.shop.others.checkout');
 
         } else {
@@ -203,12 +203,30 @@ class CartController extends Controller
         $currentUser = Auth::user(); // Lấy người dùng hiện tại
         $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
         $total = 0;
+        $iserror = false;
         foreach ($cartItems as $item) {
             $total += ($item['quantity'] * $item->product->getDiscountedPrice());
+            $request->merge([
+                'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+                'quantity_input' => $item['quantity']
+            ]);
+            $checkInventoryResponse = $this->checkinventory($request);
+            $checkInventory = $checkInventoryResponse->getData(true); // true để chuyển đổi thành mảng
+            if (!empty($checkInventory['error']) && $checkInventory['error'] === 'out_of_stock') {
+                $iserror=true;
+                $item->quantity = $checkInventory['max_quantity'];
+                $item->save();
+            }
         }
         if ($total == 0){
             return redirect()->route('client.filter');
         }
+        
+        if($iserror){
+            return redirect()->route('client.filter')->with('error', 'Out of Stock');
+        }
+
         DB::beginTransaction(); // Start transaction to ensure atomicity
         try {
             // Create a new order entry in the orders table
@@ -246,10 +264,11 @@ class CartController extends Controller
                     'status' => 'Active', // Set an appropriate status
                     'isdelete' => 0, // Active item, not deleted
                 ]);
+                $product = Product::findOrFail($item->product_id);
+                $product->inventory -= $item->quantity;
+                $product->save();
             }
-            Cart::where('user_id', $currentUser->user_id)->delete();
-            // TODO: dùng để tính điểm
-            $count = floor($total/10);
+            Cart::where('user_id', $currentUser->user_id)->delete();            
 
             DB::commit(); // Commit the transaction
 
@@ -354,6 +373,39 @@ class CartController extends Controller
         } else {
             echo json_encode($returnData);
         }
+    }
+
+    public function checkinventory(Request $request)
+    {
+        $currentUser = Auth::user();
+        // Tìm sản phẩm theo product_id
+        $product = Product::findOrFail($request->product_id);
+
+        $cart = Cart::where('user_id', $currentUser->user_id)
+                        ->where('product_id', $request->product_id)
+                        ->first();
+        
+        
+        $totalQuantity = 1;
+
+        if (isset($request->quantity_input)) {
+            $totalQuantity = $request->quantity;
+
+        } elseif (isset($cart)) {
+            $totalQuantity += $cart->quantity;
+        }
+        if ($totalQuantity > $product->inventory) {
+            if (isset($cart) && $cart->quantity > $product->inventory) {
+                // Nếu số lượng trong giỏ hàng lớn hơn tồn kho, đặt giá trị bằng tồn kho
+                $setvalue = $product->inventory;
+            } else {
+                // Nếu không, đặt giá trị bằng tồn kho hoặc 0 nếu không có giỏ hàng
+                $setvalue = $cart ? min($cart->quantity, $product->inventory) : $product->inventory;
+            }
+            return response()->json(['error' => 'out_of_stock', 'message' => 'Out of Stock', 'max_quantity' => $setvalue]);
+        }
+        
+        return response()->json(['sucess' => 'success']);
     }
 
 }

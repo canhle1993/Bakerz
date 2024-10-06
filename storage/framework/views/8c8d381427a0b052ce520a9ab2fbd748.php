@@ -439,6 +439,7 @@
                                                 <h5 class="card-title">Order ID: <?php echo e($order->order_id); ?></h5>
                                                 <p><b>Phone Number:</b> <?php echo e($order->delivery_phone); ?></p>
                                                 <p><b>Delivery Address:</b> <?php echo e($order->delivery_address); ?></p>
+                                                <p><b>Discount:</b> -$<?php echo e($order->discount ? $order->discount : 0); ?></p>
                                                 <p><b>Price:</b> $<?php echo e($order->pay); ?></p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -479,6 +480,7 @@
                                                 <h5 class="card-title">Order ID: <?php echo e($order->order_id); ?></h5>
                                                 <p><b>Phone Number:</b> <?php echo e($order->delivery_phone); ?></p>
                                                 <p><b>Delivery Address:</b> <?php echo e($order->delivery_address); ?></p>
+                                                <p><b>Discount:</b> -$<?php echo e($order->discount ? $order->discount : 0); ?></p>
                                                 <p><b>Price:</b> $<?php echo e($order->pay); ?></p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -519,6 +521,7 @@
                                                 <h5 class="card-title">Order ID: <?php echo e($order->order_id); ?></h5>
                                                 <p><b>Phone Number:</b> <?php echo e($order->delivery_phone); ?></p>
                                                 <p><b>Delivery Address:</b> <?php echo e($order->delivery_address); ?></p>
+                                                <p><b>Discount:</b> -$<?php echo e($order->discount ? $order->discount : 0); ?></p>
                                                 <p><b>Price:</b> $<?php echo e($order->pay); ?></p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -559,6 +562,7 @@
                                                 <h5 class="card-title">Order ID: <?php echo e($order->order_id); ?></h5>
                                                 <p><b>Phone Number:</b> <?php echo e($order->delivery_phone); ?></p>
                                                 <p><b>Delivery Address:</b> <?php echo e($order->delivery_address); ?></p>
+                                                <p><b>Discount:</b> -$<?php echo e($order->discount ? $order->discount : 0); ?></p>
                                                 <p><b>Price:</b> $<?php echo e($order->pay); ?></p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">
@@ -599,6 +603,7 @@
                                                 <h5 class="card-title">Order ID: <?php echo e($order->order_id); ?></h5>
                                                 <p><b>Phone Number:</b> <?php echo e($order->delivery_phone); ?></p>
                                                 <p><b>Delivery Address:</b> <?php echo e($order->delivery_address); ?></p>
+                                                <p><b>Discount:</b> -$<?php echo e($order->discount ? $order->discount : 0); ?></p>
                                                 <p><b>Price:</b> $<?php echo e($order->pay); ?></p>
                                                 <div class="d-flex">
                                                 <div class="align-self-end">

@@ -16,7 +16,7 @@
         }
 
         .pagination li.active a {
-            background-color: #dde028;
+            background-color: #BC8157;
 
 
         }
@@ -187,7 +187,7 @@
                                             ></a>
                                         </li>
                                         <li class="product-item__meta-action">
-                                            <a class="shadow-1 labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a>
+                                            <a class="labtn-icon-wishlist" href="#" data-product-id="<?php echo e($product->product_id); ?>" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -199,8 +199,9 @@
                                         <?php if($product->price != $product->getDiscountedPrice()): ?>
                                         <del><?php echo e(formatPriceVND($product->price)); ?></del>
                                         <!-- Giá gốc -->
+                                    
                                         <strong style="color: red;"
-                                        ><?php echo e(formatPriceVND($product->getDiscountedPrice())); ?></strong
+                                        >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
                                         >
                                         <!-- Giá sau khi giảm -->
                                         <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
@@ -240,6 +241,8 @@
                                         <h3 class="sidebars_widget__title">Category</h3>
                                         <ul class="sidebars_widget__category">
                                             <li><a href="<?php echo e(route('shop_all')); ?>">All Products</a></li>
+                                            <li><a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>">Discount</a></li>
+                                            <li><a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 4])); ?>">What Hot</a></li>
                                             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <li><a href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><?php echo e($category->category_name); ?></a></li>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -731,6 +734,34 @@ $('.quickview').on('click', function(e) {
 // Script cho QuickView
 </script>
 
+
+<script>
+    $(document).on('click', '.labtn-icon-wishlist', function(e) {
+    e.preventDefault();
+
+    var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+    $.ajax({
+        url: "<?php echo e(route('add.to.wishlist')); ?>",
+        method: 'POST',
+        data: {
+            product_id: productId,
+            _token: "<?php echo e(csrf_token()); ?>",  // Token bảo mật
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                alert('Product added to wishlist!');
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function(xhr) {
+            console.error('Error:', xhr);
+        }
+    });
+    });
+
+</script>
 
 </html>
 <?php /**PATH C:\xampp\htdocs\bakerz\resources\views/client/shop/shop_all.blade.php ENDPATH**/ ?>

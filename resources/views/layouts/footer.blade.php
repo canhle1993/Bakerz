@@ -325,10 +325,10 @@
                                 <a class="logo-white d-none" href="index.html"><img src="{{asset('assets/images/logo-white.svg')}}" alt="Logo"></a>
                             </div>
                             <div class="footer-widget__social">
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-facebook"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-twitter"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-instagram"></i></a>
+                                <a href="https://aptechvietnam.com.vn/" target="blank"><i class="lastudioicon-b-facebook"></i></a>
+                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-twitter"></i></a>
+                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
+                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-instagram"></i></a>
                                 <b style="padding: 3px 0px;"><i class="fas fa-users"></i>
                                 <span  id="onlineCount" style="border: none; background-color: #0771fb; color: #eff0f2; padding: 2px 7px 2px 7px; border-radius: 99px; left: -4px; top: -8px; position: relative;"></span></b>
                             </div>
@@ -344,10 +344,9 @@
                                 <h4 class="footer-widget__title">Categories</h4>
 
                                 <ul class="footer-widget__link">
-                                    <li><a href="{{ route('category')}}">Sweet Breads</a></li>
-                                    <li><a href="{{ route('category')}}">Baked Goods</a></li>
-                                    <li><a href="{{ route('category')}}">Cakes</a></li>
-                                    <li><a href="{{ route('category')}}">Cheesecakes</a></li>
+                                  @foreach ($categories->take(4) as $category)
+                                    <li><a class="sub-item-link" href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}"><span>{{ $category->category_name }}</span></a></li>
+                                  @endforeach
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -357,9 +356,7 @@
                                 <h4 class="footer-widget__title">Services</h4>
 
                                 <ul class="footer-widget__link">
-                                    <li><a href="{{ route('delivery')}}">Delivery</a></li>
                                     <li><a href="{{ route('checkout')}}">Payment</a></li>
-                                    <li><a href="{{ route('exchange-return-policy')}}">Exchange & Return Policy</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -371,7 +368,7 @@
                                 <ul class="footer-widget__link">
                                     <li><a href="{{ route('about')}}">About Us</a></li>
                                     <li><a href="{{ route('contact')}}">Contact Us</a></li>
-                                    <li><a href="{{ route('blog-detail')}}">Latest Post</a></li>
+                                    <li><a href="{{ route('faq') }}">FAQs</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->

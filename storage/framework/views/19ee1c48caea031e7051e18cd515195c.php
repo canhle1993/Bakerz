@@ -1,6 +1,6 @@
 <?php $__env->startSection('catogory_content'); ?>
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame.png')); ?>">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

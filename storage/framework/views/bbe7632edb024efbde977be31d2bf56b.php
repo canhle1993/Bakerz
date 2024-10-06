@@ -15,13 +15,13 @@
         <thead>
             <tr>
                 <th>Avatar</th>
-                <th>Tên</th>
+                <th>Name</th>
                 <th>Email</th>
-                <th>Số điện thoại</th>
+                <th>Phone</th>
                 <th>Rating</th>
                 <th>Comment</th>
-                <th>Thời gian đánh giá</th>
-                <th>Hành động</th>
+                <th>Evaluation time</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -36,14 +36,14 @@
                     <td><?php echo e(\Carbon\Carbon::parse($review->CreatedDate)->format('d/m/Y H:i:s')); ?></td>
                     <td>
                         <!-- Nút Xem -->
-                        <button class="btn btn-info" onclick="toggleView('<?php echo e($review->ID); ?>')">Xem</button>                       
+                        <button class="btn btn-info" onclick="toggleView('<?php echo e($review->ID); ?>')">View</button>                       
                         <!-- Nút Trả Lời -->
-                        <button class="btn btn-primary" onclick="toggleReplyForm('<?php echo e($review->ID); ?>')">Trả lời</button>    
+                        <button class="btn btn-success" onclick="toggleReplyForm('<?php echo e($review->ID); ?>')">Reply</button>    
                         <!-- Nút Xóa -->
                         <form action="<?php echo e(route('reviews.delete', ['id' => $review->ID])); ?>" method="POST" style="display: inline-block;">
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('DELETE'); ?>
-                            <button type="submit" class="btn btn-danger">Xóa</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>          
                     </td>
                 </tr>
@@ -55,7 +55,7 @@
                             <form action="<?php echo e(route('reviews.reply', ['id' => $review->ID])); ?>" method="POST">
                                 <?php echo csrf_field(); ?>
                                 <textarea name="reply" class="form-control mb-2" placeholder="Nhập câu trả lời"></textarea>
-                                <button type="submit" class="btn btn-success">Gửi trả lời</button>
+                                <button type="submit" class="btn btn-success">Send</button>
                             </form>
                         </div>
                     </td>
@@ -65,14 +65,14 @@
                 <tr>
                     <td colspan="8">
                         <div id="view-info-<?php echo e($review->ID); ?>" style="display:none;">
-                        <span><strong class="text-warning">Tên bánh:</strong> <?php echo e($review->product->product_name); ?></span>
-                        <span><strong class="text-warning"> <span class="text-danger">|</span> Danh mục bánh:</strong>
+                        <span><strong class="text-warning">Cake name:</strong> <?php echo e($review->product->product_name); ?></span>
+                        <span><strong class="text-warning"> <span class="text-danger">|</span> Cake category:</strong>
                             <?php $__currentLoopData = $review->product->catalogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $catalog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php echo e($catalog->category_name); ?><?php echo e(!$loop->last ? ', ' : ''); ?>
 
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <span class="text-danger">|</span>
-                            <a href="<?php echo e(route('product.single', ['product' => $review->product->product_id])); ?>#comment-<?php echo e($review->ID); ?>" class="btn btn-primary btn-sm">Xem comment</a>
+                            <a href="<?php echo e(route('product.single', ['product' => $review->product->product_id])); ?>#comment-<?php echo e($review->ID); ?>" class="btn btn-primary btn-sm">View comment</a>
                         </span>
                         </div>
                     </td>

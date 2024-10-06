@@ -62,6 +62,12 @@ class Product extends Model
         return $this->hasMany(Banner::class, 'product_id');
     }
 
+    public function wishlists()
+    {
+        return $this->hasMany(Cart::class, 'product_id');
+    }
+
+
     public function getDiscountedPrice()
     {
         // Lấy tất cả các discount của sản phẩm

@@ -50,16 +50,33 @@
                                 </th>
                                 <th class="wishlist-thumb">
                                     <a href="{{ route('product.single', ['product' => $item->product_id]) }}">
-                                        <img src="{{ asset('storage/products/' . $item->image) }}" alt="{{ $item->product_name }}">
+                                        <img src="{{ asset('storage/products/' . $item->product->image) }}" alt="{{ $item->product_name }}">
                                     </a>
                                 </th>
                                 <th class="text-start">
                                     <a href="{{ route('product.single', ['product' => $item->product_id]) }}">
-                                        {{ $item->product_name }}
+                                        {{ $item->product->product_name }}
                                     </a>
                                 </th>
-                                <td class="stock in-stock">In Stock</td>
-                                <td>${{ $item->price }}</td>
+                                <td class="stock in-stock">
+                                @if ($item->product->inventory > 0)
+                                In Stock
+                                @else
+                                Out Stock
+                                @endif
+                                </td>
+                                @if ($item->product->price != $item->product->getDiscountedPrice())
+                                <td>
+                                    <del>{{ formatPriceVND($item->product->price) }}</del>
+                                    <!-- Giá gốc -->
+
+                                    <strong style="color: red;"
+                                    >${{ number_format($item->product->getDiscountedPrice(),2)
+                                    }}</strong>
+                                </td>
+                                @else
+                                <td>{{ formatPriceVND($item->product->price) }}</td>
+                                @endif
                                 <td class="wishlist-cart">
                                     <a href="shop-cart.html" class="btn btn-dark btn-hover-primary">Select Option</a>
                                 </td>
@@ -92,7 +109,7 @@
 
         </div>
     </div>
-</div>
+</div><br><br><br><br>
 <!-- Wishlist Section End -->
 
 @include('layouts.footer')
