@@ -41,7 +41,16 @@
                         </form>
 
                         
-                        <a href="#">Move to Stock In</a>
+                        <label for="">Move ALL: </label>
+                        <input id="quantityInput" class="form-control bg-dark border-0 text-danger" style="width: 15%;" type="number" 
+                            oninput="setQuantity(this.value)"
+                            placeholder="Enter quantity" name="quantityInput" 
+                            value="{{ old('quantityInput', request()->input('quantityInput')) }}"><br>
+                            <form id="stockinAllLink" method="POST" action="{{ route('product.goallquanlity_stockin') }}">
+                                @csrf
+                                <input hidden type="text" name="quantityInput" class="inputTarget" placeholder="This will get the value automatically">
+                                <button type="submit" class="btn btn-outline-info border-0 m-2 text-danger"> Quanlity To Stock In</button>
+                            </form>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -157,7 +166,11 @@
             </div>
 
 <script>
-
+    // Lưu giá trị vào Local Storage
+    function setQuantity(value) {
+        document.querySelectorAll('.inputTarget').forEach(input => input.value = value);
+        localStorage.setItem('quantityInput', value); // Lưu giá trị vào localStorage
+    }
 
                 
     function showDeleteModal(element) {

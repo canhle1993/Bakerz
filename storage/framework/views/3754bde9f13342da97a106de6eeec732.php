@@ -1336,10 +1336,11 @@
                             var imageUrl = "<?php echo e(asset('storage/products')); ?>/" + image.image; // Access the correct field inside image object
                             imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
                         });
-
+                        var addCart = '<a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="'+ product.product_id +'">Add to cart</a>';
                         $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
                         $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
-                        
+                        console.log("Product ID:" + product.product_id);
+                        $('.add-to_cart .add-to-cart').replaceWith(addCart);
                         // Hiển thị modal
                         $('#exampleProductModal').modal('show');
                     } else {
@@ -1350,6 +1351,7 @@
                     console.error(error); // Xử lý lỗi
                 }
             });
+            
         });
 
         // Bắt sự kiện click vào thẻ <a> và submit form

@@ -194,8 +194,12 @@ Route::get('/product/index_instock', [AdminProductController::class, 'index_inst
 Route::get('/product/index_outstock', [AdminProductController::class, 'index_outstock'])->name('product.index_outstock');
 Route::get('/product/index_stockcheck', [AdminProductController::class, 'index_stockcheck'])->name('product.index_stockcheck');
 Route::post('/product/{id}/goto_stockin', [AdminProductController::class, 'goto_stockin'])->name('product.goto_stockin');
+Route::post('/product/goallquanlity_stockin', [AdminProductController::class, 'goallquanlity_stockin'])->name('product.goallquanlity_stockin');
+Route::post('/product/goallto_stockin', [AdminProductController::class, 'goallto_stockin'])->name('product.goallto_stockin');
 Route::post('/product/{id}/stockin_byid', [AdminProductController::class, 'stockin_byid'])->name('product.stockin_byid');
 Route::post('/product/stockin_all', [AdminProductController::class, 'stockin_all'])->name('product.stockin_all');
+Route::post('/product/{id}/stockin_cancel', [AdminProductController::class, 'stockin_cancel'])->name('product.stockin_cancel');
+
 
 //route cho catalog trang admin
 use App\Http\Controllers\Admin\CategoryController;

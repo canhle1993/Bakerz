@@ -125,13 +125,17 @@
                                         {{ $product->inventory }}
                                     </td>
                                     <td>{{ formatPriceVND($product->price) }}</td>
-                                    <form id="deleteForm" method="POST" action="{{ route('product.stockin_byid', $product->product_id) }}">
-                                    @csrf
                                     <td>
+                                    <form method="POST" action="{{ route('product.stockin_byid', $product->product_id) }}">
+                                    @csrf
                                         <input hidden type="text" name="quanlity_stockin" class="inputTarget" placeholder="This will get the value automatically">
                                         <button type="submit" class="btn btn-outline-info m-2">Stock In</button>
-                                    </td>
                                     </form>
+                                    <form method="POST" action="{{ route('product.stockin_cancel', $product->product_id) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-danger m-2">Cancel</button>
+                                    </form>
+                                </td>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -393,7 +393,7 @@
     <!-- Search End -->
 
     <!-- Add cart Error modal  -->
-<div class="quickview-product-modal modal fade"  id="outOfStock">
+<div class="quickview-product-modal modal fade"  id="outOfStock" style="z-index: 1050 !important ;">
     <div class="modal-dialog modal-dialog-centered mw-100">
             <div class="custom-content">
                 <button type="button" class="btn-close bg-warning" data-bs-dismiss="modal" aria-label="Close">
@@ -482,8 +482,18 @@
           // Kiểm tra trạng thái mỗi giây (1000ms)
           setInterval(updateonlineUser, 1000);
 
-          $('.add-to-cart').on('click', function(e) {
-              e.preventDefault();
+          // Khi mở modal #outOfStock
+          $('#outOfStock').on('shown.bs.modal', function () {
+            // Đóng exampleProductModal trước khi mở outOfStock
+            $('#exampleProductModal').modal('hide');
+            $('.modal-backdrop').not(':last').remove();
+            // Đảm bảo modal outOfStock có z-index cao
+            $('#outOfStock').css('z-index', 1060);
+        });
+
+
+          $(document).on('click', '.add-to-cart', function(e) {
+            e.preventDefault();
               var productId = $(this).data('product-id');
               $.ajax({
                   url: "<?php echo e(route('cart.checkinventory')); ?>",
@@ -609,6 +619,7 @@
             // Hiển thị tổng đã tính
             $('#total_price').text(total.toFixed(2) + ' $');
         }
+
     </script>
 </body>
 

@@ -38,8 +38,10 @@
                             <?php endif; ?>
                         </form>
 
-                        
-                        <a href="#">Move to Stock In</a>
+                        <form method="POST" action="<?php echo e(route('product.goallto_stockin')); ?>">
+                        <?php echo csrf_field(); ?>
+                            <button type="submit" class="btn btn-outline-info border-0 m-2 text-danger">Move All to Stock In</button>
+                        </form>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
