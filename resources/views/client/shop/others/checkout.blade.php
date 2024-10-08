@@ -241,7 +241,7 @@
             // Bắt sự kiện khi trang được hiển thị trở lại
             window.addEventListener('pageshow', function(event) {
                 if (event.persisted && sessionStorage.getItem('checkoutVisited') === 'true') {
-                    window.location.href = "{{ route('client.filter') }}";
+                    window.location.href = "{{ route('client.profile', Auth::user()->user_id) }}";
                     alert("Thanh toán thất bại. Hãy mở đơn hàng và thanh toán lại. ")
                     sessionStorage.removeItem('checkoutVisited'); // Xóa trạng thái nếu không cần nữa
                 }

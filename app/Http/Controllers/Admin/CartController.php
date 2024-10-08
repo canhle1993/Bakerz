@@ -141,7 +141,7 @@ class CartController extends Controller
 
     public function showCart()
     {
-
+        $this->getsession();
         $cart = session()->get('cart', []);
         $cart_html = view('client.shop.others.cartpartials', compact('cart'))->render(); // Tạo HTML từ view
         $cart_html2 = view('client.shop.others.cartdetail', compact('cart'))->render(); // Tạo HTML từ view
@@ -220,11 +220,11 @@ class CartController extends Controller
             }
         }
         if ($total == 0){
-            return redirect()->route('client.filter');
+            return redirect()->route('client.profile', $currentUser->user_id);
         }
         
         if($iserror){
-            return redirect()->route('client.filter')->with('error', 'Out of Stock');
+            return redirect()->route('client.profile', $currentUser->user_id)->with('error', 'Out of Stock');
         }
 
         DB::beginTransaction(); // Start transaction to ensure atomicity
@@ -279,9 +279,9 @@ class CartController extends Controller
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback transaction if any error occurs
             $this->getsession();
-            return redirect()->route('client.filter');
+            return redirect()->route('client.profile', $currentUser->user_id);
         }
-        return redirect()->route('client.filter');
+        return redirect()->route('client.profile', $currentUser->user_id);
     }
 
     public function getsession(){
