@@ -46,7 +46,7 @@
                     <div class="breadcrumb_content">
                         <h1 class="breadcrumb_title">FAQs</h1>
                         <ul class="breadcrumb_list">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="<?php echo e(route('client.home')); ?>">Home</a></li>
                             <li>FAQs</li>
                         </ul>
                     </div>
@@ -62,10 +62,10 @@
                 <div class="col-12">
                     <div class="faq-top" data-bg-image="assets/images/shape/faqs.png">
                         <h2 class="faq-top__title">Have Any Question</h2>
-                        <form action="#" class="faq-search">
+                        <!-- <form action="#" class="faq-search">
                             <input type="text" class="faq-search__input form-field" placeholder="Search Questions...">
                             <button class="faq-search__btn"><i class="lastudioicon-zoom-1"></i></button>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
                 <div class="col-12">
@@ -233,94 +233,8 @@
     </div>
     <!-- Faq Section End -->
 
-    <div class="bg-dark-four dark-footer">
-        <!-- Footer Strat -->
-    <div class="footer-section">
+    <?php echo $__env->make('layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-        <!-- Footer Widget Section Strat -->
-        <div class="footer-widget-section">
-            <div class="container custom-container">
-                <div class="row gy-6">
-                    <div class="col-md-4">
-                        <!-- Footer Widget Section Strat -->
-                        <div class="footer-widget">
-                            <div class="footer-widget__logo">
-                                <a class="logo-dark" href="<?php echo e(route('client.home')); ?>"><img src="assets/images/logo.svg" alt="Logo"></a>
-                                <a class="logo-white d-none" href="index.html"><img src="assets/images/logo-white.svg" alt="Logo"></a>
-                            </div>
-                            <div class="footer-widget__social">
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-facebook"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-twitter"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-instagram"></i></a>
-                            </div>
-                        </div>
-                        <!-- Footer Widget Section End -->
-                    </div>
-                    <div class="col-md-8">
-                        <!-- Footer Widget Wrapper Strat -->
-                        <div class="footer-widget-wrapper d-flex flex-wrap gap-4">
-
-                            <!-- Footer Widget Strat -->
-                            <div class="footer-widget flex-grow-1">
-                                <h4 class="footer-widget__title">Categories</h4>
-
-                                <ul class="footer-widget__link">
-                                    <li><a href="<?php echo e(route('category')); ?>">Sweet Breads</a></li>
-                                    <li><a href="<?php echo e(route('category')); ?>">Baked Goods</a></li>
-                                    <li><a href="<?php echo e(route('category')); ?>">Cakes</a></li>
-                                    <li><a href="<?php echo e(route('category')); ?>">Cheesecakes</a></li>
-                                </ul>
-                            </div>
-                            <!-- Footer Widget End -->
-
-                            <!-- Footer Widget Strat -->
-                            <div class="footer-widget flex-grow-1">
-                                <h4 class="footer-widget__title">Services</h4>
-
-                                <ul class="footer-widget__link">
-                                    <li><a href="<?php echo e(route('delivery')); ?>">Delivery</a></li>
-                                    <li><a href="<?php echo e(route('checkout')); ?>">Payment</a></li>
-                                    <li><a href="<?php echo e(route('exchange-return-policy')); ?>">Exchange & Return Policy</a></li>
-                                </ul>
-                            </div>
-                            <!-- Footer Widget End -->
-
-                            <!-- Footer Widget Strat -->
-                            <div class="footer-widget flex-grow-1">
-                                <h4 class="footer-widget__title">Information</h4>
-
-                                <ul class="footer-widget__link">
-                                    <li><a href="<?php echo e(route('about')); ?>">About Us</a></li>
-                                    <li><a href="<?php echo e(route('contact')); ?>">Contact Us</a></li>
-                                    <li><a href="<?php echo e(route('blog-detail')); ?>">Latest Post</a></li>
-                                </ul>
-                            </div>
-                            <!-- Footer Widget End -->
-
-                        </div>
-                        <!-- Footer Widget Wrapper End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer Widget Section End -->
-
-        <!-- Footer Copyright Strat -->
-        <div class="footer-copyright footer-copyright-two">
-            <div class="container">
-                <!-- Footer Copyright Text Strat -->
-                <div class="footer-copyright-text text-center">
-                    <p>&copy; 2024 <strong> Bakerz Bite </strong> Made with <i class="lastudioicon-heart-1"></i> by <a href="https://aptechvietnam.com.vn/">Aptech</a></p>
-                </div>
-                <!-- Footer Copyright Text End -->
-            </div>
-        </div>
-        <!-- Footer Copyright End -->
-
-    </div>
-    <!-- Footer End -->
-    </div>
 
     <!-- JS Vendor, Plugins & Activation Script Files -->
 

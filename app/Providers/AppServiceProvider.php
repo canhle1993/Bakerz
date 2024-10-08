@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
         // Chia sẻ biến $categories đến tất cả view
         $categories = Category::where('isdelete', '<>', 1)
             ->orWhereNull('isdelete')
-            ->take(6)  // Giới hạn 4 category đầu tiên
+            ->take(10)  // Giới hạn 4 category đầu tiên
             ->get();
 
         View::share('categories', $categories);

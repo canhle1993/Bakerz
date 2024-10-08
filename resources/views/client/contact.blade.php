@@ -39,9 +39,19 @@
 <body>
 @include('layouts.header')
     <!-- Breadcrumb Section Start -->
-    <div class="breadcrumb" data-bg-image="assets/images/bg/breadcrumb-bg.jpg">
+    <div class="breadcrumb" data-bg-image="assets/images/bg/breadcrumb-bg-4.jpg">
         <div class="container">
-
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <h1 class="breadcrumb_title">Contact Us</h1>
+                        <ul class="breadcrumb_list">
+                            <li><a href="{{ route('client.home') }}">Home</a></li>
+                            <li>Contact Us</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Breadcrumb Section End -->
@@ -57,15 +67,15 @@
                         <ul class="contact-section2_list">
                             <li>
                                 <span class="contact-section2_list__icon"><i class="lastudioicon lastudioicon-pin-3-2"></i></span>
-                                <span class="contact-section2_list__text">6391 Elgin St. Celina, Delaware 10299 <br> 2464 Royal Ln. Mesa, New Jersey 45463</span>
+                                <span class="contact-section2_list__text">35/6 đường D5, Q. Bình Thạnh, TP.HCM </span>
                             </li>
                             <li>
                                 <span class="contact-section2_list__icon"><i class="lastudioicon lastudioicon-phone-2"></i></span>
-                                <span class="contact-section2_list__text">+880-123-456789 <br> +880-123-456789</span>
+                                <span class="contact-section2_list__text">1800 1779</span>
                             </li>
                             <li>
                                 <span class="contact-section2_list__icon"><i class="lastudioicon lastudioicon-mail"></i></span>
-                                <span class="contact-section2_list__text">info@admin.com <br> test.mail.com</span>
+                                <span class="contact-section2_list__text">aptech2@aprotrain.com</span>
                             </li>
                         </ul>
                     </div>
@@ -77,19 +87,19 @@
                             <div class="row">
                                 <div class="col-sm-6 col-6 form-p">
                                     <div class="form-group">
-                                        <label>First Name*</label>
+                                        <label>Name*</label>
                                         <input class="form-field" type="text" name="name">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-6 form-p">
                                     <div class="form-group">
-                                        <label>Last Name*</label>
-                                        <input class="form-field" type="text" name="lastname">
+                                        <label>Phone*</label>
+                                        <input class="form-field" type="phone" name="phone">
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-p">
                                     <div class="form-group">
-                                        <label>Email Address*</label>
+                                        <label>Email*</label>
                                         <input class="form-field" type="email" name="email">
                                     </div>
                                 </div>
@@ -119,7 +129,7 @@
     <div class="section">
         <!-- Google Map Area Start -->
         <div class="google-map-area w-100" data-aos="fade-up" data-aos-duration="1000">
-            <iframe class="contact-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2136.986005919501!2d-73.9685579655238!3d40.75862446708152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258e4a1c884e5%3A0x24fe1071086b36d5!2sThe%20Atrium!5e0!3m2!1sen!2sbd!4v1585132512970!5m2!1sen!2sbd"></iframe>
+            <iframe class="contact-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.0604020544074!2d106.71161967507751!3d10.806685889343976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529ed00409f09%3A0x11f7708a5c77d777!2zQXB0ZWNoIENvbXB1dGVyIEVkdWNhdGlvbiAtIEjhu4cgVGjhu5FuZyDEkMOgbyB04bqhbyBM4bqtcCBUcsOsbmggVmnDqm4gUXXhu5FjIHThur8gQXB0ZWNo!5e0!3m2!1svi!2s!4v1728360582273!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <!-- Google Map Area Start -->
     </div>
@@ -157,10 +167,9 @@
                                 <h4 class="footer-widget__title">Categories</h4>
 
                                 <ul class="footer-widget__link">
-                                    <li><a href="{{ route('category')}}">Sweet Breads</a></li>
-                                    <li><a href="{{ route('category')}}">Baked Goods</a></li>
-                                    <li><a href="{{ route('category')}}">Cakes</a></li>
-                                    <li><a href="{{ route('category')}}">Cheesecakes</a></li>
+                                  @foreach ($categories->take(4) as $category)
+                                    <li><a class="sub-item-link" href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}"><span>{{ $category->category_name }}</span></a></li>
+                                  @endforeach
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -170,9 +179,7 @@
                                 <h4 class="footer-widget__title">Services</h4>
 
                                 <ul class="footer-widget__link">
-                                    <li><a href="{{ route('delivery')}}">Delivery</a></li>
                                     <li><a href="{{ route('checkout')}}">Payment</a></li>
-                                    <li><a href="{{ route('exchange-return-policy')}}">Exchange & Return Policy</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -184,7 +191,7 @@
                                 <ul class="footer-widget__link">
                                     <li><a href="{{ route('about')}}">About Us</a></li>
                                     <li><a href="{{ route('contact')}}">Contact Us</a></li>
-                                    <li><a href="{{ route('blog-detail')}}">Latest Post</a></li>
+                                    <li><a href="{{ route('faq') }}">FAQs</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->

@@ -348,30 +348,7 @@
                         <!-- Instagram Widget End -->
 
                         <!-- Banner Widget Start -->
-                        <div class="sidebars_widget">
-                            <a href="shop.html" class="sidebars_widget__banner">
-                                <img src="https://i.pinimg.com/564x/fe/69/a9/fe69a9c516fda99fbec304e802be28e2.jpg" alt="banner-Image">
 
-                                <div class="banner-content">
-                                    <span class="banner-content_title">Check it now</span>
-                                </div>
-                                <div class="banner-content">
-                                    <span class="banner-content_title">Check it now</span>
-                                </div>
-                                <div class="banner-content">
-                                    <span class="banner-content_title">Check it now</span>
-                                </div>
-                                <div class="banner-content">
-                                    <span class="banner-content_title">Check it now</span>
-                                </div>
-                                <div class="banner-content">
-                                    <span class="banner-content_title">Check it now</span>
-                                </div>
-                                <div class="banner-content">
-                                    <span class="banner-content_title">Check it now</span>
-                                </div>
-                            </a>
-                        </div>
                         <!-- Banner Widget End -->
 
 
@@ -586,7 +563,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><br><br>
 
     {{-- QuickView --}}
 

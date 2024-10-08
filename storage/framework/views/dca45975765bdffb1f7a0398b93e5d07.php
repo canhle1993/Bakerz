@@ -122,17 +122,17 @@
     <script>
         $(document).on('click', '.remove-btn', function(e) {
         e.preventDefault();
-
+        var _token = "<?php echo e(csrf_token()); ?>"; // CSRF token để bảo mật
         var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
-
         $.ajax({
             url: "<?php echo e(route('remove.from.wishlist')); ?>",
             method: 'POST',
             data: {
+                _token: _token,
                 product_id: productId,
-                _token: "<?php echo e(csrf_token()); ?>",  // Token bảo mật
             },
             success: function(response) {
+                console.log("OK");
                 if (response.status === 'success') {
                     // Reload lại trang hoặc xóa sản phẩm khỏi DOM
                     location.reload();  // Reload trang để cập nhật lại danh sách wishlist
@@ -141,6 +141,7 @@
                 }
             },
             error: function(xhr) {
+                console.log("ERROR");
                 console.error('Error:', xhr);
             }
         });

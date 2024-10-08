@@ -371,7 +371,7 @@
                           <span class="d-none d-sm-block">Change password</span>
                         </a>
                       </li>
-
+                      @if (Auth::check() && (Auth::user()->role_id == 2 || Auth::user()->role_id == 3))
                       <li class="nav-item" role="presentation" id="checkAdmin">
                         <a
                           class="nav-link px-4"
@@ -386,6 +386,8 @@
                           <span class="d-none d-sm-block">Dashboard</span>
                         </a>
                       </li>
+                      @endif
+
                     </ul>
                   </div>
                 </div>

@@ -293,11 +293,13 @@ class ProductController extends Controller
     //Xóa sản phẩm trong wishlist
     public function removeFromWishlist(Request $request)
     {
-        $product_id = $request->input('product_id');
+        $product_id = $request->product_id;
         $user_id = Auth::user()->user_id;  // Lấy ID của user hiện tại
-
+        
         // Xóa sản phẩm khỏi wishlist dựa trên user_id và product_id
-        Wishlist::table('wishlists')->where('user_id', $user_id)->where('product_id', $product_id)->delete();
+        Wishlist::where('user_id', $user_id)
+        ->where('product_id', $product_id)
+        ->delete();
 
         return response()->json(['status' => 'success', 'message' => 'Product removed from wishlist']);
     }
