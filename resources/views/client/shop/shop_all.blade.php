@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
+<title>Bakerz Bite</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
     <style>
         .pagination li {
             display: inline-block;

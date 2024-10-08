@@ -170,7 +170,7 @@
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="text-primary">Pending Order Management</h1>
+        <h1 class="">Confirmed Order Management</h1>
         
     </div>
 
@@ -197,7 +197,7 @@
                 <td>Confirmed</td>
 
                 <td class="text-center">
-                    <button data-order-id="{{ $item->order_id }}" class="btn btn-sm btn-outline-info view">
+                    <button style="color: black !important;" data-order-id="{{ $item->order_id }}" class="btn btn-sm btn-outline-info view">
                         View
                     </button>
                     <!-- Button to lower admin role to client -->
@@ -207,7 +207,7 @@
                             <i class="bi bi-box-arrow-right"></i> Confimed
                         </button>
                     </form>
-                    <a class="btn btn-sm btn-danger bi bi-trash" href="#" data-url="{{ route('order.gotoCancel', $item->order_id) }}" onclick="showDeleteModal(this)">Cancel</a>
+                    <a style="color: black !important;" class="btn btn-sm btn-danger bi bi-trash" href="#" data-url="{{ route('order.gotoCancel', $item->order_id) }}" onclick="showDeleteModal(this)">Cancel</a>
                     
                 </td>
 

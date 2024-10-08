@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame.png')); ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -339,21 +339,26 @@
                             <!-- header-primary-menu d-flex justify-content-center -->
                             <div class="header-meta__action d-flex justify-content-end">
                             <?php if(auth()->guard()->check()): ?>
-                            <li >
-                                <a  class=" action" href="<?php echo e(route('client.profile', ['userid' => Auth::user()->user_id])); ?>">
-                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="far fa-user"></i>
-                                    </button>
-                                </a>
-                            </li>
-                            <li >
-                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
-                                    <?php echo csrf_field(); ?>
-                                </form>
-                                <a  class="action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="fas fa-sign-out-alt"></i>
-                                    </button>
-                                </a>
-                            </li>
+                            <div class="header-menu">
+                                <ul class="header-primary-menu d-flex justify-content-center">
+                                    <li style="padding: 0px 0px !important; position: relative !important;"><a  class=" action" href="<?php echo e(route('client.profile', ['userid' => Auth::user()->user_id])); ?>">
+                                            <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="far fa-user"></i></button>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li><a class="sub-item-link" href="<?php echo e(route('client.profile', ['userid' => Auth::user()->user_id])); ?>"><span>Profile</span></a></li>
+                                            <li >
+                                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                                    <?php echo csrf_field(); ?>
+                                                </form>
+                                                <a  class="sub-item-link action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                    <button class=" action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="fas fa-sign-out-alt"></i>
+                                                    </button>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div> 
                             <?php endif; ?>
                             <?php if(auth()->guard()->guest()): ?>
 

@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame.png')); ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,29 +42,31 @@
         <!-- Spinner End -->
 
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-secondary navbar-dark">
-                <a href="<?php echo e(route('admin.dashboard')); ?>" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>BakerzBite</h3>
+        <div class="sidebar pe-4 pb-3" style="background-color: white !important;">
+            <nav class="navbar bg-secondary navbar-dark" style="background-color: white !important;">
+                <a  href="<?php echo e(route('admin.dashboard')); ?>"  class="navbar-brand mx-4 mb-3">
+                    <h3 style="color: #BC8157;"><i class="fa fa-user me-2"></i>BakerzBite</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0"><?php echo e(Auth::user()->name); ?></h6>
+                        <h6 style="color: #BC8157 !important;" class="mb-0"><?php echo e(Auth::user()->name); ?></h6>
                         <span><?php echo e(Auth::user()->role->role_name); ?></span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
                     
-                    <a href="<?php echo e(route('admin.dashboard')); ?>" class="nav-item nav-link <?php echo e(Request::routeIs('admin.dashboard') ? 'active' : ''); ?>"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('banner*') || Request::is('admin.chefs.create*') || Request::is('blog*')) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Pages</a>
+                    <a  href="<?php echo e(route('admin.dashboard')); ?>" class="nav-item nav-link <?php echo e(Request::routeIs('admin.dashboard') ? 'active' : ''); ?>"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <div  class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('banner*') || Request::is('admin.chefs.create*') || Request::is('blog*') || Request::is('blog*')) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('banner*') || Request::is('admin.chefs.create*') || Request::is('blog*')) ? 'show' : ''); ?>">
                             <a href="<?php echo e(route('banner.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Banner</a>
                             <a href="<?php echo e(route('admin.chefs.create')); ?>" class="bi-tag m-2 dropdown-item <?php echo e(Request::routeIs('catalog.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Chefs</a>
                             <a href="<?php echo e(route('blog.index')); ?>" class="bi-lightning m-2 dropdown-item <?php echo e(Request::routeIs('discount.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Blog</a>
+                            <!-- <a href="<?php echo e(route('admin.reviews.manage')); ?>" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a> -->
+                            <a href="<?php echo e(route('message.read')); ?>" class="m-2 dropdown-item <?php echo e(Request::routeIs('message.read') ? 'active' : ''); ?>">💞&nbsp;&nbsp;Review</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
@@ -89,8 +91,7 @@
                             <a href="<?php echo e(route('manage-blacklist')); ?>" class="dropdown-item">Blacklist</a>
                         </div>
                     </div>
-                    <!-- <a href="<?php echo e(route('admin.reviews.manage')); ?>" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a> -->
-                    <a href="<?php echo e(route('message.read')); ?>" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a>
+
                     <!-- Order Manager -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('order*') ) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Order Manager</a>
@@ -104,17 +105,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>User</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="signin.html" class="dropdown-item">User Management</a>
-                    <a href="signup.html" class="dropdown-item">Order</a>
-                    <a href="404.html" class="dropdown-item">Evaluate</a>
-                    <a href="blank.html" class="dropdown-item">Comment</a>
-                </div>
-                <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
+                
             </nav>
         </div>
         <!-- Sidebar End -->
@@ -122,7 +113,7 @@
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0" style="background-color: white !important;">
                 <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
                 </a>
@@ -251,7 +242,6 @@
         <!-- Content End -->
 
         <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
     <!-- JavaScript Libraries -->

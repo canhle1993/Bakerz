@@ -169,12 +169,12 @@
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="text-primary">Pending Order Management</h1>
+        <h1 class="">Pending Order Management</h1>
         
     </div>
 
     <table class="table text-start align-middle table-bordered table-hover mb-0">
-    <thead class="table-dark">
+    <thead class="">
             <tr>
                 <th>Order ID</th>
                 <th>Purchase Date</th>
@@ -196,7 +196,7 @@
                 <td><?php echo e($item->status); ?></td>
 
                 <td class="text-center">
-                    <button data-order-id="<?php echo e($item->order_id); ?>" class="btn btn-sm btn-outline-info view">
+                    <button data-order-id="<?php echo e($item->order_id); ?>" style="color: black;" class="btn btn-sm btn-outline-info view">
                         View
                     </button>
                     <!-- Button to lower admin role to client -->
@@ -207,7 +207,7 @@
                         </button>
                     </form>
                     
-                    <a class="btn btn-sm btn-danger bi bi-trash" href="#" data-url="<?php echo e(route('order.gotoCancel', $item->order_id)); ?>" onclick="showDeleteModal(this)">Cancel</a>
+                    <a style="color: black !important;" class="btn btn-sm btn-danger bi bi-trash" href="#" data-url="<?php echo e(route('order.gotoCancel', $item->order_id)); ?>" onclick="showDeleteModal(this)">Cancel</a>
                     
                 </td>
 

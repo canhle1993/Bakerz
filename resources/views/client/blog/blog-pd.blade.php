@@ -8,6 +8,8 @@
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="{{ $blog->content1 }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
+
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -339,21 +339,26 @@
                             <!-- header-primary-menu d-flex justify-content-center -->
                             <div class="header-meta__action d-flex justify-content-end">
                             @auth
-                            <li >
-                                <a  class=" action" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">
-                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="far fa-user"></i>
-                                    </button>
-                                </a>
-                            </li>
-                            <li >
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                                <a  class="action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="fas fa-sign-out-alt"></i>
-                                    </button>
-                                </a>
-                            </li>
+                            <div class="header-menu">
+                                <ul class="header-primary-menu d-flex justify-content-center">
+                                    <li style="padding: 0px 0px !important; position: relative !important;"><a  class=" action" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}">
+                                            <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="far fa-user"></i></button>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li><a class="sub-item-link" href="{{ route('client.profile', ['userid' => Auth::user()->user_id]) }}"><span>Profile</span></a></li>
+                                            <li >
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                                <a  class="sub-item-link action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                    <button class=" action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="fas fa-sign-out-alt"></i>
+                                                    </button>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div> 
                             @endauth
                             @guest
 
