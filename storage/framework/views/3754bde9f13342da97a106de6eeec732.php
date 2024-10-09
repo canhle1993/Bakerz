@@ -1326,7 +1326,8 @@
             sessionStorage.removeItem('scrollToA1');
         }
     });
-
+    var swiperMain;
+    var swiperThumb;
     $('.quickview').on('click', function(e) {
             e.preventDefault();
             var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
@@ -1338,24 +1339,37 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.status === 'success') {
-                        var product = response.product;  // Đối tượng product từ server
+                        // Hủy Swiper nếu đã tồn tại trước đó
+                        if (swiperMain) {
+                            swiperMain.destroy(true, true);
+                        }
+
+                        if (swiperThumb) {
+                            swiperThumb.destroy(true, true);
+                        }
                         
+                        var product = response.product;  // Đối tượng product từ server
                         // Đổ dữ liệu vào modal
                         $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
-                        $('#modal-single-product .desc-content').html(product.describe);  // Đổ mô tả sản phẩm
+                        
+                        $('#modal-single-product .desc-content').html(product.describe.replace(/\n/g, '<br>'));
                         
                         // Cập nhật hình ảnh sản phẩm
                         var imagesHtml = '';
+                        var thumbImageHtml = '';
                         var productImage = "<?php echo e(asset('storage/products/')); ?>/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
 
-                        imagesHtml += '<div class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + productImage + '" alt="Product"></div>';
+                        imagesHtml +='<a class="swiper-slide h-auto" href="' + productImage + '"><img class="w-100" src="' + productImage + '" alt="<?php echo e($product->product_name); ?>"></a>'
+                        
+                        thumbImageHtml+= '<div class="swiper-slide"><img src="' + productImage + '" alt=""></div>';
                         product.images.forEach(function(image) {
                             var imageUrl = "<?php echo e(asset('storage/products')); ?>/" + image.image; // Access the correct field inside image object
-                            imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
+                            imagesHtml += '<a class="swiper-slide h-auto" href="' + imageUrl + '"><img class="w-100" src="' + imageUrl + '" alt="<?php echo e($product->product_name); ?>"></a>'
+                            thumbImageHtml+= '<div class="swiper-slide"><img src="' + imageUrl + '" alt=""></div>';
                         });
                         var addCart = '<a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="'+ product.product_id +'">Add to cart</a>';
                         $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
-                        $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
+                        $('.product-thumb-vertical .swiper-wrapper').html(thumbImageHtml);
                         console.log("Product ID:" + product.product_id);
                         $('.add-to_cart .add-to-cart').replaceWith(addCart);
                         // Hiển thị modal
@@ -1370,7 +1384,11 @@
             });
             
         });
-
+        $('#exampleProductModal').on('hidden.bs.modal', function () {
+            // Reset trạng thái modal, nếu cần
+            swiperMain = null;
+            swiperThumb = null;
+        });
         // Bắt sự kiện click vào thẻ <a> và submit form
         $(document).on('click', '#health_readmore', function(e) {
             e.preventDefault(); // Ngăn không cho thẻ <a> chuyển trang

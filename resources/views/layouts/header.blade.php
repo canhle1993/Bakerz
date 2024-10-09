@@ -271,8 +271,8 @@
                                     <li class="mega-menu-item">
                                         <ul>
                                             <li class="mega-menu-item-title">Featured Product</li>
-                                            <li><a class="sub-item-link" href="{{ route('shop.filter_nonCatagory', ['isOption' => 3]) }}">Discount</a></li>
-                                            <li><a class="sub-item-link" href="{{ route('shop.filter_nonCatagory', ['isOption' => 4]) }}">What Hot</a></li>
+                                            <li><a class="sub-item-link" href="{{ route('shop.filter_nonCatagory', ['isOption' => 3]) }}"><span>Discount</span></a></li>
+                                            <li><a class="sub-item-link" href="{{ route('shop.filter_nonCatagory', ['isOption' => 4]) }}"><span>What Hot</span></a></li>
                                             <!-- Hiển thị 2 category cuối cùng -->
                                             @foreach ($categories->slice(-3) as $category)
                                             <li><a class="sub-item-link" href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}"><span>{{ $category->category_name }}</span></a></li>
@@ -308,7 +308,6 @@
                                     <li><a class="sub-item-link" href="{{ route('faq') }}"><span>FAQs</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('pricing-plan') }}"><span>Bakerz Bite Rewards</span></a></li>
                                     <li><a class="sub-item-link" href="{{ route('coming-soon') }}"><span>Coming Soon</span></a></li>
-                                    <li><a class="sub-item-link" href="{{ route('client_location') }}"><span>Client Location</span></a></li>
                                 </ul>
                             </li>
                             <li><a class="menu-item-link" href="{{ route('about') }}"><span>About</span></a>

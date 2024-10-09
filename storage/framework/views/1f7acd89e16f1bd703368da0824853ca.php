@@ -247,7 +247,7 @@
                                         <h3 class="sidebars_widget__title">Category</h3>
                                         <ul class="sidebars_widget__category">
                                             <li><a href="<?php echo e(route('shop_all')); ?>">All Products</a></li>
-                                            <li><a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>">Discount</a></li>
+                                            <li><a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>" >Discount</a></li>
                                             <li><a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 4])); ?>">What Hot</a></li>
                                             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <li><a href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><?php echo e($category->category_name); ?></a></li>
@@ -326,25 +326,25 @@
                             <h3 class="sidebars_widget__title">Instagram</h3>
                             <ul class="sidebars_widget__instagram " >
                                 <li>
-                                    <a class="instagram-thumb" href="#">
+                                    <a class="instagram-thumb" href="https://www.instagram.com/aptechvn.official/">
                                         <img src="https://i.pinimg.com/564x/80/35/60/803560020f0f772bb12862e1eb2f50c0.jpg"  alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="instagram-thumb" href="#">
+                                    <a class="instagram-thumb" href="https://www.instagram.com/aptechvn.official/">
                                         <img src="https://i.pinimg.com/564x/61/e1/38/61e13860559dac54522ad4c622c37705.jpg" alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="instagram-thumb" href="#">
+                                    <a class="instagram-thumb" href="https://www.instagram.com/aptechvn.official/">
                                         <img src="https://i.pinimg.com/564x/d0/e5/10/d0e5108a1db4e95a60a13e520531bc13.jpg" alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="instagram-thumb" href="#">
+                                    <a class="instagram-thumb" href="https://www.instagram.com/aptechvn.official/">
                                         <img src="https://i.pinimg.com/564x/8e/f4/b9/8ef4b9e35ed97c97fde4b0cfb45d5af3.jpg" alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
@@ -354,7 +354,17 @@
                         <!-- Instagram Widget End -->
 
                         <!-- Banner Widget Start -->
+                            <!-- Banner Widget Start -->
+                            <div class="sidebars_widget">
+                                <a href="shop.html" class="sidebars_widget__banner">
+                                    <img src="<?php echo e(asset('assets/images/banner/sidebarbanner.jpg')); ?>" alt="banner-Image">
 
+                                    <div class="banner-content">
+                                        <span class="banner-content_title">Check it now</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Banner Widget End -->
                         <!-- Banner Widget End -->
 
 

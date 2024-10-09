@@ -29,6 +29,8 @@
 
     <!-- Template Stylesheet -->
     <link href="<?php echo e(asset('darkpan-1.0.0/css/style.css')); ?>" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -233,7 +235,6 @@
             <?php echo $__env->yieldContent('coming_soon_content'); ?> <!-- Thêm phần này cho Coming Soon -->
 
             <!-- Body End -->
-
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4" >
                 <div class="bg-secondary rounded-top p-4" style="background-color: #FFFFFF !important;">

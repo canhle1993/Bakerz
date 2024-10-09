@@ -11,61 +11,17 @@
     <style>
         #map {
             height: 500px;
-            width: 500px;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <h1>Vị trí hiện tại của bạn</h1>
-    <p id="distance">Đang tính toán khoảng cách...</p>
+    <h1  style="display: none;">Vị trí hiện tại của bạn</h1>
+    <p id="distance">The distance from your location to the store is: </p>
     <div id="map">Đang tải bản đồ...</div>
 
-    <!-- Form để nhập tọa độ thủ công -->
-    <h2>Nhập tọa độ thủ công</h2>
-    <form id="manualLocationForm">
-        <label for="latitude">Latitude:</label>
-        <input type="text" id="latitude" name="latitude" required><br><br>
-        <label for="longitude">Longitude:</label>
-        <input type="text" id="longitude" name="longitude" required><br><br>
-        <button type="submit">Tính khoảng cách</button>
-    </form>
-
     <script>
-        // Xử lý nhập vị trí thủ công
-        document.getElementById('manualLocationForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Lấy giá trị từ form
-            let latitude = document.getElementById('latitude').value;
-            let longitude = document.getElementById('longitude').value;
-
-            if (!latitude || !longitude) {
-                alert('Vui lòng nhập đầy đủ tọa độ');
-                return;
-            }
-
-            // Hiển thị bản đồ với vị trí nhập thủ công
-            displayMap(parseFloat(latitude), parseFloat(longitude));
-
-            // Gửi tọa độ đến server để tính toán khoảng cách
-            axios.post('/calculate-distance', {
-                latitude: latitude,
-                longitude: longitude
-            }, {
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
-            })
-            .then(response => {
-                console.log(response.data);
-                document.getElementById('distance').innerText = `Khoảng cách đến cửa hàng: ${response.data.distance} km`;
-            })
-            .catch(error => {
-                console.error('Lỗi khi tính toán khoảng cách:', error);
-            });
-        });
-
-        // Khởi tạo bản đồ Google Maps sau khi lấy vị trí người dùng
+        // Khởi tạo bản đồ Google Maps và chỉ đường
         function displayMap(latitude, longitude) {
             var userLocation = { lat: latitude, lng: longitude };
             var storeLocation = { lat: 10.80688612, lng: 106.71420533 }; // Tọa độ cửa hàng
@@ -88,6 +44,26 @@
                 map: map,
                 title: 'Cửa hàng'
             });
+
+            // Tạo dịch vụ chỉ đường
+            var directionsService = new google.maps.DirectionsService();
+            var directionsRenderer = new google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(map);
+
+            // Tính toán và hiển thị chỉ đường
+            var request = {
+                origin: userLocation,
+                destination: storeLocation,
+                travelMode: 'DRIVING' // Phương tiện di chuyển: 'DRIVING', 'WALKING', 'BICYCLING', 'TRANSIT'
+            };
+
+            directionsService.route(request, function(result, status) {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(result); // Hiển thị chỉ đường lên bản đồ
+                } else {
+                    console.error('Lỗi khi chỉ đường: ' + status);
+                }
+            });
         }
 
         // Lấy vị trí của người dùng và hiển thị trên bản đồ
@@ -98,7 +74,7 @@
 
                 console.log("Vị trí của bạn:", latitude, longitude);
 
-                // Hiển thị bản đồ với vị trí của người dùng
+                // Hiển thị bản đồ với vị trí của người dùng và tính toán chỉ đường
                 displayMap(latitude, longitude);
 
                 // Gửi tọa độ đến server để tính toán khoảng cách
@@ -112,7 +88,7 @@
                 })
                 .then(response => {
                     console.log(response.data);
-                    document.getElementById('distance').innerText = `Khoảng cách đến cửa hàng: ${response.data.distance} km`;
+                    document.getElementById('distance').innerText = `The distance from your location to the store is: ${response.data.distance} km`;
                 })
                 .catch(error => {
                     console.error('Lỗi khi tính toán khoảng cách:', error);
@@ -128,10 +104,9 @@
         }
     </script>
 
-    <!-- Nhúng Google Maps API với API Key của bạn mà không có callback -->
+    <!-- Nhúng Google Maps API với API Key của bạn -->
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLyLJ5CjThpOJAlZc593fLNIMm0XiBCHs">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLyLJ5CjThpOJAlZc593fLNIMm0XiBCHs&libraries=places">
     </script>
-    <a href="{{ route('client.home') }}">Quay về trang Home</a>
 </body>
 </html>
