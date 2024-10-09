@@ -358,6 +358,14 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::put('/deal-of-the-day/{id}/delete', [DealOfTheDayController::class, 'destroy'])->name('deal.destroy');
 });
 
-// Route cho trang chủ
+use App\Http\Controllers\Admin\ComingSoonController;
+
+Route::prefix('admin')->name('admin.')->group(function() {
+    // Routes cho Coming Soon
+    Route::get('/coming-soon', [ComingSoonController::class, 'index'])->name('coming_soon.index');
+    Route::post('/coming-soon/store', [ComingSoonController::class, 'store'])->name('coming_soon.store');
+    Route::put('/coming-soon/{id}/update', [ComingSoonController::class, 'update'])->name('coming_soon.update');
+    Route::put('/coming-soon/{id}/delete', [ComingSoonController::class, 'destroy'])->name('coming_soon.destroy');
+});
 
 

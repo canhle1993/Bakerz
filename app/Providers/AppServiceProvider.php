@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\Catalog;
 use App\Models\Chef;
+use App\Models\ComingSoon;
 use App\Models\DealOfTheDay;
 use App\Models\Notification;
 use App\Models\User;
@@ -131,6 +132,18 @@ class AppServiceProvider extends ServiceProvider
 
         $view->with('deals', $deals);
     });
+
+    // Chia sẻ thông tin Coming Soon
+    View::composer('*', function ($view) {
+        $comingSoon = ComingSoon::where('isdelete', 0)
+            ->orderBy('release_date', 'desc')
+            ->take(1)  // Lấy 1 sản phẩm sắp ra mắt mới nhất
+            ->get();
+    
+        $view->with('comingSoon', $comingSoon);
+    });
+    
+
     }
 
     

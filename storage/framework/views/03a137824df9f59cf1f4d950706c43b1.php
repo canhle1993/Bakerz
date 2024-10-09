@@ -108,6 +108,10 @@
                     <a href="<?php echo e(route('admin.deal.index')); ?>" class="nav-item nav-link">
                         <i class="fa fa-gift me-2"></i>Deal of the Day
                     </a>
+                    <a href="<?php echo e(route('admin.coming_soon.index')); ?>" class="nav-item nav-link">
+                        <i class="fa fa-gift me-2"></i>Coming Soon
+                    </a>
+
                 </div>
                 
             </nav>
@@ -226,6 +230,8 @@
             <?php echo $__env->yieldContent('admin_content'); ?>
             <?php echo $__env->yieldContent('blog_content'); ?>
             <?php echo $__env->yieldContent('deal_of_the_day_content'); ?>
+            <?php echo $__env->yieldContent('coming_soon_content'); ?> <!-- Thêm phần này cho Coming Soon -->
+
             <!-- Body End -->
 
             <!-- Footer Start -->
