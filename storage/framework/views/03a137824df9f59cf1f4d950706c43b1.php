@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-
     <link href="<?php echo e(asset('darkpan-1.0.0/lib/owlcarousel/assets/owl.carousel.min.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('darkpan-1.0.0/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')); ?>" rel="stylesheet" />
 
@@ -42,25 +41,34 @@
         </div>
         <!-- Spinner End -->
 
-
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-secondary navbar-dark">
-                <a href="<?php echo e(route('admin.dashboard')); ?>" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>BakerzBite</h3>
+        <div class="sidebar pe-4 pb-3" style="background-color: white !important;">
+            <nav class="navbar bg-secondary navbar-dark" style="background-color: white !important;">
+                <a  href="<?php echo e(route('admin.dashboard')); ?>"  class="navbar-brand mx-4 mb-3">
+                    <h3 style="color: #BC8157;"><i class="fa fa-user me-2"></i>BakerzBite</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0"><?php echo e(Auth::user()->name); ?></h6>
+                        <h6 style="color: #BC8157 !important;" class="mb-0"><?php echo e(Auth::user()->name); ?></h6>
                         <span><?php echo e(Auth::user()->role->role_name); ?></span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="<?php echo e(route('admin.dashboard')); ?>" class="nav-item nav-link <?php echo e(Request::routeIs('admin.dashboard') ? 'active' : ''); ?>"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    
+                    <a  href="<?php echo e(route('admin.dashboard')); ?>" class="nav-item nav-link <?php echo e(Request::routeIs('admin.dashboard') ? 'active' : ''); ?>"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <div  class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('banner*') || Request::is('admin.chefs.create*') || Request::is('blog*') || Request::is('blog*')) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Pages</a>
+                        <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('banner*') || Request::is('admin.chefs.create*') || Request::is('blog*')) ? 'show' : ''); ?>">
+                            <a href="<?php echo e(route('banner.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Banner</a>
+                            <a href="<?php echo e(route('admin.chefs.create')); ?>" class="bi-tag m-2 dropdown-item <?php echo e(Request::routeIs('catalog.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Chefs</a>
+                            <a href="<?php echo e(route('blog.index')); ?>" class="bi-lightning m-2 dropdown-item <?php echo e(Request::routeIs('discount.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Blog</a>
+                            <!-- <a href="<?php echo e(route('admin.reviews.manage')); ?>" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a> -->
+                            <a href="<?php echo e(route('message.read')); ?>" class="m-2 dropdown-item <?php echo e(Request::routeIs('message.read') ? 'active' : ''); ?>">💞&nbsp;&nbsp;Review</a>
+                        </div>
+                    </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
                         <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'show' : ''); ?>">
@@ -68,59 +76,48 @@
                             <a href="<?php echo e(route('catalog.index')); ?>" class="bi-tag m-2 dropdown-item <?php echo e(Request::routeIs('catalog.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Category</a>
                             <a href="<?php echo e(route('discount.index')); ?>" class="bi-lightning m-2 dropdown-item <?php echo e(Request::routeIs('discount.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Discount</a>
                             <a href="<?php echo e(route('heathy.index')); ?>" class="m-2 dropdown-item <?php echo e(Request::routeIs('heathy.index') ? 'active' : ''); ?>">💞&nbsp;&nbsp;Heathy Type</a>
+                            <a href="<?php echo e(route('product.index_instock')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index_instock') ? 'active' : ''); ?>">&nbsp;&nbsp;InStock Product</a>
+                            <a href="<?php echo e(route('product.index_outstock')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index_outstock') ? 'active' : ''); ?>">&nbsp;&nbsp;OutStock Product</a>
+                            <a href="<?php echo e(route('product.index_stockcheck')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index_stockcheck') ? 'active' : ''); ?>">&nbsp;&nbsp;Stock Check</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Management</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="<?php echo e(route('manage-client')); ?>" class="dropdown-item">Client</a>
-
                             <?php if(Auth::user()->role_id == 3): ?>
-                            <!-- Chỉ hiển thị phần quản lý Admin nếu user là Manager -->
-                            <a href="<?php echo e(route('manage-admin')); ?>" class="dropdown-item">Admin</a>
-                        <?php endif; ?>
-
+                                <a href="<?php echo e(route('manage-admin')); ?>" class="dropdown-item">Admin</a>
+                            <?php endif; ?>
                             <a href="<?php echo e(route('manage-blacklist')); ?>" class="dropdown-item">Blacklist</a>
                         </div>
                     </div>
-                    <a href="<?php echo e(route('admin.reviews.manage')); ?>" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a>
+
                     <!-- Order Manager -->
                     <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('order*') ) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Order Manager</a>
+                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('order*') ) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Order Manager</a>
                         <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('order*') ) ? 'show' : ''); ?>">
-                            <a href="<?php echo e(route('order.pending')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.pending') ? 'active' : ''); ?>">&nbsp;&nbsp;Pending Order</a>
-                            <a href="<?php echo e(route('order.paid')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.paid') ? 'active' : ''); ?>">&nbsp;&nbsp;Paid Order</a>
-                            <a href="<?php echo e(route('order.confirmed')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.confirmed') ? 'active' : ''); ?>">&nbsp;&nbsp;Confirmed Order</a>
-                            <a href="<?php echo e(route('order.delivered')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.delivered') ? 'active' : ''); ?>">&nbsp;&nbsp;Deliveried Order</a>
-                            <a href="<?php echo e(route('order.cancel')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.cancel') ? 'active' : ''); ?>">&nbsp;&nbsp;Cancel Order</a>
+                            <a href="<?php echo e(route('order.pending')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.pending') ? 'active' : ''); ?>">&nbsp;&nbsp;Pending</a>
+                            <!-- <a href="<?php echo e(route('order.paid')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.paid') ? 'active' : ''); ?>">&nbsp;&nbsp;Confirmed</a> -->
+                            <a href="<?php echo e(route('notification.read')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.paid') ? 'active' : ''); ?>">&nbsp;&nbsp;Confirmed</a>
+                            <a href="<?php echo e(route('order.confirmed')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.confirmed') ? 'active' : ''); ?>">&nbsp;&nbsp;Being delivered</a>
+                            <a href="<?php echo e(route('order.delivered')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.delivered') ? 'active' : ''); ?>">&nbsp;&nbsp;Delivered</a>
+                            <a href="<?php echo e(route('order.cancel')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.cancel') ? 'active' : ''); ?>">&nbsp;&nbsp;Cancel</a>
                         </div>
                     </div>
-                    </div>
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>User</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">User Management</a>
-                            <a href="signup.html" class="dropdown-item">Order</a>
-                            <a href="404.html" class="dropdown-item">Evaluate</a>
-                            <a href="blank.html" class="dropdown-item">Comment</a>
-
-                        </div>
-                            <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                            <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                            <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                            <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                    </div>
-
+                    <!-- Deal of the Day -->
+                    <a href="<?php echo e(route('admin.deal.index')); ?>" class="nav-item nav-link">
+                        <i class="fa fa-gift me-2"></i>Deal of the Day
+                    </a>
                 </div>
+                
             </nav>
         </div>
         <!-- Sidebar End -->
 
-
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0" style="background-color: white !important;">
                 <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
                 </a>
@@ -129,86 +126,87 @@
                 </a>
 
                 <div class="navbar-nav align-items-center ms-auto">
+                    <!-- Message Dropdown -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-envelope me-lg-2"></i>
+                            <i class="fa fa-envelope me-lg-2 position-relative">
+                                <?php if($reviewNotifications->count() > 0): ?>
+                                    <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;"><?php echo e($reviewNotifications->count()); ?></span>
+                                <?php endif; ?>
+                            </i>
                             <span class="d-none d-lg-inline-flex">Message</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all message</a>
+                            <?php if($reviewNotifications->isEmpty()): ?>
+                                <p class="dropdown-item text-center">Không có thông báo mới.</p>
+                            <?php else: ?>
+                                <?php $__currentLoopData = $reviewNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <a href="<?php echo e(route('message.read', $notification->id)); ?>" class="dropdown-item">
+                                        <div class="d-flex align-items-center">
+                                            <img class="rounded-circle" src="<?php echo e(asset('storage/avatars/' . $notification->user->avatar)); ?>" alt="User avatar" style="width: 40px; height: 40px;">
+                                            <div class="ms-2">
+                                                <h6 class="fw-normal mb-0"><?php echo e($notification->user->name); ?> đã <?php echo e($notification->review_id ? 'gửi một đánh giá' : 'trả lời đánh giá'); ?>.</h6>
+                                                <small><?php echo e(\Carbon\Carbon::parse($notification->created_at)->diffForHumans()); ?></small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <hr class="dropdown-divider">
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <a href="<?php echo e(route('admin.reviews.manage')); ?>" class="dropdown-item text-center">Xem tất cả thông báo</a>
+                            <?php endif; ?>
                         </div>
                     </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notificatin</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Profile updated</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">New user added</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Password changed</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all notifications</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
 
+                    <!-- Notification Dropdown -->
+                    <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fa fa-bell me-lg-2 position-relative">
+                            <?php
+                                $orderCount = $orderNotifications->count();
+                            ?>
+                            <?php if($orderCount > 0): ?>
+                                <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;"><?php echo e($orderCount); ?></span>
+                            <?php endif; ?>
+                        </i>
+                        <span class="d-none d-lg-inline-flex"> Notifications</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        <?php if($orderNotifications->isEmpty()): ?>
+                            <p class="dropdown-item text-center">Không có thông báo đơn hàng mới.</p>
+                        <?php else: ?>
+                            <?php $__currentLoopData = $orderNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <a href="<?php echo e(route('notification.read', $notification->order_id)); ?>" class="dropdown-item">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Hiển thị avatar của user -->
+                                        <img class="rounded-circle" src="<?php echo e(asset('storage/avatars/' . $notification->user->avatar)); ?>" alt="User avatar" style="width: 40px; height: 40px;">
+                                        <div class="ms-2">
+                                            <!-- Hiển thị tên user và thông báo -->
+                                            <h6 class="fw-normal mb-0"><?php echo e($notification->user->name); ?> vừa đặt đơn hàng mới.</h6>
+                                            <small><?php echo e($notification->created_at->diffForHumans()); ?></small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <hr class="dropdown-divider">
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+
+                    <!-- Profile Dropdown -->
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="<?php echo e(asset('storage/avatars/' . Auth::user()->avatar)); ?>" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex"><?php echo e(Auth::user()->name); ?></span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0" style="background-color: #FFFFFF !important;">
                             <a href="<?php echo e(route('client.home')); ?>" class="dropdown-item"><i class="fa fa-home"></i> Home</a>
-                            <a href="<?php echo e(route('client.profile', ['userid' => Auth::user()->user_id])); ?>" class="dropdown-item"><i class=" fa fa-suitcase"></i> My Profile</a>
+                            <a href="<?php echo e(route('client.profile', ['userid' => Auth::user()->user_id])); ?>" class="dropdown-item"><i class="fa fa-suitcase"></i> My Profile</a>
                             <a href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item"><i class="fa fa-key"></i> Log Out</a>
                         </div>
                         <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
-            <?php echo csrf_field(); ?>
-        </form>
+                            <?php echo csrf_field(); ?>
+                        </form>
                     </div>
                 </div>
             </nav>
@@ -225,42 +223,30 @@
             <?php echo $__env->yieldContent('manage_client_edit'); ?>
             <?php echo $__env->yieldContent('manage_admin_create'); ?>
             <?php echo $__env->yieldContent('manage_blacklist'); ?>
-
-            <!-- Body -->
-
-
+            <?php echo $__env->yieldContent('admin_content'); ?>
+            <?php echo $__env->yieldContent('blog_content'); ?>
+            <?php echo $__env->yieldContent('deal_of_the_day_content'); ?>
+            <!-- Body End -->
 
             <!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4">
-                    <div class="bg-secondary rounded-top p-4">
-                        <div class="row">
-                            <div
-                                class="col-12 col-sm-6 text-center text-sm-start"
-                            >
-                                &copy; <a href="#">bakerz bite</a>, All Right
-                                Reserved.
-                            </div>
-                            <div
-                                class="col-12 col-sm-6 text-center text-sm-end"
-                            >
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                                Designed By
-                                <a href="https://htmlcodex.com">HTML Codex</a>
-                                <br />Distributed By:
-                                <a href="https://themewagon.com" target="_blank"
-                                    >ThemeWagon</a
-                                >
-                            </div>
+            <div class="container-fluid pt-4 px-4" >
+                <div class="bg-secondary rounded-top p-4" style="background-color: #FFFFFF !important;">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">BakerzBite</a>, All Rights Reserved.
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            Designed By <a href="https://htmlcodex.com">HTML Codex</a><br>
+                            Distributed By: <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
                         </div>
                     </div>
                 </div>
+            </div>
             <!-- Footer End -->
         </div>
         <!-- Content End -->
 
-
         <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
     <!-- JavaScript Libraries -->

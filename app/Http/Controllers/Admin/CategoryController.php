@@ -21,7 +21,7 @@ class CategoryController extends Controller
             $query->where('category_name', 'like', '%' . $request->search . '%');
         }
 
-        $catalogs = $query->orderBy('ModifiedDate', 'desc')->paginate(5);
+        $catalogs = $query->paginate(5);
 
         return view('admin.catagorylist', compact('catalogs'));
     }

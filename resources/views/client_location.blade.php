@@ -1,12 +1,12 @@
-<!-- resources/views/client_location.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Kiểm tra khoảng cách đến cửa hàng</title>
+    <title>Bakerz Bite</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
         #map {
@@ -20,9 +20,53 @@
     <p id="distance">Đang tính toán khoảng cách...</p>
     <div id="map">Đang tải bản đồ...</div>
 
+    <!-- Form để nhập tọa độ thủ công -->
+    <h2>Nhập tọa độ thủ công</h2>
+    <form id="manualLocationForm">
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" required><br><br>
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" required><br><br>
+        <button type="submit">Tính khoảng cách</button>
+    </form>
+
     <script>
-        // Khởi tạo bản đồ Google Maps
-        function initMap(latitude, longitude) {
+        // Xử lý nhập vị trí thủ công
+        document.getElementById('manualLocationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Lấy giá trị từ form
+            let latitude = document.getElementById('latitude').value;
+            let longitude = document.getElementById('longitude').value;
+
+            if (!latitude || !longitude) {
+                alert('Vui lòng nhập đầy đủ tọa độ');
+                return;
+            }
+
+            // Hiển thị bản đồ với vị trí nhập thủ công
+            displayMap(parseFloat(latitude), parseFloat(longitude));
+
+            // Gửi tọa độ đến server để tính toán khoảng cách
+            axios.post('/calculate-distance', {
+                latitude: latitude,
+                longitude: longitude
+            }, {
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => {
+                console.log(response.data);
+                document.getElementById('distance').innerText = `Khoảng cách đến cửa hàng: ${response.data.distance} km`;
+            })
+            .catch(error => {
+                console.error('Lỗi khi tính toán khoảng cách:', error);
+            });
+        });
+
+        // Khởi tạo bản đồ Google Maps sau khi lấy vị trí người dùng
+        function displayMap(latitude, longitude) {
             var userLocation = { lat: latitude, lng: longitude };
             var storeLocation = { lat: 10.80688612, lng: 106.71420533 }; // Tọa độ cửa hàng
 
@@ -55,20 +99,25 @@
                 console.log("Vị trí của bạn:", latitude, longitude);
 
                 // Hiển thị bản đồ với vị trí của người dùng
-                initMap(latitude, longitude);
+                displayMap(latitude, longitude);
 
                 // Gửi tọa độ đến server để tính toán khoảng cách
                 axios.post('/calculate-distance', {
                     latitude: latitude,
                     longitude: longitude
+                }, {
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
                 })
                 .then(response => {
-                    // Hiển thị kết quả khoảng cách
+                    console.log(response.data);
                     document.getElementById('distance').innerText = `Khoảng cách đến cửa hàng: ${response.data.distance} km`;
                 })
                 .catch(error => {
                     console.error('Lỗi khi tính toán khoảng cách:', error);
                 });
+
             }, function(error) {
                 console.error('Lỗi khi lấy vị trí:', error);
                 document.getElementById('distance').innerText = "Không thể lấy vị trí của bạn.";
@@ -79,10 +128,10 @@
         }
     </script>
 
-    <!-- Nhúng Google Maps API với API Key của bạn -->
+    <!-- Nhúng Google Maps API với API Key của bạn mà không có callback -->
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLyLJ5CjThpOJAlZc593fLNIMm0XiBCHs&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLyLJ5CjThpOJAlZc593fLNIMm0XiBCHs">
     </script>
-    <a href="{{ route('client.home') }}">Quay về trang Home</a></li>
+    <a href="{{ route('client.home') }}">Quay về trang Home</a>
 </body>
 </html>

@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserReview;
 use App\Models\UserReviewReply;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
@@ -15,13 +18,13 @@ class ReviewController extends Controller
         if (!Auth::check()) {
             return redirect()->back()->with('error', 'Bạn cần đăng nhập để đánh giá sản phẩm.');
         }
-    
+
         $request->validate([
             'ratestar' => 'required|integer|between:1,5',
             'comment' => 'nullable|string',
         ]);
-    
-        UserReview::create([
+
+        $review = UserReview::create([
             'ratestar' => $request->input('ratestar'),
             'comment' => $request->input('comment'),
             'user_id' => Auth::id(),
@@ -29,17 +32,42 @@ class ReviewController extends Controller
             'CreatedDate' => now(),
             'CreatedBy' => Auth::user()->name,
         ]);
-    
+
+        // Tạo thông báo cho admin
+        Notification::create([
+            'user_id' => Auth::id(),  // ID người dùng
+            'review_id' => $review->id,  // ID của review
+            'reply_id' => null,  // Không có reply
+            'is_read' => 0,  // Đánh dấu là chưa đọc
+            'type' => 'review',  // Loại thông báo là review
+            'created_at' => Carbon::now(),  // Thời gian tạo thông báo
+        ]);
+
         return redirect()->route('product.single', ['product' => $product_id])->with('success', 'Đánh giá của bạn đã được gửi thành công!');
     }
 
     // Hiển thị trang quản lý đánh giá
     public function manage()
     {
-        $reviews = UserReview::with(['user', 'product.catalogs'])->where('is_deleted', 0)->get();
-        return view('admin.reviews.manage', compact('reviews'));
+        // Lấy danh sách đánh giá và phân trang
+        $reviews = UserReview::with(['user', 'product.catalogs'])
+            ->where('is_deleted', 0)
+            ->orderBy('id', 'desc')
+            ->paginate(10); // Phân trang
 
+        // Lấy danh sách thông báo chưa đọc
+        $notifications = Notification::with('user')
+            ->where('is_read', 0)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Đánh dấu tất cả các thông báo là đã đọc
+        Notification::where('is_read', 0)->update(['is_read' => 1]);
+
+        // Truyền dữ liệu vào view
+        return view('admin.reviews.manage', compact('reviews', 'notifications'));
     }
+
 
     // Xóa đánh giá (đánh dấu là đã xóa)
     public function delete($id)
@@ -59,19 +87,44 @@ class ReviewController extends Controller
         $request->validate([
             'reply' => 'required|string',
         ]);
-    
+
         // Tìm đánh giá theo ID
         $review = UserReview::findOrFail($id);
-    
+
         // Lưu câu trả lời mới
         UserReviewReply::create([
             'userreview_id' => $review->ID,
             'user_id' => Auth::id(),
             'reply' => $request->input('reply')
         ]);
-    
+
         return redirect()->back()->with('success', 'Trả lời đã được gửi thành công.');
     }
+
+    // Lấy đánh giá 5 sao để hiển thị
+    public function showFiveStarReviews()
+    {
+        // Lấy đánh giá 5 sao mới nhất của mỗi tài khoản
+        $fiveStarReviews = User::join('userreview', 'user.user_id', '=', 'userreview.user_id') // Sử dụng 'user.user_id'
+            ->where('userreview.ratestar', '=', 5)
+            ->whereIn('userreview.ID', function ($query) {
+                $query->select(DB::raw('MAX(u3.ID)'))
+                    ->from('userreview as u3')
+                    ->where('u3.ratestar', '=', 5)
+                    ->groupBy('u3.user_id');
+            })
+            ->select('user.user_id', 'user.name', 'user.email', 'user.avatar', 'userreview.comment', 'userreview.CreatedDate')
+            ->orderBy('userreview.CreatedDate', 'desc')
+            ->limit(5)  // Giới hạn chỉ lấy 5 kết quả
+            ->get();
+
+
+        // dd($fiveStarReviews);
+        // Truyền biến $fiveStarReviews vào view
+        return view('client.pages.about', compact('fiveStarReviews'));
+    }
+    
+
 
 
 }

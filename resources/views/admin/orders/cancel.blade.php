@@ -169,7 +169,7 @@
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="text-primary">Pending Order Management</h1>
+        <h1 class="">Cancel Order Management</h1>
         
     </div>
 
@@ -195,7 +195,7 @@
                 <td>{{ $item->pay }}</td>
                 <td>{{ $item->status }}</td>
                 <td>
-                    <button data-order-id="{{ $item->order_id }}" class="btn btn-sm btn-outline-info view">
+                    <button style="color: black !important;" data-order-id="{{ $item->order_id }}" class="btn btn-sm btn-outline-info view">
                         View
                     </button>
                 </td>

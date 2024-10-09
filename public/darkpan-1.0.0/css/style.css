@@ -1,11 +1,19 @@
 /********** Template CSS **********/
 :root {
-    --primary: #EB1616;
-    --secondary: #191C24;
-    --light: #6C7293;
+    --primary: #eb1616;
+    --secondary: #191c24;
+    --light: #6c7293;
     --dark: #000000;
 }
-
+a:hover {
+    color: #ffffff !important;
+}
+th {
+    color: #000000 !important;
+}
+td {
+    color: #1f2242 !important;
+}
 .back-to-top {
     position: fixed;
     display: none;
@@ -14,25 +22,23 @@
     z-index: 99;
 }
 
-
 /*** Spinner ***/
 #spinner {
     opacity: 0;
     visibility: hidden;
-    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
     z-index: 99999;
 }
 
 #spinner.show {
-    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0s;
     visibility: visible;
     opacity: 1;
 }
 
-
 /*** Button ***/
 .btn {
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .btn-square {
@@ -61,7 +67,6 @@
     border-radius: 50px;
 }
 
-
 /*** Layout ***/
 .sidebar {
     position: fixed;
@@ -79,7 +84,7 @@
 .content {
     margin-left: 250px;
     min-height: 100vh;
-    background: var(--dark);
+    background: #abacb0 !important;
     transition: 0.5s;
 }
 
@@ -117,7 +122,6 @@
     }
 }
 
-
 /*** Navbar ***/
 .sidebar .navbar .navbar-nav .nav-link {
     padding: 7px 20px;
@@ -130,9 +134,9 @@
 
 .sidebar .navbar .navbar-nav .nav-link:hover,
 .sidebar .navbar .navbar-nav .nav-link.active {
-    color: var(--primary);
-    background: var(--dark);
-    border-color: var(--primary);
+    color: chocolate !important;
+    background: #bbb8b6 !important;
+    border-color: #bbb8b6 !important;
 }
 
 .sidebar .navbar .navbar-nav .nav-link i {
@@ -141,13 +145,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--dark);
+    background: #000000 !important;
     border-radius: 40px;
 }
 
 .sidebar .navbar .navbar-nav .nav-link:hover i,
 .sidebar .navbar .navbar-nav .nav-link.active i {
-    background: var(--secondary);
+    background: #46506a !important;
 }
 
 .sidebar .navbar .dropdown-toggle::after {
@@ -158,10 +162,10 @@
     content: "\f107";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    transition: .5s;
+    transition: 0.5s;
 }
 
-.sidebar .navbar .dropdown-toggle[aria-expanded=true]::after {
+.sidebar .navbar .dropdown-toggle[aria-expanded="true"]::after {
     transform: rotate(-180deg);
 }
 
@@ -173,7 +177,7 @@
 
 .sidebar .navbar .dropdown-item:hover,
 .sidebar .navbar .dropdown-item.active {
-    background: var(--dark);
+    background: #bbb8b6 !important;
 }
 
 .content .navbar .navbar-nav .nav-link {
@@ -185,7 +189,7 @@
 
 .content .navbar .navbar-nav .nav-link:hover,
 .content .navbar .navbar-nav .nav-link.active {
-    color: var(--primary);
+    color: chocolate !important;
 }
 
 .content .navbar .sidebar-toggler,
@@ -195,7 +199,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--dark);
+    background: #000000 !important;
     border-radius: 40px;
 }
 
@@ -205,7 +209,7 @@
 
 .content .navbar .dropdown-item:hover,
 .content .navbar .dropdown-item.active {
-    background: var(--dark);
+    background: #bbb8b6 !important;
 }
 
 .content .navbar .dropdown-toggle::after {
@@ -215,10 +219,10 @@
     content: "\f107";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    transition: .5s;
+    transition: 0.5s;
 }
 
-.content .navbar .dropdown-toggle[aria-expanded=true]::after {
+.content .navbar .dropdown-toggle[aria-expanded="true"]::after {
     transform: rotate(-180deg);
 }
 
@@ -227,7 +231,6 @@
         margin-left: 15px;
     }
 }
-
 
 /*** Date Picker ***/
 .bootstrap-datetimepicker-widget.bottom {
@@ -249,20 +252,18 @@
 
 .bootstrap-datetimepicker-widget table td.active,
 .bootstrap-datetimepicker-widget table td.active:hover {
-    background: var(--primary);
+    background: chocolate !important;
 }
 
 .bootstrap-datetimepicker-widget table td.today::before {
-    border-bottom-color: var(--primary);
+    border-bottom-color: chocolate !important;
 }
-
 
 /*** Testimonial ***/
 .progress .progress-bar {
     width: 0px;
     transition: 2s;
 }
-
 
 /*** Testimonial ***/
 .testimonial-carousel .owl-dots {
@@ -278,12 +279,12 @@
     margin: 0 5px;
     width: 15px;
     height: 15px;
-    border: 5px solid var(--primary);
+    border: 5px solid chocolate !important;
     border-radius: 15px;
-    transition: .5s;
+    transition: 0.5s;
 }
 
 .testimonial-carousel .owl-dot.active {
-    background: var(--dark);
-    border-color: var(--primary);
+    background: #46506a !important;
+    border-color: chocolate !important;
 }

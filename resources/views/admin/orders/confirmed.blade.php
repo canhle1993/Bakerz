@@ -61,7 +61,7 @@
 .pagination .page-link:hover {
     transform: scale(1.1);
     color: #fff;
-    background-color: #f80808;
+    background-color: #fff;
     box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
 }
 
@@ -169,7 +169,7 @@
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="text-primary">Pending Order Management</h1>
+        <h1 class="">Being Delivered Management</h1>
         
     </div>
 
@@ -193,10 +193,10 @@
                 <td>{{ $item->delivery_phone }}</td>
                 <td>{{ $item->delivery_address }}</td>
                 <td>{{ $item->pay }}</td>
-                <td>{{ $item->status }}</td>
+                <td>Being delivered</td>
 
                 <td class="text-center">
-                    <button data-order-id="{{ $item->order_id }}" class="btn btn-sm btn-outline-info view">
+                    <button style="color: black !important;" data-order-id="{{ $item->order_id }}" class="btn btn-sm btn-outline-info view">
                         View
                     </button>
                     <!-- Button to lower admin role to client -->
@@ -206,7 +206,7 @@
                             <i class="bi bi-box-arrow-right"></i> Delivered
                         </button>
                     </form>
-                    <a class="btn btn-sm btn-danger bi bi-trash" href="#" data-url="{{ route('order.gotoCancel', $item->order_id) }}" onclick="showDeleteModal(this)">Cancel</a>
+                    <a style="color: black !important;" class="btn btn-sm btn-danger bi bi-trash" href="#" data-url="{{ route('order.gotoCancel', $item->order_id) }}" onclick="showDeleteModal(this)">Cancel</a>
                     
                 </td>
 

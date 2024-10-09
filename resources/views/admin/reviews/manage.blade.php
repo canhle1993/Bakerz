@@ -14,13 +14,13 @@
         <thead>
             <tr>
                 <th>Avatar</th>
-                <th>Tên</th>
+                <th>Name</th>
                 <th>Email</th>
-                <th>Số điện thoại</th>
+                <th>Phone</th>
                 <th>Rating</th>
                 <th>Comment</th>
-                <th>Thời gian đánh giá</th>
-                <th>Hành động</th>
+                <th>Evaluation time</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -35,14 +35,14 @@
                     <td>{{ \Carbon\Carbon::parse($review->CreatedDate)->format('d/m/Y H:i:s') }}</td>
                     <td>
                         <!-- Nút Xem -->
-                        <button class="btn btn-info" onclick="toggleView('{{ $review->ID }}')">Xem</button>                       
+                        <button class="btn btn-info" onclick="toggleView('{{ $review->ID }}')">View</button>                       
                         <!-- Nút Trả Lời -->
-                        <button class="btn btn-primary" onclick="toggleReplyForm('{{ $review->ID }}')">Trả lời</button>    
+                        <button class="btn btn-success" onclick="toggleReplyForm('{{ $review->ID }}')">Reply</button>    
                         <!-- Nút Xóa -->
                         <form action="{{ route('reviews.delete', ['id' => $review->ID]) }}" method="POST" style="display: inline-block;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Xóa</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>          
                     </td>
                 </tr>
@@ -54,7 +54,7 @@
                             <form action="{{ route('reviews.reply', ['id' => $review->ID]) }}" method="POST">
                                 @csrf
                                 <textarea name="reply" class="form-control mb-2" placeholder="Nhập câu trả lời"></textarea>
-                                <button type="submit" class="btn btn-success">Gửi trả lời</button>
+                                <button type="submit" class="btn btn-success">Send</button>
                             </form>
                         </div>
                     </td>
@@ -64,13 +64,13 @@
                 <tr>
                     <td colspan="8">
                         <div id="view-info-{{ $review->ID }}" style="display:none;">
-                        <span><strong class="text-warning">Tên bánh:</strong> {{ $review->product->product_name }}</span>
-                        <span><strong class="text-warning"> <span class="text-danger">|</span> Danh mục bánh:</strong>
+                        <span><strong class="text-warning">Cake name:</strong> {{ $review->product->product_name }}</span>
+                        <span><strong class="text-warning"> <span class="text-danger">|</span> Cake category:</strong>
                             @foreach ($review->product->catalogs as $catalog)
                                 {{ $catalog->category_name }}{{ !$loop->last ? ', ' : '' }}
                             @endforeach
                             <span class="text-danger">|</span>
-                            <a href="{{ route('product.single', ['product' => $review->product->product_id]) }}#comment-{{ $review->ID }}" class="btn btn-primary btn-sm">Xem comment</a>
+                            <a href="{{ route('product.single', ['product' => $review->product->product_id]) }}#comment-{{ $review->ID }}" class="btn btn-primary btn-sm">View comment</a>
                         </span>
                         </div>
                     </td>
@@ -80,7 +80,10 @@
         </tbody>
     </table>
 </div>
-
+<div style="height: 20px;"></div>
+<div class="d-flex justify-content-center">
+    {{ $reviews->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
+</div>
 <script>
     function toggleReplyForm(id) {
         var replyForm = document.getElementById('reply-form-' + id);

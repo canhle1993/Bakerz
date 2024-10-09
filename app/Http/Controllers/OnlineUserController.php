@@ -12,9 +12,9 @@ class OnlineUserController extends Controller
         $files = glob(storage_path('framework/sessions/*'));
         $activeSessions = 0;
 
-        // Đếm các phiên hoạt động trong 2 phút qua
+        // Đếm các phiên hoạt động trong 1 giây qua
         foreach ($files as $file) {
-            if (filemtime($file) >= now()->subMinutes(2)->timestamp) {
+            if (filemtime($file) >= now()->subSeconds(60)->timestamp) {
                 $activeSessions++;
             }
         }

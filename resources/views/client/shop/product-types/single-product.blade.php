@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -146,7 +146,20 @@
                     <div class="product-head mb-3">
 
                         <!-- Price Start -->
-                        <span class="product-head-price">{{ formatPriceVND($product->price) }}</span>
+                        <span class="product-item__price">
+                            @if ($product->price != $product->getDiscountedPrice())
+                            <del>{{ formatPriceVND($product->price) }}</del>
+                            <!-- Giá gốc -->
+                        
+                            <strong style="color: red;"
+                            >${{ number_format($product->getDiscountedPrice(),2)
+                            }}</strong
+                            >
+                            <!-- Giá sau khi giảm -->
+                            @else {{ formatPriceVND($product->price) }}
+                            <!-- Giá không giảm -->
+                            @endif
+                        </span>
                         <!-- Price End -->
                          <div>
                                 <!-- Hiển thị thông báo -->
@@ -196,7 +209,7 @@
                             <!-- Cart Button Start -->
                             <div class="cart-btn">       
                                 <div class="add-to_cart">
-                                    <a class="btn btn-dark btn-hover-primary add-to-cart" href="#/" data-bs-toggle="modal" data-bs-target="#modalCart" data-product-id="{{ $product->product_id }}">Add to cart</a>
+                                    <a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="{{ $product->product_id }}">Add to cart</a>
                                 </div>
                             </div>
                             <!-- Cart Button End -->
@@ -205,7 +218,6 @@
                             <!-- Action Button Start -->
                             <div class="actions">
                                 <a href="#/" title="Wishlist" class="action compare" data-bs-toggle="modal" data-bs-target="#modalWishlist"><i class="lastudioicon-heart-2"></i></a>
-                                <a href="#/" title="Compare" class="action wishlist" data-bs-toggle="modal" data-bs-target="#modalCompare"><i class="lastudioicon-ic_compare_arrows_24px"></i></a>
                             </div>
                             <!-- Action Button End -->
                         </li>
@@ -338,9 +350,14 @@
                                         <form action="{{ route('reviews.store', ['product_id' => $product->product_id]) }}" method="POST" class="comments-area_form">
                                             @csrf
                                             <div class="mb-3">
+                                            @if ($errors->has('ratestar'))
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ $errors->first('ratestar') }}</strong>
+                                                </div>
+                                            @endif
                                                 <label for="ratestar">Rating (1-5):</label>
                                                 <div class="star-rating">
-                                                    <input type="radio" id="star5" name="ratestar" value="5" required />
+                                                    <input type="radio" id="star5" name="ratestar" value="5" checked required />
                                                     <label for="star5" title="5 stars">★</label>
                                                     <input type="radio" id="star4" name="ratestar" value="4" />
                                                     <label for="star4" title="4 stars">★</label>
@@ -403,31 +420,38 @@
                                 <div class="product-item text-center">
                                     <!-- <div class="product-item__badge">Hot</div> -->
                                     <div class="product-item__image border w-100">
-                                        <a href="{{ route('single-product', ['id' => $relatedProduct->product_id]) }}">
+                                        <a href="{{ route('product.single', ['product' => $product->product_id]) }}">
                                             <img width="350" height="350" src="{{ asset('storage/products/' . $relatedProduct->image) }}" alt="{{ $relatedProduct->product_name }}">
                                         </a>
                                         <ul class="product-item__meta">
-                                            <li class="product-item__meta-action">
-                                                <a class="shadow-1 labtn-icon-cart" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to Cart"></a>
-                                            </li>
+                                        <li class="product-item__meta-action">
+                                            <a
+                                            class="shadow-1 labtn-icon-cart add-to-cart"
+                                            href="#"
+                                            data-product-id="{{ $product->product_id }}"
+                                            ></a>
+                                        </li>
                                             <li class="product-item__meta-action">
                                                 <a class="shadow-1 labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
-                                            </li>
-                                            <li class="product-item__meta-action">
-                                                <a class="shadow-1 labtn-icon-compare" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to compare"></a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="product-item__content pt-5">
-                                        <h5 class="product-item__title"><a href="{{ route('single-product', ['id' => $relatedProduct->product_id]) }}">{{ $relatedProduct->product_name }}</a></h5>
-                                        @if($relatedProduct->price != $relatedProduct->getDiscountedPrice())
-                                            <span class="original-price">{{ formatPriceVND($relatedProduct->price) }}</span>
-                                            <span class="discounted-price">${{ number_format($relatedProduct->getDiscountedPrice(), 2) }}</span> <!-- Giá mới -->
-                                        @else
-                                        <span class="product-item__price"
-                                        >{{ formatPriceVND($relatedProduct->price) }}</span
+                                        <h5 class="product-item__title"><a href="{{ route('product.single', ['product' => $product->product_id]) }}">{{ $relatedProduct->product_name }}</a></h5>
+                                        <span class="product-item__price">
+                                        @if ($product->price != $product->getDiscountedPrice())
+                                        <del>{{ formatPriceVND($product->price) }}</del>
+                                        <!-- Giá gốc -->
+                                    
+                                        <strong style="color: red;"
+                                        >${{ number_format($product->getDiscountedPrice(),2)
+                                        }}</strong
                                         >
+                                        <!-- Giá sau khi giảm -->
+                                        @else {{ formatPriceVND($product->price) }}
+                                        <!-- Giá không giảm -->
                                         @endif
+                                    </span>
                                     </div>
                                 </div>
                                 <!-- Product Item End -->
@@ -542,6 +566,61 @@
 
             });
         });
+        $('.quickview').on('click', function(e) {
+            e.preventDefault();
+            var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+            // Gọi AJAX để lấy dữ liệu sản phẩm
+            $.ajax({
+                url: "{{ route('product.details', ':id') }}".replace(':id', productid), // Thay :id bằng product ID
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        var product = response.product;  // Đối tượng product từ server
+                        
+                        // Đổ dữ liệu vào modal
+                        $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
+                        $('#modal-single-product .desc-content').html(product.describe);  // Đổ mô tả sản phẩm
+                        
+                        // Cập nhật hình ảnh sản phẩm
+                        var imagesHtml = '';
+                        var productImage = "{{ asset('storage/products/') }}/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
+
+                        imagesHtml += '<div class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + productImage + '" alt="Product"></div>';
+                        product.images.forEach(function(image) {
+                            var imageUrl = "{{ asset('storage/products') }}/" + image.image; // Access the correct field inside image object
+                            imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
+                        });
+
+                        $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
+                        $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
+                        
+                        // Hiển thị modal
+                        $('#exampleProductModal').modal('show');
+                    } else {
+                        alert(response.message); // Hiển thị thông báo lỗi nếu có
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // Xử lý lỗi
+                }
+            });
+        });
+
+        function updateonlineUser() {
+                $.ajax({
+                    url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                    method: "GET",
+                    success: function(response) {
+                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                        // alert('An error occurred while updating the cart.');
+                    }
+                });
+            }
 
     </script>
 

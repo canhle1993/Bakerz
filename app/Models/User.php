@@ -37,7 +37,7 @@ class User extends Authenticatable
         'rank',
     ];
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for serialization..
      *
      * @var array<int, string>
      */
@@ -69,6 +69,11 @@ class User extends Authenticatable
     }
 
     public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
+    }
+
+    public function wishlists()
     {
         return $this->hasMany(Order::class, 'user_id');
     }

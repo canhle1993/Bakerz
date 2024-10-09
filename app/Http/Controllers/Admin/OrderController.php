@@ -14,7 +14,7 @@ class OrderController extends Controller
     // Hiển thị danh sách đơn hàng
     public function pending()
     {
-        $orders = Order::where('status', 'Pending')->orderBy('ModifiedDate', 'desc')->paginate(5);
+        $orders = Order::where('status', 'Pending')->orderBy('ModifiedDate', 'desc')->paginate(10);
         return view('admin.orders.pending', compact('orders'));
     }
 
@@ -29,7 +29,7 @@ class OrderController extends Controller
     // Hiển thị danh sách đơn hàng
     public function paid()
     {
-        $orders = Order::where('status', 'Paid')->orderBy('ModifiedDate', 'desc')->paginate(5);
+        $orders = Order::where('status', 'Paid')->orderBy('ModifiedDate', 'desc')->paginate(10);
         return view('admin.orders.paid', compact('orders'));
     }
 
@@ -44,7 +44,7 @@ class OrderController extends Controller
     // Hiển thị danh sách đơn hàng
     public function confirmed()
     {
-        $orders = Order::where('status', 'Confirmed')->orderBy('ModifiedDate', 'desc')->paginate(5);
+        $orders = Order::where('status', 'Confirmed')->orderBy('ModifiedDate', 'desc')->paginate(10);
         return view('admin.orders.confirmed', compact('orders'));
     }
 
@@ -84,14 +84,14 @@ class OrderController extends Controller
     // Hiển thị danh sách đơn hàng
     public function delivered()
     {
-        $orders = Order::where('status', 'Delivered')->orderBy('ModifiedDate', 'desc')->paginate(5);
+        $orders = Order::where('status', 'Delivered')->orderBy('ModifiedDate', 'desc')->paginate(10);
         return view('admin.orders.delivered', compact('orders'));
     }
 
     // Hiển thị danh sách đơn hàng
     public function cancel()
     {
-        $orders = Order::where('status', 'Cancel')->orderBy('ModifiedDate', 'desc')->paginate(5);
+        $orders = Order::where('status', 'Cancel')->orderBy('ModifiedDate', 'desc')->paginate(10);
         return view('admin.orders.cancel', compact('orders'));
     }
 
