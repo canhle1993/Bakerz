@@ -36,6 +36,11 @@
 
 
     <style>
+        .expired-text {
+            color: #00fb33;
+            font-weight: bold;
+            font-size: 1.2em; /* Tùy chỉnh kích thước chữ */
+        }
       .hidden-form {
         display: none;
       }
@@ -1185,7 +1190,7 @@
                 // Nếu đếm ngược về 0 thì ẩn phần tử ul
                 if (distance < 0) {
                     clearInterval(countdownFunction);
-                    countdownElement.innerHTML = "Promotion period expired";
+                    countdownElement.innerHTML = "<span class='expired-text'>Promotion period expired</span>";
                     
                     // Tìm phần tử ul gần nhất và ẩn nó
                     var dealMeta = countdownElement.closest('.deal-two_content').querySelector('.deal-two_meta');
