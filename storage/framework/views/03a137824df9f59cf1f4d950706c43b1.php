@@ -104,6 +104,10 @@
                             <a href="<?php echo e(route('order.cancel')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.cancel') ? 'active' : ''); ?>">&nbsp;&nbsp;Cancel</a>
                         </div>
                     </div>
+                    <!-- Deal of the Day -->
+                    <a href="<?php echo e(route('admin.deal.index')); ?>" class="nav-item nav-link">
+                        <i class="fa fa-gift me-2"></i>Deal of the Day
+                    </a>
                 </div>
                 
             </nav>
@@ -195,7 +199,7 @@
                             <img class="rounded-circle me-lg-2" src="<?php echo e(asset('storage/avatars/' . Auth::user()->avatar)); ?>" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex"><?php echo e(Auth::user()->name); ?></span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0" style="background-color: #FFFFFF !important;">
                             <a href="<?php echo e(route('client.home')); ?>" class="dropdown-item"><i class="fa fa-home"></i> Home</a>
                             <a href="<?php echo e(route('client.profile', ['userid' => Auth::user()->user_id])); ?>" class="dropdown-item"><i class="fa fa-suitcase"></i> My Profile</a>
                             <a href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item"><i class="fa fa-key"></i> Log Out</a>
@@ -221,11 +225,12 @@
             <?php echo $__env->yieldContent('manage_blacklist'); ?>
             <?php echo $__env->yieldContent('admin_content'); ?>
             <?php echo $__env->yieldContent('blog_content'); ?>
+            <?php echo $__env->yieldContent('deal_of_the_day_content'); ?>
             <!-- Body End -->
 
             <!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary rounded-top p-4">
+            <div class="container-fluid pt-4 px-4" >
+                <div class="bg-secondary rounded-top p-4" style="background-color: #FFFFFF !important;">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
                             &copy; <a href="#">BakerzBite</a>, All Rights Reserved.

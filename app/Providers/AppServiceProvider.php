@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\Catalog;
 use App\Models\Chef;
+use App\Models\DealOfTheDay;
 use App\Models\Notification;
 use App\Models\User;
 use App\Models\UserReview;
@@ -120,6 +121,16 @@ class AppServiceProvider extends ServiceProvider
             $chefs = Chef::where('isdelete', 0)->limit(3)->get(); // Lấy 3 đầu bếp
             $view->with('chefs', $chefs);
         });
+
+            // Chia sẻ biến $deals đến tất cả view
+    View::composer('*', function ($view) {
+        $deals = DealOfTheDay::where('isdelete', 0)
+            ->orderBy('promotion_date', 'desc') // Sắp xếp theo ngày khuyến mãi mới nhất
+            ->take(1)  // Lấy 1 deal mới nhất
+            ->get();
+
+        $view->with('deals', $deals);
+    });
     }
 
     

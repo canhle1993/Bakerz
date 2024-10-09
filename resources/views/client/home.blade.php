@@ -389,36 +389,67 @@
 <!-- Product Section End -->
 
 
+@if($deals->count() > 0)
+    @foreach($deals as $deal)
     <!-- Product Deal Section Start -->
-        <div class="section-padding-03 deal-two_bg" data-bg-image="assets/images/bg/product-deal-bg.jpg">
-            <div class="container custom-container-two">
+    <div class="section-padding-03 deal-two_bg" data-bg-image="assets/images/bg/product-deal-bg.jpg">
+        <div class="container custom-container-two">
             <div class="row row-cols-lg-2 row-cols-md-2 row-cols-1 align-items-center mb-n30">
                 <div class="col mb-30">
                     <div class="deal-two_images">
-                        <img class="deal-two_thumb" src="assets/images/product/product-deal.png" alt="Deal-Image">
+                        <!-- Thêm link ảnh từ deal -->
+                        <img class="deal-two_thumb" src="{{ asset('storage/' . $deal->image) }}" alt="{{ $deal->name }}">
                         <img class="deal-two_sale" src="assets/images/shape/hot-sale.png" alt="Sale-Image">
                     </div>
                 </div>
                 <div class="col mb-30">
                     <div class="deal-two_content">
                         <span class="deal-two_subtitle">Deal of the day</span>
-                        <h4 class="deal-two_title">Sesame Rye Bread</h4>
+                        <!-- Thêm tên deal -->
+                        <h4 class="deal-two_title">{{ $deal->name }}</h4>
                         <div class="countdown-area">
-                            <div class="countdown-wrapper" data-countdown="2024/10/04"></div>
+                            <!-- Thêm ngày khuyến mãi -->
+                            <div class="countdown-wrapper" data-countdown="{{ $deal->promotion_date }}"></div>
                         </div>
-                        <span class="deal-two_price"><span>$</span>4.99</span>
+                        <!-- Thêm giá tiền -->
+                        <span class="deal-two_price"><span>$</span>{{ number_format($deal->price, 2) }}</span>
 
                         <ul class="product-item__meta deal-two_meta">
-                            <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" ></a></li>
-                            <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                            <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                            <li class="product-item__meta-action">
+                                <a
+                                class="shadow-1 labtn-icon-cart add-to-cart"
+                                href="#"
+                                data-product-id="{{ $deal->product_id }}"
+                                ></a>
+                            </li>
+                            <li class="product-item__meta-action">
+                                <a
+                                class="labtn-icon-quickview quickview"
+                                    href="#"
+                                    data-product-id="{{ $deal->product_id }}"
+                                data-bs-tooltip="tooltip"
+                                data-bs-placement="top"
+                                title=""
+                                data-bs-original-title="Quick View"
+                                aria-label="Quick View"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleProductModal"
+                                ></a>
+                            </li>
+                            <li class="product-item__meta-action">
+                                <a class="labtn-icon-wishlist" href="#" data-product-id="{{ $deal->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
+                            </li>
                         </ul>
+
                     </div>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
     <!-- Product Deal Section End -->
+    @endforeach
+@endif
+
 
 </div>
 <!-- Product Section Start -->
@@ -1130,7 +1161,39 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        
+        document.addEventListener('DOMContentLoaded', function () {
+        // Lặp qua tất cả các phần tử có class 'countdown-wrapper'
+        document.querySelectorAll('.countdown-wrapper').forEach(function (countdownElement) {
+            var countdownDate = new Date(countdownElement.getAttribute('data-countdown')).getTime();
+
+            // Hàm tính thời gian đếm ngược
+            var countdownFunction = setInterval(function () {
+                var now = new Date().getTime();
+                var distance = countdownDate - now;
+
+                // Tính thời gian còn lại
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000)) / 1000);
+
+                // Hiển thị thời gian còn lại trong countdownElement
+                // countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+                // Nếu đếm ngược về 0 thì ẩn phần tử ul
+                if (distance < 0) {
+                    clearInterval(countdownFunction);
+                    countdownElement.innerHTML = "Promotion period expired";
+                    
+                    // Tìm phần tử ul gần nhất và ẩn nó
+                    var dealMeta = countdownElement.closest('.deal-two_content').querySelector('.deal-two_meta');
+                    if (dealMeta) {
+                        dealMeta.style.display = 'none';
+                    }
+                }
+            }, 1000);
+        });
+    });
 
       document
         .getElementById("healthSuggestionBtn")

@@ -337,3 +337,27 @@ Route::get('/wishlist', [ProductController::class, 'showWishlist'])->name('wishl
 Route::post('/remove-from-wishlist', [ProductController::class, 'removeFromWishlist'])->name('remove.from.wishlist');
 
 Route::get('/about', [ReviewController::class, 'showFiveStarReviews'])->name('about');
+
+
+// Định tuyến cho Deal of the Day
+use App\Http\Controllers\Admin\DealOfTheDayController;
+
+// Group route cho admin
+Route::prefix('admin')->name('admin.')->group(function() {
+    
+    // Route để hiển thị danh sách Deal
+    Route::get('/deal-of-the-day', [DealOfTheDayController::class, 'index'])->name('deal.index');
+
+    // Route để thêm Deal mới
+    Route::post('/deal-of-the-day/store', [DealOfTheDayController::class, 'store'])->name('deal.store');
+
+    // Route để cập nhật Deal
+    Route::put('/deal-of-the-day/{id}/update', [DealOfTheDayController::class, 'update'])->name('deal.update');
+
+    // Route để xóa Deal
+    Route::put('/deal-of-the-day/{id}/delete', [DealOfTheDayController::class, 'destroy'])->name('deal.destroy');
+});
+
+// Route cho trang chủ
+
+
