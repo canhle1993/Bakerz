@@ -335,3 +335,5 @@ Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog-pd');
 Route::post('/add-to-wishlist', [ProductController::class, 'addToWishlist'])->name('add.to.wishlist');
 Route::get('/wishlist', [ProductController::class, 'showWishlist'])->name('wishlist');
 Route::post('/remove-from-wishlist', [ProductController::class, 'removeFromWishlist'])->name('remove.from.wishlist');
+
+Route::get('/about', [ReviewController::class, 'showFiveStarReviews'])->name('about');

@@ -82,7 +82,11 @@
         </tbody>
     </table>
 </div>
+<div style="height: 20px;"></div>
+<div class="d-flex justify-content-center">
+    <?php echo e($reviews->appends(request()->except('page'))->links('pagination::bootstrap-4')); ?>
 
+</div>
 <script>
     function toggleReplyForm(id) {
         var replyForm = document.getElementById('reply-form-' + id);

@@ -252,30 +252,32 @@ class ProductController extends Controller
     //Hàm xử lý thả tim cho sản phẩm để sản phẩm vào trong trang wishlist
     public function addToWishlist(Request $request)
     {
-        $product_id = $request->input('product_id');
-        $user_id = Auth::user()->user_id;  // Lấy ID của user hiện tại
-
+        // Kiểm tra xem người dùng đã đăng nhập chưa
         if (!Auth::check()) {
             return response()->json(['status' => 'error', 'message' => 'You must be logged in to add to wishlist']);
         }
-
+    
+        // Lấy ID sản phẩm và user
+        $product_id = $request->input('product_id');
+        $user_id = Auth::user()->user_id;  // Lấy ID của user hiện tại
+    
         // Kiểm tra xem sản phẩm đã có trong wishlist chưa
         $exists = Wishlist::where('product_id', $product_id)
-                  ->where('user_id', $user_id)
-                  ->exists();
-
+                          ->where('user_id', $user_id)
+                          ->exists();
+    
         if (!$exists) {
             // Thêm sản phẩm vào wishlist
-            Wishlist::table('wishlists')->insert([
+            Wishlist::create([
                 'user_id' => $user_id,
                 'product_id' => $product_id,
             ]);
             return response()->json(['status' => 'success', 'message' => 'Added to wishlist']);
         }
-
+    
         return response()->json(['status' => 'error', 'message' => 'Product already in wishlist']);
     }
-
+    
 
     //Show thông tin sản phẩm được tim qua trang wishlist
     public function showWishlist()

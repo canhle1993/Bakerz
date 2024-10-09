@@ -330,7 +330,7 @@
                                 <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
                                 <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-instagram"></i></a>
                                 <b style="padding: 3px 0px;"><i class="fas fa-users"></i>
-                                <span  id="onlineCount" style="border: none; background-color: #0771fb; color: #eff0f2; padding: 2px 7px 2px 7px; border-radius: 99px; left: -4px; top: -8px; position: relative;"></span></b>
+                                <span  id="onlineCount" style=" padding: 2px 7px 2px 7px; border-radius: 99px;"></span></b>
                             </div>
                         </div>
                         <!-- Footer Widget Section End -->

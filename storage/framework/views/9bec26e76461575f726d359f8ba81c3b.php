@@ -20,19 +20,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Allura&family=Handlee&family=Inter:wght@300;400;500;600;700&family=Comfortaa:wght@300;400;500;600;700&family=Montaga&family=Pacifico&family=Fredericka+the+Great&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Yellowtail&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS (Bootstrap & Icon Font) -->
-    <link rel="stylesheet" href="./assets/css/vendor/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/vendor/lastudioicons.css">
-    <link rel="stylesheet" href="./assets/css/vendor/dliconoutline.css">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/vendor/bootstrap.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/vendor/lastudioicons.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/vendor/dliconoutline.css')); ?>">
 
     <!-- Plugins CSS (All Plugins Files) -->
-    <link rel="stylesheet" href="./assets/css/animate.min.css">
-    <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="./assets/css/ion.rangeSlider.min.css">
-    <link rel="stylesheet" href="./assets/css/lightgallery-bundle.min.css">
-    <link rel="stylesheet" href="./assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/animate.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/swiper-bundle.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/ion.rangeSlider.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/lightgallery-bundle.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/magnific-popup.css')); ?>">
 
     <!-- Style CSS -->
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/style.css')); ?>">
 
 </head>
 
@@ -222,23 +222,46 @@
 
     <!-- JS Vendor, Plugins & Activation Script Files -->
 
-    <!-- Vendors JS -->
-    <script src="./assets/js/vendor/modernizr-3.11.7.min.js"></script>
-    <script src="./assets/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="./assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
-    <script src="./assets/js/vendor/bootstrap.bundle.min.js"></script>
+     <!-- Vendors JS -->
+     <script src="<?php echo e(asset('assets/js/vendor/modernizr-3.11.7.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/vendor/jquery-3.6.0.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/vendor/jquery-migrate-3.3.2.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/vendor/bootstrap.bundle.min.js')); ?>"></script>
 
     <!-- Plugins JS -->
-    <script src="./assets/js/swiper-bundle.min.js"></script>
-    <script src="./assets/js/countdown.min.js"></script>
-    <script src="./assets/js/ion.rangeSlider.min.js"></script>
-    <script src="./assets/js/lightgallery.min.js"></script>
-    <script src="./assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="./assets/js/ajax.js"></script>
-    <script src="./assets/js/jquery.validate.min.js"></script>
+    <script src="<?php echo e(asset('assets/js/swiper-bundle.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/countdown.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/ion.rangeSlider.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/lightgallery.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/jquery.magnific-popup.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/ajax.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/jquery.validate.min.js')); ?>"></script>
 
     <!-- Activation JS -->
-    <script src="./assets/js/main.js"></script>
+    <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
+    <!-- Vendors JS -->
+     <script>
+        $(window).on("scroll", function (event) {
+            var scroll = $(window).scrollTop();
+            if (scroll <= 0) {
+                $(
+                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
+                ).removeClass("sticky");
+                $(".header-sticky .header-logo img").attr(
+                    "src",
+                    "<?php echo e(asset('assets/images/logo-white.svg')); ?>"
+                );
+            } else {
+                $(
+                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
+                ).addClass("sticky");
+                $(".header-sticky .header-logo img").attr(
+                    "src",
+                    "<?php echo e(asset('assets/images/logo.svg')); ?>"
+                );
+            }
+        });
+     </script>
 
 </body>
 

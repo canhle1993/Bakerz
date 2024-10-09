@@ -114,95 +114,34 @@
 <!-- About Section End -->
 
 <!-- Team Section Start -->
-<div class="team-2 section-padding-03 pt-0">
+<div class="team section-padding-03">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <!-- Section Title Strat -->
-                <div class="section-title-10 text-center">
-                    <h2 class="section-title-10__title mb-0 mb-lg-5 mb-md-3">Our Chef</h2>
-                </div>
-                <!-- Section Title End -->
-            </div>
-        </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mb-n25">
-            <!-- Single Teams start -->
+            @foreach($chefs as $chef)
+            <!-- Single Team start -->
             <div class="col mb-25">
-                <div class="team-2-wrapper">
-                    <div class="team-2-thumb">
-                        <img src="assets/images/team/team-1.jpg" alt="Team-Image">
+                <div class="team-3-wrapper">
+                <div class="team-3-thumb">
+                    <img src="{{ asset('storage/' . $chef->image) }}" alt="{{ $chef->name }}">
+                </div>
+
+                    <div class="team-3-content">
+                        <div class="team-3-head">
+                            <span class="team-3-name">{{ $chef->name }}</span>
+                            <span class="team-3-designation">{{ $chef->position }}</span>
+                        </div>
+                        <p class="team-3-text">{!! nl2br(e($chef->description)) !!}</p>
+                        <ul class="team-3-social">
+                            <li><a href="#"><i class="lastudioicon-b-facebook"></i></a></li>
+                            <li><a href="#"><i class="lastudioicon-b-twitter"></i></a></li>
+                            <li><a href="#"><i class="lastudioicon-b-pinterest"></i></a></li>
+                            <li><a href="#"><i class="lastudioicon-b-instagram"></i></a></li>
+                        </ul>
                     </div>
-                    <div class="team-2-content">
-                        <span class="team-2-name">Esther Howard</span>
-                        <span class="team-2-designation">Chef cook - Founder</span>
-                    </div>
-                    <ul class="team-2-social">
-                        <li>
-                            <a href=""><i class="lastudioicon-b-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="lastudioicon-b-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="lastudioicon-b-pinterest"></i></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="lastudioicon-b-instagram"></i></a>
-                        </li>
-                    </ul>
                 </div>
             </div>
-            <div class="col mb-25">
-                <div class="team-2-wrapper">
-                    <div class="team-2-thumb">
-                        <img src="assets/images/team/team-2.jpg" alt="Team-Image">
-                    </div>
-                    <div class="team-2-content">
-                        <span class="team-2-name">Kristin Watson</span>
-                        <span class="team-2-designation">Chef Cook</span>
-                    </div>
-                    <ul class="team-2-social">
-                        <li>
-                            <a href=""><i class="lastudioicon-b-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="lastudioicon-b-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="lastudioicon-b-pinterest"></i></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="lastudioicon-b-instagram"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col mb-25">
-                <div class="team-2-wrapper">
-                    <div class="team-2-thumb">
-                        <img src="assets/images/team/team-3.jpg" alt="Team-Image">
-                    </div>
-                    <div class="team-2-content">
-                        <span class="team-2-name">Darrell Steward</span>
-                        <span class="team-2-designation">Chef Cook</span>
-                    </div>
-                    <ul class="team-2-social">
-                        <li>
-                            <a href=""><i class="lastudioicon-b-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="lastudioicon-b-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="lastudioicon-b-pinterest"></i></a>
-                        </li>
-                        <li>
-                            <a href=""><i class="lastudioicon-b-instagram"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Single Teams end-->
+            <!-- Single Team end -->
+            @endforeach
         </div>
     </div>
 </div>
@@ -225,85 +164,34 @@
     <div class="testimonial-active-two my-0 mx-auto">
         <div class="swiper">
             <div class="swiper-wrapper">
-
-                <!-- swiper-slide start -->
-                <!-- Testimonial Item Strat -->
-                <div class="swiper-slide">
-                    <div class="testimonial-two text-center">
-                        <div class="testimonial-two_quote">
-                            <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
-                            </svg>
+            @if(isset($fiveStarReviews) && $fiveStarReviews->count() > 0)
+             @foreach($fiveStarReviews as $review)
+                        <div class="swiper-slide">
+                            <div class="testimonial-two text-center">
+                                <div class="testimonial-two_quote">
+                                <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
+                                </svg>
+                                </div>
+                                <p class="testimonial-two_text">{!! nl2br(e($review->comment)) !!}</p>
+                                <div class="testimonial-two_image">
+                                    <img width="56" height="56" src="{{ asset('storage/avatars/' . $review->avatar) }}" alt="Author"> <!-- Thay đổi đường dẫn avatar -->
+                                </div>
+                                <span class="testimonial-two_name">{{ $review->name }}</span>
+                                <span class="testimonial-two_position">{{ $review->address }}</span> <!-- Nếu có thêm địa chỉ -->
+                            </div>
                         </div>
-                        <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
-                        <div class="testimonial-two_image">
-                            <img width="56" height="56" src="assets/images/avatar/testimoial-1.png" alt="Author">
-                        </div>
-                        <span class="testimonial-two_name">Esther Howard</span>
-                        <span class="testimonial-two_position">New Yourk</span>
-                    </div>
-                </div>
-                <!-- Testimonial Item End -->
-                <!-- Testimonial Item Strat -->
-                <div class="swiper-slide">
-                    <div class="testimonial-two text-center">
-                        <div class="testimonial-two_quote">
-                            <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
-                            </svg>
-                        </div>
-                        <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
-                        <div class="testimonial-two_image">
-                            <img width="56" height="56" src="assets/images/avatar/testimoial-2.png" alt="Author">
-                        </div>
-                        <span class="testimonial-two_name">Elanor Pera</span>
-                        <span class="testimonial-two_position">Canada</span>
-                    </div>
-                </div>
-                <!-- Testimonial Item End -->
-                <!-- Testimonial Item Strat -->
-                <div class="swiper-slide">
-                    <div class="testimonial-two text-center">
-                        <div class="testimonial-two_quote">
-                            <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
-                            </svg>
-                        </div>
-                        <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
-                        <div class="testimonial-two_image">
-                            <img width="56" height="56" src="assets/images/avatar/testimoial-3.png" alt="Author">
-                        </div>
-                        <span class="testimonial-two_name">Krishna Barbe</span>
-                        <span class="testimonial-two_position">Singapore</span>
-                    </div>
-                </div>
-                <!-- Testimonial Item End -->
-                <!-- Testimonial Item Strat -->
-                <div class="swiper-slide">
-                    <div class="testimonial-two text-center">
-                        <div class="testimonial-two_quote">
-                            <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
-                            </svg>
-                        </div>
-                        <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
-                        <div class="testimonial-two_image">
-                            <img width="56" height="56" src="assets/images/avatar/testimoial-2.png" alt="Author">
-                        </div>
-                        <span class="testimonial-two_name">Esther Howard</span>
-                        <span class="testimonial-two_position">Dubai</span>
-                    </div>
-                </div>
-                <!-- Testimonial Item End -->
-                <!-- swiper-slide end-->
-
+                    @endforeach
+                @else
+                    <p>Không có đánh giá 5 sao nào.</p>
+                @endif
             </div>
         </div>
     </div>
     <!-- Testimonial Active End -->
-
 </div>
 <!-- Testimonial Section End -->
+
 
 <!-- Brand Section Strat -->
 <div class="brand-section">

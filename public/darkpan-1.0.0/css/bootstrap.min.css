@@ -1819,7 +1819,7 @@ progress {
     font-weight: 400;
     line-height: 1.5;
     color: #6c7293;
-    background-color: #b9d8b9;
+    background-color: #e7e5ec;
     background-clip: padding-box;
     border: 1px solid #b9d8b9;
     appearance: none;
@@ -6851,7 +6851,7 @@ fieldset:disabled .btn {
     background-color: #6c7293 !important;
 }
 .bg-dark {
-    background-color: #b9d8b9 !important;
+    background-color: #e6e5ec !important;
 }
 .bg-body {
     background-color: white !important;
