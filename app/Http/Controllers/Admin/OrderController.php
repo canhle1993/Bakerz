@@ -67,7 +67,7 @@ class OrderController extends Controller
                 $rank = 'Gold';
                 break;
 
-            case ($user->score >= 500):  // Rank Kim Cương
+            case ($user->score >= 500):  // Rank Kim Cương.
                 $rank = 'Diamond';
                 break;
 

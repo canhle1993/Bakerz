@@ -369,3 +369,29 @@ Route::prefix('admin')->name('admin.')->group(function() {
 });
 
 
+use App\Http\Controllers\ContactUsController;
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact_us.index');
+    Route::get('/contact-us/reply/{id}', [ContactUsController::class, 'showReplyForm'])->name('contact_us.reply'); // Hiển thị form trả lời
+    Route::post('/contact-us/reply/{id}', [ContactUsController::class, 'sendReply'])->name('contact_us.sendReply'); // Gửi trả lời
+    Route::delete('/contact-us/delete/{id}', [ContactUsController::class, 'delete'])->name('contact_us.delete'); // Xóa thông tin liên hệ
+});
+
+Route::post('/contact-us/store', [ContactUsController::class, 'store'])->name('contact.store');
+
+use App\Http\Controllers\WorkshopController;
+Route::prefix('admin/workshop')->group(function () {
+    Route::get('/', [WorkshopController::class, 'index'])->name('admin.workshop.index');
+    Route::post('/approve/{id}', [WorkshopController::class, 'approve'])->name('admin.workshop.approve');
+    Route::post('/cancel/{id}', [WorkshopController::class, 'cancel'])->name('admin.workshop.cancel');
+    Route::delete('/delete/{id}', [WorkshopController::class, 'delete'])->name('admin.workshop.delete');
+    Route::post('/register-workshop', [WorkshopController::class, 'registerWorkshop'])->name('workshop.register');
+});
+
+Route::get('/clear-success-session', function () {
+    session()->forget('isdone');
+    session()->forget('iserror');
+    return response()->json(['message' => 'Session cleared']);
+})->name('session.clearSuccess');
+

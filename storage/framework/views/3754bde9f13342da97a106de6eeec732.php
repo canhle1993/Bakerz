@@ -846,6 +846,7 @@
             <div class="swiper-wrapper">
             <?php if(isset($fiveStarReviews) && $fiveStarReviews->count() > 0): ?>
              <?php $__currentLoopData = $fiveStarReviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+             <?php if($review->is_deleted == 0): ?> <!-- Đảm bảo chỉ hiển thị các đánh giá chưa bị xóa -->
                         <div class="swiper-slide">
                             <div class="testimonial-two text-center">
                                 <div class="testimonial-two_quote">
@@ -861,6 +862,7 @@
                                 <span class="testimonial-two_position"><?php echo e($review->address); ?></span> <!-- Nếu có thêm địa chỉ -->
                             </div>
                         </div>
+                        <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php else: ?>
                     <p>Không có đánh giá 5 sao nào.</p>
@@ -1326,8 +1328,7 @@
             sessionStorage.removeItem('scrollToA1');
         }
     });
-    var swiperMain;
-    var swiperThumb;
+    
     $('.quickview').on('click', function(e) {
             e.preventDefault();
             var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
@@ -1340,17 +1341,10 @@
                 success: function(response) {
                     if (response.status === 'success') {
                         // Hủy Swiper nếu đã tồn tại trước đó
-                        if (swiperMain) {
-                            swiperMain.destroy(true, true);
-                        }
-
-                        if (swiperThumb) {
-                            swiperThumb.destroy(true, true);
-                        }
                         
                         var product = response.product;  // Đối tượng product từ server
                         // Đổ dữ liệu vào modal
-                        $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
+                        $('#modal-single-product .product-head-price').text("$" + response.discounted_price);  // Đổ giá sản phẩm
                         
                         $('#modal-single-product .desc-content').html(product.describe.replace(/\n/g, '<br>'));
                         
@@ -1372,6 +1366,7 @@
                         $('.product-thumb-vertical .swiper-wrapper').html(thumbImageHtml);
                         console.log("Product ID:" + product.product_id);
                         $('.add-to_cart .add-to-cart').replaceWith(addCart);
+                        
                         // Hiển thị modal
                         $('#exampleProductModal').modal('show');
                     } else {
@@ -1384,11 +1379,7 @@
             });
             
         });
-        $('#exampleProductModal').on('hidden.bs.modal', function () {
-            // Reset trạng thái modal, nếu cần
-            swiperMain = null;
-            swiperThumb = null;
-        });
+        
         // Bắt sự kiện click vào thẻ <a> và submit form
         $(document).on('click', '#health_readmore', function(e) {
             e.preventDefault(); // Ngăn không cho thẻ <a> chuyển trang

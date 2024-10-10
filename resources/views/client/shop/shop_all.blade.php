@@ -275,51 +275,42 @@
                                     </div>
                                 </div>
 
-
-
-
                             <!-- Price Filter Widget End -->
 
-                          <!-- Popular Product Widget Start -->
-                          <div class="sidebars_widget">
-                            <h3 class="sidebars_widget__title">Popular products</h3>
-                            <ul class="sidebars_widget__product">
-                                <!-- Single Product Start -->
-                                <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                        <img src="img/Sweet Breads1/Brioche/Brioche3.png" alt="Sidebar-Image">
-                                    </a>
-                                    <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Brioche</a>
-                                        <span class="single-product_content__price">$10</span>
-                                    </div>
-                                </li>
-                                <!-- Single Product End -->
-                                    <!-- Single Product Start -->
-                                    <li class="single-product">
-                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                            <img src="img/Sweet Breads1/Almond bread/Almond bread3.png" alt="Sidebar-Image">
-                                        </a>
-                                        <div class="single-product_content">
-                                            <a href="single-product.html" class="single-product_content__title">Almond bread</a>
-                                            <span class="single-product_content__price">$5</span>
-                                        </div>
-                                    </li>
-                                    <!-- Single Product End -->
-                                    <!-- Single Product Start -->
-                                    <li class="single-product">
-                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                            <img src="img/Cakes (1)/Blueberry cake.png" alt="Sidebar-Image">
-                                        </a>
-                                        <div class="single-product_content">
-                                            <a href="single-product.html" class="single-product_content__title">Blueberry cake</a>
-                                            <span class="single-product_content__price">$10</span>
-                                        </div>
-                                    </li>
-                                    <!-- Single Product End -->
-                            </ul>
-                        </div>
-                        <!-- Popular Product Widget End -->
+<!-- Popular Product Widget Start -->
+<div class="sidebars_widget">
+    <h3 class="sidebars_widget__title">Popular products</h3>
+    <ul class="sidebars_widget__product">
+        @foreach($bestSellingProducts->take(3) as $product)
+        <!-- Single Product Start -->
+        <li class="single-product">
+            <a href="{{ route('product.single', ['product' => $product->product_id]) }}" class="single-product_thumb" style="border: none; width: 127px;">
+                <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}">
+            </a>
+            <div class="single-product_content">
+                <a href="{{ route('product.single', ['product' => $product->product_id]) }}" class="single-product_content__title">{{ $product->product_name }}</a>
+                <span class="single-product_content__price">
+                    @if ($product->price != $product->getDiscountedPrice())
+                        <del>{{ formatPriceVND($product->price) }}</del>
+                        <!-- Giá gốc -->
+                    
+                        <strong style="color: red;"
+                        >${{ number_format($product->getDiscountedPrice(),2)
+                        }}</strong
+                        >
+                    <!-- Giá sau khi giảm -->
+                    @else {{ formatPriceVND($product->price) }}
+                    <!-- Giá không giảm -->
+                    @endif
+                </span>
+            </div>
+        </li>
+        <!-- Single Product End -->
+        @endforeach
+    </ul>
+</div>
+<!-- Popular Product Widget End -->
+
 
                          <!-- Instagram Widget Start -->
                          <div class="sidebars_widget">

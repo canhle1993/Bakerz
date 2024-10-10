@@ -9,12 +9,23 @@ use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Get all blogs with user info and return to the view
-        $blogs = Blog::with('user')->get();
+        // Lấy giá trị tìm kiếm từ request
+        $search = $request->query('search');
+    
+        // Lấy danh sách blog có tìm kiếm và sắp xếp theo ngày đăng mới nhất
+             $blogs = Blog::where('isdelete', 0) // Chỉ lấy những chef chưa bị xóa
+
+            ->when($search, function ($query, $search) {
+                return $query->where('blog_name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('posted_date', 'desc') // Sắp xếp theo ngày đăng mới nhất
+            ->paginate(5); // Phân trang
+    
         return view('admin.blog.index', compact('blogs'));
     }
+    
 
     public function store(Request $request)
     {

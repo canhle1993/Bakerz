@@ -258,31 +258,32 @@
                 <div class="col-md-6">
                     <div class="contact-section_formbg" data-bg-image="<?php echo e(asset('assets/images/bg/contact-form-bg.jpg')); ?>">
                         <h2 class="contact-section_form__title">Get in touch.</h2>
-                        <form class="contact-section_form" id="contact-form" action="http://whizthemes.com/mail-php/raju/arden/mail.php" method="post">
+                        <form class="contact-section_form" id="contact-form" action="<?php echo e(route('contact.store')); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
                             <div class="row">
                                 <div class="col-md-6 form-p">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="con_name" placeholder="Name">
+                                        <input class="form-control" type="text" name="name" placeholder="Name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 form-p">
                                     <div class="form-group">
-                                        <input class="form-control" type="email" name="con_email" placeholder="Email">
+                                        <input class="form-control" type="email" name="email" placeholder="Email" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 form-p">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="con_phone" placeholder="Phone">
+                                        <input class="form-control" type="text" name="phone" placeholder="Phone" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 form-p">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="con_address" placeholder="Address">
+                                        <input class="form-control" type="text" name="address" placeholder="Address" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-p">
                                     <div class="form-group">
-                                        <textarea class="form-control text-area" name="con_message" placeholder="Message"></textarea>
+                                        <textarea class="form-control text-area" name="comment" placeholder="Message" required></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-p">
@@ -292,6 +293,7 @@
                                 </div>
                             </div>
                         </form>
+
                         <!-- Message Notification -->
                         <div class="form-message"></div>
                     </div>

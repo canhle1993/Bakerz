@@ -275,51 +275,42 @@
                                     </div>
                                 </div>
 
-
-
-
                             <!-- Price Filter Widget End -->
 
-                          <!-- Popular Product Widget Start -->
-                          <div class="sidebars_widget">
-                            <h3 class="sidebars_widget__title">Popular products</h3>
-                            <ul class="sidebars_widget__product">
-                                <!-- Single Product Start -->
-                                <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                        <img src="img/Sweet Breads1/Brioche/Brioche3.png" alt="Sidebar-Image">
-                                    </a>
-                                    <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Brioche</a>
-                                        <span class="single-product_content__price">$10</span>
-                                    </div>
-                                </li>
-                                <!-- Single Product End -->
-                                    <!-- Single Product Start -->
-                                    <li class="single-product">
-                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                            <img src="img/Sweet Breads1/Almond bread/Almond bread3.png" alt="Sidebar-Image">
-                                        </a>
-                                        <div class="single-product_content">
-                                            <a href="single-product.html" class="single-product_content__title">Almond bread</a>
-                                            <span class="single-product_content__price">$5</span>
-                                        </div>
-                                    </li>
-                                    <!-- Single Product End -->
-                                    <!-- Single Product Start -->
-                                    <li class="single-product">
-                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                            <img src="img/Cakes (1)/Blueberry cake.png" alt="Sidebar-Image">
-                                        </a>
-                                        <div class="single-product_content">
-                                            <a href="single-product.html" class="single-product_content__title">Blueberry cake</a>
-                                            <span class="single-product_content__price">$10</span>
-                                        </div>
-                                    </li>
-                                    <!-- Single Product End -->
-                            </ul>
-                        </div>
-                        <!-- Popular Product Widget End -->
+<!-- Popular Product Widget Start -->
+<div class="sidebars_widget">
+    <h3 class="sidebars_widget__title">Popular products</h3>
+    <ul class="sidebars_widget__product">
+        <?php $__currentLoopData = $bestSellingProducts->take(3); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <!-- Single Product Start -->
+        <li class="single-product">
+            <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>" class="single-product_thumb" style="border: none; width: 127px;">
+                <img src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="<?php echo e($product->product_name); ?>">
+            </a>
+            <div class="single-product_content">
+                <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>" class="single-product_content__title"><?php echo e($product->product_name); ?></a>
+                <span class="single-product_content__price">
+                    <?php if($product->price != $product->getDiscountedPrice()): ?>
+                        <del><?php echo e(formatPriceVND($product->price)); ?></del>
+                        <!-- Giá gốc -->
+                    
+                        <strong style="color: red;"
+                        >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
+                        >
+                    <!-- Giá sau khi giảm -->
+                    <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
+
+                    <!-- Giá không giảm -->
+                    <?php endif; ?>
+                </span>
+            </div>
+        </li>
+        <!-- Single Product End -->
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </ul>
+</div>
+<!-- Popular Product Widget End -->
+
 
                          <!-- Instagram Widget Start -->
                          <div class="sidebars_widget">

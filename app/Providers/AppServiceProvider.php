@@ -10,6 +10,7 @@ use App\Models\Chef;
 use App\Models\ComingSoon;
 use App\Models\DealOfTheDay;
 use App\Models\Notification;
+use App\Models\Product;
 use App\Models\User;
 use App\Models\UserReview;
 use Illuminate\Support\Facades\Auth;
@@ -143,8 +144,18 @@ class AppServiceProvider extends ServiceProvider
         $view->with('comingSoon', $comingSoon);
     });
     
+    View::composer('*', function ($view) {
+        // Lấy danh sách sản phẩm bán chạy nhất
+        $bestSellingProducts = Product::join('orderdetails', 'product.product_id', '=', 'orderdetails.product_id')
+            ->select('product.product_id', 'product.product_name', 'product.price', 'product.image', DB::raw('SUM(orderdetails.quantity) as total_quantity'))
+            ->groupBy('product.product_id', 'product.product_name', 'product.price', 'product.image')
+            ->orderBy('total_quantity', 'desc')
+            ->take(5)  // Giới hạn lấy 5 sản phẩm bán chạy nhất
+            ->get();
 
-    }
+        // Chia sẻ biến $bestSellingProducts đến tất cả các view
+        $view->with('bestSellingProducts', $bestSellingProducts);
+    });
 
-    
+ }   
 }

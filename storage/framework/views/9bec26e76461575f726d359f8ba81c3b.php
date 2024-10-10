@@ -85,7 +85,8 @@
                 <div class="col-md-6">
                     <div class="contact-section2_formbg">
                         <h2 class="contact-section2_form__title">Say Something...</h2>
-                        <form class="contact-section2_form" id="contact-form" action="assets/php/mail.php" method="post">
+                        <form class="contact-section2_form" id="contact-form" action="<?php echo e(route('contact.store')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
                             <div class="row">
                                 <div class="col-sm-6 col-6 form-p">
                                     <div class="form-group">
@@ -99,16 +100,22 @@
                                         <input class="form-field" type="phone" name="phone">
                                     </div>
                                 </div>
-                                <div class="col-md-12 form-p">
+                                <div class="col-sm-6 col-6 form-p">
                                     <div class="form-group">
                                         <label>Email*</label>
                                         <input class="form-field" type="email" name="email">
                                     </div>
                                 </div>
+                                <div class="col-sm-6 col-6 form-p">
+                                    <div class="form-group">
+                                        <label>Address*</label>
+                                        <input class="form-field" type="text" name="address">
+                                    </div>
+                                </div>
                                 <div class="col-md-12 form-p">
                                     <div class="form-group">
                                         <label>Message*</label>
-                                        <textarea class="form-control text-area" name="message"></textarea>
+                                        <textarea class="form-control text-area" name="comment" placeholder="Message" required></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-p">

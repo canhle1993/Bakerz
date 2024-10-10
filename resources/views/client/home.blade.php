@@ -844,6 +844,7 @@
             <div class="swiper-wrapper">
             @if(isset($fiveStarReviews) && $fiveStarReviews->count() > 0)
              @foreach($fiveStarReviews as $review)
+             @if($review->is_deleted == 0) <!-- Đảm bảo chỉ hiển thị các đánh giá chưa bị xóa -->
                         <div class="swiper-slide">
                             <div class="testimonial-two text-center">
                                 <div class="testimonial-two_quote">
@@ -859,6 +860,7 @@
                                 <span class="testimonial-two_position">{{ $review->address }}</span> <!-- Nếu có thêm địa chỉ -->
                             </div>
                         </div>
+                        @endif
                     @endforeach
                 @else
                     <p>Không có đánh giá 5 sao nào.</p>
@@ -1340,7 +1342,7 @@
                         
                         var product = response.product;  // Đối tượng product từ server
                         // Đổ dữ liệu vào modal
-                        $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
+                        $('#modal-single-product .product-head-price').text("$" + response.discounted_price);  // Đổ giá sản phẩm
                         
                         $('#modal-single-product .desc-content').html(product.describe.replace(/\n/g, '<br>'));
                         

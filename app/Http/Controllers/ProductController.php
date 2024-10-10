@@ -191,9 +191,11 @@ class ProductController extends Controller
         $product = Product::with('images', 'discounts', 'catalogs')->find($id);
 
         if ($product) {
+            $discountedPrice = $product->getDiscountedPrice();
             return response()->json([
                 'status' => 'success',
-                'product' => $product
+                'product' => $product,
+                'discounted_price' => $discountedPrice // Trả về giá đã giảm
             ]);
         } else {
             return response()->json([

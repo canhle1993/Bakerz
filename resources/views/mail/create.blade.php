@@ -1,6 +1,6 @@
-Chào: {{ $data['name'] }},<br>
-Bạn đã tạo tài khoản tại cửa hàng Bakerz Bite thành công! 😉<br>
-Lưu ý không chia sẻ tài khoản cho bất kỳ ai.<br>
-Tài khoản đăng nhập của bạn là: {{ $data['email'] }},<br>
-Mật khẩu là: {{ $data['password'] }},<br>
-Chúc bạn có trải nghiệm vui vẻ!.<br>
+Hello: {{ $data['name'] }},<br> 
+ You have successfully created an account at Bakerz Bite store! 😉<br>
+ Please note not to share your account with anyone.<br> 
+ Your login account is: {{ $data['email'] }},<br> 
+ Your password is: {{ $data['password'] }},<br>
+ Wishing you a pleasant experience!<br>
