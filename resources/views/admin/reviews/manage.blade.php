@@ -2,7 +2,7 @@
 
 @section('manage_admin')
 <div class="container-fluid">
-    <h2 class="mb-4">Manage reviews and comments</h2>
+    <h2 class="mb-4">Quản lý đánh giá và bình luận</h2>
 
     @if (session('success'))
         <div class="alert alert-success">
@@ -10,11 +10,11 @@
         </div>
     @endif
 
-    <!-- Form tìm kiếm theo name và rating -->
+    <!-- Form tìm kiếm theo tên và số sao đánh giá -->
     <form class="mb-4" method="GET" action="{{ route('admin.reviews.manage') }}">
         <div class="row">
             <div class="col-md-5">
-                <input type="text" name="searchName" class="form-control" placeholder="Search by name" value="{{ request()->query('searchName') }}">
+                <input type="text" name="searchName" class="form-control" placeholder="Search by user name" value="{{ request()->query('searchName') }}">
             </div>
             <div class="col-md-3">
                 <select name="searchRating" class="form-control">
@@ -30,7 +30,8 @@
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
             <div class="col-md-2">
-                <a href="{{ route('admin.reviews.manage') }}" class="btn btn-light">Reset</a>
+                <!-- Nút Reset -->
+                <a href="{{ route('admin.reviews.manage') }}" class="btn btn-secondary">Reset</a>
             </div>
         </div>
     </form>
@@ -60,11 +61,9 @@
                     <td>{{ \Carbon\Carbon::parse($review->CreatedDate)->format('d/m/Y H:i:s') }}</td>
                     <td>
                         <!-- Nút Xem -->
-                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#viewModal" data-id="{{ $review->ID }}" data-product="{{ $review->product->product_name }}" data-category="{{ $review->product->catalogs->pluck('category_name')->join(', ') }}">View</button>
-                       
+                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#viewModal-{{ $review->ID }}">View</button>
                         <!-- Nút Trả Lời -->
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#replyModal" data-id="{{ $review->ID }}">Reply</button>    
-                        
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#replyModal-{{ $review->ID }}">Reply</button>
                         <!-- Nút Xóa -->
                         <form action="{{ route('reviews.delete', ['id' => $review->ID]) }}" method="POST" style="display: inline-block;">
                             @csrf
@@ -73,82 +72,66 @@
                         </form>          
                     </td>
                 </tr>
+
+                <!-- Modal for Reply -->
+                <div class="modal fade" id="replyModal-{{ $review->ID }}" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="replyModalLabel">Reply to Review</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{{ route('reviews.reply', ['id' => $review->ID]) }}" method="POST">
+                                @csrf
+                                <div class="modal-body">
+                                    <textarea name="reply" class="form-control mb-2" placeholder="Nhập câu trả lời"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal for Viewing Information -->
+                <div class="modal fade" id="viewModal-{{ $review->ID }}" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="viewModalLabel">View Review Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong class="text-warning">Cake name:</strong> {{ $review->product->product_name }}</p>
+                                <p><strong class="text-warning">Cake category:</strong>
+                                    @foreach ($review->product->catalogs as $catalog)
+                                        {{ $catalog->category_name }}{{ !$loop->last ? ', ' : '' }}
+                                    @endforeach
+                                </p>
+                                <a href="{{ route('product.single', ['product' => $review->product->product_id]) }}#comment-{{ $review->ID }}" class="btn btn-primary btn-sm">View comment</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endforeach
         </tbody>
     </table>
 </div>
-
+<div style="height: 20px;"></div>
 <div class="d-flex justify-content-center">
     {{ $reviews->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
 </div>
-
-<!-- Modal Form Trả Lời -->
-<div class="modal fade" id="replyModal" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="replyModalLabel">Reply to Review</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="replyForm" action="" method="POST">
-                @csrf
-                <div class="modal-body">
-                    <textarea name="reply" class="form-control" rows="5" placeholder="Nhập câu trả lời"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Send</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Bảng Hiển Thị Thông Tin -->
-<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="viewModalLabel">View Review Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong class="text-warning">Cake name:</strong> <span id="viewProduct"></span></p>
-                <p><strong class="text-warning">Cake category:</strong> <span id="viewCategory"></span></p>
-                <p><a href="#" id="viewCommentLink" class="btn btn-primary btn-sm">View comment</a></p>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var replyModal = document.getElementById('replyModal');
-        replyModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget;
-            var reviewId = button.getAttribute('data-id');
-            
-            // Cập nhật action form với URL động
-            var form = replyModal.querySelector('form');
-            form.action = "{{ route('reviews.reply', '') }}/" + reviewId;
-        });
+    function toggleReplyForm(id) {
+        var replyForm = document.getElementById('reply-form-' + id);
+        replyForm.style.display = (replyForm.style.display === 'none' || replyForm.style.display === '') ? 'block' : 'none';
+    }
 
-        var viewModal = document.getElementById('viewModal');
-        viewModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget;
-            var productName = button.getAttribute('data-product');
-            var productCategory = button.getAttribute('data-category');
-            var reviewId = button.getAttribute('data-id');
-
-            // Đặt dữ liệu vào modal
-            document.getElementById('viewProduct').textContent = productName;
-            document.getElementById('viewCategory').textContent = productCategory;
-
-            // Cập nhật đường dẫn đến comment
-            var commentLink = document.getElementById('viewCommentLink');
-            commentLink.href = "{{ route('product.single', '') }}/" + reviewId + "#comment-" + reviewId;
-        });
-    });
+    function toggleView(id) {
+        var viewDiv = document.getElementById('view-info-' + id);
+        viewDiv.style.display = (viewDiv.style.display === 'none' || viewDiv.style.display === '') ? 'block' : 'none';
+    }
 </script>
-
 @endsection

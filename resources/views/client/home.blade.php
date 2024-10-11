@@ -75,7 +75,7 @@
             <div class="swiper-wrapper">
                 <!-- Single Slider Start -->
                 @foreach($banners as $banner)
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('{{ asset('storage/banners/' . $banner->image_banner) }}'); height: 775px !important;">
+                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('{{ asset('storage/banners/' . $banner->image_banner) }}'); height: 860px !important;">
                     <div class="image movex">
                         <img class="img-center" src="{{ asset('storage/banners/' . $banner->image_product) }}" alt="Slider-Image">
                     </div>
@@ -157,14 +157,6 @@
                     <div class="col-md-6 mb-3">
                         <div class="mb-3">
                             <label class="form-label">Select health status:</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="heath_dump" value=""
-                                id="heath_0"
-                                {{ request('heath_dump') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="heath_0">
-                                Normal
-                                </label>
-                            </div>
                             @foreach($heathyCatalogs as $catalog)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="heath_id[]" value="{{ $catalog->heath_id }}"
@@ -810,7 +802,7 @@
                     <!-- Counter Item Strat -->
                     <div class="counter-item text-center">
                         <span class="counter-item__label text-global-color-03"><span id="" class="count scroll-counter" data-counter-time="1500">10</span>K+</span>
-                        <p class="counter-item__value text-secondary">Client</p>
+                        <p class="counter-item__value text-secondary">Clients</p>
                     </div>
                     <!-- Counter Item End -->
                 </div>

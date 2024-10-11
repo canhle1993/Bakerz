@@ -28,10 +28,10 @@ class PaymentController extends Controller
             }
             $order->status = "Paid";
             $order->save();
-            $_SESSION['success'] = 'Đã thanh toán thành công. Mong gặp lại quý khách lần sau!';
+            $_SESSION['success'] = 'The payment has been successfully completed. We look forward to seeing you again!';
             // Lấy thông tin của order từ database
         } else {
-            $_SESSION['error'] = 'Thanh toán thất bại. Vui lòng thử lại.';
+            $_SESSION['error'] = 'Payment failed. Please try again.';
         }
         
         // Kiểm tra xem session có được lưu không

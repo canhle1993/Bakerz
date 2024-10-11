@@ -80,7 +80,7 @@
                                 <td><?php echo e(formatPriceVND($item->product->price)); ?></td>
                                 <?php endif; ?>
                                 <td class="wishlist-cart">
-                                    <a class="btn btn-dark btn-hover-primary add-to-cart" href="#" data-product-id="<?php echo e($item->product->product_id); ?>">Select Option</a>
+                                    <a class="btn btn-dark btn-hover-primary add-to-cart" href="#" data-product-id="<?php echo e($item->product->product_id); ?>">Add to cart</a>
                                 </td>
                             </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

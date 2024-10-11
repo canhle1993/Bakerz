@@ -80,7 +80,7 @@
                                 <td>{{ formatPriceVND($item->product->price) }}</td>
                                 @endif
                                 <td class="wishlist-cart">
-                                    <a class="btn btn-dark btn-hover-primary add-to-cart" href="#" data-product-id="{{ $item->product->product_id }}">Select Option</a>
+                                    <a class="btn btn-dark btn-hover-primary add-to-cart" href="#" data-product-id="{{ $item->product->product_id }}">Add to cart</a>
                                 </td>
                             </tr>
                             @endforeach
