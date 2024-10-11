@@ -395,3 +395,17 @@ Route::get('/clear-success-session', function () {
     return response()->json(['message' => 'Session cleared']);
 })->name('session.clearSuccess');
 
+use App\Http\Controllers\Admin\SocialMediaController;
+
+// Route to display the Social Media page
+Route::get('/admin/socialmedia', [SocialMediaController::class, 'index'])->name('admin.socialmedia.index');
+
+// Route to store a new Social Media link
+Route::post('/admin/socialmedia/store', [SocialMediaController::class, 'store'])->name('admin.socialmedia.store');
+
+// Route to update an existing Social Media link
+Route::put('/admin/socialmedia/update/{id}', [SocialMediaController::class, 'update'])->name('admin.socialmedia.update');
+
+// Route to soft delete a Social Media link
+Route::delete('/admin/socialmedia/delete/{id}', [SocialMediaController::class, 'destroy'])->name('admin.socialmedia.delete');
+

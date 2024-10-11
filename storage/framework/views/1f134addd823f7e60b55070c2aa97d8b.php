@@ -327,13 +327,28 @@
                                 <a class="logo-white d-none" href="index.html"><img src="<?php echo e(asset('assets/images/logo-white.svg')); ?>" alt="Logo"></a>
                             </div>
                             <div class="footer-widget__social">
-                                <a href="https://aptechvietnam.com.vn/" target="blank"><i class="lastudioicon-b-facebook"></i></a>
-                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-twitter"></i></a>
-                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
-                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-instagram"></i></a>
-                                <b style="padding: 3px 0px;"><i class="fas fa-users"></i>
-                                <span  id="onlineCount" style=" padding: 2px 7px 2px 7px; border-radius: 99px;"></span></b>
-                            </div>
+                              <?php $__currentLoopData = $socialMedia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $socialMedia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <a href="<?php echo e($socialMedia->link); ?>" target="_blank">
+                                      <!-- Tùy chỉnh icon dựa trên name hoặc thêm icon chung cho tất cả -->
+                                      <?php if(strpos($socialMedia->name, 'Facebook') !== false): ?>
+                                          <i class="lastudioicon-b-facebook"></i>
+                                      <?php elseif(strpos($socialMedia->name, 'Twitter') !== false): ?>
+                                          <i class="lastudioicon-b-twitter"></i>
+                                      <?php elseif(strpos($socialMedia->name, 'Pinterest') !== false): ?>
+                                          <i class="lastudioicon-b-pinterest"></i>
+                                      <?php elseif(strpos($socialMedia->name, 'Instagram') !== false): ?>
+                                          <i class="lastudioicon-b-instagram"></i>
+                                      <?php else: ?>
+                                          <i class="lastudioicon-b-globe"></i> <!-- Biểu tượng mặc định -->
+                                      <?php endif; ?>
+                                  </a>
+                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                              <b style="padding: 3px 0px;">
+                                  <i class="fas fa-users"></i>
+                                  <span id="onlineCount" style="padding: 2px 7px 2px 7px; border-radius: 99px;"></span>
+                              </b>
+                          </div>
+
                         </div>
                         <!-- Footer Widget Section End -->
                     </div>

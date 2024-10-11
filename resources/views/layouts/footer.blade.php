@@ -327,13 +327,28 @@
                                 <a class="logo-white d-none" href="index.html"><img src="{{asset('assets/images/logo-white.svg')}}" alt="Logo"></a>
                             </div>
                             <div class="footer-widget__social">
-                                <a href="https://aptechvietnam.com.vn/" target="blank"><i class="lastudioicon-b-facebook"></i></a>
-                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-twitter"></i></a>
-                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
-                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-instagram"></i></a>
-                                <b style="padding: 3px 0px;"><i class="fas fa-users"></i>
-                                <span  id="onlineCount" style=" padding: 2px 7px 2px 7px; border-radius: 99px;"></span></b>
-                            </div>
+                              @foreach ($socialMedia as $socialMedia)
+                                  <a href="{{ $socialMedia->link }}" target="_blank">
+                                      <!-- Tùy chỉnh icon dựa trên name hoặc thêm icon chung cho tất cả -->
+                                      @if (strpos($socialMedia->name, 'Facebook') !== false)
+                                          <i class="lastudioicon-b-facebook"></i>
+                                      @elseif (strpos($socialMedia->name, 'Twitter') !== false)
+                                          <i class="lastudioicon-b-twitter"></i>
+                                      @elseif (strpos($socialMedia->name, 'Pinterest') !== false)
+                                          <i class="lastudioicon-b-pinterest"></i>
+                                      @elseif (strpos($socialMedia->name, 'Instagram') !== false)
+                                          <i class="lastudioicon-b-instagram"></i>
+                                      @else
+                                          <i class="lastudioicon-b-globe"></i> <!-- Biểu tượng mặc định -->
+                                      @endif
+                                  </a>
+                              @endforeach
+                              <b style="padding: 3px 0px;">
+                                  <i class="fas fa-users"></i>
+                                  <span id="onlineCount" style="padding: 2px 7px 2px 7px; border-radius: 99px;"></span>
+                              </b>
+                          </div>
+
                         </div>
                         <!-- Footer Widget Section End -->
                     </div>

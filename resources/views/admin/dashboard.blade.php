@@ -119,8 +119,8 @@
                     <a href="{{ route('admin.contact_us.index') }}" class="nav-item nav-link"><i class="fa fa-envelope me-2"></i><span>ContactUs</span>
                     </a>
                     <a href="{{ route('admin.workshop.index') }}" class="nav-item nav-link"><i class="fa fa-chalkboard-teacher me-2"></i><span>Workshop</span></a>
-
-                </div>
+                    <a href="{{ route('admin.socialmedia.index') }}" class="nav-item nav-link"><i class="fa fa-chalkboard-teacher me-2"></i><span>Social Media</span></a>
+                    </div>
                 
             </nav>
         </div>
@@ -241,6 +241,8 @@
             @yield('coming_soon_content') <!-- Thêm phần này cho Coming Soon -->
             @yield('admint_content')
             @yield('workshop_content') <!-- Thêm phần này cho Workshop -->
+            @yield('SocialMedia_content')
+
 
             <!-- Body End -->
             <!-- Footer Start -->

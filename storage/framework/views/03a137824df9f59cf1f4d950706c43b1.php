@@ -119,8 +119,8 @@
                     <a href="<?php echo e(route('admin.contact_us.index')); ?>" class="nav-item nav-link"><i class="fa fa-envelope me-2"></i><span>ContactUs</span>
                     </a>
                     <a href="<?php echo e(route('admin.workshop.index')); ?>" class="nav-item nav-link"><i class="fa fa-chalkboard-teacher me-2"></i><span>Workshop</span></a>
-
-                </div>
+                    <a href="<?php echo e(route('admin.socialmedia.index')); ?>" class="nav-item nav-link"><i class="fa fa-chalkboard-teacher me-2"></i><span>Social Media</span></a>
+                    </div>
                 
             </nav>
         </div>
@@ -241,6 +241,8 @@
             <?php echo $__env->yieldContent('coming_soon_content'); ?> <!-- Thêm phần này cho Coming Soon -->
             <?php echo $__env->yieldContent('admint_content'); ?>
             <?php echo $__env->yieldContent('workshop_content'); ?> <!-- Thêm phần này cho Workshop -->
+            <?php echo $__env->yieldContent('SocialMedia_content'); ?>
+
 
             <!-- Body End -->
             <!-- Footer Start -->

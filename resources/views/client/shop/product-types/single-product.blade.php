@@ -251,10 +251,22 @@
 
                     <!-- Product Share Start -->
                     <div class="product-share">
-                        <a href="#"><i class="lastudioicon-b-facebook"></i></a>
-                        <a href="#"><i class="lastudioicon-b-twitter"></i></a>
-                        <a href="#"><i class="lastudioicon-b-pinterest"></i></a>
-                        <a href="#"><i class="lastudioicon-b-instagram"></i></a>
+                    @foreach ($socialMedia as $socialMedia)
+                        <a href="{{ $socialMedia->link }}" target="_blank">
+                            <!-- Tùy chỉnh icon dựa trên name hoặc thêm icon chung cho tất cả -->
+                            @if (strpos($socialMedia->name, 'Facebook') !== false)
+                                <i class="lastudioicon-b-facebook"></i>
+                            @elseif (strpos($socialMedia->name, 'Twitter') !== false)
+                                <i class="lastudioicon-b-twitter"></i>
+                            @elseif (strpos($socialMedia->name, 'Pinterest') !== false)
+                                <i class="lastudioicon-b-pinterest"></i>
+                            @elseif (strpos($socialMedia->name, 'Instagram') !== false)
+                                <i class="lastudioicon-b-instagram"></i>
+                            @else
+                                <i class="lastudioicon-b-globe"></i> <!-- Biểu tượng mặc định -->
+                            @endif
+                        </a>
+                    @endforeach
                     </div>
                     <!-- Product Share End -->
 

@@ -316,30 +316,34 @@
                          <div class="sidebars_widget">
                             <h3 class="sidebars_widget__title">Instagram</h3>
                             <ul class="sidebars_widget__instagram " >
+                            <?php $__currentLoopData = $socialMedia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $media): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if(strpos($media->name, 'Instagram') !== false): ?>
                                 <li>
-                                    <a class="instagram-thumb" href="https://www.instagram.com/aptechvn.official/">
+                                    <a class="instagram-thumb" href="<?php echo e($media->link); ?>">
                                         <img src="https://i.pinimg.com/564x/80/35/60/803560020f0f772bb12862e1eb2f50c0.jpg"  alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="instagram-thumb" href="https://www.instagram.com/aptechvn.official/">
+                                    <a class="instagram-thumb" href="<?php echo e($media->link); ?>">
                                         <img src="https://i.pinimg.com/564x/61/e1/38/61e13860559dac54522ad4c622c37705.jpg" alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="instagram-thumb" href="https://www.instagram.com/aptechvn.official/">
+                                    <a class="instagram-thumb" href="<?php echo e($media->link); ?>">
                                         <img src="https://i.pinimg.com/564x/d0/e5/10/d0e5108a1db4e95a60a13e520531bc13.jpg" alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="instagram-thumb" href="https://www.instagram.com/aptechvn.official/">
+                                    <a class="instagram-thumb" href="<?php echo e($media->link); ?>">
                                         <img src="https://i.pinimg.com/564x/8e/f4/b9/8ef4b9e35ed97c97fde4b0cfb45d5af3.jpg" alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
+                                <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </ul>
                         </div>
                         <!-- Instagram Widget End -->
@@ -347,13 +351,20 @@
                         <!-- Banner Widget Start -->
                             <!-- Banner Widget Start -->
                             <div class="sidebars_widget">
-                                <a href="shop.html" class="sidebars_widget__banner">
-                                    <img src="<?php echo e(asset('assets/images/banner/sidebarbanner.jpg')); ?>" alt="banner-Image">
-
+                            <?php $__currentLoopData = $socialMedia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $media): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if(strpos($media->name, 'Advertise') !== false): ?>
+                                <a href="<?php echo e($media->link); ?>" class="sidebars_widget__banner">
+                                <?php if($media->image): ?>
+                                    <img src="<?php echo e(asset('storage/' . $media->image)); ?>" alt="banner-Image">
+                                <?php else: ?>
+                                    <img src="<?php echo e(asset('assets/images/banner/default-banner.jpg')); ?>" alt="default-banner">
+                                <?php endif; ?>
                                     <div class="banner-content">
                                         <span class="banner-content_title">Check it now</span>
                                     </div>
                                 </a>
+                            <?php endif; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             <!-- Banner Widget End -->
                         <!-- Banner Widget End -->
