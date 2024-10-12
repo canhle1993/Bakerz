@@ -319,7 +319,7 @@
                       <?php if(Auth::user()->rank === 'Gold'): ?>
                           <a href="<?php echo e(route('pricing-plan')); ?>" style="float: right;"><b style="margin-left: 25px"><img style="border: none; width: 50px; height: 70px;" src="<?php echo e(asset('img/2.png')); ?>" alt="gold"><br>Point: <?php echo e(Auth::user()->score); ?></b></a>
                       <?php elseif(Auth::user()->rank === 'Diamond'): ?>
-                      <a href="<?php echo e(route('pricing-plan')); ?>" style="float: right;"><b style="margin-left: 25px"><img style="border: none; width: 50px; height: 70px;" src="<?php echo e(asset('img/3.png')); ?>" alt="diamond"><br>Point: <?php echo e(Auth::user()->score); ?></b></a>
+                      <a href="<?php echo e(route('blog-detail')); ?>" style="float: right;"><b style="margin-left: 25px"><img style="border: none; width: 50px; height: 70px;" src="<?php echo e(asset('img/3.png')); ?>" alt="diamond"><br>Point: <?php echo e(Auth::user()->score); ?></b></a>
                       <?php else: ?>
                       <a href="<?php echo e(route('pricing-plan')); ?>" style="float: right;"><b ><img style="border: none; width: 50px; height: 70px;" src="<?php echo e(asset('img/1.png')); ?>" alt="Bronze"><br><span >Point: <?php echo e(Auth::user()->score); ?></span></b></a>
                       

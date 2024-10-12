@@ -220,7 +220,7 @@
                     <form action="<?php echo e(route('order.gotopaid', $item->order_id)); ?>" method="POST" style="display:inline-block;">
                         <?php echo csrf_field(); ?>
                         <button type="submit" class="btn btn-sm btn-lower">
-                            <i class="bi bi-box-arrow-right"></i> Paid
+                            <i class="bi bi-box-arrow-right"></i>Confirmed
                         </button>
                     </form>
                     

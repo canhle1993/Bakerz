@@ -50,7 +50,7 @@ class ManageAdminController extends Controller
             'phone' => 'nullable|string',
             'gender' => 'nullable|string',
             'address' => 'nullable|string',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp',
             'avatar_url' => 'nullable|url'
         ]);
 

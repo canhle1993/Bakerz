@@ -221,7 +221,7 @@
                     <form action="{{route('order.gotoConfirmed', $item->order_id)}}" method="POST" style="display:inline-block;">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-lower">
-                            <i class="bi bi-box-arrow-right"></i> Confimed
+                            <i class="bi bi-box-arrow-right"></i>Being Delivered
                         </button>
                     </form>
                     <a style="color: black !important;" class="btn btn-sm btn-danger bi bi-trash" href="#" data-url="{{ route('order.gotoCancel', $item->order_id) }}" onclick="showDeleteModal(this)">Cancel</a>
