@@ -444,8 +444,10 @@
 
       <!-- Mini Cart Button End  -->
       <div class="mini-cart-btn d-flex flex-column gap-2">
+        <?php if(auth()->guard()->check()): ?>
           <a class="d-block btn btn-secondary btn-hover-primary" href="<?php echo e(route('cart')); ?>">View cart</a>
           <a id="btnCheckout" class="d-block btn btn-secondary btn-hover-primary" href="<?php echo e(route('checkout')); ?>">Checkout</a>
+        <?php endif; ?>
       </div>
       <!-- Mini Cart Button End  -->
 

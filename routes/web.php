@@ -236,6 +236,8 @@ Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart']
 Route::get('/showcheckout', [CartController::class, 'showcheckout'])->name('checkout');
 Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.cart_checkout');
 Route::get('/cart/checkinventory', [CartController::class, 'checkinventory'])->name('cart.checkinventory');
+Route::delete('/cart/clear_cart', [CartController::class, 'clear_cart'])->name('cart.clear');
+
 
 // Route để lưu đánh giá
 Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
@@ -377,8 +379,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/contact-us/reply/{id}', [ContactUsController::class, 'sendReply'])->name('contact_us.sendReply'); // Gửi trả lời
     Route::delete('/contact-us/delete/{id}', [ContactUsController::class, 'delete'])->name('contact_us.delete'); // Xóa thông tin liên hệ
 });
+Route::post('contact-us/store', [ContactUsController::class, 'store'])->name('contact.store');
 
-Route::post('/contact-us/store', [ContactUsController::class, 'store'])->name('contact.store');
 
 use App\Http\Controllers\WorkshopController;
 Route::prefix('admin/workshop')->group(function () {

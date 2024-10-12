@@ -63,7 +63,11 @@
                     <div class="row justify-content-between gap-3">
                         <div class="col-auto"><a href="<?php echo e(route('shop_all')); ?>"><button class="btn btn-outline-dark btn-primary-hover rounded-0">Continue Shopping</button></a></div>
                         <div class="col-auto d-flex flex-wrap gap-3">
+                        <form action="<?php echo e(route('cart.clear')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('DELETE'); ?>
                             <a href=""><button class="btn btn-outline-dark btn-primary-hover rounded-0">Clear Cart</button></a>
+                        </form>
                         </div>
                     </div>
                     <!-- Cart Action Buttons End -->

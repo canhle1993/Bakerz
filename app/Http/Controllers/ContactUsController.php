@@ -87,24 +87,24 @@ class ContactUsController extends Controller
     
 
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-        'phone' => 'required|string|max:100',
-        'address' => 'required|string|max:255',
-        'comment' => 'required|string',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:100',
+            'address' => 'required|string|max:255',
+            'comment' => 'required|string',
+        ]);
 
-    ContactUs::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'phone' => $request->phone,
-        'address' => $request->address,
-        'comment' => $request->comment,
-    ]);
+        ContactUs::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'comment' => $request->comment,
+        ]);
 
-    return redirect()->back()->with('success', 'Your message has been sent successfully.');
-}
+        return redirect()->back()->with('success', 'Your message has been sent successfully.');
+    }
 
 }
