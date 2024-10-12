@@ -1,4 +1,5 @@
 @extends('admin.dashboard')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @section('manage_blacklist')
 <style>
@@ -127,6 +128,123 @@
         box-shadow: 0px 4px 10px rgba(200, 35, 51, 0.5);
         transform: scale(1.05);
     }
+
+
+    /* Cấu trúc và kiểu cơ bản cho bảng */
+.table {
+    border-collapse: separate !important;
+    border-spacing: 0 15px !important; /* Khoảng cách giữa các hàng */
+    background-color: #fff !important;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+}
+
+/* Header bảng */
+.table thead th {
+    background-color: #343a40 !important; /* Màu nền tối */
+    color: #fff !important; /* Màu chữ trắng */
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    padding: 12px 15px !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+    border: none !important;
+    text-align: center !important;
+}
+
+/* Các hàng trong bảng */
+.table tbody tr {
+    background-color: #f9f9f9 !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef !important; /* Màu nền khi hover */
+}
+
+/* Các ô trong bảng */
+.table td {
+    padding: 12px 15px !important;
+    color: #333 !important;
+    border: none !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+/* Căn chỉnh nội dung ảnh avatar */
+.table td img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important; /* Thêm shadow cho avatar */
+    transition: transform 0.3s ease !important;
+}
+
+/* Hiệu ứng hover cho avatar */
+.table td img:hover {
+    transform: scale(1.1) !important; /* Phóng to avatar khi hover */
+}
+
+/* Các ô khác nhau */
+.table tbody td:first-child {
+    border-left: 2px solid #dee2e6 !important; /* Đường viền bên trái */
+}
+
+.table tbody td:last-child {
+    border-right: 2px solid #dee2e6 !important; /* Đường viền bên phải */
+}
+
+/* Style cho khoảng cách giữa các hàng */
+.table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px !important;
+}
+
+.table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px !important;
+}
+
+/* Kiểu cho phần ghi chú */
+.table td.note {
+    font-style: italic !important;
+    color: #6c757d !important; /* Màu chữ cho note */
+}
+
+/* Kiểu riêng cho avatar trong bảng */
+.table-avatar {
+    text-align: center !important;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important; /* Giữ tỉ lệ ảnh */
+}
+
+/* Điều chỉnh bố cục của các ô trong bảng */
+.table td {
+    font-size: 16px !important;
+    padding: 12px !important;
+    line-height: 1.5 !important;
+}
+
+/* Điều chỉnh responsive cho bảng */
+@media (max-width: 768px) {
+    .table td {
+        display: block !important;
+        text-align: left !important;
+        padding-left: 50% !important;
+        position: relative !important;
+    }
+
+    .table td:before {
+        content: attr(data-label) !important;
+        position: absolute !important;
+        left: 10px !important;
+        font-weight: bold !important;
+        text-transform: uppercase !important;
+    }
+
+    .table td img {
+        display: inline-block !important;
+    }
+}
+
 </style>
 
 @if(session('success'))
@@ -196,20 +314,20 @@
 
                 <td class="text-center">
                     <!-- Button to restore user -->
-                    <form action="{{ route('blacklist.restore', $user->user_id) }}" method="POST" style="display:inline-block;">
+                    <form id="restore-client-form-{{ $user->user_id }}" action="{{ route('blacklist.restore', $user->user_id) }}" method="POST" style="display:inline-block;">
                         @csrf
-                        <button type="submit" class="btn btn-sm btn-restore">
+                        <button type="button" class="btn btn-sm btn-restore" onclick="confirmRestoreClient('{{ $user->user_id }}')">
                             <i class="bi bi-arrow-up-circle"></i> Restore
                         </button>
                     </form>
                      <!-- Button to delete product -->
-                     <form action="{{ route('user.delete', $user->user_id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this user permanently?');">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-sm btn-danger">
-            <i class="bi bi-trash"></i> Delete
-        </button>
-    </form>
+                     <form id="delete-client-form-{{ $user->user_id }}" action="{{ route('user.delete', $user->user_id) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDeleteClient('{{ $user->user_id }}')">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </form>
 
                 </td>
 
@@ -261,20 +379,20 @@
 
                     <td class="text-center">
                         <!-- Button to restore product -->
-                        <form action="{{ route('product.restore', $product->product_id) }}" method="POST" style="display:inline-block;">
+                        <form id="restore-product-form-{{ $product->product_id }}" action="{{ route('product.restore', $product->product_id) }}" method="POST" style="display:inline-block;">
                             @csrf
-                            <button type="submit" class="btn btn-sm btn-restore">
+                            <button type="button" class="btn btn-sm btn-restore" onclick="confirmRestoreProduct('{{ $product->product_id }}')">
                                 <i class="bi bi-arrow-up-circle"></i> Restore
                             </button>
                         </form>
                              <!-- Button to delete product -->
-    <form action="{{ route('product.delete', $product->product_id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this product permanently?');">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-sm btn-danger">
-            <i class="bi bi-trash"></i> Delete
-        </button>
-    </form>
+                             <form id="delete-product-form-{{ $product->product_id }}" action="{{ route('product.delete', $product->product_id) }}" method="POST" style="display:inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="btn btn-sm btn-danger" onclick="confirmDeleteProduct('{{ $product->product_id }}')">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </form>
                     </td>
                 </tr>
                 @endforeach
@@ -315,21 +433,21 @@
 
                 <td class="text-center">
                     <!-- Button to restore category -->
-                    <form action="{{ route('category.restore', $category->category_id) }}" method="POST" style="display:inline-block;">
+                    <form id="restore-category-form-{{ $category->category_id }}" action="{{ route('category.restore', $category->category_id) }}" method="POST" style="display:inline-block;">
                         @csrf
-                        <button type="submit" class="btn btn-sm btn-restore">
+                        <button type="button" class="btn btn-sm btn-restore" onclick="confirmRestoreCategory('{{ $category->category_id }}')">
                             <i class="bi bi-arrow-up-circle"></i> Restore
                         </button>
                     </form>
-
                     <!-- Button to delete category -->
-                    <form action="{{ route('category.delete', $category->category_id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this category permanently?');">
+                    <form id="delete-category-form-{{ $category->category_id }}" action="{{ route('category.delete', $category->category_id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger">
+                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDeleteCategory('{{ $category->category_id }}')">
                             <i class="bi bi-trash"></i> Delete
                         </button>
                     </form>
+
                 </td>
 
             </tr>
@@ -346,3 +464,102 @@
 
 
 @endsection
+
+
+<script>
+    function confirmRestoreClient(userId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to restore this client?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, restore them!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('restore-client-form-' + userId).submit();
+            }
+        });
+    }
+
+    function confirmDeleteClient(userId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action will permanently delete the client and cannot be undone!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete permanently!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-client-form-' + userId).submit();
+            }
+        });
+    }
+
+    function confirmRestoreProduct(productId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to restore this product?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, restore it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('restore-product-form-' + productId).submit();
+            }
+        });
+    }
+
+    function confirmDeleteProduct(productId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action will permanently delete the product and cannot be undone!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete permanently!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-product-form-' + productId).submit();
+            }
+        });
+    }
+
+    function confirmRestoreCategory(categoryId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to restore this category?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, restore it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('restore-category-form-' + categoryId).submit();
+            }
+        });
+    }
+
+    function confirmDeleteCategory(categoryId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action will permanently delete the category and cannot be undone!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete permanently!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-category-form-' + categoryId).submit();
+            }
+        });
+    }
+</script>

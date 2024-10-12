@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    
+
                     <a  href="{{ route('admin.dashboard') }}" class="nav-item nav-link {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
 
                     <div class="nav-item dropdown">
@@ -75,16 +75,21 @@
                             <a href="{{ route('product.index_stockcheck') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('product.index_stockcheck') ? 'active' : '' }}">&nbsp;&nbsp;Stock Check</a>
                         </div>
                     </div>
+
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Management</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ route('manage-client') }}" class="dropdown-item">Client</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ (Request::is('admin/manage/client*') || Request::is('admin/manage/admin*') || Request::is('admin/manage/blacklist*')) ? 'active' : '' }}" data-bs-toggle="dropdown">
+                            <i class="far fa-file-alt me-2"></i>Management
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('admin/manage/client*') || Request::is('admin/manage/admin*') || Request::is('admin/manage/blacklist*')) ? 'show' : '' }}">
+                            <a href="{{ route('manage-client') }}" class="dropdown-item {{ Request::routeIs('manage-client') ? 'active' : '' }}">Client</a>
                             @if(Auth::user()->role_id == 3)
-                                <a href="{{ route('manage-admin') }}" class="dropdown-item">Admin</a>
+                                <a href="{{ route('manage-admin') }}" class="dropdown-item {{ Request::routeIs('manage-admin') ? 'active' : '' }}">Admin</a>
                             @endif
-                            <a href="{{ route('manage-blacklist') }}" class="dropdown-item">Blacklist</a>
+                            <a href="{{ route('manage-blacklist') }}" class="dropdown-item {{ Request::routeIs('manage-blacklist') ? 'active' : '' }}">Blacklist</a>
                         </div>
                     </div>
+
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle {{ (Request::is('banner*') || Request::is('admin/chefs*') || Request::is('blog*') || Request::routeIs('admin.reviews*')) ? 'active' : '' }}" data-bs-toggle="dropdown">
                             <i class="fa fa-list me-2"></i>Pages
@@ -120,7 +125,7 @@
                     <a href="{{ route('admin.workshop.index') }}" class="nav-item nav-link"><i class="fa fa-chalkboard-teacher me-2"></i><span>Workshop</span></a>
                     <a href="{{ route('admin.socialmedia.index') }}" class="nav-item nav-link"><i class="fa fa-chalkboard-teacher me-2"></i><span>Social Media</span></a>
                     </div>
-                
+
             </nav>
         </div>
         <!-- Sidebar End -->

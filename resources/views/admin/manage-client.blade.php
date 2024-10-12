@@ -1,5 +1,7 @@
 @extends('admin.dashboard')
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @section('manage_client')
 <style>
 .pagination {
@@ -133,6 +135,122 @@
         color: #ddd;
     }
 
+
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    background-color: #fff;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+.table thead th {
+    background-color: #343a40 !important;
+    color: #fff !important;
+    font-weight: bold !important;
+    text-transform: uppercase;
+    padding: 12px 15px !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+    border: none !important;
+    text-align: center;
+}
+
+
+.table tbody tr {
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+
+.table td {
+    padding: 12px 15px;
+    color: #333;
+    border: none;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.table td img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+
+.table td img:hover {
+    transform: scale(1.1);
+}
+
+
+.table tbody td:first-child {
+    border-left: 2px solid #dee2e6;
+}
+
+.table tbody td:last-child {
+    border-right: 2px solid #dee2e6;
+}
+
+
+.table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+
+.table td.note {
+    font-style: italic;
+    color: #6c757d;
+}
+
+
+.table-avatar {
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.table td {
+    font-size: 16px;
+    padding: 12px;
+    line-height: 1.5;
+}
+
+
+@media (max-width: 768px) {
+    .table td {
+        display: block;
+        text-align: left;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .table td img {
+        display: inline-block;
+    }
+}
+
 </style>
 
 
@@ -167,9 +285,24 @@
 
 <div class="container mt-5">
 
+    <h1 style="color: #ff0000;
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+    text-align: center;
+    line-height: 1.2;
+    padding: 20px; /* Thêm khoảng cách bên trong */
+    border: 3px solid #ff0000; /* Viền đỏ để làm nổi bật */
+    background-color: rgba(243, 232, 232, 0.651); /* Nền đỏ nhạt để tạo độ tương phản */">
+Client Management
+</h1>
+
 
     <table class="table table-hover table-bordered table-striped shadow-sm">
-        <thead class="table-dark">
+        <thead >
             <tr>
                 <th>Avatar</th>
                 <th>Name</th>
@@ -207,10 +340,10 @@
                 <td class="text-center">
 
 
-                    <form action="{{ route('client.destroy', $client->user_id) }}" method="POST" style="display:inline-block;">
+                    <form id="delete-client-form-{{ $client->user_id }}" action="{{ route('client.destroy', $client->user_id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger">
+                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDeleteClient('{{ $client->user_id }}')">
                             <i class="bi bi-trash"></i> Delete
                         </button>
                     </form>
@@ -237,4 +370,23 @@
     </div>
 
 
+
 @endsection
+
+<script>
+    function confirmDeleteClient(userId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This will move the client to the blacklist and restrict their access!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete client!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-client-form-' + userId).submit();
+            }
+        })
+    }
+</script>
