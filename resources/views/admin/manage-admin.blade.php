@@ -174,14 +174,113 @@
         }
     </script>
 @endif
+@if ($errors->any())
+<div id="custom-alert" class="custom-alert alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+    <button class="close-btn" onclick="closeAlert()">×</button>
+</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const alert = document.getElementById('custom-alert');
+            alert.style.backgroundColor = "#f0d8da";
+            alert.style.color = "red";
+            alert.classList.add('show');
 
+<<<<<<< HEAD
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="text-primary">Admin Management</h1>
         <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addAdminModal">Add Admin</button>
         {{-- <a href="{{ route('admin.create') }}" class="btn btn-primary">Add Admin</a> --}}
-    </div>
+=======
+            setTimeout(function () {
+                closeAlert();
+            }, 5000);
+        });
 
+        function closeAlert() {
+            const alert = document.getElementById('custom-alert');
+            alert.classList.remove('show');
+            setTimeout(function () {
+                alert.remove();
+            }, 500);
+        }
+    </script>
+@endif
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="text-primary">Admin Management</h1>
+            <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addAdminModal">Add Admin</button>
+            {{-- <a href="{{ route('admin.create') }}" class="btn btn-primary">Add Admin</a> --}}
+>>>>>>> 9c2a699e93b4131165dee421295ad5c7c4ab8af0
+    </div>
+<!-- Modal  add admin-->
+<div class="modal fade" id="addAdminModal" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAdminModalLabel">Add New Admin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="Enter name" value="{{ old('name') }}">
+                       
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" required placeholder="Enter email" value="{{ old('email') }}">
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required placeholder="Enter password">
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirm_password" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" name="password_confirmation" id="confirm_password" required placeholder="Confirm password" value="{{ old('password_confirmation') }}">
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number (optional)" value="{{ old('phone') }}">
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select class="form-control" id="gender" name="gender">
+                            <option value="">Select Gender</option>
+                            <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
+                            <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
+                        </select>
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Enter address (optional)" value="{{ old('address') }}">
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="avatar" class="form-label">Avatar (optional)</label>
+                        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
+                       
+                    </div>
+                    <div class="mb-3">
+                        <label for="avatar_url" class="form-label">Avatar URL (optional)</label>
+                        <input type="url" class="form-control" id="avatar_url" name="avatar_url" placeholder="Enter avatar URL (optional)" value="{{ old('avatar_url') }}">
+                       
+                    </div>
+                </div>
+
+<<<<<<< HEAD
 
 
 
@@ -238,6 +337,8 @@
                         <input type="url" class="form-control" id="avatar_url" name="avatar_url" placeholder="Enter avatar URL (optional)">
                     </div>
                 </div>
+=======
+>>>>>>> 9c2a699e93b4131165dee421295ad5c7c4ab8af0
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-danger">Register Admin</button>
@@ -246,6 +347,7 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 
 
 
@@ -256,6 +358,8 @@
 
 
 
+=======
+>>>>>>> 9c2a699e93b4131165dee421295ad5c7c4ab8af0
     <table class="table table-hover table-bordered table-striped shadow-sm">
         <thead class="table-dark">
             <tr>

@@ -318,7 +318,7 @@
                       @if(Auth::user()->rank === 'Gold')
                           <a href="{{ route('pricing-plan') }}" style="float: right;"><b style="margin-left: 25px"><img style="border: none; width: 50px; height: 70px;" src="{{asset('img/2.png')}}" alt="gold"><br>Point: {{ Auth::user()->score }}</b></a>
                       @elseif(Auth::user()->rank === 'Diamond')
-                      <a href="{{ route('pricing-plan') }}" style="float: right;"><b style="margin-left: 25px"><img style="border: none; width: 50px; height: 70px;" src="{{asset('img/3.png')}}" alt="diamond"><br>Point: {{ Auth::user()->score }}</b></a>
+                      <a href="{{ route('blog-detail') }}" style="float: right;"><b style="margin-left: 25px"><img style="border: none; width: 50px; height: 70px;" src="{{asset('img/3.png')}}" alt="diamond"><br>Point: {{ Auth::user()->score }}</b></a>
                       @else
                       <a href="{{ route('pricing-plan') }}" style="float: right;"><b ><img style="border: none; width: 50px; height: 70px;" src="{{asset('img/1.png')}}" alt="Bronze"><br><span >Point: {{ Auth::user()->score }}</span></b></a>
                       

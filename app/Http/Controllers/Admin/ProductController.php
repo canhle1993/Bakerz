@@ -592,7 +592,7 @@ class ProductController extends Controller
 
     public function stockin_byid(Request $request, $id){
         $product = Product::findOrFail($id);
-        $product->inventory += $request->quanlity_stockin;
+        $product->inventory += $request->quantity_stockin;
         $product->status = "";
         $product->save();
         // Redirect về trang hiện tại

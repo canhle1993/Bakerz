@@ -258,37 +258,54 @@
                 <div class="col-md-6">
                     <div class="contact-section_formbg" data-bg-image="<?php echo e(asset('assets/images/bg/contact-form-bg.jpg')); ?>">
                         <h2 class="contact-section_form__title">Get in touch.</h2>
-                        <form class="contact-section_form" id="contact-form" action="<?php echo e(route('contact.store')); ?>" method="POST">
+                        <?php if(session('success')): ?>
+                            <div id="tbn" class="alert alert-success" id="message-success">
+                                <?php echo e(session('success')); ?>
+
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if($errors->any()): ?>
+                            <div id="tbn" class="alert alert-danger" id="message-error">
+                                <ul>
+                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <li><?php echo e($error); ?></li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+                        <!-- <form class="contact-section_form" id="contact-form" action="<?php echo e(route('contact.store')); ?>" method="POST"> -->
+                        <form action="<?php echo e(route('contact.store')); ?>" method="POST"  enctype="multipart/form-data">
                             <?php echo csrf_field(); ?>
                             <div class="row">
-                                <div class="col-md-6 form-p">
+                                <div class="col-md-6 form-p pt-3">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="name" placeholder="Name" required>
+                                        <input class="form-control" type="text" name="name" placeholder="Name">
                                     </div>
                                 </div>
-                                <div class="col-md-6 form-p">
+                                <div class="col-md-6 form-p pt-3">
                                     <div class="form-group">
-                                        <input class="form-control" type="email" name="email" placeholder="Email" required>
+                                        <input class="form-control" type="text" name="email" placeholder="Email">
                                     </div>
                                 </div>
-                                <div class="col-md-6 form-p">
+                                <div class="col-md-6 form-p pt-3">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="phone" placeholder="Phone" required>
+                                        <input class="form-control" type="text" name="phone" placeholder="Phone">
                                     </div>
                                 </div>
-                                <div class="col-md-6 form-p">
+                                <div class="col-md-6 form-p pt-3">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="address" placeholder="Address" required>
+                                        <input class="form-control" type="text" name="address" placeholder="Address">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-p pt-3">
+                                    <div class="form-group">
+                                        <textarea class="form-control text-area" name="comment" placeholder="Message"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-p">
-                                    <div class="form-group">
-                                        <textarea class="form-control text-area" name="comment" placeholder="Message" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 form-p">
-                                    <div class="form-group mb-0">
-                                        <button class="btn btn-theme" type="submit">Send Message</button>
+                                    <div class="form-group mb-0 d-flex justify-content-center">
+                                        <button id="btnSendMessage" class="slider-content__btn btn btn-primary btn-hover-black" type="submit">Send Message</button>
                                     </div>
                                 </div>
                             </div>
@@ -455,6 +472,23 @@
                     }
                 });
             }
+      // Đặt session scrollToTBN khi nhấn nút gửi form
+      document.getElementById('btnSendMessage').addEventListener('click', function() {
+          sessionStorage.setItem('scrollToTBN', 'true');
+      });
+
+      // Kiểm tra nếu session scrollToTBN tồn tại sau khi trang được load
+      window.addEventListener('load', function() {
+          if (sessionStorage.getItem('scrollToTBN') === 'true') {
+              // Cuộn tới form ở footer sau khi trang load
+              document.getElementById('tbn').scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'end'  // Cuộn xuống phía cuối trang (footer)
+              });
+              // Xóa session sau khi đã cuộn để tránh cuộn lại khi load trang tiếp
+              sessionStorage.removeItem('scrollToTBN');
+          }
+      });
     </script>
     <!-- Vendors JS -->
 </body>

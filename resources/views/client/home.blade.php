@@ -62,6 +62,7 @@
 </head>
 
 <body>
+    
 @include('layouts.header')
 @if(session('error'))
     <script>
@@ -547,7 +548,7 @@
     <div class="boxbanner-wrapper order-md-2 order-1">
       <!-- Ad Banner Start -->
       <a
-        href="single-product.html"
+        href="{{ route('shop.filter_nonCatagory', ['isOption' => 3]) }}"
         class="boxbanner-bg boxbanner"
         data-bg-image="assets/images/banner/add-banner.jpg"
       >
@@ -556,7 +557,7 @@
         <span class="boxbanner-discount">15%</span>
         <div class="boxbanner-btn-area">
           <span class="boxbanner-btn"
-            >Store Location <i class="lastudioicon lastudioicon-right-arrow"></i
+            >CLICK ME<i class="lastudioicon lastudioicon-right-arrow"></i
           ></span>
         </div>
       </a>
@@ -668,7 +669,7 @@
     <div class="boxbanner-wrapper order-1">
       <!-- Ad Banner Start -->
       <a
-        href="single-product.html"
+        href="{{ route('shop.filter_nonCatagory', ['isOption' => 4]) }}"
         class="boxbanner-bg boxbanner"
         data-bg-image="assets/images/banner/add-banner-two.jpg"
       >
@@ -678,7 +679,7 @@
         </div>
         <div class="boxbanner-btn-area">
           <span class="boxbanner-btn"
-            >Store Location <i class="lastudioicon lastudioicon-right-arrow"></i
+            >CLICK ME<i class="lastudioicon lastudioicon-right-arrow"></i
           ></span>
         </div>
       </a>
@@ -801,7 +802,7 @@
                 <div class="col-4">
                     <!-- Counter Item Strat -->
                     <div class="counter-item text-center">
-                        <span class="counter-item__label text-global-color-03"><span id="" class="count scroll-counter" data-counter-time="1500">10</span>K+</span>
+                        <span class="counter-item__label text-global-color-03"><span id="" class="count scroll-counter" data-counter-time="1500">{{ $userCount }}</span></span>
                         <p class="counter-item__value text-secondary">Clients</p>
                     </div>
                     <!-- Counter Item End -->
@@ -809,8 +810,8 @@
                 <div class="col-4">
                     <!-- Counter Item Strat -->
                     <div class="counter-item text-center">
-                        <span class="counter-item__label text-global-color-03"><span class="count scroll-counter" data-counter-time="1500">100</span>+</span>
-                        <p class="counter-item__value text-secondary">Cakes</p>
+                        <span class="counter-item__label text-global-color-03"><span class="count scroll-counter" data-counter-time="1500">{{ $productCount }}</span></span>
+                        <p class="counter-item__value text-secondary">Products</p>
                     </div>
                     <!-- Counter Item End -->
                 </div>

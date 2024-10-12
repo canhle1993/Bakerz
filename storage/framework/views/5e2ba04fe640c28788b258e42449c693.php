@@ -367,9 +367,5 @@
 <?php $__env->stopSection(); ?>
 
 
-<div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4"></div>
-    <div class="col-md-4"></div>
-</div>
+
 <?php echo $__env->make('admin.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bakerz\resources\views/admin/orders/confirmed.blade.php ENDPATH**/ ?>

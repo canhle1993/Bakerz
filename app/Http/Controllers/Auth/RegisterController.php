@@ -39,16 +39,13 @@ class RegisterController extends Controller
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
                 'password' => $request->get('password'),
-
                 'phone' => $request->get('phone'),
                 'address' => $request->get('address'),
-
             ];
 
             Mail::to($user->email)->send(new RegisterEmail($data));
 
         } catch (Exception $e) {
-
             return back()->withErrors([
                 'email' => 'duplicate emails.',
             ])->withInput($request->only('email'));
@@ -64,23 +61,34 @@ class RegisterController extends Controller
         } else {
             return redirect()->intended('/');
         }
-
     }
 
     // Validate the incoming request data
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^[\pL\s\-]+$/u'], // Chỉ cho phép ký tự có dấu và chữ cái
+
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users',
+                'regex:/^.+@gmail\.com$/i' // Chỉ cho phép email có đuôi @gmail.com
+            ],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
-
-            'phone' => ['required', 'string', 'max:100'],
+            'phone' => [
+                'required',
+                'string',
+                'max:100',
+                'regex:/^[0-9\+\-\(\)\s]+$/' // Chỉ cho phép số và các ký tự +, -, ()
+            ],
             'address' => ['required', 'string', 'max:100'],
-
         ]);
     }
 
+    // Validate change password request
     protected function valid_changepass(array $data)
     {
         return Validator::make($data, [
@@ -99,19 +107,23 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
             'address' => $data['address'],
-            'role_id' => 1, // Gán mặc định role_id là 1 cho client đăng ký nha ( nếu không bị xung đột code)
+            'role_id' => 1, // Gán mặc định role_id là 1 cho client đăng ký
         ]);
     }
+
+    // Show password reset form
     public function showGetPasswordForm()
     {
         return view('auth.getpass');
     }
 
+    // Show change password form
     public function showChangePasswordForm()
     {
         return view('auth.changepass');
     }
 
+    // Change password function
     public function changepass(Request $request)
     {
         $this->valid_changepass($request->all())->validate();
@@ -129,6 +141,6 @@ class RegisterController extends Controller
         $user->save();
 
         return redirect()->route('client.profile', ['userid' => $user->user_id])
-        ->with('success', 'Password has been changed successfully.');
-}
+            ->with('success', 'Password has been changed successfully.');
+    }
 }

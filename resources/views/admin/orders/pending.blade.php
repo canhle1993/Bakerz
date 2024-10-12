@@ -221,7 +221,7 @@
                     <form action="{{route('order.gotopaid', $item->order_id)}}" method="POST" style="display:inline-block;">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-lower">
-                            <i class="bi bi-box-arrow-right"></i> Paid
+                            <i class="bi bi-box-arrow-right"></i>Confirmed
                         </button>
                     </form>
                     
