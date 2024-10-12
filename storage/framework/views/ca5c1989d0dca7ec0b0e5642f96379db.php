@@ -148,7 +148,7 @@
 </style>
 
 <?php if(session('success')): ?>
-    <div id="custom-alert" class="custom-alert">
+<div id="custom-alert" class="custom-alert">
         <?php echo e(session('success')); ?>
 
         <button class="close-btn" onclick="closeAlert()">×</button>
@@ -177,8 +177,83 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="text-primary">Admin Management</h1>
+        <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addAdminModal">Add Admin</button>
         
     </div>
+
+
+
+
+
+<!-- Modal  add admin-->
+<div class="modal fade" id="addAdminModal" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAdminModalLabel">Add New Admin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="<?php echo e(route('admin.store')); ?>" method="POST" enctype="multipart/form-data">
+                <?php echo csrf_field(); ?>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="Enter name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" required placeholder="Enter email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required placeholder="Enter password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirm_password" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirm_password" required placeholder="Confirm password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone</label>
+<input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number (optional)">
+                    </div>
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select class="form-control" id="gender" name="gender">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Enter address (optional)">
+                    </div>
+                    <div class="mb-3">
+                        <label for="avatar" class="form-label">Avatar (optional)</label>
+                        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
+                    </div>
+                    <div class="mb-3">
+                        <label for="avatar_url" class="form-label">Avatar URL (optional)</label>
+                        <input type="url" class="form-control" id="avatar_url" name="avatar_url" placeholder="Enter avatar URL (optional)">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Register Admin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
 
     <table class="table table-hover table-bordered table-striped shadow-sm">
         <thead class="table-dark">
@@ -208,7 +283,7 @@
                 </td>
 
                 <td><?php echo e($admin->name); ?></td>
-                <td><?php echo e($admin->email); ?></td>
+<td><?php echo e($admin->email); ?></td>
                 <td><?php echo e($admin->phone); ?></td>
                 <td><?php echo e($admin->address); ?></td>
                 <td><?php echo e($admin->note); ?></td>

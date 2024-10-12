@@ -50,12 +50,7 @@
                             <span class="team-3-designation"><?php echo e($chef->position); ?></span>
                         </div>
                         <p class="team-3-text"><?php echo nl2br(e($chef->description)); ?></p>
-                        <ul class="team-3-social">
-                            <li><a href="#"><i class="lastudioicon-b-facebook"></i></a></li>
-                            <li><a href="#"><i class="lastudioicon-b-twitter"></i></a></li>
-                            <li><a href="#"><i class="lastudioicon-b-pinterest"></i></a></li>
-                            <li><a href="#"><i class="lastudioicon-b-instagram"></i></a></li>
-                        </ul>
+
                     </div>
                 </div>
             </div>

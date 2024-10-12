@@ -2,7 +2,7 @@
 
 <?php $__env->startSection('manage_admin'); ?>
 <div class="container-fluid">
-    <h2 class="mb-4">Quản lý đánh giá và bình luận</h2>
+    <h2 class="mb-4">Manage reviews and comments</h2>
 
     <?php if(session('success')): ?>
         <div class="alert alert-success">

@@ -19,6 +19,7 @@ class ClientController extends Controller
     public function home()
 
     {
+         
 
         return redirect()->route('client.filter');
     }
@@ -88,6 +89,16 @@ class ClientController extends Controller
 
     public function filter(Request $request)
 {
+    // Đếm số lượng tài khoản đã đăng ký thành công (không bị xóa)
+    $userCount = User::where(function ($query) {
+        $query->where('isdelete', 0)
+              ->orWhereNull('isdelete');
+    })->count();
+    
+    $productCount = Product::where(function ($query) {
+        $query->where('isdelete', 0)
+              ->orWhereNull('isdelete');
+    })->count();
     // Lấy ID của người dùng đang đăng nhập
     $userId = Auth::id();
 
@@ -181,6 +192,8 @@ class ClientController extends Controller
 
     // Trả về toàn bộ trang 'client.home' với danh sách các sản phẩm
     return view('client.home', compact(
+        'userCount',
+        'productCount',
         'products',
         'heathyCatalogs',
         'client',

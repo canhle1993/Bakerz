@@ -641,6 +641,15 @@
             // Hiển thị tổng đã tính
             $('#total_price').text(total.toFixed(2) + ' $');
         }
+        document.getElementById('offcanvasCart').addEventListener('hidden.bs.offcanvas', function () {
+            // Xóa lớp backdrop khi modal bị ẩn
+            var backdrops = document.querySelectorAll('.offcanvas-backdrop, .modal-backdrop');
+            // Lặp qua tất cả các backdrop và xóa chúng
+            backdrops.forEach(function(backdrop) {
+                backdrop.remove();
+            });
+            
+          });
 
     </script>
 </body>

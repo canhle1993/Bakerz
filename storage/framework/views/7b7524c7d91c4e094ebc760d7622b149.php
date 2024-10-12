@@ -169,7 +169,7 @@
                 <th>Phone</th>
                 <th>Address</th>
                 <th>Note</th>
-                <th>Actions</th>
+                <th style="width: 230px;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -241,7 +241,7 @@
                     <th>Categories</th> <!-- Nhiều danh mục -->
                     <th>Price</th>
                     <th>Description</th>
-                    <th>Actions</th>
+                    <th style="width: 230px;">Actions</th>
                 </tr>
             </thead>
             <tbody>
