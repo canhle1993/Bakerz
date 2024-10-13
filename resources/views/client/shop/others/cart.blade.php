@@ -5,12 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Bakerfresh - Cake Shop HTML Template</title>
+    <title>Bakerz Bite</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="./assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -63,7 +63,11 @@
                     <div class="row justify-content-between gap-3">
                         <div class="col-auto"><a href="{{ route('shop_all')}}"><button class="btn btn-outline-dark btn-primary-hover rounded-0">Continue Shopping</button></a></div>
                         <div class="col-auto d-flex flex-wrap gap-3">
+                        <form action="{{route('cart.clear')}}" method="POST">
+                        @csrf
+                        @method('DELETE')
                             <a href=""><button class="btn btn-outline-dark btn-primary-hover rounded-0">Clear Cart</button></a>
+                        </form>
                         </div>
                     </div>
                     <!-- Cart Action Buttons End -->

@@ -12,7 +12,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,12 +37,12 @@
 
     <style>
       #a1 {
-        border: solid 2px #808080;
+        border: solid 1px #d3cece;
       }
       .product-table {
         padding: 20px;
         border-radius: 8px;
-        background-color: #191c24;
+        background-color: #ffffff;
         position: relative;
       }
       .product-image {
@@ -52,10 +52,10 @@
       }
       .product-column {
         font-weight: bold;
-        color: #ffc106; /* Màu chữ của cột 2 */
+        color: black; /* Màu chữ của cột 2 */
       }
       .product-info {
-        color: #ffffff; /* Màu chữ của cột 3 */
+        color: #1f2242 ; /* Màu chữ của cột 3 */
         padding: 5px;
         border-radius: 5px;
       }

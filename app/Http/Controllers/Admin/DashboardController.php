@@ -26,7 +26,7 @@ class DashboardController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
 
-        return view('admin.dashboard', compact('orderNotifications', 'reviewNotifications'));
+        return view('admin.chart', compact('orderNotifications', 'reviewNotifications'));
     }
 
 

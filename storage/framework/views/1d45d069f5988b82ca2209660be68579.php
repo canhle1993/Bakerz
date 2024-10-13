@@ -4,6 +4,21 @@
 <div class="container mt-5">
     <h1>Blog Management</h1>
 
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+                <!-- Form tìm kiếm blog theo tên -->
+            <form class="d-flex mb-4" method="GET" action="<?php echo e(route('blog.index')); ?>">
+                <input class="form-control me-2" type="search" placeholder="Search Blog Name" name="search" value="<?php echo e(request()->query('search')); ?>">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+        <a href="<?php echo e(route('blog.index')); ?>" class="btn btn-light">Reset</a>
+        </div>
+    </div>
+
     <!-- Button to open the modal to add blog -->
     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addBlogModal">Add Blog</button>
 
@@ -136,7 +151,11 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </tbody>
     </table>
+    <!-- Hiển thị phân trang -->
+    <div class="d-flex justify-content-center">
+        <?php echo e($blogs->appends(request()->except('page'))->links('pagination::bootstrap-4')); ?>
 
+    </div>
     <!-- Add Blog Modal -->
     <div class="modal fade" id="addBlogModal" tabindex="-1">
         <div class="modal-dialog">

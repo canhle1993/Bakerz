@@ -534,9 +534,65 @@ class ProductController extends Controller
 
     }
 
+    public function goallquanlity_stockin(Request $request){
+        $products = Product::select('Product.*')
+                ->distinct()  // Loại bỏ các bản ghi trùng lặp
+                ->join('LinkCatalogProduct', 'Product.product_id', '=', 'LinkCatalogProduct.product_id')
+                ->join('Category', 'LinkCatalogProduct.category_id', '=', 'Category.category_id')
+                ->where(function ($query) {
+                    $query->where('Product.isdelete', '<>', 1)
+                          ->orWhereNull('Product.isdelete');
+                })
+                ->where(function ($query) use ($request) {
+                    $query->where('Product.inventory', $request->quantityInput);
+                })
+                ->where(function ($query) {
+                    $query->where('Product.status', '<>', 'Check Stock')
+                    ->orWhereNull('Product.status');
+                })->get();
+
+        foreach ($products as $product) {
+            $product->status = "Check Stock";
+            $product->save();
+        }
+        
+        // Redirect về trang hiện tại
+        return redirect()->back()->with('success', 'Product status updated to Check Stock');
+
+    }
+
+    public function goallto_stockin(){
+        
+        $products = Product::select('Product.*')
+                ->distinct()  // Loại bỏ các bản ghi trùng lặp
+                ->join('LinkCatalogProduct', 'Product.product_id', '=', 'LinkCatalogProduct.product_id')
+                ->join('Category', 'LinkCatalogProduct.category_id', '=', 'Category.category_id')
+                ->where(function ($query) {
+                    $query->where('Product.isdelete', '<>', 1)
+                        ->orWhereNull('Product.isdelete');
+                })
+                ->where(function ($query) {
+                    $query->where('Product.inventory', 0)
+                    ->orWhereNull('Product.inventory');
+                })
+                ->where(function ($query) {
+                    $query->where('Product.status', '<>', 'Check Stock')
+                    ->orWhereNull('Product.status');
+                })->get();
+
+        foreach ($products as $product) {
+            $product->status = "Check Stock";
+            $product->save();
+        }
+
+        // Redirect về trang hiện tại
+        return redirect()->back()->with('success', 'Product status updated to Check Stock');
+
+    }
+
     public function stockin_byid(Request $request, $id){
         $product = Product::findOrFail($id);
-        $product->inventory += $request->quanlity_stockin;
+        $product->inventory += $request->quantity_stockin;
         $product->status = "";
         $product->save();
         // Redirect về trang hiện tại
@@ -560,6 +616,14 @@ class ProductController extends Controller
             $product->status = "";
             $product->save();
         }
+        // Redirect về trang hiện tại
+        return redirect()->back()->withInput(); // Giữ lại dữ liệu qua request khi reload trang
+    }
+
+    public function stockin_cancel(Request $request, $id){
+        $product = Product::findOrFail($id);
+        $product->status = "";
+        $product->save();
         // Redirect về trang hiện tại
         return redirect()->back()->withInput(); // Giữ lại dữ liệu qua request khi reload trang
     }

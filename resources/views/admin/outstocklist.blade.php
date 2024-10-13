@@ -4,7 +4,7 @@
     <!-- Favicon -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <link href="img/favicon.ico" rel="icon">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,8 +40,10 @@
                             @endif
                         </form>
 
-                        
-                        <a href="#">Move to Stock In</a>
+                        <form method="POST" action="{{ route('product.goallto_stockin') }}">
+                        @csrf
+                            <button type="submit" class="btn btn-outline-info border-0 m-2 text-danger">Move All to Stock In</button>
+                        </form>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">

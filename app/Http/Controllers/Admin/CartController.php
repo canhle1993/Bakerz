@@ -141,7 +141,7 @@ class CartController extends Controller
 
     public function showCart()
     {
-
+        $this->getsession();
         $cart = session()->get('cart', []);
         $cart_html = view('client.shop.others.cartpartials', compact('cart'))->render(); // Tạo HTML từ view
         $cart_html2 = view('client.shop.others.cartdetail', compact('cart'))->render(); // Tạo HTML từ view
@@ -199,6 +199,36 @@ class CartController extends Controller
 
     }
 
+    public function cart_cancel(Request $request, $orderId){
+        $currentUser = Auth::user();
+        $order = Order::find($orderId);
+        $order->status = "Cancel";
+        $order->save();
+        return redirect()->route('client.profile', $currentUser->user_id);
+
+    }
+
+    public function cart_Recheckout(Request $request){
+        try {
+            DB::beginTransaction(); // Start transaction to ensure atomicity
+            $currentUser = Auth::user();
+            $order = Order::find($request->orderId);
+            if (!$order) {
+                dd("order null");
+                return redirect()->route('client.profile', Auth::user()->user_id)->with('error', 'Order not found');
+            }
+            $this->vnp($request, $order);
+            
+            $order->status = "Paid";
+            $order->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack(); // Rollback transaction if any error occurs
+            $this->getsession();
+            return redirect()->route('client.profile', $currentUser->user_id);
+        }
+        return redirect()->route('client.profile', $currentUser->user_id);
+    }
     public function cart_checkout(Request $request){
         $currentUser = Auth::user(); // Lấy người dùng hiện tại
         $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
@@ -220,11 +250,11 @@ class CartController extends Controller
             }
         }
         if ($total == 0){
-            return redirect()->route('client.filter');
+            return redirect()->route('client.profile', $currentUser->user_id);
         }
         
         if($iserror){
-            return redirect()->route('client.filter')->with('error', 'Out of Stock');
+            return redirect()->route('client.profile', $currentUser->user_id)->with('error', 'Out of Stock');
         }
 
         DB::beginTransaction(); // Start transaction to ensure atomicity
@@ -279,15 +309,18 @@ class CartController extends Controller
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback transaction if any error occurs
             $this->getsession();
-            return redirect()->route('client.filter');
+            return redirect()->route('client.profile', $currentUser->user_id);
         }
-        return redirect()->route('client.filter');
+        return redirect()->route('client.profile', $currentUser->user_id);
     }
 
     public function getsession(){
         $currentUser = Auth::user(); // Lấy người dùng hiện tại
-
-        $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
+        if($currentUser){
+            $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
+        } else {
+            $cartItems = Cart::with('product')->where('user_id', 0)->get();
+        }
 
         $cart = [];
         foreach ($cartItems as $item) {
@@ -311,16 +344,16 @@ class CartController extends Controller
         $vnp_Returnurl = route('vnpay.return', ['order_id' => $order->order_id]);
         $vnp_TmnCode = "OT1X2F3Y";//Mã website tại VNPAY
         $vnp_HashSecret = "S9ZGL7JWJCZRSXD605B1C01YY0S67XS8"; //Chuỗi bí mật
-
+        
         $vnp_TxnRef = uniqid(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này
-
+        
         $vnp_OrderInfo ="Bill Payment";
         $vnp_OrderType = "Bake Payment";
         $vnp_Amount = ($order['pay'] * 25000) * 100;
         $vnp_Locale = "vn";
         // $vnp_BankCode = "NCB";
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-
+        
         $inputData = array(
             "vnp_Version" => "2.1.0",
             "vnp_TmnCode" => $vnp_TmnCode,
@@ -334,16 +367,16 @@ class CartController extends Controller
             "vnp_OrderType" => $vnp_OrderType,
             "vnp_ReturnUrl" => $vnp_Returnurl,
             "vnp_TxnRef" => $vnp_TxnRef,
-
+            
         );
-
+        
         if (isset($vnp_BankCode) && $vnp_BankCode != "") {
             $inputData['vnp_BankCode'] = $vnp_BankCode;
         }
         if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
             $inputData['vnp_Bill_State'] = $vnp_Bill_State;
         }
-
+        
         //var_dump($inputData);
         ksort($inputData);
         $query = "";
@@ -358,15 +391,15 @@ class CartController extends Controller
             }
             $query .= urlencode($key) . "=" . urlencode($value) . '&';
         }
-
+        
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
             $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
         $returnData = array('code' => '00'
-            , 'message' => 'success'
-            , 'data' => $vnp_Url);
+        , 'message' => 'success'
+        , 'data' => $vnp_Url);
         if (isset($_POST['redirect'])) {
             header('Location: ' . $vnp_Url);
             die();
@@ -378,6 +411,10 @@ class CartController extends Controller
     public function checkinventory(Request $request)
     {
         $currentUser = Auth::user();
+        if(!$currentUser){
+            return redirect()->route('login');
+
+        }
         // Tìm sản phẩm theo product_id
         $product = Product::findOrFail($request->product_id);
 
@@ -408,4 +445,13 @@ class CartController extends Controller
         return response()->json(['sucess' => 'success']);
     }
 
+    public function clear_cart(){
+        $currentUser = Auth::user(); // Lấy người dùng hiện tại
+        Cart::where('user_id', $currentUser->user_id)
+        ->delete();
+
+        $this->getsession();
+        
+        return redirect()->route('cart');
+    }
 }

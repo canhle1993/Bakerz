@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/favicon.png')); ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -241,7 +241,7 @@
             // Bắt sự kiện khi trang được hiển thị trở lại
             window.addEventListener('pageshow', function(event) {
                 if (event.persisted && sessionStorage.getItem('checkoutVisited') === 'true') {
-                    window.location.href = "<?php echo e(route('client.filter')); ?>";
+                    window.location.href = "<?php echo e(route('client.profile', Auth::user()->user_id)); ?>";
                     alert("Thanh toán thất bại. Hãy mở đơn hàng và thanh toán lại. ")
                     sessionStorage.removeItem('checkoutVisited'); // Xóa trạng thái nếu không cần nữa
                 }

@@ -4,7 +4,7 @@
     <!-- Favicon -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <link href="img/favicon.ico" rel="icon">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -102,7 +102,7 @@
                                             </a>
                                         </div>
                                     </th>
-                                    <th scope="col">
+                                    <th scope="col" style="width: 265px;">
                                         Action
                                     </th>
                                 </tr>
@@ -125,13 +125,20 @@
                                         {{ $product->inventory }}
                                     </td>
                                     <td>{{ formatPriceVND($product->price) }}</td>
-                                    <form id="deleteForm" method="POST" action="{{ route('product.stockin_byid', $product->product_id) }}">
-                                    @csrf
-                                    <td>
-                                        <input hidden type="text" name="quanlity_stockin" class="inputTarget" placeholder="This will get the value automatically">
+                                    <td >
+                                        
+                                    <div style="display: flex; justify-content: space-between;">
+                                    <form method="POST" action="{{ route('product.stockin_byid', $product->product_id) }}">
+                                        @csrf
+                                        <input style="width: 50px;" type="number" name="quantity_stockin" class="inputTarget">
                                         <button type="submit" class="btn btn-outline-info m-2">Stock In</button>
-                                    </td>
                                     </form>
+                                    <form method="POST" action="{{ route('product.stockin_cancel', $product->product_id) }}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline-danger m-2">Cancel</button>
+                                    </form>
+                                </div>
+                                </td>
                                 </tr>
                             @endforeach
                             </tbody>

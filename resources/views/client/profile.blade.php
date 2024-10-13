@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -318,7 +318,7 @@
                       @if(Auth::user()->rank === 'Gold')
                           <a href="{{ route('pricing-plan') }}" style="float: right;"><b style="margin-left: 25px"><img style="border: none; width: 50px; height: 70px;" src="{{asset('img/2.png')}}" alt="gold"><br>Point: {{ Auth::user()->score }}</b></a>
                       @elseif(Auth::user()->rank === 'Diamond')
-                      <a href="{{ route('pricing-plan') }}" style="float: right;"><b style="margin-left: 25px"><img style="border: none; width: 50px; height: 70px;" src="{{asset('img/3.png')}}" alt="diamond"><br>Point: {{ Auth::user()->score }}</b></a>
+                      <a href="{{ route('blog-detail') }}" style="float: right;"><b style="margin-left: 25px"><img style="border: none; width: 50px; height: 70px;" src="{{asset('img/3.png')}}" alt="diamond"><br>Point: {{ Auth::user()->score }}</b></a>
                       @else
                       <a href="{{ route('pricing-plan') }}" style="float: right;"><b ><img style="border: none; width: 50px; height: 70px;" src="{{asset('img/1.png')}}" alt="Bronze"><br><span >Point: {{ Auth::user()->score }}</span></b></a>
                       
@@ -371,7 +371,7 @@
                           <span class="d-none d-sm-block">Change password</span>
                         </a>
                       </li>
-
+                      @if (Auth::check() && (Auth::user()->role_id == 2 || Auth::user()->role_id == 3))
                       <li class="nav-item" role="presentation" id="checkAdmin">
                         <a
                           class="nav-link px-4"
@@ -386,6 +386,8 @@
                           <span class="d-none d-sm-block">Dashboard</span>
                         </a>
                       </li>
+                      @endif
+
                     </ul>
                   </div>
                 </div>
@@ -753,12 +755,40 @@
           </tbody>
         </table>
       </div>
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      
+      <div class="modal-footer">
+      <form id="form-payment" style="display: none;" action="{{ route('cart.cart_Recheckout') }}" class="checkout-form" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input hidden name="orderId" type="text" id="order-detail-id" value="">
+        <button  type="submit" class="btn btn-success" data-bs-dismiss="modal">Order Payment</button>
+      </form>
+        <button  id="form-cancel" data-url="{{ route('cart.cart_cancel', ['orderId' => ':orderId']) }}" type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="showDeleteModal(this)">Order Cancel</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- Modal Popup -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h5 style="color: grey;" class="modal-title" id="deleteModalLabel">Confirm Cancel Order</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          Are you sure you want to cancel this order?
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form id="deleteForm" method="POST" action="">
+              @csrf
+              <button type="submit" class="btn btn-danger">Cancel</button>
+          </form>
+      </div>
+      </div>
+  </div>
+  </div>
 @include('layouts.footer')
      <!-- JS Vendor, Plugins & Activation Script Files -->
 
@@ -859,11 +889,21 @@
               dataType: 'json',
               success: function(response) {
                 if (response.status === 'success') {
+                  var order = response.data.order
                   // Đổ dữ liệu vào modal
+                  console.log(order.status);
+                  if (order.status == "Pending"){
+                    $('#form-payment').show();
+                    $('#form-cancel').show();
+                  } else {
+                    $('#form-payment').hide();
+                    $('#form-cancel').hide();
+                  }
+                  var getorder = response.data.order_id;
                   var orderdetails = response.data.orderDetails; // Giả sử response trả về orderDetails
                   var modalContent = '';
                   
-
+                  $('#order-detail-id').val(getorder);  // Đổ giá sản phẩm
                   // Lặp qua chi tiết đơn hàng và hiển thị
                   orderdetails.forEach(function(item) {
                     var imageUrl = `{{ asset('storage/products/') }}/${item.product.image}`; // Xây dựng URL hình ảnh
@@ -908,6 +948,64 @@
             }
           });
         });
+    
+        window.addEventListener('load', updateCartView)
+        
+        function updateCartView() {
+          
+              $.ajax({
+                  url: "{{ route('cart.show') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                  method: "GET",
+                  success: function(response) {
+                    console.log("OK");
+                      $('#cart-content').html(response.cart_html); // Cập nhật lại nội dung giỏ hàng
+                      $('#cart-content2').html(response.cart_html2); // Cập nhật lại nội dung giỏ hàng
+                      $('#cart_quantity').text(response.cart_quantity); // Cập nhật lại số lượng giỏ hàng
+
+                      console.log(response.cart_quantity);
+                      calculateTotal();
+                      // Sử dụng jQuery animate để tạo hiệu ứng di chuyển
+                      $('#cart_icon').css('color', 'red')// Đổi màu thành đỏ
+                      .animate({
+                          top: '-10px'
+                      }, 200, function() {
+                          $(this).animate({
+                              top: '0px'
+                          }, 200, function() {
+                              // Lặp lại lần nữa
+                              $(this).animate({
+                                  top: '-10px'
+                              }, 200, function() {
+                                  $(this).animate({
+                                      top: '0px'
+                                  }, 200, function() {
+                                      // Sau khi hiệu ứng hoàn thành, đổi lại màu ban đầu
+                                      $(this).css('color', '');
+                                  });
+                              });
+                          });
+                      });
+                  },
+                  error: function(xhr) {
+                    console.log("FAIL");
+                      console.error('Error:', xhr.responseText);
+                      // alert('An error occurred while updating the cart.');
+                  }
+              });
+        }
+        
+        function showDeleteModal(element) {
+            // Lấy giá trị URL từ thuộc tính data-url
+            var actionUrl = element.getAttribute('data-url');
+            var orderId = document.getElementById("order-detail-id").value;
+            // Gán action URL cho form xóa trong modal
+            actionUrl = actionUrl.replace(':orderId', orderId);
+            document.getElementById('deleteForm').action = actionUrl;
+
+            // Hiển thị modal
+            var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            deleteModal.show();
+        }
     </script>
 </body>
 

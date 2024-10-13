@@ -45,7 +45,7 @@ class ProductController extends Controller
 
     public function all_product(Request $request)
     {
-        $sort = $request->get('sort', 'price-ascending');
+        $sort = $request->get('sort', 'best-selling');
         $query = $request->input('query');
         $categoryId = $request->get('category_id');
         $paginateBy = $request->get('paginate', 12);
@@ -80,6 +80,8 @@ class ProductController extends Controller
             $products->orderBy('price', 'asc');
         } elseif ($sort == 'price-descending') {
             $products->orderBy('price', 'desc');
+        } else {
+            $products->orderBy('ModifiedDate', 'desc');
         }
 
         // Phân trang sản phẩm dựa trên lựa chọn người dùng
@@ -191,9 +193,13 @@ class ProductController extends Controller
         $product = Product::with('images', 'discounts', 'catalogs')->find($id);
 
         if ($product) {
+            $discountedPrice = $product->getDiscountedPrice();
+            $discountedPercent = $product->getDiscountPercent();
             return response()->json([
                 'status' => 'success',
-                'product' => $product
+                'product' => $product,
+                'discounted_price' => $discountedPrice, // Trả về giá đã giảm
+                'discounted_percent' => $discountedPercent
             ]);
         } else {
             return response()->json([
@@ -252,30 +258,32 @@ class ProductController extends Controller
     //Hàm xử lý thả tim cho sản phẩm để sản phẩm vào trong trang wishlist
     public function addToWishlist(Request $request)
     {
-        $product_id = $request->input('product_id');
-        $user_id = Auth::user()->user_id;  // Lấy ID của user hiện tại
-
+        // Kiểm tra xem người dùng đã đăng nhập chưa
         if (!Auth::check()) {
             return response()->json(['status' => 'error', 'message' => 'You must be logged in to add to wishlist']);
         }
-
+    
+        // Lấy ID sản phẩm và user
+        $product_id = $request->input('product_id');
+        $user_id = Auth::user()->user_id;  // Lấy ID của user hiện tại
+    
         // Kiểm tra xem sản phẩm đã có trong wishlist chưa
         $exists = Wishlist::where('product_id', $product_id)
-                  ->where('user_id', $user_id)
-                  ->exists();
-
+                          ->where('user_id', $user_id)
+                          ->exists();
+    
         if (!$exists) {
             // Thêm sản phẩm vào wishlist
-            Wishlist::table('wishlists')->insert([
+            Wishlist::create([
                 'user_id' => $user_id,
                 'product_id' => $product_id,
             ]);
             return response()->json(['status' => 'success', 'message' => 'Added to wishlist']);
         }
-
+    
         return response()->json(['status' => 'error', 'message' => 'Product already in wishlist']);
     }
-
+    
 
     //Show thông tin sản phẩm được tim qua trang wishlist
     public function showWishlist()
@@ -293,11 +301,13 @@ class ProductController extends Controller
     //Xóa sản phẩm trong wishlist
     public function removeFromWishlist(Request $request)
     {
-        $product_id = $request->input('product_id');
+        $product_id = $request->product_id;
         $user_id = Auth::user()->user_id;  // Lấy ID của user hiện tại
-
+        
         // Xóa sản phẩm khỏi wishlist dựa trên user_id và product_id
-        Wishlist::table('wishlists')->where('user_id', $user_id)->where('product_id', $product_id)->delete();
+        Wishlist::where('user_id', $user_id)
+        ->where('product_id', $product_id)
+        ->delete();
 
         return response()->json(['status' => 'success', 'message' => 'Product removed from wishlist']);
     }

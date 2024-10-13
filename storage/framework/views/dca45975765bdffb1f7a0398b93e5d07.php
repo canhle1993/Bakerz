@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Bakerfresh - Cake Shop HTML Template</title>
+    <title>Bakerz Bite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="./assets/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
+
 </head>
 
 <body>
@@ -78,7 +80,7 @@
                                 <td><?php echo e(formatPriceVND($item->product->price)); ?></td>
                                 <?php endif; ?>
                                 <td class="wishlist-cart">
-                                    <a href="shop-cart.html" class="btn btn-dark btn-hover-primary">Select Option</a>
+                                    <a class="btn btn-dark btn-hover-primary add-to-cart" href="#" data-product-id="<?php echo e($item->product->product_id); ?>">Add to cart</a>
                                 </td>
                             </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -122,17 +124,17 @@
     <script>
         $(document).on('click', '.remove-btn', function(e) {
         e.preventDefault();
-
+        var _token = "<?php echo e(csrf_token()); ?>"; // CSRF token để bảo mật
         var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
-
         $.ajax({
             url: "<?php echo e(route('remove.from.wishlist')); ?>",
             method: 'POST',
             data: {
+                _token: _token,
                 product_id: productId,
-                _token: "<?php echo e(csrf_token()); ?>",  // Token bảo mật
             },
             success: function(response) {
+                console.log("OK");
                 if (response.status === 'success') {
                     // Reload lại trang hoặc xóa sản phẩm khỏi DOM
                     location.reload();  // Reload trang để cập nhật lại danh sách wishlist
@@ -141,6 +143,7 @@
                 }
             },
             error: function(xhr) {
+                console.log("ERROR");
                 console.error('Error:', xhr);
             }
         });

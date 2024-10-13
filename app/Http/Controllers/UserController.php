@@ -55,7 +55,7 @@ class UserController extends Controller
             'name' => $request->name,
             'address' => $request->address,
             'phone' => $request->phone,
-            'gender' => $request->gender, // Cập nhật gender
+            'gender' => $request->gender, // Cập nhật gender.
         ]);
     
         return redirect()->back()->with('success', 'Profile updated successfully');

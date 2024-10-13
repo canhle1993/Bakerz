@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/favicon.png')); ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
@@ -258,40 +258,59 @@
                 <div class="col-md-6">
                     <div class="contact-section_formbg" data-bg-image="<?php echo e(asset('assets/images/bg/contact-form-bg.jpg')); ?>">
                         <h2 class="contact-section_form__title">Get in touch.</h2>
-                        <form class="contact-section_form" id="contact-form" action="http://whizthemes.com/mail-php/raju/arden/mail.php" method="post">
+                        <?php if(session('success')): ?>
+                            <div id="tbn" class="alert alert-success" id="message-success">
+                                <?php echo e(session('success')); ?>
+
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if($errors->any()): ?>
+                            <div id="tbn" class="alert alert-danger" id="message-error">
+                                <ul>
+                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <li><?php echo e($error); ?></li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+                        <!-- <form class="contact-section_form" id="contact-form" action="<?php echo e(route('contact.store')); ?>" method="POST"> -->
+                        <form action="<?php echo e(route('contact.store')); ?>" method="POST"  enctype="multipart/form-data">
+                            <?php echo csrf_field(); ?>
                             <div class="row">
-                                <div class="col-md-6 form-p">
+                                <div class="col-md-6 form-p pt-3">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="con_name" placeholder="Name">
+                                        <input class="form-control" type="text" name="name" placeholder="Name">
                                     </div>
                                 </div>
-                                <div class="col-md-6 form-p">
+                                <div class="col-md-6 form-p pt-3">
                                     <div class="form-group">
-                                        <input class="form-control" type="email" name="con_email" placeholder="Email">
+                                        <input class="form-control" type="text" name="email" placeholder="Email">
                                     </div>
                                 </div>
-                                <div class="col-md-6 form-p">
+                                <div class="col-md-6 form-p pt-3">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="con_phone" placeholder="Phone">
+                                        <input class="form-control" type="text" name="phone" placeholder="Phone">
                                     </div>
                                 </div>
-                                <div class="col-md-6 form-p">
+                                <div class="col-md-6 form-p pt-3">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="con_address" placeholder="Address">
+                                        <input class="form-control" type="text" name="address" placeholder="Address">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-p pt-3">
+                                    <div class="form-group">
+                                        <textarea class="form-control text-area" name="comment" placeholder="Message"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-p">
-                                    <div class="form-group">
-                                        <textarea class="form-control text-area" name="con_message" placeholder="Message"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 form-p">
-                                    <div class="form-group mb-0">
-                                        <button class="btn btn-theme" type="submit">Send Message</button>
+                                    <div class="form-group mb-0 d-flex justify-content-center">
+                                        <button id="btnSendMessage" class="slider-content__btn btn btn-primary btn-hover-black" type="submit">Send Message</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
+
                         <!-- Message Notification -->
                         <div class="form-message"></div>
                     </div>
@@ -325,13 +344,28 @@
                                 <a class="logo-white d-none" href="index.html"><img src="<?php echo e(asset('assets/images/logo-white.svg')); ?>" alt="Logo"></a>
                             </div>
                             <div class="footer-widget__social">
-                                <a href="https://aptechvietnam.com.vn/" target="blank"><i class="lastudioicon-b-facebook"></i></a>
-                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-twitter"></i></a>
-                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
-                                <a href="https://www.instagram.com/aptechvn.official/" target="blank"><i class="lastudioicon-b-instagram"></i></a>
-                                <b style="padding: 3px 0px;"><i class="fas fa-users"></i>
-                                <span  id="onlineCount" style="border: none; background-color: #0771fb; color: #eff0f2; padding: 2px 7px 2px 7px; border-radius: 99px; left: -4px; top: -8px; position: relative;"></span></b>
-                            </div>
+                              <?php $__currentLoopData = $socialMedia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $socialMedia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <a href="<?php echo e($socialMedia->link); ?>" target="_blank">
+                                      <!-- Tùy chỉnh icon dựa trên name hoặc thêm icon chung cho tất cả -->
+                                      <?php if(strpos($socialMedia->name, 'Facebook') !== false): ?>
+                                          <i class="lastudioicon-b-facebook"></i>
+                                      <?php elseif(strpos($socialMedia->name, 'Twitter') !== false): ?>
+                                          <i class="lastudioicon-b-twitter"></i>
+                                      <?php elseif(strpos($socialMedia->name, 'Pinterest') !== false): ?>
+                                          <i class="lastudioicon-b-pinterest"></i>
+                                      <?php elseif(strpos($socialMedia->name, 'Instagram') !== false): ?>
+                                          <i class="lastudioicon-b-instagram"></i>
+                                      <?php else: ?>
+                                          <i class="lastudioicon-b-globe"></i> <!-- Biểu tượng mặc định -->
+                                      <?php endif; ?>
+                                  </a>
+                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                              <b style="padding: 3px 0px;">
+                                  <i class="fas fa-users"></i>
+                                  <span id="onlineCount" style="padding: 2px 7px 2px 7px; border-radius: 99px;"></span>
+                              </b>
+                          </div>
+
                         </div>
                         <!-- Footer Widget Section End -->
                     </div>
@@ -438,6 +472,23 @@
                     }
                 });
             }
+      // Đặt session scrollToTBN khi nhấn nút gửi form
+      document.getElementById('btnSendMessage').addEventListener('click', function() {
+          sessionStorage.setItem('scrollToTBN', 'true');
+      });
+
+      // Kiểm tra nếu session scrollToTBN tồn tại sau khi trang được load
+      window.addEventListener('load', function() {
+          if (sessionStorage.getItem('scrollToTBN') === 'true') {
+              // Cuộn tới form ở footer sau khi trang load
+              document.getElementById('tbn').scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'end'  // Cuộn xuống phía cuối trang (footer)
+              });
+              // Xóa session sau khi đã cuộn để tránh cuộn lại khi load trang tiếp
+              sessionStorage.removeItem('scrollToTBN');
+          }
+      });
     </script>
     <!-- Vendors JS -->
 </body>

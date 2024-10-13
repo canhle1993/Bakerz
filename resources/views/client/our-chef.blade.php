@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-    <meta charset="utf-8">
+<meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Bakerfresh - Cake Shop HTML Template</title>
+    <title>Bakerz Bite</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./assets/css/vendor/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
 </head>
 
 <body>
@@ -48,12 +50,7 @@
                             <span class="team-3-designation">{{ $chef->position }}</span>
                         </div>
                         <p class="team-3-text">{!! nl2br(e($chef->description)) !!}</p>
-                        <ul class="team-3-social">
-                            <li><a href="#"><i class="lastudioicon-b-facebook"></i></a></li>
-                            <li><a href="#"><i class="lastudioicon-b-twitter"></i></a></li>
-                            <li><a href="#"><i class="lastudioicon-b-pinterest"></i></a></li>
-                            <li><a href="#"><i class="lastudioicon-b-instagram"></i></a></li>
-                        </ul>
+
                     </div>
                 </div>
             </div>

@@ -31,13 +31,26 @@ class ManageAdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:user,email',
-            'password' => 'required|string|min:6',
+            'name' => ['required', 'string', 'max:255', 'regex:/^[\pL\s\-]+$/u'], // Chỉ cho phép ký tự có dấu và chữ cái
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users',
+                'regex:/^.+@gmail\.com$/i' // Chỉ cho phép email có đuôi @gmail.com
+            ],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'phone' => [
+                'required',
+                'string',
+                'max:100',
+                'regex:/^[0-9\+\-\(\)\s]+$/' // Chỉ cho phép số và các ký tự +, -, ()
+            ],
             'phone' => 'nullable|string',
             'gender' => 'nullable|string',
             'address' => 'nullable|string',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,bmp,webp',
             'avatar_url' => 'nullable|url'
         ]);
 

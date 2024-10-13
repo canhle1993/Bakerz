@@ -8,6 +8,8 @@
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="<?php echo e($blog->content1); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
+
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,10 +88,22 @@
                                 <div class="single-blog-share">
                                     <span class="label">Share:</span>
                                     <div class="social">
-                                        <a href="#"><i class="lastudioicon-b-facebook"></i></a>
-                                        <a href="#"><i class="lastudioicon-b-twitter"></i></a>
-                                        <a href="#"><i class="lastudioicon-b-pinterest"></i></a>
-                                        <a href="#"><i class="lastudioicon-b-instagram"></i></a>
+                                    <?php $__currentLoopData = $socialMedia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $socialMedia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <a href="<?php echo e($socialMedia->link); ?>" target="_blank">
+                                      <!-- Tùy chỉnh icon dựa trên name hoặc thêm icon chung cho tất cả -->
+                                      <?php if(strpos($socialMedia->name, 'Facebook') !== false): ?>
+                                          <i class="lastudioicon-b-facebook"></i>
+                                      <?php elseif(strpos($socialMedia->name, 'Twitter') !== false): ?>
+                                          <i class="lastudioicon-b-twitter"></i>
+                                      <?php elseif(strpos($socialMedia->name, 'Pinterest') !== false): ?>
+                                          <i class="lastudioicon-b-pinterest"></i>
+                                      <?php elseif(strpos($socialMedia->name, 'Instagram') !== false): ?>
+                                          <i class="lastudioicon-b-instagram"></i>
+                                      <?php else: ?>
+                                          <i class="lastudioicon-b-globe"></i> <!-- Biểu tượng mặc định -->
+                                      <?php endif; ?>
+                                  </a>
+                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </div>
                                 </div>
                             </div>
