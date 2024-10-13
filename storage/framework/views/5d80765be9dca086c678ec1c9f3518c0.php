@@ -229,6 +229,39 @@
         display: none;
       }
 
+      @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .cart-bounce {
+        animation: bounce 0.5s ease-in-out;
+    }
+
+    /* CSS cho fly-to-cart animation */
+    @keyframes fly-to-cart {
+        0% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-300px) translateX(200px) scale(0.1);
+        }
+    }
+
+    .fly-to-cart-img {
+        position: absolute;
+        z-index: 9999;
+        transition: all 1s ease-in-out;
+        animation: fly-to-cart 1s forwards;
+        opacity: 0;
+    }
+
     </style>
 
 </head>
@@ -511,10 +544,14 @@
             $('#outOfStock').css('z-index', 1060);
         });
 
-
+        var isAnimating = false;
+        var cart = $('#cart_icon'); // Lấy vị trí của biểu tượng giỏ hàng
           $(document).on('click', '.add-to-cart', function(e) {
             e.preventDefault();
+            
               var productId = $(this).data('product-id');
+              var imgtodrag = $(this).closest('.product-item').find('img').eq(0);
+            //   var cart = $('#cart_icon'); // Lấy vị trí của biểu tượng giỏ hàng
               $.ajax({
                   url: "<?php echo e(route('cart.checkinventory')); ?>",
                   method: "GET",
@@ -540,9 +577,42 @@
                           success: function(response) {
                               if (response.status === 'success') {
                                   // Cập nhật số lượng sản phẩm trong giỏ hàng
-                                  var modalCart = new bootstrap.Modal(document.getElementById('modalCart'));
-                                  modalCart.show();
+                                //   var modalCart = new bootstrap.Modal(document.getElementById('modalCart'));
+                                //   modalCart.show();
                                   updateCartView();
+                                  // Thêm hiệu ứng animation vào icon giỏ hàng
+                                    $('#cart_icon').addClass('cart-bounce');
+                                    setTimeout(function() {
+                                        $('#cart_icon').removeClass('cart-bounce');
+                                    }, 500); // Thời gian của animation
+
+                                    // Start
+                                    
+                                    if (imgtodrag.length > 0 && !imgtodrag.hasClass('cloned')) {
+                                    // Tạo một thẻ img clone để thực hiện animation bay
+                                    var imgclone = imgtodrag.clone()
+                                        .css({
+                                            'position': 'absolute',
+                                            'z-index': '9999',
+                                            'top': imgtodrag.offset().top,
+                                            'left': imgtodrag.offset().left,
+                                            'width': imgtodrag.width(),
+                                            'height': imgtodrag.height()
+                                        })
+                                        .appendTo($('body')) // Chỉ append vào body một lần
+                                        .addClass('fly-to-cart-img'); // Thêm class để apply animation
+                                    // Animation bay đến giỏ hàng
+                                    imgclone.animate({
+                                        'top': cart.offset().top,
+                                        'left': cart.offset().left,
+                                        'width': 50,
+                                        'height': 50
+                                    }, 1000, function() {
+                                        imgclone.remove(); // Xóa clone sau khi animation kết thúc
+                                    });
+                                        imgtodrag.addClass('cloned');
+                                    }
+                                    // End
                               } else {
                                   alert(response.message);
                               }
@@ -641,15 +711,6 @@
             // Hiển thị tổng đã tính
             $('#total_price').text(total.toFixed(2) + ' $');
         }
-        document.getElementById('offcanvasCart').addEventListener('hidden.bs.offcanvas', function () {
-            // Xóa lớp backdrop khi modal bị ẩn
-            var backdrops = document.querySelectorAll('.offcanvas-backdrop, .modal-backdrop');
-            // Lặp qua tất cả các backdrop và xóa chúng
-            backdrops.forEach(function(backdrop) {
-                backdrop.remove();
-            });
-            
-          });
 
     </script>
 </body>

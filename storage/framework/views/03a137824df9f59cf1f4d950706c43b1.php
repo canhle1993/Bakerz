@@ -86,10 +86,10 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('banner*') || Request::is('admin/chefs*') || Request::is('blog*') || Request::routeIs('admin.reviews*')) ? 'active' : ''); ?>" data-bs-toggle="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('banner*') || Request::is('admin/chefs*') || Request::is('admin/blog*') || Request::routeIs('admin.reviews*')) ? 'active' : ''); ?>" data-bs-toggle="dropdown">
                             <i class="fa fa-list me-2"></i>Pages
                         </a>
-                        <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('banner*') || Request::is('admin/chefs*') || Request::is('blog*') || Request::routeIs('admin.reviews*')) ? 'show' : ''); ?>">
+                        <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('banner*') || Request::is('admin/chefs*') || Request::is('admin/blog*') || Request::routeIs('admin.reviews*')) ? 'show' : ''); ?>">
                             <a href="<?php echo e(route('banner.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('banner.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Banner</a>
                             <a href="<?php echo e(route('admin.chefs.create')); ?>" class="bi-tag m-2 dropdown-item <?php echo e(Request::routeIs('admin.chefs.create') ? 'active' : ''); ?>">&nbsp;&nbsp;Chefs</a>
                             <a href="<?php echo e(route('blog.index')); ?>" class="bi-lightning m-2 dropdown-item <?php echo e(Request::routeIs('blog.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Blog</a>

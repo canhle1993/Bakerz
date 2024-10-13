@@ -973,12 +973,28 @@
                                 <div class="product-details-img d-flex overflow-hidden flex-row">
 
                                     <!-- Single Product Image Start -->
-                                    <div class="single-product-vertical-tab swiper-container order-2">
+                                    <div class="single-product-vertical-tab swiper-container order-2 product-item">
 
-                                        <div class="swiper-wrapper">
-                                        
-
-                                        </div>
+                                    <div class="swiper-wrapper" id="swiper-wrapper-dea913122338a79f" aria-live="polite" style="transition-duration: 0ms; transform: translate3d(-484px, 0px, 0px);">
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            </div>
 
                                         <!-- Next Previous Button Start -->
                                         <div class="swiper-button-vertical-next swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
@@ -992,8 +1008,18 @@
                                     <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
 
                                         <div class="swiper-wrapper">
-                                        
-                
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
                                         </div>
 
                                     </div>
@@ -1050,7 +1076,8 @@
                                         <li>
                                             <!-- Cart Button Start -->
                                             <div class="cart-btn">
-                                                <div class="add-to_cart">
+                                                <div class="add-to_cart product-item">
+                                                    <a style="display: none;" href=""><img style="border: none !important; height: 287px !important;" width="350" height="350" src="" alt=""></a>
                                                     <a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="<?php echo e($product->product_id); ?>">Add to cart</a>
                                                 </div>
                                             </div>
@@ -1058,9 +1085,9 @@
                                         </li>
                                         <li>
                                             <!-- Action Button Start -->
-                                            <div class="actions">
+                                            <!-- <div class="actions">
                                                 <a href="compare.html" title="Compare" class="action compare"><i class="lastudioicon-heart-2"></i></a>
-                                            </div>
+                                            </div> -->
                                             <!-- Action Button End -->
                                         </li>
                                     </ul>
@@ -1068,25 +1095,20 @@
 
                                     <!-- Product Meta Start -->
                                     <ul class="product-meta">
-                                        <li class="product-meta-wrapper">
+                                        <li class="product-meta-wrapper inventory-meta">
                                             <span class="product-meta-name">Remaining quantity:</span>
                                             <span class="product-meta-detail"><?php echo e($product->inventory); ?></span>
                                         </li>
-                                        <li class="product-meta-wrapper">
+                                        <li class="product-meta-wrapper category-meta">
                                             <span class="product-meta-name">category:</span>
                                             <span class="product-meta-detail">
-                                                <a href="#"> <?php $__currentLoopData = $product->catalogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $catalog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <?php echo e($catalog->category_name); ?><?php echo e(!$loop->last ? ', ' : ''); ?>
-
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></a>
+                                                
                                             </span>
                                         </li>
-                                        <li class="product-meta-wrapper">
+                                        <li class="product-meta-wrapper discount-meta">
                                             <span class="product-meta-name">Discount:</span>
                                             <span class="product-meta-detail">
-                                                <a href="#"><?php $__currentLoopData = $product->discounts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $discount): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php echo e($discount->discount *100); ?> %
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></a>
+                                                
                                             </span>
                                         </li>
                                     </ul>
@@ -1336,27 +1358,45 @@
                         // Hủy Swiper nếu đã tồn tại trước đó
                         
                         var product = response.product;  // Đối tượng product từ server
+                        var catagories = response.getsimpCatagories;
                         // Đổ dữ liệu vào modal
                         $('#modal-single-product .product-head-price').text("$" + response.discounted_price);  // Đổ giá sản phẩm
                         
                         $('#modal-single-product .desc-content').html(product.describe.replace(/\n/g, '<br>'));
-                        
+                        $('.product-meta .inventory-meta .product-meta-detail').text(product.inventory);
+                        $('.product-meta .discount-meta .product-meta-detail').text(response.discounted_percent + " %");
+                        var catalog ='';
+                        if (Array.isArray(product.catalogs) && product.catalogs.length > 0) {
+                            product.catalogs.forEach(function(getlist) {
+                                catalog += "\r\n" + getlist.category_name;
+                            });
+                        }
+                        $('.product-meta .category-meta .product-meta-detail').text(catalog);
                         // Cập nhật hình ảnh sản phẩm
-                        var imagesHtml = '';
-                        var thumbImageHtml = '';
-                        var productImage = "<?php echo e(asset('storage/products/')); ?>/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
-
-                        imagesHtml +='<a class="swiper-slide h-auto" href="' + productImage + '"><img class="w-100" src="' + productImage + '" alt="<?php echo e($product->product_name); ?>"></a>'
                         
-                        thumbImageHtml+= '<div class="swiper-slide"><img src="' + productImage + '" alt=""></div>';
+                        var slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(0);
+                        var thumbslide = $('.product-thumb-vertical .swiper-wrapper').find('.swiper-slide').eq(0);
+                        var hiddenimg = $('.cart-btn').find('.product-item');
+                        var productImage = "<?php echo e(asset('storage/products/')); ?>/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
+                        slide.find('img').attr('src', productImage);
+                        hiddenimg.find('img').attr('src', productImage);
+                        thumbslide.find('img').attr('src', productImage);
+                        var count = 0;
+                        var thumbcount = 0;
                         product.images.forEach(function(image) {
+                            count++;
+                            slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(count);
+                            thumbslide = $('.product-thumb-vertical').find('.swiper-slide').eq(count);
                             var imageUrl = "<?php echo e(asset('storage/products')); ?>/" + image.image; // Access the correct field inside image object
-                            imagesHtml += '<a class="swiper-slide h-auto" href="' + imageUrl + '"><img class="w-100" src="' + imageUrl + '" alt="<?php echo e($product->product_name); ?>"></a>'
-                            thumbImageHtml+= '<div class="swiper-slide"><img src="' + imageUrl + '" alt=""></div>';
+
+                            slide.find('img').attr('src', imageUrl);
+                            thumbslide.find('img').attr('src', imageUrl);
+                            // imagesHtml += '<a class="swiper-slide h-auto" href="' + imageUrl + '"><img class="w-100" src="' + imageUrl + '" alt="<?php echo e($product->product_name); ?>"></a>'
+                            // thumbImageHtml+= '<div class="swiper-slide"><img src="' + imageUrl + '" alt=""></div>';
                         });
                         var addCart = '<a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="'+ product.product_id +'">Add to cart</a>';
-                        $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
-                        $('.product-thumb-vertical .swiper-wrapper').html(thumbImageHtml);
+                        // $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
+                        // $('.product-thumb-vertical .swiper-wrapper').html(thumbImageHtml);
                         console.log("Product ID:" + product.product_id);
                         $('.add-to_cart .add-to-cart').replaceWith(addCart);
                         

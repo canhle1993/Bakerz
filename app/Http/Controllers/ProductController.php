@@ -192,10 +192,12 @@ class ProductController extends Controller
 
         if ($product) {
             $discountedPrice = $product->getDiscountedPrice();
+            $discountedPercent = $product->getDiscountPercent();
             return response()->json([
                 'status' => 'success',
                 'product' => $product,
-                'discounted_price' => $discountedPrice // Trả về giá đã giảm
+                'discounted_price' => $discountedPrice, // Trả về giá đã giảm
+                'discounted_percent' => $discountedPercent
             ]);
         } else {
             return response()->json([
