@@ -45,7 +45,7 @@ class ProductController extends Controller
 
     public function all_product(Request $request)
     {
-        $sort = $request->get('sort', 'price-ascending');
+        $sort = $request->get('sort', 'best-selling');
         $query = $request->input('query');
         $categoryId = $request->get('category_id');
         $paginateBy = $request->get('paginate', 12);

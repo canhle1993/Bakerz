@@ -239,15 +239,16 @@
                 <ul class="product-item__meta">
                  <li class="product-item__meta-action">
                     <a
-                      class="labtn-icon-quickview"
-                      href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title=""
-                      data-bs-original-title="Quick View"
-                      aria-label="Quick View"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleProductModal"
+                    class="labtn-icon-quickview quickview"
+                    href="#"
+                    data-product-id="<?php echo e($product->product_id); ?>"
+                    data-bs-tooltip="tooltip"
+                    data-bs-placement="top"
+                    title=""
+                    data-bs-original-title="Quick View"
+                    aria-label="Quick View"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleProductModal"
                     ></a>
                   </li>
                   <li class="product-item__meta-action">
