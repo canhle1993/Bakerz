@@ -97,7 +97,9 @@ class ClientController extends Controller
         return response()->json([
             'status' => 'success',
             'data' => [
-                'orderDetails' => $order->orderDetails // Gửi thông tin chi tiết đơn hàng
+                'order_id' => $orderId, // Thêm order_id vào response
+                'orderDetails' => $order->orderDetails, // Gửi thông tin chi tiết đơn hàng
+                'order' => $order,
             ]
         ]);
 >>>>>>> f3663b0fcd1617fcef9058852b3d17805a2ad507

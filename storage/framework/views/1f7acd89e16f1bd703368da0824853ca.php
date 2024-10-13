@@ -143,7 +143,6 @@
         <div class="shop-topbar-item">
             <form id="sortForm" action="<?php echo e(route('shop_all')); ?>" method="GET">
                 <select name="sort" id="SortBy" onchange="document.getElementById('sortForm').submit();">
-                    <option value="manual" <?php echo e(request('sort') == 'manual' ? 'selected' : ''); ?>>Sort by Rated</option>
                     <option value="best-selling" <?php echo e(request('sort') == 'best-selling' ? 'selected' : ''); ?>>Sort by Latest</option>
                     <option value="price-ascending" <?php echo e(request('sort') == 'price-ascending' ? 'selected' : ''); ?>>Price ↑</option>
                     <option value="price-descending" <?php echo e(request('sort') == 'price-descending' ? 'selected' : ''); ?>>Price ↓</option>
