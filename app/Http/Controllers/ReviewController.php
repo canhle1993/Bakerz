@@ -16,7 +16,7 @@ class ReviewController extends Controller
     public function store(Request $request, $product_id)
     {
         if (!Auth::check()) {
-            return redirect()->back()->with('error', 'Bạn cần đăng nhập để đánh giá sản phẩm.');
+            return redirect()->back()->with('error', 'You need to be logged in to review the product.');
         }
 
         $request->validate([
@@ -43,31 +43,41 @@ class ReviewController extends Controller
             'created_at' => Carbon::now(),  // Thời gian tạo thông báo
         ]);
 
-        return redirect()->route('product.single', ['product' => $product_id])->with('success', 'Đánh giá của bạn đã được gửi thành công!');
+        return redirect()->route('product.single', ['product' => $product_id])->with('success', 'Your review has been submitted successfully!');
     }
 
-    // Hiển thị trang quản lý đánh giá
-    public function manage()
+    public function manage(Request $request)
     {
-        // Lấy danh sách đánh giá và phân trang
+        // Lấy giá trị tìm kiếm từ request
+        $searchName = $request->query('searchName');
+        $searchRating = $request->query('searchRating');
+    
+        // Lấy danh sách đánh giá và áp dụng tìm kiếm, sắp xếp theo CreatedDate
         $reviews = UserReview::with(['user', 'product.catalogs'])
             ->where('is_deleted', 0)
-            ->orderBy('id', 'desc')
-            ->paginate(10); // Phân trang
-
+            ->when($searchName, function ($query, $searchName) {
+                return $query->whereHas('user', function ($q) use ($searchName) {
+                    $q->where('name', 'like', '%' . $searchName . '%');
+                });
+            })
+            ->when($searchRating, function ($query, $searchRating) {
+                return $query->where('ratestar', $searchRating);
+            })
+            ->orderBy('CreatedDate', 'desc')  // Sắp xếp theo CreatedDate mới nhất
+            ->paginate(10);
+    
         // Lấy danh sách thông báo chưa đọc
         $notifications = Notification::with('user')
             ->where('is_read', 0)
             ->orderBy('created_at', 'desc')
             ->get();
-
+    
         // Đánh dấu tất cả các thông báo là đã đọc
         Notification::where('is_read', 0)->update(['is_read' => 1]);
-
-        // Truyền dữ liệu vào view
+    
         return view('admin.reviews.manage', compact('reviews', 'notifications'));
     }
-
+    
 
     // Xóa đánh giá (đánh dấu là đã xóa)
     public function delete($id)
@@ -80,7 +90,7 @@ class ReviewController extends Controller
         $review->save();
 
         // Chuyển hướng lại với thông báo thành công
-        return redirect()->route('admin.reviews.manage')->with('success', 'Đánh giá đã được ẩn thành công.');
+        return redirect()->route('admin.reviews.manage')->with('success', 'The review has been successfully hidden.');
     }
     public function reply(Request $request, $id)
     {
@@ -98,7 +108,7 @@ class ReviewController extends Controller
             'reply' => $request->input('reply')
         ]);
 
-        return redirect()->back()->with('success', 'Trả lời đã được gửi thành công.');
+        return redirect()->back()->with('success', 'Response has been successfully submitted.');
     }
 
     // Lấy đánh giá 5 sao để hiển thị
@@ -107,10 +117,12 @@ class ReviewController extends Controller
         // Lấy đánh giá 5 sao mới nhất của mỗi tài khoản
         $fiveStarReviews = User::join('userreview', 'user.user_id', '=', 'userreview.user_id') // Sử dụng 'user.user_id'
             ->where('userreview.ratestar', '=', 5)
+            ->where('userreview.is_deleted', 0)  // Điều kiện loại bỏ đánh giá đã bị xóa
             ->whereIn('userreview.ID', function ($query) {
                 $query->select(DB::raw('MAX(u3.ID)'))
                     ->from('userreview as u3')
                     ->where('u3.ratestar', '=', 5)
+                    ->where('u3.is_deleted', 0)  // Điều kiện loại bỏ đánh giá đã bị xóa trong subquery
                     ->groupBy('u3.user_id');
             })
             ->select('user.user_id', 'user.name', 'user.email', 'user.avatar', 'userreview.comment', 'userreview.CreatedDate')
@@ -123,8 +135,5 @@ class ReviewController extends Controller
         // Truyền biến $fiveStarReviews vào view
         return view('client.pages.about', compact('fiveStarReviews'));
     }
-    
-
-
 
 }

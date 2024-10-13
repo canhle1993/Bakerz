@@ -254,10 +254,22 @@
 
                     <!-- Product Share Start -->
                     <div class="product-share">
-                        <a href="#"><i class="lastudioicon-b-facebook"></i></a>
-                        <a href="#"><i class="lastudioicon-b-twitter"></i></a>
-                        <a href="#"><i class="lastudioicon-b-pinterest"></i></a>
-                        <a href="#"><i class="lastudioicon-b-instagram"></i></a>
+                    <?php $__currentLoopData = $socialMedia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $socialMedia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <a href="<?php echo e($socialMedia->link); ?>" target="_blank">
+                            <!-- Tùy chỉnh icon dựa trên name hoặc thêm icon chung cho tất cả -->
+                            <?php if(strpos($socialMedia->name, 'Facebook') !== false): ?>
+                                <i class="lastudioicon-b-facebook"></i>
+                            <?php elseif(strpos($socialMedia->name, 'Twitter') !== false): ?>
+                                <i class="lastudioicon-b-twitter"></i>
+                            <?php elseif(strpos($socialMedia->name, 'Pinterest') !== false): ?>
+                                <i class="lastudioicon-b-pinterest"></i>
+                            <?php elseif(strpos($socialMedia->name, 'Instagram') !== false): ?>
+                                <i class="lastudioicon-b-instagram"></i>
+                            <?php else: ?>
+                                <i class="lastudioicon-b-globe"></i> <!-- Biểu tượng mặc định -->
+                            <?php endif; ?>
+                        </a>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <!-- Product Share End -->
 
@@ -423,7 +435,7 @@
                                 <div class="product-item text-center">
                                     <!-- <div class="product-item__badge">Hot</div> -->
                                     <div class="product-item__image border w-100">
-                                        <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>">
+                                        <a href="<?php echo e(route('product.single', ['product' => $relatedProduct->product_id])); ?>">
                                             <img width="350" height="350" src="<?php echo e(asset('storage/products/' . $relatedProduct->image)); ?>" alt="<?php echo e($relatedProduct->product_name); ?>">
                                         </a>
                                         <ul class="product-item__meta">
@@ -431,7 +443,7 @@
                                             <a
                                             class="shadow-1 labtn-icon-cart add-to-cart"
                                             href="#"
-                                            data-product-id="<?php echo e($product->product_id); ?>"
+                                            data-product-id="<?php echo e($relatedProduct->product_id); ?>"
                                             ></a>
                                         </li>
                                             <li class="product-item__meta-action">
@@ -440,17 +452,17 @@
                                         </ul>
                                     </div>
                                     <div class="product-item__content pt-5">
-                                        <h5 class="product-item__title"><a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>"><?php echo e($relatedProduct->product_name); ?></a></h5>
+                                        <h5 class="product-item__title"><a href="<?php echo e(route('product.single', ['product' => $relatedProduct->product_id])); ?>"><?php echo e($relatedProduct->product_name); ?></a></h5>
                                         <span class="product-item__price">
-                                        <?php if($product->price != $product->getDiscountedPrice()): ?>
-                                        <del><?php echo e(formatPriceVND($product->price)); ?></del>
+                                        <?php if($relatedProduct->price != $relatedProduct->getDiscountedPrice()): ?>
+                                        <del><?php echo e(formatPriceVND($relatedProduct->price)); ?></del>
                                         <!-- Giá gốc -->
                                     
                                         <strong style="color: red;"
-                                        >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
+                                        >$<?php echo e(number_format($relatedProduct->getDiscountedPrice(),2)); ?></strong
                                         >
                                         <!-- Giá sau khi giảm -->
-                                        <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
+                                        <?php else: ?> <?php echo e(formatPriceVND($relatedProduct->price)); ?>
 
                                         <!-- Giá không giảm -->
                                         <?php endif; ?>

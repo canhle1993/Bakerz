@@ -100,7 +100,7 @@
                                             </a>
                                         </div>
                                     </th>
-                                    <th scope="col">
+                                    <th scope="col" style="width: 265px;">
                                         Action
                                     </th>
                                 </tr>
@@ -125,16 +125,19 @@
 
                                     </td>
                                     <td><?php echo e(formatPriceVND($product->price)); ?></td>
-                                    <td>
+                                    <td >
+                                        
+                                    <div style="display: flex; justify-content: space-between;">
                                     <form method="POST" action="<?php echo e(route('product.stockin_byid', $product->product_id)); ?>">
-                                    <?php echo csrf_field(); ?>
-                                        <input hidden type="text" name="quanlity_stockin" class="inputTarget" placeholder="This will get the value automatically">
+                                        <?php echo csrf_field(); ?>
+                                        <input style="width: 50px;" type="number" name="quantity_stockin" class="inputTarget">
                                         <button type="submit" class="btn btn-outline-info m-2">Stock In</button>
                                     </form>
                                     <form method="POST" action="<?php echo e(route('product.stockin_cancel', $product->product_id)); ?>">
-                                    <?php echo csrf_field(); ?>
-                                    <button type="submit" class="btn btn-outline-danger m-2">Cancel</button>
+                                        <?php echo csrf_field(); ?>
+                                        <button type="submit" class="btn btn-outline-danger m-2">Cancel</button>
                                     </form>
+                                </div>
                                 </td>
                                 </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

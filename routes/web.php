@@ -236,6 +236,8 @@ Route::delete('/cart/{product_id}/delete', [CartController::class, 'deleteCart']
 Route::get('/showcheckout', [CartController::class, 'showcheckout'])->name('checkout');
 Route::post('/cart/checkout', [CartController::class, 'cart_checkout'])->name('cart.cart_checkout');
 Route::get('/cart/checkinventory', [CartController::class, 'checkinventory'])->name('cart.checkinventory');
+Route::delete('/cart/clear_cart', [CartController::class, 'clear_cart'])->name('cart.clear');
+
 
 // Route để lưu đánh giá
 Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
@@ -358,6 +360,54 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::put('/deal-of-the-day/{id}/delete', [DealOfTheDayController::class, 'destroy'])->name('deal.destroy');
 });
 
-// Route cho trang chủ
+use App\Http\Controllers\Admin\ComingSoonController;
 
+Route::prefix('admin')->name('admin.')->group(function() {
+    // Routes cho Coming Soon
+    Route::get('/coming-soon', [ComingSoonController::class, 'index'])->name('coming_soon.index');
+    Route::post('/coming-soon/store', [ComingSoonController::class, 'store'])->name('coming_soon.store');
+    Route::put('/coming-soon/{id}/update', [ComingSoonController::class, 'update'])->name('coming_soon.update');
+    Route::put('/coming-soon/{id}/delete', [ComingSoonController::class, 'destroy'])->name('coming_soon.destroy');
+});
+
+
+use App\Http\Controllers\ContactUsController;
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact_us.index');
+    Route::get('/contact-us/reply/{id}', [ContactUsController::class, 'showReplyForm'])->name('contact_us.reply'); // Hiển thị form trả lời
+    Route::post('/contact-us/reply/{id}', [ContactUsController::class, 'sendReply'])->name('contact_us.sendReply'); // Gửi trả lời
+    Route::delete('/contact-us/delete/{id}', [ContactUsController::class, 'delete'])->name('contact_us.delete'); // Xóa thông tin liên hệ
+});
+Route::post('contact-us/store', [ContactUsController::class, 'store'])->name('contact.store');
+
+
+use App\Http\Controllers\WorkshopController;
+Route::prefix('admin/workshop')->group(function () {
+    Route::get('/', [WorkshopController::class, 'index'])->name('admin.workshop.index');
+    Route::post('/approve/{id}', [WorkshopController::class, 'approve'])->name('admin.workshop.approve');
+    Route::post('/cancel/{id}', [WorkshopController::class, 'cancel'])->name('admin.workshop.cancel');
+    Route::delete('/delete/{id}', [WorkshopController::class, 'delete'])->name('admin.workshop.delete');
+    Route::post('/register-workshop', [WorkshopController::class, 'registerWorkshop'])->name('workshop.register');
+});
+
+Route::get('/clear-success-session', function () {
+    session()->forget('isdone');
+    session()->forget('iserror');
+    return response()->json(['message' => 'Session cleared']);
+})->name('session.clearSuccess');
+
+use App\Http\Controllers\Admin\SocialMediaController;
+
+// Route to display the Social Media page
+Route::get('/admin/socialmedia', [SocialMediaController::class, 'index'])->name('admin.socialmedia.index');
+
+// Route to store a new Social Media link
+Route::post('/admin/socialmedia/store', [SocialMediaController::class, 'store'])->name('admin.socialmedia.store');
+
+// Route to update an existing Social Media link
+Route::put('/admin/socialmedia/update/{id}', [SocialMediaController::class, 'update'])->name('admin.socialmedia.update');
+
+// Route to soft delete a Social Media link
+Route::delete('/admin/socialmedia/delete/{id}', [SocialMediaController::class, 'destroy'])->name('admin.socialmedia.delete');
 

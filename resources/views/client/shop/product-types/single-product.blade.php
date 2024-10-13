@@ -251,10 +251,22 @@
 
                     <!-- Product Share Start -->
                     <div class="product-share">
-                        <a href="#"><i class="lastudioicon-b-facebook"></i></a>
-                        <a href="#"><i class="lastudioicon-b-twitter"></i></a>
-                        <a href="#"><i class="lastudioicon-b-pinterest"></i></a>
-                        <a href="#"><i class="lastudioicon-b-instagram"></i></a>
+                    @foreach ($socialMedia as $socialMedia)
+                        <a href="{{ $socialMedia->link }}" target="_blank">
+                            <!-- Tùy chỉnh icon dựa trên name hoặc thêm icon chung cho tất cả -->
+                            @if (strpos($socialMedia->name, 'Facebook') !== false)
+                                <i class="lastudioicon-b-facebook"></i>
+                            @elseif (strpos($socialMedia->name, 'Twitter') !== false)
+                                <i class="lastudioicon-b-twitter"></i>
+                            @elseif (strpos($socialMedia->name, 'Pinterest') !== false)
+                                <i class="lastudioicon-b-pinterest"></i>
+                            @elseif (strpos($socialMedia->name, 'Instagram') !== false)
+                                <i class="lastudioicon-b-instagram"></i>
+                            @else
+                                <i class="lastudioicon-b-globe"></i> <!-- Biểu tượng mặc định -->
+                            @endif
+                        </a>
+                    @endforeach
                     </div>
                     <!-- Product Share End -->
 
@@ -420,7 +432,7 @@
                                 <div class="product-item text-center">
                                     <!-- <div class="product-item__badge">Hot</div> -->
                                     <div class="product-item__image border w-100">
-                                        <a href="{{ route('product.single', ['product' => $product->product_id]) }}">
+                                        <a href="{{ route('product.single', ['product' => $relatedProduct->product_id]) }}">
                                             <img width="350" height="350" src="{{ asset('storage/products/' . $relatedProduct->image) }}" alt="{{ $relatedProduct->product_name }}">
                                         </a>
                                         <ul class="product-item__meta">
@@ -428,7 +440,7 @@
                                             <a
                                             class="shadow-1 labtn-icon-cart add-to-cart"
                                             href="#"
-                                            data-product-id="{{ $product->product_id }}"
+                                            data-product-id="{{ $relatedProduct->product_id }}"
                                             ></a>
                                         </li>
                                             <li class="product-item__meta-action">
@@ -437,18 +449,18 @@
                                         </ul>
                                     </div>
                                     <div class="product-item__content pt-5">
-                                        <h5 class="product-item__title"><a href="{{ route('product.single', ['product' => $product->product_id]) }}">{{ $relatedProduct->product_name }}</a></h5>
+                                        <h5 class="product-item__title"><a href="{{ route('product.single', ['product' => $relatedProduct->product_id]) }}">{{ $relatedProduct->product_name }}</a></h5>
                                         <span class="product-item__price">
-                                        @if ($product->price != $product->getDiscountedPrice())
-                                        <del>{{ formatPriceVND($product->price) }}</del>
+                                        @if ($relatedProduct->price != $relatedProduct->getDiscountedPrice())
+                                        <del>{{ formatPriceVND($relatedProduct->price) }}</del>
                                         <!-- Giá gốc -->
                                     
                                         <strong style="color: red;"
-                                        >${{ number_format($product->getDiscountedPrice(),2)
+                                        >${{ number_format($relatedProduct->getDiscountedPrice(),2)
                                         }}</strong
                                         >
                                         <!-- Giá sau khi giảm -->
-                                        @else {{ formatPriceVND($product->price) }}
+                                        @else {{ formatPriceVND($relatedProduct->price) }}
                                         <!-- Giá không giảm -->
                                         @endif
                                     </span>

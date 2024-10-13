@@ -62,6 +62,7 @@
 </head>
 
 <body>
+    
 <?php echo $__env->make('layouts.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php if(session('error')): ?>
     <script>
@@ -75,7 +76,7 @@
             <div class="swiper-wrapper">
                 <!-- Single Slider Start -->
                 <?php $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $banner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('<?php echo e(asset('storage/banners/' . $banner->image_banner)); ?>'); height: 775px !important;">
+                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('<?php echo e(asset('storage/banners/' . $banner->image_banner)); ?>'); height: 860px !important;">
                     <div class="image movex">
                         <img class="img-center" src="<?php echo e(asset('storage/banners/' . $banner->image_product)); ?>" alt="Slider-Image">
                     </div>
@@ -157,14 +158,6 @@
                     <div class="col-md-6 mb-3">
                         <div class="mb-3">
                             <label class="form-label">Select health status:</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="heath_dump" value=""
-                                id="heath_0"
-                                <?php echo e(request('heath_dump') ? 'checked' : ''); ?>>
-                                <label class="form-check-label" for="heath_0">
-                                Normal
-                                </label>
-                            </div>
                             <?php $__currentLoopData = $heathyCatalogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $catalog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="heath_id[]" value="<?php echo e($catalog->heath_id); ?>"
@@ -556,7 +549,7 @@
     <div class="boxbanner-wrapper order-md-2 order-1">
       <!-- Ad Banner Start -->
       <a
-        href="single-product.html"
+        href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>"
         class="boxbanner-bg boxbanner"
         data-bg-image="assets/images/banner/add-banner.jpg"
       >
@@ -565,7 +558,7 @@
         <span class="boxbanner-discount">15%</span>
         <div class="boxbanner-btn-area">
           <span class="boxbanner-btn"
-            >Store Location <i class="lastudioicon lastudioicon-right-arrow"></i
+            >CLICK ME<i class="lastudioicon lastudioicon-right-arrow"></i
           ></span>
         </div>
       </a>
@@ -678,7 +671,7 @@
     <div class="boxbanner-wrapper order-1">
       <!-- Ad Banner Start -->
       <a
-        href="single-product.html"
+        href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 4])); ?>"
         class="boxbanner-bg boxbanner"
         data-bg-image="assets/images/banner/add-banner-two.jpg"
       >
@@ -688,7 +681,7 @@
         </div>
         <div class="boxbanner-btn-area">
           <span class="boxbanner-btn"
-            >Store Location <i class="lastudioicon lastudioicon-right-arrow"></i
+            >CLICK ME<i class="lastudioicon lastudioicon-right-arrow"></i
           ></span>
         </div>
       </a>
@@ -811,16 +804,16 @@
                 <div class="col-4">
                     <!-- Counter Item Strat -->
                     <div class="counter-item text-center">
-                        <span class="counter-item__label text-global-color-03"><span id="" class="count scroll-counter" data-counter-time="1500">10</span>K+</span>
-                        <p class="counter-item__value text-secondary">Client</p>
+                        <span class="counter-item__label text-global-color-03"><span id="" class="count scroll-counter" data-counter-time="1500"><?php echo e($userCount); ?></span></span>
+                        <p class="counter-item__value text-secondary">Clients</p>
                     </div>
                     <!-- Counter Item End -->
                 </div>
                 <div class="col-4">
                     <!-- Counter Item Strat -->
                     <div class="counter-item text-center">
-                        <span class="counter-item__label text-global-color-03"><span class="count scroll-counter" data-counter-time="1500">100</span>+</span>
-                        <p class="counter-item__value text-secondary">Cakes</p>
+                        <span class="counter-item__label text-global-color-03"><span class="count scroll-counter" data-counter-time="1500"><?php echo e($productCount); ?></span></span>
+                        <p class="counter-item__value text-secondary">Products</p>
                     </div>
                     <!-- Counter Item End -->
                 </div>
@@ -846,6 +839,7 @@
             <div class="swiper-wrapper">
             <?php if(isset($fiveStarReviews) && $fiveStarReviews->count() > 0): ?>
              <?php $__currentLoopData = $fiveStarReviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+             <?php if($review->is_deleted == 0): ?> <!-- Đảm bảo chỉ hiển thị các đánh giá chưa bị xóa -->
                         <div class="swiper-slide">
                             <div class="testimonial-two text-center">
                                 <div class="testimonial-two_quote">
@@ -861,6 +855,7 @@
                                 <span class="testimonial-two_position"><?php echo e($review->address); ?></span> <!-- Nếu có thêm địa chỉ -->
                             </div>
                         </div>
+                        <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php else: ?>
                     <p>Không có đánh giá 5 sao nào.</p>
@@ -978,12 +973,28 @@
                                 <div class="product-details-img d-flex overflow-hidden flex-row">
 
                                     <!-- Single Product Image Start -->
-                                    <div class="single-product-vertical-tab swiper-container order-2">
+                                    <div class="single-product-vertical-tab swiper-container order-2 product-item">
 
-                                        <div class="swiper-wrapper">
-                                        
-
-                                        </div>
+                                    <div class="swiper-wrapper" id="swiper-wrapper-dea913122338a79f" aria-live="polite" style="transition-duration: 0ms; transform: translate3d(-484px, 0px, 0px);">
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            </div>
 
                                         <!-- Next Previous Button Start -->
                                         <div class="swiper-button-vertical-next swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
@@ -997,8 +1008,18 @@
                                     <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
 
                                         <div class="swiper-wrapper">
-                                        
-                
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
                                         </div>
 
                                     </div>
@@ -1012,10 +1033,9 @@
 
                                 <!-- Product Summery Start -->
                                 <div class="product-summery position-relative">
-
+                                <h3 class="product-head-name"></h3>
                                     <!-- Product Head Start -->
                                     <div class="product-head mb-3">
-
                                         <!-- Price Start -->
                                         <span class="product-head-price">
                                             <?php if($product->price != $product->getDiscountedPrice()): ?>
@@ -1036,7 +1056,7 @@
                                     <!-- Product Head End -->
 
                                     <!-- Description Start -->
-                                    <p class="desc-content"><?php echo nl2br(e($product->describe)); ?></p>
+                                    <p class="desc-content" style="margin-bottom: 0px !important;"><?php echo nl2br(e($product->describe)); ?></p>
                                     <!-- Description End -->
 
                                     <!-- Product Coler Variation Start -->
@@ -1051,11 +1071,12 @@
                                     <!-- Product Size End -->
 
                                     <!-- Product Quantity, Cart Button, Wishlist and Compare Start -->
-                                    <ul class="product-cta">
+                                    <ul class="product-cta" style="margin-bottom: 15px !important;">
                                         <li>
                                             <!-- Cart Button Start -->
                                             <div class="cart-btn">
-                                                <div class="add-to_cart">
+                                                <div class="add-to_cart product-item">
+                                                    <a style="display: none;" href=""><img style="border: none !important; height: 287px !important;" width="350" height="350" src="" alt=""></a>
                                                     <a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="<?php echo e($product->product_id); ?>">Add to cart</a>
                                                 </div>
                                             </div>
@@ -1063,9 +1084,9 @@
                                         </li>
                                         <li>
                                             <!-- Action Button Start -->
-                                            <div class="actions">
+                                            <!-- <div class="actions">
                                                 <a href="compare.html" title="Compare" class="action compare"><i class="lastudioicon-heart-2"></i></a>
-                                            </div>
+                                            </div> -->
                                             <!-- Action Button End -->
                                         </li>
                                     </ul>
@@ -1073,25 +1094,20 @@
 
                                     <!-- Product Meta Start -->
                                     <ul class="product-meta">
-                                        <li class="product-meta-wrapper">
+                                        <li class="product-meta-wrapper inventory-meta">
                                             <span class="product-meta-name">Remaining quantity:</span>
                                             <span class="product-meta-detail"><?php echo e($product->inventory); ?></span>
                                         </li>
-                                        <li class="product-meta-wrapper">
+                                        <li class="product-meta-wrapper category-meta">
                                             <span class="product-meta-name">category:</span>
                                             <span class="product-meta-detail">
-                                                <a href="#"> <?php $__currentLoopData = $product->catalogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $catalog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <?php echo e($catalog->category_name); ?><?php echo e(!$loop->last ? ', ' : ''); ?>
-
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></a>
+                                                
                                             </span>
                                         </li>
-                                        <li class="product-meta-wrapper">
+                                        <li class="product-meta-wrapper discount-meta">
                                             <span class="product-meta-name">Discount:</span>
                                             <span class="product-meta-detail">
-                                                <a href="#"><?php $__currentLoopData = $product->discounts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $discount): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php echo e($discount->discount *100); ?> %
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></a>
+                                                
                                             </span>
                                         </li>
                                     </ul>
@@ -1326,7 +1342,7 @@
             sessionStorage.removeItem('scrollToA1');
         }
     });
-
+    
     $('.quickview').on('click', function(e) {
             e.preventDefault();
             var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
@@ -1338,26 +1354,52 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.status === 'success') {
+                        // Hủy Swiper nếu đã tồn tại trước đó
+                        
                         var product = response.product;  // Đối tượng product từ server
-                        
+                        var catagories = response.getsimpCatagories;
                         // Đổ dữ liệu vào modal
-                        $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
-                        $('#modal-single-product .desc-content').html(product.describe);  // Đổ mô tả sản phẩm
+                        $('#modal-single-product .product-head-price').text("$" + response.discounted_price);  // Đổ giá sản phẩm
                         
+                        $('#modal-single-product .desc-content').html(product.describe.replace(/\n/g, '<br>'));
+                        $('.product-meta .inventory-meta .product-meta-detail').text(product.inventory);
+                        $('.product-meta .discount-meta .product-meta-detail').text(response.discounted_percent + " %");
+                        $('.product-head-name').text(product.product_name);
+                        var catalog ='';
+                        if (Array.isArray(product.catalogs) && product.catalogs.length > 0) {
+                            product.catalogs.forEach(function(getlist) {
+                                catalog += "\r\n" + getlist.category_name;
+                            });
+                        }
+                        $('.product-meta .category-meta .product-meta-detail').text(catalog);
                         // Cập nhật hình ảnh sản phẩm
-                        var imagesHtml = '';
+                        
+                        var slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(0);
+                        var thumbslide = $('.product-thumb-vertical .swiper-wrapper').find('.swiper-slide').eq(0);
+                        var hiddenimg = $('.cart-btn').find('.product-item');
                         var productImage = "<?php echo e(asset('storage/products/')); ?>/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
-
-                        imagesHtml += '<div class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + productImage + '" alt="Product"></div>';
+                        slide.find('img').attr('src', productImage);
+                        hiddenimg.find('img').attr('src', productImage);
+                        thumbslide.find('img').attr('src', productImage);
+                        var count = 0;
+                        var thumbcount = 0;
                         product.images.forEach(function(image) {
+                            count++;
+                            slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(count);
+                            thumbslide = $('.product-thumb-vertical').find('.swiper-slide').eq(count);
                             var imageUrl = "<?php echo e(asset('storage/products')); ?>/" + image.image; // Access the correct field inside image object
-                            imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
+
+                            slide.find('img').attr('src', imageUrl);
+                            thumbslide.find('img').attr('src', imageUrl);
+                            // imagesHtml += '<a class="swiper-slide h-auto" href="' + imageUrl + '"><img class="w-100" src="' + imageUrl + '" alt="<?php echo e($product->product_name); ?>"></a>'
+                            // thumbImageHtml+= '<div class="swiper-slide"><img src="' + imageUrl + '" alt=""></div>';
                         });
                         var addCart = '<a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="'+ product.product_id +'">Add to cart</a>';
-                        $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
-                        $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
+                        // $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
+                        // $('.product-thumb-vertical .swiper-wrapper').html(thumbImageHtml);
                         console.log("Product ID:" + product.product_id);
                         $('.add-to_cart .add-to-cart').replaceWith(addCart);
+                        
                         // Hiển thị modal
                         $('#exampleProductModal').modal('show');
                     } else {
@@ -1370,7 +1412,7 @@
             });
             
         });
-
+        
         // Bắt sự kiện click vào thẻ <a> và submit form
         $(document).on('click', '#health_readmore', function(e) {
             e.preventDefault(); // Ngăn không cho thẻ <a> chuyển trang

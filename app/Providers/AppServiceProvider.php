@@ -7,12 +7,16 @@ use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\Catalog;
 use App\Models\Chef;
+use App\Models\ComingSoon;
 use App\Models\DealOfTheDay;
 use App\Models\Notification;
+use App\Models\Product;
+use App\Models\SocialMedia;
 use App\Models\User;
 use App\Models\UserReview;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class AppServiceProvider extends ServiceProvider
@@ -131,7 +135,47 @@ class AppServiceProvider extends ServiceProvider
 
         $view->with('deals', $deals);
     });
+
+    // Chia sẻ thông tin Coming Soon
+    View::composer('*', function ($view) {
+        $comingSoon = ComingSoon::where('isdelete', 0)
+            ->orderBy('release_date', 'desc')
+            ->take(1)  // Lấy 1 sản phẩm sắp ra mắt mới nhất
+            ->get();
+    
+        $view->with('comingSoon', $comingSoon);
+    });
+    
+    View::composer('*', function ($view) {
+        // Lấy danh sách sản phẩm bán chạy nhất
+        $bestSellingProducts = Product::join('orderdetails', 'product.product_id', '=', 'orderdetails.product_id')
+            ->select('product.product_id', 'product.product_name', 'product.price', 'product.image', DB::raw('SUM(orderdetails.quantity) as total_quantity'))
+            ->groupBy('product.product_id', 'product.product_name', 'product.price', 'product.image')
+            ->orderBy('total_quantity', 'desc')
+            ->take(5)  // Giới hạn lấy 5 sản phẩm bán chạy nhất
+            ->get();
+
+        // Chia sẻ biến $bestSellingProducts đến tất cả các view
+        $view->with('bestSellingProducts', $bestSellingProducts);
+    });
+
+   // Chia sẻ dữ liệu Social Media đến tất cả các view với hỗ trợ tìm kiếm và phân trang
+   View::composer('*', function ($view) {
+    // Lấy từ khóa tìm kiếm từ request
+    $search = Request::input('search');
+
+    // Kiểm tra nếu có từ khóa tìm kiếm
+    if ($search) {
+        $socialMedia = SocialMedia::where('isdelete', 0)
+            ->where('name', 'LIKE', '%' . $search . '%') // Tìm kiếm theo tên
+            ->paginate(5); // Phân trang với 5 bản ghi mỗi trang
+    } else {
+        $socialMedia = SocialMedia::where('isdelete', 0)
+            ->paginate(5); // Phân trang với 5 bản ghi mỗi trang
     }
 
-    
+    // Chia sẻ biến $socialMedia đến tất cả các view
+    $view->with('socialMedia', $socialMedia);
+});
+ }   
 }

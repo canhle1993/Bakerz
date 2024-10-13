@@ -8,9 +8,15 @@ use Illuminate\Http\Request;
 class AdminChefController extends Controller
 {
     // Phương thức hiển thị form thêm chefs và danh sách chefs
-    public function create()
-    {
-        $chefs = Chef::all(); // Lấy tất cả thông tin Chef
+    public function create(Request $request)
+    {// Tìm kiếm theo tên chef
+        $search = $request->query('search');
+        $chefs = Chef::where('isdelete', 0) // Lấy các chef chưa bị xóa mềm
+            ->when($search, function($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc') // Sắp xếp theo ngày tạo mới nhất
+            ->paginate(10); // Phân trang
         return view('admin.our-chef', compact('chefs')); // Trả về view của form và danh sách đầu bếp
     }
 

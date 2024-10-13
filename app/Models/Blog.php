@@ -12,7 +12,7 @@ class Blog extends Model
     // Nếu khóa chính không phải là 'id', bạn phải chỉ định nó
     protected $primaryKey = 'blog_id';
 
-    protected $fillable = ['user_id', 'blog_name', 'image', 'title1', 'title2', 'content1', 'content2'];
+    protected $fillable = ['user_id', 'blog_name', 'image', 'title1', 'title2', 'content1', 'content2', 'isdelete'];
 
     public function user()
     {

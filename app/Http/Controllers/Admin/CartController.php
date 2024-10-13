@@ -286,8 +286,11 @@ class CartController extends Controller
 
     public function getsession(){
         $currentUser = Auth::user(); // Lấy người dùng hiện tại
-
-        $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
+        if($currentUser){
+            $cartItems = Cart::with('product')->where('user_id', $currentUser->user_id)->get();
+        } else {
+            $cartItems = Cart::with('product')->where('user_id', 0)->get();
+        }
 
         $cart = [];
         foreach ($cartItems as $item) {
@@ -378,6 +381,10 @@ class CartController extends Controller
     public function checkinventory(Request $request)
     {
         $currentUser = Auth::user();
+        if(!$currentUser){
+            return redirect()->route('login');
+
+        }
         // Tìm sản phẩm theo product_id
         $product = Product::findOrFail($request->product_id);
 
@@ -408,4 +415,13 @@ class CartController extends Controller
         return response()->json(['sucess' => 'success']);
     }
 
+    public function clear_cart(){
+        $currentUser = Auth::user(); // Lấy người dùng hiện tại
+        Cart::where('user_id', $currentUser->user_id)
+        ->delete();
+
+        $this->getsession();
+        
+        return redirect()->route('cart');
+    }
 }

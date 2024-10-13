@@ -247,7 +247,7 @@
                                         <h3 class="sidebars_widget__title">Category</h3>
                                         <ul class="sidebars_widget__category">
                                             <li><a href="<?php echo e(route('shop_all')); ?>">All Products</a></li>
-                                            <li><a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>">Discount</a></li>
+                                            <li><a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>" >Discount</a></li>
                                             <li><a href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 4])); ?>">What Hot</a></li>
                                             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <li><a href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><?php echo e($category->category_name); ?></a></li>
@@ -275,86 +275,98 @@
                                     </div>
                                 </div>
 
-
-
-
                             <!-- Price Filter Widget End -->
 
-                          <!-- Popular Product Widget Start -->
-                          <div class="sidebars_widget">
-                            <h3 class="sidebars_widget__title">Popular products</h3>
-                            <ul class="sidebars_widget__product">
-                                <!-- Single Product Start -->
-                                <li class="single-product">
-                                    <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                        <img src="img/Sweet Breads1/Brioche/Brioche3.png" alt="Sidebar-Image">
-                                    </a>
-                                    <div class="single-product_content">
-                                        <a href="single-product.html" class="single-product_content__title">Brioche</a>
-                                        <span class="single-product_content__price">$10</span>
-                                    </div>
-                                </li>
-                                <!-- Single Product End -->
-                                    <!-- Single Product Start -->
-                                    <li class="single-product">
-                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                            <img src="img/Sweet Breads1/Almond bread/Almond bread3.png" alt="Sidebar-Image">
-                                        </a>
-                                        <div class="single-product_content">
-                                            <a href="single-product.html" class="single-product_content__title">Almond bread</a>
-                                            <span class="single-product_content__price">$5</span>
-                                        </div>
-                                    </li>
-                                    <!-- Single Product End -->
-                                    <!-- Single Product Start -->
-                                    <li class="single-product">
-                                        <a href="single-product.html" class="single-product_thumb" style="border: none; width: 127px;">
-                                            <img src="img/Cakes (1)/Blueberry cake.png" alt="Sidebar-Image">
-                                        </a>
-                                        <div class="single-product_content">
-                                            <a href="single-product.html" class="single-product_content__title">Blueberry cake</a>
-                                            <span class="single-product_content__price">$10</span>
-                                        </div>
-                                    </li>
-                                    <!-- Single Product End -->
-                            </ul>
-                        </div>
-                        <!-- Popular Product Widget End -->
+<!-- Popular Product Widget Start -->
+<div class="sidebars_widget">
+    <h3 class="sidebars_widget__title">Popular products</h3>
+    <ul class="sidebars_widget__product">
+        <?php $__currentLoopData = $bestSellingProducts->take(3); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <!-- Single Product Start -->
+        <li class="single-product">
+            <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>" class="single-product_thumb" style="border: none; width: 127px;">
+                <img src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="<?php echo e($product->product_name); ?>">
+            </a>
+            <div class="single-product_content">
+                <a href="<?php echo e(route('product.single', ['product' => $product->product_id])); ?>" class="single-product_content__title"><?php echo e($product->product_name); ?></a>
+                <span class="single-product_content__price">
+                    <?php if($product->price != $product->getDiscountedPrice()): ?>
+                        <del><?php echo e(formatPriceVND($product->price)); ?></del>
+                        <!-- Giá gốc -->
+                    
+                        <strong style="color: red;"
+                        >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
+                        >
+                    <!-- Giá sau khi giảm -->
+                    <?php else: ?> <?php echo e(formatPriceVND($product->price)); ?>
+
+                    <!-- Giá không giảm -->
+                    <?php endif; ?>
+                </span>
+            </div>
+        </li>
+        <!-- Single Product End -->
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </ul>
+</div>
+<!-- Popular Product Widget End -->
+
 
                          <!-- Instagram Widget Start -->
                          <div class="sidebars_widget">
                             <h3 class="sidebars_widget__title">Instagram</h3>
                             <ul class="sidebars_widget__instagram " >
+                            <?php $__currentLoopData = $socialMedia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $media): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if(strpos($media->name, 'Instagram') !== false): ?>
                                 <li>
-                                    <a class="instagram-thumb" href="#">
+                                    <a class="instagram-thumb" href="<?php echo e($media->link); ?>">
                                         <img src="https://i.pinimg.com/564x/80/35/60/803560020f0f772bb12862e1eb2f50c0.jpg"  alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="instagram-thumb" href="#">
+                                    <a class="instagram-thumb" href="<?php echo e($media->link); ?>">
                                         <img src="https://i.pinimg.com/564x/61/e1/38/61e13860559dac54522ad4c622c37705.jpg" alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="instagram-thumb" href="#">
+                                    <a class="instagram-thumb" href="<?php echo e($media->link); ?>">
                                         <img src="https://i.pinimg.com/564x/d0/e5/10/d0e5108a1db4e95a60a13e520531bc13.jpg" alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="instagram-thumb" href="#">
+                                    <a class="instagram-thumb" href="<?php echo e($media->link); ?>">
                                         <img src="https://i.pinimg.com/564x/8e/f4/b9/8ef4b9e35ed97c97fde4b0cfb45d5af3.jpg" alt="Image">
                                         <i class="lastudioicon lastudioicon-b-instagram"></i>
                                     </a>
                                 </li>
+                                <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </ul>
                         </div>
                         <!-- Instagram Widget End -->
 
                         <!-- Banner Widget Start -->
-
+                            <!-- Banner Widget Start -->
+                            <div class="sidebars_widget">
+                            <?php $__currentLoopData = $socialMedia; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $media): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if(strpos($media->name, 'Advertise') !== false): ?>
+                                <a href="<?php echo e($media->link); ?>" class="sidebars_widget__banner">
+                                <?php if($media->image): ?>
+                                    <img src="<?php echo e(asset('storage/' . $media->image)); ?>" alt="banner-Image">
+                                <?php else: ?>
+                                    <img src="<?php echo e(asset('assets/images/banner/default-banner.jpg')); ?>" alt="default-banner">
+                                <?php endif; ?>
+                                    <div class="banner-content">
+                                        <span class="banner-content_title">Check it now</span>
+                                    </div>
+                                </a>
+                            <?php endif; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </div>
+                            <!-- Banner Widget End -->
                         <!-- Banner Widget End -->
 
 
@@ -383,7 +395,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <i class="lastudioicon lastudioicon-e-remove"></i>
                     </button>
-                    <div class="modal-body">
+                    <div class="modal-body" id='modal-single-product'>
                         <!-- Single Product Top Area Start -->
                         <div class="row">
                             <div class="col-lg-6 offset-lg-0 col-md-10 offset-md-1">
@@ -392,21 +404,28 @@
                                 <div class="product-details-img d-flex overflow-hidden flex-row">
 
                                     <!-- Single Product Image Start -->
-                                    <div class="single-product-vertical-tab swiper-container order-2">
+                                    <div class="single-product-vertical-tab swiper-container order-2 product-item">
 
-                                        <div class="swiper-wrapper">
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-1.png" alt="Product">
+                                    <div class="swiper-wrapper" id="swiper-wrapper-dea913122338a79f" aria-live="polite" style="transition-duration: 0ms; transform: translate3d(-484px, 0px, 0px);">
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
                                             </a>
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-2.png" alt="Product">
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
                                             </a>
-                                            <a class="swiper-slide h-auto" href="#/">
-                                                <img class="w-100" src="assets/images/product/product-7-3.png" alt="Product">
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
                                             </a>
-
-
-                                        </div>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            </div>
 
                                         <!-- Next Previous Button Start -->
                                         <div class="swiper-button-vertical-next swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
@@ -421,16 +440,17 @@
 
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-1.png" alt="Product">
+                                                <img src="#">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-2.png" alt="Product">
+                                                <img src="#">
                                             </div>
                                             <div class="swiper-slide">
-                                                <img src="assets/images/product/product-tab-3.png" alt="Product">
+                                                <img src="#">
                                             </div>
-
-
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
                                         </div>
 
                                     </div>
@@ -444,46 +464,60 @@
 
                                 <!-- Product Summery Start -->
                                 <div class="product-summery position-relative">
-
+                                <h3 class="product-head-name"></h3>
                                     <!-- Product Head Start -->
                                     <div class="product-head mb-3">
-
                                         <!-- Price Start -->
-                                        <span class="product-head-price"></span>
+                                        <span class="product-head-price">
+                                            <?php if($product->price != $product->getDiscountedPrice()): ?>
+                                            <del ><?php echo e(formatPriceVND($product->price)); ?></del>
+                                            <!-- Giá gốc -->
+                                        
+                                            <strong style="color: red;"
+                                            >$<?php echo e(number_format($product->getDiscountedPrice(),2)); ?></strong
+                                            >
+                                            <!-- Giá sau khi giảm -->
+                                            <?php else: ?> <span style="color: white;"><?php echo e(formatPriceVND($product->price)); ?></span>
+                                            <!-- Giá không giảm -->
+                                            <?php endif; ?>
+                                        </span>
                                         <!-- Price End -->
 
                                     </div>
                                     <!-- Product Head End -->
 
                                     <!-- Description Start -->
-                                    <p class="desc-content"></p>
+                                    <p class="desc-content" style="margin-bottom: 0px !important;"><?php echo nl2br(e($product->describe)); ?></p>
                                     <!-- Description End -->
 
+                                    <!-- Product Coler Variation Start -->
+                                    <div class="product-color mb-2">
+
+                                    </div>
+                                    <!-- Product Coler Variation End -->
+
+                                    <!-- Product Size Start -->
+                                    <div class="product-size mb-5">
+                                    </div>
+                                    <!-- Product Size End -->
 
                                     <!-- Product Quantity, Cart Button, Wishlist and Compare Start -->
-                                    <ul class="product-cta">
-                                        <li>
-                                            <!-- Quantity Start -->
-                                            <div class="quantity">
-                                                <div class="cart-plus-minus"></div>
-                                            </div>
-                                            <!-- Quantity End -->
-                                        </li>
+                                    <ul class="product-cta" style="margin-bottom: 15px !important;">
                                         <li>
                                             <!-- Cart Button Start -->
                                             <div class="cart-btn">
-                                                <div class="add-to_cart">
-                                                    <a class="btn btn-dark btn-hover-primary" href="cart.html">Add to cart</a>
+                                                <div class="add-to_cart product-item">
+                                                    <a style="display: none;" href=""><img style="border: none !important; height: 287px !important;" width="350" height="350" src="" alt=""></a>
+                                                    <a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="<?php echo e($product->product_id); ?>">Add to cart</a>
                                                 </div>
                                             </div>
                                             <!-- Cart Button End -->
                                         </li>
                                         <li>
                                             <!-- Action Button Start -->
-                                            <div class="actions">
+                                            <!-- <div class="actions">
                                                 <a href="compare.html" title="Compare" class="action compare"><i class="lastudioicon-heart-2"></i></a>
-                                                <a href="wishlist.html" title="Wishlist" class="action wishlist"><i class="lastudioicon-ic_compare_arrows_24px"></i></a>
-                                            </div>
+                                            </div> -->
                                             <!-- Action Button End -->
                                         </li>
                                     </ul>
@@ -491,35 +525,24 @@
 
                                     <!-- Product Meta Start -->
                                     <ul class="product-meta">
-                                        <li class="product-meta-wrapper">
-                                            <span class="product-meta-name">SKU:</span>
-                                            <span class="product-meta-detail">REF. LA-199</span>
+                                        <li class="product-meta-wrapper inventory-meta">
+                                            <span class="product-meta-name">Remaining quantity:</span>
+                                            <span class="product-meta-detail"><?php echo e($product->inventory); ?></span>
                                         </li>
-                                        <li class="product-meta-wrapper">
+                                        <li class="product-meta-wrapper category-meta">
                                             <span class="product-meta-name">category:</span>
                                             <span class="product-meta-detail">
-                                            <a href="#">Cake, </a>
-                                            <a href="#">New</a>
-                                        </span>
+                                                
+                                            </span>
                                         </li>
-                                        <li class="product-meta-wrapper">
-                                            <span class="product-meta-name">Tags:</span>
+                                        <li class="product-meta-wrapper discount-meta">
+                                            <span class="product-meta-name">Discount:</span>
                                             <span class="product-meta-detail">
-                                            <a href="#">Cake 1</a>
-                                        </span>
+                                                
+                                            </span>
                                         </li>
                                     </ul>
                                     <!-- Product Meta End -->
-
-                                    <!-- Product Shear Start -->
-                                    <div class="product-share">
-                                        <a href="#"><i class="lastudioicon-b-facebook"></i></a>
-                                        <a href="#"><i class="lastudioicon-b-twitter"></i></a>
-                                        <a href="#"><i class="lastudioicon-b-pinterest"></i></a>
-                                        <a href="#"><i class="lastudioicon-b-instagram"></i></a>
-                                    </div>
-                                    <!-- Product Shear End -->
-
                                 </div>
                                 <!-- Product Summery End -->
 
@@ -744,6 +767,75 @@ $('.quickview').on('click', function(e) {
     });
     });
 
+    $('.quickview').on('click', function(e) {
+            e.preventDefault();
+            var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+            // Gọi AJAX để lấy dữ liệu sản phẩm
+            $.ajax({
+                url: "<?php echo e(route('product.details', ':id')); ?>".replace(':id', productid), // Thay :id bằng product ID
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Hủy Swiper nếu đã tồn tại trước đó
+                        
+                        var product = response.product;  // Đối tượng product từ server
+                        var catagories = response.getsimpCatagories;
+                        // Đổ dữ liệu vào modal
+                        $('#modal-single-product .product-head-price').text("$" + response.discounted_price);  // Đổ giá sản phẩm
+                        
+                        $('#modal-single-product .desc-content').html(product.describe.replace(/\n/g, '<br>'));
+                        $('.product-meta .inventory-meta .product-meta-detail').text(product.inventory);
+                        $('.product-meta .discount-meta .product-meta-detail').text(response.discounted_percent + " %");
+                        $('.product-head-name').text(product.product_name);
+                        var catalog ='';
+                        if (Array.isArray(product.catalogs) && product.catalogs.length > 0) {
+                            product.catalogs.forEach(function(getlist) {
+                                catalog += "\r\n" + getlist.category_name;
+                            });
+                        }
+                        $('.product-meta .category-meta .product-meta-detail').text(catalog);
+                        // Cập nhật hình ảnh sản phẩm
+                        
+                        var slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(0);
+                        var thumbslide = $('.product-thumb-vertical .swiper-wrapper').find('.swiper-slide').eq(0);
+                        var hiddenimg = $('.cart-btn').find('.product-item');
+                        var productImage = "<?php echo e(asset('storage/products/')); ?>/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
+                        slide.find('img').attr('src', productImage);
+                        hiddenimg.find('img').attr('src', productImage);
+                        thumbslide.find('img').attr('src', productImage);
+                        var count = 0;
+                        var thumbcount = 0;
+                        product.images.forEach(function(image) {
+                            count++;
+                            slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(count);
+                            thumbslide = $('.product-thumb-vertical').find('.swiper-slide').eq(count);
+                            var imageUrl = "<?php echo e(asset('storage/products')); ?>/" + image.image; // Access the correct field inside image object
+
+                            slide.find('img').attr('src', imageUrl);
+                            thumbslide.find('img').attr('src', imageUrl);
+                            // imagesHtml += '<a class="swiper-slide h-auto" href="' + imageUrl + '"><img class="w-100" src="' + imageUrl + '" alt="<?php echo e($product->product_name); ?>"></a>'
+                            // thumbImageHtml+= '<div class="swiper-slide"><img src="' + imageUrl + '" alt=""></div>';
+                        });
+                        var addCart = '<a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="'+ product.product_id +'">Add to cart</a>';
+                        // $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
+                        // $('.product-thumb-vertical .swiper-wrapper').html(thumbImageHtml);
+                        console.log("Product ID:" + product.product_id);
+                        $('.add-to_cart .add-to-cart').replaceWith(addCart);
+                        
+                        // Hiển thị modal
+                        $('#exampleProductModal').modal('show');
+                    } else {
+                        alert(response.message); // Hiển thị thông báo lỗi nếu có
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // Xử lý lỗi
+                }
+            });
+            
+        });
 </script>
 
 </html>

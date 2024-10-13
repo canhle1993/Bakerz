@@ -1,9 +1,22 @@
- <!-- Kế thừa từ layout dashboard -->
 
-<?php $__env->startSection('admin_content'); ?> <!-- Thêm nội dung vào section -->
 
+<?php $__env->startSection('admin_content'); ?>
     <div class="container mt-5">
         <h1>Chef List</h1>
+
+        <!-- Form tìm kiếm chef theo tên -->
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <form class="d-flex mb-4" method="GET" action="<?php echo e(route('admin.chefs.create')); ?>"> <!-- Sửa route -->
+                    <input class="form-control me-2" type="search" placeholder="Search Chef Name" name="search" value="<?php echo e(request()->query('search')); ?>">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <a href="<?php echo e(route('admin.chefs.create')); ?>" class="btn btn-light">Reset</a> <!-- Sửa route -->
+            </div>
+        </div>
 
         <!-- Nút Thêm Chef Mới -->
         <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createChefModal">Add Chef</button>
@@ -90,6 +103,9 @@
             </tbody>
         </table>
 
+        <!-- Hiển thị phân trang -->
+    
+
         <!-- Modal Sửa Chef -->
         <div class="modal fade" id="editChefModal" tabindex="-1" aria-labelledby="editChefModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -139,29 +155,28 @@
 
     <script>
         // Khi click vào nút Sửa, hiển thị thông tin Chef trong modal
-document.querySelectorAll('.editChefBtn').forEach(button => {
-    button.addEventListener('click', function() {
-        const chefId = this.getAttribute('data-id');
-        const name = this.getAttribute('data-name');
-        const position = this.getAttribute('data-position');
-        const description = this.getAttribute('data-description');
-        const image = this.getAttribute('data-image');
+        document.querySelectorAll('.editChefBtn').forEach(button => {
+            button.addEventListener('click', function() {
+                const chefId = this.getAttribute('data-id');
+                const name = this.getAttribute('data-name');
+                const position = this.getAttribute('data-position');
+                const description = this.getAttribute('data-description');
+                const image = this.getAttribute('data-image');
 
-        // Set values for form fields
-        document.getElementById('editChefId').value = chefId;
-        document.getElementById('editName').value = name;
-        document.getElementById('editPosition').value = position;
-        document.getElementById('editDescription').value = description;
-        document.getElementById('currentImage').src = image;
+                // Set values for form fields
+                document.getElementById('editChefId').value = chefId;
+                document.getElementById('editName').value = name;
+                document.getElementById('editPosition').value = position;
+                document.getElementById('editDescription').value = description;
+                document.getElementById('currentImage').src = image;
 
-        // Set dynamic action for the form
-        const updateUrl = `<?php echo e(route('admin.chefs.update', ':id')); ?>`; // Tạo route với placeholder
-        document.getElementById('editChefForm').action = updateUrl.replace(':id', chefId); // Thay thế ':id' bằng chefId thực tế
-    });
-});
-
+                // Set dynamic action for the form
+                const updateUrl = `<?php echo e(route('admin.chefs.update', ':id')); ?>`;
+                document.getElementById('editChefForm').action = updateUrl.replace(':id', chefId);
+            });
+        });
     </script>
 
-<?php $__env->stopSection(); ?> <!-- Kết thúc section -->
+<?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bakerz\resources\views/admin/our-chef.blade.php ENDPATH**/ ?>

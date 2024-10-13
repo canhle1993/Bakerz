@@ -229,6 +229,39 @@
         display: none;
       }
 
+      @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .cart-bounce {
+        animation: bounce 0.5s ease-in-out;
+    }
+
+    /* CSS cho fly-to-cart animation */
+    @keyframes fly-to-cart {
+        0% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-300px) translateX(200px) scale(0.1);
+        }
+    }
+
+    .fly-to-cart-img {
+        position: absolute;
+        z-index: 9999;
+        transition: all 1s ease-in-out;
+        animation: fly-to-cart 1s forwards;
+        opacity: 0;
+    }
+
     </style>
 
 </head>
@@ -271,8 +304,8 @@
                                     <li class="mega-menu-item">
                                         <ul>
                                             <li class="mega-menu-item-title">Featured Product</li>
-                                            <li><a class="sub-item-link" href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>">Discount</a></li>
-                                            <li><a class="sub-item-link" href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 4])); ?>">What Hot</a></li>
+                                            <li><a class="sub-item-link" href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>"><span>Discount</span></a></li>
+                                            <li><a class="sub-item-link" href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 4])); ?>"><span>What Hot</span></a></li>
                                             <!-- Hiển thị 2 category cuối cùng -->
                                             <?php $__currentLoopData = $categories->slice(-3); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <li><a class="sub-item-link" href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><span><?php echo e($category->category_name); ?></span></a></li>
@@ -308,7 +341,6 @@
                                     <li><a class="sub-item-link" href="<?php echo e(route('faq')); ?>"><span>FAQs</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('pricing-plan')); ?>"><span>Bakerz Bite Rewards</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('coming-soon')); ?>"><span>Coming Soon</span></a></li>
-                                    <li><a class="sub-item-link" href="<?php echo e(route('client_location')); ?>"><span>Client Location</span></a></li>
                                 </ul>
                             </li>
                             <li><a class="menu-item-link" href="<?php echo e(route('about')); ?>"><span>About</span></a>
@@ -445,8 +477,10 @@
 
       <!-- Mini Cart Button End  -->
       <div class="mini-cart-btn d-flex flex-column gap-2">
+        <?php if(auth()->guard()->check()): ?>
           <a class="d-block btn btn-secondary btn-hover-primary" href="<?php echo e(route('cart')); ?>">View cart</a>
           <a id="btnCheckout" class="d-block btn btn-secondary btn-hover-primary" href="<?php echo e(route('checkout')); ?>">Checkout</a>
+        <?php endif; ?>
       </div>
       <!-- Mini Cart Button End  -->
 
@@ -510,10 +544,14 @@
             $('#outOfStock').css('z-index', 1060);
         });
 
-
+        var isAnimating = false;
+        var cart = $('#cart_icon'); // Lấy vị trí của biểu tượng giỏ hàng
           $(document).on('click', '.add-to-cart', function(e) {
             e.preventDefault();
+            
               var productId = $(this).data('product-id');
+              var imgtodrag = $(this).closest('.product-item').find('img').eq(0);
+            //   var cart = $('#cart_icon'); // Lấy vị trí của biểu tượng giỏ hàng
               $.ajax({
                   url: "<?php echo e(route('cart.checkinventory')); ?>",
                   method: "GET",
@@ -539,9 +577,42 @@
                           success: function(response) {
                               if (response.status === 'success') {
                                   // Cập nhật số lượng sản phẩm trong giỏ hàng
-                                  var modalCart = new bootstrap.Modal(document.getElementById('modalCart'));
-                                  modalCart.show();
+                                //   var modalCart = new bootstrap.Modal(document.getElementById('modalCart'));
+                                //   modalCart.show();
                                   updateCartView();
+                                  // Thêm hiệu ứng animation vào icon giỏ hàng
+                                    $('#cart_icon').addClass('cart-bounce');
+                                    setTimeout(function() {
+                                        $('#cart_icon').removeClass('cart-bounce');
+                                    }, 500); // Thời gian của animation
+
+                                    // Start
+                                    
+                                    if (imgtodrag.length > 0) {
+                                    // Tạo một thẻ img clone để thực hiện animation bay
+                                    var imgclone = imgtodrag.clone()
+                                        .css({
+                                            'position': 'absolute',
+                                            'z-index': '9999',
+                                            'top': imgtodrag.offset().top,
+                                            'left': imgtodrag.offset().left,
+                                            'width': imgtodrag.width(),
+                                            'height': imgtodrag.height()
+                                        })
+                                        .appendTo($('body')) // Chỉ append vào body một lần
+                                        .addClass('fly-to-cart-img'); // Thêm class để apply animation
+                                    // Animation bay đến giỏ hàng
+                                    imgclone.animate({
+                                        'top': cart.offset().top,
+                                        'left': cart.offset().left,
+                                        'width': 50,
+                                        'height': 50
+                                    }, 1000, function() {
+                                        imgclone.remove(); // Xóa clone sau khi animation kết thúc
+                                    });
+                                        
+                                    }
+                                    // End
                               } else {
                                   alert(response.message);
                               }

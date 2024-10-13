@@ -37,8 +37,17 @@
                 <div class="section-title-10 justify-content-start text-start align-items-start">
                     <span class="section-title-10__subtitle">We Are Bakerfresh</span>
                     <h1 class="section-title-10__title">we love cake</h1>
-                    <p class="section-title-10__text">As the owner of this bakery, I pour my heart into every cake we bake and every cup of coffee we brew. Our mission is to create a space where every treat is made with love and attention to detail, offering you a cozy escape from the hustle of everyday life.</p>
-                    <p class="section-title-10__text">From the moment you walk in, we aim to make you feel at home, where every bite and sip brings a little sweetness and warmth to your day.</p>
+                    <p class="section-title-10__text">Since its launch, “Bakerz Bite” has developed into a reputable bakery &amp; café,
+                    specializing in baked goods, passionately made from the finest ingredients.
+                    Bakerz Bite offers a wide range of baked goods made fresh in-store every day. The
+                    bakery chain offers more than 300 different kinds of baked goods, including artisan
+                    pastries, gourmet cakes and desserts, and handcrafted beverages.</p>
+                    <p class="section-title-10__text">The brand takes pride in sourcing and using carefully selected ingredients and promises
+                    to bring freshness and quality to its customers. Bakerz Bite continues to expand and
+                    embrace innovation in all markets.
+                    We believe and are dedicated in delivering premium quality products. So we only use real
+                    butter, cream and unbleached flour. We treat our Customers as our family and will not
+                    use any ingredient which we will not want to feed ours.</p>
                     <img src="assets/images/singnecher-2.png" alt="Signature-Image">
                 </div>
             </div>

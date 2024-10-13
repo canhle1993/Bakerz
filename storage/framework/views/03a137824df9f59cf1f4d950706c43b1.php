@@ -29,6 +29,8 @@
 
     <!-- Template Stylesheet -->
     <link href="<?php echo e(asset('darkpan-1.0.0/css/style.css')); ?>" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -57,20 +59,12 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    
+
                     <a  href="<?php echo e(route('admin.dashboard')); ?>" class="nav-item nav-link <?php echo e(Request::routeIs('admin.dashboard') ? 'active' : ''); ?>"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <div  class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('banner*') || Request::is('admin.chefs.create*') || Request::is('blog*') || Request::is('blog*')) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Pages</a>
-                        <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('banner*') || Request::is('admin.chefs.create*') || Request::is('blog*')) ? 'show' : ''); ?>">
-                            <a href="<?php echo e(route('banner.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Banner</a>
-                            <a href="<?php echo e(route('admin.chefs.create')); ?>" class="bi-tag m-2 dropdown-item <?php echo e(Request::routeIs('catalog.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Chefs</a>
-                            <a href="<?php echo e(route('blog.index')); ?>" class="bi-lightning m-2 dropdown-item <?php echo e(Request::routeIs('discount.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Blog</a>
-                            <!-- <a href="<?php echo e(route('admin.reviews.manage')); ?>" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Review</a> -->
-                            <a href="<?php echo e(route('message.read')); ?>" class="m-2 dropdown-item <?php echo e(Request::routeIs('message.read') ? 'active' : ''); ?>">💞&nbsp;&nbsp;Review</a>
-                        </div>
-                    </div>
+
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
+                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-box me-2"></i>Product
+                        </a>
                         <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('product*') || Request::is('catalog*') || Request::is('heathy*') || Request::is('discount*')) ? 'show' : ''); ?>">
                             <a href="<?php echo e(route('product.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Product Management</a>
                             <a href="<?php echo e(route('catalog.index')); ?>" class="bi-tag m-2 dropdown-item <?php echo e(Request::routeIs('catalog.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Category</a>
@@ -81,17 +75,32 @@
                             <a href="<?php echo e(route('product.index_stockcheck')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('product.index_stockcheck') ? 'active' : ''); ?>">&nbsp;&nbsp;Stock Check</a>
                         </div>
                     </div>
+
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Management</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="<?php echo e(route('manage-client')); ?>" class="dropdown-item">Client</a>
+                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('admin/manage/client*') || Request::is('admin/manage/admin*') || Request::is('admin/manage/blacklist*')) ? 'active' : ''); ?>" data-bs-toggle="dropdown">
+                            <i class="far fa-file-alt me-2"></i>Management
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('admin/manage/client*') || Request::is('admin/manage/admin*') || Request::is('admin/manage/blacklist*')) ? 'show' : ''); ?>">
+                            <a href="<?php echo e(route('manage-client')); ?>" class="dropdown-item <?php echo e(Request::routeIs('manage-client') ? 'active' : ''); ?>">Client</a>
                             <?php if(Auth::user()->role_id == 3): ?>
-                                <a href="<?php echo e(route('manage-admin')); ?>" class="dropdown-item">Admin</a>
+                                <a href="<?php echo e(route('manage-admin')); ?>" class="dropdown-item <?php echo e(Request::routeIs('manage-admin') ? 'active' : ''); ?>">Admin</a>
                             <?php endif; ?>
-                            <a href="<?php echo e(route('manage-blacklist')); ?>" class="dropdown-item">Blacklist</a>
+                            <a href="<?php echo e(route('manage-blacklist')); ?>" class="dropdown-item <?php echo e(Request::routeIs('manage-blacklist') ? 'active' : ''); ?>">Blacklist</a>
                         </div>
                     </div>
 
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('banner*') || Request::is('admin/chefs*') || Request::is('admin/blog*') || Request::routeIs('admin.reviews*')) ? 'active' : ''); ?>" data-bs-toggle="dropdown">
+                            <i class="fa fa-list me-2"></i>Pages
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('banner*') || Request::is('admin/chefs*') || Request::is('admin/blog*') || Request::routeIs('admin.reviews*')) ? 'show' : ''); ?>">
+                            <a href="<?php echo e(route('banner.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('banner.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Banner</a>
+                            <a href="<?php echo e(route('admin.chefs.create')); ?>" class="bi-tag m-2 dropdown-item <?php echo e(Request::routeIs('admin.chefs.create') ? 'active' : ''); ?>">&nbsp;&nbsp;Chefs</a>
+                            <a href="<?php echo e(route('blog.index')); ?>" class="bi-lightning m-2 dropdown-item <?php echo e(Request::routeIs('blog.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Blog</a>
+                            <a href="<?php echo e(route('message.read')); ?>" class="m-2 dropdown-item <?php echo e(Request::routeIs('admin.reviews*') ? 'active' : ''); ?>">🌟&nbsp;&nbsp;Review</a>
+                        </div>
+                    </div>
                     <!-- Order Manager -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('order*') ) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Order Manager</a>
@@ -108,8 +117,15 @@
                     <a href="<?php echo e(route('admin.deal.index')); ?>" class="nav-item nav-link">
                         <i class="fa fa-gift me-2"></i>Deal of the Day
                     </a>
-                </div>
-                
+                    <a href="<?php echo e(route('admin.coming_soon.index')); ?>" class="nav-item nav-link">
+                    <i class="fa fa-clock me-2"></i><span>Coming Soon</span>
+                    </a>
+                    <a href="<?php echo e(route('admin.contact_us.index')); ?>" class="nav-item nav-link"><i class="fa fa-envelope me-2"></i><span>ContactUs</span>
+                    </a>
+                    <a href="<?php echo e(route('admin.workshop.index')); ?>" class="nav-item nav-link"><i class="fa fa-chalkboard-teacher me-2"></i><span>Workshop</span></a>
+                    <a href="<?php echo e(route('admin.socialmedia.index')); ?>" class="nav-item nav-link"><i class="fa fa-chalkboard-teacher me-2"></i><span>Social Media</span></a>
+                    </div>
+
             </nav>
         </div>
         <!-- Sidebar End -->
@@ -226,8 +242,13 @@
             <?php echo $__env->yieldContent('admin_content'); ?>
             <?php echo $__env->yieldContent('blog_content'); ?>
             <?php echo $__env->yieldContent('deal_of_the_day_content'); ?>
-            <!-- Body End -->
+            <?php echo $__env->yieldContent('coming_soon_content'); ?> <!-- Thêm phần này cho Coming Soon -->
+            <?php echo $__env->yieldContent('admint_content'); ?>
+            <?php echo $__env->yieldContent('workshop_content'); ?> <!-- Thêm phần này cho Workshop -->
+            <?php echo $__env->yieldContent('SocialMedia_content'); ?>
 
+
+            <!-- Body End -->
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4" >
                 <div class="bg-secondary rounded-top p-4" style="background-color: #FFFFFF !important;">
@@ -264,5 +285,4 @@
     <script src="<?php echo e(asset('darkpan-1.0.0/js/main.js')); ?>"></script>
 </body>
 
-</html>
-<?php /**PATH C:\xampp\htdocs\bakerz\resources\views/admin/dashboard.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\xampp\htdocs\bakerz\resources\views/admin/dashboard.blade.php ENDPATH**/ ?>

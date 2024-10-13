@@ -58,13 +58,14 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Contact form section Start -->
-    <div class="section-padding-03 contact-section2 contact-section2_bg">
+    <div class="section-padding-03 contact-section2 contact-section2_bg" style="padding-bottom: 0px !important;">
         <div class="container custom-container">
             <div class="row">
                 <div class="col-md-6">
                     <div class="contact-section2_content">
                         <h2 class="contact-section2__title">Information</h2>
-                        <p class="contact-section2__text">Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt</p>
+                        <p class="contact-section2__text">Bakerz Bite is a bakery with extensive experience, committed to delivering high-quality products with exquisite flavors in every bite.
+                             Here is our contact information. Thank you very much!</p>
                         <ul class="contact-section2_list">
                             <li>
                                 <span class="contact-section2_list__icon"><i class="lastudioicon lastudioicon-pin-3-2"></i></span>
@@ -84,7 +85,24 @@
                 <div class="col-md-6">
                     <div class="contact-section2_formbg">
                         <h2 class="contact-section2_form__title">Say Something...</h2>
-                        <form class="contact-section2_form" id="contact-form" action="assets/php/mail.php" method="post">
+                        <?php if(session('success')): ?>
+                            <div class="alert alert-success" id="message-success">
+                                <?php echo e(session('success')); ?>
+
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if($errors->any()): ?>
+                            <div class="alert alert-danger" id="message-error">
+                                <ul>
+                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <li><?php echo e($error); ?></li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+                        <form action="<?php echo e(route('contact.store')); ?>" method="POST" enctype="multipart/form-data">
+                        <?php echo csrf_field(); ?>
                             <div class="row">
                                 <div class="col-sm-6 col-6 form-p">
                                     <div class="form-group">
@@ -98,27 +116,33 @@
                                         <input class="form-field" type="phone" name="phone">
                                     </div>
                                 </div>
-                                <div class="col-md-12 form-p">
+                                <div class="col-sm-6 col-6 form-p">
                                     <div class="form-group">
                                         <label>Email*</label>
-                                        <input class="form-field" type="email" name="email">
+                                        <input class="form-field" type="text" name="email">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-6 form-p">
+                                    <div class="form-group">
+                                        <label>Address*</label>
+                                        <input class="form-field" type="text" name="address">
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-p">
                                     <div class="form-group">
                                         <label>Message*</label>
-                                        <textarea class="form-control text-area" name="message"></textarea>
+                                        <textarea class="form-control text-area" name="comment" placeholder="Message"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-12 form-p">
+                                <div class="col-md-12 form-p pt-3">
                                     <div class="form-group mb-0 d-flex justify-content-center">
-                                        <button class="btn btn-secondary btn-hover-primary" type="submit" value="Send Massage">Send Message</button>
+                                        <button class="btn btn-secondary btn-hover-primary" id="btnSendMessage2" type="submit" value="Send Massage">Send Message</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
                         <!-- Message Notification -->
-                        <div class="form-messege"></div>
+                        <!-- <div class="form-messege"></div> -->
                     </div>
                 </div>
             </div>
@@ -130,7 +154,7 @@
     <div class="section">
         <!-- Google Map Area Start -->
         <div class="google-map-area w-100" data-aos="fade-up" data-aos-duration="1000">
-            <iframe class="contact-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.0604020544074!2d106.71161967507751!3d10.806685889343976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529ed00409f09%3A0x11f7708a5c77d777!2zQXB0ZWNoIENvbXB1dGVyIEVkdWNhdGlvbiAtIEjhu4cgVGjhu5FuZyDEkMOgbyB04bqhbyBM4bqtcCBUcsOsbmggVmnDqm4gUXXhu5FjIHThur8gQXB0ZWNo!5e0!3m2!1svi!2s!4v1728360582273!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <?php echo $__env->make('client_location', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>
         <!-- Google Map Area Start -->
     </div>
@@ -261,6 +285,11 @@
                 );
             }
         });
+
+        // document.getElementById('btnSendMessage2').addEventListener('click', function(e) {
+        //     e.preventDefault();
+
+        // });
      </script>
 
 </body>

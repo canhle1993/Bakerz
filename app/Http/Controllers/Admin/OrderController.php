@@ -12,11 +12,22 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     // Hiển thị danh sách đơn hàng
-    public function pending()
-    {
-        $orders = Order::where('status', 'Pending')->orderBy('ModifiedDate', 'desc')->paginate(10);
-        return view('admin.orders.pending', compact('orders'));
-    }
+    public function pending(Request $request)
+{
+    // Lấy giá trị tìm kiếm Order ID từ request
+    $searchOrderID = $request->query('searchOrderID');
+
+    // Thêm logic tìm kiếm nếu có Order ID
+    $orders = Order::where('status', 'Pending')
+        ->when($searchOrderID, function ($query, $searchOrderID) {
+            return $query->where('order_id', 'like', '%' . $searchOrderID . '%');
+        })
+        ->orderBy('ModifiedDate', 'desc')
+        ->paginate(10);
+
+    return view('admin.orders.pending', compact('orders'));
+}
+
 
     public function gotoPaid($orderid)
     {
@@ -27,11 +38,22 @@ class OrderController extends Controller
     }
 
     // Hiển thị danh sách đơn hàng
-    public function paid()
-    {
-        $orders = Order::where('status', 'Paid')->orderBy('ModifiedDate', 'desc')->paginate(10);
-        return view('admin.orders.paid', compact('orders'));
-    }
+    public function paid(Request $request)
+{
+    // Lấy giá trị tìm kiếm Order ID từ request
+    $searchOrderID = $request->query('searchOrderID');
+
+    // Tìm kiếm theo Order ID hoặc hiển thị toàn bộ
+    $orders = Order::where('status', 'Paid')
+        ->when($searchOrderID, function ($query, $searchOrderID) {
+            return $query->where('order_id', 'like', '%' . $searchOrderID . '%');
+        })
+        ->orderBy('ModifiedDate', 'desc')
+        ->paginate(10);
+
+    return view('admin.orders.paid', compact('orders'));
+}
+
 
     public function gotoConfirmed($orderid)
     {
@@ -42,11 +64,21 @@ class OrderController extends Controller
     }
 
     // Hiển thị danh sách đơn hàng
-    public function confirmed()
-    {
-        $orders = Order::where('status', 'Confirmed')->orderBy('ModifiedDate', 'desc')->paginate(10);
-        return view('admin.orders.confirmed', compact('orders'));
-    }
+    public function confirmed(Request $request)
+{
+    // Lấy giá trị tìm kiếm Order ID từ request
+    $searchOrderID = $request->query('searchOrderID');
+
+    // Tìm kiếm theo Order ID hoặc hiển thị toàn bộ
+    $orders = Order::where('status', 'Confirmed')
+        ->when($searchOrderID, function ($query, $searchOrderID) {
+            return $query->where('order_id', 'like', '%' . $searchOrderID . '%');
+        })
+        ->orderBy('ModifiedDate', 'desc')
+        ->paginate(10);
+
+    return view('admin.orders.confirmed', compact('orders'));
+}
 
     public function gotoDelivered($orderid)
     {
@@ -67,7 +99,7 @@ class OrderController extends Controller
                 $rank = 'Gold';
                 break;
 
-            case ($user->score >= 500):  // Rank Kim Cương
+            case ($user->score >= 500):  // Rank Kim Cương.
                 $rank = 'Diamond';
                 break;
 
@@ -82,18 +114,40 @@ class OrderController extends Controller
     }
 
     // Hiển thị danh sách đơn hàng
-    public function delivered()
-    {
-        $orders = Order::where('status', 'Delivered')->orderBy('ModifiedDate', 'desc')->paginate(10);
-        return view('admin.orders.delivered', compact('orders'));
-    }
+    public function delivered(Request $request)
+{
+    // Lấy giá trị tìm kiếm Order ID từ request
+    $searchOrderID = $request->query('searchOrderID');
+
+    // Tìm kiếm theo Order ID hoặc hiển thị toàn bộ
+    $orders = Order::where('status', 'Delivered')
+        ->when($searchOrderID, function ($query, $searchOrderID) {
+            return $query->where('order_id', 'like', '%' . $searchOrderID . '%');
+        })
+        ->orderBy('ModifiedDate', 'desc')
+        ->paginate(10);
+
+    return view('admin.orders.delivered', compact('orders'));
+}
+
 
     // Hiển thị danh sách đơn hàng
-    public function cancel()
-    {
-        $orders = Order::where('status', 'Cancel')->orderBy('ModifiedDate', 'desc')->paginate(10);
-        return view('admin.orders.cancel', compact('orders'));
-    }
+    public function cancel(Request $request)
+{
+    // Lấy giá trị tìm kiếm Order ID từ request
+    $searchOrderID = $request->query('searchOrderID');
+
+    // Tìm kiếm theo Order ID hoặc hiển thị toàn bộ đơn hàng đã hủy
+    $orders = Order::where('status', 'Cancel')
+        ->when($searchOrderID, function ($query, $searchOrderID) {
+            return $query->where('order_id', 'like', '%' . $searchOrderID . '%');
+        })
+        ->orderBy('ModifiedDate', 'desc')
+        ->paginate(10);
+
+    return view('admin.orders.cancel', compact('orders'));
+}
+
 
     public function gotoCancel($orderid)
     {
