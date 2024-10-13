@@ -19,11 +19,11 @@ class ClientController extends Controller
     public function home()
 
     {
-         
+
 
         return redirect()->route('client.filter');
     }
-    
+
 
     public function profile($userid)
     {
@@ -72,21 +72,6 @@ class ClientController extends Controller
         // Lấy thông tin đơn hàng theo ID
         $order = Order::with('orderDetails.product')->find($orderId);
 
-<<<<<<< HEAD
-         if (!$order) {
-             return response()->json([
-                 'status' => 'error',
-                 'message' => 'Order not found'
-             ], 404);
-         }
-
-         return response()->json([
-             'status' => 'success',
-             'data' => [
-                 'orderDetails' => $order->orderDetails // Gửi thông tin chi tiết đơn hàng
-             ]
-         ]);
-=======
         if (!$order) {
             return response()->json([
                 'status' => 'error',
@@ -102,7 +87,6 @@ class ClientController extends Controller
                 'order' => $order,
             ]
         ]);
->>>>>>> f3663b0fcd1617fcef9058852b3d17805a2ad507
     }
 
     public function filter(Request $request)
@@ -112,7 +96,7 @@ class ClientController extends Controller
         $query->where('isdelete', 0)
               ->orWhereNull('isdelete');
     })->count();
-    
+
     $productCount = Product::where(function ($query) {
         $query->where('isdelete', 0)
               ->orWhereNull('isdelete');
@@ -171,39 +155,8 @@ class ClientController extends Controller
             ];
         }
 
-<<<<<<< HEAD
-        $discount_products = Product::whereHas('discounts')->get();
-
-        // BTT
-        $seasonalCatalog = Catalog::where('category_name', 'Seasonal Products')->first();
-
-        if ($seasonalCatalog) {
-            // Fetch the products that belong to the "Seasonal Products" catalog
-            $seasonalProducts = Product::with('catalogs') // Use lowercase 'catalog'
-                ->whereHas('catalogs', function ($query) {
-                    $query->where('category_name', 'Seasonal Products');
-                })
-                ->get();
-        }
-
-        // Drink
-        $coffeCatalog = Catalog::where('category_name', 'Coffee & Espresso')->first();
-
-        if ($coffeCatalog) {
-            // Fetch the products that belong to the "Seasonal Products" catalog
-            $coffeProducts = Product::with('catalogs') // Use lowercase 'catalog'
-                ->whereHas('catalogs', function ($query) {
-                    $query->where('category_name', 'Coffee & Espresso');
-                })
-                ->get();
-        }
-        // Trả về toàn bộ trang 'client.home' với danh sách các sản phẩm
-        return view('client.home', compact('products', 'heathyCatalogs', 'client',
-        'discount_products', 'recentPurchasedProducts', 'bestSellingProducts','seasonalProducts','coffeProducts'));
-=======
         // Cập nhật lại giỏ hàng vào session
         session()->put('cart', $cart);
->>>>>>> f3663b0fcd1617fcef9058852b3d17805a2ad507
     }
 
     $discount_products = Product::whereHas('discounts')->get();
