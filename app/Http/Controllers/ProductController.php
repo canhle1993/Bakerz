@@ -80,6 +80,8 @@ class ProductController extends Controller
             $products->orderBy('price', 'asc');
         } elseif ($sort == 'price-descending') {
             $products->orderBy('price', 'desc');
+        } else {
+            $products->orderBy('ModifiedDate', 'desc');
         }
 
         // Phân trang sản phẩm dựa trên lựa chọn người dùng

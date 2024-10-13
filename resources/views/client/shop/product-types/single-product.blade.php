@@ -141,7 +141,7 @@
 
                 <!-- Product Summery Start -->
                 <div class="product-summery position-relative">
-
+                <h3 class="product-head-name">{{$product->product_name}}</h3>
                     <!-- Product Head Start -->
                     <div class="product-head mb-3">
 

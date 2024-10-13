@@ -755,12 +755,40 @@
           </tbody>
         </table>
       </div>
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      
+      <div class="modal-footer">
+      <form id="form-payment" style="display: none;" action="{{ route('cart.cart_Recheckout') }}" class="checkout-form" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input hidden name="orderId" type="text" id="order-detail-id" value="">
+        <button  type="submit" class="btn btn-success" data-bs-dismiss="modal">Order Payment</button>
+      </form>
+        <button  id="form-cancel" data-url="{{ route('cart.cart_cancel', ['orderId' => ':orderId']) }}" type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="showDeleteModal(this)">Order Cancel</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- Modal Popup -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h5 style="color: grey;" class="modal-title" id="deleteModalLabel">Confirm Cancel Order</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          Are you sure you want to cancel this order?
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form id="deleteForm" method="POST" action="">
+              @csrf
+              <button type="submit" class="btn btn-danger">Cancel</button>
+          </form>
+      </div>
+      </div>
+  </div>
+  </div>
 @include('layouts.footer')
      <!-- JS Vendor, Plugins & Activation Script Files -->
 
@@ -861,11 +889,21 @@
               dataType: 'json',
               success: function(response) {
                 if (response.status === 'success') {
+                  var order = response.data.order
                   // Đổ dữ liệu vào modal
+                  console.log(order.status);
+                  if (order.status == "Pending"){
+                    $('#form-payment').show();
+                    $('#form-cancel').show();
+                  } else {
+                    $('#form-payment').hide();
+                    $('#form-cancel').hide();
+                  }
+                  var getorder = response.data.order_id;
                   var orderdetails = response.data.orderDetails; // Giả sử response trả về orderDetails
                   var modalContent = '';
                   
-
+                  $('#order-detail-id').val(getorder);  // Đổ giá sản phẩm
                   // Lặp qua chi tiết đơn hàng và hiển thị
                   orderdetails.forEach(function(item) {
                     var imageUrl = `{{ asset('storage/products/') }}/${item.product.image}`; // Xây dựng URL hình ảnh
@@ -954,7 +992,20 @@
                       // alert('An error occurred while updating the cart.');
                   }
               });
-            }
+        }
+        
+        function showDeleteModal(element) {
+            // Lấy giá trị URL từ thuộc tính data-url
+            var actionUrl = element.getAttribute('data-url');
+            var orderId = document.getElementById("order-detail-id").value;
+            // Gán action URL cho form xóa trong modal
+            actionUrl = actionUrl.replace(':orderId', orderId);
+            document.getElementById('deleteForm').action = actionUrl;
+
+            // Hiển thị modal
+            var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            deleteModal.show();
+        }
     </script>
 </body>
 

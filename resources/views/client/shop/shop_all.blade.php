@@ -143,7 +143,6 @@
         <div class="shop-topbar-item">
             <form id="sortForm" action="{{ route('shop_all') }}" method="GET">
                 <select name="sort" id="SortBy" onchange="document.getElementById('sortForm').submit();">
-                    <option value="manual" {{ request('sort') == 'manual' ? 'selected' : '' }}>Sort by Rated</option>
                     <option value="best-selling" {{ request('sort') == 'best-selling' ? 'selected' : '' }}>Sort by Latest</option>
                     <option value="price-ascending" {{ request('sort') == 'price-ascending' ? 'selected' : '' }}>Price ↑</option>
                     <option value="price-descending" {{ request('sort') == 'price-descending' ? 'selected' : '' }}>Price ↓</option>
