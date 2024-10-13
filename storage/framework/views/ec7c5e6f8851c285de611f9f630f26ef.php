@@ -27,7 +27,7 @@
 
 
     <style>
-        /* Style cho table */
+
 .table {
     border-collapse: separate !important;
     border-spacing: 0 15px !important;

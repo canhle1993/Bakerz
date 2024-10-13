@@ -24,7 +24,7 @@
     <!-- Template Stylesheet -->
     <link href="darkpan-1.0.0/css/style.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         .table {
@@ -119,6 +119,18 @@
 
     </style>
 
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: '{{ session('success') }}',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+    });
+</script>
+@endif
+
     <!-- Bootstrap CSS -->
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
@@ -203,7 +215,8 @@
                                 data-category-id="{{ $discount->discount_id }}"
                                 data-update-url="{{ route('discount.update', ['discount' => $discount->discount_id]) }}"
                                 onclick="editRow(this)"></a>
-                                <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('discount.destroy', $discount->discount_id) }}" onclick="showDeleteModal(this)">Delete</a>
+                                <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('discount.destroy', $discount->discount_id) }}" onclick="confirmDelete(this)">Delete</a>
+
                                 <a class="btn m-2" href="{{ route('discount.setup', $discount->discount_id) }}" >Go to Setup</a>
                                 </td>
                             </tr>
@@ -218,43 +231,50 @@
 
             </div>
             <!-- Recent Sales End -->
-            <!-- Modal Popup -->
-            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 style="color: grey;" class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete this product?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <form id="deleteForm" method="POST" action="">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-                </div>
-            </div>
-            </div>
+
 
 <script>
 
-    function showDeleteModal(element) {
-        // Lấy giá trị URL từ thuộc tính data-url
+function confirmDelete(element) {
+        // Lấy URL từ thuộc tính data-url của thẻ a
         var actionUrl = element.getAttribute('data-url');
 
-        // Gán action URL cho form xóa trong modal
-        document.getElementById('deleteForm').action = actionUrl;
+        // Hiển thị SweetAlert2 để xác nhận
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This will move the discount to the blacklist and restrict their access!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Tạo form động để submit yêu cầu xóa
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = actionUrl;
 
-        // Hiển thị modal
-        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-        deleteModal.show();
+                // Thêm CSRF token vào form
+                var csrfToken = document.createElement('input');
+                csrfToken.type = 'hidden';
+                csrfToken.name = '_token';
+                csrfToken.value = '{{ csrf_token() }}'; // Laravel CSRF token
+                form.appendChild(csrfToken);
+
+                // Thêm method DELETE vào form
+                var methodInput = document.createElement('input');
+                methodInput.type = 'hidden';
+                methodInput.name = '_method';
+                methodInput.value = 'DELETE';
+                form.appendChild(methodInput);
+
+                // Thêm form vào body và submit
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
     }
-
     let currentEditRow = null;
 
     function editRow(element) {

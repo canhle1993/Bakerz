@@ -26,10 +26,10 @@ class DiscountController extends Controller
     }
 
 
-    
+
     public function store(Request $request)
     {
-        
+
         $discount = new Discount();
 
         $request->validate([
@@ -52,7 +52,7 @@ class DiscountController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+
         $discount = Discount::findOrFail($id);
         $request->validate([
             'promotion_name'=> 'required|string|max:255',
@@ -82,7 +82,7 @@ class DiscountController extends Controller
         ]);
         $discount->products()->detach();
 
-        return redirect()->route('discount.index')->with('success', 'Product added successfully');
+        return redirect()->route('discount.index')->with('success', 'Discount has been moved to the blacklist successfully.');
     }
 
     public function setup($id, Request $request)
@@ -124,9 +124,9 @@ class DiscountController extends Controller
 
     public function update_discount($productid, $discountid)
     {
-        
+
         $discount = Discount::findOrFail($discountid);
-        
+
         $product = Product::findOrFail($productid);
 
         $product->discounts()->syncWithoutDetaching([
@@ -136,7 +136,7 @@ class DiscountController extends Controller
                 'discount' => $discount->discount, // Giá
             ]
         ]);
-        
+
         // Chuyển hướng về route 'discount.setup' với cả productid và discountid
         return redirect()->route('discount.setup', ['discount' => $discountid])
         ->with('success', 'Discount updated successfully');
@@ -147,10 +147,10 @@ class DiscountController extends Controller
         $discount = Discount::findOrFail($discountid);
         // Tìm sản phẩm
         $product = Product::findOrFail($productid);
-        
+
         // Sử dụng detach để xóa liên kết giữa sản phẩm và discount
         $product->discounts()->detach($discountid);
-        
+
         // Chuyển hướng lại với thông báo thành công
         return redirect()->route('discount.setup', ['discount' => $discountid])
         ->with('success', 'Discount updated successfully');

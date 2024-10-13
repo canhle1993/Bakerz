@@ -181,6 +181,18 @@
 
     </style>
 
+<?php if(session('success')): ?>
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: '<?php echo e(session('success')); ?>',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+    });
+</script>
+<?php endif; ?>
+
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
 
@@ -323,9 +335,15 @@
                                         <a class="btn btn-info m-2" href="<?php echo e(route('product.showDetail', $product->product_id)); ?>" style="color: #fff; background-color: #17a2b8; border: none; transition: all 0.3s ease-in-out;">
                                             Detail
                                         </a>
-                                        <a class="btn btn-danger m-2" href="#" data-url="<?php echo e(route('product.destroy', $product->product_id)); ?>" onclick="showDeleteModal(this)" style="color: #fff; background-color: #dc3545; border: none; transition: all 0.3s ease-in-out;">
+                                        <a class="btn btn-danger m-2" href="#" data-url="<?php echo e(route('product.destroy', $product->product_id)); ?>" onclick="confirmDelete(this)" style="color: #fff; background-color: #dc3545; border: none; transition: all 0.3s ease-in-out;">
                                             Delete
                                         </a>
+
+                                        <!-- Form xóa -->
+                                            <form id="deleteForm" method="POST" style="display: none;">
+                                                <?php echo csrf_field(); ?>
+                                                <?php echo method_field('DELETE'); ?>
+                                            </form>
                                     </td>
 
                                 </tr>
@@ -343,47 +361,35 @@
             </div>
             <!-- Recent Sales End -->
             <!-- Modal Popup -->
-            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 style="color: grey;" class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete this product?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <form id="deleteForm" method="POST" action="">
-                            <?php echo csrf_field(); ?>
-                            <?php echo method_field('DELETE'); ?>
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </div>
-                    </div>
-                </div>
-            </div>
+            
 
 <script>
 
 
 
-    function showDeleteModal(element) {
-        // Lấy giá trị URL từ thuộc tính data-url
-        var actionUrl = element.getAttribute('data-url');
+function confirmDelete(element) {
+        var actionUrl = element.getAttribute('data-url'); // Lấy URL từ thuộc tính data-url
 
-        // Gán action URL cho form xóa trong modal
-        document.getElementById('deleteForm').action = actionUrl;
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This will move the product to the blacklist and restrict their access!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Gán action URL cho form xóa
+                var form = document.getElementById('deleteForm');
+                form.action = actionUrl;
 
-        // Hiển thị modal
-        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-        deleteModal.show();
+                // Submit form để xóa
+                form.submit();
+            }
+        });
     }
-    document.getElementById('reset-search').addEventListener('click', function() {
-        // Reset lại URL về trang không có tham số tìm kiếm
-        window.location.href="<?php echo e(route('product.index')); ?>";
-    });
 </script>
 
 

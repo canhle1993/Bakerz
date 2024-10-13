@@ -22,6 +22,7 @@
     <!-- Template Stylesheet -->
     <link href="darkpan-1.0.0/css/style.css" rel="stylesheet">
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
 
@@ -118,6 +119,19 @@
 }
 
     </style>
+
+
+<?php if(session('success')): ?>
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: '<?php echo e(session('success')); ?>',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+    });
+</script>
+<?php endif; ?>
 
     <!-- Bootstrap CSS -->
             <!-- Recent Sales Start -->
@@ -220,6 +234,11 @@
                                         transition: background-color 0.3s ease, box-shadow 0.3s ease;">
                                         Delete
                                     </a>
+                                    <form id="deleteForm" method="POST" style="display:none;">
+                                        <?php echo csrf_field(); ?>
+                                        <?php echo method_field('DELETE'); ?>
+                                    </form>
+
                                 </td>
                             </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -234,28 +253,7 @@
                 </div>
             </div>
 
-            <!-- Modal Popup -->
-            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 style="color: grey;" class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure you want to delete this product?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <form id="deleteForm" method="POST" action="">
-                                <?php echo csrf_field(); ?>
-                                <?php echo method_field('DELETE'); ?>
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             <script>
                 function showDeleteModal(element) {
@@ -281,17 +279,38 @@
 <script>
 
 
-    function showDeleteModal(element) {
-        // Lấy giá trị URL từ thuộc tính data-url
-        var actionUrl = element.getAttribute('data-url');
+function showDeleteModal(element) {
+    var actionUrl = element.getAttribute('data-url');
 
-        // Gán action URL cho form xóa trong modal
-        document.getElementById('deleteForm').action = actionUrl;
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "This will move the healthy type to the blacklist and restrict their access!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, move it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Tạo một form ẩn nếu chưa có, hoặc sử dụng form có sẵn
+            var form = document.getElementById('deleteForm');
+            if (!form) {
+                form = document.createElement('form');
+                form.id = 'deleteForm';
+                form.method = 'POST';
+                document.body.appendChild(form);
+            }
 
-        // Hiển thị modal
-        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-        deleteModal.show();
-    }
+            form.action = actionUrl;
+            form.innerHTML = `
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('DELETE'); ?>
+            `;
+            form.submit();
+        }
+    });
+}
+
 
     let currentEditRow = null;
 
