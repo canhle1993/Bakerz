@@ -1,5 +1,5 @@
 @extends('admin.dashboard')
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @section('manage_admin')
 <style>
 .pagination {
@@ -145,6 +145,120 @@
     color: #ddd;
 }
 
+/* Cấu trúc và kiểu cơ bản cho bảng */
+.table {
+    border-collapse: separate !important;
+    border-spacing: 0 15px !important; /* Khoảng cách giữa các hàng */
+    background-color: #fff !important;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+}
+
+/* Header bảng */
+.table thead th {
+    background-color: #343a40 !important; /* Màu nền tối */
+    color: #fff !important; /* Màu chữ trắng giúp dễ đọc hơn */
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    padding: 12px 15px !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+    border: none !important;
+    text-align: center !important;
+}
+
+/* Các hàng trong bảng */
+.table tbody tr {
+    background-color: #f9f9f9 !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef !important; /* Màu nền khi hover */
+}
+
+/* Các ô trong bảng */
+.table td {
+    padding: 12px 15px !important;
+    color: #333 !important;
+    border: none !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+/* Căn chỉnh nội dung ảnh avatar */
+.table td img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important; /* Thêm shadow cho avatar */
+    transition: transform 0.3s ease !important;
+}
+
+/* Hiệu ứng hover cho avatar */
+.table td img:hover {
+    transform: scale(1.1) !important; /* Phóng to avatar khi hover */
+}
+
+/* Các ô khác nhau */
+.table tbody td:first-child {
+    border-left: 2px solid #dee2e6 !important; /* Đường viền bên trái */
+}
+
+.table tbody td:last-child {
+    border-right: 2px solid #dee2e6 !important; /* Đường viền bên phải */
+}
+
+/* Style cho khoảng cách giữa các hàng */
+.table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px !important;
+}
+
+.table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px !important;
+}
+
+/* Kiểu cho phần ghi chú */
+.table td.note {
+    font-style: italic !important;
+    color: #6c757d !important; /* Màu chữ cho note */
+}
+
+/* Kiểu riêng cho avatar trong bảng */
+.table-avatar {
+    text-align: center !important;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important; /* Giữ tỉ lệ ảnh */
+}
+
+/* Điều chỉnh bố cục của các ô trong bảng */
+.table td {
+    font-size: 16px !important;
+    padding: 12px !important;
+    line-height: 1.5 !important;
+}
+
+/* Điều chỉnh responsive cho bảng */
+@media (max-width: 768px) {
+    .table td {
+        display: block !important;
+        text-align: left !important;
+        padding-left: 50% !important;
+        position: relative !important;
+    }
+
+    .table td:before {
+        content: attr(data-label) !important;
+        position: absolute !important;
+        left: 10px !important;
+        font-weight: bold !important;
+        text-transform: uppercase !important;
+    }
+
+    .table td img {
+        display: inline-block !important;
+    }
+}
 
 
 </style>
@@ -205,11 +319,40 @@
     </script>
 @endif
     <div class="container mt-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="text-primary">Admin Management</h1>
-            <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addAdminModal">Add Admin</button>
-            {{-- <a href="{{ route('admin.create') }}" class="btn btn-primary">Add Admin</a> --}}
-    </div>
+
+            <h1 style="color: #ff0000;
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+            text-align: center;
+            line-height: 1.2;
+            padding: 20px; /* Thêm khoảng cách bên trong */
+            border: 3px solid #ff0000; /* Viền đỏ để làm nổi bật */
+            background-color: rgba(243, 232, 232, 0.651); /* Nền đỏ nhạt để tạo độ tương phản */">
+        Admin Management
+        </h1>
+
+        <button class="btn btn-primary"
+        style="background-color: #007bff;
+               border: none;
+               padding: 15px 30px;
+               font-size: 1.2rem;
+               font-weight: bold;
+               margin: 20px 0;
+               border-radius: 8px;
+               box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+               transition: all 0.3s ease-in-out;"
+        onmouseover="this.style.backgroundColor='#0056b3'; this.style.boxShadow='0 6px 12px rgba(0, 123, 255, 0.5)';"
+        onmouseout="this.style.backgroundColor='#007bff'; this.style.boxShadow='0 4px 10px rgba(0, 123, 255, 0.3)';"
+        data-bs-toggle="modal"
+        data-bs-target="#addAdminModal">
+    Add Admin
+</button>
+
+
 <!-- Modal  add admin-->
 <div class="modal fade" id="addAdminModal" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -224,27 +367,27 @@
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required placeholder="Enter name" value="{{ old('name') }}">
-                       
+
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
                         <input type="email" class="form-control" id="email" name="email" required placeholder="Enter email" value="{{ old('email') }}">
-                        
+
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required placeholder="Enter password">
-                        
+
                     </div>
                     <div class="mb-3">
                         <label for="confirm_password" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" name="password_confirmation" id="confirm_password" required placeholder="Confirm password" value="{{ old('password_confirmation') }}">
-                        
+
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone</label>
                         <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number (optional)" value="{{ old('phone') }}">
-                        
+
                     </div>
                     <div class="mb-3">
                         <label for="gender" class="form-label">Gender</label>
@@ -253,33 +396,50 @@
                             <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
                             <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
                         </select>
-                        
+
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
                         <input type="text" class="form-control" id="address" name="address" placeholder="Enter address (optional)" value="{{ old('address') }}">
-                        
+
                     </div>
                     <div class="mb-3">
                         <label for="avatar" class="form-label">Avatar (optional)</label>
                         <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
-                       
+
                     </div>
                     <div class="mb-3">
                         <label for="avatar_url" class="form-label">Avatar URL (optional)</label>
                         <input type="url" class="form-control" id="avatar_url" name="avatar_url" placeholder="Enter avatar URL (optional)" value="{{ old('avatar_url') }}">
-                       
+
                     </div>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Register Admin</button>
+                    <button type="submit" class="btn btn-danger"
+                    style="background-color: #ffc107;
+                           border: none;
+                           padding: 10px 20px;
+                           font-size: 1.1rem;
+                           font-weight: bold;
+                           color: #000;
+                           border-radius: 5px;
+                           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                           transition: all 0.3s ease-in-out;"
+                    onmouseover="this.style.backgroundColor='#e0a800';"
+                    onmouseout="this.style.backgroundColor='#ffc107';">
+                Register Admin
+            </button>
+
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
+
     <table class="table table-hover table-bordered table-striped shadow-sm">
         <thead class="table-dark">
             <tr>
@@ -322,10 +482,10 @@
                         </button>
                     </form>
 
-                    <form action="{{ route('admin.destroy', $admin->user_id) }}" method="POST" style="display:inline-block;">
+                    <form id="delete-form-{{ $admin->user_id }}" action="{{ route('admin.destroy', $admin->user_id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger">
+                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('{{ $admin->user_id }}')">
                             <i class="bi bi-trash"></i> Delete
                         </button>
                     </form>
@@ -350,3 +510,22 @@
     </div>
 
 @endsection
+
+
+<script>
+ function confirmDelete(userId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This will move the admin to the blacklist and restrict their access!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + userId).submit();
+            }
+        })
+    }
+</script>

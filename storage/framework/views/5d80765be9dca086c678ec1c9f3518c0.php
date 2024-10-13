@@ -588,7 +588,7 @@
 
                                     // Start
                                     
-                                    if (imgtodrag.length > 0 && !imgtodrag.hasClass('cloned')) {
+                                    if (imgtodrag.length > 0) {
                                     // Tạo một thẻ img clone để thực hiện animation bay
                                     var imgclone = imgtodrag.clone()
                                         .css({
@@ -610,7 +610,7 @@
                                     }, 1000, function() {
                                         imgclone.remove(); // Xóa clone sau khi animation kết thúc
                                     });
-                                        imgtodrag.addClass('cloned');
+                                        
                                     }
                                     // End
                               } else {

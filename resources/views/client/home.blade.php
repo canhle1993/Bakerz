@@ -1031,10 +1031,9 @@
 
                                 <!-- Product Summery Start -->
                                 <div class="product-summery position-relative">
-
+                                <h3 class="product-head-name"></h3>
                                     <!-- Product Head Start -->
                                     <div class="product-head mb-3">
-
                                         <!-- Price Start -->
                                         <span class="product-head-price">
                                             @if ($product->price != $product->getDiscountedPrice())
@@ -1056,7 +1055,7 @@
                                     <!-- Product Head End -->
 
                                     <!-- Description Start -->
-                                    <p class="desc-content">{!! nl2br(e($product->describe)) !!}</p>
+                                    <p class="desc-content" style="margin-bottom: 0px !important;">{!! nl2br(e($product->describe)) !!}</p>
                                     <!-- Description End -->
 
                                     <!-- Product Coler Variation Start -->
@@ -1071,7 +1070,7 @@
                                     <!-- Product Size End -->
 
                                     <!-- Product Quantity, Cart Button, Wishlist and Compare Start -->
-                                    <ul class="product-cta">
+                                    <ul class="product-cta" style="margin-bottom: 15px !important;">
                                         <li>
                                             <!-- Cart Button Start -->
                                             <div class="cart-btn">
@@ -1364,6 +1363,7 @@
                         $('#modal-single-product .desc-content').html(product.describe.replace(/\n/g, '<br>'));
                         $('.product-meta .inventory-meta .product-meta-detail').text(product.inventory);
                         $('.product-meta .discount-meta .product-meta-detail').text(response.discounted_percent + " %");
+                        $('.product-head-name').text(product.product_name);
                         var catalog ='';
                         if (Array.isArray(product.catalogs) && product.catalogs.length > 0) {
                             product.catalogs.forEach(function(getlist) {
