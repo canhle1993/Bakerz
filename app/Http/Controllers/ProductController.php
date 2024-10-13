@@ -45,7 +45,7 @@ class ProductController extends Controller
 
     public function all_product(Request $request)
     {
-        $sort = $request->get('sort', 'price-ascending');
+        $sort = $request->get('sort', 'best-selling');
         $query = $request->input('query');
         $categoryId = $request->get('category_id');
         $paginateBy = $request->get('paginate', 12);
@@ -80,6 +80,8 @@ class ProductController extends Controller
             $products->orderBy('price', 'asc');
         } elseif ($sort == 'price-descending') {
             $products->orderBy('price', 'desc');
+        } else {
+            $products->orderBy('ModifiedDate', 'desc');
         }
 
         // Phân trang sản phẩm dựa trên lựa chọn người dùng
@@ -192,10 +194,12 @@ class ProductController extends Controller
 
         if ($product) {
             $discountedPrice = $product->getDiscountedPrice();
+            $discountedPercent = $product->getDiscountPercent();
             return response()->json([
                 'status' => 'success',
                 'product' => $product,
-                'discounted_price' => $discountedPrice // Trả về giá đã giảm
+                'discounted_price' => $discountedPrice, // Trả về giá đã giảm
+                'discounted_percent' => $discountedPercent
             ]);
         } else {
             return response()->json([

@@ -390,3 +390,21 @@ Client Management
         })
     }
 </script>
+
+<script>
+    function confirmDeleteClient(userId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This will move the client to the blacklist and restrict their access!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete client!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-client-form-' + userId).submit();
+            }
+        })
+    }
+</script>
