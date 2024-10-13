@@ -389,7 +389,7 @@
                                 <h4 class="footer-widget__title">Services</h4>
 
                                 <ul class="footer-widget__link">
-                                    <li><a href="{{ route('checkout')}}">Payment</a></li>
+                                    <li><a href="{{ route('checkout') }}">Payment</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->

@@ -103,6 +103,15 @@
             padding: 10px 20px;
             border-radius: 5px;
         }
+        .active-category {
+            background-color: #e5a591;
+            color: white !important;
+            width: 55%;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: bold;
+}
+
     </style>
 </head>
 
@@ -117,7 +126,19 @@
                         <h1 class="breadcrumb_title">Shop</h1>
                         <ul class="breadcrumb_list">
                             <li><a href="{{ route('client.home') }}">Home</a></li>
-                            <li>Shop All Products</li>
+                            <li>
+                            <a href="">
+                                @if(request()->is('shop_all'))
+                                    All Products
+                                @elseif(request()->is('shop/3/filter_nonCatagory*'))
+                                    Discount
+                                @elseif(request()->is('shop/4/filter_nonCatagory*'))
+                                    What Hot
+                                @else
+                                    Category
+                                @endif
+                            </a>
+                        </li>
                         </ul>
                     </div>
                 </div>
@@ -242,17 +263,28 @@
 
 
                              <!-- Category Widget Start -->
-                                    <div class="sidebars_widget">
-                                        <h3 class="sidebars_widget__title">Category</h3>
-                                        <ul class="sidebars_widget__category">
-                                            <li><a href="{{ route('shop_all')}}">All Products</a></li>
-                                            <li><a href="{{ route('shop.filter_nonCatagory', ['isOption' => 3]) }}" >Discount</a></li>
-                                            <li><a href="{{ route('shop.filter_nonCatagory', ['isOption' => 4]) }}">What Hot</a></li>
-                                            @foreach ($categories as $category)
-                                            <li><a href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}">{{ $category->category_name }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
+                             <div class="sidebars_widget">
+                                    <h3 class="sidebars_widget__title">Category</h3>
+                                    <ul class="sidebars_widget__category">
+                                        <li>
+                                            <a href="{{ route('shop_all') }}" class="{{ request()->is('shop_all') ? 'active-category' : '' }}">All Products</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('shop.filter_nonCatagory', ['isOption' => 3]) }}" class="{{ request()->is('shop/3/filter_nonCatagory*') ? 'active-category' : '' }}">Discount</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('shop.filter_nonCatagory', ['isOption' => 4]) }}" class="{{ request()->is('shop/4/filter_nonCatagory*') ? 'active-category' : '' }}">What Hot</a>
+                                        </li>
+                                        @foreach ($categories as $category)
+                                            <li>
+                                                <a href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}" class="{{ request('category_id') == $category->category_id ? 'active-category' : '' }}">
+                                                    {{ $category->category_name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+
                              <!-- Category Widget End -->
 
 

@@ -219,6 +219,7 @@
                         <li>
                             <!-- Action Button Start -->
                             <div class="actions">
+                                
                                 <a href="#/" title="Wishlist" class="action compare" data-bs-toggle="modal" data-bs-target="#modalWishlist"><i class="lastudioicon-heart-2"></i></a>
                             </div>
                             <!-- Action Button End -->
