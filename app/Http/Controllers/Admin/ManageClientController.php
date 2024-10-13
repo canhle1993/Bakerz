@@ -12,7 +12,7 @@ class ManageClientController extends Controller
     public function index()
     {
 
-        $clients = User::where('role_id', '=', 1)->whereNull('isdelete')->paginate(2);
+        $clients = User::where('role_id', '=', 1)->whereNull('isdelete')->paginate(5);
 
         return view('admin.manage-client', compact('clients'));
     }

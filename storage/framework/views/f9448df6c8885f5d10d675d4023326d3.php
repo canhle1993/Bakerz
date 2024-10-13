@@ -338,7 +338,8 @@
 
     <!-- Pagination -->
     <div class="d-flex justify-content-center mt-4">
-        <?php echo e($blacklistedUsers->links('pagination::bootstrap-5')); ?>
+        <?php echo e($blacklistedUsers->appends(request()->query())->links('pagination::bootstrap-5')); ?>
+
 
     </div>
     </div>
@@ -402,7 +403,8 @@
 
         <!-- Pagination -->
         <div class="d-flex justify-content-center mt-4">
-            <?php echo e($deletedProducts->links('pagination::bootstrap-5')); ?>
+            <?php echo e($deletedProducts->appends(request()->query())->links('pagination::bootstrap-5')); ?>
+
 
         </div>
     </div>
@@ -459,7 +461,8 @@
 
     <!-- Pagination -->
     <div class="d-flex justify-content-center mt-4">
-        <?php echo e($deletedCategories->links('pagination::bootstrap-5')); ?>
+        <?php echo e($deletedCategories->appends(request()->query())->links('pagination::bootstrap-5')); ?>
+
 
     </div>
 </div>
@@ -469,101 +472,195 @@
 <?php $__env->stopSection(); ?>
 
 
+
+
 <script>
+
+
+
     function confirmRestoreClient(userId) {
+
         Swal.fire({
+
             title: 'Are you sure?',
+
             text: "Do you want to restore this client?",
+
             icon: 'question',
+
             showCancelButton: true,
+
             confirmButtonColor: '#3085d6',
+
             cancelButtonColor: '#d33',
+
             confirmButtonText: 'Yes, restore them!'
+
         }).then((result) => {
+
             if (result.isConfirmed) {
+
                 document.getElementById('restore-client-form-' + userId).submit();
+
             }
+
         });
+
     }
+
 
     function confirmDeleteClient(userId) {
+
         Swal.fire({
+
             title: 'Are you sure?',
+
             text: "This action will permanently delete the client and cannot be undone!",
+
             icon: 'warning',
+
             showCancelButton: true,
+
             confirmButtonColor: '#d33',
+
             cancelButtonColor: '#3085d6',
+
             confirmButtonText: 'Yes, delete permanently!'
+
         }).then((result) => {
+
             if (result.isConfirmed) {
+
                 document.getElementById('delete-client-form-' + userId).submit();
+
             }
+
         });
+
     }
+
 
     function confirmRestoreProduct(productId) {
+
         Swal.fire({
+
             title: 'Are you sure?',
+
             text: "Do you want to restore this product?",
+
             icon: 'question',
+
             showCancelButton: true,
+
             confirmButtonColor: '#3085d6',
+
             cancelButtonColor: '#d33',
+
             confirmButtonText: 'Yes, restore it!'
+
         }).then((result) => {
+
             if (result.isConfirmed) {
+
                 document.getElementById('restore-product-form-' + productId).submit();
+
             }
+
         });
+
+       }
+
+
+        function confirmDeleteProduct(productId) {
+
+        Swal.fire({
+
+            title: 'Are you sure?',
+
+            text: "This action will permanently delete the product and cannot be undone!",
+
+            icon: 'warning',
+
+            showCancelButton: true,
+
+            confirmButtonColor: '#d33',
+
+            cancelButtonColor: '#3085d6',
+
+            confirmButtonText: 'Yes, delete permanently!'
+
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+
+                document.getElementById('delete-product-form-' + productId).submit();
+
+            }
+
+        });
+
     }
 
-    function confirmDeleteProduct(productId) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "This action will permanently delete the product and cannot be undone!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete permanently!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('delete-product-form-' + productId).submit();
-            }
-        });
-    }
 
     function confirmRestoreCategory(categoryId) {
+
         Swal.fire({
+
             title: 'Are you sure?',
+
             text: "Do you want to restore this category?",
+
             icon: 'question',
+
             showCancelButton: true,
+
             confirmButtonColor: '#3085d6',
+
             cancelButtonColor: '#d33',
+
             confirmButtonText: 'Yes, restore it!'
+
         }).then((result) => {
+
             if (result.isConfirmed) {
+
                 document.getElementById('restore-category-form-' + categoryId).submit();
+
             }
+
         });
+
     }
 
+
     function confirmDeleteCategory(categoryId) {
+
         Swal.fire({
+
             title: 'Are you sure?',
+
             text: "This action will permanently delete the category and cannot be undone!",
+
             icon: 'warning',
+
             showCancelButton: true,
+
             confirmButtonColor: '#d33',
+
             cancelButtonColor: '#3085d6',
+
             confirmButtonText: 'Yes, delete permanently!'
+
         }).then((result) => {
+
             if (result.isConfirmed) {
+
                 document.getElementById('delete-category-form-' + categoryId).submit();
+
             }
+
         });
+
     }
 </script>
 

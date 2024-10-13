@@ -320,7 +320,7 @@
 @endif
     <div class="container mt-5">
 
-            <h1 style="color: #ff0000;
+            <h1 style="color:#BC8157;
             font-size: 3.5rem;
             font-weight: bold;
             text-transform: uppercase;
@@ -330,7 +330,7 @@
             text-align: center;
             line-height: 1.2;
             padding: 20px; /* Thêm khoảng cách bên trong */
-            border: 3px solid #ff0000; /* Viền đỏ để làm nổi bật */
+            border: 3px solid #BC8157; /* Viền đỏ để làm nổi bật */
             background-color: rgba(243, 232, 232, 0.651); /* Nền đỏ nhạt để tạo độ tương phản */">
         Admin Management
         </h1>
@@ -482,19 +482,20 @@
                         </button>
                     </form>
 
-                    <form id="delete-form-{{ $admin->user_id }}" action="{{ route('admin.destroy', $admin->user_id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('{{ $admin->user_id }}')">
-                            <i class="bi bi-trash"></i> Delete
-                        </button>
-                    </form>
-
                     <!-- Button to up admin role to super -->
                     <form action="{{ route('admin.up_to_super', $admin->user_id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-success">
                             <i class="bi bi-arrow-up-circle"></i> Up to Supper
+                        </button>
+                    </form>
+
+
+                    <form id="delete-form-{{ $admin->user_id }}" action="{{ route('admin.destroy', $admin->user_id) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('{{ $admin->user_id }}')">
+                            <i class="bi bi-trash"></i> Delete
                         </button>
                     </form>
                 </td>
@@ -510,3 +511,41 @@
     </div>
 
 @endsection
+
+
+<script>
+
+
+     function confirmDelete(userId) {
+
+            Swal.fire({
+
+                title: 'Are you sure?',
+
+                text: "This will move the admin to the blacklist and restrict their access!",
+
+                icon: 'warning',
+
+                showCancelButton: true,
+
+                confirmButtonColor: '#3085d6',
+
+                cancelButtonColor: '#d33',
+
+                confirmButtonText: 'Yes, delete it!'
+
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+
+                    document.getElementById('delete-form-' + userId).submit();
+
+                }
+
+            })
+
+
+
+        }
+
+    </script>

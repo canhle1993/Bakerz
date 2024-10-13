@@ -27,22 +27,159 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Bootstrap CSS -->
+
+
+    <style>
+
+
+
+.table {
+    border-collapse: separate !important;
+    border-spacing: 0 15px !important;
+    background-color: #fff !important;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+}
+
+
+.table thead th {
+    background-color: #BC8157 !important;
+    color: #fff !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    padding: 12px 15px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+
+.table tbody tr {
+    background-color: #f9f9f9 !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef !important;
+}
+
+
+.table td {
+    padding: 12px 15px !important;
+    color: #333 !important;
+    border: none !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+
+.table td img {
+    border-radius: 5px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    transition: transform 0.3s ease !important;
+}
+
+
+.table td img:hover {
+    transform: scale(1.05) !important;
+}
+
+
+.table tbody td:first-child {
+    border-left: 2px solid #dee2e6 !important;
+}
+
+.table tbody td:last-child {
+    border-right: 2px solid #dee2e6 !important;
+}
+
+
+.table th div {
+    display: inline-block !important;
+    float: right !important;
+}
+
+.table th i {
+    color: #fff !important;
+    font-size: 1rem !important;
+}
+
+.table th i:hover {
+    color: #ffc107 !important;
+    cursor: pointer !important;
+}
+
+.btn-create {
+        color: white;
+        background-color: #007bff; /* Màu xanh dương */
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-create:hover {
+        background-color: #0056b3; /* Màu xanh đậm hơn khi hover */
+    }
+
+/* Điều chỉnh responsive */
+@media (max-width: 768px) {
+    .table td {
+        display: block !important;
+        text-align: left !important;
+        padding-left: 50% !important;
+        position: relative !important;
+    }
+
+    .table td:before {
+        content: attr(data-label) !important;
+        position: absolute !important;
+        left: 10px !important;
+        font-weight: bold !important;
+        text-transform: uppercase !important;
+    }
+
+    .table td img {
+        display: inline-block !important;
+    }
+}
+    </style>
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
+
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h4 class="mb-0">List Banner</h4>
+                        <h4 style="color: #BC8157;
+                        font-size: 3rem;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+                        margin: 30px 0;
+                        text-align: center;
+                        line-height: 1.2;
+                        padding: 15px;
+                        border: 4px dashed #BC8157;
+                        background-color: rgba(230, 247, 255, 0.7);
+                        border-radius: 15px;
+                        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng cho toàn bộ box */">
+                        List Banner
+                    </h4>
 
-                        <!-- Form tìm kiếm -->
-                        <form class="d-none d-md-flex ms-4" method="GET" action="{{ route('banner.index') }}">
-                            <input class="form-control bg-dark border-0" type="search" placeholder="Banner Tilte" name="search" value="{{ request()->query('search') }}">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                            @if(request()->query('search'))
-                                <button type="button" class="btn btn-light ms-2" id="reset-search">✖</button>
-                            @endif
-                        </form>
+                     <!-- Form tìm kiếm -->
+<form class="d-none d-md-flex ms-4" method="GET" action="{{ route('banner.index') }}">
+    <div class="input-group">
+        <input class="form-control bg-white border-0 ps-3" type="search" placeholder="Banner Title" name="search" value="{{ request()->query('search') }}" style="border-radius: 25px 0 0 25px;">
+        <button type="submit" class="btn" style="background-color: #BC8157; color: white; border-radius: 0 25px 25px 0;">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+    @if(request()->query('search'))
+        <button type="button" class="btn btn-light ms-2" id="reset-search" style="border-radius: 25px;">✖</button>
+    @endif
+</form>
 
-                        <a id="btnCreate" href="#">Create Banner </a>
+
+<a id="btnCreate" href="#" class="btn-create">Create Banner</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -89,7 +226,7 @@
                     </div>
 
 
-                </div>
+
             </div>
             <!-- Recent Sales End -->
             <!-- Modal Popup -->
@@ -158,7 +295,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="saveBannerBtn">Save Banner</button>
+        <button type="button" class="btn" id="saveBannerBtn" style="background-color: #ffc107; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
+            Save Banner
+        </button>
       </div>
     </div>
   </div>
@@ -217,20 +356,20 @@ function editRow(element) {
     isEdit = true; // Đang ở chế độ chỉnh sửa
     const bannerId = element.getAttribute('data-banner-id'); // Lấy ID của banner
     updateUrl = element.getAttribute('data-update-url'); // Lấy URL cập nhật
-    
+
     // Lấy dữ liệu của banner từ hàng đã chọn
     const row = document.getElementById(`row-${bannerId}`);
     const title1 = row.querySelector('td:nth-child(4)').innerText;
     const title2 = row.querySelector('td:nth-child(5)').innerText;
     const description = row.querySelector('td:nth-child(6)').innerText;
-    
+
     document.getElementById('createBannerModalLabel').innerText = "Edit Banner";
     // Gán dữ liệu vào form
     document.getElementById('title1').value = title1;
     document.getElementById('title2').value = title2;
     document.getElementById('product_id').value = '';
     document.getElementById('description').value = description;
-    
+
     // Mở modal
     var createBannerModal = new bootstrap.Modal(document.getElementById('createBannerModal'));
     createBannerModal.show();
@@ -269,10 +408,10 @@ function editRow(element) {
             alert('Please fill out all required fields.');
             return; // Ngừng xử lý nếu có trường bị thiếu
         }
-    } 
+    }
 
     let url = isEdit ? updateUrl : "{{ route('banner.store') }}";
-    
+
     // Gửi AJAX với dữ liệu là FormData
     $.ajax({
         url: url, // Đường dẫn đến route lưu banner mới
@@ -321,11 +460,11 @@ function editRow(element) {
     loadProducts();
   });
 
-  
+
   // Hàm load sản phẩm từ route product.index qua AJAX
   function loadProducts() {
     const tableBody = document.querySelector('#productTable tbody');
-    
+
     // Xóa nội dung cũ của bảng
     tableBody.innerHTML = '';
     const searchValue = document.getElementById('searchProduct').value; // Lấy giá trị từ ô tìm kiếm

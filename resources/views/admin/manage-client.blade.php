@@ -285,7 +285,7 @@
 
 <div class="container mt-5">
 
-    <h1 style="color: #ff0000;
+    <h1 style="color: #BC8157;
     font-size: 3.5rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -295,7 +295,7 @@
     text-align: center;
     line-height: 1.2;
     padding: 20px; /* Thêm khoảng cách bên trong */
-    border: 3px solid #ff0000; /* Viền đỏ để làm nổi bật */
+    border: 3px solid #BC8157; /* Viền đỏ để làm nổi bật */
     background-color: rgba(243, 232, 232, 0.651); /* Nền đỏ nhạt để tạo độ tương phản */">
 Client Management
 </h1>

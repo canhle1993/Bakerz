@@ -284,7 +284,7 @@
 
 <div class="container mt-5">
 
-    <h1 style="color: #ff0000;
+    <h1 style="color: #BC8157;
     font-size: 3.5rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -294,7 +294,7 @@
     text-align: center;
     line-height: 1.2;
     padding: 20px; /* Thêm khoảng cách bên trong */
-    border: 3px solid #ff0000; /* Viền đỏ để làm nổi bật */
+    border: 3px solid #BC8157; /* Viền đỏ để làm nổi bật */
     background-color: rgba(243, 232, 232, 0.651); /* Nền đỏ nhạt để tạo độ tương phản */">
 Client Management
 </h1>
@@ -367,6 +367,24 @@ Client Management
 
 
 <?php $__env->stopSection(); ?>
+
+<script>
+    function confirmDeleteClient(userId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This will move the client to the blacklist and restrict their access!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete client!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-client-form-' + userId).submit();
+            }
+        })
+    }
+</script>
 
 <script>
     function confirmDeleteClient(userId) {
