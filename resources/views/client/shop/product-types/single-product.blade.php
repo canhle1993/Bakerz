@@ -33,7 +33,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <style>
+<style>
     .star-rating {
         direction: rtl;
         display: inline-flex;
@@ -141,7 +141,7 @@
 
                 <!-- Product Summery Start -->
                 <div class="product-summery position-relative">
-                <h3 class="product-head-name">{{$product->product_name}}</h3>
+                <h3 class="product-head-name">{{$product->product_name}}</h3><br>
                     <!-- Product Head Start -->
                     <div class="product-head mb-3">
 

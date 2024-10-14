@@ -141,7 +141,7 @@
 
                 <!-- Product Summery Start -->
                 <div class="product-summery position-relative">
-                <h3 class="product-head-name"><?php echo e($product->product_name); ?></h3>
+                <h3 class="product-head-name"><?php echo e($product->product_name); ?></h3><br>
                     <!-- Product Head Start -->
                     <div class="product-head mb-3">
 
