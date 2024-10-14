@@ -336,7 +336,7 @@
         </h1>
 
         <button class="btn btn-primary"
-        style="background-color: #007bff;
+        style="background-color: #0fa7bf;
                border: none;
                padding: 15px 30px;
                font-size: 1.2rem;
@@ -346,7 +346,7 @@
                box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
                transition: all 0.3s ease-in-out;"
         onmouseover="this.style.backgroundColor='#0056b3'; this.style.boxShadow='0 6px 12px rgba(0, 123, 255, 0.5)';"
-        onmouseout="this.style.backgroundColor='#007bff'; this.style.boxShadow='0 4px 10px rgba(0, 123, 255, 0.3)';"
+        onmouseout="this.style.backgroundColor='#0fa7bf'; this.style.boxShadow='0 4px 10px rgba(0, 123, 255, 0.3)';"
         data-bs-toggle="modal"
         data-bs-target="#addAdminModal">
     Add Admin

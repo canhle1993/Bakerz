@@ -76,7 +76,7 @@
             <div class="swiper-wrapper">
                 <!-- Single Slider Start -->
                 <?php $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $banner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('<?php echo e(asset('storage/banners/' . $banner->image_banner)); ?>'); height: 860px !important;">
+                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('<?php echo e(asset('storage/banners/' . $banner->image_banner)); ?>'); height: 775px !important;">
                     <div class="image movex">
                         <img class="img-center" src="<?php echo e(asset('storage/banners/' . $banner->image_product)); ?>" alt="Slider-Image">
                     </div>

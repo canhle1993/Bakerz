@@ -142,7 +142,7 @@
             </form>
 
             <!-- Move All Quantity Section -->
-            <label for="" style="color: #fff;">Move ALL:</label>
+            <label for="" style="color: #fff; margin-left: 20px;">Move ALL:</label>
             <input id="quantityInput" class="form-control " style="width: 15%; border-radius: 25px;" type="number" oninput="setQuantity(this.value)" placeholder="Enter quantity" name="quantityInput" value="{{ old('quantityInput', request()->input('quantityInput')) }}">
             <form id="stockinAllLink" method="POST" action="{{ route('product.goallquanlity_stockin') }}">
                 @csrf
@@ -150,10 +150,10 @@
                 <button type="submit" class="btn" style="
                     background-color: #17a2b8;
                     color: white;
-                    padding: 6px 12px;
+                    margin-left: 10px;
                     border-radius: 4px;
                     transition: background-color 0.3s ease, box-shadow 0.3s ease;">
-                    Quantity To Stock In
+                    Stock In
                 </button>
             </form>
         </div>
@@ -201,7 +201,7 @@
                                     padding: 6px 12px;
                                     border-radius: 4px;
                                     transition: background-color 0.3s ease, box-shadow 0.3s ease;">
-                                    Go to Stock In
+                                    Go to Stock
                                 </button>
                             </form>
                         </td>

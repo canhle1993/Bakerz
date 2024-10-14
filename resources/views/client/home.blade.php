@@ -76,7 +76,7 @@
             <div class="swiper-wrapper">
                 <!-- Single Slider Start -->
                 @foreach($banners as $banner)
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('{{ asset('storage/banners/' . $banner->image_banner) }}'); height: 860px !important;">
+                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('{{ asset('storage/banners/' . $banner->image_banner) }}'); height: 775px !important;">
                     <div class="image movex">
                         <img class="img-center" src="{{ asset('storage/banners/' . $banner->image_product) }}" alt="Slider-Image">
                     </div>

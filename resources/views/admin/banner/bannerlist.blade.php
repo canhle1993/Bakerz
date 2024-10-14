@@ -111,7 +111,7 @@
 
 .btn-create {
         color: white;
-        background-color: #007bff; /* Màu xanh dương */
+        background-color: #0fa7bf; /* Màu xanh dương */
         padding: 10px 20px;
         border-radius: 5px;
         text-decoration: none;

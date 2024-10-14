@@ -119,7 +119,6 @@
 <?php endif; ?>
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h4 style="color: #BC8157;
                         font-size: 3rem;
@@ -149,7 +148,7 @@
                             </div>
                         </form>
 
-                        <a id="btnCreate" href="#" style="background-color: #007bff;
+                        <a id="btnCreate" href="#" style="background-color: #0fa7bf;
                           color: white;
                           font-weight: bold;
                           padding: 10px 20px;
@@ -158,7 +157,7 @@
                           display: inline-block;
                           transition: all 0.3s ease;"
                           onmouseover="this.style.backgroundColor='#0056b3'; this.style.boxShadow='0 4px 8px rgba(0, 123, 255, 0.3)';"
-                          onmouseout="this.style.backgroundColor='#007bff'; this.style.boxShadow='none';"
+                          onmouseout="this.style.backgroundColor='#0fa7bf'; this.style.boxShadow='none';"
                           >Create Catagory </a>
                     </div>
                     <div class="table-responsive">
@@ -212,7 +211,6 @@
                     </div>
 
 
-                </div>
             </div>
             <!-- Recent Sales End -->
             <!-- Modal Popup -->

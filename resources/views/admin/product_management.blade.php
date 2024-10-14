@@ -231,7 +231,7 @@
 
 
                         <a href="{{route('product.create')}}"
-                        style="background-color: #007bff;
+                        style="background-color: #0fa7bf;
                                color: white;
                                font-weight: bold;
                                padding: 10px 20px;
@@ -240,7 +240,7 @@
                                display: inline-block;
                                transition: all 0.3s ease;"
                         onmouseover="this.style.backgroundColor='#0056b3'; this.style.boxShadow='0 4px 8px rgba(0, 123, 255, 0.3)';"
-                        onmouseout="this.style.backgroundColor='#007bff'; this.style.boxShadow='none';">
+                        onmouseout="this.style.backgroundColor='#0fa7bf'; this.style.boxShadow='none';">
                          Create Product
                      </a>
 
@@ -307,7 +307,7 @@
                                             </a>
                                         </div>
                                     </th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col" style="width: 210px !important;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

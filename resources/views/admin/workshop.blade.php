@@ -98,7 +98,7 @@ Workshop Management
                 <th>Address</th>
                 <th>Product</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th style="width: 250px;">Action</th>
             </tr>
         </thead>
         <tbody>

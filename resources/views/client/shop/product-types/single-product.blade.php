@@ -306,7 +306,7 @@
                         <div class="review">
                             <h4>Reviews</h4>
                             @if($product->reviews->isEmpty())
-                                <p>Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá sản phẩm này!</p>
+                                <p>There are no reviews yet. Be the first to review this product!</p>
                             @else
                             @foreach($product->reviews as $review)
                                 <div class="review-top d-flex mb-4 align-items-center pt-5" id="comment-{{ $review->ID }}">
@@ -358,7 +358,7 @@
                             <div class="comments-area comments-reply-area">
                                 <div class="row">
                                     <div class="col-lg-12 col-custom">
-                                        <h5 class="title mb-2">Thêm đánh giá</h5>
+                                        <h5 class="title mb-2">Add a review</h5>
 
                                         <form action="{{ route('reviews.store', ['product_id' => $product->product_id]) }}" method="POST" class="comments-area_form">
                                             @csrf

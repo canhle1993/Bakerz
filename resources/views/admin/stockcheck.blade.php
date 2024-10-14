@@ -167,7 +167,7 @@
                     </form>
 
 
-                        <label for="">Enter stock quantity</label>
+                        <label for="" style="    margin-left: 15px;">Enter stock quantity</label>
                         <input id="quantityInput" class="form-control bg-dark border-0 text-danger" style="width: 15%;" type="number"
                             oninput="setQuantity(this.value)"
                             placeholder="Enter quantity" name="quanlity_stockin"
@@ -176,7 +176,8 @@
                                 @csrf
                                 <input hidden type="text" name="quanlity_stockin" class="inputTarget" placeholder="This will get the value automatically">
                                 <button type="submit"
-                                style="background-color: #007bff;
+                                style="background-color: #0fa7bf;
+                                    margin-left: 15px;
                                        color: white;
                                        font-weight: bold;
                                        padding: 10px 20px;
@@ -185,7 +186,7 @@
                                        display: inline-block;
                                        transition: all 0.3s ease;"
                                 onmouseover="this.style.backgroundColor='#0056b3'; this.style.boxShadow='0 4px 8px rgba(0, 123, 255, 0.3)';"
-                                onmouseout="this.style.backgroundColor='#007bff'; this.style.boxShadow='none';">
+                                onmouseout="this.style.backgroundColor='#0fa7bf'; this.style.boxShadow='none';">
                             Stock In All Product In List
                         </button>
 

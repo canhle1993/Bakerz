@@ -66,7 +66,7 @@ Social Media Management
 </h1>
     <div class="d-flex justify-content-between mb-4">
 
-        <button class="btn" data-bs-toggle="modal" data-bs-target="#addSocialMediaModal" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#addSocialMediaModal" style="background-color: #0fa7bf; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
             Add Social Media
         </button>
 

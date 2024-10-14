@@ -82,7 +82,7 @@
 
 
     <!-- Button to open the modal to add blog -->
-    <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#addBlogModal" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
+    <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#addBlogModal" style="background-color: #0fa7bf; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
         Add Blog
     </button>
 

@@ -63,7 +63,7 @@
  Comming Soon
 </h1>
     <!-- Nút thêm sản phẩm sắp ra mắt -->
-    <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#addComingSoonModal" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
+    <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#addComingSoonModal" style="background-color: #0fa7bf; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
         Add Product
     </button>
 

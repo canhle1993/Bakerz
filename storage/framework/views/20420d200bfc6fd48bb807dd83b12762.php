@@ -309,7 +309,7 @@
                         <div class="review">
                             <h4>Reviews</h4>
                             <?php if($product->reviews->isEmpty()): ?>
-                                <p>Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá sản phẩm này!</p>
+                                <p>There are no reviews yet. Be the first to review this product!</p>
                             <?php else: ?>
                             <?php $__currentLoopData = $product->reviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="review-top d-flex mb-4 align-items-center pt-5" id="comment-<?php echo e($review->ID); ?>">
@@ -361,7 +361,7 @@
                             <div class="comments-area comments-reply-area">
                                 <div class="row">
                                     <div class="col-lg-12 col-custom">
-                                        <h5 class="title mb-2">Thêm đánh giá</h5>
+                                        <h5 class="title mb-2">Add a review</h5>
 
                                         <form action="<?php echo e(route('reviews.store', ['product_id' => $product->product_id])); ?>" method="POST" class="comments-area_form">
                                             <?php echo csrf_field(); ?>

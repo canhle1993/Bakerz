@@ -42,7 +42,7 @@
         text-align: center!important;
     }
     .btn:hover {
-        background-color: #0056b3; /* Màu xanh dương đậm hơn khi hover */
+        background-color: #0056b3 !important; /* Màu xanh dương đậm hơn khi hover */
     }
 </style>
 
@@ -84,7 +84,7 @@
 
 
         <!-- Nút Thêm Chef Mới -->
-        <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#createChefModal" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
+        <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#createChefModal" style="background-color: #0fa7bf; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
             Add Chef
         </button>
 

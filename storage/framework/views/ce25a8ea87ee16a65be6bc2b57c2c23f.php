@@ -1,25 +1,89 @@
+<style>
+     .btn-secondary {
+        background-color: #6c757d !important;
+        color: white !important;
+        font-weight: bold !important;
+        padding: 10px 20px !important;
+        border-radius: 5px !important;
+        border: none !important;
+        transition: all 0.3s ease !important;
+    }
 
+    .table {
+        border-collapse: separate !important;
+        border-spacing: 0 15px !important;
+        background-color: #fff !important;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1) !important;
+        border-radius: 10px !important;
+    }
+
+    .table thead th {
+        background-color: #BC8157 !important;
+        color: white !important;
+        font-weight: bold !important;
+        padding: 12px 15px !important;
+        text-align: center!important;
+    }
+
+    .table tbody tr {
+        background-color: #f9f9f9!important;
+        transition: background-color 0.3s ease !important;
+    }
+
+    .table tbody tr:hover {
+        background-color: #e9ecef!important;
+    }
+
+    .table td {
+        padding: 12px 15px!important;
+        text-align: center!important;
+    }
+    .btn:hover {
+        background-color: #0056b3 !important; /* Màu xanh dương đậm hơn khi hover */
+    }
+</style>
 
 <?php $__env->startSection('admin_content'); ?>
     <div class="container mt-5">
-        <h1>Chef List</h1>
+        <h1 style="color: #BC8157;
+        font-size: 3rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        margin: 30px 0;
+        text-align: center;
+        line-height: 1.2;
+        padding: 15px;
+        border: 4px dashed #BC8157;
+        background-color: rgba(230, 247, 255, 0.7);
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng cho toàn bộ box */">
+      Chefs List
+    </h1>
 
         <!-- Form tìm kiếm chef theo tên -->
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <form class="d-flex mb-4" method="GET" action="<?php echo e(route('admin.chefs.create')); ?>"> <!-- Sửa route -->
-                    <input class="form-control me-2" type="search" placeholder="Search Chef Name" name="search" value="<?php echo e(request()->query('search')); ?>">
-                    <button class="btn btn-primary" type="submit">Search</button>
+        <div class="row mb-4">
+            <div class="col-md-8 offset-md-2">
+                <form method="GET" action="<?php echo e(route('admin.chefs.create')); ?>" class="input-group">
+                    <input type="text" name="search" class="form-control bg-white border-0 ps-3" placeholder="Search Chef Name" value="<?php echo e(request()->query('search')); ?>" style="border-radius: 25px 0 0 25px;">
+                    <button type="submit" class="btn" style="background-color: #BC8157; color: white; border-radius: 0 25px 25px 0;">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </form>
             </div>
-            <div class="col-md-4">
-                <a href="<?php echo e(route('admin.chefs.create')); ?>" class="btn btn-light">Reset</a> <!-- Sửa route -->
+            <div class="col-md-2 text-end">
+                <a href="<?php echo e(route('admin.chefs.create')); ?>" class="btn btn-secondary">
+                    Reset
+                </a>
             </div>
         </div>
 
+
         <!-- Nút Thêm Chef Mới -->
-        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createChefModal">Add Chef</button>
+        <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#createChefModal" style="background-color: #0fa7bf; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
+            Add Chef
+        </button>
 
         <!-- Modal Thêm Chef Mới -->
         <div class="modal fade" id="createChefModal" tabindex="-1" aria-labelledby="createChefModalLabel" aria-hidden="true">
@@ -56,7 +120,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" form="createChefForm" class="btn btn-primary">Add Chef</button>
+                        <button type="submit" form="createChefForm" class="btn" style="background-color: #ffc107; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
+                            Add Chef
+                        </button>
                     </div>
                 </div>
             </div>
@@ -82,7 +148,7 @@
                     <td><?php echo nl2br(e($chef->description)); ?></td>
                     <td>
                         <!-- Nút Sửa, mở modal -->
-                        <button class="btn btn-warning editChefBtn" data-bs-toggle="modal" data-bs-target="#editChefModal" 
+                        <button class="btn btn-warning editChefBtn" data-bs-toggle="modal" data-bs-target="#editChefModal"
                                 data-id="<?php echo e($chef->id); ?>"
                                 data-name="<?php echo e($chef->name); ?>"
                                 data-position="<?php echo e($chef->position); ?>"
@@ -104,7 +170,7 @@
         </table>
 
         <!-- Hiển thị phân trang -->
-    
+
 
         <!-- Modal Sửa Chef -->
         <div class="modal fade" id="editChefModal" tabindex="-1" aria-labelledby="editChefModalLabel" aria-hidden="true">

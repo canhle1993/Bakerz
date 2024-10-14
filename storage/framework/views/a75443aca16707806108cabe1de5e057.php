@@ -28,7 +28,6 @@
            <div class="container-fluid pt-4 px-4">
             <div class="row">
                 <div class="col-9">
-                <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h4 class="mb-0"><b><?php echo e($discount->promotion_name); ?> (discount <?php echo e($discount->discount * 100); ?>%) </b></h4>
                         <!-- Thêm form tìm kiếm -->
@@ -88,7 +87,6 @@
 
                     </div>
 
-                </div>
                 </div>
                 <div class="col-3">
                 <div class="bg-secondary rounded p-1" >

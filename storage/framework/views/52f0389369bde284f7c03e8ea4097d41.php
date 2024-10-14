@@ -142,7 +142,7 @@ Swal.fire({
     <!-- Bootstrap CSS -->
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
+             
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h4 style="color: #BC8157;
                             font-size: 3rem;
@@ -170,7 +170,7 @@ Swal.fire({
                                 <?php endif; ?>
                             </div>
                         </form>
-                        <a id="btnCreate" href="#" style="background-color: #007bff;
+                        <a id="btnCreate" href="#" style="background-color: #0fa7bf;
                           color: white;
                           font-weight: bold;
                           padding: 10px 20px;
@@ -179,7 +179,7 @@ Swal.fire({
                           display: inline-block;
                           transition: all 0.3s ease;"
                         onmouseover="this.style.backgroundColor='#0056b3'; this.style.boxShadow='0 4px 8px rgba(0, 123, 255, 0.3)';"
-                        onmouseout="this.style.backgroundColor='#007bff'; this.style.boxShadow='none';">New Discount Promotion </a>
+                        onmouseout="this.style.backgroundColor='#0fa7bf'; this.style.boxShadow='none';">New Discount Promotion </a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -217,7 +217,7 @@ Swal.fire({
                                 <td id="enddate-cell-<?php echo e($discount->discount_id); ?>"><?php echo e($discount->end_date); ?></td>
                                 <td id="discount-cell-<?php echo e($discount->discount_id); ?>"><?php echo e($discount->discount * 100); ?> %</td>
                                 <td>
-                                <a href="javascript:void(0);" class="bi bi-pencil m-2"
+                                <a href="javascript:void(0);" style="color: #007bff;" class="bi bi-pencil m-2"
                                 data-category-id="<?php echo e($discount->discount_id); ?>"
                                 data-update-url="<?php echo e(route('discount.update', ['discount' => $discount->discount_id])); ?>"
                                 onclick="editRow(this)"></a>
@@ -234,7 +234,7 @@ Swal.fire({
                         <?php echo e($discounts->appends(request()->except('page'))->links('pagination::bootstrap-4')); ?>
 
                     </div>
-                </div>
+                    
             </div>
             <!-- Recent Sales End -->
             <!-- Modal Popup -->
