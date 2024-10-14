@@ -27,7 +27,7 @@ class HeathyController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $heathy = new HeathyCatalog();
 
         $request->validate([
