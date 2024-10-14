@@ -162,7 +162,7 @@
 
     <div class="shop-topbar-right">
         <div class="shop-topbar-item">
-            <form id="sortForm" action="{{ route('shop_all') }}" method="GET">
+            <form id="sortForm" action="{{ url()->current() }}" method="GET">
                 <select name="sort" id="SortBy" onchange="document.getElementById('sortForm').submit();">
                     <option value="best-selling" {{ request('sort') == 'best-selling' ? 'selected' : '' }}>Sort by Latest</option>
                     <option value="price-ascending" {{ request('sort') == 'price-ascending' ? 'selected' : '' }}>Price ↑</option>
@@ -788,9 +788,11 @@ $('.quickview').on('click', function(e) {
         },
         success: function(response) {
             if (response.status === 'success') {
-                alert('Product added to wishlist!');
+                var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
+                modalWishlist.show();
             } else {
-                alert(response.message);
+                var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
+                modalWishlist.show();
             }
         },
         error: function(xhr) {

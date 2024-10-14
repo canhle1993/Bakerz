@@ -218,7 +218,7 @@
                             <!-- Action Button Start -->
                             <div class="actions">
                                 
-                                <a href="#/" title="Wishlist" class="action compare" data-bs-toggle="modal" data-bs-target="#modalWishlist"><i class="lastudioicon-heart-2"></i></a>
+                                <a href="#/" title="Wishlist" class="action compare labtn-icon-wishlist" data-bs-toggle="modal" data-product-id="{{ $product->product_id }}" ><i class="lastudioicon-heart-2"></i></a>
                             </div>
                             <!-- Action Button End -->
                         </li>
@@ -445,7 +445,7 @@
                                             ></a>
                                         </li>
                                             <li class="product-item__meta-action">
-                                                <a class="shadow-1 labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
+                                                <a class="shadow-1 labtn-icon-wishlist" data-product-id="{{ $relatedProduct->product_id }}" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -622,19 +622,44 @@
         });
 
         function updateonlineUser() {
-                $.ajax({
-                    url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
-                    method: "GET",
-                    success: function(response) {
-                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
-                    },
-                    error: function(xhr) {
-                        console.error('Error:', xhr.responseText);
-                        // alert('An error occurred while updating the cart.');
-                    }
-                });
-            }
+            $.ajax({
+                url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                method: "GET",
+                success: function(response) {
+                    $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr.responseText);
+                    // alert('An error occurred while updating the cart.');
+                }
+            });
+        }
 
+            $(document).on('click', '.labtn-icon-wishlist', function(e) {
+            e.preventDefault();
+
+            var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+            $.ajax({
+                url: "{{ route('add.to.wishlist') }}",
+                method: 'POST',
+                data: {
+                    product_id: productId,
+                    _token: "{{ csrf_token() }}",  // Token bảo mật
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
+                        modalWishlist.show();
+                    } else {
+                        
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr);
+                }
+            });
+        });
     </script>
 
 </body>

@@ -275,7 +275,7 @@
                 <div class="col-lg-3 col-xl-3 col-7">
                     <!-- Header Logo Start -->
                     <div class="header-logo">
-                        <a href="{{ route('client.home')}}">
+                        <a id="countuser" href="{{ route('client.home')}}">
                         
                             <img class="white-logo" src="{{asset('assets/images/logo-white.svg')}}" width="229" height="62" alt="Logo">
                         </a>

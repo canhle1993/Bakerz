@@ -33,9 +33,8 @@ class WorkshopController extends Controller
         $user = Auth::user(); // Lấy thông tin người dùng đang đăng nhập
         $product = $request->input('product'); // Lấy tên sản phẩm từ form
 
-        if ($user->rank <> "Diamond"){
+        if (!isset($user) || $user->rank <> "Diamond"){
             return redirect()->route('blog-detail')->with('iserror', 'This feature is only available for Diamond rank accounts!');
-
         }
         // Kiểm tra xem người dùng đã đăng ký workshop với trạng thái "Pending" hay chưa
         $existingRegistration = Workshop::where('user_id', $user->user_id)

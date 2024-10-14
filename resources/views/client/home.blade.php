@@ -1420,29 +1420,30 @@
         });
 
         $(document).on('click', '.labtn-icon-wishlist', function(e) {
-    e.preventDefault();
+            e.preventDefault();
 
-    var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+            var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
 
-    $.ajax({
-        url: "{{ route('add.to.wishlist') }}",
-        method: 'POST',
-        data: {
-            product_id: productId,
-            _token: "{{ csrf_token() }}",  // Token bảo mật
-        },
-        success: function(response) {
-            if (response.status === 'success') {
-                alert('Product added to wishlist!');
-            } else {
-                alert(response.message);
-            }
-        },
-        error: function(xhr) {
-            console.error('Error:', xhr);
-        }
-    });
-    });
+            $.ajax({
+                url: "{{ route('add.to.wishlist') }}",
+                method: 'POST',
+                data: {
+                    product_id: productId,
+                    _token: "{{ csrf_token() }}",  // Token bảo mật
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
+                        modalWishlist.show();
+                    } else {
+                        
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr);
+                }
+            });
+        });
     </script>
 </body>
 

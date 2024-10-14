@@ -456,7 +456,10 @@
     <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      window.addEventListener('load', function() {
+      // window.addEventListener('load', function() {
+        
+        document.getElementById('countuser').addEventListener('click', function() {
+
         updateonlineUser();
       });
       function updateonlineUser() {

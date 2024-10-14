@@ -109,6 +109,13 @@ class ProductController extends Controller
     }
 
     public function filter_nonCatagory(Request $request, $isOption){
+        $minPrice = $request->get('min_price', 0);
+        $maxPrice = $request->get('max_price', 50);
+		$categoryId = $request->get('category_id');
+
+		$sort = $request->get('sort', 'best-selling');
+        $paginateBy = $request->get('paginate', 12);
+        $query = $request->input('query');
         // Heathy
         if ($isOption == 1){
             $products = Product::where(function ($q) {
@@ -125,7 +132,7 @@ class ProductController extends Controller
                               ->groupBy('product_id')
                               ->havingRaw('COUNT(DISTINCT link_product_heathy.heath_id) = ?', [count($heathIds)]);
                             }
-                })->paginate(12);
+                });
                 
         } elseif ($isOption==2){
             $userId = Auth::user()->user_id;
@@ -134,18 +141,35 @@ class ProductController extends Controller
                 ->where('order.user_id', $userId)
                 ->select('product.product_id', 'product.product_name', 'product.price', 'product.image', DB::raw('MAX(order.order_id) as latest_order_id'))
                 ->groupBy('product.product_id', 'product.product_name', 'product.price', 'product.image')
-                ->orderBy('latest_order_id', 'desc')
-                    ->paginate(12);
+                ;
         } elseif ($isOption==3){
             $products = Product::whereHas('discounts')
-                    ->paginate(12);
+                    ;
         } else {
             $products = Product::join('orderdetails', 'product.product_id', '=', 'orderdetails.product_id')
                 ->select('product.product_id', 'product.product_name', 'product.price', 'product.image', DB::raw('SUM(orderdetails.quantity) as total_quantity'))
                 ->groupBy('product.product_id', 'product.product_name', 'product.price', 'product.image')
-                ->orderBy('total_quantity', 'desc')
-                ->paginate(12);
+                ;
         }
+        $products->whereBetween('price', [$minPrice, $maxPrice]);
+		// Sắp xếp sản phẩm
+        if ($sort == 'price-ascending') {
+            $products->orderBy('product.price', 'asc');
+        } elseif ($sort == 'price-descending') {
+            $products->orderBy('product.price', 'desc');
+        } else {
+            $products->orderBy('product.ModifiedDate', 'desc');
+        }
+		// Phân trang sản phẩm dựa trên lựa chọn người dùng
+        $products = $products->paginate($paginateBy)->appends([
+            'query' => $query,
+            'sort' => $sort,
+            'category_id' => $categoryId,
+            'paginate' => $paginateBy,
+            'min_price' => $minPrice,
+            'max_price' => $maxPrice,
+        ]);
+        
         // Lấy danh sách tất cả các danh mục
         $categories = Catalog::where(function ($query) {
             $query->where('isdelete', '<>', 1)
@@ -158,8 +182,15 @@ class ProductController extends Controller
         ]);
     }
     //Chức năng xử lý trả sản phẩm khi client bấm vào danh mục
-    public function filterByCategory($category_id)
+    public function filterByCategory(Request $request, $category_id)
     {
+        $minPrice = $request->get('min_price', 0);
+        $maxPrice = $request->get('max_price', 50);
+		// $categoryId = $request->get('category_id');
+
+		$sort = $request->get('sort', 'best-selling');
+        $paginateBy = $request->get('paginate', 12);
+        $query = $request->input('query');
         // Tìm danh mục dựa trên category_id
         $category = Catalog::find($category_id);
 
@@ -176,13 +207,31 @@ class ProductController extends Controller
             $query->where('isdelete', '<>', 1)
                 ->orWhereNull('isdelete');
         })
-        ->paginate(12); // Phân trang nếu cần
+        ; // Phân trang nếu cần
 
         // Lấy tất cả các danh mục để hiển thị
         $categories = Catalog::where(function ($query) {
             $query->where('isdelete', '<>', 1)
                 ->orWhereNull('isdelete');
         })->get();
+        $products->whereBetween('price', [$minPrice, $maxPrice]);
+		// Sắp xếp sản phẩm
+        if ($sort == 'price-ascending') {
+            $products->orderBy('product.price', 'asc');
+        } elseif ($sort == 'price-descending') {
+            $products->orderBy('product.price', 'desc');
+        } else {
+            $products->orderBy('product.ModifiedDate', 'desc');
+        }
+		// Phân trang sản phẩm dựa trên lựa chọn người dùng
+        $products = $products->paginate($paginateBy)->appends([
+            'query' => $query,
+            'sort' => $sort,
+            'category_id' => $category_id,
+            'paginate' => $paginateBy,
+            'min_price' => $minPrice,
+            'max_price' => $maxPrice,
+        ]);
 
         // Trả về view shop_all với danh sách sản phẩm lọc theo danh mục
         return view('client.shop.shop_all', compact('products', 'categories', 'category'));
