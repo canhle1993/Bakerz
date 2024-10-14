@@ -81,11 +81,11 @@
                             <i class="far fa-file-alt me-2"></i>Management
                         </a>
                         <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('admin/manage/client*') || Request::is('admin/manage/admin*') || Request::is('admin/manage/blacklist*')) ? 'show' : '' }}">
-                            <a href="{{ route('manage-client') }}" class="dropdown-item {{ Request::routeIs('manage-client') ? 'active' : '' }}">Client</a>
+                            <a href="{{ route('manage-client') }}" class="bi-person-fill dropdown-item {{ Request::routeIs('manage-client') ? 'active' : '' }}">&nbsp;&nbsp;Client</a>
                             @if(Auth::user()->role_id == 3)
-                                <a href="{{ route('manage-admin') }}" class="dropdown-item {{ Request::routeIs('manage-admin') ? 'active' : '' }}">Admin</a>
+                                <a href="{{ route('manage-admin') }}" class="bi-gear-fill dropdown-item {{ Request::routeIs('manage-admin') ? 'active' : '' }}">&nbsp;&nbsp;Admin</a>
                             @endif
-                            <a href="{{ route('manage-blacklist') }}" class="dropdown-item {{ Request::routeIs('manage-blacklist') ? 'active' : '' }}">Blacklist</a>
+                            <a href="{{ route('manage-blacklist') }}" class="bi-trash-fill dropdown-item {{ Request::routeIs('manage-blacklist') ? 'active' : '' }}">&nbsp;&nbsp;Blacklist</a>
                         </div>
                     </div>
 
