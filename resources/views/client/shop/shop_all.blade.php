@@ -756,17 +756,7 @@ $('.quickview').on('click', function(e) {
         });
 
         function updateonlineUser() {
-                $.ajax({
-                    url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
-                    method: "GET",
-                    success: function(response) {
-                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
-                    },
-                    error: function(xhr) {
-                        console.error('Error:', xhr.responseText);
-                        // alert('An error occurred while updating the cart.');
-                    }
-                });
+                
             }
 
 // Script cho QuickView

@@ -76,7 +76,7 @@
             <div class="swiper-wrapper">
                 <!-- Single Slider Start -->
                 @foreach($banners as $banner)
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('{{ asset('storage/banners/' . $banner->image_banner) }}'); height: 775px !important;">
+                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('{{ asset('storage/banners/' . $banner->image_banner) }}'); height: 860px !important;">
                     <div class="image movex">
                         <img class="img-center" src="{{ asset('storage/banners/' . $banner->image_product) }}" alt="Slider-Image">
                     </div>
@@ -1225,7 +1225,6 @@
           form.classList.toggle("hidden-form");
         });
 
-    document.addEventListener("visibilitychange", updateonlineUser);
 
             // Bắt sự kiện thay đổi trạng thái của các checkbox
     $('input[name="heath_id[]"]').on('change', function() {
@@ -1331,7 +1330,20 @@
     });
     
     window.addEventListener('load', function() {
-        
+        // Start Online user
+        $.ajax({
+            url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+            method: "GET",
+            success: function(response) {
+                $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+            },
+            error: function(xhr) {
+                console.error('Error:', xhr.responseText);
+                // alert('An error occurred while updating the cart.');
+            }
+        });
+        // End Online user
+
         document.getElementById('a2').style.display = 'none';  // Show the product section
         if (sessionStorage.getItem('scrollToA1') === 'true') {
             document.getElementById('a2').style.display = 'block';  // Show the product section
@@ -1444,6 +1456,28 @@
                 }
             });
         });
+        
+        setInterval(
+            // Start Online user
+            $.ajax({
+                url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                method: "GET",
+                success: function(response) {
+                    $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr.responseText);
+                    // alert('An error occurred while updating the cart.');
+                }
+            })
+            // End Online user
+            , 30000); // 30 giây là 30000ms
+        // Gọi hàm ngay lập tức khi trang tải
+        function updateonlineUser() {
+            // Start Online user
+            // End Online user
+        }
+       
     </script>
 </body>
 

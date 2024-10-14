@@ -43,7 +43,7 @@ class ReviewController extends Controller
             'created_at' => Carbon::now(),  // Thời gian tạo thông báo
         ]);
 
-        return redirect()->route('product.single', ['product' => $product_id])->with('success', 'Your review has been submitted successfully!');
+        return redirect()->route('product.single', ['product' => $product_id])->with('success', 'Review submitted successfully!');
     }
 
     public function manage(Request $request)
