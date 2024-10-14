@@ -254,7 +254,7 @@
             <!-- Display New Password -->
             @if (session('new_password'))
                 <div class="alert alert-success">
-                    Your new password is: <strong>{{ session('new_password') }}</strong>
+                Your password has been changed successfully. Please check your email!
                 </div>
             @endif
             
