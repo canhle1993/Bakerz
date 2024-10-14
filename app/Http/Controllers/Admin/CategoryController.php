@@ -84,7 +84,7 @@ class CategoryController extends Controller
             'ModifiedBy' => Auth::user()->id ?? null,
         ]);
 
-        return redirect()->route('catalog.index')->with('success', 'Product added successfully');
+        return redirect()->route('catalog.index')->with('success', 'Category deleted successfully');
     }
 
 }

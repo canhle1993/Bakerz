@@ -33,7 +33,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/style.css')); ?>">
-    <style>
+<style>
     .star-rating {
         direction: rtl;
         display: inline-flex;

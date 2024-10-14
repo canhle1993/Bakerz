@@ -82,7 +82,7 @@ class DiscountController extends Controller
         ]);
         $discount->products()->detach();
 
-        return redirect()->route('discount.index')->with('success', 'Product added successfully');
+        return redirect()->route('discount.index')->with('success', 'Discount has been moved to the blacklist successfully.');
     }
 
     public function setup($id, Request $request)
