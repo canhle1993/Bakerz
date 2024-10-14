@@ -76,8 +76,8 @@ use App\Http\Controllers\Admin\ManageAdminController;
 
 
 // Route để đánh dấu thông báo là đã đọc và chuyển hướng đến trang review
-Route::get('/admin/message/read', [DashboardController::class, 'markAsRead'])->name('message.read');
-Route::get('/admin/notify/read', [DashboardController::class, 'markasreadOrder'])->name('notification.read');
+Route::get('/admin/message/read/{id}', [DashboardController::class, 'markAsRead'])->name('message.read');
+Route::get('/admin/notify/read/{id}', [DashboardController::class, 'markasreadOrder'])->name('notification.read');
 
 
 Route::get('/admin/manage/admin', [ManageAdminController::class, 'index'])->name('manage-admin');

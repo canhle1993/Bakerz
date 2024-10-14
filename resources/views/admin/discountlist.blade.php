@@ -144,7 +144,7 @@ Swal.fire({
     <!-- Bootstrap CSS -->
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-             
+
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h4 style="color: #BC8157;
                             font-size: 3rem;
@@ -209,7 +209,7 @@ Swal.fire({
                                 <button type="submit" class="btn btn-success m-2" >Save</button>
                                 <button id="btnCancelAdd" type="button" class="btn btn-secondary m-2">Cancel</button>
                                 </td>
-                            </tr>   
+                            </tr>
                             </form>
                             @foreach($discounts as $discount)
                             <tr id="row-{{ $discount->discount_id }}">
@@ -223,8 +223,14 @@ Swal.fire({
                                 data-category-id="{{ $discount->discount_id }}"
                                 data-update-url="{{ route('discount.update', ['discount' => $discount->discount_id]) }}"
                                 onclick="editRow(this)"></a>
-                                <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('discount.destroy', $discount->discount_id) }}" onclick="confirmDelete(this)">Delete</a>
-                                <a class="btn m-2" href="{{ route('discount.setup', $discount->discount_id) }}" >Go to Setup</a>
+
+                                <a class="btn m-2" href="{{ route('discount.setup', $discount->discount_id) }}"
+                                   >
+                                    Go to Setup
+                                 </a>
+
+                                 <a class="btn btn-outline-danger m-2" href="#" data-url="{{ route('discount.destroy', $discount->discount_id) }}" onclick="confirmDelete(this)">Delete</a>
+
                                 </td>
                             </tr>
                             @endforeach
@@ -235,7 +241,7 @@ Swal.fire({
                     <div class="d-flex justify-content-center">
                         {{ $discounts->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
                     </div>
-                    
+
             </div>
             <!-- Recent Sales End -->
             <!-- Modal Popup -->
@@ -403,9 +409,9 @@ Swal.fire({
     }
 
     document.getElementById('btnCreate').addEventListener('click', function(event) {
-        
+
         document.getElementById("row-create").style.display ='contents'
-        
+
     });
     document.getElementById('btnCancelAdd').addEventListener('click', function(event) {
         document.getElementById("row-create").style.display ='none'

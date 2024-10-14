@@ -209,7 +209,22 @@
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="">Cancel Order Management</h1>
+        <h1 style="color: #BC8157;
+        font-size: 3rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        margin: 30px 0;
+        text-align: center;
+        line-height: 1.2;
+        padding: 15px;
+        border: 4px dashed #BC8157;
+        background-color: rgba(230, 247, 255, 0.7);
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng cho toàn bộ box */">
+       Cancel Order Management
+    </h1>
 
     </div>
     <div class="row mb-4">

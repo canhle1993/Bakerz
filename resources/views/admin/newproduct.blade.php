@@ -35,82 +35,170 @@
     <link href="{{asset('darkpan-1.0.0/css/style.css')}}" rel="stylesheet">
 </head>
 
+
+<style>
+     .title-product {
+        color: #BC8157 !important;
+        font-size: 32px !important;
+        font-weight: bold !important;
+        text-align: center !important;
+        letter-spacing: 2px !important;
+    }
+    .bg-secondary {
+        background-color: #F0E6DC !important;
+        color: #333 !important;
+    }
+
+    .form-label {
+        color: #BC8157 !important;
+        font-weight: bold !important;
+    }
+
+    .form-control {
+        background-color: #fff !important;
+        color: #333 !important;
+        border: 1px solid #BC8157 !important;
+    }
+
+    .form-control:focus {
+        background-color: #fff !important;
+        border-color: #BC8157 !important;
+        box-shadow: 0 0 5px rgba(188, 129, 87, 0.8) !important;
+    }
+
+    .form-check-input:checked {
+        background-color: #BC8157 !important;
+        border-color: #BC8157 !important;
+    }
+
+    .btn-outline-info {
+        color: #BC8157 !important;
+        border-color: #BC8157 !important;
+    }
+
+    .btn-outline-info:hover {
+        background-color: #BC8157 !important;
+        color: #fff !important;
+    }
+
+    .btn-outline-light {
+        color: #BC8157 !important;
+        border-color: #BC8157 !important;
+    }
+
+    .btn-outline-light:hover {
+        background-color: #BC8157 !important;
+        color: #fff !important;
+    }
+
+    #previewImage0, #previewImage1, #previewImage2, #previewImage3 {
+        margin-top: 10px !important;
+        display: none !important;
+        border: 2px solid #BC8157 !important;
+    }
+
+
+    .container-fluid {
+        margin-top: 30px !important;
+    }
+
+
+    .mb-3 {
+        margin-bottom: 20px !important;
+    }
+
+
+    .rounded {
+        border-radius: 10px !important;
+    }
+
+
+    #btnCancel a {
+        text-decoration: none !important;
+        color: #BC8157 !important;
+    }
+
+    #btnCancel a:hover {
+        color: #fff !important;
+    }
+</style>
+
+
+
+
 <body>
 
-<div id="updateDetail" class="container-fluid pt-4 px-4">
-    <div class="row pt-3">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <div class="bg-secondary rounded h-100 p-4">
-                <h6 class="mb-4">New Product</h6>
-                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Product Main Image</label>
-                    <input class="form-control bg-dark" type="file" id="formFile0" name="main_image">
-                    <img id="previewImage0" src="#" alt="Product Image" width="100px" ><br>
-
+    <div id="updateDetail" class="container-fluid pt-4 px-4">
+        <div class="row pt-3">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4 title-product">New Product</h6>
+                    <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Product Main Image</label>
+                            <input class="form-control" type="file" id="formFile0" name="main_image">
+                            <img id="previewImage0" src="#" alt="Product Image" width="100px"><br>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Product Image 1</label>
+                            <input class="form-control" type="file" id="formFile1" name="image_1">
+                            <img id="previewImage1" src="#" alt="Product Image" width="100px"><br>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Product Image 2</label>
+                            <input class="form-control" type="file" id="formFile2" name="image_2">
+                            <img id="previewImage2" src="#" alt="Product Image" width="100px"><br>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Product Image 3</label>
+                            <input class="form-control" type="file" id="formFile3" name="image_3">
+                            <img id="previewImage3" src="#" alt="Product Image" width="100px"><br>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFileMultiple" class="form-label">Product Name</label>
+                            <input class="form-control" type="text" name="product_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Category</label><br>
+                            @foreach($catalogs as $catalog)
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input class="form-check-input" type="checkbox" name="catalog[]" value="{{ $catalog->category_id }}">
+                                {{ $catalog->category_name }}<br>
+                            @endforeach
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFileMultiple" class="form-label">Inventory</label>
+                            <input class="form-control" type="number" name="inventory">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFileMultiple" class="form-label">Unit Price</label>
+                            <input class="form-control" type="number" name="price" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Healthy Options</label><br>
+                            @foreach($heathys as $heathy)
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input class="form-check-input" type="checkbox" name="heathy[]" value="{{ $heathy->heath_id }}">
+                                {{ $heathy->heath_catalog }}<br>
+                            @endforeach
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFileMultiple" class="form-label">Description</label>
+                            <textarea class="form-control" placeholder="Product description here" id="describe" name="describe" style="height: 150px;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-outline-info m-2">Create</button>
+                        <button id="btnCancel" type="button" class="btn btn-outline-light m-2">
+                            <a href="{{ route('product.index') }}">Cancel</a>
+                        </button>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Product Image 1</label>
-                    <input class="form-control bg-dark" type="file" id="formFile1" name="image_1">
-                    <img id="previewImage1" src="#" alt="Product Image" width="100px"><br>
-                    
-                </div>
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Product Image 2</label>
-                    <input class="form-control bg-dark" type="file" id="formFile2" name="image_2">
-                    <img id="previewImage2" src="#" alt="Product Image" width="100px"><br>
-                </div>
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Product Image 3</label>
-                    <input class="form-control bg-dark" type="file" id="formFile3" name="image_3">
-                    <img id="previewImage3" src="#" alt="Product Image" width="100px"><br>
-                    
-                </div>
-                <div class="mb-3">
-                    <label for="formFileMultiple" class="form-label">Product Name</label>
-                    <input class="form-control bg-dark" type="text" name="product_name" required>
-                </div>
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Catagory</label><br>
-                    @foreach($catalogs as $catalog)
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input class="form-check-input" type="checkbox" name="catalog[]" value="{{ $catalog->category_id }}"> 
-                            {{ $catalog->category_name }}<br>
-                    @endforeach
-                </div>
-                <div class="mb-3">
-                    <label for="formFileMultiple" class="form-label">Inventory</label>
-                    <input class="form-control bg-dark" type="number" name="inventory">
-                </div>
-                <div class="mb-3">
-                    <label for="formFileMultiple" class="form-label">Unit price</label>
-                    <input class="form-control bg-dark" type="number" name="price" required >
-                </div>
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Heathy</label><br>
-                    @foreach($heathys as $heathy)
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input class="form-check-input" type="checkbox" name="heathy[]" value="{{ $heathy->heath_id }}" > 
-                            {{ $heathy->heath_catalog }}<br>
-                    @endforeach
-                </div>
-                <div class="mb-3">
-                    <label for="formFileMultiple" class="form-label">Description</label>
-                    <textarea class="form-control" placeholder="Product description here" id="describe" name="describe" style="height: 150px;"></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-outline-info m-2">Create</button>
-                <button id="btnCancel" type="button" class="btn btn-outline-light m-2">
-                <a href="{{ route('product.index') }}">Cancel</a>
-                </button>
-                </form>
             </div>
+            <div class="col-md-1"></div>
         </div>
-        <div class="col-md-1"></div>
     </div>
-</div>
+
 </body>
 <script>
     // Lắng nghe sự kiện thay đổi file và cập nhật hình ảnh ngay lập tức
