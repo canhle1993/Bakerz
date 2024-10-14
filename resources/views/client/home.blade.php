@@ -62,7 +62,7 @@
 </head>
 
 <body>
-    
+
 @include('layouts.header')
 @if(session('error'))
     <script>
@@ -175,7 +175,7 @@
                     <div class="col-md-12">
                         <div class="d-flex justify-content-center" style="margin-top: -5%;">
                             <button id="btnFilter" type="submit" class="slider-content__btn btn btn-primary btn-hover-black">Filter</button>
-                        </div>   
+                        </div>
                     </div>
                 </div>
             </form>
@@ -203,7 +203,7 @@
             <input type="text" id="heathyIdsInput" name="heathyIds" value="{{ implode(',', request('heath_id', [])) }}" hidden >
 
              <div class="section-title-05">
-                     
+
              <h5 class="section-title-05__title"><span>Products suitable for your health</span></h5>
                  <a href="#" class="read-more" id="health_readmore">
                     <span>show more </span></a>
@@ -220,7 +220,7 @@
         <div id="productList" class="swiper-wrapper">
           @if($products->isEmpty())
           <p>----- No products found.</p>
-          @else 
+          @else
           @foreach($products as $product)
           <div class="swiper-slide">
             <!-- Product Item Start -->
@@ -279,7 +279,7 @@
             </div>
             <!-- Product Item End -->
           </div>
-          @endforeach 
+          @endforeach
           @endif
         </div>
 
@@ -304,7 +304,7 @@
         <div class="row">
             <div class="col-12" >
                 <div class="section-title-05">
-                
+
                 <h5 class="section-title-05__title"><span>Most recently purchased products</span></h5>
                 <a href="{{ route('shop.filter_nonCatagory', ['isOption' => 2]) }}" class="read-more"
                 ><span>show more</span
@@ -361,7 +361,7 @@
                                         @if ($product->price != $product->getDiscountedPrice())
                                         <del>{{ formatPriceVND($product->price) }}</del>
                                         <!-- Giá gốc -->
-                                    
+
                                         <strong style="color: red;"
                                         >${{ number_format($product->getDiscountedPrice(),2)
                                         }}</strong
@@ -371,7 +371,7 @@
                                         <!-- Giá không giảm -->
                                         @endif
                                     </span>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -497,13 +497,13 @@
                   <h5 class="product-item__title">
                     <a href="{{ route('product.single', ['product' => $disproduct->product_id]) }}"
                       >{{ $disproduct->product_name }}</a
-                    >   
+                    >
                   </h5>
                     <span class="product-item__price">
                         <span class="original-price">{{ formatPriceVND($disproduct->price) }}</span>
                         <span class="discounted-price">${{ number_format($disproduct->getDiscountedPrice(), 2) }}</span> <!-- Giá mới -->
                     </span>
-                 
+
                 </div>
                 <ul class="product-item__meta">
                   <li class="product-item__meta-action">
@@ -617,7 +617,7 @@
                         @if ($product->price != $product->getDiscountedPrice())
                         <del>{{ formatPriceVND($product->price) }}</del>
                         <!-- Giá gốc -->
-                    
+
                         <strong style="color: red;"
                         >${{ number_format($product->getDiscountedPrice(),2)
                         }}</strong
@@ -701,7 +701,7 @@
                     <!-- Thay thế đường dẫn cho nút "show more" -->
                     <a href="{{ route('shop.filterByCategory', ['category_id' => $seasonalCatalog->category_id ?? '']) }}" class="read-more">
                         <span>show more</span><i class="lastudioicon lastudioicon-right-arrow"></i>
-                    </a>                
+                    </a>
                 </div>
                 <!-- Section Title End -->
                  <!-- BTT -->
@@ -725,7 +725,7 @@
                                             href="#"
                                             data-product-id="{{ $product->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a>
                                             </li>
-                                            
+
                                             <li class="product-item__meta-action">
                                             <a
                                                 class="shadow-1 labtn-icon-cart add-to-cart"
@@ -745,7 +745,7 @@
                                             @if ($product->price != $product->getDiscountedPrice())
                                             <del>{{ formatPriceVND($product->price) }}</del>
                                             <!-- Giá gốc -->
-                                        
+
                                             <strong style="color: red;"
                                             >${{ number_format($product->getDiscountedPrice(),2)
                                             }}</strong
@@ -1040,7 +1040,7 @@
                                             @if ($product->price != $product->getDiscountedPrice())
                                             <del >{{ formatPriceVND($product->price) }}</del>
                                             <!-- Giá gốc -->
-                                        
+
                                             <strong style="color: red;"
                                             >${{ number_format($product->getDiscountedPrice(),2)
                                             }}</strong
@@ -1101,13 +1101,13 @@
                                         <li class="product-meta-wrapper category-meta">
                                             <span class="product-meta-name">category:</span>
                                             <span class="product-meta-detail">
-                                                
+
                                             </span>
                                         </li>
                                         <li class="product-meta-wrapper discount-meta">
                                             <span class="product-meta-name">Discount:</span>
                                             <span class="product-meta-detail">
-                                                
+
                                             </span>
                                         </li>
                                     </ul>
@@ -1207,7 +1207,7 @@
                 if (distance < 0) {
                     clearInterval(countdownFunction);
                     countdownElement.innerHTML = "<span class='expired-text'>Promotion period expired</span>";
-                    
+
                     // Tìm phần tử ul gần nhất và ẩn nó
                     var dealMeta = countdownElement.closest('.deal-two_content').querySelector('.deal-two_meta');
                     if (dealMeta) {
@@ -1267,18 +1267,18 @@
 
         var height = parseFloat($('#heightInput').val());
         var weight = parseFloat($('#weightInput').val());
-        
+
         if (height > 0 && weight > 0 && height <= 500 && weight <= 500) {
             height = height / 100;
             var bmi = (weight / (height * height)).toFixed(2);
             $('#bmiResult').text(bmi);
-            
+
             // Cập nhật trạng thái checkbox "Thừa Cân" và "Thiếu Cân"
             updateHeathStatus(bmi);
         } else {
-            
+
             $('#bmiResult').text('No data available yet.');
-            
+
             // Nếu không hợp lệ, bỏ chọn cả hai checkbox
             $('input[name="heath_id[]"][value="Thừa Cân"]').prop('checked', false);
             $('input[name="heath_id[]"][value="Thiếu Cân"]').prop('checked', false);
@@ -1315,7 +1315,7 @@
             event.preventDefault(); // Chặn không cho nhập nếu giá trị vượt quá maxValue
         }
     }
-    
+
      // Áp dụng hàm xử lý sự kiện cho cả chiều cao và cân nặng
      $('#heightInput').on('keydown', function(event) {
         handleKeyDown.call(this, event, 500); // Giới hạn chiều cao tối đa là 3 mét
@@ -1328,7 +1328,7 @@
     document.getElementById('btnFilter').addEventListener('click', function() {
         sessionStorage.setItem('scrollToA1', 'true');
     });
-    
+
     window.addEventListener('load', function() {
         // Start Online user
         $.ajax({
@@ -1354,7 +1354,7 @@
             sessionStorage.removeItem('scrollToA1');
         }
     });
-    
+
     $('.quickview').on('click', function(e) {
             e.preventDefault();
             var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
@@ -1367,12 +1367,12 @@
                 success: function(response) {
                     if (response.status === 'success') {
                         // Hủy Swiper nếu đã tồn tại trước đó
-                        
+
                         var product = response.product;  // Đối tượng product từ server
                         var catagories = response.getsimpCatagories;
                         // Đổ dữ liệu vào modal
                         $('#modal-single-product .product-head-price').text("$" + response.discounted_price);  // Đổ giá sản phẩm
-                        
+
                         $('#modal-single-product .desc-content').html(product.describe.replace(/\n/g, '<br>'));
                         $('.product-meta .inventory-meta .product-meta-detail').text(product.inventory);
                         $('.product-meta .discount-meta .product-meta-detail').text(response.discounted_percent + " %");
@@ -1385,7 +1385,7 @@
                         }
                         $('.product-meta .category-meta .product-meta-detail').text(catalog);
                         // Cập nhật hình ảnh sản phẩm
-                        
+
                         var slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(0);
                         var thumbslide = $('.product-thumb-vertical .swiper-wrapper').find('.swiper-slide').eq(0);
                         var hiddenimg = $('.cart-btn').find('.product-item');
@@ -1411,7 +1411,7 @@
                         // $('.product-thumb-vertical .swiper-wrapper').html(thumbImageHtml);
                         console.log("Product ID:" + product.product_id);
                         $('.add-to_cart .add-to-cart').replaceWith(addCart);
-                        
+
                         // Hiển thị modal
                         $('#exampleProductModal').modal('show');
                     } else {
@@ -1422,9 +1422,9 @@
                     console.error(error); // Xử lý lỗi
                 }
             });
-            
+
         });
-        
+
         // Bắt sự kiện click vào thẻ <a> và submit form
         $(document).on('click', '#health_readmore', function(e) {
             e.preventDefault(); // Ngăn không cho thẻ <a> chuyển trang
@@ -1448,7 +1448,7 @@
                         var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
                         modalWishlist.show();
                     } else {
-                        
+
                     }
                 },
                 error: function(xhr) {
@@ -1456,7 +1456,7 @@
                 }
             });
         });
-        
+
         setInterval(
             // Start Online user
             $.ajax({
@@ -1475,9 +1475,10 @@
         // Gọi hàm ngay lập tức khi trang tải
         function updateonlineUser() {
             // Start Online user
+
             // End Online user
         }
-       
+
     </script>
 </body>
 
