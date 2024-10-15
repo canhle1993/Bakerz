@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame.png')); ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- CSS (Font, Vendor, Icon, Plugins & Style CSS files) -->
 
@@ -228,6 +229,39 @@
         display: none;
       }
 
+      @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .cart-bounce {
+        animation: bounce 0.5s ease-in-out;
+    }
+
+    /* CSS cho fly-to-cart animation */
+    @keyframes fly-to-cart {
+        0% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-300px) translateX(200px) scale(0.1);
+        }
+    }
+
+    .fly-to-cart-img {
+        position: absolute;
+        z-index: 9999;
+        transition: all 1s ease-in-out;
+        animation: fly-to-cart 1s forwards;
+        opacity: 0;
+    }
+
     </style>
 
 </head>
@@ -270,10 +304,10 @@
                                     <li class="mega-menu-item">
                                         <ul>
                                             <li class="mega-menu-item-title">Featured Product</li>
-                                            <li><a class="sub-item-link" href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>">Discount</a></li>
-                                            <li><a class="sub-item-link" href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 4])); ?>">What Hot</a></li>
+                                            <li><a class="sub-item-link" href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>"><span>Discount</span></a></li>
+                                            <li><a class="sub-item-link" href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 4])); ?>"><span>What Hot</span></a></li>
                                             <!-- Hiển thị 2 category cuối cùng -->
-                                            <?php $__currentLoopData = $categories->slice(-2); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php $__currentLoopData = $categories->slice(-3); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <li><a class="sub-item-link" href="<?php echo e(route('shop.filterByCategory', ['category_id' => $category->category_id])); ?>"><span><?php echo e($category->category_name); ?></span></a></li>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -307,7 +341,6 @@
                                     <li><a class="sub-item-link" href="<?php echo e(route('faq')); ?>"><span>FAQs</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('pricing-plan')); ?>"><span>Bakerz Bite Rewards</span></a></li>
                                     <li><a class="sub-item-link" href="<?php echo e(route('coming-soon')); ?>"><span>Coming Soon</span></a></li>
-                                    <li><a class="sub-item-link" href="<?php echo e(route('client_location')); ?>"><span>Client Location</span></a></li>
                                 </ul>
                             </li>
                             <li><a class="menu-item-link" href="<?php echo e(route('about')); ?>"><span>About</span></a>
@@ -339,21 +372,26 @@
                             <!-- header-primary-menu d-flex justify-content-center -->
                             <div class="header-meta__action d-flex justify-content-end">
                             <?php if(auth()->guard()->check()): ?>
-                            <li >
-                                <a  class=" action" href="<?php echo e(route('client.profile', ['userid' => Auth::user()->user_id])); ?>">
-                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="far fa-user"></i>
-                                    </button>
-                                </a>
-                            </li>
-                            <li >
-                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
-                                    <?php echo csrf_field(); ?>
-                                </form>
-                                <a  class="action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="fas fa-sign-out-alt"></i>
-                                    </button>
-                                </a>
-                            </li>
+                            <div class="header-menu">
+                                <ul class="header-primary-menu d-flex justify-content-center">
+                                    <li style="padding: 0px 0px !important; position: relative !important;"><a  class=" action" href="<?php echo e(route('client.profile', ['userid' => Auth::user()->user_id])); ?>">
+                                            <button class="action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="far fa-user"></i></button>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li><a class="sub-item-link" href="<?php echo e(route('client.profile', ['userid' => Auth::user()->user_id])); ?>"><span>Profile</span></a></li>
+                                            <li >
+                                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                                    <?php echo csrf_field(); ?>
+                                                </form>
+                                                <a  class="sub-item-link action" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                    <button class=" action" data-bs-toggle="offcanvas" data-bs-target="#"><i class="fas fa-sign-out-alt"></i>
+                                                    </button>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div> 
                             <?php endif; ?>
                             <?php if(auth()->guard()->guest()): ?>
 
@@ -393,7 +431,7 @@
     <!-- Search End -->
 
     <!-- Add cart Error modal  -->
-<div class="quickview-product-modal modal fade"  id="outOfStock">
+<div class="quickview-product-modal modal fade"  id="outOfStock" style="z-index: 1050 !important ;">
     <div class="modal-dialog modal-dialog-centered mw-100">
             <div class="custom-content">
                 <button type="button" class="btn-close bg-warning" data-bs-dismiss="modal" aria-label="Close">
@@ -405,6 +443,19 @@
             </div>
         </div>
 </div>
+<!-- Add cart OK modal  -->
+<div class="quickview-product-modal modal fade" id="modalCart">
+        <div class="modal-dialog modal-dialog-centered mw-100">
+            <div class="custom-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="lastudioicon lastudioicon-e-remove"></i>
+                </button>
+                <div class="modal-body">
+                    <i class="dlicon files_check"></i> Added To Cart Successfully!
+                </div>
+            </div>
+        </div>
+    </div>
         <!-- Offcanvas Cart Start  -->
 <div class="offcanvas offcanvas-end offcanvas-cart" id="offcanvasCart">
 
@@ -426,8 +477,10 @@
 
       <!-- Mini Cart Button End  -->
       <div class="mini-cart-btn d-flex flex-column gap-2">
+        <?php if(auth()->guard()->check()): ?>
           <a class="d-block btn btn-secondary btn-hover-primary" href="<?php echo e(route('cart')); ?>">View cart</a>
           <a id="btnCheckout" class="d-block btn btn-secondary btn-hover-primary" href="<?php echo e(route('checkout')); ?>">Checkout</a>
+        <?php endif; ?>
       </div>
       <!-- Mini Cart Button End  -->
 
@@ -482,9 +535,23 @@
           // Kiểm tra trạng thái mỗi giây (1000ms)
           setInterval(updateonlineUser, 1000);
 
-          $('.add-to-cart').on('click', function(e) {
-              e.preventDefault();
+          // Khi mở modal #outOfStock
+          $('#outOfStock').on('shown.bs.modal', function () {
+            // Đóng exampleProductModal trước khi mở outOfStock
+            $('#exampleProductModal').modal('hide');
+            $('.modal-backdrop').not(':last').remove();
+            // Đảm bảo modal outOfStock có z-index cao
+            $('#outOfStock').css('z-index', 1060);
+        });
+
+        var isAnimating = false;
+        var cart = $('#cart_icon'); // Lấy vị trí của biểu tượng giỏ hàng
+          $(document).on('click', '.add-to-cart', function(e) {
+            e.preventDefault();
+            
               var productId = $(this).data('product-id');
+              var imgtodrag = $(this).closest('.product-item').find('img').eq(0);
+            //   var cart = $('#cart_icon'); // Lấy vị trí của biểu tượng giỏ hàng
               $.ajax({
                   url: "<?php echo e(route('cart.checkinventory')); ?>",
                   method: "GET",
@@ -510,7 +577,42 @@
                           success: function(response) {
                               if (response.status === 'success') {
                                   // Cập nhật số lượng sản phẩm trong giỏ hàng
+                                //   var modalCart = new bootstrap.Modal(document.getElementById('modalCart'));
+                                //   modalCart.show();
                                   updateCartView();
+                                  // Thêm hiệu ứng animation vào icon giỏ hàng
+                                    $('#cart_icon').addClass('cart-bounce');
+                                    setTimeout(function() {
+                                        $('#cart_icon').removeClass('cart-bounce');
+                                    }, 500); // Thời gian của animation
+
+                                    // Start
+                                    
+                                    if (imgtodrag.length > 0) {
+                                    // Tạo một thẻ img clone để thực hiện animation bay
+                                    var imgclone = imgtodrag.clone()
+                                        .css({
+                                            'position': 'absolute',
+                                            'z-index': '9999',
+                                            'top': imgtodrag.offset().top,
+                                            'left': imgtodrag.offset().left,
+                                            'width': imgtodrag.width(),
+                                            'height': imgtodrag.height()
+                                        })
+                                        .appendTo($('body')) // Chỉ append vào body một lần
+                                        .addClass('fly-to-cart-img'); // Thêm class để apply animation
+                                    // Animation bay đến giỏ hàng
+                                    imgclone.animate({
+                                        'top': cart.offset().top,
+                                        'left': cart.offset().left,
+                                        'width': 50,
+                                        'height': 50
+                                    }, 1000, function() {
+                                        imgclone.remove(); // Xóa clone sau khi animation kết thúc
+                                    });
+                                        
+                                    }
+                                    // End
                               } else {
                                   alert(response.message);
                               }
@@ -609,6 +711,7 @@
             // Hiển thị tổng đã tính
             $('#total_price').text(total.toFixed(2) + ' $');
         }
+
     </script>
 </body>
 

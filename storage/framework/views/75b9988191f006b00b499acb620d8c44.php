@@ -36,6 +36,11 @@
 
 
     <style>
+        .expired-text {
+            color: #00fb33;
+            font-weight: bold;
+            font-size: 1.2em; /* Tùy chỉnh kích thước chữ */
+        }
       .hidden-form {
         display: none;
       }
@@ -57,6 +62,7 @@
 </head>
 
 <body>
+    
 <?php echo $__env->make('layouts.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php if(session('error')): ?>
     <script>
@@ -70,7 +76,7 @@
             <div class="swiper-wrapper">
                 <!-- Single Slider Start -->
                 <?php $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $banner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('<?php echo e(asset('storage/banners/' . $banner->image_banner)); ?>'); height: 775px !important;">
+                <div class="swiper-slide single-slider-07 animation-style-07 movearea" style="background-image: url('<?php echo e(asset('storage/banners/' . $banner->image_banner)); ?>'); height: 860px !important;">
                     <div class="image movex">
                         <img class="img-center" src="<?php echo e(asset('storage/banners/' . $banner->image_product)); ?>" alt="Slider-Image">
                     </div>
@@ -152,14 +158,6 @@
                     <div class="col-md-6 mb-3">
                         <div class="mb-3">
                             <label class="form-label">Select health status:</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="heath_dump" value=""
-                                id="heath_0"
-                                <?php echo e(request('heath_dump') ? 'checked' : ''); ?>>
-                                <label class="form-check-label" for="heath_0">
-                                Normal
-                                </label>
-                            </div>
                             <?php $__currentLoopData = $heathyCatalogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $catalog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="heath_id[]" value="<?php echo e($catalog->heath_id); ?>"
@@ -241,15 +239,16 @@
                 <ul class="product-item__meta">
                  <li class="product-item__meta-action">
                     <a
-                      class="labtn-icon-quickview"
-                      href="#"
-                      data-bs-tooltip="tooltip"
-                      data-bs-placement="top"
-                      title=""
-                      data-bs-original-title="Quick View"
-                      aria-label="Quick View"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleProductModal"
+                    class="labtn-icon-quickview quickview"
+                    href="#"
+                    data-product-id="<?php echo e($product->product_id); ?>"
+                    data-bs-tooltip="tooltip"
+                    data-bs-placement="top"
+                    title=""
+                    data-bs-original-title="Quick View"
+                    aria-label="Quick View"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleProductModal"
                     ></a>
                   </li>
                   <li class="product-item__meta-action">
@@ -390,36 +389,67 @@
 <!-- Product Section End -->
 
 
+<?php if($deals->count() > 0): ?>
+    <?php $__currentLoopData = $deals; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $deal): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <!-- Product Deal Section Start -->
-        <div class="section-padding-03 deal-two_bg" data-bg-image="assets/images/bg/product-deal-bg.jpg">
-            <div class="container custom-container-two">
+    <div class="section-padding-03 deal-two_bg" data-bg-image="assets/images/bg/product-deal-bg.jpg">
+        <div class="container custom-container-two">
             <div class="row row-cols-lg-2 row-cols-md-2 row-cols-1 align-items-center mb-n30">
                 <div class="col mb-30">
                     <div class="deal-two_images">
-                        <img class="deal-two_thumb" src="assets/images/product/product-deal.png" alt="Deal-Image">
+                        <!-- Thêm link ảnh từ deal -->
+                        <img class="deal-two_thumb" src="<?php echo e(asset('storage/' . $deal->image)); ?>" alt="<?php echo e($deal->name); ?>">
                         <img class="deal-two_sale" src="assets/images/shape/hot-sale.png" alt="Sale-Image">
                     </div>
                 </div>
                 <div class="col mb-30">
                     <div class="deal-two_content">
                         <span class="deal-two_subtitle">Deal of the day</span>
-                        <h4 class="deal-two_title">Sesame Rye Bread</h4>
+                        <!-- Thêm tên deal -->
+                        <h4 class="deal-two_title"><?php echo e($deal->name); ?></h4>
                         <div class="countdown-area">
-                            <div class="countdown-wrapper" data-countdown="2024/10/04"></div>
+                            <!-- Thêm ngày khuyến mãi -->
+                            <div class="countdown-wrapper" data-countdown="<?php echo e($deal->promotion_date); ?>"></div>
                         </div>
-                        <span class="deal-two_price"><span>$</span>4.99</span>
+                        <!-- Thêm giá tiền -->
+                        <span class="deal-two_price"><span>$</span><?php echo e(number_format($deal->price, 2)); ?></span>
 
                         <ul class="product-item__meta deal-two_meta">
-                            <li class="product-item__meta-action"><a class="labtn-icon-cart" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" ></a></li>
-                            <li class="product-item__meta-action"><a class="labtn-icon-quickview" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" title="" data-bs-original-title="Quick View" aria-label="Quick View" data-bs-toggle="modal" data-bs-target="#exampleProductModal"></a></li>
-                            <li class="product-item__meta-action"><a class="labtn-icon-wishlist" href="#/" data-bs-tooltip="tooltip" data-bs-placement="top" data-bs-toggle="modal" data-bs-target="#modalWishlist"></a></li>
+                            <li class="product-item__meta-action">
+                                <a
+                                class="shadow-1 labtn-icon-cart add-to-cart"
+                                href="#"
+                                data-product-id="<?php echo e($deal->product_id); ?>"
+                                ></a>
+                            </li>
+                            <li class="product-item__meta-action">
+                                <a
+                                class="labtn-icon-quickview quickview"
+                                    href="#"
+                                    data-product-id="<?php echo e($deal->product_id); ?>"
+                                data-bs-tooltip="tooltip"
+                                data-bs-placement="top"
+                                title=""
+                                data-bs-original-title="Quick View"
+                                aria-label="Quick View"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleProductModal"
+                                ></a>
+                            </li>
+                            <li class="product-item__meta-action">
+                                <a class="labtn-icon-wishlist" href="#" data-product-id="<?php echo e($deal->product_id); ?>" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
+                            </li>
                         </ul>
+
                     </div>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
     <!-- Product Deal Section End -->
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php endif; ?>
+
 
 </div>
 <!-- Product Section Start -->
@@ -520,7 +550,7 @@
     <div class="boxbanner-wrapper order-md-2 order-1">
       <!-- Ad Banner Start -->
       <a
-        href="single-product.html"
+        href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 3])); ?>"
         class="boxbanner-bg boxbanner"
         data-bg-image="assets/images/banner/add-banner.jpg"
       >
@@ -529,7 +559,7 @@
         <span class="boxbanner-discount">15%</span>
         <div class="boxbanner-btn-area">
           <span class="boxbanner-btn"
-            >Store Location <i class="lastudioicon lastudioicon-right-arrow"></i
+            >CLICK ME<i class="lastudioicon lastudioicon-right-arrow"></i
           ></span>
         </div>
       </a>
@@ -642,7 +672,7 @@
     <div class="boxbanner-wrapper order-1">
       <!-- Ad Banner Start -->
       <a
-        href="single-product.html"
+        href="<?php echo e(route('shop.filter_nonCatagory', ['isOption' => 4])); ?>"
         class="boxbanner-bg boxbanner"
         data-bg-image="assets/images/banner/add-banner-two.jpg"
       >
@@ -652,7 +682,7 @@
         </div>
         <div class="boxbanner-btn-area">
           <span class="boxbanner-btn"
-            >Store Location <i class="lastudioicon lastudioicon-right-arrow"></i
+            >CLICK ME<i class="lastudioicon lastudioicon-right-arrow"></i
           ></span>
         </div>
       </a>
@@ -775,16 +805,16 @@
                 <div class="col-4">
                     <!-- Counter Item Strat -->
                     <div class="counter-item text-center">
-                        <span class="counter-item__label text-global-color-03"><span id="" class="count scroll-counter" data-counter-time="1500">10</span>K+</span>
-                        <p class="counter-item__value text-secondary">Client</p>
+                        <span class="counter-item__label text-global-color-03"><span id="" class="count scroll-counter" data-counter-time="1500"><?php echo e($userCount); ?></span></span>
+                        <p class="counter-item__value text-secondary">Clients</p>
                     </div>
                     <!-- Counter Item End -->
                 </div>
                 <div class="col-4">
                     <!-- Counter Item Strat -->
                     <div class="counter-item text-center">
-                        <span class="counter-item__label text-global-color-03"><span class="count scroll-counter" data-counter-time="1500">100</span>+</span>
-                        <p class="counter-item__value text-secondary">Cakes</p>
+                        <span class="counter-item__label text-global-color-03"><span class="count scroll-counter" data-counter-time="1500"><?php echo e($productCount); ?></span></span>
+                        <p class="counter-item__value text-secondary">Products</p>
                     </div>
                     <!-- Counter Item End -->
                 </div>
@@ -804,86 +834,37 @@
     </div>
     <div class="testimonial-section">
 
-        <!-- Testimonial Active Strat -->
-        <div class="testimonial-active-two">
-            <div class="swiper">
-                <div class="swiper-wrapper">
-
-                    <!-- swiper-slide start -->
-                    <!-- Testimonial Item Strat -->
-                    <div class="swiper-slide">
-                        <div class="testimonial-two text-center">
-                            <div class="testimonial-two_quote">
+    <!-- Testimonial Active Strat -->
+    <div class="testimonial-active-two my-0 mx-auto">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+            <?php if(isset($fiveStarReviews) && $fiveStarReviews->count() > 0): ?>
+             <?php $__currentLoopData = $fiveStarReviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+             <?php if($review->is_deleted == 0): ?> <!-- Đảm bảo chỉ hiển thị các đánh giá chưa bị xóa -->
+                        <div class="swiper-slide">
+                            <div class="testimonial-two text-center">
+                                <div class="testimonial-two_quote">
                                 <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
                                 </svg>
+                                </div>
+                                <p class="testimonial-two_text"><?php echo nl2br(e($review->comment)); ?></p>
+                                <div class="testimonial-two_image">
+                                    <img width="56" height="56" src="<?php echo e(asset('storage/avatars/' . $review->avatar)); ?>" alt="Author"> <!-- Thay đổi đường dẫn avatar -->
+                                </div>
+                                <span class="testimonial-two_name"><?php echo e($review->name); ?></span>
+                                <span class="testimonial-two_position"><?php echo e($review->address); ?></span> <!-- Nếu có thêm địa chỉ -->
                             </div>
-                            <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
-                            <div class="testimonial-two_image">
-                                <img width="56" height="56" src="assets/images/avatar/testimoial-1.png" alt="Author">
-                            </div>
-                            <span class="testimonial-two_name">Esther Howard</span>
-                            <span class="testimonial-two_position">New Yourk</span>
                         </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                    <!-- Testimonial Item Strat -->
-                    <div class="swiper-slide">
-                        <div class="testimonial-two text-center">
-                            <div class="testimonial-two_quote">
-                                <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
-                                </svg>
-                            </div>
-                            <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
-                            <div class="testimonial-two_image">
-                                <img width="56" height="56" src="assets/images/avatar/testimoial-2.png" alt="Author">
-                            </div>
-                            <span class="testimonial-two_name">Elanor Pera</span>
-                            <span class="testimonial-two_position">Canada</span>
-                        </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                    <!-- Testimonial Item Strat -->
-                    <div class="swiper-slide">
-                        <div class="testimonial-two text-center">
-                            <div class="testimonial-two_quote">
-                                <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
-                                </svg>
-                            </div>
-                            <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
-                            <div class="testimonial-two_image">
-                                <img width="56" height="56" src="assets/images/avatar/testimoial-3.png" alt="Author">
-                            </div>
-                            <span class="testimonial-two_name">Krishna Barbe</span>
-                            <span class="testimonial-two_position">Singapore</span>
-                        </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                    <!-- Testimonial Item Strat -->
-                    <div class="swiper-slide">
-                        <div class="testimonial-two text-center">
-                            <div class="testimonial-two_quote">
-                                <svg width="30" height="30" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.203 16c2.034 0 3.594-1.7 3.594-3.752 0-2.124-1.356-3.61-3.255-3.61-.339 0-.813.07-.881.07C3.864 6.442 5.831 3.611 8 2.124L5.492 0C2.372 2.336 0 6.3 0 10.62 0 14.087 1.966 16 4.203 16zm11 0c2.034 0 3.661-1.7 3.661-3.752 0-2.124-1.423-3.61-3.322-3.61-.339 0-.813.07-.881.07.271-2.266 2.17-5.097 4.339-6.584L16.492 0C13.372 2.336 11 6.3 11 10.62c0 3.468 1.966 5.38 4.203 5.38z" fill="currentColor" fill-rule="nonzero"></path>
-                                </svg>
-                            </div>
-                            <p class="testimonial-two_text">It's amazing, the cakes here are so special that it's hard to describe, it's worth a try. I don't think I have ever eaten a better cake. I will be back again</p>
-                            <div class="testimonial-two_image">
-                                <img width="56" height="56" src="assets/images/avatar/testimoial-2.png" alt="Author">
-                            </div>
-                            <span class="testimonial-two_name">Esther Howard</span>
-                            <span class="testimonial-two_position">Dubai</span>
-                        </div>
-                    </div>
-                    <!-- Testimonial Item End -->
-                    <!-- swiper-slide end-->
-
-                </div>
+                        <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php else: ?>
+                    <p>Không có đánh giá 5 sao nào.</p>
+                <?php endif; ?>
             </div>
         </div>
-        <!-- Testimonial Active End -->
+    </div>
+    <!-- Testimonial Active End -->
 
     </div>
     <!-- Testimonial Section End -->
@@ -993,12 +974,28 @@
                                 <div class="product-details-img d-flex overflow-hidden flex-row">
 
                                     <!-- Single Product Image Start -->
-                                    <div class="single-product-vertical-tab swiper-container order-2">
+                                    <div class="single-product-vertical-tab swiper-container order-2 product-item">
 
-                                        <div class="swiper-wrapper">
-                                        
-
-                                        </div>
+                                    <div class="swiper-wrapper" id="swiper-wrapper-dea913122338a79f" aria-live="polite" style="transition-duration: 0ms; transform: translate3d(-484px, 0px, 0px);">
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            <a class="swiper-slide h-auto" href="#">
+                                                <img class="w-100" src="#">
+                                            </a>
+                                            </div>
 
                                         <!-- Next Previous Button Start -->
                                         <div class="swiper-button-vertical-next swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
@@ -1012,8 +1009,18 @@
                                     <div class="product-thumb-vertical overflow-hidden swiper-container order-1">
 
                                         <div class="swiper-wrapper">
-                                        
-                
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="#">
+                                            </div>
                                         </div>
 
                                     </div>
@@ -1027,10 +1034,9 @@
 
                                 <!-- Product Summery Start -->
                                 <div class="product-summery position-relative">
-
+                                <h3 class="product-head-name"></h3>
                                     <!-- Product Head Start -->
                                     <div class="product-head mb-3">
-
                                         <!-- Price Start -->
                                         <span class="product-head-price">
                                             <?php if($product->price != $product->getDiscountedPrice()): ?>
@@ -1051,7 +1057,7 @@
                                     <!-- Product Head End -->
 
                                     <!-- Description Start -->
-                                    <p class="desc-content"><?php echo nl2br(e($product->describe)); ?></p>
+                                    <p class="desc-content" style="margin-bottom: 0px !important;"><?php echo nl2br(e($product->describe)); ?></p>
                                     <!-- Description End -->
 
                                     <!-- Product Coler Variation Start -->
@@ -1066,11 +1072,12 @@
                                     <!-- Product Size End -->
 
                                     <!-- Product Quantity, Cart Button, Wishlist and Compare Start -->
-                                    <ul class="product-cta">
+                                    <ul class="product-cta" style="margin-bottom: 15px !important;">
                                         <li>
                                             <!-- Cart Button Start -->
                                             <div class="cart-btn">
-                                                <div class="add-to_cart">
+                                                <div class="add-to_cart product-item">
+                                                    <a style="display: none;" href=""><img style="border: none !important; height: 287px !important;" width="350" height="350" src="" alt=""></a>
                                                     <a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="<?php echo e($product->product_id); ?>">Add to cart</a>
                                                 </div>
                                             </div>
@@ -1078,9 +1085,9 @@
                                         </li>
                                         <li>
                                             <!-- Action Button Start -->
-                                            <div class="actions">
+                                            <!-- <div class="actions">
                                                 <a href="compare.html" title="Compare" class="action compare"><i class="lastudioicon-heart-2"></i></a>
-                                            </div>
+                                            </div> -->
                                             <!-- Action Button End -->
                                         </li>
                                     </ul>
@@ -1088,25 +1095,20 @@
 
                                     <!-- Product Meta Start -->
                                     <ul class="product-meta">
-                                        <li class="product-meta-wrapper">
+                                        <li class="product-meta-wrapper inventory-meta">
                                             <span class="product-meta-name">Remaining quantity:</span>
                                             <span class="product-meta-detail"><?php echo e($product->inventory); ?></span>
                                         </li>
-                                        <li class="product-meta-wrapper">
+                                        <li class="product-meta-wrapper category-meta">
                                             <span class="product-meta-name">category:</span>
                                             <span class="product-meta-detail">
-                                                <a href="#"> <?php $__currentLoopData = $product->catalogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $catalog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <?php echo e($catalog->category_name); ?><?php echo e(!$loop->last ? ', ' : ''); ?>
-
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></a>
+                                                
                                             </span>
                                         </li>
-                                        <li class="product-meta-wrapper">
+                                        <li class="product-meta-wrapper discount-meta">
                                             <span class="product-meta-name">Discount:</span>
                                             <span class="product-meta-detail">
-                                                <a href="#"><?php $__currentLoopData = $product->discounts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $discount): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php echo e($discount->discount *100); ?> %
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></a>
+                                                
                                             </span>
                                         </li>
                                     </ul>
@@ -1183,7 +1185,39 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        
+        document.addEventListener('DOMContentLoaded', function () {
+        // Lặp qua tất cả các phần tử có class 'countdown-wrapper'
+        document.querySelectorAll('.countdown-wrapper').forEach(function (countdownElement) {
+            var countdownDate = new Date(countdownElement.getAttribute('data-countdown')).getTime();
+
+            // Hàm tính thời gian đếm ngược
+            var countdownFunction = setInterval(function () {
+                var now = new Date().getTime();
+                var distance = countdownDate - now;
+
+                // Tính thời gian còn lại
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000)) / 1000);
+
+                // Hiển thị thời gian còn lại trong countdownElement
+                // countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+                // Nếu đếm ngược về 0 thì ẩn phần tử ul
+                if (distance < 0) {
+                    clearInterval(countdownFunction);
+                    countdownElement.innerHTML = "<span class='expired-text'>Promotion period expired</span>";
+                    
+                    // Tìm phần tử ul gần nhất và ẩn nó
+                    var dealMeta = countdownElement.closest('.deal-two_content').querySelector('.deal-two_meta');
+                    if (dealMeta) {
+                        dealMeta.style.display = 'none';
+                    }
+                }
+            }, 1000);
+        });
+    });
 
       document
         .getElementById("healthSuggestionBtn")
@@ -1309,7 +1343,7 @@
             sessionStorage.removeItem('scrollToA1');
         }
     });
-
+    
     $('.quickview').on('click', function(e) {
             e.preventDefault();
             var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
@@ -1321,24 +1355,51 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.status === 'success') {
+                        // Hủy Swiper nếu đã tồn tại trước đó
+                        
                         var product = response.product;  // Đối tượng product từ server
-                        
+                        var catagories = response.getsimpCatagories;
                         // Đổ dữ liệu vào modal
-                        $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
-                        $('#modal-single-product .desc-content').html(product.describe);  // Đổ mô tả sản phẩm
+                        $('#modal-single-product .product-head-price').text("$" + response.discounted_price);  // Đổ giá sản phẩm
                         
+                        $('#modal-single-product .desc-content').html(product.describe.replace(/\n/g, '<br>'));
+                        $('.product-meta .inventory-meta .product-meta-detail').text(product.inventory);
+                        $('.product-meta .discount-meta .product-meta-detail').text(response.discounted_percent + " %");
+                        $('.product-head-name').text(product.product_name);
+                        var catalog ='';
+                        if (Array.isArray(product.catalogs) && product.catalogs.length > 0) {
+                            product.catalogs.forEach(function(getlist) {
+                                catalog += "\r\n" + getlist.category_name;
+                            });
+                        }
+                        $('.product-meta .category-meta .product-meta-detail').text(catalog);
                         // Cập nhật hình ảnh sản phẩm
-                        var imagesHtml = '';
+                        
+                        var slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(0);
+                        var thumbslide = $('.product-thumb-vertical .swiper-wrapper').find('.swiper-slide').eq(0);
+                        var hiddenimg = $('.cart-btn').find('.product-item');
                         var productImage = "<?php echo e(asset('storage/products/')); ?>/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
-
-                        imagesHtml += '<div class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + productImage + '" alt="Product"></div>';
+                        slide.find('img').attr('src', productImage);
+                        hiddenimg.find('img').attr('src', productImage);
+                        thumbslide.find('img').attr('src', productImage);
+                        var count = 0;
+                        var thumbcount = 0;
                         product.images.forEach(function(image) {
+                            count++;
+                            slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(count);
+                            thumbslide = $('.product-thumb-vertical').find('.swiper-slide').eq(count);
                             var imageUrl = "<?php echo e(asset('storage/products')); ?>/" + image.image; // Access the correct field inside image object
-                            imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
-                        });
 
-                        $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
-                        $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
+                            slide.find('img').attr('src', imageUrl);
+                            thumbslide.find('img').attr('src', imageUrl);
+                            // imagesHtml += '<a class="swiper-slide h-auto" href="' + imageUrl + '"><img class="w-100" src="' + imageUrl + '" alt="<?php echo e($product->product_name); ?>"></a>'
+                            // thumbImageHtml+= '<div class="swiper-slide"><img src="' + imageUrl + '" alt=""></div>';
+                        });
+                        var addCart = '<a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="'+ product.product_id +'">Add to cart</a>';
+                        // $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
+                        // $('.product-thumb-vertical .swiper-wrapper').html(thumbImageHtml);
+                        console.log("Product ID:" + product.product_id);
+                        $('.add-to_cart .add-to-cart').replaceWith(addCart);
                         
                         // Hiển thị modal
                         $('#exampleProductModal').modal('show');
@@ -1350,8 +1411,9 @@
                     console.error(error); // Xử lý lỗi
                 }
             });
+            
         });
-
+        
         // Bắt sự kiện click vào thẻ <a> và submit form
         $(document).on('click', '#health_readmore', function(e) {
             e.preventDefault(); // Ngăn không cho thẻ <a> chuyển trang
