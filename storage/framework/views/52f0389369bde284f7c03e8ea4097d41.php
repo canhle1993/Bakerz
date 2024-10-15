@@ -142,7 +142,7 @@ Swal.fire({
     <!-- Bootstrap CSS -->
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-             
+
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h4 style="color: #BC8157;
                             font-size: 3rem;
@@ -207,7 +207,7 @@ Swal.fire({
                                 <button type="submit" class="btn btn-success m-2" >Save</button>
                                 <button id="btnCancelAdd" type="button" class="btn btn-secondary m-2">Cancel</button>
                                 </td>
-                            </tr>   
+                            </tr>
                             </form>
                             <?php $__currentLoopData = $discounts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $discount): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr id="row-<?php echo e($discount->discount_id); ?>">
@@ -221,8 +221,14 @@ Swal.fire({
                                 data-category-id="<?php echo e($discount->discount_id); ?>"
                                 data-update-url="<?php echo e(route('discount.update', ['discount' => $discount->discount_id])); ?>"
                                 onclick="editRow(this)"></a>
-                                <a class="btn btn-outline-danger m-2" href="#" data-url="<?php echo e(route('discount.destroy', $discount->discount_id)); ?>" onclick="confirmDelete(this)">Delete</a>
-                                <a class="btn m-2" href="<?php echo e(route('discount.setup', $discount->discount_id)); ?>" >Go to Setup</a>
+
+                                <a class="btn m-2" href="<?php echo e(route('discount.setup', $discount->discount_id)); ?>"
+                                   >
+                                    Go to Setup
+                                 </a>
+
+                                 <a class="btn btn-outline-danger m-2" href="#" data-url="<?php echo e(route('discount.destroy', $discount->discount_id)); ?>" onclick="confirmDelete(this)">Delete</a>
+
                                 </td>
                             </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -234,7 +240,7 @@ Swal.fire({
                         <?php echo e($discounts->appends(request()->except('page'))->links('pagination::bootstrap-4')); ?>
 
                     </div>
-                    
+
             </div>
             <!-- Recent Sales End -->
             <!-- Modal Popup -->
@@ -402,9 +408,9 @@ Swal.fire({
     }
 
     document.getElementById('btnCreate').addEventListener('click', function(event) {
-        
+
         document.getElementById("row-create").style.display ='contents'
-        
+
     });
     document.getElementById('btnCancelAdd').addEventListener('click', function(event) {
         document.getElementById("row-create").style.display ='none'
@@ -416,5 +422,4 @@ Swal.fire({
 
 </script>
     <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('admin.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bakerz\resources\views/admin/discountlist.blade.php ENDPATH**/ ?>

@@ -51,7 +51,7 @@ class ReviewController extends Controller
         // Lấy giá trị tìm kiếm từ request
         $searchName = $request->query('searchName');
         $searchRating = $request->query('searchRating');
-    
+
         // Lấy danh sách đánh giá và áp dụng tìm kiếm, sắp xếp theo CreatedDate
         $reviews = UserReview::with(['user', 'product.catalogs'])
             ->where('is_deleted', 0)
@@ -65,19 +65,22 @@ class ReviewController extends Controller
             })
             ->orderBy('CreatedDate', 'desc')  // Sắp xếp theo CreatedDate mới nhất
             ->paginate(10);
-    
+
         // Lấy danh sách thông báo chưa đọc
         $notifications = Notification::with('user')
-            ->where('is_read', 0)
-            ->orderBy('created_at', 'desc')
-            ->get();
-    
+        ->where('is_read', 0)
+        ->where('type', 'review') // Lọc chỉ thông báo review
+        ->orderBy('created_at', 'desc')
+        ->get();
+
         // Đánh dấu tất cả các thông báo là đã đọc
-        Notification::where('is_read', 0)->update(['is_read' => 1]);
-    
+        Notification::where('is_read', 0)
+        ->where('type', 'review') // Chỉ đánh dấu các thông báo có type là review
+        ->update(['is_read' => 1]);
+
         return view('admin.reviews.manage', compact('reviews', 'notifications'));
     }
-    
+
 
     // Xóa đánh giá (đánh dấu là đã xóa)
     public function delete($id)

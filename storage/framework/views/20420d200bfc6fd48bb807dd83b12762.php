@@ -548,24 +548,25 @@
     <!-- Vendors JS -->
 
     <script>
-        $(window).on("scroll", function (event) {
+        $(window).on("scroll", function () {
             var scroll = $(window).scrollTop();
+            var headers = $(".header-sticky, .header-sticky-02, .header-sticky-03, .header-sticky-4, .header-sticky-06");
+            var logoImg = $(".header-sticky .header-logo img");
+            
             if (scroll <= 0) {
-                $(
-                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
-                ).removeClass("sticky");
-                $(".header-sticky .header-logo img").attr(
-                    "src",
-                    "<?php echo e(asset('assets/images/logo-white.svg')); ?>"
-                );
+                headers.removeClass("sticky");
+
+                // Chỉ thay đổi src nếu khác với giá trị hiện tại
+                if (logoImg.attr("src") !== "<?php echo e(asset('assets/images/logo-white.svg')); ?>") {
+                    logoImg.attr("src", "<?php echo e(asset('assets/images/logo-white.svg')); ?>");
+                }
             } else {
-                $(
-                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
-                ).addClass("sticky");
-                $(".header-sticky .header-logo img").attr(
-                    "src",
-                    "<?php echo e(asset('assets/images/logo.svg')); ?>"
-                );
+                headers.addClass("sticky");
+
+                // Chỉ thay đổi src nếu khác với giá trị hiện tại
+                if (logoImg.attr("src") !== "<?php echo e(asset('assets/images/logo.svg')); ?>") {
+                    logoImg.attr("src", "<?php echo e(asset('assets/images/logo.svg')); ?>");
+                }
             }
         });
         $(document).ready(function() {

@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Notification;
 
 class OrderController extends Controller
 {
@@ -51,7 +52,22 @@ class OrderController extends Controller
         ->orderBy('ModifiedDate', 'desc')
         ->paginate(10);
 
-    return view('admin.orders.paid', compact('orders'));
+
+         // Lấy danh sách thông báo chưa đọc liên quan đến order
+    $notifications = Notification::with('user')
+    ->where('is_read', 0)
+    ->where('type', 'order') // Chỉ lấy thông báo liên quan đến order
+    ->orderBy('created_at', 'desc')
+    ->get();
+
+// Đánh dấu tất cả các thông báo order là đã đọc
+Notification::where('is_read', 0)
+    ->where('type', 'order') // Chỉ đánh dấu thông báo order
+    ->update(['is_read' => 1]);
+
+return view('admin.orders.paid', compact('orders', 'notifications'));
+
+
 }
 
 
@@ -91,7 +107,7 @@ class OrderController extends Controller
         $total = 0;
         foreach ($orderdetails as $item) {
             $total += ($item['quantity'] * $item['discount']);
-        }        
+        }
         $user->score += floor($total/10);
         // Xác định rank của user
         switch (true) {

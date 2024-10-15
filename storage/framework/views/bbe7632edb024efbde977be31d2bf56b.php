@@ -177,6 +177,11 @@
 
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </p>
+                                <p>
+                                <?php $__currentLoopData = $review->replies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reply): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <p><?php echo nl2br(e($reply->reply)); ?></p>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </p>
                                 <a href="<?php echo e(route('product.single', ['product' => $review->product->product_id])); ?>#comment-<?php echo e($review->ID); ?>" class="btn btn-primary btn-sm">View comment</a>
                             </div>
                         </div>

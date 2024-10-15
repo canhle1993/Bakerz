@@ -46,7 +46,7 @@ class DiscountController extends Controller
         $discount->CreatedBy = Auth::user()->id ?? null;
         $discount->save();
 
-        return redirect()->route('discount.index')->with('success', 'Product added successfully');
+        return redirect()->route('discount.index')->with('success', 'Discount has been updated');
     }
 
 

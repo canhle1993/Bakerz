@@ -176,6 +176,11 @@
                                         {{ $catalog->category_name }}{{ !$loop->last ? ', ' : '' }}
                                     @endforeach
                                 </p>
+                                <p>
+                                @foreach ($review->replies as $reply)
+                                    <p>{!! nl2br(e($reply->reply)) !!}</p>
+                                @endforeach
+                                </p>
                                 <a href="{{ route('product.single', ['product' => $review->product->product_id]) }}#comment-{{ $review->ID }}" class="btn btn-primary btn-sm">View comment</a>
                             </div>
                         </div>
