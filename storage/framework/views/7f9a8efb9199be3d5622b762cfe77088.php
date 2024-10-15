@@ -1,10 +1,8 @@
-@extends('admin.dashboard')
-
-@section('product_content')
+<?php $__env->startSection('product_content'); ?>
     <!-- Favicon -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/Frame1.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('assets/images/Frame1.png')); ?>">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -163,9 +161,9 @@
                         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng cho toàn bộ box */">
                         List Product
                     </h4>
-                        <form class="d-none d-md-flex ms-4" method="GET" action="{{ route('product.index_outstock') }}">
+                        <form class="d-none d-md-flex ms-4" method="GET" action="<?php echo e(route('product.index_outstock')); ?>">
                             <div class="input-group">
-                                <input class="form-control bg-white border-0 ps-3" type="search" placeholder="Product name" name="search" value="{{ request()->query('search') }}" style="border-radius: 25px 0 0 25px;">
+                                <input class="form-control bg-white border-0 ps-3" type="search" placeholder="Product name" name="search" value="<?php echo e(request()->query('search')); ?>" style="border-radius: 25px 0 0 25px;">
                                 <button type="submit" class="btn" style="background-color: #BC8157; color: white; border-radius: 0 25px 25px 0;">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -173,8 +171,8 @@
                         </form>
 
 
-                        <form method="POST" action="{{ route('product.goallto_stockin') }}">
-                        @csrf
+                        <form method="POST" action="<?php echo e(route('product.goallto_stockin')); ?>">
+                        <?php echo csrf_field(); ?>
                             <button type="submit" class="btn btn-outline-info border-0 m-2 text-danger">Move All to Stock In</button>
                         </form>
                     </div>
@@ -188,10 +186,10 @@
                                     <th scope="col">
                                         Name
                                         <div style="float: right;">
-                                            <a href="{{ route('product.index_outstock', array_merge(request()->all(), ['sort' => 'name_asc'])) }}">
+                                            <a href="<?php echo e(route('product.index_outstock', array_merge(request()->all(), ['sort' => 'name_asc']))); ?>">
                                                 <i class="fas fa-arrow-up"></i>
                                             </a>
-                                            <a href="{{ route('product.index_outstock', array_merge(request()->all(), ['sort' => 'name_desc'])) }}">
+                                            <a href="<?php echo e(route('product.index_outstock', array_merge(request()->all(), ['sort' => 'name_desc']))); ?>">
                                                 <i class="fas fa-arrow-down"></i>
                                             </a>
                                         </div>
@@ -199,10 +197,10 @@
                                     <th scope="col">
                                         Category
                                         <div style="float: right;">
-                                            <a href="{{ route('product.index_outstock', ['sort' => 'category_asc']) }}">
+                                            <a href="<?php echo e(route('product.index_outstock', ['sort' => 'category_asc'])); ?>">
                                                 <i class="fas fa-arrow-up"></i>
                                             </a>
-                                            <a href="{{ route('product.index_outstock', ['sort' => 'category_desc']) }}">
+                                            <a href="<?php echo e(route('product.index_outstock', ['sort' => 'category_desc'])); ?>">
                                                 <i class="fas fa-arrow-down"></i>
                                             </a>
                                         </div>
@@ -210,10 +208,10 @@
                                     <th scope="col">
                                         Inventory
                                         <div style="float: right;">
-                                            <a href="{{ route('product.index_outstock', array_merge(request()->all(), ['sort' => 'inventory_asc'])) }}">
+                                            <a href="<?php echo e(route('product.index_outstock', array_merge(request()->all(), ['sort' => 'inventory_asc']))); ?>">
                                                 <i class="fas fa-arrow-up"></i>
                                             </a>
-                                            <a href="{{ route('product.index_outstock', array_merge(request()->all(), ['sort' => 'inventory_desc'])) }}">
+                                            <a href="<?php echo e(route('product.index_outstock', array_merge(request()->all(), ['sort' => 'inventory_desc']))); ?>">
                                                 <i class="fas fa-arrow-down"></i>
                                             </a>
                                         </div>
@@ -221,10 +219,10 @@
                                     <th scope="col">
                                         Price
                                         <div style="float: right;">
-                                            <a href="{{ route('product.index_outstock', array_merge(request()->all(), ['sort' => 'price_asc'])) }}">
+                                            <a href="<?php echo e(route('product.index_outstock', array_merge(request()->all(), ['sort' => 'price_asc']))); ?>">
                                                 <i class="fas fa-arrow-up"></i>
                                             </a>
-                                            <a href="{{ route('product.index_outstock', array_merge(request()->all(), ['sort' => 'price_desc'])) }}">
+                                            <a href="<?php echo e(route('product.index_outstock', array_merge(request()->all(), ['sort' => 'price_desc']))); ?>">
                                                 <i class="fas fa-arrow-down"></i>
                                             </a>
                                         </div>
@@ -233,36 +231,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($products as $product)
+                            <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-                                     <td>{{ ($products->currentPage() - 1) * $products->perPage() + $loop->iteration }}</td>
+                                     <td><?php echo e(($products->currentPage() - 1) * $products->perPage() + $loop->iteration); ?></td>
                                     <td>
-                                        <img src="{{ asset('storage/products/' . $product->image) }}" alt="Hình ảnh" width="100" class="mt-2">
+                                        <img src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="Hình ảnh" width="100" class="mt-2">
                                     </td>
-                                    <td>{{ $product->product_name }}</td>
+                                    <td><?php echo e($product->product_name); ?></td>
                                     <td>
-                                    @foreach($product->catalogs as $catalog)
-                                        {{ $catalog->category_name }}
-                                    @endforeach
+                                    <?php $__currentLoopData = $product->catalogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $catalog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php echo e($catalog->category_name); ?>
+
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </td>
-                                    <td>{{ $product->inventory }}</td>
-                                    <td>{{ formatPriceVND($product->price) }}</td>
-                                    <form id="deleteForm" method="POST" action="{{ route('product.goto_stockin', $product->product_id) }}">
-                                    @csrf
+                                    <td><?php echo e($product->inventory); ?></td>
+                                    <td><?php echo e(formatPriceVND($product->price)); ?></td>
+                                    <form id="deleteForm" method="POST" action="<?php echo e(route('product.goto_stockin', $product->product_id)); ?>">
+                                    <?php echo csrf_field(); ?>
                                     <td>
                                         <button type="submit" class="btn btn-outline-info m-2">Go to Stock In</button>
                                     </td>
                                     </form>
 
                                 </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                     </div>
                     <div style="height: 20px;"></div>
                     <div class="d-flex justify-content-center">
-                        {{ $products->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
+                        <?php echo e($products->appends(request()->except('page'))->links('pagination::bootstrap-4')); ?>
+
                     </div>
 
 
@@ -282,8 +282,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <form id="deleteForm" method="POST" action="">
-                        @csrf
-                        @method('DELETE')
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('DELETE'); ?>
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </div>
@@ -308,9 +308,11 @@
     }
     document.getElementById('reset-search').addEventListener('click', function() {
         // Reset lại URL về trang không có tham số tìm kiếm
-        window.location.href="{{ route('product.index_outstock') }}";
+        window.location.href="<?php echo e(route('product.index_outstock')); ?>";
     });
 </script>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bakerz\resources\views/admin/outstocklist.blade.php ENDPATH**/ ?>

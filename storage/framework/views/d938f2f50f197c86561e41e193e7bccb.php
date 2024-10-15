@@ -1,4 +1,3 @@
-@extends('admin.dashboard')
 <style>
     .btn-secondary {
        background-color: #6c757d !important;
@@ -40,11 +39,15 @@
        text-align: center!important;
    }
    .btn:hover {
-       background-color: #0056b3 !important; /* Màu xanh dương đậm hơn khi hover */
+       background-color: #0056b3; /* Màu xanh dương đậm hơn khi hover */
    }
+
+   .btn:hover {
+        background-color: #0056b3 !important;
+    }
 </style>
 
-@section('coming_soon_content')
+<?php $__env->startSection('deal_of_the_day_content'); ?>
 <div class="container mt-4">
     <h1 style="color: #BC8157;
     font-size: 3rem;
@@ -60,74 +63,74 @@
     background-color: rgba(230, 247, 255, 0.7);
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng cho toàn bộ box */">
- Comming Soon
+Deal of The Day
 </h1>
-    <!-- Nút thêm sản phẩm sắp ra mắt -->
-    <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#addComingSoonModal" style="background-color: #0fa7bf; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
-        Add Product
+    <!-- Nút thêm deal -->
+    <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#addDealModal" style="background-color: #0fa7bf; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
+        Add Deal
     </button>
 
-    <!-- Bảng danh sách sản phẩm sắp ra mắt -->
-    <table class="table table-bordered" style="margin-bottom: 233px !important;">
+    <!-- Bảng danh sách Deal -->
+    <table class="table table-bordered" style="margin-bottom: 270px !important;">
         <thead>
             <tr>
                 <th>Image</th>
                 <th>Name</th>
-                <th>Release date</th>
+                <th>Promotion date</th>
                 <th>Price</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($coming_soon as $item)
+            <?php $__currentLoopData = $deals; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $deal): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
-                <td><img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" width="100"></td>
-                <td>{{ $item->name }}</td>
-                <td>{{ $item->release_date }}</td>
-                <td>${{ number_format($item->price, 2) }}</td>
+                <td><img src="<?php echo e(asset('storage/' . $deal->image)); ?>" alt="<?php echo e($deal->name); ?>" width="100"></td>
+                <td><?php echo e($deal->name); ?></td>
+                <td><?php echo e($deal->promotion_date); ?></td>
+                <td>$<?php echo e(number_format($deal->price, 2)); ?></td>
                 <td>
                     <!-- Nút sửa -->
-                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editComingSoonModal{{ $item->coming_soon_id }}">Edit</button>
+                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editDealModal<?php echo e($deal->deal_id); ?>">Edit</button>
                     <!-- Nút xóa -->
-                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteComingSoonModal{{ $item->coming_soon_id }}">Delete</button>
+                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteDealModal<?php echo e($deal->deal_id); ?>">Delete</button>
                 </td>
             </tr>
 
-            <!-- Modal sửa sản phẩm -->
-            <div class="modal fade" id="editComingSoonModal{{ $item->coming_soon_id }}" tabindex="-1">
+            <!-- Modal sửa deal -->
+            <div class="modal fade" id="editDealModal<?php echo e($deal->deal_id); ?>" tabindex="-1" >
                 <div class="modal-dialog">
-                    <form action="{{ route('admin.coming_soon.update', $item->coming_soon_id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
+                    <form action="<?php echo e(route('admin.deal.update', $deal->deal_id)); ?>" method="POST" enctype="multipart/form-data">
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('PUT'); ?>
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Edit</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                <h5 class="modal-title" id="editDealLabel">Edit Deal</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control" name="name" value="{{ $item->name }}" required>
+                                    <input type="text" class="form-control" name="name" value="<?php echo e($deal->name); ?>" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Image</label>
                                     <input type="file" class="form-control" name="image">
-                                    <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" width="100" class="mt-2">
+                                    <img src="<?php echo e(asset('storage/' . $deal->image)); ?>" alt="<?php echo e($deal->name); ?>" width="100" class="mt-2">
                                 </div>
                                 <div class="form-group">
-                                    <label for="release_date">Release date</label>
-                                    <input type="date" class="form-control" name="release_date" value="{{ $item->release_date }}" required>
+                                    <label for="promotion_date">Promotion date</label>
+                                    <input type="date" class="form-control" name="promotion_date" value="<?php echo e($deal->promotion_date); ?>" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="price">Price</label>
-                                    <input type="number" class="form-control" name="price" value="{{ $item->price }}" step="0.01" required>
-                                </div>
+                                    <input type="number" class="form-control" name="price" value="<?php echo e($deal->price); ?>" step="0.01" required>
+                                    </div>
                                 <div class="form-group">
                                     <label for="product_id">Product</label>
                                     <select class="form-control" name="product_id" required>
-                                        @foreach($products as $product)
-                                        <option value="{{ $product->product_id }}" {{ $item->product_id == $product->product_id ? 'selected' : '' }}>{{ $product->product_name }}</option>
-                                        @endforeach
+                                        <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($product->product_id); ?>" <?php echo e($deal->product_id == $product->product_id ? 'selected' : ''); ?>><?php echo e($product->product_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>
                             </div>
@@ -140,42 +143,43 @@
                 </div>
             </div>
 
-            <!-- Modal xóa sản phẩm -->
-            <div class="modal fade" id="deleteComingSoonModal{{ $item->coming_soon_id }}" tabindex="-1">
+            <!-- Modal xóa deal -->
+            <div class="modal fade" id="deleteDealModal<?php echo e($deal->deal_id); ?>" tabindex="-1" aria-labelledby="deleteDealLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form action="{{ route('admin.coming_soon.destroy', $item->coming_soon_id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
+                    <form action="<?php echo e(route('admin.deal.destroy', $deal->deal_id)); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('PUT'); ?>
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Delete</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                <h5 class="modal-title" id="deleteDealLabel">Delete</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                            Are you sure you want to remove this product?
+                            Are you sure you want to delete this deal?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-danger">Save</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            @endforeach
+
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </tbody>
     </table>
 </div>
 
-<!-- Modal thêm sản phẩm sắp ra mắt -->
-<div class="modal fade" id="addComingSoonModal" tabindex="-1" aria-labelledby="addComingSoonLabel" aria-hidden="true">
+<!-- Modal thêm deal -->
+<div class="modal fade" id="addDealModal" tabindex="-1" aria-labelledby="addDealLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{ route('admin.coming_soon.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+        <form action="<?php echo e(route('admin.deal.store')); ?>" method="POST" enctype="multipart/form-data">
+            <?php echo csrf_field(); ?>
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addComingSoonLabel">Add Products</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title" id="addDealLabel">Add New</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -187,8 +191,8 @@
                         <input type="file" class="form-control" name="image" required>
                     </div>
                     <div class="form-group">
-                        <label for="release_date">Release date</label>
-                        <input type="date" class="form-control" name="release_date" required>
+                        <label for="promotion_date">Promotion date</label>
+                        <input type="date" class="form-control" name="promotion_date" required>
                     </div>
                     <div class="form-group">
                         <label for="price">Price</label>
@@ -197,9 +201,9 @@
                     <div class="form-group">
                         <label for="product_id">Product</label>
                         <select class="form-control" name="product_id" required>
-                            @foreach($products as $product)
-                            <option value="{{ $product->product_id }}">{{ $product->product_name }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($product->product_id); ?>"><?php echo e($product->product_name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                 </div>
@@ -213,4 +217,6 @@
         </form>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bakerz\resources\views/admin/deal_of_the_day.blade.php ENDPATH**/ ?>

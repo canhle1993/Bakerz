@@ -144,7 +144,7 @@ class ManageAdminController extends Controller
         $admin = User::findOrFail($id);
         $admin->update(['isdelete' => 1]);
 
-        return redirect()->route('manage-admin')->with('success', 'Admin deleted successfully');
+        return redirect()->route('manage-client')->with('success', 'Admin deleted successfully');
     }
 
     // Hạ cấp admin xuống client

@@ -159,20 +159,20 @@
     <div class="row pt-3">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-            <div class="bg-secondary rounded h-100 p-4">
-                <h6 class="mb-4">Product Update</h6>
+            <div class="bg-secondary rounded h-100 p-4" style="background-color: #f8f5f5 !important;">
+                <h6 class="mb-4" style="color: #1f2242;">Product Update</h6>
                 <form action="{{ route('product.update', $product->product_id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT') 
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Main Image</label>
-                    <input class="form-control bg-dark" type="file" id="formFile0" name="main_image">
+                    <input class="form-control " type="file" id="formFile0" name="main_image">
                     <img id="previewImage0" src="{{ asset('storage/products/' . $product->image) }}" alt="Product Image" width="100px" ><br>
 
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Image 1</label>
-                    <input class="form-control bg-dark" type="file" id="formFile1" name="image_1">
+                    <input class="form-control " type="file" id="formFile1" name="image_1">
                     @if($product->images()->count() > 0)
                         <img id="previewImage1" src="{{ asset('storage/products/' . $product->images()->first()->image) }}" alt="Product Image" width="100px"><br>
                     @else
@@ -181,7 +181,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Image 2</label>
-                    <input class="form-control bg-dark" type="file" id="formFile2" name="image_2">
+                    <input class="form-control " type="file" id="formFile2" name="image_2">
                     @if($product->images()->count() > 1)
                         <img id="previewImage2" src="{{ asset('storage/products/' . $product->images()->skip(1)->first()->image) }}" alt="Product Image" width="100px"><br>
                     @else
@@ -190,7 +190,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Image 3</label>
-                    <input class="form-control bg-dark" type="file" id="formFile3" name="image_3">
+                    <input class="form-control " type="file" id="formFile3" name="image_3">
                     @if($product->images()->count() > 2)
                         <img id="previewImage3" src="{{ asset('storage/products/' . $product->images()->skip(2)->first()->image) }}" alt="Product Image" width="100px"><br>
                     @else
@@ -199,24 +199,24 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFileMultiple" class="form-label">Product Name</label>
-                    <input class="form-control bg-dark" type="text" name="product_name" required value="{{$product->product_name}}">
+                    <input class="form-control" style="background-color: #ABACB0 !important; color: blue !important;" type="text" name="product_name" required value="{{$product->product_name}}">
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Catagory</label><br>
                     @foreach($catalogs as $catalog)
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input class="form-check-input" type="checkbox" name="catalog[]" value="{{ $catalog->category_id }}" 
+                        <input class="form-check-input"  type="checkbox" name="catalog[]" value="{{ $catalog->category_id }}" 
                             {{ in_array($catalog->category_id, $product->catalogs->pluck('category_id')->toArray()) ? 'checked' : '' }}> 
                             {{ $catalog->category_name }}<br>
                     @endforeach
                 </div>
                 <div class="mb-3">
                     <label for="formFileMultiple" class="form-label">Inventory</label>
-                    <input class="form-control bg-dark" type="number" name="inventory" value="{{$product->inventory}}">
+                    <input class="form-control " style="background-color: #ABACB0 !important; color: blue !important;" type="number" name="inventory" value="{{$product->inventory}}">
                 </div>
                 <div class="mb-3">
                     <label for="formFileMultiple" class="form-label">Unit price</label>
-                    <input class="form-control bg-dark" type="number" name="price" required value="{{$product->price}}">
+                    <input class="form-control " style="background-color: #ABACB0 !important; color: blue !important;" type="number" name="price" required value="{{$product->price}}">
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Heathy</label><br>
@@ -229,7 +229,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFileMultiple" class="form-label">Description</label>
-                    <textarea class="form-control" placeholder="Product description here" id="describe" name="describe" style="height: 150px;">{{$product->describe}}</textarea>
+                    <textarea class="form-control" style="background-color: #ABACB0 !important; color: blue !important;" placeholder="Product description here" id="describe" name="describe" style="height: 150px;">{{$product->describe}}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-outline-info m-2">Update</button>

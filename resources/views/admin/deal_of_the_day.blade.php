@@ -72,7 +72,7 @@ Deal of The Day
     </button>
 
     <!-- Bảng danh sách Deal -->
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="margin-bottom: 270px !important;">
         <thead>
             <tr>
                 <th>Image</th>

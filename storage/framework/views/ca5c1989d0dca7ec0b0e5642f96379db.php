@@ -1,6 +1,5 @@
-@extends('admin.dashboard')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@section('manage_admin')
+<?php $__env->startSection('manage_admin'); ?>
 <style>
 .pagination {
     display: flex;
@@ -263,9 +262,10 @@
 
 </style>
 
-@if(session('success'))
+<?php if(session('success')): ?>
     <div id="custom-alert" class="custom-alert">
-        {{ session('success') }}
+        <?php echo e(session('success')); ?>
+
         <button class="close-btn" onclick="closeAlert()">×</button>
     </div>
 
@@ -287,13 +287,13 @@
             }, 500);
         }
     </script>
-@endif
-@if ($errors->any())
+<?php endif; ?>
+<?php if($errors->any()): ?>
 <div id="custom-alert" class="custom-alert alert alert-danger">
     <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
+        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <li><?php echo e($error); ?></li>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </ul>
     <button class="close-btn" onclick="closeAlert()">×</button>
 </div>
@@ -317,7 +317,7 @@
             }, 500);
         }
     </script>
-@endif
+<?php endif; ?>
     <div class="container mt-5">
 
             <h1 style="color:#BC8157;
@@ -361,17 +361,17 @@
                 <h5 class="modal-title" id="addAdminModalLabel">Add New Admin</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
+            <form action="<?php echo e(route('admin.store')); ?>" method="POST" enctype="multipart/form-data">
+                <?php echo csrf_field(); ?>
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required placeholder="Enter name" value="{{ old('name') }}">
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="Enter name" value="<?php echo e(old('name')); ?>">
 
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" required placeholder="Enter email" value="{{ old('email') }}">
+                        <input type="email" class="form-control" id="email" name="email" required placeholder="Enter email" value="<?php echo e(old('email')); ?>">
 
                     </div>
                     <div class="mb-3">
@@ -381,26 +381,26 @@
                     </div>
                     <div class="mb-3">
                         <label for="confirm_password" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" name="password_confirmation" id="confirm_password" required placeholder="Confirm password" value="{{ old('password_confirmation') }}">
+                        <input type="password" class="form-control" name="password_confirmation" id="confirm_password" required placeholder="Confirm password" value="<?php echo e(old('password_confirmation')); ?>">
 
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number (optional)" value="{{ old('phone') }}">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number (optional)" value="<?php echo e(old('phone')); ?>">
 
                     </div>
                     <div class="mb-3">
                         <label for="gender" class="form-label">Gender</label>
                         <select class="form-control" id="gender" name="gender">
                             <option value="">Select Gender</option>
-                            <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
-                            <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
+                            <option value="Male" <?php echo e(old('gender') == 'Male' ? 'selected' : ''); ?>>Male</option>
+                            <option value="Female" <?php echo e(old('gender') == 'Female' ? 'selected' : ''); ?>>Female</option>
                         </select>
 
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Enter address (optional)" value="{{ old('address') }}">
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Enter address (optional)" value="<?php echo e(old('address')); ?>">
 
                     </div>
                     <div class="mb-3">
@@ -410,7 +410,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="avatar_url" class="form-label">Avatar URL (optional)</label>
-                        <input type="url" class="form-control" id="avatar_url" name="avatar_url" placeholder="Enter avatar URL (optional)" value="{{ old('avatar_url') }}">
+                        <input type="url" class="form-control" id="avatar_url" name="avatar_url" placeholder="Enter avatar URL (optional)" value="<?php echo e(old('avatar_url')); ?>">
 
                     </div>
                 </div>
@@ -453,64 +453,65 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($admins as $admin)
+            <?php $__currentLoopData = $admins; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $admin): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
                 <td class="text-center">
-                    @if($admin->avatar)
-                        @if (filter_var($admin->avatar, FILTER_VALIDATE_URL))
-                            <img src="{{ $admin->avatar }}" alt="avatar" class="rounded-circle" width="50" height="50">
-                        @else
-                            <img src="{{ asset('storage/avatars/'.$admin->avatar) }}" alt="avatar" class="rounded-circle" width="50" height="50">
-                        @endif
-                    @else
-                        <img src="{{ asset('storage/avatars/default-avatar.png') }}" alt="default avatar" class="rounded-circle" width="50" height="50">
-                    @endif
+                    <?php if($admin->avatar): ?>
+                        <?php if(filter_var($admin->avatar, FILTER_VALIDATE_URL)): ?>
+                            <img src="<?php echo e($admin->avatar); ?>" alt="avatar" class="rounded-circle" width="50" height="50">
+                        <?php else: ?>
+                            <img src="<?php echo e(asset('storage/avatars/'.$admin->avatar)); ?>" alt="avatar" class="rounded-circle" width="50" height="50">
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <img src="<?php echo e(asset('storage/avatars/default-avatar.png')); ?>" alt="default avatar" class="rounded-circle" width="50" height="50">
+                    <?php endif; ?>
                 </td>
 
-                <td>{{ $admin->name }}</td>
-                <td>{{ $admin->email }}</td>
-                <td>{{ $admin->phone }}</td>
-                <td>{{ $admin->address }}</td>
-                <td>{{ $admin->note }}</td>
+                <td><?php echo e($admin->name); ?></td>
+                <td><?php echo e($admin->email); ?></td>
+                <td><?php echo e($admin->phone); ?></td>
+                <td><?php echo e($admin->address); ?></td>
+                <td><?php echo e($admin->note); ?></td>
 
                 <td class="text-center">
                     <!-- Button to lower admin role to client -->
-                    <form action="{{ route('admin.lower_to_client', $admin->user_id) }}" method="POST" style="display:inline-block;">
-                        @csrf
+                    <form action="<?php echo e(route('admin.lower_to_client', $admin->user_id)); ?>" method="POST" style="display:inline-block;">
+                        <?php echo csrf_field(); ?>
                         <button type="submit" class="btn btn-sm btn-lower">
                             <i class="bi bi-arrow-down-circle"></i> Lower to Client
                         </button>
                     </form>
 
                     <!-- Button to up admin role to super -->
-                    <form action="{{ route('admin.up_to_super', $admin->user_id) }}" method="POST" style="display:inline-block;">
-                        @csrf
+                    <form action="<?php echo e(route('admin.up_to_super', $admin->user_id)); ?>" method="POST" style="display:inline-block;">
+                        <?php echo csrf_field(); ?>
                         <button type="submit" class="btn btn-sm btn-success">
                             <i class="bi bi-arrow-up-circle"></i> Up to Supper
                         </button>
                     </form>
 
 
-                    <form id="delete-form-{{ $admin->user_id }}" action="{{ route('admin.destroy', $admin->user_id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('{{ $admin->user_id }}')">
+                    <form id="delete-form-<?php echo e($admin->user_id); ?>" action="<?php echo e(route('admin.destroy', $admin->user_id)); ?>" method="POST" style="display:inline-block;">
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('DELETE'); ?>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete('<?php echo e($admin->user_id); ?>')">
                             <i class="bi bi-trash"></i> Delete
                         </button>
                     </form>
                 </td>
 
             </tr>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </tbody>
     </table>
 
     <!-- Pagination -->
     <div class="d-flex justify-content-center mt-4">
-        {{ $admins->links('pagination::bootstrap-5') }}
+        <?php echo e($admins->links('pagination::bootstrap-5')); ?>
+
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 <script>
@@ -549,3 +550,5 @@
         }
 
     </script>
+
+<?php echo $__env->make('admin.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\bakerz\resources\views/admin/manage-admin.blade.php ENDPATH**/ ?>
