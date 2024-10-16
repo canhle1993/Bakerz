@@ -139,6 +139,67 @@
                 object-fit: cover; /* Ensure the image fits within the dimensions */
             }
 
+            .table {
+        border-collapse: separate;
+        border-spacing: 0 15px;
+        background-color: #fff;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .table thead th {
+        background-color: #BC8157;
+        color: white;
+        font-weight: bold;
+        padding: 12px 15px;
+        text-align: center;
+    }
+
+    .table tbody tr {
+        background-color: #f9f9f9;
+        transition: background-color 0.3s ease;
+    }
+
+    .table tbody tr:hover {
+        background-color: #e9ecef;
+    }
+
+    .table td {
+        padding: 12px 15px;
+        text-align: center;
+    }
+
+    /* Button styles */
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        box-shadow: 0 4px 8px rgba(90, 98, 104, 0.3);
+    }
+
 
 </style>
 
@@ -170,25 +231,39 @@
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="">Pending Order Management</h1>
-        
-    </div>
-<!-- Form tìm kiếm theo Order ID -->
-<div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-    <form method="GET" action="{{ route('order.pending') }}" class="mb-4">
-        <div class="input-group">
-            <input type="text" name="searchOrderID" class="form-control" placeholder="Search by Order ID" value="{{ request()->query('searchOrderID') }}">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-    </form>
-    </div>
-    <div class="col-md-4">
-    <a href="{{ route('order.pending') }}" class="btn btn-secondary">Reset</a> <!-- Nút reset tìm kiếm -->
+        <h1 style="color: #BC8157;
+        font-size: 3rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        margin: 30px 0;
+        text-align: center;
+        line-height: 1.2;
+        padding: 15px;
+        border: 4px dashed #BC8157;
+        background-color: rgba(230, 247, 255, 0.7);
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng cho toàn bộ box */">
+        Pending Order
+    </h1>
 
     </div>
+<!-- Form tìm kiếm theo Order ID -->
+<div class="row mb-4">
+    <div class="col-md-8 offset-md-2">
+        <form method="GET" action="{{ route('order.pending') }}" class="input-group">
+            <input type="text" name="searchOrderID" class="form-control bg-white border-0 ps-3" placeholder="Search by Order ID" value="{{ request()->query('searchOrderID') }}" style="border-radius: 25px 0 0 25px;">
+            <button type="submit" class="btn" style="background-color: #BC8157; color: white; border-radius: 0 25px 25px 0;">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+    <div class="col-md-2 text-end">
+        <a href="{{ route('order.pending') }}" class="btn btn-secondary">Reset</a>
+    </div>
 </div>
+
 
 
     <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -224,9 +299,9 @@
                             <i class="bi bi-box-arrow-right"></i>Confirmed
                         </button>
                     </form>
-                    
+
                     <a style="color: black !important;" class="btn btn-sm btn-danger bi bi-trash" href="#" data-url="{{ route('order.gotoCancel', $item->order_id) }}" onclick="showDeleteModal(this)">Cancel</a>
-                    
+
                 </td>
 
             </tr>
@@ -298,10 +373,10 @@
     function showDeleteModal(element) {
         // Lấy giá trị URL từ thuộc tính data-url
         var actionUrl = element.getAttribute('data-url');
-        
+
         // Gán action URL cho form xóa trong modal
         document.getElementById('deleteForm').action = actionUrl;
-        
+
         // Hiển thị modal
         var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         deleteModal.show();
@@ -309,7 +384,7 @@
 
     $(document).ready(function() {
           $('.view').on('click', function(e) {
-            
+
             e.preventDefault();
             var orderId = $(this).data('order-id');  // Lấy order ID từ thuộc tính data-order-id
 
@@ -323,7 +398,7 @@
                   // Đổ dữ liệu vào modal
                   var orderdetails = response.data.orderDetails; // Giả sử response trả về orderDetails
                   var modalContent = '';
-                  
+
 
                   // Lặp qua chi tiết đơn hàng và hiển thị
                   orderdetails.forEach(function(item) {
@@ -370,5 +445,5 @@
           });
         });
 </script>
-    
+
 @endsection

@@ -144,7 +144,7 @@ class ManageAdminController extends Controller
         $admin = User::findOrFail($id);
         $admin->update(['isdelete' => 1]);
 
-        return redirect()->route('manage-admin')->with('success', 'Admin deleted successfully');
+        return redirect()->route('manage-client')->with('success', 'Admin deleted successfully');
     }
 
     // Hạ cấp admin xuống client
@@ -210,17 +210,18 @@ class ManageAdminController extends Controller
     public function blacklist()
     {
         // Truy vấn người dùng có isdelete = 1 (bị blacklist)
-        $blacklistedUsers = User::where('isdelete', 1)->paginate(5);
+        $blacklistedUsers = User::where('isdelete', 1)->paginate(5, ['*'], 'blacklisted_users');
 
         // Truy vấn danh mục có isdelete = 1 (bị xóa)
-        $deletedCategories = Category::where('isdelete', 1)->paginate(5);
+        $deletedCategories = Category::where('isdelete', 1)->paginate(5, ['*'], 'deleted_categories');
 
         // Truy vấn sản phẩm có isdelete = 1 (bị xóa)
-        $deletedProducts = Product::where('isdelete', 1)->paginate(5);
+        $deletedProducts = Product::where('isdelete', 1)->paginate(5, ['*'], 'deleted_products');
 
         // Truyền cả 3 biến vào view
         return view('admin.manage-blacklist', compact('blacklistedUsers', 'deletedCategories', 'deletedProducts'));
     }
+
 
 
     public function

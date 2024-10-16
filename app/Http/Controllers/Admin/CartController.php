@@ -218,7 +218,7 @@ class CartController extends Controller
                 return redirect()->route('client.profile', Auth::user()->user_id)->with('error', 'Order not found');
             }
             $this->vnp($request, $order);
-            
+
             $order->status = "Paid";
             $order->save();
             DB::commit();
@@ -252,7 +252,7 @@ class CartController extends Controller
         if ($total == 0){
             return redirect()->route('client.profile', $currentUser->user_id);
         }
-        
+
         if($iserror){
             return redirect()->route('client.profile', $currentUser->user_id)->with('error', 'Out of Stock');
         }
@@ -278,7 +278,7 @@ class CartController extends Controller
                 'order_id' => $order->id,  // ID của đơn hàng
                 'is_read' => 0,  // Đánh dấu là chưa đọc
                 'type' => 'order',  // Loại thông báo là order
-                'message' => 'Khách hàng ' . Auth::user()->name . ' đã đặt đơn hàng mới.',  // Thông báo đặt hàng mới
+                'message' => 'Khách hàng ' . Auth::user()->name . 'had new order.',  // Thông báo đặt hàng mới
                 'created_at' => Carbon::now(),  // Thời gian tạo thông báo
             ]);
 
@@ -298,7 +298,7 @@ class CartController extends Controller
                 $product->inventory -= $item->quantity;
                 $product->save();
             }
-            Cart::where('user_id', $currentUser->user_id)->delete();            
+            Cart::where('user_id', $currentUser->user_id)->delete();
 
             DB::commit(); // Commit the transaction
 
@@ -344,16 +344,16 @@ class CartController extends Controller
         $vnp_Returnurl = route('vnpay.return', ['order_id' => $order->order_id]);
         $vnp_TmnCode = "OT1X2F3Y";//Mã website tại VNPAY
         $vnp_HashSecret = "S9ZGL7JWJCZRSXD605B1C01YY0S67XS8"; //Chuỗi bí mật
-        
+
         $vnp_TxnRef = uniqid(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này
-        
+
         $vnp_OrderInfo ="Bill Payment";
         $vnp_OrderType = "Bake Payment";
         $vnp_Amount = ($order['pay'] * 25000) * 100;
         $vnp_Locale = "vn";
         // $vnp_BankCode = "NCB";
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-        
+
         $inputData = array(
             "vnp_Version" => "2.1.0",
             "vnp_TmnCode" => $vnp_TmnCode,
@@ -367,16 +367,16 @@ class CartController extends Controller
             "vnp_OrderType" => $vnp_OrderType,
             "vnp_ReturnUrl" => $vnp_Returnurl,
             "vnp_TxnRef" => $vnp_TxnRef,
-            
+
         );
-        
+
         if (isset($vnp_BankCode) && $vnp_BankCode != "") {
             $inputData['vnp_BankCode'] = $vnp_BankCode;
         }
         if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
             $inputData['vnp_Bill_State'] = $vnp_Bill_State;
         }
-        
+
         //var_dump($inputData);
         ksort($inputData);
         $query = "";
@@ -391,7 +391,7 @@ class CartController extends Controller
             }
             $query .= urlencode($key) . "=" . urlencode($value) . '&';
         }
-        
+
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
             $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//
@@ -421,8 +421,8 @@ class CartController extends Controller
         $cart = Cart::where('user_id', $currentUser->user_id)
                         ->where('product_id', $request->product_id)
                         ->first();
-        
-        
+
+
         $totalQuantity = 1;
 
         if (isset($request->quantity_input)) {
@@ -441,7 +441,7 @@ class CartController extends Controller
             }
             return response()->json(['error' => 'out_of_stock', 'message' => 'Out of Stock', 'max_quantity' => $setvalue]);
         }
-        
+
         return response()->json(['sucess' => 'success']);
     }
 
@@ -451,7 +451,7 @@ class CartController extends Controller
         ->delete();
 
         $this->getsession();
-        
+
         return redirect()->route('cart');
     }
 }

@@ -76,7 +76,8 @@ use App\Http\Controllers\Admin\ManageAdminController;
 
 
 // Route để đánh dấu thông báo là đã đọc và chuyển hướng đến trang review
-Route::get('/admin/message/read', [DashboardController::class, 'markAsRead'])->name('message.read');
+Route::get('/admin/message/read/{id}', [DashboardController::class, 'markAsRead'])->name('message.read');
+Route::get('/admin/notify/read/{id}', [DashboardController::class, 'markasreadOrder'])->name('notification.read');
 
 
 Route::get('/admin/manage/admin', [ManageAdminController::class, 'index'])->name('manage-admin');
@@ -315,7 +316,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/chefs/{id}', [AdminChefController::class, 'destroy'])->name('admin.chefs.destroy');
 });
 
-Route::get('/admin/notify/read', [DashboardController::class, 'markasreadOrder'])->name('notification.read');
+
 
 
 use App\Http\Controllers\BlogController;
@@ -348,7 +349,7 @@ use App\Http\Controllers\Admin\DealOfTheDayController;
 
 // Group route cho admin
 Route::prefix('admin')->name('admin.')->group(function() {
-    
+
     // Route để hiển thị danh sách Deal
     Route::get('/deal-of-the-day', [DealOfTheDayController::class, 'index'])->name('deal.index');
 

@@ -275,7 +275,7 @@
                 <div class="col-lg-3 col-xl-3 col-7">
                     <!-- Header Logo Start -->
                     <div class="header-logo">
-                        <a href="{{ route('client.home')}}">
+                        <a id="countuser" href="{{ route('client.home')}}">
 
                             <img class="white-logo" src="{{asset('assets/images/logo-white.svg')}}" width="229" height="62" alt="Logo">
                         </a>
@@ -391,7 +391,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </div> 
+                            </div>
                             @endauth
                             @guest
 
@@ -548,7 +548,7 @@
         var cart = $('#cart_icon'); // Lấy vị trí của biểu tượng giỏ hàng
           $(document).on('click', '.add-to-cart', function(e) {
             e.preventDefault();
-            
+
               var productId = $(this).data('product-id');
               var imgtodrag = $(this).closest('.product-item').find('img').eq(0);
             //   var cart = $('#cart_icon'); // Lấy vị trí của biểu tượng giỏ hàng
@@ -587,7 +587,7 @@
                                     }, 500); // Thời gian của animation
 
                                     // Start
-                                    
+
                                     if (imgtodrag.length > 0) {
                                     // Tạo một thẻ img clone để thực hiện animation bay
                                     var imgclone = imgtodrag.clone()
@@ -610,7 +610,7 @@
                                     }, 1000, function() {
                                         imgclone.remove(); // Xóa clone sau khi animation kết thúc
                                     });
-                                        
+
                                     }
                                     // End
                               } else {
@@ -711,7 +711,19 @@
             // Hiển thị tổng đã tính
             $('#total_price').text(total.toFixed(2) + ' $');
         }
-
+        function updateonlineUser() {
+            $.ajax({
+                url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
+                method: "GET",
+                success: function(response) {
+                    $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr.responseText);
+                    // alert('An error occurred while updating the cart.');
+                }
+            });
+        }
     </script>
 </body>
 

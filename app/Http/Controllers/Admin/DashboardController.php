@@ -12,19 +12,19 @@ class DashboardController extends Controller
         if (Auth::user()->role_id == 1 || Auth::user()->role_id == null){
             return redirect()->route('client.home')->with('error','aaaaaaa');
         }
-                    // Lấy thông báo đơn hàng
-                $orderNotifications = Notification::with('user', 'order')
-                ->where('is_read', 0)
-                ->where('type', 'order')  // Lọc thông báo loại 'order'
-                ->orderBy('created_at', 'desc')
-                ->get();
+        $orderNotifications = Notification::with('user', 'order')
+        ->where('is_read', 0)
+        ->where('type', 'order')
+        ->orderBy('created_at', 'desc')
+        ->limit(10) // Chỉ lấy 10 thông báo gần đây nhất
+        ->get();
 
-            // Lấy thông báo đánh giá
-            $reviewNotifications = Notification::with('user', 'review')
-                ->where('is_read', 0)
-                ->where('type', 'review')  // Lọc thông báo loại 'review'
-                ->orderBy('created_at', 'desc')
-                ->get();
+    $reviewNotifications = Notification::with('user', 'review')
+        ->where('is_read', 0)
+        ->where('type', 'review')
+        ->orderBy('created_at', 'desc')
+        ->limit(10) // Chỉ lấy 10 thông báo gần đây nhất
+        ->get();
 
         return view('admin.chart', compact('orderNotifications', 'reviewNotifications'));
     }
@@ -33,22 +33,34 @@ class DashboardController extends Controller
 
 
 
-public function markAsRead()
+public function markAsRead($id)
 {
-   // Đánh dấu tất cả các thông báo review là đã đọc
-   Notification::where('is_read', 0)->where('type', 'review')->update(['is_read' => 1]);
 
-   // Chuyển hướng admin đến trang quản lý review
-   return redirect()->route('admin.reviews.manage');
+    $notification = Notification::where('id', $id)
+    ->where('type', 'review')
+    ->first();
+
+if ($notification) {
+    Notification::where('id', $notification->id)
+        ->where('type', 'review') // Chỉ cập nhật thông báo loại review
+        ->update(['is_read' => 1]);
+}
+
+    return redirect()->route('admin.reviews.manage');
 }
 
 
-public function markasreadOrder()
+public function markasreadOrder($id)
 {
-    // Cập nhật tất cả các thông báo liên quan đến đơn hàng chưa đọc thành đã đọc
-    Notification::where('is_read', 0)->where('type', 'order')->update(['is_read' => 1]);
+    $notification = Notification::where('id', $id)
+    ->where('type', 'order')
+    ->first();
 
-    // Chuyển hướng đến trang pending orders mà bạn đã có sẵn
+if ($notification) {
+    Notification::where('id', $notification->id)
+        ->where('type', 'order') // Chỉ cập nhật thông báo loại order
+        ->update(['is_read' => 1]);
     return redirect()->route('order.paid');
+}
 }
 }

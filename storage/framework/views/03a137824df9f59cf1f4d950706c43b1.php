@@ -81,11 +81,11 @@
                             <i class="far fa-file-alt me-2"></i>Management
                         </a>
                         <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('admin/manage/client*') || Request::is('admin/manage/admin*') || Request::is('admin/manage/blacklist*')) ? 'show' : ''); ?>">
-                            <a href="<?php echo e(route('manage-client')); ?>" class="dropdown-item <?php echo e(Request::routeIs('manage-client') ? 'active' : ''); ?>">Client</a>
+                            <a href="<?php echo e(route('manage-client')); ?>" class="bi-person-fill dropdown-item <?php echo e(Request::routeIs('manage-client') ? 'active' : ''); ?>">&nbsp;&nbsp;Client</a>
                             <?php if(Auth::user()->role_id == 3): ?>
-                                <a href="<?php echo e(route('manage-admin')); ?>" class="dropdown-item <?php echo e(Request::routeIs('manage-admin') ? 'active' : ''); ?>">Admin</a>
+                                <a href="<?php echo e(route('manage-admin')); ?>" class="bi-gear-fill dropdown-item <?php echo e(Request::routeIs('manage-admin') ? 'active' : ''); ?>">&nbsp;&nbsp;Admin</a>
                             <?php endif; ?>
-                            <a href="<?php echo e(route('manage-blacklist')); ?>" class="dropdown-item <?php echo e(Request::routeIs('manage-blacklist') ? 'active' : ''); ?>">Blacklist</a>
+                            <a href="<?php echo e(route('manage-blacklist')); ?>" class="bi-trash-fill dropdown-item <?php echo e(Request::routeIs('manage-blacklist') ? 'active' : ''); ?>">&nbsp;&nbsp;Blacklist</a>
                         </div>
                     </div>
 
@@ -98,7 +98,8 @@
                             <a href="<?php echo e(route('banner.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('banner.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Banner</a>
                             <a href="<?php echo e(route('admin.chefs.create')); ?>" class="bi-tag m-2 dropdown-item <?php echo e(Request::routeIs('admin.chefs.create') ? 'active' : ''); ?>">&nbsp;&nbsp;Chefs</a>
                             <a href="<?php echo e(route('blog.index')); ?>" class="bi-lightning m-2 dropdown-item <?php echo e(Request::routeIs('blog.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Blog</a>
-                            <a href="<?php echo e(route('message.read')); ?>" class="m-2 dropdown-item <?php echo e(Request::routeIs('admin.reviews*') ? 'active' : ''); ?>">🌟&nbsp;&nbsp;Review</a>
+                            <a href="<?php echo e(route('admin.reviews.manage')); ?>" class="m-2 dropdown-item <?php echo e(Request::routeIs('admin.reviews*') ? 'active' : ''); ?>">🌟&nbsp;&nbsp;Review</a>
+
                         </div>
                     </div>
                     <!-- Order Manager -->
@@ -106,25 +107,36 @@
                         <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('order*') ) ? 'active' : ''); ?> " data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Order Manager</a>
                         <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('order*') ) ? 'show' : ''); ?>">
                             <a href="<?php echo e(route('order.pending')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.pending') ? 'active' : ''); ?>">&nbsp;&nbsp;Pending</a>
-                            <!-- <a href="<?php echo e(route('order.paid')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.paid') ? 'active' : ''); ?>">&nbsp;&nbsp;Confirmed</a> -->
-                            <a href="<?php echo e(route('notification.read')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.paid') ? 'active' : ''); ?>">&nbsp;&nbsp;Confirmed</a>
-                            <a href="<?php echo e(route('order.confirmed')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.confirmed') ? 'active' : ''); ?>">&nbsp;&nbsp;Being delivered</a>
+                            <a href="<?php echo e(route('order.paid')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.paid') ? 'active' : ''); ?>">&nbsp;&nbsp;Confirmed</a>
+                            <a href="<?php echo e(route('order.confirmed')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.confirmed') ? 'active' : ''); ?>">&nbsp;&nbsp;On The Way</a>
                             <a href="<?php echo e(route('order.delivered')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.delivered') ? 'active' : ''); ?>">&nbsp;&nbsp;Delivered</a>
                             <a href="<?php echo e(route('order.cancel')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.cancel') ? 'active' : ''); ?>">&nbsp;&nbsp;Cancel</a>
                         </div>
                     </div>
-                    <!-- Deal of the Day -->
-                    <a href="<?php echo e(route('admin.deal.index')); ?>" class="nav-item nav-link">
-                        <i class="fa fa-gift me-2"></i>Deal of the Day
-                    </a>
-                    <a href="<?php echo e(route('admin.coming_soon.index')); ?>" class="nav-item nav-link">
-                    <i class="fa fa-clock me-2"></i><span>Coming Soon</span>
-                    </a>
-                    <a href="<?php echo e(route('admin.contact_us.index')); ?>" class="nav-item nav-link"><i class="fa fa-envelope me-2"></i><span>ContactUs</span>
-                    </a>
-                    <a href="<?php echo e(route('admin.workshop.index')); ?>" class="nav-item nav-link"><i class="fa fa-chalkboard-teacher me-2"></i><span>Workshop</span></a>
-                    <a href="<?php echo e(route('admin.socialmedia.index')); ?>" class="nav-item nav-link"><i class="fa fa-chalkboard-teacher me-2"></i><span>Social Media</span></a>
+
+                    <!-- Other Dropdown -->
+                    <div class="nav-item dropdown <?php echo e((Request::is('admin/deal-of-the-day') || Request::is('admin/coming-soon') || Request::is('admin/contact-us') || Request::is('admin/workshop*') || Request::is('admin/socialmedia*')) ? 'show' : ''); ?>">
+                        <a href="#" class="nav-link dropdown-toggle <?php echo e((Request::is('admin/deal-of-the-day') || Request::is('admin/coming-soon') || Request::is('admin/contact-us') || Request::is('admin/workshop*') || Request::is('admin/socialmedia*')) ? 'active' : ''); ?>" data-bs-toggle="dropdown">
+                            <i class="fa fa-ellipsis-h me-2"></i>Other
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('admin/deal-of-the-day') || Request::is('admin/coming-soon') || Request::is('admin/contact-us') || Request::is('admin/workshop*') || Request::is('admin/socialmedia*')) ? 'show' : ''); ?>">
+                            <!-- Deal of the Day -->
+                            <a href="<?php echo e(route('admin.deal.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('admin.deal.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Deal of the Day</a>
+
+                            <!-- Coming Soon -->
+                            <a href="<?php echo e(route('admin.coming_soon.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('admin.coming_soon.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Coming Soon</a>
+
+                            <!-- Contact Us -->
+                            <a href="<?php echo e(route('admin.contact_us.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('admin.contact_us.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Contact Us</a>
+
+                            <!-- Workshop -->
+                            <a href="<?php echo e(route('admin.workshop.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('admin.workshop.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Workshop</a>
+
+                            <!-- Social Media -->
+                            <a href="<?php echo e(route('admin.socialmedia.index')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('admin.socialmedia.index') ? 'active' : ''); ?>">&nbsp;&nbsp;Social Media</a>
+                        </div>
                     </div>
+
 
             </nav>
         </div>
@@ -142,72 +154,73 @@
                 </a>
 
                 <div class="navbar-nav align-items-center ms-auto">
-                    <!-- Message Dropdown -->
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-envelope me-lg-2 position-relative">
-                                <?php if($reviewNotifications->count() > 0): ?>
-                                    <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;"><?php echo e($reviewNotifications->count()); ?></span>
-                                <?php endif; ?>
-                            </i>
-                            <span class="d-none d-lg-inline-flex">Message</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <?php if($reviewNotifications->isEmpty()): ?>
-                                <p class="dropdown-item text-center">Không có thông báo mới.</p>
-                            <?php else: ?>
-                                <?php $__currentLoopData = $reviewNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <a href="<?php echo e(route('message.read', $notification->id)); ?>" class="dropdown-item">
-                                        <div class="d-flex align-items-center">
-                                            <img class="rounded-circle" src="<?php echo e(asset('storage/avatars/' . $notification->user->avatar)); ?>" alt="User avatar" style="width: 40px; height: 40px;">
-                                            <div class="ms-2">
-                                                <h6 class="fw-normal mb-0"><?php echo e($notification->user->name); ?> đã <?php echo e($notification->review_id ? 'gửi một đánh giá' : 'trả lời đánh giá'); ?>.</h6>
-                                                <small><?php echo e(\Carbon\Carbon::parse($notification->created_at)->diffForHumans()); ?></small>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <hr class="dropdown-divider">
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <a href="<?php echo e(route('admin.reviews.manage')); ?>" class="dropdown-item text-center">Xem tất cả thông báo</a>
-                            <?php endif; ?>
-                        </div>
-                    </div>
 
-                    <!-- Notification Dropdown -->
-                    <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <i class="fa fa-bell me-lg-2 position-relative">
-                            <?php
-                                $orderCount = $orderNotifications->count();
-                            ?>
-                            <?php if($orderCount > 0): ?>
-                                <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;"><?php echo e($orderCount); ?></span>
-                            <?php endif; ?>
-                        </i>
-                        <span class="d-none d-lg-inline-flex"> Notifications</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                        <?php if($orderNotifications->isEmpty()): ?>
-                            <p class="dropdown-item text-center">Không có thông báo đơn hàng mới.</p>
-                        <?php else: ?>
-                            <?php $__currentLoopData = $orderNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <a href="<?php echo e(route('notification.read', $notification->order_id)); ?>" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <!-- Hiển thị avatar của user -->
-                                        <img class="rounded-circle" src="<?php echo e(asset('storage/avatars/' . $notification->user->avatar)); ?>" alt="User avatar" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <!-- Hiển thị tên user và thông báo -->
-                                            <h6 class="fw-normal mb-0"><?php echo e($notification->user->name); ?> vừa đặt đơn hàng mới.</h6>
-                                            <small><?php echo e($notification->created_at->diffForHumans()); ?></small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        <?php endif; ?>
 
-                    </div>
+                  <!-- Message Dropdown -->
+<div class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+        <i class="fa fa-envelope me-lg-2 position-relative">
+            <?php if($reviewNotifications->count() > 0): ?>
+                <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;"><?php echo e($reviewNotifications->count()); ?></span>
+            <?php endif; ?>
+        </i>
+        <span class="d-none d-lg-inline-flex">Messages</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+        <?php if($reviewNotifications->isEmpty()): ?>
+            <p class="dropdown-item text-center">No new notifications.</p>
+        <?php else: ?>
+        <?php $__currentLoopData = $reviewNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <a href="<?php echo e(route('message.read', ['id' => $notification->id])); ?>" class="dropdown-item">
+            <div class="d-flex align-items-center">
+                <img class="rounded-circle" src="<?php echo e(asset('storage/avatars/' . $notification->user->avatar)); ?>" alt="User avatar" style="width: 40px; height: 40px;">
+                <div class="ms-2">
+                    <h6 class="fw-normal mb-0"><?php echo e($notification->user->name); ?> has <?php echo e($notification->review_id ? 'submitted a review' : 'replied to a review'); ?>.</h6>
+                    <small><?php echo e(\Carbon\Carbon::parse($notification->created_at)->diffForHumans()); ?></small>
                 </div>
+            </div>
+        </a>
+        <hr class="dropdown-divider">
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+            <a href="<?php echo e(route('admin.reviews.manage')); ?>" class="dropdown-item text-center">View all notifications</a>
+        <?php endif; ?>
+    </div>
+</div>
+
+
+<!-- Notification Dropdown -->
+<div class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+        <i class="fa fa-bell me-lg-2 position-relative">
+            <?php if($orderNotifications->count() > 0): ?>
+                <span class="badge bg-danger position-absolute rounded-circle" style="top: -10px; right: -10px;"><?php echo e($orderNotifications->count()); ?></span>
+            <?php endif; ?>
+        </i>
+        <span class="d-none d-lg-inline-flex">Notifications</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+        <?php if($orderNotifications->isEmpty()): ?>
+            <p class="dropdown-item text-center">No new order notifications.</p>
+        <?php else: ?>
+        <?php $__currentLoopData = $orderNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ordernotification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <a href="<?php echo e(route('notification.read', ['id' => $ordernotification->id])); ?>" class="dropdown-item">
+            <div class="d-flex align-items-center">
+                <img class="rounded-circle" src="<?php echo e(asset('storage/avatars/' . $ordernotification->user->avatar)); ?>" alt="User avatar" style="width: 40px; height: 40px;">
+                <div class="ms-2">
+                    <h6 class="fw-normal mb-0"><?php echo e($ordernotification->user->name); ?> has placed a new order.</h6>
+                    <small><?php echo e($ordernotification->created_at->diffForHumans()); ?></small>
+                </div>
+            </div>
+        </a>
+        <hr class="dropdown-divider">
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+        <?php endif; ?>
+    </div>
+</div>
+
+
 
                     <!-- Profile Dropdown -->
                     <div class="nav-item dropdown">
@@ -257,8 +270,8 @@
                             &copy; <a href="#">BakerzBite</a>, All Rights Reserved.
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a><br>
-                            Distributed By: <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                        Address : <a href="">35/6 đường D5, Q. Bình Thạnh, TP.HCM</a><br>
+                        Email Adress: <a href="" target="_blank">aptech2@aprotrain.com</a>
                         </div>
                     </div>
                 </div>

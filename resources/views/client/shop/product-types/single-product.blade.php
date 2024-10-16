@@ -33,7 +33,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <style>
+<style>
     .star-rating {
         direction: rtl;
         display: inline-flex;
@@ -141,7 +141,7 @@
 
                 <!-- Product Summery Start -->
                 <div class="product-summery position-relative">
-                <h3 class="product-head-name">{{$product->product_name}}</h3>
+                <h3 class="product-head-name">{{$product->product_name}}</h3><br>
                     <!-- Product Head Start -->
                     <div class="product-head mb-3">
 
@@ -218,7 +218,7 @@
                             <!-- Action Button Start -->
                             <div class="actions">
                                 
-                                <a href="#/" title="Wishlist" class="action compare" data-bs-toggle="modal" data-bs-target="#modalWishlist"><i class="lastudioicon-heart-2"></i></a>
+                                <a href="#/" title="Wishlist" class="action compare labtn-icon-wishlist" data-bs-toggle="modal" data-product-id="{{ $product->product_id }}" ><i class="lastudioicon-heart-2"></i></a>
                             </div>
                             <!-- Action Button End -->
                         </li>
@@ -306,7 +306,7 @@
                         <div class="review">
                             <h4>Reviews</h4>
                             @if($product->reviews->isEmpty())
-                                <p>Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá sản phẩm này!</p>
+                                <p>There are no reviews yet. Be the first to review this product!</p>
                             @else
                             @foreach($product->reviews as $review)
                                 <div class="review-top d-flex mb-4 align-items-center pt-5" id="comment-{{ $review->ID }}">
@@ -358,7 +358,7 @@
                             <div class="comments-area comments-reply-area">
                                 <div class="row">
                                     <div class="col-lg-12 col-custom">
-                                        <h5 class="title mb-2">Thêm đánh giá</h5>
+                                        <h5 class="title mb-2">Add a review</h5>
 
                                         <form action="{{ route('reviews.store', ['product_id' => $product->product_id]) }}" method="POST" class="comments-area_form">
                                             @csrf
@@ -445,7 +445,7 @@
                                             ></a>
                                         </li>
                                             <li class="product-item__meta-action">
-                                                <a class="shadow-1 labtn-icon-wishlist" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
+                                                <a class="shadow-1 labtn-icon-wishlist" data-product-id="{{ $relatedProduct->product_id }}" href="#" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -545,24 +545,25 @@
     <!-- Vendors JS -->
 
     <script>
-        $(window).on("scroll", function (event) {
+        $(window).on("scroll", function () {
             var scroll = $(window).scrollTop();
+            var headers = $(".header-sticky, .header-sticky-02, .header-sticky-03, .header-sticky-4, .header-sticky-06");
+            var logoImg = $(".header-sticky .header-logo img");
+            
             if (scroll <= 0) {
-                $(
-                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
-                ).removeClass("sticky");
-                $(".header-sticky .header-logo img").attr(
-                    "src",
-                    "{{asset('assets/images/logo-white.svg')}}"
-                );
+                headers.removeClass("sticky");
+
+                // Chỉ thay đổi src nếu khác với giá trị hiện tại
+                if (logoImg.attr("src") !== "{{ asset('assets/images/logo-white.svg') }}") {
+                    logoImg.attr("src", "{{ asset('assets/images/logo-white.svg') }}");
+                }
             } else {
-                $(
-                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
-                ).addClass("sticky");
-                $(".header-sticky .header-logo img").attr(
-                    "src",
-                    "{{asset('assets/images/logo.svg')}}"
-                );
+                headers.addClass("sticky");
+
+                // Chỉ thay đổi src nếu khác với giá trị hiện tại
+                if (logoImg.attr("src") !== "{{ asset('assets/images/logo.svg') }}") {
+                    logoImg.attr("src", "{{ asset('assets/images/logo.svg') }}");
+                }
             }
         });
         $(document).ready(function() {
@@ -622,19 +623,34 @@
         });
 
         function updateonlineUser() {
-                $.ajax({
-                    url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
-                    method: "GET",
-                    success: function(response) {
-                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
-                    },
-                    error: function(xhr) {
-                        console.error('Error:', xhr.responseText);
-                        // alert('An error occurred while updating the cart.');
-                    }
-                });
-            }
+            
+        }
 
+            $(document).on('click', '.labtn-icon-wishlist', function(e) {
+            e.preventDefault();
+
+            var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+
+            $.ajax({
+                url: "{{ route('add.to.wishlist') }}",
+                method: 'POST',
+                data: {
+                    product_id: productId,
+                    _token: "{{ csrf_token() }}",  // Token bảo mật
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
+                        modalWishlist.show();
+                    } else {
+                        
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr);
+                }
+            });
+        });
     </script>
 
 </body>

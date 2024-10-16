@@ -162,7 +162,7 @@
 
     <div class="shop-topbar-right">
         <div class="shop-topbar-item">
-            <form id="sortForm" action="{{ route('shop_all') }}" method="GET">
+            <form id="sortForm" action="{{ url()->current() }}" method="GET">
                 <select name="sort" id="SortBy" onchange="document.getElementById('sortForm').submit();">
                     <option value="best-selling" {{ request('sort') == 'best-selling' ? 'selected' : '' }}>Sort by Latest</option>
                     <option value="price-ascending" {{ request('sort') == 'price-ascending' ? 'selected' : '' }}>Price ↑</option>
@@ -756,17 +756,7 @@ $(document).ready(function() {
         });
 
         function updateonlineUser() {
-                $.ajax({
-                    url: "{{ route('online-users') }}", // Đường dẫn để lấy lại giỏ hàng từ session
-                    method: "GET",
-                    success: function(response) {
-                        $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
-                    },
-                    error: function(xhr) {
-                        console.error('Error:', xhr.responseText);
-                        // alert('An error occurred while updating the cart.');
-                    }
-                });
+                
             }
 
 // Script cho QuickView
@@ -788,9 +778,11 @@ $(document).ready(function() {
         },
         success: function(response) {
             if (response.status === 'success') {
-                alert('Product added to wishlist!');
+                var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
+                modalWishlist.show();
             } else {
-                alert(response.message);
+                var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
+                modalWishlist.show();
             }
         },
         error: function(xhr) {

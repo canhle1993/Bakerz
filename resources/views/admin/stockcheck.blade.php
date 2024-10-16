@@ -27,28 +27,170 @@
     <link href="darkpan-1.0.0/css/style.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
 
+    <style>
+        /* Table General Styles */
+.table {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    background-color: #fff;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.table thead {
+    background-color: #BC8157;
+    color: white;
+}
+
+.table thead th {
+    padding: 12px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.table tbody tr {
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.table tbody td {
+    padding: 12px 15px;
+    color: #333;
+    text-align: center;
+}
+
+.table tbody td img {
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.table tbody td img:hover {
+    transform: scale(1.05);
+}
+
+.table th div {
+    display: inline-block;
+    float: right;
+}
+
+.table th i {
+    color: #fff;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.table th i:hover {
+    color: #ffc107;
+    cursor: pointer;
+}
+
+/* Button Styles */
+.btn-outline-info, .btn-outline-danger {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-outline-info:hover {
+    background-color: #007bff;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .table td {
+        display: block;
+        text-align: left;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .table td img {
+        display: inline-block;
+    }
+
+
+}
+
+
+    </style>
+
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h4 class="mb-0">List Product</h4>
-                        <form class="d-none d-md-flex ms-4" method="GET" action="{{ route('product.index_stockcheck') }}">
-                            <input class="form-control bg-dark border-0" type="search" placeholder="Product name" name="search" value="{{ request()->query('search') }}">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                            @if(request()->query('search'))
-                                <button type="button" class="btn btn-light ms-2" id="reset-search">✖</button>
-                            @endif
-                        </form>
 
-                        <label for="">Enter stock quantity</label>
-                        <input id="quantityInput" class="form-control bg-dark border-0 text-danger" style="width: 15%;" type="number" 
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h4 style="color: #BC8157;
+                        font-size: 3rem;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+                        margin: 30px 0;
+                        text-align: center;
+                        line-height: 1.2;
+                        padding: 15px;
+                        border: 4px dashed #BC8157;
+                        background-color: rgba(230, 247, 255, 0.7);
+                        border-radius: 15px;
+                        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng cho toàn bộ box */">
+                        List Product
+                    </h4>
+                    <form class="d-none d-md-flex ms-4" method="GET" action="{{ route('product.index_stockcheck') }}">
+                        <div class="input-group">
+                            <input class="form-control bg-white border-0 ps-3" type="search" placeholder="Product name" name="search" value="{{ request()->query('search') }}" style="border-radius: 25px 0 0 25px;">
+                            <button type="submit" class="btn" style="background-color: #BC8157; color: white; border-radius: 0 25px 25px 0;">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+
+
+                        <label for="" style="    margin-left: 15px;">Enter stock quantity</label>
+                        <input id="quantityInput" class="form-control bg-dark border-0 text-danger" style="width: 15%;" type="number"
                             oninput="setQuantity(this.value)"
-                            placeholder="Enter quantity" name="quanlity_stockin" 
+                            placeholder="Enter quantity" name="quanlity_stockin"
                             value="{{ old('quantity_stockin', request()->input('quantity_stockin')) }}"><br>
                             <form id="stockinAllLink" method="POST" action="{{ route('product.stockin_all') }}">
                                 @csrf
                                 <input hidden type="text" name="quanlity_stockin" class="inputTarget" placeholder="This will get the value automatically">
-                                <button type="submit" class="btn btn-outline-info border-0 m-2 text-danger">Stock In All Product In List</button>
+                                <button type="submit"
+                                style="background-color: #0fa7bf;
+                                    margin-left: 15px;
+                                       color: white;
+                                       font-weight: bold;
+                                       padding: 10px 20px;
+                                       border-radius: 5px;
+                                       border: none;
+                                       display: inline-block;
+                                       transition: all 0.3s ease;"
+                                onmouseover="this.style.backgroundColor='#0056b3'; this.style.boxShadow='0 4px 8px rgba(0, 123, 255, 0.3)';"
+                                onmouseout="this.style.backgroundColor='#0fa7bf'; this.style.boxShadow='none';">
+                            Stock In All Product In List
+                        </button>
+
+
                             </form>
                     </div>
                     <div class="table-responsive">
@@ -79,7 +221,7 @@
                                                 <i class="fas fa-arrow-down"></i>
                                             </a>
                                         </div>
-                                    </th>  
+                                    </th>
                                     <th scope="col">
                                         Inventory
                                         <div style="float: right;">
@@ -102,7 +244,7 @@
                                             </a>
                                         </div>
                                     </th>
-                                    <th scope="col" style="width: 265px;">
+                                    <th scope="col" style="width: 350px;">
                                         Action
                                     </th>
                                 </tr>
@@ -126,18 +268,43 @@
                                     </td>
                                     <td>{{ formatPriceVND($product->price) }}</td>
                                     <td >
-                                        
-                                    <div style="display: flex; justify-content: space-between;">
-                                    <form method="POST" action="{{ route('product.stockin_byid', $product->product_id) }}">
-                                        @csrf
-                                        <input style="width: 50px;" type="number" name="quantity_stockin" class="inputTarget">
-                                        <button type="submit" class="btn btn-outline-info m-2">Stock In</button>
-                                    </form>
-                                    <form method="POST" action="{{ route('product.stockin_cancel', $product->product_id) }}">
-                                        @csrf
-                                        <button type="submit" class="btn btn-outline-danger m-2">Cancel</button>
-                                    </form>
-                                </div>
+
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <form method="POST" action="{{ route('product.stockin_byid', $product->product_id) }}">
+                                                @csrf
+                                                <input style="width: 80px; height: 38px; padding: 5px; margin-right: 15px; border-radius: 5px; border: 1px solid #ced4da;" type="number" name="quantity_stockin" class="inputTarget">
+                                                <button type="submit"
+                                                        style="background-color: #28a745;
+                                                               color: white;
+                                                               font-weight: bold;
+                                                               padding: 10px 20px;
+                                                               border-radius: 5px;
+                                                               border: none;
+                                                               display: inline-block;
+                                                               transition: all 0.3s ease;"
+                                                        onmouseover="this.style.backgroundColor='#218838'; this.style.boxShadow='0 4px 8px rgba(40, 167, 69, 0.3)';"
+                                                        onmouseout="this.style.backgroundColor='#28a745'; this.style.boxShadow='none';">
+                                                    Stock In
+                                                </button>
+                                            </form>
+                                            <form method="POST" action="{{ route('product.stockin_cancel', $product->product_id) }}">
+                                                @csrf
+                                                <button type="submit"
+                                                        style="background-color: #dc3545;
+                                                               color: white;
+                                                               font-weight: bold;
+                                                               padding: 10px 20px;
+                                                               border-radius: 5px;
+                                                               border: none;
+                                                               display: inline-block;
+                                                               transition: all 0.3s ease;"
+                                                        onmouseover="this.style.backgroundColor='#c82333'; this.style.boxShadow='0 4px 8px rgba(220, 53, 69, 0.3)';"
+                                                        onmouseout="this.style.backgroundColor='#dc3545'; this.style.boxShadow='none';">
+                                                    Cancel
+                                                </button>
+                                            </form>
+                                        </div>
+
                                 </td>
                                 </tr>
                             @endforeach
@@ -149,7 +316,7 @@
                         {{ $products->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
                     </div>
 
-                </div>
+
             </div>
             <!-- Recent Sales End -->
             <!-- Modal Popup -->
@@ -180,10 +347,10 @@
     function showDeleteModal(element) {
         // Lấy giá trị URL từ thuộc tính data-url
         var actionUrl = element.getAttribute('data-url');
-        
+
         // Gán action URL cho form xóa trong modal
         document.getElementById('deleteForm').action = actionUrl;
-        
+
         // Hiển thị modal
         var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         deleteModal.show();

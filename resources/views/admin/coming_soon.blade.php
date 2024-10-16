@@ -1,12 +1,74 @@
 @extends('admin.dashboard')
+<style>
+    .btn-secondary {
+       background-color: #6c757d !important;
+       color: white !important;
+       font-weight: bold !important;
+       padding: 10px 20px !important;
+       border-radius: 5px !important;
+       border: none !important;
+       transition: all 0.3s ease !important;
+   }
+
+   .table {
+       border-collapse: separate !important;
+       border-spacing: 0 15px !important;
+       background-color: #fff !important;
+       box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1) !important;
+       border-radius: 10px !important;
+   }
+
+   .table thead th {
+       background-color: #BC8157 !important;
+       color: white !important;
+       font-weight: bold !important;
+       padding: 12px 15px !important;
+       text-align: center!important;
+   }
+
+   .table tbody tr {
+       background-color: #f9f9f9!important;
+       transition: background-color 0.3s ease !important;
+   }
+
+   .table tbody tr:hover {
+       background-color: #e9ecef!important;
+   }
+
+   .table td {
+       padding: 12px 15px!important;
+       text-align: center!important;
+   }
+   .btn:hover {
+       background-color: #0056b3 !important; /* Màu xanh dương đậm hơn khi hover */
+   }
+</style>
 
 @section('coming_soon_content')
 <div class="container mt-4">
+    <h1 style="color: #BC8157;
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    margin: 30px 0;
+    text-align: center;
+    line-height: 1.2;
+    padding: 15px;
+    border: 4px dashed #BC8157;
+    background-color: rgba(230, 247, 255, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng cho toàn bộ box */">
+ Comming Soon
+</h1>
     <!-- Nút thêm sản phẩm sắp ra mắt -->
-    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addComingSoonModal">Add Product</button>
+    <button class="btn mb-3" data-bs-toggle="modal" data-bs-target="#addComingSoonModal" style="background-color: #0fa7bf; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
+        Add Product
+    </button>
 
     <!-- Bảng danh sách sản phẩm sắp ra mắt -->
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="margin-bottom: 233px !important;">
         <thead>
             <tr>
                 <th>Image</th>
@@ -143,7 +205,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn" style="background-color: #ffc107; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease;">
+                        Add
+                    </button>
                 </div>
             </div>
         </form>

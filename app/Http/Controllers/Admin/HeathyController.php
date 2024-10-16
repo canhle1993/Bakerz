@@ -27,7 +27,7 @@ class HeathyController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $heathy = new HeathyCatalog();
 
         $request->validate([
@@ -68,7 +68,7 @@ class HeathyController extends Controller
             'ModifiedBy' => Auth::user()->id ?? null,
         ]);
 
-        return redirect()->route('heathy.index')->with('success', 'Product added successfully');
+        return redirect()->route('heathy.index')->with('success', 'The healthy type had been deleted successfully');
     }
 
 }

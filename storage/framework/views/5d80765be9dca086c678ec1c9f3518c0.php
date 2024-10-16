@@ -275,7 +275,7 @@
                 <div class="col-lg-3 col-xl-3 col-7">
                     <!-- Header Logo Start -->
                     <div class="header-logo">
-                        <a href="<?php echo e(route('client.home')); ?>">
+                        <a id="countuser" href="<?php echo e(route('client.home')); ?>">
                         
                             <img class="white-logo" src="<?php echo e(asset('assets/images/logo-white.svg')); ?>" width="229" height="62" alt="Logo">
                         </a>
@@ -711,7 +711,19 @@
             // Hiển thị tổng đã tính
             $('#total_price').text(total.toFixed(2) + ' $');
         }
-
+        function updateonlineUser() {
+            $.ajax({
+                url: "<?php echo e(route('online-users')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
+                method: "GET",
+                success: function(response) {
+                    $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr.responseText);
+                    // alert('An error occurred while updating the cart.');
+                }
+            });
+        }
     </script>
 </body>
 

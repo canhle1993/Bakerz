@@ -254,7 +254,7 @@
             <!-- Display New Password -->
             <?php if(session('new_password')): ?>
                 <div class="alert alert-success">
-                    Your new password is: <strong><?php echo e(session('new_password')); ?></strong>
+                Your password has been changed successfully. Please check your email!
                 </div>
             <?php endif; ?>
             

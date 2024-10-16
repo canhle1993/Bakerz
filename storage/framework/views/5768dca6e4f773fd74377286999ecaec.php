@@ -161,20 +161,20 @@
     <div class="row pt-3">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-            <div class="bg-secondary rounded h-100 p-4">
-                <h6 class="mb-4">Product Update</h6>
+            <div class="bg-secondary rounded h-100 p-4" style="background-color: #f8f5f5 !important;">
+                <h6 class="mb-4" style="color: #1f2242;">Product Update</h6>
                 <form action="<?php echo e(route('product.update', $product->product_id)); ?>" method="POST" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('PUT'); ?> 
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Main Image</label>
-                    <input class="form-control bg-dark" type="file" id="formFile0" name="main_image">
+                    <input class="form-control " type="file" id="formFile0" name="main_image">
                     <img id="previewImage0" src="<?php echo e(asset('storage/products/' . $product->image)); ?>" alt="Product Image" width="100px" ><br>
 
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Image 1</label>
-                    <input class="form-control bg-dark" type="file" id="formFile1" name="image_1">
+                    <input class="form-control " type="file" id="formFile1" name="image_1">
                     <?php if($product->images()->count() > 0): ?>
                         <img id="previewImage1" src="<?php echo e(asset('storage/products/' . $product->images()->first()->image)); ?>" alt="Product Image" width="100px"><br>
                     <?php else: ?>
@@ -183,7 +183,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Image 2</label>
-                    <input class="form-control bg-dark" type="file" id="formFile2" name="image_2">
+                    <input class="form-control " type="file" id="formFile2" name="image_2">
                     <?php if($product->images()->count() > 1): ?>
                         <img id="previewImage2" src="<?php echo e(asset('storage/products/' . $product->images()->skip(1)->first()->image)); ?>" alt="Product Image" width="100px"><br>
                     <?php else: ?>
@@ -192,7 +192,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Product Image 3</label>
-                    <input class="form-control bg-dark" type="file" id="formFile3" name="image_3">
+                    <input class="form-control " type="file" id="formFile3" name="image_3">
                     <?php if($product->images()->count() > 2): ?>
                         <img id="previewImage3" src="<?php echo e(asset('storage/products/' . $product->images()->skip(2)->first()->image)); ?>" alt="Product Image" width="100px"><br>
                     <?php else: ?>
@@ -201,24 +201,24 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFileMultiple" class="form-label">Product Name</label>
-                    <input class="form-control bg-dark" type="text" name="product_name" required value="<?php echo e($product->product_name); ?>">
+                    <input class="form-control" style="background-color: #ABACB0 !important; color: blue !important;" type="text" name="product_name" required value="<?php echo e($product->product_name); ?>">
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Catagory</label><br>
                     <?php $__currentLoopData = $catalogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $catalog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input class="form-check-input" type="checkbox" name="catalog[]" value="<?php echo e($catalog->category_id); ?>" 
+                        <input class="form-check-input"  type="checkbox" name="catalog[]" value="<?php echo e($catalog->category_id); ?>" 
                             <?php echo e(in_array($catalog->category_id, $product->catalogs->pluck('category_id')->toArray()) ? 'checked' : ''); ?>> 
                             <?php echo e($catalog->category_name); ?><br>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
                 <div class="mb-3">
                     <label for="formFileMultiple" class="form-label">Inventory</label>
-                    <input class="form-control bg-dark" type="number" name="inventory" value="<?php echo e($product->inventory); ?>">
+                    <input class="form-control " style="background-color: #ABACB0 !important; color: blue !important;" type="number" name="inventory" value="<?php echo e($product->inventory); ?>">
                 </div>
                 <div class="mb-3">
                     <label for="formFileMultiple" class="form-label">Unit price</label>
-                    <input class="form-control bg-dark" type="number" name="price" required value="<?php echo e($product->price); ?>">
+                    <input class="form-control " style="background-color: #ABACB0 !important; color: blue !important;" type="number" name="price" required value="<?php echo e($product->price); ?>">
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Heathy</label><br>
@@ -231,7 +231,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="formFileMultiple" class="form-label">Description</label>
-                    <textarea class="form-control" placeholder="Product description here" id="describe" name="describe" style="height: 150px;"><?php echo e($product->describe); ?></textarea>
+                    <textarea class="form-control" style="background-color: #ABACB0 !important; color: blue !important;" placeholder="Product description here" id="describe" name="describe" style="height: 150px;"><?php echo e($product->describe); ?></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-outline-info m-2">Update</button>

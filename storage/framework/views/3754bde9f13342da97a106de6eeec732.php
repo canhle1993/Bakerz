@@ -1226,7 +1226,6 @@
           form.classList.toggle("hidden-form");
         });
 
-    document.addEventListener("visibilitychange", updateonlineUser);
 
             // Bắt sự kiện thay đổi trạng thái của các checkbox
     $('input[name="heath_id[]"]').on('change', function() {
@@ -1332,7 +1331,20 @@
     });
     
     window.addEventListener('load', function() {
-        
+        // Start Online user
+        $.ajax({
+            url: "<?php echo e(route('online-users')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
+            method: "GET",
+            success: function(response) {
+                $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+            },
+            error: function(xhr) {
+                console.error('Error:', xhr.responseText);
+                // alert('An error occurred while updating the cart.');
+            }
+        });
+        // End Online user
+
         document.getElementById('a2').style.display = 'none';  // Show the product section
         if (sessionStorage.getItem('scrollToA1') === 'true') {
             document.getElementById('a2').style.display = 'block';  // Show the product section
@@ -1421,29 +1433,52 @@
         });
 
         $(document).on('click', '.labtn-icon-wishlist', function(e) {
-    e.preventDefault();
+            e.preventDefault();
 
-    var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+            var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
 
-    $.ajax({
-        url: "<?php echo e(route('add.to.wishlist')); ?>",
-        method: 'POST',
-        data: {
-            product_id: productId,
-            _token: "<?php echo e(csrf_token()); ?>",  // Token bảo mật
-        },
-        success: function(response) {
-            if (response.status === 'success') {
-                alert('Product added to wishlist!');
-            } else {
-                alert(response.message);
-            }
-        },
-        error: function(xhr) {
-            console.error('Error:', xhr);
+            $.ajax({
+                url: "<?php echo e(route('add.to.wishlist')); ?>",
+                method: 'POST',
+                data: {
+                    product_id: productId,
+                    _token: "<?php echo e(csrf_token()); ?>",  // Token bảo mật
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
+                        modalWishlist.show();
+                    } else {
+                        
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr);
+                }
+            });
+        });
+        
+        setInterval(
+            // Start Online user
+            $.ajax({
+                url: "<?php echo e(route('online-users')); ?>", // Đường dẫn để lấy lại giỏ hàng từ session
+                method: "GET",
+                success: function(response) {
+                    $('#onlineCount').text(response.onlineCount); // Cập nhật lại số lượng giỏ hàng
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr.responseText);
+                    // alert('An error occurred while updating the cart.');
+                }
+            })
+            // End Online user
+            , 30000); // 30 giây là 30000ms
+        // Gọi hàm ngay lập tức khi trang tải
+        function updateonlineUser() {
+            // Start Online user
+            // End Online user
         }
-    });
-    });
+       
     </script>
 </body>
 
