@@ -108,7 +108,7 @@
                         <div class="dropdown-menu bg-transparent border-0 <?php echo e((Request::is('order*') ) ? 'show' : ''); ?>">
                             <a href="<?php echo e(route('order.pending')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.pending') ? 'active' : ''); ?>">&nbsp;&nbsp;Pending</a>
                             <a href="<?php echo e(route('order.paid')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.paid') ? 'active' : ''); ?>">&nbsp;&nbsp;Confirmed</a>
-                            <a href="<?php echo e(route('order.confirmed')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.confirmed') ? 'active' : ''); ?>">&nbsp;&nbsp;Being delivered</a>
+                            <a href="<?php echo e(route('order.confirmed')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.confirmed') ? 'active' : ''); ?>">&nbsp;&nbsp;On The Way</a>
                             <a href="<?php echo e(route('order.delivered')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.delivered') ? 'active' : ''); ?>">&nbsp;&nbsp;Delivered</a>
                             <a href="<?php echo e(route('order.cancel')); ?>" class="bi-kanban-fill m-2 dropdown-item <?php echo e(Request::routeIs('order.cancel') ? 'active' : ''); ?>">&nbsp;&nbsp;Cancel</a>
                         </div>

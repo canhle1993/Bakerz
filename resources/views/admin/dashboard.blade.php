@@ -108,7 +108,7 @@
                         <div class="dropdown-menu bg-transparent border-0 {{ (Request::is('order*') ) ? 'show' : '' }}">
                             <a href="{{ route('order.pending') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.pending') ? 'active' : '' }}">&nbsp;&nbsp;Pending</a>
                             <a href="{{ route('order.paid') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.paid') ? 'active' : '' }}">&nbsp;&nbsp;Confirmed</a>
-                            <a href="{{ route('order.confirmed') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.confirmed') ? 'active' : '' }}">&nbsp;&nbsp;Being delivered</a>
+                            <a href="{{ route('order.confirmed') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.confirmed') ? 'active' : '' }}">&nbsp;&nbsp;On The Way</a>
                             <a href="{{ route('order.delivered') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.delivered') ? 'active' : '' }}">&nbsp;&nbsp;Delivered</a>
                             <a href="{{ route('order.cancel') }}" class="bi-kanban-fill m-2 dropdown-item {{ Request::routeIs('order.cancel') ? 'active' : '' }}">&nbsp;&nbsp;Cancel</a>
                         </div>
