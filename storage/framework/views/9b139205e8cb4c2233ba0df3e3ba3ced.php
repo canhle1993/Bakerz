@@ -17,7 +17,7 @@
 </head>
 <body>
     <h1  style="display: none;">Vị trí hiện tại của bạn</h1>
-    <p id="distance">The distance from your location to the store is: </p>
+    <p id="distance">The distance from your location to the store is: 1.46 km</p>
     <div id="map">Đang tải bản đồ...</div>
 
     <script>
