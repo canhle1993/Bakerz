@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
+
 <head>
-<title>Bakerz Bite</title>
+    <title>Bakerz Bite</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -36,6 +37,7 @@
         .pagination li a:hover {
             background-color: #9b8e8e;
         }
+
         .sidebars_widget__instagram {
             display: flex;
             flex-wrap: wrap;
@@ -103,6 +105,7 @@
             padding: 10px 20px;
             border-radius: 5px;
         }
+
         .active-category {
             background-color: #e5a591;
             color: white !important;
@@ -110,13 +113,43 @@
             text-align: center;
             border-radius: 10px;
             font-weight: bold;
-}
+        }
 
+        .search-voice-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-voice-wrapper input {
+            width: 100%;
+            padding-right: 70px;
+            /* chừa chỗ cho mic + search */
+        }
+
+        #voice-search {
+            position: absolute;
+            right: 45px;
+            /* mic nằm trước nút search */
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+            font-size: 18px;
+        }
+
+        .sidebars_search__btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+        }
     </style>
 </head>
 
 <body>
-@include('layouts.header')
+    @include('layouts.header')
     <!-- Breadcrumb Section Start -->
     <div class="breadcrumb" data-bg-image="{{ asset('assets/images/bg/breadcrumb-bg.jpg') }}">
         <div class="container">
@@ -127,18 +160,18 @@
                         <ul class="breadcrumb_list">
                             <li><a href="{{ route('client.home') }}">Home</a></li>
                             <li>
-                            <a href="">
-                                @if(request()->is('shop_all'))
+                                <a href="">
+                                    @if(request()->is('shop_all'))
                                     All Products
-                                @elseif(request()->is('shop/3/filter_nonCatagory*'))
+                                    @elseif(request()->is('shop/3/filter_nonCatagory*'))
                                     Discount
-                                @elseif(request()->is('shop/4/filter_nonCatagory*'))
+                                    @elseif(request()->is('shop/4/filter_nonCatagory*'))
                                     What Hot
-                                @else
+                                    @else
                                     Category
-                                @endif
-                            </a>
-                        </li>
+                                    @endif
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -154,28 +187,28 @@
                 <!-- Main Content Section -->
                 <div class="col-md-8 section-padding-04">
                     <!-- Shop Top Bar Start -->
-<div class="shop-topbar">
+                    <div class="shop-topbar">
 
-    <div class="shop-topbar-item shop-topbar-left">
-        <p>Showing {{ $products->firstItem() }} - {{ $products->lastItem() }} of {{ $products->total() }} result</p>
-    </div>
+                        <div class="shop-topbar-item shop-topbar-left">
+                            <p>Showing {{ $products->firstItem() }} - {{ $products->lastItem() }} of {{ $products->total() }} result</p>
+                        </div>
 
-    <div class="shop-topbar-right">
-        <div class="shop-topbar-item">
-            <form id="sortForm" action="{{ url()->current() }}" method="GET">
-                <select name="sort" id="SortBy" onchange="document.getElementById('sortForm').submit();">
-                    <option value="best-selling" {{ request('sort') == 'best-selling' ? 'selected' : '' }}>Sort by Latest</option>
-                    <option value="price-ascending" {{ request('sort') == 'price-ascending' ? 'selected' : '' }}>Price ↑</option>
-                    <option value="price-descending" {{ request('sort') == 'price-descending' ? 'selected' : '' }}>Price ↓</option>
-                </select>
-            </form>
-        </div>
+                        <div class="shop-topbar-right">
+                            <div class="shop-topbar-item">
+                                <form id="sortForm" action="{{ url()->current() }}" method="GET">
+                                    <select name="sort" id="SortBy" onchange="document.getElementById('sortForm').submit();">
+                                        <option value="best-selling" {{ request('sort') == 'best-selling' ? 'selected' : '' }}>Sort by Latest</option>
+                                        <option value="price-ascending" {{ request('sort') == 'price-ascending' ? 'selected' : '' }}>Price ↑</option>
+                                        <option value="price-descending" {{ request('sort') == 'price-descending' ? 'selected' : '' }}>Price ↓</option>
+                                    </select>
+                                </form>
+                            </div>
 
 
-    </div>
+                        </div>
 
-</div>
-<!-- Shop Top Bar End -->
+                    </div>
+                    <!-- Shop Top Bar End -->
 
                     <!-- Product Section Start -->
 
@@ -191,26 +224,24 @@
                                         <img width="350" height="350" src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}">
                                     </a>
                                     <ul class="product-item__meta">
-                                    <li class="product-item__meta-action">
+                                        <li class="product-item__meta-action">
                                             <a
-                                            class="labtn-icon-quickview quickview"
-                                            href="#"
-                                            data-product-id="{{ $product->product_id }}"
-                                            data-bs-tooltip="tooltip"
-                                            data-bs-placement="top"
-                                            title=""
-                                            data-bs-original-title="Quick View"
-                                            aria-label="Quick View"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#exampleProductModal"
-                                            ></a>
+                                                class="labtn-icon-quickview quickview"
+                                                href="#"
+                                                data-product-id="{{ $product->product_id }}"
+                                                data-bs-tooltip="tooltip"
+                                                data-bs-placement="top"
+                                                title=""
+                                                data-bs-original-title="Quick View"
+                                                aria-label="Quick View"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleProductModal"></a>
                                         </li>
                                         <li class="product-item__meta-action">
                                             <a
-                                            class="shadow-1 labtn-icon-cart add-to-cart"
-                                            href="#"
-                                            data-product-id="{{ $product->product_id }}"
-                                            ></a>
+                                                class="shadow-1 labtn-icon-cart add-to-cart"
+                                                href="#"
+                                                data-product-id="{{ $product->product_id }}"></a>
                                         </li>
                                         <li class="product-item__meta-action">
                                             <a class="labtn-icon-wishlist" href="#" data-product-id="{{ $product->product_id }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Add to wishlist"></a>
@@ -225,11 +256,9 @@
                                         @if ($product->price != $product->getDiscountedPrice())
                                         <del>{{ formatPriceVND($product->price) }}</del>
                                         <!-- Giá gốc -->
-                                    
-                                        <strong style="color: red;"
-                                        >${{ number_format($product->getDiscountedPrice(),2)
-                                        }}</strong
-                                        >
+
+                                        <strong style="color: red;">${{ number_format($product->getDiscountedPrice(),2)
+                                        }}</strong>
                                         <!-- Giá sau khi giảm -->
                                         @else {{ formatPriceVND($product->price) }}
                                         <!-- Giá không giảm -->
@@ -253,152 +282,167 @@
                 <div class="col-md-4">
                     <div class="sidebars">
                         <div class="sidebars_inner">
-                           <!-- Search Widget Start -->
-                                <form action="{{ route('shop_all') }}" method="GET" class="sidebars_search">
+                            <!-- Search Widget Start -->
+                            <!-- <form action="{{ route('shop_all') }}" method="GET" class="sidebars_search">
                                     <input type="text" name="query" placeholder="Search Here" class="sidebars_search__input" value="{{ request()->query('query') }}">
                                     <button class="sidebars_search__btn" type="submit"><i class="lastudioicon-zoom-1"></i></button>
-                                </form>
-                                <!-- Search Widget End -->
+                                </form> -->
+                            <form action="{{ route('shop_all') }}" method="GET" class="sidebars_search">
+                                <div class="search-voice-wrapper">
+                                    <input type="text" name="query" placeholder="Search Here"
+                                        class="sidebars_search__input"
+                                        value="{{ request()->query('query') }}">
 
+                                    <!-- 🎤 Voice -->
+                                    <i class="fa fa-microphone" id="voice-search"></i>
 
-
-                             <!-- Category Widget Start -->
-                             <div class="sidebars_widget">
-                                    <h3 class="sidebars_widget__title">Category</h3>
-                                    <ul class="sidebars_widget__category">
-                                        <li>
-                                            <a href="{{ route('shop_all') }}" class="{{ request()->is('shop_all') ? 'active-category' : '' }}">All Products</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('shop.filter_nonCatagory', ['isOption' => 3]) }}" class="{{ request()->is('shop/3/filter_nonCatagory*') ? 'active-category' : '' }}">Discount</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('shop.filter_nonCatagory', ['isOption' => 4]) }}" class="{{ request()->is('shop/4/filter_nonCatagory*') ? 'active-category' : '' }}">What Hot</a>
-                                        </li>
-                                        @foreach ($categories as $category)
-                                            <li>
-                                                <a href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}" class="{{ request('category_id') == $category->category_id ? 'active-category' : '' }}">
-                                                    {{ $category->category_name }}
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                    <!-- 🔍 Search -->
+                                    <button class="sidebars_search__btn" type="submit">
+                                        <i class="lastudioicon-zoom-1"></i>
+                                    </button>
                                 </div>
+                            </form>
 
-                             <!-- Category Widget End -->
+
+                            <!-- Search Widget End -->
 
 
-                             <!-- Price Filter Widget Start -->
 
-                                <div class="sidebars_widget">
-                                    <h3 class="sidebars_widget__title">Price Filter</h3>
-                                    <div class="range-slider">
+                            <!-- Category Widget Start -->
+                            <div class="sidebars_widget">
+                                <h3 class="sidebars_widget__title">Category</h3>
+                                <ul class="sidebars_widget__category">
+                                    <li>
+                                        <a href="{{ route('shop_all') }}" class="{{ request()->is('shop_all') ? 'active-category' : '' }}">All Products</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('shop.filter_nonCatagory', ['isOption' => 3]) }}" class="{{ request()->is('shop/3/filter_nonCatagory*') ? 'active-category' : '' }}">Discount</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('shop.filter_nonCatagory', ['isOption' => 4]) }}" class="{{ request()->is('shop/4/filter_nonCatagory*') ? 'active-category' : '' }}">What Hot</a>
+                                    </li>
+                                    @foreach ($categories as $category)
+                                    <li>
+                                        <a href="{{ route('shop.filterByCategory', ['category_id' => $category->category_id]) }}" class="{{ request('category_id') == $category->category_id ? 'active-category' : '' }}">
+                                            {{ $category->category_name }}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
 
-                                        <input id="price-range" type="text" name="price" value="" />
-                                    </div>
-                                    <div class="extra-controls">
-                                        <button id="filter-btn" class="extra-controls_btn">Filter</button>
-                                        <div class="extra-controls_filter">
-                                            <label>Price: </label>
+                            <!-- Category Widget End -->
 
-                                            <span id="price-range-value">0 - 50</span>
-                                        </div>
+
+                            <!-- Price Filter Widget Start -->
+
+                            <div class="sidebars_widget">
+                                <h3 class="sidebars_widget__title">Price Filter</h3>
+                                <div class="range-slider">
+
+                                    <input id="price-range" type="text" name="price" value="" />
+                                </div>
+                                <div class="extra-controls">
+                                    <button id="filter-btn" class="extra-controls_btn">Filter</button>
+                                    <div class="extra-controls_filter">
+                                        <label>Price: </label>
+
+                                        <span id="price-range-value">0 - 50</span>
                                     </div>
                                 </div>
+                            </div>
 
                             <!-- Price Filter Widget End -->
 
-<!-- Popular Product Widget Start -->
-<div class="sidebars_widget">
-    <h3 class="sidebars_widget__title">Popular products</h3>
-    <ul class="sidebars_widget__product">
-        @foreach($bestSellingProducts->take(3) as $product)
-        <!-- Single Product Start -->
-        <li class="single-product">
-            <a href="{{ route('product.single', ['product' => $product->product_id]) }}" class="single-product_thumb" style="border: none; width: 127px;">
-                <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}">
-            </a>
-            <div class="single-product_content">
-                <a href="{{ route('product.single', ['product' => $product->product_id]) }}" class="single-product_content__title">{{ $product->product_name }}</a>
-                <span class="single-product_content__price">
-                    @if ($product->price != $product->getDiscountedPrice())
-                        <del>{{ formatPriceVND($product->price) }}</del>
-                        <!-- Giá gốc -->
-                    
-                        <strong style="color: red;"
-                        >${{ number_format($product->getDiscountedPrice(),2)
-                        }}</strong
-                        >
-                    <!-- Giá sau khi giảm -->
-                    @else {{ formatPriceVND($product->price) }}
-                    <!-- Giá không giảm -->
-                    @endif
-                </span>
-            </div>
-        </li>
-        <!-- Single Product End -->
-        @endforeach
-    </ul>
-</div>
-<!-- Popular Product Widget End -->
+                            <!-- Popular Product Widget Start -->
+                            <div class="sidebars_widget">
+                                <h3 class="sidebars_widget__title">Popular products</h3>
+                                <ul class="sidebars_widget__product">
+                                    @foreach($bestSellingProducts->take(3) as $product)
+                                    <!-- Single Product Start -->
+                                    <li class="single-product">
+                                        <a href="{{ route('product.single', ['product' => $product->product_id]) }}" class="single-product_thumb" style="border: none; width: 127px;">
+                                            <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->product_name }}">
+                                        </a>
+                                        <div class="single-product_content">
+                                            <a href="{{ route('product.single', ['product' => $product->product_id]) }}" class="single-product_content__title">{{ $product->product_name }}</a>
+                                            <span class="single-product_content__price">
+                                                @if ($product->price != $product->getDiscountedPrice())
+                                                <del>{{ formatPriceVND($product->price) }}</del>
+                                                <!-- Giá gốc -->
+
+                                                <strong style="color: red;">${{ number_format($product->getDiscountedPrice(),2)
+                        }}</strong>
+                                                <!-- Giá sau khi giảm -->
+                                                @else {{ formatPriceVND($product->price) }}
+                                                <!-- Giá không giảm -->
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <!-- Single Product End -->
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <!-- Popular Product Widget End -->
 
 
-                         <!-- Instagram Widget Start -->
-                         <div class="sidebars_widget">
-                            <h3 class="sidebars_widget__title">Instagram</h3>
-                            <ul class="sidebars_widget__instagram " >
-                            @foreach ($socialMedia as $media)
-                            @if (strpos($media->name, 'Instagram') !== false)
-                                <li>
-                                    <a class="instagram-thumb" href="{{ $media->link }}">
-                                        <img src="https://i.pinimg.com/564x/80/35/60/803560020f0f772bb12862e1eb2f50c0.jpg"  alt="Image">
-                                        <i class="lastudioicon lastudioicon-b-instagram"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="instagram-thumb" href="{{ $media->link }}">
-                                        <img src="https://i.pinimg.com/564x/61/e1/38/61e13860559dac54522ad4c622c37705.jpg" alt="Image">
-                                        <i class="lastudioicon lastudioicon-b-instagram"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="instagram-thumb" href="{{ $media->link }}">
-                                        <img src="https://i.pinimg.com/564x/d0/e5/10/d0e5108a1db4e95a60a13e520531bc13.jpg" alt="Image">
-                                        <i class="lastudioicon lastudioicon-b-instagram"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="instagram-thumb" href="{{ $media->link }}">
-                                        <img src="https://i.pinimg.com/564x/8e/f4/b9/8ef4b9e35ed97c97fde4b0cfb45d5af3.jpg" alt="Image">
-                                        <i class="lastudioicon lastudioicon-b-instagram"></i>
-                                    </a>
-                                </li>
-                                @endif
-                                @endforeach
-                            </ul>
-                        </div>
-                        <!-- Instagram Widget End -->
+                            <!-- Instagram Widget Start -->
+                            <div class="sidebars_widget">
+                                <h3 class="sidebars_widget__title">Instagram</h3>
+                                <ul class="sidebars_widget__instagram ">
+                                    @foreach ($socialMedia as $media)
+                                    @if (strpos($media->name, 'Instagram') !== false)
+                                    <li>
+                                        <a class="instagram-thumb" href="{{ $media->link }}">
+                                            <img src="https://i.pinimg.com/564x/80/35/60/803560020f0f772bb12862e1eb2f50c0.jpg" alt="Image">
+                                            <i class="lastudioicon lastudioicon-b-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="instagram-thumb" href="{{ $media->link }}">
+                                            <img src="https://i.pinimg.com/564x/61/e1/38/61e13860559dac54522ad4c622c37705.jpg" alt="Image">
+                                            <i class="lastudioicon lastudioicon-b-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="instagram-thumb" href="{{ $media->link }}">
+                                            <img src="https://i.pinimg.com/564x/d0/e5/10/d0e5108a1db4e95a60a13e520531bc13.jpg" alt="Image">
+                                            <i class="lastudioicon lastudioicon-b-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="instagram-thumb" href="{{ $media->link }}">
+                                            <img src="https://i.pinimg.com/564x/8e/f4/b9/8ef4b9e35ed97c97fde4b0cfb45d5af3.jpg" alt="Image">
+                                            <i class="lastudioicon lastudioicon-b-instagram"></i>
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <!-- Instagram Widget End -->
 
-                        <!-- Banner Widget Start -->
+                            <!-- Banner Widget Start -->
                             <!-- Banner Widget Start -->
                             <div class="sidebars_widget">
-                            @foreach ($socialMedia as $media)
-                            @if (strpos($media->name, 'Advertise') !== false)
+                                @foreach ($socialMedia as $media)
+                                @if (strpos($media->name, 'Advertise') !== false)
                                 <a href="{{ $media->link }}" class="sidebars_widget__banner">
-                                @if ($media->image)
+                                    @if ($media->image)
                                     <img src="{{ asset('storage/' . $media->image) }}" alt="banner-Image">
-                                @else
+                                    @else
                                     <img src="{{ asset('assets/images/banner/default-banner.jpg') }}" alt="default-banner">
-                                @endif
+                                    @endif
                                     <div class="banner-content">
                                         <span class="banner-content_title">Check it now</span>
                                     </div>
                                 </a>
-                            @endif
-                            @endforeach
+                                @endif
+                                @endforeach
                             </div>
                             <!-- Banner Widget End -->
-                        <!-- Banner Widget End -->
+                            <!-- Banner Widget End -->
 
 
                         </div>
@@ -437,7 +481,7 @@
                                     <!-- Single Product Image Start -->
                                     <div class="single-product-vertical-tab swiper-container order-2 product-item">
 
-                                    <div class="swiper-wrapper" id="swiper-wrapper-dea913122338a79f" aria-live="polite" style="transition-duration: 0ms; transform: translate3d(-484px, 0px, 0px);">
+                                        <div class="swiper-wrapper" id="swiper-wrapper-dea913122338a79f" aria-live="polite" style="transition-duration: 0ms; transform: translate3d(-484px, 0px, 0px);">
                                             <a class="swiper-slide h-auto" href="#">
                                                 <img class="w-100" src="#">
                                             </a>
@@ -456,7 +500,7 @@
                                             <a class="swiper-slide h-auto" href="#">
                                                 <img class="w-100" src="#">
                                             </a>
-                                            </div>
+                                        </div>
 
                                         <!-- Next Previous Button Start -->
                                         <div class="swiper-button-vertical-next swiper-button-next"><i class="lastudioicon-arrow-right"></i></div>
@@ -495,19 +539,17 @@
 
                                 <!-- Product Summery Start -->
                                 <div class="product-summery position-relative">
-                                <h3 class="product-head-name"></h3>
+                                    <h3 class="product-head-name"></h3>
                                     <!-- Product Head Start -->
                                     <div class="product-head mb-3">
                                         <!-- Price Start -->
                                         <span class="product-head-price">
                                             @if ($product->price != $product->getDiscountedPrice())
-                                            <del >{{ formatPriceVND($product->price) }}</del>
+                                            <del>{{ formatPriceVND($product->price) }}</del>
                                             <!-- Giá gốc -->
-                                        
-                                            <strong style="color: red;"
-                                            >${{ number_format($product->getDiscountedPrice(),2)
-                                            }}</strong
-                                            >
+
+                                            <strong style="color: red;">${{ number_format($product->getDiscountedPrice(),2)
+                                            }}</strong>
                                             <!-- Giá sau khi giảm -->
                                             @else <span style="color: white;">{{ formatPriceVND($product->price) }}</span>
                                             <!-- Giá không giảm -->
@@ -540,7 +582,7 @@
                                             <div class="cart-btn">
                                                 <div class="add-to_cart product-item">
                                                     <a style="display: none;" href=""><img style="border: none !important; height: 287px !important;" width="350" height="350" src="" alt=""></a>
-                                                    <a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="{{ $product->product_id }}">Add to cart</a>
+                                                    <a class="btn btn-dark btn-hover-primary add-to-cart" data-product-id="{{ $product->product_id }}">Add to cart</a>
                                                 </div>
                                             </div>
                                             <!-- Cart Button End -->
@@ -564,13 +606,13 @@
                                         <li class="product-meta-wrapper category-meta">
                                             <span class="product-meta-name">category:</span>
                                             <span class="product-meta-detail">
-                                                
+
                                             </span>
                                         </li>
                                         <li class="product-meta-wrapper discount-meta">
                                             <span class="product-meta-name">Discount:</span>
                                             <span class="product-meta-detail">
-                                                
+
                                             </span>
                                         </li>
                                     </ul>
@@ -642,224 +684,278 @@
 
 <!-- Script của bạn -->
 <script>
-    $(window).on("scroll", function (event) {
-            var scroll = $(window).scrollTop();
-            if (scroll <= 0) {
-                $(
-                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
-                ).removeClass("sticky");
-                $(".header-sticky .header-logo img").attr(
-                    "src",
-                    "{{asset('assets/images/logo-white.svg')}}"
-                );
-            } else {
-                $(
-                    ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
-                ).addClass("sticky");
-                $(".header-sticky .header-logo img").attr(
-                    "src",
-                    "{{asset('assets/images/logo.svg')}}"
-                );
-            }
-        });
-
-$(document).ready(function() {
-    // Khởi tạo slider với khoảng giá từ 0 đến 100
-    $("#price-range").ionRangeSlider({
-        type: "double",
-        min: 0,
-        max: 50,
-        from: 0,
-        to: 50,
-        prefix: "$",
-        onChange: function (data) {
-            // Cập nhật giá trị hiển thị khi thay đổi
-            $("#price-range-value").text(data.from + " - " + data.to);
+    $(window).on("scroll", function(event) {
+        var scroll = $(window).scrollTop();
+        if (scroll <= 0) {
+            $(
+                ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
+            ).removeClass("sticky");
+            $(".header-sticky .header-logo img").attr(
+                "src",
+                "{{asset('assets/images/logo-white.svg')}}"
+            );
+        } else {
+            $(
+                ".header-sticky, .header-sticky-02, .header-sticky-03, header-sticky-4, .header-sticky-06"
+            ).addClass("sticky");
+            $(".header-sticky .header-logo img").attr(
+                "src",
+                "{{asset('assets/images/logo.svg')}}"
+            );
         }
     });
 
-    // Bắt sự kiện khi nhấn nút Filter
-    $('#filter-btn').click(function() {
-        var range = $("#price-range").data("ionRangeSlider");
-        var from = range.result.from;
-        var to = range.result.to;
-
-        // Redirect tới URL với các tham số lọc
-        window.location.href = "?min_price=" + from + "&max_price=" + to;
-    });
-});
-
-// Script cho QuickView
-
-
-$(document).on('click', '.labtn-icon-quickview', function() {
-    var productId = $(this).data('id');  // Lấy product_id từ thuộc tính data-id
-    if (productId) {
-        $.ajax({
-            url: '/product/details/' + productId,  // Sử dụng productId trong URL
-            type: 'GET',
-            success: function(response) {
-                // Cập nhật modal với thông tin sản phẩm
-                $('#exampleProductModal .product-head-price').text('$' + response.price);
-                $('#exampleProductModal .desc-content').text(response.description);
-                $('#exampleProductModal .product-details-img img').attr('src', '/storage/products/' + response.image);
-                $('#exampleProductModal').modal('show');
-            },
-            error: function(xhr, status, error) {
-                console.log('Lỗi:', error);
+    $(document).ready(function() {
+        // Khởi tạo slider với khoảng giá từ 0 đến 100
+        $("#price-range").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 50,
+            from: 0,
+            to: 50,
+            prefix: "$",
+            onChange: function(data) {
+                // Cập nhật giá trị hiển thị khi thay đổi
+                $("#price-range-value").text(data.from + " - " + data.to);
             }
         });
-    } else {
-        console.log('Không tìm thấy product_id.');
-    }
-});
-$('.quickview').on('click', function(e) {
-            e.preventDefault();
-            var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
 
-            // Gọi AJAX để lấy dữ liệu sản phẩm
+        // Bắt sự kiện khi nhấn nút Filter
+        $('#filter-btn').click(function() {
+            var range = $("#price-range").data("ionRangeSlider");
+            var from = range.result.from;
+            var to = range.result.to;
+
+            // Redirect tới URL với các tham số lọc
+            window.location.href = "?min_price=" + from + "&max_price=" + to;
+        });
+    });
+
+    // Script cho QuickView
+
+
+    $(document).on('click', '.labtn-icon-quickview', function() {
+        var productId = $(this).data('id'); // Lấy product_id từ thuộc tính data-id
+        if (productId) {
             $.ajax({
-                url: "{{ route('product.details', ':id') }}".replace(':id', productid), // Thay :id bằng product ID
+                url: '/product/details/' + productId, // Sử dụng productId trong URL
                 type: 'GET',
-                dataType: 'json',
                 success: function(response) {
-                    if (response.status === 'success') {
-                        var product = response.product;  // Đối tượng product từ server
-                        
-                        // Đổ dữ liệu vào modal
-                        $('#modal-single-product .product-head-price').text(product.price);  // Đổ giá sản phẩm
-                        $('#modal-single-product .desc-content').html(product.describe);  // Đổ mô tả sản phẩm
-                        
-                        // Cập nhật hình ảnh sản phẩm
-                        var imagesHtml = '';
-                        var productImage = "{{ asset('storage/products/') }}/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
-
-                        imagesHtml += '<div class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + productImage + '" alt="Product"></div>';
-                        product.images.forEach(function(image) {
-                            var imageUrl = "{{ asset('storage/products') }}/" + image.image; // Access the correct field inside image object
-                            imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
-                        });
-
-                        $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
-                        $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
-                        
-                        // Hiển thị modal
-                        $('#exampleProductModal').modal('show');
-                    } else {
-                        alert(response.message); // Hiển thị thông báo lỗi nếu có
-                    }
+                    // Cập nhật modal với thông tin sản phẩm
+                    $('#exampleProductModal .product-head-price').text('$' + response.price);
+                    $('#exampleProductModal .desc-content').text(response.description);
+                    $('#exampleProductModal .product-details-img img').attr('src', '/storage/products/' + response.image);
+                    $('#exampleProductModal').modal('show');
                 },
                 error: function(xhr, status, error) {
-                    console.error(error); // Xử lý lỗi
+                    console.log('Lỗi:', error);
                 }
             });
-        });
+        } else {
+            console.log('Không tìm thấy product_id.');
+        }
+    });
+    $('.quickview').on('click', function(e) {
+        e.preventDefault();
+        var productid = $(this).data('product-id'); // Lấy product ID từ thuộc tính data-product-id
 
-        function updateonlineUser() {
-                
+        // Gọi AJAX để lấy dữ liệu sản phẩm
+        $.ajax({
+            url: "{{ route('product.details', ':id') }}".replace(':id', productid), // Thay :id bằng product ID
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    var product = response.product; // Đối tượng product từ server
+
+                    // Đổ dữ liệu vào modal
+                    $('#modal-single-product .product-head-price').text(product.price); // Đổ giá sản phẩm
+                    $('#modal-single-product .desc-content').html(product.describe); // Đổ mô tả sản phẩm
+
+                    // Cập nhật hình ảnh sản phẩm
+                    var imagesHtml = '';
+                    var productImage = "{{ asset('storage/products/') }}/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
+
+                    imagesHtml += '<div class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + productImage + '" alt="Product"></div>';
+                    product.images.forEach(function(image) {
+                        var imageUrl = "{{ asset('storage/products') }}/" + image.image; // Access the correct field inside image object
+                        imagesHtml += '<div  class="swiper-slide"><img style="z-index: 1;"  class="w-100" src="' + imageUrl + '" alt="Product"></div>';
+                    });
+
+                    $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
+                    $('.product-thumb-vertical .swiper-wrapper').html(imagesHtml);
+
+                    // Hiển thị modal
+                    $('#exampleProductModal').modal('show');
+                } else {
+                    alert(response.message); // Hiển thị thông báo lỗi nếu có
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error); // Xử lý lỗi
             }
+        });
+    });
 
-// Script cho QuickView
+    function updateonlineUser() {
+
+    }
+
+    // Script cho QuickView
 </script>
 
 {{-- Script xử lý bấm vào nút tim để thêm sản phẩm vào trang wishlist --}}
 <script>
     $(document).on('click', '.labtn-icon-wishlist', function(e) {
-    e.preventDefault();
+        e.preventDefault();
 
-    var productId = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+        var productId = $(this).data('product-id'); // Lấy product ID từ thuộc tính data-product-id
 
-    $.ajax({
-        url: "{{ route('add.to.wishlist') }}",
-        method: 'POST',
-        data: {
-            product_id: productId,
-            _token: "{{ csrf_token() }}",  // Token bảo mật
-        },
-        success: function(response) {
-            if (response.status === 'success') {
-                var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
-                modalWishlist.show();
-            } else {
-                var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
-                modalWishlist.show();
+        $.ajax({
+            url: "{{ route('add.to.wishlist') }}",
+            method: 'POST',
+            data: {
+                product_id: productId,
+                _token: "{{ csrf_token() }}", // Token bảo mật
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
+                    modalWishlist.show();
+                } else {
+                    var modalWishlist = new bootstrap.Modal(document.getElementById('modalWishlist'));
+                    modalWishlist.show();
+                }
+            },
+            error: function(xhr) {
+                console.error('Error:', xhr);
             }
-        },
-        error: function(xhr) {
-            console.error('Error:', xhr);
-        }
-    });
+        });
     });
 
     $('.quickview').on('click', function(e) {
-            e.preventDefault();
-            var productid = $(this).data('product-id');  // Lấy product ID từ thuộc tính data-product-id
+        e.preventDefault();
+        var productid = $(this).data('product-id'); // Lấy product ID từ thuộc tính data-product-id
 
-            // Gọi AJAX để lấy dữ liệu sản phẩm
-            $.ajax({
-                url: "{{ route('product.details', ':id') }}".replace(':id', productid), // Thay :id bằng product ID
-                type: 'GET',
-                dataType: 'json',
-                success: function(response) {
-                    if (response.status === 'success') {
-                        // Hủy Swiper nếu đã tồn tại trước đó
-                        
-                        var product = response.product;  // Đối tượng product từ server
-                        var catagories = response.getsimpCatagories;
-                        // Đổ dữ liệu vào modal
-                        $('#modal-single-product .product-head-price').text("$" + response.discounted_price);  // Đổ giá sản phẩm
-                        
-                        $('#modal-single-product .desc-content').html(product.describe.replace(/\n/g, '<br>'));
-                        $('.product-meta .inventory-meta .product-meta-detail').text(product.inventory);
-                        $('.product-meta .discount-meta .product-meta-detail').text(response.discounted_percent + " %");
-                        $('.product-head-name').text(product.product_name);
-                        var catalog ='';
-                        if (Array.isArray(product.catalogs) && product.catalogs.length > 0) {
-                            product.catalogs.forEach(function(getlist) {
-                                catalog += "\r\n" + getlist.category_name;
-                            });
-                        }
-                        $('.product-meta .category-meta .product-meta-detail').text(catalog);
-                        // Cập nhật hình ảnh sản phẩm
-                        
-                        var slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(0);
-                        var thumbslide = $('.product-thumb-vertical .swiper-wrapper').find('.swiper-slide').eq(0);
-                        var hiddenimg = $('.cart-btn').find('.product-item');
-                        var productImage = "{{ asset('storage/products/') }}/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
-                        slide.find('img').attr('src', productImage);
-                        hiddenimg.find('img').attr('src', productImage);
-                        thumbslide.find('img').attr('src', productImage);
-                        var count = 0;
-                        var thumbcount = 0;
-                        product.images.forEach(function(image) {
-                            count++;
-                            slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(count);
-                            thumbslide = $('.product-thumb-vertical').find('.swiper-slide').eq(count);
-                            var imageUrl = "{{ asset('storage/products') }}/" + image.image; // Access the correct field inside image object
+        // Gọi AJAX để lấy dữ liệu sản phẩm
+        $.ajax({
+            url: "{{ route('product.details', ':id') }}".replace(':id', productid), // Thay :id bằng product ID
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    // Hủy Swiper nếu đã tồn tại trước đó
 
-                            slide.find('img').attr('src', imageUrl);
-                            thumbslide.find('img').attr('src', imageUrl);
-                            // imagesHtml += '<a class="swiper-slide h-auto" href="' + imageUrl + '"><img class="w-100" src="' + imageUrl + '" alt="{{ $product->product_name }}"></a>'
-                            // thumbImageHtml+= '<div class="swiper-slide"><img src="' + imageUrl + '" alt=""></div>';
+                    var product = response.product; // Đối tượng product từ server
+                    var catagories = response.getsimpCatagories;
+                    // Đổ dữ liệu vào modal
+                    $('#modal-single-product .product-head-price').text("$" + response.discounted_price); // Đổ giá sản phẩm
+
+                    $('#modal-single-product .desc-content').html(product.describe.replace(/\n/g, '<br>'));
+                    $('.product-meta .inventory-meta .product-meta-detail').text(product.inventory);
+                    $('.product-meta .discount-meta .product-meta-detail').text(response.discounted_percent + " %");
+                    $('.product-head-name').text(product.product_name);
+                    var catalog = '';
+                    if (Array.isArray(product.catalogs) && product.catalogs.length > 0) {
+                        product.catalogs.forEach(function(getlist) {
+                            catalog += "\r\n" + getlist.category_name;
                         });
-                        var addCart = '<a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="'+ product.product_id +'">Add to cart</a>';
-                        // $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
-                        // $('.product-thumb-vertical .swiper-wrapper').html(thumbImageHtml);
-                        console.log("Product ID:" + product.product_id);
-                        $('.add-to_cart .add-to-cart').replaceWith(addCart);
-                        
-                        // Hiển thị modal
-                        $('#exampleProductModal').modal('show');
-                    } else {
-                        alert(response.message); // Hiển thị thông báo lỗi nếu có
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error(error); // Xử lý lỗi
+                    $('.product-meta .category-meta .product-meta-detail').text(catalog);
+                    // Cập nhật hình ảnh sản phẩm
+
+                    var slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(0);
+                    var thumbslide = $('.product-thumb-vertical .swiper-wrapper').find('.swiper-slide').eq(0);
+                    var hiddenimg = $('.cart-btn').find('.product-item');
+                    var productImage = "{{ asset('storage/products/') }}/" + product.image; // Sử dụng asset() của Laravel để lấy đường dẫn tương đối
+                    slide.find('img').attr('src', productImage);
+                    hiddenimg.find('img').attr('src', productImage);
+                    thumbslide.find('img').attr('src', productImage);
+                    var count = 0;
+                    var thumbcount = 0;
+                    product.images.forEach(function(image) {
+                        count++;
+                        slide = $('#swiper-wrapper-dea913122338a79f').find('.swiper-slide').eq(count);
+                        thumbslide = $('.product-thumb-vertical').find('.swiper-slide').eq(count);
+                        var imageUrl = "{{ asset('storage/products') }}/" + image.image; // Access the correct field inside image object
+
+                        slide.find('img').attr('src', imageUrl);
+                        thumbslide.find('img').attr('src', imageUrl);
+                        // imagesHtml += '<a class="swiper-slide h-auto" href="' + imageUrl + '"><img class="w-100" src="' + imageUrl + '" alt="{{ $product->product_name }}"></a>'
+                        // thumbImageHtml+= '<div class="swiper-slide"><img src="' + imageUrl + '" alt=""></div>';
+                    });
+                    var addCart = '<a class="btn btn-dark btn-hover-primary add-to-cart"  data-product-id="' + product.product_id + '">Add to cart</a>';
+                    // $('.single-product-vertical-tab .swiper-wrapper').html(imagesHtml);
+                    // $('.product-thumb-vertical .swiper-wrapper').html(thumbImageHtml);
+                    console.log("Product ID:" + product.product_id);
+                    $('.add-to_cart .add-to-cart').replaceWith(addCart);
+
+                    // Hiển thị modal
+                    $('#exampleProductModal').modal('show');
+                } else {
+                    alert(response.message); // Hiển thị thông báo lỗi nếu có
                 }
-            });
-            
+            },
+            error: function(xhr, status, error) {
+                console.error(error); // Xử lý lỗi
+            }
         });
+
+    });
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const SpeechRecognition =
+            window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        if (!SpeechRecognition) {
+            alert('Trình duyệt không hỗ trợ tìm kiếm bằng giọng nói');
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'vi-VN';
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        const mic = document.getElementById('voice-search');
+        const input = document.querySelector('input[name="query"]');
+        const form = input.closest('form');
+
+        let isListening = false;
+
+        mic.addEventListener('click', function() {
+            if (!isListening) {
+                recognition.start();
+            }
+        });
+
+        recognition.onstart = function() {
+            isListening = true;
+            mic.style.color = 'red';
+        };
+
+        recognition.onresult = function(event) {
+            const text = event.results[event.results.length - 1][0].transcript;
+            input.value = text.trim();
+
+            // 🚀 auto submit
+            setTimeout(() => {
+                form.submit();
+            }, 300);
+        };
+
+        recognition.onerror = function() {
+            alert('Không nhận diện được giọng nói');
+        };
+
+        recognition.onend = function() {
+            isListening = false;
+            mic.style.color = '';
+        };
+    });
+</script>
+
 
 </html>

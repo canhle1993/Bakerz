@@ -292,7 +292,7 @@
                     <button data-order-id="{{ $item->order_id }}" style="color: black;" class="btn btn-sm btn-outline-info view">
                         View
                     </button>
-                    <!-- Button to lower admin role to client -->
+                    <!-- Button to lower admin role to client --->
                     <form action="{{route('order.gotopaid', $item->order_id)}}" method="POST" style="display:inline-block;">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-lower">

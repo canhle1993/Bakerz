@@ -1,5 +1,9 @@
 /.phpunit.cache
 /node_modules
+/.DS_Store
+**/.DS_Store
+
+.env
 
 .env.backup
 .env.production
@@ -14,3 +18,10 @@ yarn-error.log
 /.idea
 /.vscode
 
+/database/backup/*.sql
+/storage/logs/*.log
+/storage/framework/sessions/*
+/storage/framework/views/*
+!/storage/framework/sessions/.gitignore
+!/storage/framework/views/.gitignore
+!/storage/logs/.gitignore

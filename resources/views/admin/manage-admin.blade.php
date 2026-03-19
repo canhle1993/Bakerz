@@ -483,12 +483,12 @@
                     </form>
 
                     <!-- Button to up admin role to super -->
-                    <form action="{{ route('admin.up_to_super', $admin->user_id) }}" method="POST" style="display:inline-block;">
+                    <!-- <form action="{{ route('admin.up_to_super', $admin->user_id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-success">
                             <i class="bi bi-arrow-up-circle"></i> Up to Supper
                         </button>
-                    </form>
+                    </form> -->
 
 
                     <form id="delete-form-{{ $admin->user_id }}" action="{{ route('admin.destroy', $admin->user_id) }}" method="POST" style="display:inline-block;">
