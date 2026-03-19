@@ -242,15 +242,15 @@
                         <ul class="contact-section_list">
                             <li>
                                 <span class="contact-section_list__icon"><i class="lastudioicon lastudioicon-phone-2"></i></span>
-                                <span class="contact-section_list__text">Phone Number : <span>1800 1779</span></span>
+                                <span class="contact-section_list__text">Phone Number : <span>{{ config('bakerz.contact.phone') }}</span></span>
                             </li>
                             <li>
                                 <span class="contact-section_list__icon"><i class="lastudioicon lastudioicon-pin-3-2"></i></span>
-                                <span class="contact-section_list__text">Address : <span>35/6 đường D5, Q. Bình Thạnh, TP.HCM</span></span>
+                                <span class="contact-section_list__text">Address : <span>{{ config('bakerz.contact.address') }}</span></span>
                             </li>
                             <li>
                                 <span class="contact-section_list__icon"><i class="lastudioicon lastudioicon-mail"></i></span>
-                                <span class="contact-section_list__text">Email Adress : <span>aptech2@aprotrain.com</span></span>
+                                <span class="contact-section_list__text">Email Adress : <span>{{ config('bakerz.contact.email') }}</span></span>
                             </li>
                         </ul>
                     </div>
@@ -343,22 +343,7 @@
                                 <a class="logo-white d-none" href="index.html"><img src="{{asset('assets/images/logo-white.svg')}}" alt="Logo"></a>
                             </div>
                             <div class="footer-widget__social">
-                              @foreach ($socialMedia as $socialMedia)
-                                  <a href="{{ $socialMedia->link }}" target="_blank">
-                                      <!-- Tùy chỉnh icon dựa trên name hoặc thêm icon chung cho tất cả -->
-                                      @if (strpos($socialMedia->name, 'Facebook') !== false)
-                                          <i class="lastudioicon-b-facebook"></i>
-                                      @elseif (strpos($socialMedia->name, 'Twitter') !== false)
-                                          <i class="lastudioicon-b-twitter"></i>
-                                      @elseif (strpos($socialMedia->name, 'Pinterest') !== false)
-                                          <i class="lastudioicon-b-pinterest"></i>
-                                      @elseif (strpos($socialMedia->name, 'Instagram') !== false)
-                                          <i class="lastudioicon-b-instagram"></i>
-                                      @else
-                                          <i class="lastudioicon-b-globe"></i> <!-- Biểu tượng mặc định -->
-                                      @endif
-                                  </a>
-                              @endforeach
+                              @include('layouts.social-links')
                               <b style="padding: 3px 0px;">
                                   <i class="fas fa-users"></i>
                                   <span id="onlineCount" style="padding: 2px 7px 2px 7px; border-radius: 99px;"></span>

@@ -16,18 +16,40 @@
     </style>
 </head>
 <body>
+    @php
+        $googleMapsApiKey = config('bakerz.integrations.google_maps_api_key');
+        $googleMapsLibraries = config('bakerz.integrations.google_maps_libraries');
+        $storeLatitude = config('bakerz.store.latitude');
+        $storeLongitude = config('bakerz.store.longitude');
+        $storeMapZoom = config('bakerz.store.map_zoom');
+    @endphp
     <h1  style="display: none;">Vị trí hiện tại của bạn</h1>
     <p id="distance">The distance from your location to the store is: </p>
-    <div id="map">Đang tải bản đồ...</div>
+    <div
+        id="map"
+        data-google-maps-configured="{{ blank($googleMapsApiKey) ? '0' : '1' }}"
+        data-store-latitude="{{ $storeLatitude }}"
+        data-store-longitude="{{ $storeLongitude }}"
+        data-store-map-zoom="{{ $storeMapZoom }}"
+    >Đang tải bản đồ...</div>
 
     <script>
+        const mapElement = document.getElementById('map');
+        const googleMapsConfigured = mapElement.dataset.googleMapsConfigured === '1';
+        const storeLatitude = Number(mapElement.dataset.storeLatitude);
+        const storeLongitude = Number(mapElement.dataset.storeLongitude);
+        const storeMapZoom = Number(mapElement.dataset.storeMapZoom);
+
         // Khởi tạo bản đồ Google Maps và chỉ đường
         function displayMap(latitude, longitude) {
             var userLocation = { lat: latitude, lng: longitude };
-            var storeLocation = { lat: 10.80688612, lng: 106.71420533 }; // Tọa độ cửa hàng
+            var storeLocation = {
+                lat: storeLatitude,
+                lng: storeLongitude
+            }; // Tọa độ cửa hàng
 
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
+            var map = new google.maps.Map(mapElement, {
+                zoom: storeMapZoom,
                 center: userLocation
             });
 
@@ -75,7 +97,11 @@
                 console.log("Vị trí của bạn:", latitude, longitude);
 
                 // Hiển thị bản đồ với vị trí của người dùng và tính toán chỉ đường
-                displayMap(latitude, longitude);
+                if (googleMapsConfigured) {
+                    displayMap(latitude, longitude);
+                } else {
+                    mapElement.innerText = 'Google Maps is not configured.';
+                }
 
                 // Gửi tọa độ đến server để tính toán khoảng cách
                 axios.post('/calculate-distance', {
@@ -105,8 +131,10 @@
     </script>
 
     <!-- Nhúng Google Maps API với API Key của bạn -->
+    @if(!blank($googleMapsApiKey))
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLyLJ5CjThpOJAlZc593fLNIMm0XiBCHs&libraries=places">
+        src="https://maps.googleapis.com/maps/api/js?key={{ urlencode($googleMapsApiKey) }}&libraries={{ urlencode($googleMapsLibraries) }}">
     </script>
+    @endif
 </body>
 </html>

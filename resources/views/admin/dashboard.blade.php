@@ -270,8 +270,8 @@
                             &copy; <a href="#">BakerzBite</a>, All Rights Reserved.
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
-                        Address : <a href="">35/6 đường D5, Q. Bình Thạnh, TP.HCM</a><br>
-                        Email Adress: <a href="" target="_blank">aptech2@aprotrain.com</a>
+                        Address : <a href="">{{ config('bakerz.contact.address') }}</a><br>
+                        Email Adress: <a href="mailto:{{ config('bakerz.contact.email') }}" target="_blank">{{ config('bakerz.contact.email') }}</a>
                         </div>
                     </div>
                 </div>

@@ -69,15 +69,15 @@
                         <ul class="contact-section2_list">
                             <li>
                                 <span class="contact-section2_list__icon"><i class="lastudioicon lastudioicon-pin-3-2"></i></span>
-                                <span class="contact-section2_list__text">35/6 đường D5, Q. Bình Thạnh, TP.HCM </span>
+                                <span class="contact-section2_list__text">{{ config('bakerz.contact.address') }}</span>
                             </li>
                             <li>
                                 <span class="contact-section2_list__icon"><i class="lastudioicon lastudioicon-phone-2"></i></span>
-                                <span class="contact-section2_list__text">1800 1779</span>
+                                <span class="contact-section2_list__text">{{ config('bakerz.contact.phone') }}</span>
                             </li>
                             <li>
                                 <span class="contact-section2_list__icon"><i class="lastudioicon lastudioicon-mail"></i></span>
-                                <span class="contact-section2_list__text">aptech2@aprotrain.com</span>
+                                <span class="contact-section2_list__text">{{ config('bakerz.contact.email') }}</span>
                             </li>
                         </ul>
                     </div>
@@ -174,10 +174,7 @@
                                 <a class="logo-white d-none" href="index.html"><img src="assets/images/logo-white.svg" alt="Logo"></a>
                             </div>
                             <div class="footer-widget__social">
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-facebook"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-twitter"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-pinterest"></i></a>
-                                <a href="https://www.facebook.com/profile.php?id=61566020916878&sk=about" target="blank"><i class="lastudioicon-b-instagram"></i></a>
+                                @include('layouts.social-links')
                             </div>
                         </div>
                         <!-- Footer Widget Section End -->

@@ -9,9 +9,13 @@
 <div class="container-fluid pt-4 px-4">
     <div class="bg-secondary text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
+        @if(config('bakerz.integrations.power_bi_embed_url'))
         <iframe id="powerBIFrame" title="TEMP" width="1300" height="580" 
-    src="https://app.powerbi.com/reportEmbed?reportId=10cc5f4c-4f89-4e04-983d-fdb4caeeb8dd&autoAuth=true&ctid=ce5d08da-b13c-40d6-aab6-04501ee1ffbb&filterPaneEnabled=false&navContentPaneEnabled=false" 
+    src="{{ config('bakerz.integrations.power_bi_embed_url') }}" 
     frameborder="0" allowFullScreen="true"></iframe>
+        @else
+        <p class="mb-0 text-white">Power BI embed URL is not configured.</p>
+        @endif
         </div>
         
         

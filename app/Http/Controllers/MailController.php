@@ -11,6 +11,12 @@ class MailController extends Controller
 {
     public function sendEmail()
     {
+        $recipient = config('bakerz.mail.test_recipient');
+
+        if (blank($recipient)) {
+            abort(500, 'MAIL_TEST_RECIPIENT is not configured.');
+        }
+
         $data = [
             'title' => 'Đây là tiêu đề của email',
             'message' => 'Nội dung của email được gửi từ Laravel',
@@ -19,7 +25,7 @@ class MailController extends Controller
             'password' => Auth::user()->password,
         ];
 
-        Mail::to('aplevancanh1993@gmail.com')->send(new MyTestEmail($data));
+        Mail::to($recipient)->send(new MyTestEmail($data));
 
         return "Email đã được gửi thành công!";
     }

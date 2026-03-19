@@ -27,8 +27,8 @@ class CalculateDistanceController extends Controller
         $location->save();
 
         // Tọa độ của cửa hàng
-        $storeLatitude = 10.80688612;
-        $storeLongitude = 106.71420533;
+        $storeLatitude = config('bakerz.store.latitude');
+        $storeLongitude = config('bakerz.store.longitude');
 
         // Tính khoảng cách bằng công thức Haversine
         $earthRadius = 6371; // Bán kính Trái Đất tính bằng km

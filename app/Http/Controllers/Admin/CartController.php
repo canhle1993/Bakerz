@@ -340,19 +340,20 @@ class CartController extends Controller
 
     public function vnp(Request $request, Order $order){
         $data= $request ->all();
-        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+        $vnpConfig = config('bakerz.integrations.vnpay');
+        $vnp_Url = $vnpConfig['url'];
         $vnp_Returnurl = route('vnpay.return', ['order_id' => $order->order_id]);
-        $vnp_TmnCode = "OT1X2F3Y";//Mã website tại VNPAY
-        $vnp_HashSecret = "S9ZGL7JWJCZRSXD605B1C01YY0S67XS8"; //Chuỗi bí mật
+        $vnp_TmnCode = $vnpConfig['tmn_code'];//Mã website tại VNPAY
+        $vnp_HashSecret = $vnpConfig['hash_secret']; //Chuỗi bí mật
 
         $vnp_TxnRef = uniqid(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này
 
-        $vnp_OrderInfo ="Bill Payment";
-        $vnp_OrderType = "Bake Payment";
-        $vnp_Amount = ($order['pay'] * 25000) * 100;
-        $vnp_Locale = "vn";
+        $vnp_OrderInfo = $vnpConfig['order_info'];
+        $vnp_OrderType = $vnpConfig['order_type'];
+        $vnp_Amount = ($order['pay'] * $vnpConfig['exchange_rate']) * 100;
+        $vnp_Locale = $vnpConfig['locale'];
         // $vnp_BankCode = "NCB";
-        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+        $vnp_IpAddr = $request->ip();
 
         $inputData = array(
             "vnp_Version" => "2.1.0",
@@ -360,7 +361,7 @@ class CartController extends Controller
             "vnp_Amount" => $vnp_Amount,
             "vnp_Command" => "pay",
             "vnp_CreateDate" => date('YmdHis'),
-            "vnp_CurrCode" => "VND",
+            "vnp_CurrCode" => $vnpConfig['currency'],
             "vnp_IpAddr" => $vnp_IpAddr,
             "vnp_Locale" => $vnp_Locale,
             "vnp_OrderInfo" => $vnp_OrderInfo,
